@@ -331,6 +331,11 @@ if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {
 
         $leg['vectores'] = $perfil['vectores'];
         $leg['vectores_ponderados'] = $perfil['vectores_ponderados'];
+        $votosSimple = [];
+        foreach (fetchVotosLegislador($pdo, $id) as $v) {
+            $votosSimple[$v['ley_id']] = $v['sentido_voto'];
+        }
+        $leg['votos'] = $votosSimple;
         $leg['patrimonio_resumen'] = [
             'anio_inicial'                        => $patrimonio['anio_inicial'],
             'anio_actual'                         => $patrimonio['anio_actual'],

@@ -347,7 +347,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     camara: 'Diputados',
     provincia: 'Ciudad Autónoma de Buenos Aires',
     bloque_actual: 'Frente de Izquierda',
-    estado: 'Activo',
+    estado: 'Mandato Cumplido',
     biografia:
       'Abogada laboralista y de derechos humanos egresada de la UBA. Referente parlamentaria del Frente de Izquierda y de Trabajadores - Unidad (PTS) por la Ciudad Autónoma de Buenos Aires.',
     foto_url:

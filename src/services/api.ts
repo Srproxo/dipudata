@@ -193,6 +193,7 @@ function construirLegisladorCompletoLocal(rawId: number): LegisladorPerfilComple
     vector_ideologico: vector,
     evolucion_patrimonial: evolucion,
     votaciones,
+    votos: obtenerVotosSeedPorLegislador(raw.id),
   };
 }
 
@@ -348,6 +349,7 @@ function normalizarLegisladorDesdeApi(item: Record<string, unknown>): Legislador
       ),
       Laboral: Number(vectorRaw.Laboral ?? fallbackLocal?.vector_ideologico.Laboral ?? 50),
     },
+    votos: (item.votos as Record<string, SentidoVoto>) ?? obtenerVotosSeedPorLegislador(idNum || fallbackLocal!.id),
   };
 }
 

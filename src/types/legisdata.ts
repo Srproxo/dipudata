@@ -89,6 +89,7 @@ export interface LegisladorResumen {
   patrimonio_usd_actual: number;
   crecimiento_real_usd_pct: number;
   vector_ideologico: VectorIdeologico;
+  votos?: Record<string, SentidoVoto>;
 }
 
 export interface LegisladorPerfilCompleto extends LegisladorResumen {

@@ -148,7 +148,7 @@ INSERT INTO legisladores (
  98.10, 94.70),
 
 (19, 'HCDN-1014', '27-22741852-6', 'Myriam_Bregman', 'Myriam Teresa Bregman', 'Diputados', 'Ciudad Autónoma de Buenos Aires',
- 'Frente de Izquierda', 'Activo',
+ 'Frente de Izquierda', 'Mandato Cumplido',
  'Abogada laboralista y de derechos humanos egresada de la UBA. Referente parlamentaria del Frente de Izquierda y de Trabajadores - Unidad (PTS) por la Ciudad Autónoma de Buenos Aires.',
  'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Myriam_Bregman_2021.jpg/400px-Myriam_Bregman_2021.jpg',
  93.50, 99.40),

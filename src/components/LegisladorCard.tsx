@@ -18,13 +18,21 @@ import {
 
 interface LegisladorCardProps {
   legislador: LegisladorResumen;
+  filtroLey?: string;
+  tituloLey?: string;
 }
 
-export const LegisladorCard: React.FC<LegisladorCardProps> = ({ legislador }) => {
+export const LegisladorCard: React.FC<LegisladorCardProps> = ({
+  legislador,
+  filtroLey,
+  tituloLey,
+}) => {
   const isPatrimonioPositivo = legislador.crecimiento_real_usd_pct >= 0;
   const cargoLabel =
     legislador.camara === 'Senadores' ? 'Senador/a Nacional' : 'Diputado/a Nacional';
   const perfilUrl = getLegisladorUrl(legislador);
+  const esActivo = legislador.estado === 'Activo';
+  const votoFiltrado = filtroLey && legislador.votos ? legislador.votos[filtroLey] : null;
 
   return (
     <a
@@ -47,7 +55,19 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({ legislador }) =>
             <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 mt-0.5" />
           </div>
 
-          <p className="text-xs font-medium text-slate-500 mt-0.5">{cargoLabel}</p>
+          <div className="flex items-center gap-2 mt-0.5">
+            <p className="text-xs font-medium text-slate-500">{cargoLabel}</p>
+            <span
+              className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.2 text-[10px] font-semibold ${
+                esActivo
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : 'bg-slate-100 text-slate-600 border border-slate-200'
+              }`}
+            >
+              {esActivo && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />}
+              {legislador.estado}
+            </span>
+          </div>
 
           {/* Badges: Provincia y Bloque Político */}
           <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
@@ -68,6 +88,28 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({ legislador }) =>
           </div>
         </div>
       </div>
+
+      {/* Voto en Ley Filtrada (si está activo el filtro de ley) */}
+      {votoFiltrado && (
+        <div className="flex items-center justify-between text-xs px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 gap-2">
+          <span className="text-slate-600 font-medium truncate text-[11px]">
+            {tituloLey || 'Voto registrado'}:
+          </span>
+          <span
+            className={`font-bold text-[11px] px-2.5 py-0.5 rounded-full shrink-0 ${
+              votoFiltrado === 'Afirmativo'
+                ? 'bg-emerald-100 text-emerald-800'
+                : votoFiltrado === 'Negativo'
+                ? 'bg-rose-100 text-rose-800'
+                : votoFiltrado === 'Abstencion'
+                ? 'bg-amber-100 text-amber-800'
+                : 'bg-slate-200 text-slate-700'
+            }`}
+          >
+            {votoFiltrado}
+          </span>
+        </div>
+      )}
 
       {/* Mini barras de huella temática */}
       <div className="grid grid-cols-4 gap-1.5 pt-2 border-t border-slate-100">
