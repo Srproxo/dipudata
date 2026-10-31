@@ -181,9 +181,55 @@ assert_test("MVC Router: vista de perfil renderiza 'Agenda Legislativa Propia'",
     str_contains($perfilHtml, 'id="filtroProyectos"')
 );
 
+// 6. Fase 4: Tensión Partido vs. Provincia (Índice de Defensa Provincial)
+echo "\n--- FASE 4: TENSIÓN PARTIDO VS. PROVINCIA (AUDITORÍA REGIONAL) ---\n";
+
+// Test 6.1: Rodrigo de Loredo (Córdoba) - Caso testigo: Ley de Manejo del Fuego
+$deLoredo = $modelLeg->findBySlug('rodrigo-de-loredo');
+assert_test("LegisladorModel: localización de Rodrigo de Loredo (Córdoba)", $deLoredo !== null && $deLoredo['provincia'] === 'Córdoba');
+
+$defensaCordoba = $modelLeg->calcularDefensaProvincial((int)$deLoredo['id']);
+assert_test("LegisladorModel: cálculo de defensa provincial para Córdoba",
+    $defensaCordoba['total_leyes_evaluadas'] >= 3 &&
+    isset($defensaCordoba['indice_defensa_provincial']) &&
+    isset($defensaCordoba['indice_lealtad_partido'])
+);
+
+// Buscar la alerta de Manejo del Fuego en Córdoba
+$alertaFuego = array_filter($defensaCordoba['alertas_conflicto'], fn($a) => str_contains($a['ley'], 'Manejo del Fuego'));
+$alertaFuego = reset($alertaFuego);
+assert_test("LegisladorModel: detección de conflicto en 'Ley de Manejo del Fuego' en Córdoba",
+    $alertaFuego !== false &&
+    $alertaFuego['voto_legislador'] === 'Negativo' &&
+    $alertaFuego['voto_esperado_regional'] === 'Afirmativo' &&
+    $alertaFuego['disciplina_partidaria_perjudicial'] === true
+);
+
+// Test 6.2: Martín Menem (La Rioja) - Conflictos por disciplina partidaria LLA
+$defensaLaRioja = $modelLeg->calcularDefensaProvincial($legId);
+assert_test("LegisladorModel: alertas de disciplina partidaria en La Rioja (Menem)",
+    $defensaLaRioja['votos_disciplina_perjuicio'] >= 1 &&
+    count($defensaLaRioja['alertas_conflicto']) >= 2
+);
+
+// Test 6.3: Renderizado de la Card 'Defensa de su Provincia' en perfil.php
+$_SERVER['REQUEST_URI'] = '/diputado/rodrigo-de-loredo';
+ob_start();
+require dirname(__DIR__) . '/mvc.php';
+$perfilDeLoredoHtml = ob_get_clean();
+
+assert_test("MVC Router: vista de perfil renderiza Card 'Defensa de su Provincia'",
+    str_contains($perfilDeLoredoHtml, 'Defensa de su Provincia') &&
+    str_contains($perfilDeLoredoHtml, 'Índice de Lealtad al Partido') &&
+    str_contains($perfilDeLoredoHtml, 'Índice de Defensa Provincial') &&
+    str_contains($perfilDeLoredoHtml, 'Votos en conflicto con su provincia') &&
+    str_contains($perfilDeLoredoHtml, 'Ley de Manejo del Fuego y Protección Serrana') &&
+    str_contains($perfilDeLoredoHtml, 'Voto por Disciplina Partidaria en perjuicio provincial')
+);
+
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";
-echo sprintf(" RESUMEN FASES 2 Y 3: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
+echo sprintf(" RESUMEN FASES 2, 3 Y 4: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
 echo "------------------------------------------------------------------------------\n";
 
 exit($fallaron === 0 ? 0 : 1);

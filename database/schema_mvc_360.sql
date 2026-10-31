@@ -7,6 +7,7 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS blog_articulos;
+DROP TABLE IF EXISTS leyes_impacto_provincial;
 DROP TABLE IF EXISTS proyectos_firmas;
 DROP TABLE IF EXISTS proyectos;
 DROP TABLE IF EXISTS votaciones;
@@ -171,4 +172,24 @@ CREATE TABLE blog_articulos (
     publicado TINYINT(1) NOT NULL DEFAULT 1,
     fecha_publicacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_blog_cat_slug (categoria_slug, articulo_slug, publicado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- 8. TABLA DE IMPACTO REGIONAL: leyes_impacto_provincial (Fase 4 - Tensión Provincial)
+-- Cruza leyes con el sentido de voto esperado regionalmente y criticidad
+-- ============================================================================
+CREATE TABLE leyes_impacto_provincial (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    ley_id BIGINT UNSIGNED NULL COMMENT 'Foreign Key a votaciones.id',
+    ley VARCHAR(255) NOT NULL COMMENT 'Nombre o carátula de la ley evaluada',
+    provincia VARCHAR(100) NOT NULL COMMENT 'Provincia afectada',
+    voto_esperado_regional ENUM('Afirmativo', 'Negativo') NOT NULL COMMENT 'Sentido del voto que favorece a la provincia',
+    nivel_criticidad INT NOT NULL DEFAULT 2 COMMENT 'Criticidad de 1 a 3 (1=Baja, 2=Media, 3=Crítica/Vital)',
+    descripcion_impacto TEXT NULL COMMENT 'Fundamento de impacto provincial',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_impacto_ley_votaciones
+        FOREIGN KEY (ley_id) REFERENCES votaciones(id)
+        ON UPDATE CASCADE ON DELETE SET NULL,
+    INDEX idx_impacto_provincia (provincia),
+    INDEX idx_impacto_ley (ley)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

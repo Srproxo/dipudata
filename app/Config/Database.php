@@ -43,7 +43,7 @@ class Database
     {
         $hasTables = false;
         try {
-            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM proyectos");
+            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM leyes_impacto_provincial");
             $row = $stmt ? $stmt->fetch() : false;
             if ($row && (int)$row['c'] >= 0) {
                 $hasTables = true;
@@ -57,6 +57,7 @@ class Database
                 dirname(__DIR__, 2) . '/database/schema_mvc_360.sql',
                 dirname(__DIR__, 2) . '/database/migration_fase2.sql',
                 dirname(__DIR__, 2) . '/database/migration_fase3.sql',
+                dirname(__DIR__, 2) . '/database/migration_fase4.sql',
             ];
             foreach ($files as $file) {
                 if (is_readable($file)) {
@@ -274,6 +275,39 @@ class Database
                     ':rol'        => trim((string)$data['rol']),
                     ':expediente' => $exp,
                     ':id_recinto' => trim((string)$data['legislador_id_recinto']),
+                ]);
+            }
+            fclose($handle);
+        }
+
+        // 4. Sembrar Mapeo de Impacto Provincial (Fase 4 - Tensión Partido vs Provincia)
+        $csvImpacto = dirname(__DIR__, 2) . '/storage/csv/leyes_impacto_provincial.csv';
+        if (is_readable($csvImpacto) && ($handle = fopen($csvImpacto, 'r')) !== false) {
+            $headers = fgetcsv($handle);
+            $stmtImpacto = $pdo->prepare("
+                INSERT INTO leyes_impacto_provincial (ley, provincia, voto_esperado_regional, nivel_criticidad, descripcion_impacto, ley_id)
+                VALUES (:ley, :provincia, :voto_esperado, :criticidad, :descripcion, (SELECT id FROM votaciones WHERE ley = :ley_match LIMIT 1))
+                ON DUPLICATE KEY UPDATE
+                    voto_esperado_regional = VALUES(voto_esperado_regional),
+                    nivel_criticidad = VALUES(nivel_criticidad),
+                    descripcion_impacto = VALUES(descripcion_impacto)
+            ");
+            while (($row = fgetcsv($handle)) !== false) {
+                if (!$headers || count($row) < count($headers)) {
+                    continue;
+                }
+                $data = array_combine($headers, $row);
+                if (!is_array($data)) {
+                    continue;
+                }
+                $ley = trim((string)$data['ley']);
+                $stmtImpacto->execute([
+                    ':ley'           => $ley,
+                    ':ley_match'     => $ley,
+                    ':provincia'     => trim((string)$data['provincia']),
+                    ':voto_esperado' => trim((string)$data['voto_esperado_regional']),
+                    ':criticidad'    => (int)$data['nivel_criticidad'],
+                    ':descripcion'   => trim((string)$data['descripcion_impacto']),
                 ]);
             }
             fclose($handle);

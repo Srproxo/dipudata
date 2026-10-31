@@ -81,6 +81,13 @@ $iniciales = implode('', array_map(fn($p) => mb_substr($p, 0, 1), array_slice(ex
 
 $agenda = $data['agenda'] ?? ['puntaje_proyectos' => [], 'top3_ejes' => [], 'total_proyectos' => 0, 'total_autor' => 0, 'total_coautor' => 0];
 $ultimosProyectos = $data['ultimos_proyectos'] ?? [];
+$defensaProv = $data['defensa_provincial'] ?? [
+    'indice_lealtad_partido'     => (float)$leg['indice_lealtad'],
+    'indice_defensa_provincial'  => 100.0,
+    'brecha_tension'             => 0.0,
+    'alertas_conflicto'          => [],
+    'todos_los_votos'            => [],
+];
 
 send_view_headers();
 require __DIR__ . '/app/Views/layouts/header.php';
@@ -183,6 +190,166 @@ require __DIR__ . '/app/Views/layouts/header.php';
             <?php endforeach; ?>
         </div>
         <a href="/match-360" class="mt-6 block text-center rounded-lg bg-slate-900 text-white text-sm font-semibold py-2.5 hover:bg-slate-800">¿Coincidís con este perfil? Hacé el Match 360</a>
+    </section>
+
+    <!-- Card: Defensa de su Provincia (Fase 4 - Tensión Partido vs. Provincia) -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        Auditoría Territorial & Federal
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">Provincia de <?= e($leg['provincia']) ?></span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Defensa de su Provincia</h2>
+                <p class="text-sm text-slate-500">
+                    Auditoría de tensión entre disciplina de bloque partidario nacional y defensa de los intereses de <?= e($leg['provincia']) ?>.
+                </p>
+            </div>
+            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 self-start md:self-auto">
+                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <?= count($defensaProv['alertas_conflicto']) ?> <?= count($defensaProv['alertas_conflicto']) === 1 ? 'Voto en conflicto' : 'Votos en conflicto' ?>
+            </span>
+            <?php else: ?>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start md:self-auto">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                100% Alineado con <?= e($leg['provincia']) ?>
+            </span>
+            <?php endif; ?>
+        </div>
+
+        <!-- Métricas comparativas enfrentadas: Lealtad al Partido vs Defensa Provincial -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Métrica 1: Lealtad al Partido -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Disciplina Partidaria</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-0.5">Índice de Lealtad al Partido</h3>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-200 text-slate-800 font-mono">
+                        <?= e($leg['bloque']) ?>
+                    </span>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                    <span class="font-mono text-3xl sm:text-4xl font-extrabold text-slate-900">
+                        <?= number_format((float)$defensaProv['indice_lealtad_partido'], 1, ',', '.') ?>%
+                    </span>
+                    <span class="text-xs text-slate-500">cohesión de voto con su bloque</span>
+                </div>
+                <div class="mt-3 w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-slate-800 h-2.5 rounded-full" style="width: <?= min(100, max(0, (float)$defensaProv['indice_lealtad_partido'])) ?>%"></div>
+                </div>
+            </div>
+
+            <!-- Métrica 2: Defensa Provincial -->
+            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-emerald-700">Compromiso Federal</span>
+                        <h3 class="text-base font-bold text-emerald-950 mt-0.5">Índice de Defensa Provincial</h3>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800 font-mono">
+                        <?= e($leg['provincia']) ?>
+                    </span>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                    <span class="font-mono text-3xl sm:text-4xl font-extrabold <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'text-emerald-700' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'text-amber-700' : 'text-rose-700') ?>">
+                        <?= number_format((float)$defensaProv['indice_defensa_provincial'], 1, ',', '.') ?>%
+                    </span>
+                    <span class="text-xs text-emerald-800/80">ponderado por criticidad</span>
+                </div>
+                <div class="mt-3 w-full bg-emerald-200/80 rounded-full h-2.5 overflow-hidden">
+                    <div class="h-2.5 rounded-full <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'bg-emerald-600' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'bg-amber-500' : 'bg-rose-600') ?>" style="width: <?= min(100, max(0, (float)$defensaProv['indice_defensa_provincial'])) ?>%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicador de Brecha de Tensión -->
+        <?php if ($defensaProv['brecha_tension'] > 0): ?>
+        <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center justify-between text-xs text-amber-900">
+            <span class="font-medium flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Tensión Partidaria Detectada: La lealtad a la cúpula supera a la defensa provincial en un <strong>+<?= number_format($defensaProv['brecha_tension'], 1, ',', '.') ?>%</strong>.
+            </span>
+            <span class="font-mono font-bold text-amber-800">Prioridad: Partido Nacional</span>
+        </div>
+        <?php endif; ?>
+
+        <!-- Tabla de Alertas: Votos en conflicto con su provincia -->
+        <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                <span>Votos en conflicto con su provincia</span>
+                <span class="text-xs font-normal text-slate-400 lowercase">(votaciones que contradijeron a <?= e($leg['provincia']) ?>)</span>
+            </h3>
+
+            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
+            <div class="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/30">
+                <table class="w-full text-sm">
+                    <thead class="bg-amber-100/60 text-xs uppercase font-semibold text-amber-900 border-b border-amber-200">
+                        <tr>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Ley Evaluada</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Voto Legislador</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Interés Provincial</th>
+                            <th class="text-left px-4 py-3 min-w-[260px]">Contradicción con el Interés Regional</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Criticidad</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-amber-100 bg-white">
+                    <?php foreach ($defensaProv['alertas_conflicto'] as $alerta): 
+                        $badgeCrit = match ($alerta['nivel_criticidad']) {
+                            3 => 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+                            2 => 'bg-amber-100 text-amber-800 border-amber-300',
+                            default => 'bg-slate-100 text-slate-700 border-slate-300',
+                        };
+                        $critTexto = match ($alerta['nivel_criticidad']) {
+                            3 => 'Nivel 3 (Crítica)',
+                            2 => 'Nivel 2 (Media)',
+                            default => 'Nivel 1 (Baja)',
+                        };
+                    ?>
+                        <tr class="hover:bg-amber-50/50 transition-colors">
+                            <td class="px-4 py-3 font-medium text-slate-900 text-xs sm:text-sm">
+                                <div><?= e($alerta['ley']) ?></div>
+                                <span class="font-mono text-[11px] text-slate-400"><?= e(date('d/m/Y', strtotime($alerta['fecha']))) ?></span>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold <?= $alerta['voto_legislador'] === 'Afirmativo' ? 'bg-emerald-100 text-emerald-800' : ($alerta['voto_legislador'] === 'Negativo' ? 'bg-rose-100 text-rose-800' : 'bg-slate-200 text-slate-700') ?>">
+                                    <?= e($alerta['voto_legislador']) ?>
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                    <?= e($alerta['voto_esperado_regional']) ?> (Favorable)
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-xs leading-relaxed text-slate-700">
+                                <?php if ($alerta['disciplina_partidaria_perjudicial']): ?>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200 mb-1">
+                                    Voto por Disciplina Partidaria en perjuicio provincial
+                                </span>
+                                <?php endif; ?>
+                                <p class="text-slate-800 font-medium"><?= e($alerta['descripcion_impacto']) ?></p>
+                                <p class="text-[11px] text-slate-500 mt-1 italic"><?= e($alerta['motivo']) ?></p>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap text-xs">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded border text-[11px] <?= $badgeCrit ?>">
+                                    <?= e($critTexto) ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php else: ?>
+            <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/50 text-center text-xs text-emerald-900">
+                <strong>Sin votos en conflicto registrados:</strong> El legislador ha votado de forma consistente con las leyes de impacto regional para la provincia de <?= e($leg['provincia']) ?>.
+            </div>
+            <?php endif; ?>
+        </div>
     </section>
 
     <!-- Votaciones -->

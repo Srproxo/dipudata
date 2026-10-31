@@ -30,9 +30,10 @@ class LegisladorController
             'resumen'           => $this->model->resumenPatrimonial($patrimonio),
             'perfil'            => $this->model->perfilTematico($leg['id_recinto']),
             'perfil_compuesto'  => $this->model->perfilCompuesto((int)$leg['id'], $leg['id_recinto']),
-            'agenda'            => $this->model->agendaProyectos((int)$leg['id']),
-            'ultimos_proyectos' => $this->model->ultimosProyectosAutor((int)$leg['id'], 5),
-            'votaciones'        => $this->model->votaciones($leg['id_recinto']),
+            'agenda'              => $this->model->agendaProyectos((int)$leg['id']),
+            'ultimos_proyectos'   => $this->model->ultimosProyectosAutor((int)$leg['id'], 5),
+            'defensa_provincial'  => $this->model->calcularDefensaProvincial((int)$leg['id']),
+            'votaciones'          => $this->model->votaciones($leg['id_recinto']),
         ];
     }
 

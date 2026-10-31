@@ -316,6 +316,283 @@ class LegisladorModel
         return $compuesto;
     }
 
+    public function findById(int $id): ?array
+    {
+        if ($this->pdo) {
+            $stmt = $this->pdo->prepare("SELECT * FROM legisladores_master WHERE id = :id LIMIT 1");
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch() ?: null;
+        }
+        foreach ($this->csv()['legisladores'] as $leg) {
+            if ((int)$leg['id'] === $id) {
+                return $leg;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Calcula el Índice de Defensa Provincial y detecta votos en conflicto por disciplina partidaria (Fase 4).
+     *
+     * Cruza el historial de votos del legislador con las leyes de impacto regional para su provincia.
+     * Si el legislador vota en discrepancia con el interés provincial y a su vez vota igual que la mayoría
+     * de su bloque, se cataloga formalmente como:
+     * "Voto por Disciplina Partidaria en perjuicio provincial".
+     *
+     * @return array{
+     *     legislador_id: int,
+     *     nombre: string,
+     *     provincia: string,
+     *     bloque: string,
+     *     indice_lealtad_partido: float,
+     *     indice_defensa_provincial: float,
+     *     brecha_tension: float,
+     *     total_leyes_evaluadas: int,
+     *     total_votos_defensa: int,
+     *     total_votos_conflicto: int,
+     *     votos_disciplina_perjuicio: int,
+     *     alertas_conflicto: list<array{
+     *         ley: string,
+     *         fecha: string,
+     *         voto_legislador: string,
+     *         voto_esperado_regional: string,
+     *         voto_mayoria_bloque: string,
+     *         nivel_criticidad: int,
+     *         disciplina_partidaria_perjudicial: bool,
+     *         categoria_conflicto: string,
+     *         descripcion_impacto: string,
+     *         motivo: string
+     *     }>,
+     *     todos_los_votos: list<array<string, mixed>>
+     * }
+     */
+    public function calcularDefensaProvincial(int $legisladorId): array
+    {
+        $leg = $this->findById($legisladorId);
+        if (!$leg) {
+            return [
+                'legislador_id'              => $legisladorId,
+                'nombre'                     => '',
+                'provincia'                  => '',
+                'bloque'                     => '',
+                'indice_lealtad_partido'     => 0.0,
+                'indice_defensa_provincial'  => 0.0,
+                'brecha_tension'             => 0.0,
+                'total_leyes_evaluadas'      => 0,
+                'total_votos_defensa'        => 0,
+                'total_votos_conflicto'      => 0,
+                'votos_disciplina_perjuicio' => 0,
+                'alertas_conflicto'          => [],
+                'todos_los_votos'            => [],
+            ];
+        }
+
+        $provincia = $leg['provincia'];
+        $bloque = $leg['bloque'];
+        $idRecinto = $leg['id_recinto'];
+        $lealtadPartidaria = (float)$leg['indice_lealtad'];
+
+        $leyesProvincia = [];
+
+        if ($this->pdo) {
+            try {
+                $sql = "
+                    SELECT 
+                        lip.id AS impacto_id,
+                        lip.ley,
+                        lip.provincia,
+                        lip.voto_esperado_regional,
+                        lip.nivel_criticidad,
+                        lip.descripcion_impacto,
+                        v.voto AS voto_legislador,
+                        COALESCE(v.fecha, '2024-01-01') AS fecha
+                    FROM leyes_impacto_provincial lip
+                    LEFT JOIN votaciones v ON (lip.ley = v.ley AND v.id_recinto = :recinto)
+                    WHERE lip.provincia = :provincia
+                    ORDER BY lip.nivel_criticidad DESC, lip.id ASC
+                ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([':recinto' => $idRecinto, ':provincia' => $provincia]);
+                $leyesProvincia = $stmt->fetchAll();
+            } catch (\Throwable) {
+            }
+        }
+
+        // Fallback a CSV
+        if (empty($leyesProvincia)) {
+            $impactoRows = array_filter(
+                $this->csv()['impacto_provincial'] ?? [],
+                fn($r) => ($r['provincia'] ?? '') === $provincia
+            );
+            $votosLeg = $this->csv()['votaciones'][$idRecinto] ?? [];
+            $votosPorLey = [];
+            foreach ($votosLeg as $v) {
+                $votosPorLey[$v['ley']] = $v;
+            }
+
+            foreach ($impactoRows as $imp) {
+                $leyNombre = $imp['ley'];
+                $v = $votosPorLey[$leyNombre] ?? null;
+                $leyesProvincia[] = [
+                    'impacto_id'             => (int)($imp['id'] ?? 1),
+                    'ley'                    => $leyNombre,
+                    'provincia'              => $provincia,
+                    'voto_esperado_regional' => $imp['voto_esperado_regional'] ?? 'Afirmativo',
+                    'nivel_criticidad'       => (int)($imp['nivel_criticidad'] ?? 2),
+                    'descripcion_impacto'    => $imp['descripcion_impacto'] ?? '',
+                    'voto_legislador'        => $v['voto'] ?? 'Ausente',
+                    'fecha'                  => $v['fecha'] ?? '2024-09-01',
+                ];
+            }
+        }
+
+        // Determinar cómo votó la mayoría del bloque para cada ley
+        $votosBloquePorLey = $this->obtenerMayoriaBloquePorLey($bloque);
+
+        $puntosObtenidos = 0;
+        $puntosPosibles = 0;
+        $totalDefensa = 0;
+        $totalConflicto = 0;
+        $votosDisciplinaPerjuicio = 0;
+        $alertasConflicto = [];
+        $todosLosVotos = [];
+
+        foreach ($leyesProvincia as $item) {
+            $ley = $item['ley'];
+            $votoLeg = $item['voto_legislador'] ?? 'Ausente';
+            $votoEsperado = $item['voto_esperado_regional'];
+            $criticidad = max(1, (int)($item['nivel_criticidad'] ?? 2));
+            $puntosPosibles += $criticidad;
+
+            $votoMayoria = $votosBloquePorLey[$ley] ?? $votoLeg;
+
+            // Comparación de alineamiento con el interés regional
+            $coincideRegional = ($votoLeg === $votoEsperado);
+
+            if ($coincideRegional) {
+                $totalDefensa++;
+                $puntosObtenidos += $criticidad;
+                $esConflicto = false;
+                $disciplinaPerjudicial = false;
+                $categoriaConflicto = 'Alineado con su Provincia';
+                $motivo = "El legislador votó {$votoLeg} en defensa de los intereses de {$provincia}.";
+            } else {
+                $totalConflicto++;
+                $esConflicto = true;
+                // Verificar si votó igual que la mayoría de su bloque partidario
+                $disciplinaPerjudicial = ($votoLeg === $votoMayoria);
+                if ($disciplinaPerjudicial) {
+                    $votosDisciplinaPerjuicio++;
+                    $categoriaConflicto = 'Voto por Disciplina Partidaria en perjuicio provincial';
+                    $motivo = "Votó {$votoLeg} siguiendo la disciplina del bloque {$bloque}, contradiciendo el interés regional de {$provincia} que requería voto {$votoEsperado}.";
+                } else {
+                    $categoriaConflicto = 'Discrepancia Regional Individual';
+                    $motivo = "Votó {$votoLeg} en contra del interés regional esperado ({$votoEsperado}), apartándose también de su bloque ({$votoMayoria}).";
+                }
+            }
+
+            $detalle = [
+                'ley'                               => $ley,
+                'fecha'                             => $item['fecha'] ?? '2024-01-01',
+                'voto_legislador'                   => $votoLeg,
+                'voto_esperado_regional'            => $votoEsperado,
+                'voto_mayoria_bloque'               => $votoMayoria,
+                'nivel_criticidad'                  => $criticidad,
+                'coincide_regional'                 => $coincideRegional,
+                'disciplina_partidaria_perjudicial' => $disciplinaPerjudicial,
+                'categoria_conflicto'               => $categoriaConflicto,
+                'descripcion_impacto'               => $item['descripcion_impacto'] ?? '',
+                'motivo'                            => $motivo,
+            ];
+
+            $todosLosVotos[] = $detalle;
+            if ($esConflicto) {
+                $alertasConflicto[] = $detalle;
+            }
+        }
+
+        $indiceDefensa = $puntosPosibles > 0 ? round(($puntosObtenidos / $puntosPosibles) * 100, 1) : 100.0;
+        $brechaTension = round($lealtadPartidaria - $indiceDefensa, 1);
+
+        return [
+            'legislador_id'              => $legisladorId,
+            'nombre'                     => $leg['nombre'],
+            'provincia'                  => $provincia,
+            'bloque'                     => $bloque,
+            'indice_lealtad_partido'     => $lealtadPartidaria,
+            'indice_defensa_provincial'  => $indiceDefensa,
+            'brecha_tension'             => $brechaTension,
+            'total_leyes_evaluadas'      => count($leyesProvincia),
+            'total_votos_defensa'        => $totalDefensa,
+            'total_votos_conflicto'      => $totalConflicto,
+            'votos_disciplina_perjuicio' => $votosDisciplinaPerjuicio,
+            'alertas_conflicto'          => $alertasConflicto,
+            'todos_los_votos'            => $todosLosVotos,
+        ];
+    }
+
+    /**
+     * Determina el sentido del voto mayoritario de un bloque parlamentario para cada ley.
+     * @return array<string, string> Mapa [nombre_ley => 'Afirmativo'|'Negativo']
+     */
+    public function obtenerMayoriaBloquePorLey(string $bloque): array
+    {
+        $salida = [];
+        if ($this->pdo) {
+            try {
+                $sql = "
+                    SELECT v.ley, v.voto, COUNT(*) AS total
+                    FROM votaciones v
+                    JOIN legisladores_master lm ON v.id_recinto = lm.id_recinto
+                    WHERE lm.bloque = :bloque AND v.voto IN ('Afirmativo', 'Negativo')
+                    GROUP BY v.ley, v.voto
+                    ORDER BY v.ley, total DESC
+                ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([':bloque' => $bloque]);
+                while ($row = $stmt->fetch()) {
+                    $ley = $row['ley'];
+                    if (!isset($salida[$ley])) {
+                        $salida[$ley] = $row['voto'];
+                    }
+                }
+                if (!empty($salida)) {
+                    return $salida;
+                }
+            } catch (\Throwable) {
+            }
+        }
+
+        // Fallback a CSV
+        $conteo = [];
+        $legisladores = $this->csv()['legisladores'] ?? [];
+        $recintoABloque = [];
+        foreach ($legisladores as $r => $l) {
+            $recintoABloque[$r] = $l['bloque'] ?? '';
+        }
+
+        foreach ($this->csv()['votaciones'] ?? [] as $rId => $votos) {
+            $bl = $recintoABloque[$rId] ?? '';
+            if ($bl !== $bloque) {
+                continue;
+            }
+            foreach ($votos as $v) {
+                $ley = $v['ley'];
+                $sentido = $v['voto'];
+                if ($sentido === 'Afirmativo' || $sentido === 'Negativo') {
+                    $conteo[$ley][$sentido] = ($conteo[$ley][$sentido] ?? 0) + 1;
+                }
+            }
+        }
+
+        foreach ($conteo as $ley => $votos) {
+            arsort($votos);
+            $salida[$ley] = array_key_first($votos);
+        }
+
+        return $salida;
+    }
+
     public static function urlPerfil(array $leg): string
     {
         $prefijo = $leg['camara'] === 'Senadores' ? '/senador/' : '/diputado/';
@@ -404,7 +681,13 @@ class LegisladorModel
             }
         }
 
-        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj', 'proyectos_por_id');
+        $impacto_provincial = [];
+        $impactoPath = $base . 'leyes_impacto_provincial.csv';
+        if (is_readable($impactoPath)) {
+            $impacto_provincial = self::readCsv($impactoPath);
+        }
+
+        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj', 'proyectos_por_id', 'impacto_provincial');
     }
 
     public static function readCsv(string $path): array
