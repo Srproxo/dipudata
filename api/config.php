@@ -73,11 +73,13 @@ class Config
         }
 
         $localCreds = [];
-        $localCredsFile = __DIR__ . '/credentials.local.php';
-        if (is_readable($localCredsFile)) {
-            $loadedCreds = include $localCredsFile;
-            if (is_array($loadedCreds)) {
-                $localCreds = $loadedCreds;
+        foreach ([__DIR__ . '/db_env.php', __DIR__ . '/credentials.local.php'] as $localCredsFile) {
+            if (is_readable($localCredsFile)) {
+                $loadedCreds = include $localCredsFile;
+                if (is_array($loadedCreds)) {
+                    $localCreds = $loadedCreds;
+                    break;
+                }
             }
         }
 

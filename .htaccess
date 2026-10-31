@@ -55,7 +55,7 @@ AddDefaultCharset UTF-8
     RewriteRule ^(cron|database|\.agent|\.git|node_modules|src|tests)(/|$) - [F,L,NC]
 
     # Bloquear acceso directo a librerías internas de /api (excepto api/index.php)
-    RewriteRule ^api/(config|Security|Algorithms|credentials\.local)\.php$ - [F,L,NC]
+    RewriteRule ^api/(config|Security|Algorithms|db_env|credentials\.local)\.php$ - [F,L,NC]
 
     # --------------------------------------------------------------------------
     # 4. REGLAS DE ENRUTAMIENTO LIMPIO (SITEMAP, API REST Y SSR SPA ROUTER)
