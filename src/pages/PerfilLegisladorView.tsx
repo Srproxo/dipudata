@@ -22,6 +22,7 @@ import { AvatarLegislador } from '../components/AvatarLegislador';
 import { PatrimonioLineChart } from '../components/PatrimonioLineChart';
 import { IdeologiaRadarChart } from '../components/IdeologiaRadarChart';
 import { BarrasTematicas } from '../components/BarrasTematicas';
+import { DesgloseDdjjCard } from '../components/DesgloseDdjjCard';
 import {
   EJE_TEMATICO_META,
   formatARS,
@@ -422,6 +423,14 @@ export const PerfilLegisladorView: React.FC = () => {
           </div>
         </section>
       </div>
+
+      {/* DESGLOSE DETALLADO DE DECLARACIÓN JURADA (OFICINA ANTICORRUPCIÓN) */}
+      {perfil.desglose_ddjj && (
+        <DesgloseDdjjCard
+          desglose={perfil.desglose_ddjj}
+          nombreLegislador={perfil.nombre_completo}
+        />
+      )}
 
       {/* TABLA INTERACTIVA DE VOTACIONES (PAGINACIÓN MÁXIMO 10 LEYES POR PÁGINA) */}
       <section className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">

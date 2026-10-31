@@ -50,6 +50,7 @@ class LegisladorController
             'despacho'            => $this->model->despachoCostos((int)$leg['id'], 2024, $leg['id_recinto'] ?? null, $leg['slug'] ?? null),
             'media_camara_costo'  => $this->model->mediaCamaraCostoProyecto($leg['camara']),
             'auditoria'           => $auditoria,
+            'desglose_ddjj'       => $this->model->desgloseDdjj((int)$leg['id']),
             'conflictos_transparencia' => $this->model->conflictosTransparencia((int)$leg['id']),
             'votaciones'          => $this->model->votaciones($leg['id_recinto']),
             'ficha_wiki'          => $this->model->fichaWikipedia($leg['slug'] ?? '', $leg),

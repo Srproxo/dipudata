@@ -1,4 +1,5 @@
 import {
+  DesgloseDdjjOficial,
   IndicadorEconomico,
   LeyParlamentaria,
   PreguntaMatch,
@@ -440,7 +441,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     bloque_actual: 'Frente PRO',
     estado: 'Activo',
     biografia:
-      'Licenciada en Comunicación, dirigente social y empresaria cordobesa vinculada al sector de la construcción y fundaciones comunitarias. Senadora Nacional por la provincia de Córdoba.',
+      'Licenciada en Comunicación, dirigente social y empresaria cordobesa. Senadora Nacional por la provincia de Córdoba (Frente PRO). Posee participaciones societarias en CAPDEL S.A. (administradora de Nuevocentro Shopping) y Quinto Centenario S.A. (complejo hotelero), además de 14 inmuebles y tenencias en moneda extranjera declaradas ante la Oficina Anticorrupción.',
     foto_url:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png',
     asistencia_historica: 97.4,
@@ -1336,7 +1337,7 @@ export const PATRIMONIO_NOMINAL_SEED: Record<number, Record<number, number>> = {
   20: { 2020: 21500000, 2021: 31200000, 2022: 55100000, 2023: 174000000, 2024: 206000000, 2025: 223800000 },
   21: { 2020: 32000000, 2021: 49000000, 2022: 95000000, 2023: 310000000, 2024: 385000000, 2025: 418000000 },
   22: { 2020: 28500000, 2021: 42000000, 2022: 78000000, 2023: 255000000, 2024: 315000000, 2025: 345000000 },
-  23: { 2020: 45000000, 2021: 68000000, 2022: 125000000, 2023: 410000000, 2024: 512000000, 2025: 560000000 },
+  23: { 2020: 128000000, 2021: 185000000, 2022: 325000000, 2023: 1015000000, 2024: 2222824501.34, 2025: 2798181083.71 },
   24: { 2020: 19500000, 2021: 29800000, 2022: 55000000, 2023: 182000000, 2024: 224000000, 2025: 245000000 },
   25: { 2020: 31000000, 2021: 47000000, 2022: 89000000, 2023: 295000000, 2024: 365000000, 2025: 395000000 },
   26: { 2020: 22000000, 2021: 33500000, 2022: 62000000, 2023: 205000000, 2024: 252000000, 2025: 275000000 },
@@ -1868,6 +1869,124 @@ export const PREGUNTAS_MATCH_ELECTORAL: PreguntaMatch[] = [
     ],
   },
 ];
+
+export const DESGLOSES_DDJJ_OFICIALES: Record<number, DesgloseDdjjOficial> = {
+  23: {
+    legislador_id: 23,
+    periodo_fiscal: 2025,
+    organismo: 'Oficina Anticorrupción (Poder Ejecutivo Nacional)',
+    formulario: 'F. 817 — Declaración Jurada Patrimonial Integral',
+    fecha_presentacion: '03 de agosto de 2026',
+    total_bienes_pesos: 2798181083.71,
+    total_deudas_pesos: 0.0,
+    patrimonio_neto_pesos: 2798181083.71,
+    patrimonio_neto_usd: 2186078.97,
+    patrimonio_neto_anterior_pesos: 2222824501.34,
+    variacion_nominal_pct: 25.88,
+    variacion_nominal_monto: 575356582.37,
+    resumen_ejecutivo:
+      'La Senadora Nacional cerró 2025 con un patrimonio neto de $ 2.798,2 millones sin deudas registradas. Más de la mitad de su patrimonio ($ 1.418,7 millones) se concentra en participaciones en las sociedades CAPDEL S.A. (administradora de Nuevocentro Shopping) y Quinto Centenario S.A. (complejo hotelero), además de 14 inmuebles y tenencia de U$S 135.170 en efectivo.',
+    items: [
+      {
+        categoria: 'Participaciones Societarias',
+        titulo: 'CAPDEL S.A. (Nuevocentro Shopping) — 4,62% del capital',
+        detalle:
+          'Sociedad administradora de Nuevocentro Shopping en Córdoba Capital. Valuada al cierre en $ 884,9 millones (reducción contable de $ 140 M frente a los $ 1.024,9 M al inicio).',
+        monto_pesos: 884900000,
+        monto_usd: 691328,
+        porcentaje_patrimonio: 31.62,
+        variacion_anual_texto: '-13.7% contable (ajuste balance)',
+      },
+      {
+        categoria: 'Participaciones Societarias',
+        titulo: 'Quinto Centenario S.A. (Complejo Hotelero) — 10,86% del capital',
+        detalle:
+          'Sociedad administradora del Hotel Quinto Centenario (ex Sheraton Córdoba). Valuada en $ 533,8 millones (suba de $ 223,9 M frente a los $ 309,9 M al inicio del ejercicio).',
+        monto_pesos: 533800000,
+        monto_usd: 417031,
+        porcentaje_patrimonio: 19.08,
+        variacion_anual_texto: '+72.2% incremento contable',
+      },
+      {
+        categoria: 'Inversiones y Créditos',
+        titulo: 'Crédito a favor contra Quinto Centenario S.A.',
+        detalle:
+          'Acreencia financiera declarada a su favor contra la firma hotelera por $ 276,3 millones (al inicio era de $ 201,1 millones).',
+        monto_pesos: 276300000,
+        monto_usd: 215859,
+        porcentaje_patrimonio: 9.87,
+        variacion_anual_texto: '+$ 75,2 millones en 2025',
+      },
+      {
+        categoria: 'Inmuebles',
+        titulo: '14 Propiedades Inmuebles (Residencia, Deptos y Cocheras)',
+        detalle:
+          'Residencia de 400 m² en Zona Sur de Córdoba (83% titularidad, $ 298 M), departamento con cochera de 183 m² en Nueva Córdoba ($ 109,9 M) y 12 unidades en Barrio San Martín (alquileres, con 4 adquisiciones el 30/06 por $ 30,3 M). Las valuaciones consignadas son fiscales.',
+        monto_pesos: 438200000,
+        monto_usd: 342343,
+        porcentaje_patrimonio: 15.66,
+        variacion_anual_texto: '14 unidades a valuación fiscal',
+      },
+      {
+        categoria: 'Moneda Extranjera',
+        titulo: 'Tenencia en Dólares Estadounidenses (U$S 135.170,72)',
+        detalle:
+          'U$S 134.970,72 en efectivo (fuera del sistema bancario) valuados a tipo de cambio oficial en $ 195,2 millones, más U$S 200 en caja de ahorro. Redujo tenencia en U$S 15.000 respecto al inicio ($ 150.170 USD).',
+        monto_pesos: 195200000,
+        monto_usd: 135171,
+        porcentaje_patrimonio: 6.98,
+        variacion_anual_texto: '-U$S 15.000 en 2025',
+      },
+      {
+        categoria: 'Inversiones y Créditos',
+        titulo: 'Fondo Común FIMA Ahorro Plus Clase A y Crédito AFIP',
+        detalle:
+          'Tenencia en fondo común FIMA por $ 294,0 millones (desde $ 83,2 M al inicio) y crédito fiscal a favor contra AFIP por $ 41,6 millones.',
+        monto_pesos: 335600000,
+        monto_usd: 262187,
+        porcentaje_patrimonio: 11.99,
+        variacion_anual_texto: 'FIMA aumentó de $ 83,2M a $ 294M',
+      },
+      {
+        categoria: 'Vehículos',
+        titulo: 'Parque Automotor (4 vehículos)',
+        detalle:
+          'Incorporó un Toyota Yaris XLS+ modelo 2025 por $ 31,46 millones. Conserva Chevrolet Spin 2015 ($ 7,23 M), Citroën C3 2012 ($ 0 contable) y Suzuki Grand Vitara 2008 ($ 0 contable).',
+        monto_pesos: 38690000,
+        monto_usd: 30226,
+        porcentaje_patrimonio: 1.38,
+        variacion_anual_texto: 'Alta: Toyota Yaris XLS+ 2025',
+      },
+      {
+        categoria: 'Deudas y Pasivos',
+        titulo: 'Deudas Registradas: $ 0 (Sin pasivos informados)',
+        detalle:
+          'La legisladora no declaró deudas comerciales, bancarias ni fiscales al cierre del ejercicio. El patrimonio neto coincide íntegramente con el activo total declarado.',
+        monto_pesos: 0,
+        monto_usd: 0,
+        porcentaje_patrimonio: 0.0,
+        variacion_anual_texto: '0% endeudamiento (sin pasivos)',
+      },
+      {
+        categoria: 'Ingresos Anuales',
+        titulo: 'Ingresos declarados en Ganancias ($ 411,8 millones brutos)',
+        detalle:
+          'Rentas de capital: $ 259,7 M. Trabajo personal: $ 112,6 M. Alquileres: $ 44,6 M. Total neto de gastos: $ 402,1 M. Gastos personales declarados: $ 204,3 M. Ingresos no gravados: $ 79 M.',
+        monto_pesos: 402100000,
+        monto_usd: 314140,
+        porcentaje_patrimonio: 0.0,
+        variacion_anual_texto: 'Rentas de capital representan el 63%',
+      },
+    ],
+    fuente_periodistica: {
+      medio: 'La Voz del Interior',
+      titulo:
+        'Carmen Álvarez Rivero declaró un patrimonio de $ 2.798 millones: 14 inmuebles y más de U$S 135 mil',
+      fecha: '06 de septiembre de 2026',
+      url: 'https://www.lavoz.com.ar/politica/carmen-alvarez-rivero-declaro-patrimonio-2798-millones-14-inmuebles-us-135-mil_0_dPyDS5XFod.html',
+    },
+  },
+};
 
 export const TODAS_PROVINCIAS_ARGENTINA = [
   'Buenos Aires',

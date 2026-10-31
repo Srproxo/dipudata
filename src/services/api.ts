@@ -4,6 +4,7 @@ import {
   LEYES_SEED,
   PATRIMONIO_NOMINAL_SEED,
   obtenerVotosSeedPorLegislador,
+  DESGLOSES_DDJJ_OFICIALES,
 } from '../data/seedData';
 import {
   EjeTematico,
@@ -194,6 +195,7 @@ function construirLegisladorCompletoLocal(rawId: number): LegisladorPerfilComple
     evolucion_patrimonial: evolucion,
     votaciones,
     votos: obtenerVotosSeedPorLegislador(raw.id),
+    desglose_ddjj: DESGLOSES_DDJJ_OFICIALES[raw.id] ?? undefined,
   };
 }
 
@@ -435,6 +437,7 @@ export async function fetchLegisladorPerfil(
           crecimiento_real_usd_pct: evolucion.crecimiento_real_usd_pct,
           evolucion_patrimonial: evolucion,
           votaciones: votacionesApi,
+          desglose_ddjj: DESGLOSES_DDJJ_OFICIALES[base.id] ?? undefined,
         };
       }
     }

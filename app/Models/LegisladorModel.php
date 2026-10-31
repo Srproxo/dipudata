@@ -217,9 +217,88 @@ class LegisladorModel
             8 => [
                 ['id' => 5, 'legislador_id' => 8, 'tipo_alerta' => 'Nepotismo', 'descripcion_alerta' => 'Familiar directo contratado como asesor de planta en el bloque oficialista provincial.', 'nivel_severidad' => 'Alta'],
             ],
+            23 => [
+                ['id' => 6, 'legislador_id' => 23, 'tipo_alerta' => 'Conflicto_Interes', 'descripcion_alerta' => 'Titularidad del 4,62% en CAPDEL S.A. (Nuevocentro Shopping, $884,9M) y 10,86% en Quinto Centenario S.A. (complejo hotelero, $533,8M) más crédito a favor de $276,3M. Concentran más del 50% de su patrimonio total.', 'nivel_severidad' => 'Media'],
+                ['id' => 7, 'legislador_id' => 23, 'tipo_alerta' => 'Patrimonio_Inmobiliario', 'descripcion_alerta' => '14 inmuebles registrados a valuación fiscal ($438,2M declarados, sensiblemente inferior a valores de mercado) y tenencia de U$S 135.170 en efectivo fuera del circuito bancario.', 'nivel_severidad' => 'Media'],
+            ],
         ];
 
         return $defaults[$legisladorId] ?? [];
+    }
+
+    /**
+     * Retorna el desglose auditado oficial de la Declaración Jurada Patrimonial Integral (OA).
+     * @return array|null
+     */
+    public function desgloseDdjj(int $legisladorId): ?array
+    {
+        $desgloses = [
+            23 => [
+                'periodo' => 2025,
+                'presentacion_fecha' => '03/08/2026',
+                'organismo' => 'Oficina Anticorrupción (OA)',
+                'formulario' => 'Formulario F. 817',
+                'patrimonio_neto_pesos' => 2798181083.71,
+                'patrimonio_neto_usd' => 2186079,
+                'patrimonio_anterior_pesos' => 2222824501.34,
+                'patrimonio_anterior_usd' => 1907995,
+                'variacion_nominal_pct' => 25.88,
+                'variacion_nominal_pesos' => 575356582.37,
+                'total_deudas_pesos' => 0.0,
+                'items' => [
+                    [
+                        'categoria' => 'Participaciones Societarias',
+                        'descripcion' => 'CAPDEL S.A. 4,62% (Nuevocentro Shopping $884,9M) + Quinto Centenario S.A. 10,86% (Hotel $533,8M)',
+                        'monto_pesos' => 1418700000.0,
+                        'monto_usd' => 1108359,
+                        'porcentaje_total' => 50.7,
+                        'nota' => 'Concentra más del 50% de su patrimonio total. Valuaciones contables de sociedades que no cotizan en bolsa.',
+                    ],
+                    [
+                        'categoria' => 'Inversiones y Créditos',
+                        'descripcion' => 'Fondo Común FIMA Ahorro Plus ($294M), Crédito a favor vs Quinto Centenario S.A. ($276,3M), Crédito AFIP ($41,6M)',
+                        'monto_pesos' => 611900000.0,
+                        'monto_usd' => 478047,
+                        'porcentaje_total' => 21.9,
+                        'nota' => 'El crédito a favor contra Quinto Centenario S.A. aumentó en $75,2M durante 2025.',
+                    ],
+                    [
+                        'categoria' => 'Inmuebles',
+                        'descripcion' => '14 propiedades: Casa 400 m² Zona Sur Córdoba ($298M, 83%), Depto c/cochera Nueva Córdoba ($109,9M), 12 unidades Barrio San Martín ($30,3M)',
+                        'monto_pesos' => 438200000.0,
+                        'monto_usd' => 342344,
+                        'porcentaje_total' => 15.7,
+                        'nota' => 'Valuaciones fiscales. Incorporó 4 unidades el 30/06/2025. Varios departamentos destinados al alquiler.',
+                    ],
+                    [
+                        'categoria' => 'Moneda Extranjera',
+                        'descripcion' => 'U$S 135.170,72 totales: U$S 134.970,72 en efectivo ("en el colchón") + U$S 200 en caja de ahorro',
+                        'monto_pesos' => 195200000.0,
+                        'monto_usd' => 135171,
+                        'porcentaje_total' => 7.0,
+                        'nota' => 'Redujo su tenencia en aprox. U$S 15.000 durante el período. Valuado contablemente al tipo oficial de cierre.',
+                    ],
+                    [
+                        'categoria' => 'Vehículos',
+                        'descripcion' => '4 vehículos: Toyota Yaris XLS+ 2025 ($31,46M), Chevrolet Spin 2015 ($7,23M) y dos motovehículos',
+                        'monto_pesos' => 38690000.0,
+                        'monto_usd' => 30226,
+                        'porcentaje_total' => 1.4,
+                        'nota' => 'Unidad 0km incorporada durante el ejercicio fiscal 2025.',
+                    ],
+                ],
+                'ingresos_anuales' => 402100000.0,
+                'gastos_anuales' => 204300000.0,
+                'fuente_periodistica' => [
+                    'medio' => 'La Voz del Interior',
+                    'titulo' => 'Carmen Álvarez Rivero declaró un patrimonio de $ 2.798 millones: 14 inmuebles y más de U$S 135 mil',
+                    'url' => 'https://www.lavoz.com.ar/politica/carmen-alvarez-rivero-declaro-patrimonio-2798-millones-14-inmuebles-us-135-mil_0_dPyDS5XFod.html',
+                    'fecha' => '06 de septiembre de 2026',
+                ],
+            ],
+        ];
+
+        return $desgloses[$legisladorId] ?? null;
     }
 
     /**

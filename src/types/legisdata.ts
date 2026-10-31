@@ -93,9 +93,50 @@ export interface LegisladorResumen {
   votos?: Record<string, SentidoVoto>;
 }
 
+export interface DesgloseItemDdjj {
+  categoria:
+    | 'Participaciones Societarias'
+    | 'Inmuebles'
+    | 'Moneda Extranjera'
+    | 'Inversiones y Créditos'
+    | 'Vehículos'
+    | 'Ingresos Anuales'
+    | 'Deudas y Pasivos';
+  titulo: string;
+  detalle: string;
+  monto_pesos?: number;
+  monto_usd?: number;
+  porcentaje_patrimonio?: number;
+  variacion_anual_texto?: string;
+}
+
+export interface DesgloseDdjjOficial {
+  legislador_id: number;
+  periodo_fiscal: number;
+  organismo: string;
+  formulario: string;
+  fecha_presentacion: string;
+  total_bienes_pesos: number;
+  total_deudas_pesos: number;
+  patrimonio_neto_pesos: number;
+  patrimonio_neto_usd: number;
+  patrimonio_neto_anterior_pesos: number;
+  variacion_nominal_pct: number;
+  variacion_nominal_monto: number;
+  resumen_ejecutivo: string;
+  items: DesgloseItemDdjj[];
+  fuente_periodistica?: {
+    medio: string;
+    titulo: string;
+    fecha: string;
+    url: string;
+  };
+}
+
 export interface LegisladorPerfilCompleto extends LegisladorResumen {
   evolucion_patrimonial: ResumenPatrimonial;
   votaciones: VotoDetallado[];
+  desglose_ddjj?: DesgloseDdjjOficial;
 }
 
 export interface ResultadoMatchLegislador {
