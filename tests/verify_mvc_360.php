@@ -126,9 +126,64 @@ require dirname(__DIR__) . '/mvc.php';
 $hubHtml = ob_get_clean();
 assert_test("MVC Router: Hub de Blog (/blog) renderizado", str_contains($hubHtml, 'Periodismo de datos legislativos'));
 
+// 5. Fase 3: Iniciativa Legislativa y Ponderación de Agenda (Proactividad)
+echo "\n--- FASE 3: INICIATIVA LEGISLATIVA Y AGENDA PROACTIVA ---\n";
+
+$modelLeg = new LegisladorModel();
+$legId = (int)$first['id'];
+$proyectos = $modelLeg->proyectosPorLegislador($legId);
+assert_test("LegisladorModel: proyectos por legislador", count($proyectos) >= 5, "total=" . count($proyectos));
+
+$ultimosAutores = $modelLeg->ultimosProyectosAutor($legId, 5);
+assert_test("LegisladorModel: últimos 5 proyectos como Autor principal", 
+    count($ultimosAutores) <= 5 && 
+    count($ultimosAutores) > 0 &&
+    !in_array('Co-autor', array_column($ultimosAutores, 'rol'), true)
+);
+
+$agenda = $modelLeg->agendaProyectos($legId);
+assert_test("LegisladorModel: agenda proactiva con doble peso a 'Autor' (W_autor=2, W_coautor=1)",
+    isset($agenda['puntaje_proyectos']) &&
+    isset($agenda['top3_ejes']) &&
+    count($agenda['top3_ejes']) === 3 &&
+    $agenda['total_autor'] >= 1
+);
+
+$compuesto = $modelLeg->perfilCompuesto($legId, $first['id_recinto']);
+assert_test("LegisladorModel: vector compuesto (70% Votos + 30% Proyectos)", 
+    count($compuesto) === 11 &&
+    isset($compuesto['Apertura Comercial'])
+);
+
+// Verificar cálculo matemático exacto:
+// Para Menem: si Voto Apertura Comercial = 100 y Proyectos Apertura = X
+$votoApertura = (float)$perfil['Apertura Comercial'];
+$proyApertura = (float)$agenda['puntaje_proyectos']['Apertura Comercial'];
+$esperadoApertura = round(($votoApertura * 0.7) + ($proyApertura * 0.3), 2);
+assert_test("LegisladorModel: verificación matemática exacta (0.7*Votos + 0.3*Proyectos)",
+    abs($compuesto['Apertura Comercial'] - $esperadoApertura) < 0.05,
+    "compuesto={$compuesto['Apertura Comercial']}, esperado={$esperadoApertura}"
+);
+
+// Verificar MatchEngineController con vector compuesto
+assert_test("MatchEngineController: ranking incluye vector_compuesto y agenda_proyectos",
+    isset($resMatch['top3'][0]['vector_compuesto']) &&
+    isset($resMatch['top3'][0]['agenda_proyectos']) &&
+    isset($resMatch['top3'][0]['agenda_proyectos']['top3_ejes'])
+);
+
+// Verificar vista de perfil con Treemap y tabla de proyectos de autor
+assert_test("MVC Router: vista de perfil renderiza 'Agenda Legislativa Propia'",
+    str_contains($perfilHtml, 'Agenda Legislativa Propia') &&
+    str_contains($perfilHtml, 'Iniciativa Parlamentaria') &&
+    str_contains($perfilHtml, 'Top 3 Ejes de Concentración de Agenda') &&
+    str_contains($perfilHtml, 'Últimos Proyectos Presentados como Autor Principal') &&
+    str_contains($perfilHtml, 'id="filtroProyectos"')
+);
+
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";
-echo sprintf(" RESUMEN FASE 2: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
+echo sprintf(" RESUMEN FASES 2 Y 3: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
 echo "------------------------------------------------------------------------------\n";
 
 exit($fallaron === 0 ? 0 : 1);

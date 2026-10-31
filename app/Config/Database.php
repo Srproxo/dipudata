@@ -41,29 +41,33 @@ class Database
 
     private static function ensureMvcTables(PDO $pdo): void
     {
-        $hasEjes = false;
+        $hasTables = false;
         try {
-            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM ejes_tematicos");
+            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM proyectos");
             $row = $stmt ? $stmt->fetch() : false;
-            if ($row && (int)$row['c'] >= 11) {
-                $hasEjes = true;
+            if ($row && (int)$row['c'] >= 0) {
+                $hasTables = true;
             }
         } catch (Throwable) {
-            $hasEjes = false;
+            $hasTables = false;
         }
 
-        if (!$hasEjes) {
-            $migrationFile = dirname(__DIR__, 2) . '/database/migration_fase2.sql';
-            $schemaFile = dirname(__DIR__, 2) . '/database/schema_mvc_360.sql';
-            $fileToRun = is_readable($schemaFile) ? $schemaFile : $migrationFile;
-            if (is_readable($fileToRun)) {
-                $sql = (string)file_get_contents($fileToRun);
-                foreach (explode(';', $sql) as $statement) {
-                    $statement = trim($statement);
-                    if ($statement !== '') {
-                        try {
-                            $pdo->exec($statement);
-                        } catch (Throwable) {
+        if (!$hasTables) {
+            $files = [
+                dirname(__DIR__, 2) . '/database/schema_mvc_360.sql',
+                dirname(__DIR__, 2) . '/database/migration_fase2.sql',
+                dirname(__DIR__, 2) . '/database/migration_fase3.sql',
+            ];
+            foreach ($files as $file) {
+                if (is_readable($file)) {
+                    $sql = (string)file_get_contents($file);
+                    foreach (explode(';', $sql) as $statement) {
+                        $statement = trim($statement);
+                        if ($statement !== '') {
+                            try {
+                                $pdo->exec($statement);
+                            } catch (Throwable) {
+                            }
                         }
                     }
                 }
@@ -228,6 +232,51 @@ class Database
                 ':meta'   => $art['meta_descripcion'],
                 ':html'   => $art['contenido_html'],
             ]);
+        }
+
+        // 3. Sembrar Proyectos de Ley e Iniciativa Legislativa (Fase 3)
+        $csvProyectos = dirname(__DIR__, 2) . '/storage/csv/proyectos_iniciativa.csv';
+        if (is_readable($csvProyectos) && ($handle = fopen($csvProyectos, 'r')) !== false) {
+            $headers = fgetcsv($handle);
+            $stmtProy = $pdo->prepare("
+                INSERT INTO proyectos (expediente, titulo_sumario, fecha_presentacion, eje_id, estado_tramite)
+                VALUES (:expediente, :titulo, :fecha, :eje_id, :estado)
+                ON DUPLICATE KEY UPDATE
+                    titulo_sumario = VALUES(titulo_sumario),
+                    estado_tramite = VALUES(estado_tramite),
+                    eje_id = VALUES(eje_id)
+            ");
+            $stmtFirma = $pdo->prepare("
+                INSERT INTO proyectos_firmas (proyecto_id, legislador_id, rol)
+                SELECT p.id, l.id, :rol
+                FROM proyectos p, legisladores_master l
+                WHERE p.expediente = :expediente AND l.id_recinto = :id_recinto
+                ON DUPLICATE KEY UPDATE rol = VALUES(rol)
+            ");
+
+            while (($row = fgetcsv($handle)) !== false) {
+                if (!$headers || count($row) < count($headers)) {
+                    continue;
+                }
+                $data = array_combine($headers, $row);
+                if (!is_array($data)) {
+                    continue;
+                }
+                $exp = trim((string)$data['expediente']);
+                $stmtProy->execute([
+                    ':expediente' => $exp,
+                    ':titulo'     => trim((string)$data['titulo_sumario']),
+                    ':fecha'      => trim((string)$data['fecha_presentacion']),
+                    ':eje_id'     => (int)$data['eje_id'],
+                    ':estado'     => trim((string)$data['estado_tramite']),
+                ]);
+                $stmtFirma->execute([
+                    ':rol'        => trim((string)$data['rol']),
+                    ':expediente' => $exp,
+                    ':id_recinto' => trim((string)$data['legislador_id_recinto']),
+                ]);
+            }
+            fclose($handle);
         }
     }
 

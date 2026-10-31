@@ -24,12 +24,15 @@ class LegisladorController
         $patrimonio = $this->model->patrimonio($leg['cuit']);
 
         return [
-            'legislador'  => $leg,
-            'url'         => LegisladorModel::urlPerfil($leg),
-            'patrimonio'  => $patrimonio,
-            'resumen'     => $this->model->resumenPatrimonial($patrimonio),
-            'perfil'      => $this->model->perfilTematico($leg['id_recinto']),
-            'votaciones'  => $this->model->votaciones($leg['id_recinto']),
+            'legislador'        => $leg,
+            'url'               => LegisladorModel::urlPerfil($leg),
+            'patrimonio'        => $patrimonio,
+            'resumen'           => $this->model->resumenPatrimonial($patrimonio),
+            'perfil'            => $this->model->perfilTematico($leg['id_recinto']),
+            'perfil_compuesto'  => $this->model->perfilCompuesto((int)$leg['id'], $leg['id_recinto']),
+            'agenda'            => $this->model->agendaProyectos((int)$leg['id']),
+            'ultimos_proyectos' => $this->model->ultimosProyectosAutor((int)$leg['id'], 5),
+            'votaciones'        => $this->model->votaciones($leg['id_recinto']),
         ];
     }
 

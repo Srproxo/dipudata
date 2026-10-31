@@ -79,6 +79,9 @@ $badgeVoto = [
 $maxMonto = max(array_map(fn($p) => (float)$p['monto_declarado'], $data['patrimonio']) ?: [1]);
 $iniciales = implode('', array_map(fn($p) => mb_substr($p, 0, 1), array_slice(explode(' ', $leg['nombre']), 0, 2)));
 
+$agenda = $data['agenda'] ?? ['puntaje_proyectos' => [], 'top3_ejes' => [], 'total_proyectos' => 0, 'total_autor' => 0, 'total_coautor' => 0];
+$ultimosProyectos = $data['ultimos_proyectos'] ?? [];
+
 send_view_headers();
 require __DIR__ . '/app/Views/layouts/header.php';
 ?>
@@ -203,5 +206,180 @@ require __DIR__ . '/app/Views/layouts/header.php';
             </table>
         </div>
     </section>
+
+    <!-- 4. Agenda Legislativa Propia (Fase 3 - Proactividad e Iniciativa Parlamentaria) -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        Iniciativa Parlamentaria
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">Ponderación Proactiva (30%)</span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Agenda Legislativa Propia</h2>
+                <p class="text-sm text-slate-500">
+                    Proyectos de ley redactados y presentados en el Congreso. Mide el foco proactivo más allá de la disciplina partidaria en votaciones.
+                </p>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
+                    <span class="block text-slate-400 uppercase text-[10px]">Autor Principal</span>
+                    <strong class="text-slate-900 text-sm"><?= (int)($agenda['total_autor'] ?? 0) ?></strong>
+                </div>
+                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
+                    <span class="block text-slate-400 uppercase text-[10px]">Co-autor</span>
+                    <strong class="text-slate-700 text-sm"><?= (int)($agenda['total_coautor'] ?? 0) ?></strong>
+                </div>
+                <div class="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                    <span class="block text-indigo-600 uppercase text-[10px]">Total Proyectos</span>
+                    <strong class="text-indigo-900 text-sm"><?= (int)($agenda['total_proyectos'] ?? 0) ?></strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treemap Simple de los 3 Ejes Prioritarios -->
+        <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3 flex items-center justify-between">
+                <span>Top 3 Ejes de Concentración de Agenda</span>
+                <span class="text-xs font-normal text-slate-400 lowercase">ponderación: autor x2, co-autor x1</span>
+            </h3>
+            
+            <?php if (!empty($agenda['top3_ejes'])): ?>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <?php 
+                $treemapStyles = [
+                    0 => ['bg' => 'bg-indigo-50/70', 'border' => 'border-indigo-200', 'badge' => 'bg-indigo-600 text-white', 'text' => 'text-indigo-950', 'sub' => 'text-indigo-600', 'progress' => 'bg-indigo-600'],
+                    1 => ['bg' => 'bg-emerald-50/70', 'border' => 'border-emerald-200', 'badge' => 'bg-emerald-600 text-white', 'text' => 'text-emerald-950', 'sub' => 'text-emerald-600', 'progress' => 'bg-emerald-600'],
+                    2 => ['bg' => 'bg-amber-50/70', 'border' => 'border-amber-200', 'badge' => 'bg-amber-600 text-white', 'text' => 'text-amber-950', 'sub' => 'text-amber-600', 'progress' => 'bg-amber-600'],
+                ];
+                foreach ($agenda['top3_ejes'] as $idx => $item): 
+                    $st = $treemapStyles[$idx] ?? $treemapStyles[0];
+                ?>
+                <div class="rounded-xl border <?= $st['border'] ?> <?= $st['bg'] ?> p-4 transition-all hover:shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded <?= $st['badge'] ?>">
+                                #<?= $idx + 1 ?> Prioridad
+                            </span>
+                            <span class="font-mono text-lg font-bold <?= $st['sub'] ?>">
+                                <?= number_format((float)$item['porcentaje'], 1) ?>%
+                            </span>
+                        </div>
+                        <h4 class="font-bold <?= $st['text'] ?> text-base tracking-tight leading-snug">
+                            <?= e($item['eje']) ?>
+                        </h4>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200/60">
+                        <div class="flex justify-between text-xs text-slate-600 mb-1.5 font-mono">
+                            <span><?= (int)$item['proyectos'] ?> <?= (int)$item['proyectos'] === 1 ? 'proyecto' : 'proyectos' ?></span>
+                            <span><?= number_format((float)$item['puntos'], 1) ?> pts</span>
+                        </div>
+                        <div class="h-1.5 bg-slate-200/80 rounded-full overflow-hidden">
+                            <div class="h-full <?= $st['progress'] ?> rounded-full" style="width: <?= min(100, max(5, (float)$item['porcentaje'])) ?>%"></div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php else: ?>
+            <p class="text-sm text-slate-500 italic p-4 bg-slate-50 rounded-xl border border-slate-200">
+                No se registran iniciativas legislativas propias en el período analizado.
+            </p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Tabla Filtrable: Últimos 5 Proyectos como Autor Principal -->
+        <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500">
+                        Últimos Proyectos Presentados como Autor Principal
+                    </h3>
+                    <p class="text-xs text-slate-400">Iniciativas de autoría directa registradas con expediente oficial</p>
+                </div>
+                <div class="relative max-w-xs w-full">
+                    <input type="text" id="filtroProyectos" placeholder="Filtrar por texto o estado..." 
+                           class="w-full text-xs rounded-lg border border-slate-300 pl-8 pr-3 py-1.5 focus:border-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-800"
+                           aria-label="Filtrar proyectos de autoría">
+                    <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-sm" id="tablaProyectos">
+                    <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500 border-b border-slate-200">
+                        <tr>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Fecha</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Expediente</th>
+                            <th class="text-left px-4 py-3 min-w-[280px]">Título Sumario</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Eje Temático</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white">
+                    <?php 
+                    $badgeEstado = [
+                        'Sancionado'    => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                        'Media Sanción' => 'bg-sky-50 text-sky-700 border-sky-200',
+                        'Con Dictamen'  => 'bg-amber-50 text-amber-700 border-amber-200',
+                        'En Comisión'   => 'bg-slate-100 text-slate-700 border-slate-200',
+                        'En Trámite'    => 'bg-indigo-50 text-indigo-700 border-indigo-200',
+                    ];
+                    if (!empty($ultimosProyectos)):
+                        foreach ($ultimosProyectos as $p):
+                            $bCls = $badgeEstado[$p['estado_tramite']] ?? 'bg-slate-100 text-slate-600 border-slate-200';
+                    ?>
+                        <tr class="hover:bg-slate-50/70 transition-colors fila-proyecto">
+                            <td class="px-4 py-3 font-mono text-xs text-slate-500 whitespace-nowrap">
+                                <?= e(date('d/m/Y', strtotime($p['fecha_presentacion']))) ?>
+                            </td>
+                            <td class="px-4 py-3 font-mono text-xs font-semibold text-slate-700 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200"><?= e($p['expediente']) ?></span>
+                            </td>
+                            <td class="px-4 py-3 text-slate-800 text-xs sm:text-sm font-medium">
+                                <?= e($p['titulo_sumario']) ?>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap text-xs text-slate-600 font-medium">
+                                <?= e($p['eje_tematico']) ?>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap text-xs">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border <?= $bCls ?>">
+                                    <?= e($p['estado_tramite']) ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php 
+                        endforeach;
+                    else: 
+                    ?>
+                        <tr>
+                            <td colspan="5" class="px-4 py-6 text-center text-xs text-slate-400 italic">
+                                No se encontraron proyectos de autoría directa para este legislador.
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('filtroProyectos');
+        if (!input) return;
+        input.addEventListener('input', function () {
+            const query = this.value.toLowerCase().trim();
+            const filas = document.querySelectorAll('.fila-proyecto');
+            filas.forEach(function (fila) {
+                const texto = fila.textContent.toLowerCase();
+                fila.style.display = texto.includes(query) ? '' : 'none';
+            });
+        });
+    });
+    </script>
 </div>
 <?php require __DIR__ . '/app/Views/layouts/footer.php'; ?>

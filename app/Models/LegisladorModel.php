@@ -170,6 +170,152 @@ class LegisladorModel
         return $vector;
     }
 
+    /**
+     * Obtiene los proyectos de ley presentados por un legislador (Fase 3 - Iniciativa Legislativa).
+     * @return list<array{id?:int, expediente:string, titulo_sumario:string, fecha_presentacion:string, estado_tramite:string, eje_id:int, eje_tematico:string, rol:string}>
+     */
+    public function proyectosPorLegislador(int $legisladorId, ?string $rol = null): array
+    {
+        if ($this->pdo) {
+            try {
+                $sql = "
+                    SELECT p.id, p.expediente, p.titulo_sumario, p.fecha_presentacion, p.estado_tramite,
+                           p.eje_id, e.nombre_eje AS eje_tematico, pf.rol
+                    FROM proyectos p
+                    JOIN proyectos_firmas pf ON p.id = pf.proyecto_id
+                    JOIN ejes_tematicos e ON p.eje_id = e.id
+                    WHERE pf.legislador_id = :leg_id
+                ";
+                $params = [':leg_id' => $legisladorId];
+                if ($rol !== null) {
+                    $sql .= " AND pf.rol = :rol";
+                    $params[':rol'] = $rol;
+                }
+                $sql .= " ORDER BY p.fecha_presentacion DESC";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute($params);
+                $rows = $stmt->fetchAll();
+                if (!empty($rows)) {
+                    return $rows;
+                }
+            } catch (\Throwable) {
+            }
+        }
+
+        // Fallback a CSV / memoria
+        $all = $this->csv()['proyectos_por_id'][$legisladorId] ?? [];
+        if ($rol !== null) {
+            $all = array_filter($all, fn($p) => $p['rol'] === $rol);
+        }
+        usort($all, fn($a, $b) => strcmp($b['fecha_presentacion'], $a['fecha_presentacion']));
+        return array_values($all);
+    }
+
+    /**
+     * Retorna los últimos proyectos presentados por el legislador como Autor principal.
+     */
+    public function ultimosProyectosAutor(int $legisladorId, int $limit = 5): array
+    {
+        $autores = $this->proyectosPorLegislador($legisladorId, 'Autor');
+        return array_slice($autores, 0, $limit);
+    }
+
+    /**
+     * Calcula la concentración de agenda de un legislador según sus proyectos presentados (Fase 3).
+     * Regla matemática estricta:
+     * - Rol 'Autor': peso 2.0
+     * - Rol 'Co-autor': peso 1.0
+     * Concentración por eje = (Puntos en el Eje / Puntos Totales) * 100
+     *
+     * @return array{
+     *     puntaje_proyectos: array<string, float>,
+     *     top3_ejes: list<array{eje:string, porcentaje:float, proyectos:int, puntos:float}>,
+     *     total_proyectos: int,
+     *     total_autor: int,
+     *     total_coautor: int,
+     *     total_puntos: float
+     * }
+     */
+    public function agendaProyectos(int $legisladorId): array
+    {
+        $nombres = $this->nombresEjes();
+        $proyectos = $this->proyectosPorLegislador($legisladorId);
+
+        $puntosPorEje = array_fill_keys($nombres, 0.0);
+        $conteoPorEje = array_fill_keys($nombres, 0);
+        $totalPuntos = 0.0;
+        $totalAutor = 0;
+        $totalCoautor = 0;
+
+        foreach ($proyectos as $p) {
+            $eje = $p['eje_tematico'] ?? '';
+            if (!isset($puntosPorEje[$eje])) {
+                continue;
+            }
+            $peso = ($p['rol'] === 'Autor') ? 2.0 : 1.0;
+            $puntosPorEje[$eje] += $peso;
+            $conteoPorEje[$eje]++;
+            $totalPuntos += $peso;
+            if ($p['rol'] === 'Autor') {
+                $totalAutor++;
+            } else {
+                $totalCoautor++;
+            }
+        }
+
+        $concentracion = [];
+        $rankingTreemap = [];
+        foreach ($nombres as $eje) {
+            $pct = $totalPuntos > 0.0 ? round(($puntosPorEje[$eje] / $totalPuntos) * 100, 2) : 0.0;
+            $concentracion[$eje] = $pct;
+            if ($conteoPorEje[$eje] > 0) {
+                $rankingTreemap[] = [
+                    'eje'        => $eje,
+                    'porcentaje' => $pct,
+                    'proyectos'  => $conteoPorEje[$eje],
+                    'puntos'     => $puntosPorEje[$eje],
+                ];
+            }
+        }
+
+        usort($rankingTreemap, fn($a, $b) => $b['puntos'] <=> $a['puntos']);
+
+        return [
+            'puntaje_proyectos' => $concentracion,
+            'top3_ejes'         => array_slice($rankingTreemap, 0, 3),
+            'total_proyectos'   => count($proyectos),
+            'total_autor'       => $totalAutor,
+            'total_coautor'     => $totalCoautor,
+            'total_puntos'      => $totalPuntos,
+        ];
+    }
+
+    /**
+     * Vector compuesto del Legislador (Fase 3 - Proactividad):
+     * Fórmula: (Puntaje Votos * 0.7) + (Puntaje Proyectos * 0.3)
+     * Si no posee proyectos registrados, se utiliza el 100% de la información de votos.
+     * @return array<string, float>
+     */
+    public function perfilCompuesto(int $legisladorId, string $idRecinto): array
+    {
+        $votos = $this->perfilTematico($idRecinto);
+        $agenda = $this->agendaProyectos($legisladorId);
+        $proyectos = $agenda['puntaje_proyectos'];
+        $tieneProyectos = ($agenda['total_proyectos'] > 0);
+
+        $compuesto = [];
+        foreach ($this->nombresEjes() as $eje) {
+            $ptVotos = (float)($votos[$eje] ?? 0.0);
+            $ptProy = (float)($proyectos[$eje] ?? 0.0);
+            if ($tieneProyectos) {
+                $compuesto[$eje] = round(($ptVotos * 0.7) + ($ptProy * 0.3), 2);
+            } else {
+                $compuesto[$eje] = $ptVotos;
+            }
+        }
+        return $compuesto;
+    }
+
     public static function urlPerfil(array $leg): string
     {
         $prefijo = $leg['camara'] === 'Senadores' ? '/senador/' : '/diputado/';
@@ -228,7 +374,37 @@ class LegisladorModel
             ];
         }
 
-        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj');
+        $recintoToId = [];
+        foreach ($legisladores as $recinto => $leg) {
+            $recintoToId[$recinto] = (int)$leg['id'];
+        }
+
+        $proyectos_por_id = [];
+        $proyCsvPath = $base . 'proyectos_iniciativa.csv';
+        if (is_readable($proyCsvPath)) {
+            $proyId = 1;
+            foreach (self::readCsv($proyCsvPath) as $r) {
+                $recinto = $r['legislador_id_recinto'] ?? '';
+                $legId = $recintoToId[$recinto] ?? null;
+                if ($legId === null) {
+                    continue;
+                }
+                $ejeId = isset($r['eje_id']) && is_numeric($r['eje_id']) ? (int)$r['eje_id'] : 1;
+                $ejeNombre = $ejesDefault[$ejeId]['nombre_eje'] ?? 'General';
+                $proyectos_por_id[$legId][] = [
+                    'id'                 => $proyId++,
+                    'expediente'         => $r['expediente'] ?? '',
+                    'titulo_sumario'     => $r['titulo_sumario'] ?? '',
+                    'fecha_presentacion' => $r['fecha_presentacion'] ?? '',
+                    'eje_id'             => $ejeId,
+                    'eje_tematico'       => $ejeNombre,
+                    'estado_tramite'     => $r['estado_tramite'] ?? 'En Trámite',
+                    'rol'                => $r['rol'] ?? 'Autor',
+                ];
+            }
+        }
+
+        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj', 'proyectos_por_id');
     }
 
     public static function readCsv(string $path): array

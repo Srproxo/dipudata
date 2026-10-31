@@ -224,22 +224,36 @@ class MatchEngineController
 
         $ranking = [];
         foreach ($this->model->all() as $leg) {
-            $vectorLeg = $this->model->perfilTematico($leg['id_recinto']);
+            $legId = (int)$leg['id'];
+            $vectorVotos = $this->model->perfilTematico($leg['id_recinto']);
+            $agenda = $this->model->agendaProyectos($legId);
+            $vectorCompuesto = $this->model->perfilCompuesto($legId, $leg['id_recinto']);
+
             $ranking[] = [
-                'nombre'    => $leg['nombre'],
-                'camara'    => $leg['camara'],
-                'provincia' => $leg['provincia'],
-                'bloque'    => $leg['bloque'],
-                'url'       => LegisladorModel::urlPerfil($leg),
-                'afinidad'  => self::similitudCoseno($vectorUsuario, $vectorLeg, $ejes),
-                'vector'    => $vectorLeg,
+                'id'               => $legId,
+                'nombre'           => $leg['nombre'],
+                'camara'           => $leg['camara'],
+                'provincia'        => $leg['provincia'],
+                'bloque'           => $leg['bloque'],
+                'url'              => LegisladorModel::urlPerfil($leg),
+                'afinidad'         => self::similitudCoseno($vectorUsuario, $vectorCompuesto, $ejes),
+                'vector'           => $vectorCompuesto,
+                'vector_compuesto' => $vectorCompuesto,
+                'vector_votos'     => $vectorVotos,
+                'agenda_proyectos' => [
+                    'puntaje_proyectos' => $agenda['puntaje_proyectos'],
+                    'top3_ejes'         => $agenda['top3_ejes'],
+                    'total_proyectos'   => $agenda['total_proyectos'],
+                    'total_autor'       => $agenda['total_autor'],
+                    'total_coautor'     => $agenda['total_coautor'],
+                ],
             ];
         }
 
         usort($ranking, fn($a, $b) => $b['afinidad'] <=> $a['afinidad']);
 
         return [
-            'algoritmo'      => sprintf('Similitud del Coseno (%d dimensiones dinámicas)', count($ejes)),
+            'algoritmo'      => sprintf('Similitud del Coseno Ponderada (70%% Votos + 30%% Proyectos en %d dimensiones)', count($ejes)),
             'total_ejes'     => count($ejes),
             'ejes'           => $ejes,
             'vector_usuario' => $vectorUsuario,
