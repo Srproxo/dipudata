@@ -73,10 +73,16 @@ class LegisladorModel
 
     public function findBySlug(string $slug): ?array
     {
+        $cleanSlug = strtolower(trim($slug));
+        if ($cleanSlug === '') {
+            return null;
+        }
+
+        // 1. Búsqueda exacta por slug en base de datos
         if ($this->pdo) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM legisladores_master WHERE slug = :slug LIMIT 1");
-                $stmt->execute([':slug' => $slug]);
+                $stmt->execute([':slug' => $cleanSlug]);
                 $row = $stmt->fetch();
                 if ($row) {
                     return $row;
@@ -84,11 +90,101 @@ class LegisladorModel
             } catch (\Throwable) {
             }
         }
-        foreach ($this->csv()['legisladores'] as $leg) {
-            if ($leg['slug'] === $slug) {
+
+        // 2. Búsqueda exacta por slug en almacenamiento en memoria
+        $all = $this->all();
+        foreach ($all as $leg) {
+            if ($leg['slug'] === $cleanSlug) {
                 return $leg;
             }
         }
+
+        // 3. Diccionario canónico de alias frecuentes y variantes comunes
+        $aliases = [
+            'martin-menem'            => 'martin-alexis-menem',
+            'menem'                   => 'martin-alexis-menem',
+            'cristian-ritondo'        => 'cristian-ritondo',
+            'ritondo'                 => 'cristian-ritondo',
+            'rodrigo-de-loredo'       => 'rodrigo-de-loredo',
+            'de-loredo'               => 'rodrigo-de-loredo',
+            'loredo'                  => 'rodrigo-de-loredo',
+            'german-martinez'         => 'german-martinez',
+            'martinez'                => 'german-martinez',
+            'miguel-pichetto'         => 'miguel-angel-pichetto',
+            'pichetto'                => 'miguel-angel-pichetto',
+            'myriam-bregman'          => 'myriam-bregman',
+            'bregman'                 => 'myriam-bregman',
+            'martin-lousteau'         => 'martin-lousteau',
+            'lousteau'                => 'martin-lousteau',
+            'jose-mayans'             => 'jose-mayans',
+            'mayans'                  => 'jose-mayans',
+            'jose-espert'             => 'jose-luis-espert',
+            'espert'                  => 'jose-luis-espert',
+            'gabriel-bornoroni'       => 'gabriel-bornoroni',
+            'bornoroni'               => 'gabriel-bornoroni',
+            'ezequiel-atauche'        => 'ezequiel-atauche',
+            'atauche'                 => 'ezequiel-atauche',
+            'silvia-lospennato'       => 'silvia-lospennato',
+            'lospennato'              => 'silvia-lospennato',
+            'maria-eugenia-vidal'     => 'maria-eugenia-vidal',
+            'vidal'                   => 'maria-eugenia-vidal',
+            'guadalupe-tagliaferri'   => 'guadalupe-tagliaferri',
+            'tagliaferri'             => 'guadalupe-tagliaferri',
+            'karina-banfi'            => 'karina-banfi',
+            'banfi'                   => 'karina-banfi',
+            'leandro-santoro'         => 'leandro-santoro',
+            'santoro'                 => 'leandro-santoro',
+            'victoria-tolosa-paz'     => 'victoria-tolosa-paz',
+            'tolosa-paz'              => 'victoria-tolosa-paz',
+            'juliana-di-tullio'       => 'juliana-di-tullio',
+            'di-tullio'               => 'juliana-di-tullio',
+            'juan-manuel-lopez'       => 'juan-manuel-lopez',
+            'juan-lopez'              => 'juan-manuel-lopez',
+            'carlos-arce'             => 'carlos-arce',
+            'arce'                    => 'carlos-arce',
+        ];
+
+        if (isset($aliases[$cleanSlug])) {
+            $canonicalTarget = $aliases[$cleanSlug];
+            foreach ($all as $leg) {
+                if ($leg['slug'] === $canonicalTarget) {
+                    return $leg;
+                }
+            }
+        }
+
+        // 4. Búsqueda por slug de Wikipedia o Nombre Oficial
+        foreach ($all as $leg) {
+            if (!empty($leg['nombre_wiki'])) {
+                $wikiSlug = \App\Config\Database::slugify((string)$leg['nombre_wiki']);
+                if ($wikiSlug === $cleanSlug) {
+                    return $leg;
+                }
+            }
+            $nombreSlug = \App\Config\Database::slugify((string)$leg['nombre']);
+            if ($nombreSlug === $cleanSlug) {
+                return $leg;
+            }
+        }
+
+        // 5. Coincidencia por subconjunto de tokens (ej: 'martin-menem' en 'martin-alexis-menem')
+        $searchTokens = array_filter(explode('-', $cleanSlug));
+        if (!empty($searchTokens)) {
+            foreach ($all as $leg) {
+                $targetTokens = explode('-', (string)$leg['slug']);
+                $allMatch = true;
+                foreach ($searchTokens as $token) {
+                    if (!in_array($token, $targetTokens, true)) {
+                        $allMatch = false;
+                        break;
+                    }
+                }
+                if ($allMatch) {
+                    return $leg;
+                }
+            }
+        }
+
         return null;
     }
 

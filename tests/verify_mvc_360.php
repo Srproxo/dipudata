@@ -335,6 +335,10 @@ assert_test("LegisladorModel::urlPerfil genera prefijo /senador/ para Senadores"
 assert_test("LegisladorModel::urlPerfil genera prefijo /diputado/ para Diputados",
     \App\Models\LegisladorModel::urlPerfil(['camara' => 'Diputados', 'slug' => 'martin-alexis-menem']) === '/diputado/martin-alexis-menem'
 );
+$legMenemAlias = (new \App\Models\LegisladorModel())->findBySlug('martin-menem');
+assert_test("LegisladorModel: resolución de alias 'martin-menem' a canónico 'martin-alexis-menem'",
+    $legMenemAlias !== null && $legMenemAlias['slug'] === 'martin-alexis-menem'
+);
 
 // 9. Master PRD Etapa 2: AuditorEngineController y AuditorModel
 echo "\n--- MASTER PRD ETAPA 2: CONTROLADORES Y MODELOS DE AUDITORÍA ÉTICA ---\n";

@@ -16,10 +16,10 @@ $slugLegislador ??= (string)preg_replace('/[^a-z0-9\-]/', '', strtolower((string
 $camara ??= null;
 
 try {
-    $data = $slugLegislador !== '' ? (new LegisladorController())->perfil($slugLegislador, $camara) : null;
+    $data = $slugLegislador !== '' ? (new LegisladorController())->perfil($slugLegislador, null) : null;
 } catch (\Throwable) {
     try {
-        $data = $slugLegislador !== '' ? (new LegisladorController(new LegisladorModel(null)))->perfil($slugLegislador, $camara) : null;
+        $data = $slugLegislador !== '' ? (new LegisladorController(new LegisladorModel(null)))->perfil($slugLegislador, null) : null;
     } catch (\Throwable) {
         $data = null;
     }
@@ -30,6 +30,15 @@ if ($data === null) {
 }
 
 $leg = $data['legislador'];
+$canonicalUrl = \App\Models\LegisladorModel::urlPerfil($leg);
+$expectedCamaraPrefix = str_starts_with(strtolower((string)$leg['camara']), 'senad') ? 'senador' : 'diputado';
+$currentCamaraPrefix = ($camara === 'Senadores') ? 'senador' : 'diputado';
+
+// Redirección 301 permanente para slugs alias (ej: /diputado/martin-menem -> /diputado/martin-alexis-menem) o corrección de cámara
+if (($slugLegislador !== '' && $slugLegislador !== $leg['slug']) || ($camara !== null && $currentCamaraPrefix !== $expectedCamaraPrefix)) {
+    header("Location: {$canonicalUrl}", true, 301);
+    exit;
+}
 $cargo = $leg['camara'] === 'Senadores' ? 'Senador/a Nacional' : 'Diputado/a Nacional';
 $real = $data['resumen']['crecimiento_real_pct'];
 $url = SITE_URL . $data['url'];
