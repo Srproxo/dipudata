@@ -7,6 +7,7 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS blog_articulos;
+DROP TABLE IF EXISTS despacho_costos;
 DROP TABLE IF EXISTS leyes_impacto_provincial;
 DROP TABLE IF EXISTS proyectos_firmas;
 DROP TABLE IF EXISTS proyectos;
@@ -192,4 +193,30 @@ CREATE TABLE leyes_impacto_provincial (
         ON UPDATE CASCADE ON DELETE SET NULL,
     INDEX idx_impacto_provincia (provincia),
     INDEX idx_impacto_ley (ley)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- 9. TABLA DE COSTOS DE DESPACHO Y EFICIENCIA: despacho_costos (Fase 6 - n8n)
+-- Registra asesores, masa salarial, ratio por proyecto y alertas de nepotismo
+-- ============================================================================
+CREATE TABLE despacho_costos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    legislador_id INT UNSIGNED NOT NULL COMMENT 'FK a legisladores_master(id)',
+    anio INT NOT NULL DEFAULT 2024 COMMENT 'Año legislativo auditado',
+    total_asesores INT NOT NULL DEFAULT 0,
+    costo_mensual_ars DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    costo_anual_ars DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    alertas_nepotismo INT NOT NULL DEFAULT 0 COMMENT 'Cantidad de asesores con coincidencia de apellido o vínculos societarios',
+    proyectos_autor_anio INT NOT NULL DEFAULT 0,
+    costo_por_proyecto_ars DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    detalle_asesores_json JSON NULL,
+    fuente VARCHAR(100) NOT NULL DEFAULT 'n8n.buceo.co',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_despacho_legislador
+        FOREIGN KEY (legislador_id) REFERENCES legisladores_master(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE KEY uq_despacho_legislador_anio (legislador_id, anio),
+    INDEX idx_despacho_eficiencia (costo_por_proyecto_ars),
+    INDEX idx_despacho_nepotismo (alertas_nepotismo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

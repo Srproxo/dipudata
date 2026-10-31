@@ -88,6 +88,15 @@ $defensaProv = $data['defensa_provincial'] ?? [
     'alertas_conflicto'          => [],
     'todos_los_votos'            => [],
 ];
+$despacho = $data['despacho'] ?? null;
+$mediaCamaraCosto = (float)($data['media_camara_costo'] ?? 50660000.00);
+$costoPorProyecto = (float)($despacho['costo_por_proyecto_ars'] ?? 0.0);
+$superaMedia = ($costoPorProyecto > $mediaCamaraCosto);
+$alertasNepotismo = (int)($despacho['alertas_nepotismo'] ?? 0);
+$totalAsesores = (int)($despacho['total_asesores'] ?? 0);
+$costoMensual = (float)($despacho['costo_mensual_ars'] ?? 0.0);
+$costoAnual = (float)($despacho['costo_anual_ars'] ?? 0.0);
+$proyectosAutorAnio = (int)($despacho['proyectos_autor_anio'] ?? 0);
 
 send_view_headers();
 require __DIR__ . '/app/Views/layouts/header.php';
@@ -350,6 +359,107 @@ require __DIR__ . '/app/Views/layouts/header.php';
             </div>
             <?php endif; ?>
         </div>
+    </section>
+
+    <!-- Auditoría y Transparencia: Ratio de Eficiencia Legislativa (Fase 6 - n8n) -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-violet-50 text-violet-800 border border-violet-200">
+                        Auditoría y Transparencia
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">Gasto Operativo vs. Producción Legislativa (2024)</span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Ratio de Eficiencia Legislativa</h2>
+                <p class="text-sm text-slate-500">
+                    Costo real al Estado en estructura de despacho (módulo salarial de asesores) contrastado contra los proyectos de ley presentados como autor principal. Datos procesados vía n8n.
+                </p>
+            </div>
+            
+            <!-- Alerta visual de Nepotismo (Badge de Tailwind) -->
+            <?php if ($alertasNepotismo > 0): ?>
+            <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300 self-start md:self-auto shadow-sm">
+                <svg class="w-4 h-4 text-red-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>Alerta de Nepotismo: <?= $alertasNepotismo ?> <?= $alertasNepotismo === 1 ? 'asesor coincide' : 'asesores coinciden' ?> con su grupo familiar/societario</span>
+            </div>
+            <?php else: ?>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start md:self-auto">
+                <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span>Sin alertas de nepotismo familiar detectadas</span>
+            </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- KPI Principal: Costo por Proyecto Presentado (Formato moneda, en rojo si supera la media) -->
+            <div class="md:col-span-2 rounded-xl p-5 border flex flex-col justify-between <?= $superaMedia ? 'bg-rose-50/70 border-rose-300' : 'bg-emerald-50/60 border-emerald-200' ?>">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs uppercase font-mono tracking-wider font-semibold <?= $superaMedia ? 'text-rose-800' : 'text-emerald-800' ?>">
+                        KPI de Eficiencia Parlamentaria
+                    </span>
+                    <span class="px-2 py-0.5 rounded text-[11px] font-bold font-mono <?= $superaMedia ? 'bg-rose-200 text-rose-900' : 'bg-emerald-200 text-emerald-900' ?>">
+                        <?= $superaMedia ? '▲ SUPERA LA MEDIA' : '▼ POR DEBAJO DE LA MEDIA' ?>
+                    </span>
+                </div>
+
+                <div class="my-4">
+                    <span class="block text-xs font-medium text-slate-500 mb-1">Costo al Estado por cada Proyecto Presentado</span>
+                    <div class="font-mono text-3xl sm:text-4xl font-extrabold tabular-nums <?= $superaMedia ? 'text-rose-700' : 'text-emerald-700' ?>">
+                        <?= e(ars($costoPorProyecto)) ?>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t <?= $superaMedia ? 'border-rose-200' : 'border-emerald-200' ?> flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span class="text-slate-600">
+                        Media de <?= $leg['camara'] === 'Senadores' ? 'la Cámara de Senadores' : 'la Cámara de Diputados' ?>: <strong class="font-mono text-slate-800"><?= e(ars($mediaCamaraCosto)) ?></strong>
+                    </span>
+                    <span class="font-mono font-bold <?= $superaMedia ? 'text-rose-800' : 'text-emerald-800' ?>">
+                        <?= $superaMedia ? '+' : '' ?><?= number_format((($costoPorProyecto / max(1, $mediaCamaraCosto)) - 1) * 100, 1) ?>% vs media
+                    </span>
+                </div>
+            </div>
+
+            <!-- Métrica Secundaria: Total de Asesores -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Estructura de Despacho</span>
+                    <h3 class="text-sm font-bold text-slate-700 mt-1">Total de Asesores</h3>
+                </div>
+                <div class="my-3">
+                    <div class="font-mono text-3xl font-extrabold text-slate-900">
+                        <?= (int)$totalAsesores ?>
+                    </div>
+                    <span class="text-xs text-slate-500">planta permanente y transitoria</span>
+                </div>
+                <div class="pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-500">
+                    Gasto Mensual: <strong><?= e(ars($costoMensual)) ?></strong>
+                </div>
+            </div>
+
+            <!-- Métrica Secundaria: Proyectos Propios de Autor -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Producción Legislativa</span>
+                    <h3 class="text-sm font-bold text-slate-700 mt-1">Proyectos de Autor (Año)</h3>
+                </div>
+                <div class="my-3">
+                    <div class="font-mono text-3xl font-extrabold text-slate-900">
+                        <?= (int)$proyectosAutorAnio ?>
+                    </div>
+                    <span class="text-xs text-slate-500">iniciativas de autoría propia</span>
+                </div>
+                <div class="pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-500">
+                    Costo Anual Proyectado: <strong><?= e(ars($costoAnual)) ?></strong>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-[11px] text-slate-400 font-mono">
+            * Metodología de auditoría: El ratio de costo por proyecto se calcula dividiendo la masa salarial anualizada del despacho (incluyendo 13 sueldos por SAC) sobre la cantidad de proyectos de ley ingresados formalmente con expediente de autoría principal. Datos provistos y actualizados mediante sincronizador de datos n8n.buceo.co.
+        </p>
     </section>
 
     <!-- Votaciones -->

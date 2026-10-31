@@ -43,7 +43,7 @@ class Database
     {
         $hasTables = false;
         try {
-            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM leyes_impacto_provincial");
+            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM despacho_costos");
             $row = $stmt ? $stmt->fetch() : false;
             if ($row && (int)$row['c'] >= 0) {
                 $hasTables = true;
@@ -58,6 +58,7 @@ class Database
                 dirname(__DIR__, 2) . '/database/migration_fase2.sql',
                 dirname(__DIR__, 2) . '/database/migration_fase3.sql',
                 dirname(__DIR__, 2) . '/database/migration_fase4.sql',
+                dirname(__DIR__, 2) . '/database/migration_fase6.sql',
             ];
             foreach ($files as $file) {
                 if (is_readable($file)) {
@@ -308,6 +309,43 @@ class Database
                     ':voto_esperado' => trim((string)$data['voto_esperado_regional']),
                     ':criticidad'    => (int)$data['nivel_criticidad'],
                     ':descripcion'   => trim((string)$data['descripcion_impacto']),
+                ]);
+            }
+            fclose($handle);
+        }
+
+        // 5. Sembrar Costos de Despacho y Nepotismo (Fase 6 - n8n)
+        $csvDespachos = dirname(__DIR__, 2) . '/storage/csv/despacho_costos.csv';
+        if (is_readable($csvDespachos) && ($handle = fopen($csvDespachos, 'r')) !== false) {
+            $headers = fgetcsv($handle);
+            $stmtDespacho = $pdo->prepare("
+                INSERT INTO despacho_costos (legislador_id, anio, total_asesores, costo_mensual_ars, costo_anual_ars, alertas_nepotismo, proyectos_autor_anio, costo_por_proyecto_ars)
+                VALUES (:leg_id, :anio, :asesores, :costo_m, :costo_a, :nepotismo, :proy, :costo_p)
+                ON DUPLICATE KEY UPDATE
+                    total_asesores = VALUES(total_asesores),
+                    costo_mensual_ars = VALUES(costo_mensual_ars),
+                    costo_anual_ars = VALUES(costo_anual_ars),
+                    alertas_nepotismo = VALUES(alertas_nepotismo),
+                    proyectos_autor_anio = VALUES(proyectos_autor_anio),
+                    costo_por_proyecto_ars = VALUES(costo_por_proyecto_ars)
+            ");
+            while (($row = fgetcsv($handle)) !== false) {
+                if (!$headers || count($row) < count($headers)) {
+                    continue;
+                }
+                $data = array_combine($headers, $row);
+                if (!is_array($data)) {
+                    continue;
+                }
+                $stmtDespacho->execute([
+                    ':leg_id'    => (int)$data['legislador_id'],
+                    ':anio'      => (int)$data['anio'],
+                    ':asesores'  => (int)$data['total_asesores'],
+                    ':costo_m'   => (float)$data['costo_mensual_ars'],
+                    ':costo_a'   => (float)$data['costo_anual_ars'],
+                    ':nepotismo' => (int)$data['alertas_nepotismo'],
+                    ':proy'      => (int)$data['proyectos_autor_anio'],
+                    ':costo_p'   => (float)$data['costo_por_proyecto_ars'],
                 ]);
             }
             fclose($handle);

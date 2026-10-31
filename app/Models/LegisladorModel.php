@@ -593,6 +593,160 @@ class LegisladorModel
         return $salida;
     }
 
+    /**
+     * Retorna la información de costos de despacho, asesores y alertas de nepotismo (Fase 6 - n8n).
+     */
+    public function despachoCostos(int $legisladorId, int $anio = 2024): ?array
+    {
+        if ($this->pdo) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT * FROM despacho_costos WHERE legislador_id = :id AND anio = :anio LIMIT 1");
+                $stmt->execute([':id' => $legisladorId, ':anio' => $anio]);
+                $row = $stmt->fetch();
+                if ($row) {
+                    return $row;
+                }
+            } catch (\Throwable) {
+            }
+        }
+
+        return $this->csv()['despacho_costos'][$legisladorId] ?? null;
+    }
+
+    /**
+     * Calcula la media de costo por proyecto presentado de la cámara legislativa (Diputados o Senadores).
+     */
+    public function mediaCamaraCostoProyecto(string $camara, int $anio = 2024): float
+    {
+        if ($this->pdo) {
+            try {
+                $stmt = $this->pdo->prepare("
+                    SELECT AVG(dc.costo_por_proyecto_ars) AS media
+                    FROM despacho_costos dc
+                    JOIN legisladores_master lm ON dc.legislador_id = lm.id
+                    WHERE lm.camara = :camara AND dc.anio = :anio AND dc.costo_por_proyecto_ars > 0
+                ");
+                $stmt->execute([':camara' => $camara, ':anio' => $anio]);
+                $row = $stmt->fetch();
+                if ($row && $row['media'] !== null) {
+                    return round((float)$row['media'], 2);
+                }
+            } catch (\Throwable) {
+            }
+        }
+
+        $despachos = $this->csv()['despacho_costos'] ?? [];
+        $legisladores = $this->csv()['legisladores'] ?? [];
+        $costos = [];
+        foreach ($legisladores as $recinto => $leg) {
+            if ($leg['camara'] === $camara) {
+                $id = (int)$leg['id'];
+                if (isset($despachos[$id]) && (float)$despachos[$id]['costo_por_proyecto_ars'] > 0) {
+                    $costos[] = (float)$despachos[$id]['costo_por_proyecto_ars'];
+                }
+            }
+        }
+
+        return !empty($costos) ? round(array_sum($costos) / count($costos), 2) : 50660000.00;
+    }
+
+    /**
+     * Guarda o actualiza los costos de despacho recibidos desde n8n (INSERT ... ON DUPLICATE KEY UPDATE).
+     */
+    public function guardarDespachoCostos(array $data): bool
+    {
+        $legId = (int)($data['legislador_id'] ?? 0);
+        if ($legId <= 0) {
+            return false;
+        }
+        $anio = (int)($data['anio'] ?? 2024);
+        $totalAsesores = (int)($data['total_asesores'] ?? 0);
+        $costoMensual = (float)($data['costo_mensual_ars'] ?? 0.0);
+        $costoAnual = (float)($data['costo_anual_ars'] ?? ($costoMensual * 13));
+        $alertasNepotismo = (int)($data['alertas_nepotismo'] ?? 0);
+        $proyectosAutor = (int)($data['proyectos_autor_anio'] ?? 0);
+        $costoPorProyecto = (float)($data['costo_por_proyecto_ars'] ?? ($proyectosAutor > 0 ? round($costoAnual / $proyectosAutor, 2) : $costoAnual));
+        $detalleJson = $data['detalle_asesores_json'] ?? null;
+        $fuente = (string)($data['fuente'] ?? 'n8n.buceo.co');
+
+        if ($this->pdo) {
+            try {
+                $stmt = $this->pdo->prepare("
+                    INSERT INTO despacho_costos (
+                        legislador_id, anio, total_asesores, costo_mensual_ars, costo_anual_ars,
+                        alertas_nepotismo, proyectos_autor_anio, costo_por_proyecto_ars, detalle_asesores_json, fuente
+                    ) VALUES (
+                        :leg_id, :anio, :asesores, :costo_m, :costo_a,
+                        :nepotismo, :proy, :costo_p, :detalle, :fuente
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        total_asesores = VALUES(total_asesores),
+                        costo_mensual_ars = VALUES(costo_mensual_ars),
+                        costo_anual_ars = VALUES(costo_anual_ars),
+                        alertas_nepotismo = VALUES(alertas_nepotismo),
+                        proyectos_autor_anio = VALUES(proyectos_autor_anio),
+                        costo_por_proyecto_ars = VALUES(costo_por_proyecto_ars),
+                        detalle_asesores_json = VALUES(detalle_asesores_json),
+                        fuente = VALUES(fuente)
+                ");
+                $stmt->execute([
+                    ':leg_id'    => $legId,
+                    ':anio'      => $anio,
+                    ':asesores'  => $totalAsesores,
+                    ':costo_m'   => $costoMensual,
+                    ':costo_a'   => $costoAnual,
+                    ':nepotismo' => $alertasNepotismo,
+                    ':proy'      => $proyectosAutor,
+                    ':costo_p'   => $costoPorProyecto,
+                    ':detalle'   => $detalleJson,
+                    ':fuente'    => $fuente,
+                ]);
+            } catch (\Throwable) {
+            }
+        }
+
+        // Sincronizar cache en memoria asegurando carga previa completa
+        $registro = [
+            'id'                     => $legId,
+            'legislador_id'          => $legId,
+            'anio'                   => $anio,
+            'total_asesores'         => $totalAsesores,
+            'costo_mensual_ars'      => $costoMensual,
+            'costo_anual_ars'        => $costoAnual,
+            'alertas_nepotismo'      => $alertasNepotismo,
+            'proyectos_autor_anio'   => $proyectosAutor,
+            'costo_por_proyecto_ars' => $costoPorProyecto,
+            'fuente'                 => $fuente,
+        ];
+        $todos = $this->csv()['despacho_costos'] ?? [];
+        $todos[$legId] = $registro;
+        $this->csvCache['despacho_costos'] = $todos;
+
+        // Persistir al CSV local
+        $csvPath = dirname(__DIR__, 2) . '/storage/csv/despacho_costos.csv';
+        if (is_writable($csvPath) || (!file_exists($csvPath) && is_writable(dirname($csvPath)))) {
+            $fp = fopen($csvPath, 'w');
+            if ($fp !== false) {
+                fputcsv($fp, ['legislador_id', 'anio', 'total_asesores', 'costo_mensual_ars', 'costo_anual_ars', 'alertas_nepotismo', 'proyectos_autor_anio', 'costo_por_proyecto_ars'], ',', '"', '\\');
+                foreach ($todos as $t) {
+                    fputcsv($fp, [
+                        $t['legislador_id'],
+                        $t['anio'],
+                        $t['total_asesores'],
+                        number_format((float)$t['costo_mensual_ars'], 2, '.', ''),
+                        number_format((float)$t['costo_anual_ars'], 2, '.', ''),
+                        $t['alertas_nepotismo'],
+                        $t['proyectos_autor_anio'],
+                        number_format((float)$t['costo_por_proyecto_ars'], 2, '.', ''),
+                    ], ',', '"', '\\');
+                }
+                fclose($fp);
+            }
+        }
+
+        return true;
+    }
+
     public static function urlPerfil(array $leg): string
     {
         $prefijo = $leg['camara'] === 'Senadores' ? '/senador/' : '/diputado/';
@@ -687,7 +841,26 @@ class LegisladorModel
             $impacto_provincial = self::readCsv($impactoPath);
         }
 
-        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj', 'proyectos_por_id', 'impacto_provincial');
+        $despacho_costos = [];
+        $despachoPath = $base . 'despacho_costos.csv';
+        if (is_readable($despachoPath)) {
+            foreach (self::readCsv($despachoPath) as $r) {
+                $legId = (int)$r['legislador_id'];
+                $despacho_costos[$legId] = [
+                    'id'                     => (int)($r['id'] ?? $legId),
+                    'legislador_id'          => $legId,
+                    'anio'                   => (int)($r['anio'] ?? 2024),
+                    'total_asesores'         => (int)($r['total_asesores'] ?? 0),
+                    'costo_mensual_ars'      => (float)($r['costo_mensual_ars'] ?? 0.0),
+                    'costo_anual_ars'        => (float)($r['costo_anual_ars'] ?? 0.0),
+                    'alertas_nepotismo'      => (int)($r['alertas_nepotismo'] ?? 0),
+                    'proyectos_autor_anio'   => (int)($r['proyectos_autor_anio'] ?? 0),
+                    'costo_por_proyecto_ars' => (float)($r['costo_por_proyecto_ars'] ?? 0.0),
+                ];
+            }
+        }
+
+        return $this->csvCache = compact('legisladores', 'votaciones', 'ddjj', 'proyectos_por_id', 'impacto_provincial', 'despacho_costos');
     }
 
     public static function readCsv(string $path): array

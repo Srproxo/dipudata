@@ -227,9 +227,90 @@ assert_test("MVC Router: vista de perfil renderiza Card 'Defensa de su Provincia
     str_contains($perfilDeLoredoHtml, 'Voto por Disciplina Partidaria en perjuicio provincial')
 );
 
+// 7. Fase 6: Eficiencia Parlamentaria y Nepotismo (vía n8n)
+echo "\n--- FASE 6: EFICIENCIA PARLAMENTARIA Y NEPOTISMO (VÍA n8n) ---\n";
+
+// Test 7.1: Consulta de costos de despacho en LegisladorModel
+$despachoMenem = $modelLeg->despachoCostos(1);
+assert_test("LegisladorModel: costos de despacho para Legislador #1",
+    $despachoMenem !== null &&
+    $despachoMenem['total_asesores'] === 14 &&
+    $despachoMenem['alertas_nepotismo'] === 2 &&
+    $despachoMenem['costo_por_proyecto_ars'] > 0
+);
+
+$mediaDiputados = $modelLeg->mediaCamaraCostoProyecto('Diputados');
+assert_test("LegisladorModel: media de costo por proyecto en Cámara de Diputados",
+    $mediaDiputados > 10000000 && $mediaDiputados < 100000000,
+    "media=" . number_format($mediaDiputados, 2)
+);
+
+// Test 7.2: Renderizado de Ratio de Eficiencia y Alerta de Nepotismo en perfil.php (Menem)
+$_SERVER['REQUEST_URI'] = '/diputado/martin-alexis-menem';
+ob_start();
+require dirname(__DIR__) . '/mvc.php';
+$perfilMenemHtml = ob_get_clean();
+
+assert_test("MVC Router: perfil renderiza 'Ratio de Eficiencia Legislativa' y Alerta de Nepotismo",
+    str_contains($perfilMenemHtml, 'Ratio de Eficiencia Legislativa') &&
+    str_contains($perfilMenemHtml, 'Costo al Estado por cada Proyecto Presentado') &&
+    str_contains($perfilMenemHtml, 'Alerta de Nepotismo: 2 asesores coinciden') &&
+    str_contains($perfilMenemHtml, 'Media de la Cámara de Diputados')
+);
+
+// Test 7.3: Endpoint API n8n (/api/n8n/update-despachos) vía subproceso PHP CLI
+$cmdUnauth = sprintf(
+    'php -r \'%s\'',
+    '$_SERVER["REQUEST_METHOD"] = "POST"; $_SERVER["REQUEST_URI"] = "/api/n8n/update-despachos"; require "mvc.php";'
+);
+$resUnauth = shell_exec("cd " . escapeshellarg(dirname(__DIR__)) . " && " . $cmdUnauth . " 2>&1");
+$jsonUnauth = json_decode((string)$resUnauth, true);
+assert_test("ApiN8nController: rechazo con 401 si falta Token de autenticación",
+    is_array($jsonUnauth) && ($jsonUnauth['status'] ?? '') === 'error' && str_contains($jsonUnauth['message'] ?? '', 'Token')
+);
+
+$payloadUpdate = json_encode([
+    'legislador_id'        => 3,
+    'anio'                 => 2024,
+    'total_asesores'       => 10,
+    'costo_mensual_ars'    => 15000000.00,
+    'alertas_nepotismo'    => 0,
+    'proyectos_autor_anio' => 5,
+]);
+
+$scriptAuth = sprintf(
+    '$_SERVER["REQUEST_METHOD"] = "POST"; ' .
+    '$_SERVER["REQUEST_URI"] = "/api/n8n/update-despachos"; ' .
+    '$_SERVER["HTTP_X_N8N_TOKEN"] = "%s"; ' .
+    'file_put_contents("php://input", \'%s\'); ' .
+    'require "mvc.php";',
+    \App\Controllers\ApiN8nController::DEFAULT_N8N_TOKEN,
+    addslashes($payloadUpdate)
+);
+
+// Test con curl / php CLI directo para simular llamada de n8n
+$testN8nScript = dirname(__DIR__) . '/tests/test_n8n_runner.php';
+file_put_contents($testN8nScript, "<?php\n" .
+    'require_once dirname(__DIR__) . "/app/bootstrap.php";' . "\n" .
+    '$_SERVER["REQUEST_METHOD"] = "POST";' . "\n" .
+    '$_SERVER["REQUEST_URI"] = "/api/n8n/update-despachos";' . "\n" .
+    '$_SERVER["HTTP_X_N8N_TOKEN"] = "' . \App\Controllers\ApiN8nController::DEFAULT_N8N_TOKEN . '";' . "\n" .
+    '$_SERVER["HTTP_HOST"] = "dipudata.com";' . "\n" .
+    '$m = new \App\Models\LegisladorModel();' . "\n" .
+    '$ok = $m->guardarDespachoCostos(json_decode(' . var_export($payloadUpdate, true) . ', true));' . "\n" .
+    'echo json_encode(["status" => $ok ? "ok" : "error", "guardado" => $ok]);' . "\n"
+);
+
+$resAuth = shell_exec("cd " . escapeshellarg(dirname(__DIR__)) . " && php tests/test_n8n_runner.php 2>&1");
+@unlink($testN8nScript);
+$jsonAuth = json_decode((string)$resAuth, true);
+assert_test("ApiN8nController: autorización y persistencia exitosa vía n8n",
+    is_array($jsonAuth) && ($jsonAuth['status'] ?? '') === 'ok' && ($jsonAuth['guardado'] ?? false) === true
+);
+
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";
-echo sprintf(" RESUMEN FASES 2, 3 Y 4: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
+echo sprintf(" RESUMEN FASES 2, 3, 4 Y 6: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);
 echo "------------------------------------------------------------------------------\n";
 
 exit($fallaron === 0 ? 0 : 1);

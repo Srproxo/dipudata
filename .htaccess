@@ -66,6 +66,7 @@ AddDefaultCharset UTF-8
 
     # MVC Match Electoral 360 + SEO Hub & Spoke
     RewriteRule ^api/match360/?$ mvc.php [L,QSA]
+    RewriteRule ^api/n8n/(.*)$ mvc.php [L,QSA]
     RewriteRule ^(diputado|senador)/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
     RewriteRule ^match-360/?$ mvc.php [L,QSA]
     RewriteRule ^blog(/.*)?$ mvc.php [L,QSA]

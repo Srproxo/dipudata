@@ -36,6 +36,10 @@ switch (true) {
         (new MatchEngineController())->handle();
         break;
 
+    case $path === '/api/n8n/update-despachos':
+        (new \App\Controllers\ApiN8nController())->updateDespachos();
+        break;
+
     case $path === '/blog':
         $data = (new BlogController())->hub();
         render('blog/hub', [
