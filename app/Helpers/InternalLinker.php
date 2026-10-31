@@ -20,11 +20,33 @@ class InternalLinker
     {
         $anclas = [];
         foreach ($legisladores as $leg) {
-            $anclas[$leg['nombre']] = [
+            $nombrePrincipal = (string)$leg['nombre'];
+            $anclaItem = [
                 'url'    => LegisladorModel::urlPerfil($leg),
                 'titulo' => sprintf('Radiografía de %s (%s, %s)', $leg['nombre'], $leg['bloque'], $leg['provincia']),
                 'leg'    => $leg,
             ];
+            $anclas[$nombrePrincipal] = $anclaItem;
+
+            if (!empty($leg['nombre_wiki'])) {
+                $wikiNombre = str_replace('_', ' ', (string)$leg['nombre_wiki']);
+                if ($wikiNombre !== $nombrePrincipal && !isset($anclas[$wikiNombre])) {
+                    $anclas[$wikiNombre] = $anclaItem;
+                }
+            }
+
+            // Variantes habituales sin segundo nombre (ej: Cristian Adrián Ritondo -> Cristian Ritondo)
+            $tokens = explode(' ', $nombrePrincipal);
+            if (count($tokens) >= 3) {
+                $nombreCorto = $tokens[0] . ' ' . $tokens[count($tokens) - 1];
+                if (!isset($anclas[$nombreCorto])) {
+                    $anclas[$nombreCorto] = $anclaItem;
+                }
+                $nombreDosApellidos = $tokens[0] . ' ' . $tokens[1];
+                if (!isset($anclas[$nombreDosApellidos])) {
+                    $anclas[$nombreDosApellidos] = $anclaItem;
+                }
+            }
         }
         uksort($anclas, fn($a, $b) => mb_strlen($b) <=> mb_strlen($a));
 

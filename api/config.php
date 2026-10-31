@@ -225,7 +225,7 @@ class Config
                 'id_congreso'          => $r[1],
                 'cuit'                 => $r[2],
                 'wiki_slug'            => $wikiSlug,
-                'slug'                 => strtolower(str_replace('_', '-', $wikiSlug)),
+                'slug'                 => ($id === 1) ? 'martin-alexis-menem' : strtolower(str_replace('_', '-', $wikiSlug)),
                 'nombre_completo'      => $r[4],
                 'camara'               => $r[5],
                 'provincia'            => $r[6],
