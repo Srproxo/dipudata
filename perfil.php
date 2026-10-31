@@ -1612,54 +1612,68 @@ require __DIR__ . '/app/Views/layouts/header.php';
         #slideViewport { border: none !important; box-shadow: none !important; width: 100% !important; min-height: 100vh !important; }
     }
     </style>
-    <div id="modalPresentacion" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex flex-col justify-between overflow-y-auto lg:overflow-hidden select-none p-3 sm:p-5 md:p-6 font-sans text-slate-900" role="dialog" aria-modal="true" aria-label="Modo Presentación Diapositivas">
+    <div id="modalPresentacion" class="fixed inset-0 z-[100] hidden bg-slate-950 flex flex-col justify-center items-center overflow-y-auto lg:overflow-hidden select-none p-2 sm:p-4 md:p-6 font-sans text-slate-900" role="dialog" aria-modal="true" aria-label="Modo Presentación Diapositivas">
         
-        <!-- Header de la Barra de Controles de la Presentación -->
-        <header class="w-full max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/80 shrink-0">
-            <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold tracking-wider uppercase bg-slate-900 text-white shadow-sm">
-                    <svg class="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Header Flotante Minimalista para Transmisión / TV (Floating Pill Toolbar) -->
+        <header class="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-[110] max-w-[95vw] pointer-events-auto">
+            <div class="flex items-center gap-2 sm:gap-3 bg-slate-900/90 hover:bg-slate-900 text-white rounded-full px-3 sm:px-4 py-1.5 shadow-2xl backdrop-blur-md border border-white/10 transition-all">
+                <!-- Badge TV / Logo -->
+                <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-blue-400 shrink-0">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
-                    DipuData Slides
-                </span>
-                <span class="text-xs sm:text-sm font-semibold text-slate-800 truncate max-w-xs sm:max-w-md">
-                    <?= e($leg['nombre']) ?> · <?= e($cargo) ?> (<?= e($leg['provincia']) ?>)
-                </span>
-            </div>
-
-            <!-- Contador de Diapositiva y Botones de Acción -->
-            <div class="flex items-center gap-2">
-                <div class="bg-white border border-slate-200 rounded-lg px-3 py-1 text-xs font-mono tabular-nums text-slate-700 shadow-sm">
-                    Diapositiva <span id="currentSlideNum" class="text-blue-600 font-bold text-sm">1</span> / 7
+                    <span class="hidden sm:inline">DipuData TV</span>
                 </div>
 
-                <button id="btnSlidePrev" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors shadow-sm" title="Diapositiva anterior (Flecha Izquierda)">
-                    ◀ <span class="hidden sm:inline">Anterior</span>
-                </button>
-                <button id="btnSlideNext" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors shadow-sm" title="Siguiente diapositiva (Flecha Derecha / Espacio)">
-                    <span class="hidden sm:inline">Siguiente</span> ▶
-                </button>
+                <span class="text-white/20 text-xs hidden sm:inline">|</span>
 
-                <div class="h-4 w-px bg-slate-300 mx-1"></div>
+                <!-- Nombre Legislador y Cargo -->
+                <span class="text-xs font-medium text-slate-200 truncate max-w-[120px] sm:max-w-[200px] md:max-w-xs">
+                    <?= e($leg['nombre']) ?> <span class="hidden md:inline text-slate-400 font-normal">· <?= e($cargo) ?></span>
+                </span>
 
-                <button id="btnToggleFullscreen" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors shadow-sm" title="Alternar Pantalla Completa (F)">
-                    ⛶ <span class="hidden md:inline text-[11px]">Pantalla Completa</span>
-                </button>
+                <span class="text-white/20 text-xs">|</span>
 
-                <button id="btnPrintSlides" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors shadow-sm" title="Imprimir o Exportar en PDF (Ctrl+P)">
-                    🖨 <span class="hidden md:inline text-[11px]">Exportar PDF</span>
-                </button>
+                <!-- Contador Diapositivas -->
+                <span class="font-mono text-xs font-semibold px-2 py-0.5 rounded-full bg-white/10 text-slate-200 whitespace-nowrap">
+                    <span id="currentSlideNum" class="text-blue-400 font-bold">1</span> / 7
+                </span>
 
-                <button id="btnCerrarPresentacion" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 text-xs text-rose-700 font-bold transition-colors shadow-sm" title="Cerrar Modo Presentación (Esc)">
-                    ✕ <span class="hidden sm:inline">Salir</span>
+                <!-- Controles de Navegación -->
+                <div class="flex items-center gap-1">
+                    <button id="btnSlidePrev" type="button" class="p-1 rounded-full bg-white/10 hover:bg-white/20 text-white transition flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7" title="Diapositiva anterior (←)">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button id="btnSlideNext" type="button" class="p-1 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 shadow" title="Siguiente diapositiva (→ / Espacio)">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+                <span class="text-white/20 text-xs hidden md:inline">|</span>
+
+                <!-- Herramientas TV: Fullscreen & PDF -->
+                <div class="hidden md:flex items-center gap-1">
+                    <button id="btnToggleFullscreen" type="button" class="p-1 px-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition text-[11px] font-medium flex items-center gap-1" title="Pantalla Completa (F)">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                        <span>Full</span>
+                    </button>
+                    <button id="btnPrintSlides" type="button" class="p-1 px-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition text-[11px] font-medium flex items-center gap-1" title="Exportar PDF (Ctrl+P)">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                        <span>PDF</span>
+                    </button>
+                </div>
+
+                <!-- Botón Salir -->
+                <button id="btnCerrarPresentacion" type="button" class="p-1 px-2 rounded-full bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 hover:text-rose-100 transition text-xs font-bold flex items-center gap-1 shrink-0" title="Cerrar Presentación (Esc)">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <span class="hidden sm:inline text-[11px]">Salir</span>
                 </button>
             </div>
         </header>
 
-        <!-- Escenario Principal: Diapositiva 16:9 -->
-        <main class="w-full max-w-6xl mx-auto my-auto py-2 flex items-center justify-center grow">
-            <div id="slideViewport" class="w-full aspect-[16/9] min-h-[440px] bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-slate-900">
+        <!-- Escenario Principal: Diapositiva 16:9 con Padding para los Controles Flotantes -->
+        <main class="w-full max-w-7xl mx-auto my-auto py-3 sm:py-6 flex items-center justify-center grow pt-14 pb-14">
+            <div id="slideViewport" class="w-full aspect-[16/9] min-h-[440px] max-h-[86vh] bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-slate-900">
                 
                 <!-- DIAPOSITIVA 1: Portada Ejecutiva y Ficha Técnica -->
                 <div class="slide-deck-card active h-full flex flex-col justify-between" data-slide="1">
@@ -2155,45 +2169,44 @@ require __DIR__ . '/app/Views/layouts/header.php';
             </div>
         </main>
 
-        <!-- Dock Inferior: Selector de Diapositivas e Instrucciones de Teclado -->
-        <footer class="w-full max-w-6xl mx-auto pt-3 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3 shrink-0">
-            <div class="flex items-center gap-1.5 overflow-x-auto py-1">
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-sm transition-all" data-target="1">
-                    1. Portada
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="2">
-                    2. Patrimonio
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="3">
-                    3. Radar 11 Ejes
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="4">
-                    4. Proyectos
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="5">
-                    5. Tensión Federal
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="6">
-                    6. Despacho
-                </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="7">
-                    7. Auditoría Ética
-                </button>
-            </div>
-
-            <div class="hidden lg:flex items-center gap-2 text-[11px] font-mono text-slate-500">
-                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">←</kbd>
-                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">→</kbd>
-                <span>Navegar</span>
-                <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">Espacio</kbd>
-                <span>Avanzar</span>
-                <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">F</kbd>
-                <span>Pantalla Completa</span>
-                <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">Esc</kbd>
-                <span>Salir</span>
+        <!-- Dock Flotante Inferior: Selector Rápido de Diapositivas para TV -->
+        <footer class="fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-[110] max-w-[95vw] pointer-events-auto">
+            <div class="flex items-center gap-1.5 sm:gap-2 bg-slate-900/90 text-white rounded-full px-3 py-1.5 shadow-2xl backdrop-blur-md border border-white/10 overflow-x-auto">
+                <div class="flex items-center gap-1 shrink-0">
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow transition-all" data-target="1">
+                        1. Portada
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="2">
+                        2. DDJJ USD
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="3">
+                        3. Radar 360
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="4">
+                        4. Proyectos
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="5">
+                        5. Tensión Federal
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="6">
+                        6. Eficiencia
+                    </button>
+                    <button type="button" class="slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all" data-target="7">
+                        7. Auditoría
+                    </button>
+                </div>
+                <span class="text-white/20 text-xs hidden lg:inline">|</span>
+                <div class="hidden lg:flex items-center gap-1.5 text-[10px] font-mono text-slate-400 shrink-0">
+                    <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-200">←</kbd>
+                    <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-200">→</kbd>
+                    <span class="text-slate-400">Navegar</span>
+                    <span>·</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-200">F</kbd>
+                    <span class="text-slate-400">Pantalla</span>
+                    <span>·</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-200">Esc</kbd>
+                    <span class="text-slate-400">Salir</span>
+                </div>
             </div>
         </footer>
 
@@ -2235,9 +2248,9 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 navDots.forEach(function (d) {
                     var target = parseInt(d.getAttribute('data-target'), 10);
                     if (target === currentSlide) {
-                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-sm transition-all';
+                        d.className = 'slide-nav-dot px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow transition-all';
                     } else {
-                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all';
+                        d.className = 'slide-nav-dot px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 text-slate-300 transition-all';
                     }
                 });
 
