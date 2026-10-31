@@ -209,7 +209,13 @@ export const PerfilLegisladorView: React.FC = () => {
                   Bloque {perfil.bloque_actual}
                 </span>
 
-                <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-mono tabular-nums bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-mono tabular-nums border ${
+                    perfil.estado === 'Mandato Cumplido'
+                      ? 'bg-amber-50 text-amber-800 border-amber-200'
+                      : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  }`}
+                >
                   <ShieldCheck className="w-3 h-3" />
                   {perfil.estado}
                 </span>
@@ -247,6 +253,21 @@ export const PerfilLegisladorView: React.FC = () => {
                   <span>Fuente Biográfica (Wikipedia)</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
+                {(perfil.url_comisiones || perfil.url_hcdn) && (
+                  <>
+                    <span>·</span>
+                    <a
+                      href={perfil.url_comisiones || perfil.url_hcdn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-slate-700 hover:text-slate-900"
+                    >
+                      <Landmark className="w-3 h-3 text-slate-500" />
+                      <span>Ficha Oficial HCDN · Comisiones</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>

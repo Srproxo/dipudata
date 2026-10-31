@@ -188,7 +188,7 @@ function construirLegisladorCompletoLocal(rawId: number): LegisladorPerfilComple
 
   return {
     ...raw,
-    slug: raw.wiki_slug.toLowerCase().replace(/_/g, '-'),
+    slug: raw.slug ?? (raw.id === 37 ? 'pablo-carro' : (raw.id === 1 ? 'martin-alexis-menem' : raw.wiki_slug.toLowerCase().replace(/_/g, '-').replace(/[^a-z0-9\-]/g, ''))),
     patrimonio_usd_actual: evolucion.patrimonio_usd_actual,
     crecimiento_real_usd_pct: evolucion.crecimiento_real_usd_pct,
     vector_ideologico: vector,

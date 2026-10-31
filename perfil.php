@@ -300,6 +300,17 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight"><?= e($leg['nombre']) ?></h1>
                 <p class="text-slate-500 mt-1"><?= e($cargo) ?></p>
                 <div class="flex flex-wrap items-center gap-2 mt-3">
+                    <?php if (($leg['estado'] ?? '') === 'Mandato Cumplido'): ?>
+                        <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                            Mandato Cumplido
+                        </span>
+                    <?php else: ?>
+                        <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            En Funciones (Activo)
+                        </span>
+                    <?php endif; ?>
                     <span class="rounded-full px-2.5 py-0.5 text-xs font-medium bg-slate-100 text-slate-700"><?= e($leg['provincia']) ?></span>
                     <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold <?= e($partidoColores['badge']) ?>">
                         <span class="w-2 h-2 rounded-full <?= e($partidoColores['dot']) ?>"></span>
@@ -314,9 +325,22 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </div>
         <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mt-6">Biografía</h2>
         <p class="mt-2 leading-relaxed text-slate-700"><?= e($leg['biografia_extracto'] ?: 'Biografía pendiente de sincronización con Wikipedia.') ?></p>
-        <?php if ($leg['nombre_wiki']): ?>
-            <a href="https://es.wikipedia.org/wiki/<?= e(rawurlencode($leg['nombre_wiki'])) ?>" rel="noopener nofollow" target="_blank" class="inline-block mt-2 text-sm text-blue-700 hover:underline">Fuente: Wikipedia ↗</a>
-        <?php endif; ?>
+        <div class="flex flex-wrap items-center gap-2 mt-3">
+            <?php if ($leg['nombre_wiki']): ?>
+                <a href="https://es.wikipedia.org/wiki/<?= e(rawurlencode($leg['nombre_wiki'])) ?>" rel="noopener nofollow" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 hover:text-blue-900 bg-blue-50/80 hover:bg-blue-100 border border-blue-200 px-3 py-1.5 rounded-lg transition-colors">
+                    <span>Fuente Wikipedia ↗</span>
+                </a>
+            <?php endif; ?>
+            <?php 
+                $urlHcdn = $leg['url_comisiones'] ?? $leg['url_hcdn'] ?? null;
+                if ($urlHcdn):
+            ?>
+                <a href="<?= e($urlHcdn) ?>" rel="noopener nofollow" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
+                    <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <span>Ficha Oficial HCDN · Comisiones ↗</span>
+                </a>
+            <?php endif; ?>
+        </div>
 
         <?php if (!empty($fichaWiki['nombre_completo'])): ?>
         <!-- Ficha Institucional y Biográfica Estructurada (Wikipedia) -->

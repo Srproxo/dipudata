@@ -21,6 +21,7 @@ export interface LegisladorRawSeed {
   id_congreso: string;
   cuit: string;
   wiki_slug: string;
+  slug?: string;
   nombre_completo: string;
   camara: 'Diputados' | 'Senadores';
   provincia: string;
@@ -31,6 +32,8 @@ export interface LegisladorRawSeed {
   asistencia_historica: number;
   lealtad_partidaria: number;
   mandatos: number;
+  url_hcdn?: string;
+  url_comisiones?: string;
 }
 
 export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
@@ -686,14 +689,15 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     id: 37,
     id_congreso: 'HCDN-1028',
     cuit: '20-18452147-6',
-    wiki_slug: 'Pablo_Carro',
+    wiki_slug: 'Pablo_Carro_(político)',
+    slug: 'pablo-carro',
     nombre_completo: 'Pablo Carro',
     camara: 'Diputados',
     provincia: 'Córdoba',
     bloque_actual: 'Unión por la Patria',
-    estado: 'Activo',
+    estado: 'Mandato Cumplido',
     biografia:
-      'Docente universitario en Ciencias de la Información de la UNC y dirigente sindical docente (ADIUC / CTA). Diputado Nacional por Córdoba con fuerte foco en comunicación, medios públicos y cultura nacional.',
+      'Docente universitario en Ciencias de la Información de la UNC y dirigente sindical docente (ADIUC / CTA). Ex Diputado Nacional por Córdoba (mandato cumplido) con fuerte foco en comunicación, medios públicos y cultura nacional.',
     foto_url:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Pablo_Carro_2021.jpg/400px-Pablo_Carro_2021.jpg',
     asistencia_historica: 96.5,
@@ -1312,6 +1316,27 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     lealtad_partidaria: 91.2,
     mandatos: 1,
   },
+  {
+    id: 72,
+    id_congreso: 'HCDN-1072',
+    cuit: '20-29662959-7',
+    wiki_slug: 'Enrique_Lluch',
+    slug: 'enrique-lluch',
+    nombre_completo: 'Enrique Lluch',
+    camara: 'Diputados',
+    provincia: 'Córdoba',
+    bloque_actual: 'La Libertad Avanza',
+    estado: 'Activo',
+    biografia:
+      'Empresario cordobés y dirigente político de La Libertad Avanza. Diputado Nacional por la Provincia de Córdoba (período 2025-2029). Se desempeña como Secretario 2° de la Comisión de Comunicaciones e Informática y vocal en las comisiones de Agricultura y Ganadería y Transportes.',
+    foto_url:
+      'https://parlamentaria.hcdn.gob.ar/image/20296629597_20251204145853000_medium.png',
+    asistencia_historica: 96.0,
+    lealtad_partidaria: 98.5,
+    mandatos: 1,
+    url_hcdn: 'https://www.hcdn.gob.ar/diputados/elluch/',
+    url_comisiones: 'https://www.hcdn.gob.ar/diputados/elluch/comisiones.html',
+  },
 ];
 
 export const PATRIMONIO_NOMINAL_SEED: Record<number, Record<number, number>> = {
@@ -1386,6 +1411,7 @@ export const PATRIMONIO_NOMINAL_SEED: Record<number, Record<number, number>> = {
   69: { 2020: 21000000, 2021: 32000000, 2022: 60000000, 2023: 198000000, 2024: 245000000, 2025: 268000000 },
   70: { 2020: 27000000, 2021: 41000000, 2022: 77000000, 2023: 252000000, 2024: 312000000, 2025: 342000000 },
   71: { 2020: 38500000, 2021: 58000000, 2022: 109000000, 2023: 360000000, 2024: 448000000, 2025: 490000000 },
+  72: { 2020: 38000000, 2021: 58000000, 2022: 110000000, 2023: 360000000, 2024: 450000000, 2025: 495000000 },
 };
 
 export const LEYES_SEED: LeyParlamentaria[] = [

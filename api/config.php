@@ -230,7 +230,7 @@ class Config
             [34, 'HCDN-1025', '27-17254896-3', 'Laura_Rodriguez_Machado', 'Laura Rodríguez Machado', 'Diputados', 'Córdoba', 'PRO', 'Activo', 'Abogada especialista en derecho administrativo egresada de la UNC. Diputada Nacional por Córdoba y ex Senadora Nacional (2015-2021), referente de primera línea del PRO a nivel legislativo.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Laura_Rodr%C3%ADguez_Machado_2021.jpg/400px-Laura_Rodr%C3%ADguez_Machado_2021.jpg', 96.90, 95.20],
             [35, 'HCDN-1026', '20-30541289-8', 'Oscar_Agost_Carreno', 'Oscar Agost Carreño', 'Diputados', 'Córdoba', 'Encuentro Federal', 'Activo', 'Abogado especializado en derecho público y presidente del PRO Córdoba en alianza con Encuentro Federal. Diputado Nacional con participación técnica en comisiones de justicia y legislación general.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 95.80, 86.40],
             [36, 'HCDN-1027', '27-26985412-5', 'Belen_Avico', 'María Belén Avico', 'Diputados', 'Córdoba', 'PRO', 'Activo', 'Empresaria PyME del sector del té y la agroindustria gourmet nacida en Río Cuarto. Diputada Nacional por Córdoba integrante del bloque PRO, impulsora de la simplificación comercial.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 94.20, 94.10],
-            [37, 'HCDN-1028', '20-18452147-6', 'Pablo_Carro', 'Pablo Carro', 'Diputados', 'Córdoba', 'Unión por la Patria', 'Activo', 'Docente universitario en Ciencias de la Información de la UNC y dirigente sindical docente (ADIUC / CTA). Diputado Nacional por Córdoba con fuerte foco en comunicación, medios públicos y cultura nacional.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Pablo_Carro_2021.jpg/400px-Pablo_Carro_2021.jpg', 96.50, 98.30],
+            [37, 'HCDN-1028', '20-18452147-6', 'Pablo_Carro_(político)', 'Pablo Carro', 'Diputados', 'Córdoba', 'Unión por la Patria', 'Mandato Cumplido', 'Docente universitario en Ciencias de la Información de la UNC y dirigente sindical docente (ADIUC / CTA). Ex Diputado Nacional por Córdoba (mandato cumplido) con fuerte foco en comunicación, medios públicos y cultura nacional.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Pablo_Carro_2021.jpg/400px-Pablo_Carro_2021.jpg', 96.50, 98.30],
             [38, 'HCDN-1029', '27-26852149-8', 'Gabriela_Estevez', 'Gabriela Estévez', 'Diputados', 'Córdoba', 'Unión por la Patria', 'Activo', 'Licenciada en Psicología y dirigente política cordobesa de Unión por la Patria. Diputada Nacional por Córdoba, ex Titular de ANSES Córdoba y promotora de políticas de género e inclusión federal.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Gabriela_Est%C3%A9vez_2021.jpg/400px-Gabriela_Est%C3%A9vez_2021.jpg', 95.70, 99.00],
             [39, 'HCDN-1030', '20-29145632-1', 'Francisco_Monti', 'Francisco Monti', 'Diputados', 'Catamarca', 'UCR', 'Activo', 'Abogado catamarqueño, ex diputado provincial y dirigente de la Unión Cívica Radical. Diputado Nacional por la Provincia de Catamarca con participación en comisiones de Minería y Asuntos Constitucionales.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.00, 90.50],
             [40, 'HSN-2010', '20-17852146-3', 'Guillermo_Andrada', 'Guillermo Andrada', 'Senadores', 'Catamarca', 'Unión por la Patria', 'Activo', 'Médico y dirigente peronista de Catamarca. Senador Nacional e integrante de las comisiones de Salud y Presupuesto de la Cámara Alta.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 95.10, 97.40],
@@ -265,6 +265,7 @@ class Config
             [69, 'HCDN-1046', '20-29852147-8', 'Mariano_Campero', 'Mariano Campero', 'Diputados', 'Tucumán', 'UCR', 'Activo', 'Abogado tucumano egresado de la UNT, ex dos veces Intendente municipal de Yerba Buena. Diputado Nacional por la Provincia de Tucumán integrante de la bancada radical con posiciones pro reformas nacionales.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.40, 88.90],
             [70, 'HSN-2024', '27-17852964-3', 'Beatriz_Avila', 'Beatriz Luisa Ávila', 'Senadores', 'Tucumán', 'Por la Justicia Social', 'Activo', 'Periodista y política tucumana referente del Partido por la Justicia Social, ex Diputada Nacional. Senadora Nacional por Tucumán con enfoque en obras comunitarias y derechos de la niñez.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 95.80, 89.20],
             [71, 'HCDN-1047', '20-21852964-1', 'Luis_Picat', 'Luis Albino Picat', 'Diputados', 'Córdoba', 'UCR', 'Activo', 'Ingeniero agrónomo, productor porcino y dirigente agroindustrial cordobés, ex Intendente de Jesús María (2019-2023) y ex Presidente de la Sociedad Rural de Jesús María. Diputado Nacional por la Provincia de Córdoba integrante del bloque radical con fuerte defensa de la producción agropecuaria.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.60, 91.20],
+            [72, 'HCDN-1072', '20-29662959-7', 'Enrique_Lluch', 'Enrique Lluch', 'Diputados', 'Córdoba', 'La Libertad Avanza', 'Activo', 'Empresario cordobés y dirigente político de La Libertad Avanza. Diputado Nacional por la Provincia de Córdoba (período 2025-2029). Secretario 2° de la Comisión de Comunicaciones e Informática y vocal en Agricultura y Ganadería y Transportes.', 'https://parlamentaria.hcdn.gob.ar/image/20296629597_20251204145853000_medium.png', 96.00, 98.50],
         ];
 
         $legisladores = [];
@@ -276,7 +277,7 @@ class Config
                 'id_congreso'          => $r[1],
                 'cuit'                 => $r[2],
                 'wiki_slug'            => $wikiSlug,
-                'slug'                 => ($id === 1) ? 'martin-alexis-menem' : strtolower(str_replace('_', '-', $wikiSlug)),
+                'slug'                 => ($id === 1) ? 'martin-alexis-menem' : ($id === 37 ? 'pablo-carro' : ($id === 72 ? 'enrique-lluch' : preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace('_', '-', $wikiSlug))))),
                 'nombre_completo'      => $r[4],
                 'camara'               => $r[5],
                 'provincia'            => $r[6],
@@ -289,7 +290,9 @@ class Config
                 'lealtad_partidaria'   => (float)$r[12],
                 'asistencia_pct'       => (float)$r[11],
                 'lealtad_pct'          => (float)$r[12],
-                'mandatos'             => [1=>1,2=>2,3=>1,4=>1,5=>3,6=>3,7=>1,8=>1,9=>1,10=>3,11=>2,12=>2,13=>1,14=>1,15=>4,16=>4,17=>6,18=>2,19=>2,20=>1,21=>2,22=>2,23=>1,24=>1,25=>2,26=>1,27=>1,28=>2,29=>1,30=>1,31=>3,32=>1,33=>3,34=>2,35=>1,36=>1,37=>2,38=>2,39=>1,40=>1,41=>2,42=>1,43=>1,44=>1,45=>1,46=>2,47=>3,48=>1,49=>3,50=>1,51=>1,52=>1,53=>1,54=>2,55=>1,56=>1,57=>1,58=>4,59=>1,60=>1,61=>1,62=>1,63=>2,64=>1,65=>1,66=>1,67=>1,68=>1,69=>1,70=>1,71=>1][$id] ?? 1,
+                'mandatos'             => [1=>1,2=>2,3=>1,4=>1,5=>3,6=>3,7=>1,8=>1,9=>1,10=>3,11=>2,12=>2,13=>1,14=>1,15=>4,16=>4,17=>6,18=>2,19=>2,20=>1,21=>2,22=>2,23=>1,24=>1,25=>2,26=>1,27=>1,28=>2,29=>1,30=>1,31=>3,32=>1,33=>3,34=>2,35=>1,36=>1,37=>2,38=>2,39=>1,40=>1,41=>2,42=>1,43=>1,44=>1,45=>1,46=>2,47=>3,48=>1,49=>3,50=>1,51=>1,52=>1,53=>1,54=>2,55=>1,56=>1,57=>1,58=>4,59=>1,60=>1,61=>1,62=>1,63=>2,64=>1,65=>1,66=>1,67=>1,68=>1,69=>1,70=>1,71=>1,72=>1][$id] ?? 1,
+                'url_hcdn'             => ($id === 72) ? 'https://www.hcdn.gob.ar/diputados/elluch/' : null,
+                'url_comisiones'       => ($id === 72) ? 'https://www.hcdn.gob.ar/diputados/elluch/comisiones.html' : null,
                 'updated_at'           => '2025-05-15 12:00:00',
             ];
         }
@@ -366,6 +369,7 @@ class Config
             69 => [2020 => 21000000.00, 2021 => 32000000.00, 2022 => 60000000.00, 2023 => 198000000.00, 2024 => 245000000.00, 2025 => 268000000.00],
             70 => [2020 => 27000000.00, 2021 => 41000000.00, 2022 => 77000000.00, 2023 => 252000000.00, 2024 => 312000000.00, 2025 => 342000000.00],
             71 => [2020 => 38500000.00, 2021 => 58000000.00, 2022 => 109000000.00, 2023 => 360000000.00, 2024 => 448000000.00, 2025 => 490000000.00],
+            72 => [2020 => 38000000.00, 2021 => 58000000.00, 2022 => 110000000.00, 2023 => 360000000.00, 2024 => 450000000.00, 2025 => 495000000.00],
         ];
 
         $leyes = [

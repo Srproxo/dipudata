@@ -315,7 +315,7 @@ class LegisladorModel
         $rows = [];
         if ($this->pdo) {
             try {
-                $stmt = $this->pdo->query("SELECT * FROM legisladores_master WHERE estado = 'Activo' ORDER BY id ASC");
+                $stmt = $this->pdo->query("SELECT * FROM legisladores_master ORDER BY id ASC");
                 $rows = $stmt ? $stmt->fetchAll() : [];
             } catch (\Throwable) {
                 $rows = [];
@@ -360,6 +360,8 @@ class LegisladorModel
                     'indice_lealtad'     => (float)($mLeg['lealtad_partidaria'] ?? $mLeg['lealtad_pct'] ?? 85.0),
                     'asistencia'         => (float)($mLeg['asistencia_historica'] ?? $mLeg['asistencia_pct'] ?? 90.0),
                     'mandatos'           => (int)($mLeg['mandatos'] ?? 1),
+                    'url_hcdn'           => $mLeg['url_hcdn'] ?? null,
+                    'url_comisiones'     => $mLeg['url_comisiones'] ?? null,
                 ];
                 $existing[$mSlug] = true;
                 $existing[$mCuit] = true;
@@ -387,6 +389,8 @@ class LegisladorModel
                     'indice_lealtad'     => (float)($mLeg['lealtad_partidaria'] ?? $mLeg['lealtad_pct'] ?? 85.0),
                     'asistencia'         => (float)($mLeg['asistencia_historica'] ?? $mLeg['asistencia_pct'] ?? 90.0),
                     'mandatos'           => (int)($mLeg['mandatos'] ?? 1),
+                    'url_hcdn'           => $mLeg['url_hcdn'] ?? null,
+                    'url_comisiones'     => $mLeg['url_comisiones'] ?? null,
                 ];
             }
             return $fullList;
@@ -466,6 +470,11 @@ class LegisladorModel
             'juan-lopez'              => 'juan-manuel-lopez',
             'carlos-arce'             => 'carlos-arce',
             'arce'                    => 'carlos-arce',
+            'pablo-carro'             => 'pablo-carro',
+            'carro'                   => 'pablo-carro',
+            'enrique-lluch'           => 'enrique-lluch',
+            'lluch'                   => 'enrique-lluch',
+            'kike-lluch'              => 'enrique-lluch',
         ];
 
         if (isset($aliases[$cleanSlug])) {
