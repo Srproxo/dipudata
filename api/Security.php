@@ -16,7 +16,6 @@ require_once __DIR__ . '/config.php';
 class Security
 {
     private const DEFAULT_SALT = 'LegisData_BankGrade_Salt_2026_#AR';
-    private const DEFAULT_CRON_SECRET = 'LegisDataCronSecret2026!HMAC';
 
     /**
      * Emite cabeceras HTTP de grado bancario
@@ -299,11 +298,11 @@ class Security
             return;
         }
 
-        $secret = Config::env('CRON_SECRET', self::DEFAULT_CRON_SECRET);
+        $secret = Config::env('CRON_SECRET', '');
         $providedToken = $_SERVER['HTTP_X_CRON_TOKEN'] ?? $_SERVER['HTTP_X_CRON_SIGNATURE'] ?? '';
 
-        $expectedHmac = hash_hmac('sha256', $scriptName, $secret);
-        $isValid = ($providedToken !== '') && (
+        $expectedHmac = $secret !== '' ? hash_hmac('sha256', $scriptName, $secret) : '';
+        $isValid = ($secret !== '' && strlen($secret) >= 32 && $providedToken !== '') && (
             hash_equals($secret, $providedToken) ||
             hash_equals($expectedHmac, $providedToken)
         );

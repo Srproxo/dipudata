@@ -74,4 +74,28 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     <priority>0.9</priority>
   </url>
 <?php endforeach; ?>
+<?php
+require_once __DIR__ . '/app/bootstrap.php';
+$mvcUrls = [['/match-360', 'weekly', '0.9'], ['/blog', 'daily', '0.8']];
+try {
+    foreach ((new \App\Models\LegisladorModel())->all() as $l) {
+        $mvcUrls[] = [\App\Models\LegisladorModel::urlPerfil($l), 'weekly', '0.9'];
+    }
+    $blogModel = new \App\Models\BlogModel();
+    foreach (array_keys($blogModel->categorias()) as $cat) {
+        $mvcUrls[] = ["/blog/{$cat}", 'weekly', '0.7'];
+    }
+    foreach ($blogModel->all() as $a) {
+        $mvcUrls[] = ["/blog/{$a['categoria_slug']}/{$a['articulo_slug']}", 'monthly', '0.8'];
+    }
+} catch (Throwable) {
+}
+foreach ($mvcUrls as [$ruta, $freq, $prio]): ?>
+  <url>
+    <loc><?= htmlspecialchars($baseUrl . $ruta, ENT_XML1, 'UTF-8') ?></loc>
+    <lastmod><?= $today ?></lastmod>
+    <changefreq><?= $freq ?></changefreq>
+    <priority><?= $prio ?></priority>
+  </url>
+<?php endforeach; ?>
 </urlset>

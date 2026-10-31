@@ -52,7 +52,7 @@ AddDefaultCharset UTF-8
     RewriteBase /
 
     # Bloquear acceso HTTP directo a directorios internos de backend, base de datos, cron y código fuente
-    RewriteRule ^(cron|database|\.agent|\.git|node_modules|src|tests)(/|$) - [F,L,NC]
+    RewriteRule ^(cron|database|app|storage|\.agent|\.git|node_modules|src|tests)(/|$) - [F,L,NC]
 
     # Bloquear acceso directo a librerías internas de /api (excepto api/index.php)
     RewriteRule ^api/(config|Security|Algorithms|db_env|credentials\.local)\.php$ - [F,L,NC]
@@ -63,6 +63,12 @@ AddDefaultCharset UTF-8
 
     # Sitemap XML dinámico
     RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
+
+    # MVC Match Electoral 360 + SEO Hub & Spoke
+    RewriteRule ^api/match360/?$ mvc.php [L,QSA]
+    RewriteRule ^(diputado|senador)/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
+    RewriteRule ^match-360/?$ mvc.php [L,QSA]
+    RewriteRule ^blog(/.*)?$ mvc.php [L,QSA]
 
     # Endpoints de la API RESTful (/api/* -> api/index.php)
     RewriteRule ^api/(.*)$ api/index.php [L,QSA]
