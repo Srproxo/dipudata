@@ -90,7 +90,7 @@ class Database
     public static function bios(): array
     {
         return [
-            'HCDN-1001' => 'Abogado y empresario argentino graduado en la Universidad de Belgrano. Diputado Nacional por La Rioja y Presidente de la H. Cámara de Diputados de la Nación. Impulsor de la desregulación económica, el equilibrio fiscal y la apertura comercial.',
+            'HCDN-1001' => 'Martín Alexis Menem (La Rioja, 19 de abril de 1975) es un abogado, empresario y político argentino. Se desempeña como Presidente de la Honorable Cámara de Diputados de la Nación desde el 10 de diciembre de 2023. Es además Vicepresidente de La Libertad Avanza a nivel nacional (junto a Karina Milei) y presidente de LLA La Rioja. Egresado en Derecho de la Universidad de Belgrano, fundó la empresa de nutrición deportiva Gentech. Hijo del histórico senador Eduardo Menem y sobrino del expresidente Carlos Menem, ejerció como diputado provincial de La Rioja (2021-2023).',
             'HCDN-1002' => 'Político y dirigente deportivo argentino. Presidente del bloque PRO en la Cámara de Diputados de la Nación y ex Ministro de Seguridad de la Provincia de Buenos Aires.',
             'HCDN-1003' => 'Abogado y político argentino por la Provincia de Córdoba. Presidente del bloque de la Unión Cívica Radical en la Cámara de Diputados, con foco en educación universitaria y competitividad productiva.',
             'HCDN-1004' => 'Licenciado en Ciencia Política por la Universidad Nacional de Rosario. Diputado Nacional por Santa Fe y jefe del bloque Unión por la Patria, enfocado en defensa de la industria nacional y el presupuesto público.',

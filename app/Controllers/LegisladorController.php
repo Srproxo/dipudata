@@ -51,6 +51,7 @@ class LegisladorController
             'media_camara_costo'  => $this->model->mediaCamaraCostoProyecto($leg['camara']),
             'auditoria'           => $auditoria,
             'votaciones'          => $this->model->votaciones($leg['id_recinto']),
+            'ficha_wiki'          => $this->model->fichaWikipedia($leg['slug'] ?? '', $leg),
         ];
     }
 

@@ -45,7 +45,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     biografia:
       'Abogado y empresario argentino graduado en la Universidad de Belgrano. Diputado Nacional por la provincia de La Rioja y Presidente de la Honorable Cámara de Diputados de la Nación desde diciembre de 2023. Impulsor de las reformas de desregulación económica y equilibrio fiscal.',
     foto_url:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Mart%C3%ADn_Menem_2023.jpg/400px-Mart%C3%ADn_Menem_2023.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/3/35/MenemArmenia_%28cropped%29.jpg',
     asistencia_historica: 98.4,
     lealtad_partidaria: 99.1,
   },

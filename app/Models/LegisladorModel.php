@@ -633,6 +633,84 @@ class LegisladorModel
     }
 
     /**
+     * Retorna la ficha técnica biográfica y datos estructurados de Wikipedia para el legislador.
+     */
+    public function fichaWikipedia(string $slug, array $leg): array
+    {
+        $cleanSlug = strtolower(trim($slug));
+
+        if ($cleanSlug === 'martin-alexis-menem' || $cleanSlug === 'martin-menem' || (int)($leg['id'] ?? 0) === 1) {
+            return [
+                'nombre_completo'       => 'Martín Alexis Menem',
+                'nacimiento_fecha'      => '19 de abril de 1975',
+                'nacimiento_lugar'      => 'La Rioja, Argentina',
+                'edad'                  => 51,
+                'nacionalidad'          => 'Argentina',
+                'religion'              => 'Católico',
+                'educacion'             => 'Universidad de Belgrano (Abogado)',
+                'ocupacion'             => 'Abogado, empresario y político',
+                'actividad_empresarial' => 'Fundador de Gentech (industria argentina de nutrición deportiva y suplementos dietarios)',
+                'cargo_actual'          => 'Presidente de la Honorable Cámara de Diputados de la Nación Argentina',
+                'cargo_actual_desde'    => '10 de diciembre de 2023',
+                'predecesora'           => 'Cecilia Moreau',
+                'distrito_electoral'    => 'Provincia de La Rioja (Diputado Nacional 2023–2027)',
+                'cargos_previos'        => [
+                    'Diputado de la Provincia de La Rioja por el Dpto. Capital (10/12/2021 – 07/12/2023 · Sucesora: María Liliana Medina)',
+                    'Presidente de La Libertad Avanza distrito La Rioja (Desde el 12/09/2023)',
+                ],
+                'rol_partidario'        => 'Vicepresidente de La Libertad Avanza a nivel nacional (Desde el 20/11/2024 · Presidida por Karina Milei)',
+                'partido_historico'     => 'Unión del Centro Democrático (UCEDE, hasta 2023) · La Libertad Avanza (desde 2021)',
+                'padres'                => 'Eduardo Menem (expresidente provisional del Senado) y Susana Cristina Valente',
+                'hijos'                 => 'Lola Teresa y Juan Martín',
+                'familiares'            => [
+                    'Carlos Saúl Menem (tío, Presidente de la Nación 1989–1999)',
+                    'Eduardo Menem (padre, senador nacional por La Rioja 1983–2005)',
+                    'Eduardo "Lule" Menem (primo segundo, Subsecretario de Gestión Institucional de Presidencia)',
+                    'Sharif Menem (sobrino segundo, Director General de Secretaría Privada de Presidencia HCDN)',
+                    'Adrián Menem (hermano, ex diputado nacional)',
+                    'Fernando Nicolás Menem (hermano)',
+                    'Munir Menem y Amado Menem (tíos)',
+                    'Zulema Menem, Carlos Menem Jr. y Máximo Menem Bolocco (primos hermanos)',
+                ],
+                'foto_url'              => 'https://upload.wikimedia.org/wikipedia/commons/3/35/MenemArmenia_%28cropped%29.jpg',
+                'foto_local'            => '/assets/img/legisladores/martin-menem.jpg',
+                'foto_anio'             => '2024 (Oficial Wikipedia Commons)',
+                'wiki_slug'             => 'Martín_Menem',
+                'wiki_url'              => 'https://es.wikipedia.org/wiki/Mart%C3%ADn_Menem',
+                'wikidata_id'           => 'Q123170442',
+            ];
+        }
+
+        return [
+            'nombre_completo'       => $leg['nombre'] ?? '',
+            'nacimiento_fecha'      => null,
+            'nacimiento_lugar'      => $leg['provincia'] ?? '',
+            'edad'                  => null,
+            'nacionalidad'          => 'Argentina',
+            'religion'              => null,
+            'educacion'             => null,
+            'ocupacion'             => 'Legislador/a Nacional',
+            'actividad_empresarial' => null,
+            'cargo_actual'          => ($leg['camara'] ?? '') === 'Senadores' ? 'Senador/a de la Nación' : 'Diputado/a de la Nación',
+            'cargo_actual_desde'    => 'Diciembre de 2023',
+            'predecesora'           => null,
+            'distrito_electoral'    => $leg['provincia'] ?? '',
+            'cargos_previos'        => [],
+            'rol_partidario'        => $leg['bloque'] ?? '',
+            'partido_historico'     => $leg['bloque'] ?? '',
+            'padres'                => null,
+            'hijos'                 => null,
+            'familiares'            => [],
+            'foto_url'              => $leg['foto_url'] ?? null,
+            'foto_local'            => null,
+            'foto_anio'             => null,
+            'wiki_slug'             => $leg['nombre_wiki'] ?? '',
+            'wiki_url'              => !empty($leg['nombre_wiki']) ? 'https://es.wikipedia.org/wiki/' . rawurlencode((string)$leg['nombre_wiki']) : null,
+            'wikidata_id'           => null,
+        ];
+    }
+
+    /**
      * Calcula el Índice de Defensa Provincial y detecta votos en conflicto por disciplina partidaria (Fase 4).
      *
      * Cruza el historial de votos del legislador con las leyes de impacto regional para su provincia.

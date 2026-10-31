@@ -40,6 +40,8 @@ if (($slugLegislador !== '' && $slugLegislador !== $leg['slug']) || ($camara !==
     exit;
 }
 $cargo = $leg['camara'] === 'Senadores' ? 'Senador/a Nacional' : 'Diputado/a Nacional';
+$partidoColores = partido_colores($leg['bloque'] ?? '');
+$fichaWiki = $data['ficha_wiki'] ?? [];
 $real = $data['resumen']['crecimiento_real_pct'];
 $url = SITE_URL . $data['url'];
 
@@ -272,17 +274,23 @@ require __DIR__ . '/app/Views/layouts/header.php';
     <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
         <div class="flex gap-5 items-start">
             <?php if (!empty($leg['foto_url'])): ?>
-                <img src="<?= e($leg['foto_url']) ?>" alt="Foto de <?= e($leg['nombre']) ?>" width="96" height="96" class="w-24 h-24 rounded-full object-cover border-2 border-slate-200 shrink-0" loading="eager">
+                <img src="<?= e($leg['foto_url']) ?>" alt="Foto de <?= e($leg['nombre']) ?>" width="96" height="96" class="w-24 h-24 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0" loading="eager">
             <?php else: ?>
-                <div class="w-24 h-24 rounded-full bg-slate-100 border-2 border-slate-200 grid place-items-center text-2xl font-bold text-slate-500 shrink-0" aria-hidden="true"><?= e($iniciales) ?></div>
+                <div class="w-24 h-24 rounded-full bg-slate-100 border-2 <?= e($partidoColores['border']) ?> grid place-items-center text-2xl font-bold text-slate-500 shrink-0" aria-hidden="true"><?= e($iniciales) ?></div>
             <?php endif; ?>
             <div class="min-w-0">
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight"><?= e($leg['nombre']) ?></h1>
                 <p class="text-slate-500 mt-1"><?= e($cargo) ?></p>
-                <div class="flex flex-wrap gap-2 mt-3">
-                    <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-700"><?= e($leg['provincia']) ?></span>
-                    <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-700"><?= e($leg['bloque']) ?></span>
-                    <span class="rounded-full px-2 py-0.5 text-xs font-mono bg-slate-50 text-slate-500 border border-slate-200">CUIT <?= e($leg['cuit']) ?></span>
+                <div class="flex flex-wrap items-center gap-2 mt-3">
+                    <span class="rounded-full px-2.5 py-0.5 text-xs font-medium bg-slate-100 text-slate-700"><?= e($leg['provincia']) ?></span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold <?= e($partidoColores['badge']) ?>">
+                        <span class="w-2 h-2 rounded-full <?= e($partidoColores['dot']) ?>"></span>
+                        <?= e($leg['bloque']) ?>
+                    </span>
+                    <span class="rounded-full px-2.5 py-0.5 text-xs font-mono bg-slate-50 text-slate-500 border border-slate-200">CUIT <?= e($leg['cuit']) ?></span>
+                    <?php if (!empty($fichaWiki['cargo_actual']) && $fichaWiki['cargo_actual'] !== $cargo): ?>
+                        <span class="rounded-full px-2.5 py-0.5 text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"><?= e($fichaWiki['cargo_actual']) ?></span>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -290,6 +298,130 @@ require __DIR__ . '/app/Views/layouts/header.php';
         <p class="mt-2 leading-relaxed text-slate-700"><?= e($leg['biografia_extracto'] ?: 'Biografía pendiente de sincronización con Wikipedia.') ?></p>
         <?php if ($leg['nombre_wiki']): ?>
             <a href="https://es.wikipedia.org/wiki/<?= e(rawurlencode($leg['nombre_wiki'])) ?>" rel="noopener nofollow" target="_blank" class="inline-block mt-2 text-sm text-blue-700 hover:underline">Fuente: Wikipedia ↗</a>
+        <?php endif; ?>
+
+        <?php if (!empty($fichaWiki['nombre_completo'])): ?>
+        <!-- Ficha Institucional y Biográfica Estructurada (Wikipedia) -->
+        <div class="mt-6 pt-5 border-t border-slate-100">
+            <div class="flex items-center justify-between gap-2 mb-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    Ficha Institucional & Biográfica (Datos de Wikipedia)
+                </h3>
+                <?php if (!empty($fichaWiki['wiki_url'])): ?>
+                    <a href="<?= e($fichaWiki['wiki_url']) ?>" rel="noopener nofollow" target="_blank" class="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors">
+                        <span>Ver artículo completo</span>
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <!-- Columna 1: Información Personal & Profesional -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block border-b border-slate-200/60 pb-1">
+                        Información Personal & Profesional
+                    </span>
+                    <?php if (!empty($fichaWiki['nacimiento_fecha'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Nacimiento:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['nacimiento_fecha']) ?> (<?= e($fichaWiki['nacimiento_lugar']) ?>)</span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['educacion'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Educación:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['educacion']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['ocupacion'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Ocupación:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['ocupacion']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['actividad_empresarial'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Actividad Privada:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['actividad_empresarial']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['religion'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Religión:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['religion']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['padres'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Padres:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['padres']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['hijos'])): ?>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-slate-500">Hijos:</span>
+                        <span class="font-medium text-slate-900 text-right"><?= e($fichaWiki['hijos']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Columna 2: Cargos Públicos & Roles Partidarios -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block border-b border-slate-200/60 pb-1">
+                        Cargos Institucionales & Partidarios
+                    </span>
+                    <?php if (!empty($fichaWiki['cargo_actual'])): ?>
+                    <div>
+                        <span class="text-[11px] text-slate-500 block">Cargo actual:</span>
+                        <span class="font-bold text-slate-900"><?= e($fichaWiki['cargo_actual']) ?></span>
+                        <?php if (!empty($fichaWiki['cargo_actual_desde'])): ?>
+                            <span class="text-[10px] font-mono text-slate-500 block">Desde: <?= e($fichaWiki['cargo_actual_desde']) ?><?php if (!empty($fichaWiki['predecesora'])): ?> (Predecesora: <?= e($fichaWiki['predecesora']) ?>)<?php endif; ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['rol_partidario'])): ?>
+                    <div class="pt-1.5 border-t border-slate-200/60">
+                        <span class="text-[11px] text-slate-500 block">Rol partidario:</span>
+                        <span class="font-semibold text-purple-900"><?= e($fichaWiki['rol_partidario']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($fichaWiki['cargos_previos'])): ?>
+                    <div class="pt-1.5 border-t border-slate-200/60">
+                        <span class="text-[11px] text-slate-500 block mb-1">Trayectoria institucional previa:</span>
+                        <ul class="space-y-1 text-[11px] text-slate-700">
+                            <?php foreach ($fichaWiki['cargos_previos'] as $cp): ?>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-purple-600 font-bold shrink-0">•</span>
+                                    <span><?= e($cp) ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Familiares destacados vinculados a la política / vida pública -->
+            <?php if (!empty($fichaWiki['familiares'])): ?>
+            <div class="mt-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1.5">
+                    Red Familiar & Vínculos Notables
+                </span>
+                <div class="flex flex-wrap gap-1.5">
+                    <?php foreach ($fichaWiki['familiares'] as $fam): ?>
+                        <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-700 text-[11px]">
+                            <?= e($fam) ?>
+                        </span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
         <?php endif; ?>
     </section>
 
@@ -1389,9 +1521,9 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto items-center">
                         <div class="flex items-center gap-5 md:col-span-2">
                             <?php if (!empty($leg['foto_url'])): ?>
-                                <img src="<?= e($leg['foto_url']) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 border-slate-200 shadow-sm shrink-0">
+                                <img src="<?= e($leg['foto_url']) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0">
                             <?php else: ?>
-                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 border-2 border-slate-200 grid place-items-center text-3xl font-extrabold text-slate-400 shrink-0">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 border-2 <?= e($partidoColores['border']) ?> grid place-items-center text-3xl font-extrabold text-slate-400 shrink-0">
                                     <?= e($iniciales) ?>
                                 </div>
                             <?php endif; ?>
@@ -1402,13 +1534,19 @@ require __DIR__ . '/app/Views/layouts/header.php';
                                 <p class="text-sm sm:text-base text-slate-500 mt-1 font-medium">
                                     <?= e($cargo) ?> · <?= e($leg['provincia']) ?>
                                 </p>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                                <div class="flex flex-wrap items-center gap-2 mt-2">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold <?= e($partidoColores['badge']) ?>">
+                                        <span class="w-1.5 h-1.5 rounded-full <?= e($partidoColores['dot']) ?>"></span>
                                         <?= e($leg['bloque']) ?>
                                     </span>
                                     <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-50 text-slate-500 border border-slate-200">
                                         CUIT <?= e($leg['cuit']) ?>
                                     </span>
+                                    <?php if (!empty($fichaWiki['cargo_actual']) && $fichaWiki['cargo_actual'] !== $cargo): ?>
+                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                                            <?= e($fichaWiki['cargo_actual']) ?>
+                                        </span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
