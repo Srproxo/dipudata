@@ -1,0 +1,92 @@
+{
+  "project": "LegisData (dipudata.com)",
+  "version": "1.0.0",
+  "architecture": "Stage-Gate Multi-Agent Pipeline",
+  "stages": [
+    {
+      "stage": 1,
+      "id": "arquitecto-legisdata",
+      "name": "Arquitecto Principal de Datos & Seguridad",
+      "role": "Diseño del modelo relacional MySQL 8+, normalización 3NF, índices compuestos de alto rendimiento, tablas de seguridad grado bancario y dataset semilla realista del Congreso de la Nación Argentina.",
+      "skills": [
+        "legisdata-architecture",
+        "legisdata-bank-security"
+      ],
+      "deliverables": [
+        ".agent/agents.json",
+        "database/schema.sql",
+        "database/seed.sql"
+      ],
+      "quality_gates": [
+        "Cumplimiento estricto de las 5 tablas troncales (legisladores, indicadores_economicos, patrimonio_ddjj, leyes, votos) con tipos de datos exactos e integridad referencial ON DELETE CASCADE.",
+        "Tablas de seguridad grado bancario operativas (audit_logs inmutable solo INSERT y rate_limits con ventana deslizante por IP SHA-256).",
+        "Dataset semilla equilibrado con al menos 16 legisladores de todos los bloques y provincias, serie IPC/MEP 2019-2025, DDJJ 2020-2025, 15+ leyes en los 5 ejes temáticos y matriz completa de votos."
+      ]
+    },
+    {
+      "stage": 2,
+      "id": "backend-php-worker",
+      "name": "Ingeniero Backend PHP 8.x & Motores Algorítmicos",
+      "role": "Construcción de la API RESTful nativa en PHP 8.x con PDO estricto, implementación de los 3 motores matemáticos (Deflactación Patrimonial USD MEP/IPC, Perfilamiento Temático Ponderado, Match Electoral por Similitud de Coseno) y scripts ETL Cron.",
+      "skills": [
+        "legisdata-architecture",
+        "legisdata-bank-security"
+      ],
+      "deliverables": [
+        "api/config/db.php",
+        "api/security/SecurityMiddleware.php",
+        "api/engine/LegisEngine.php",
+        "api/index.php",
+        "cron/sync_wikipedia.php",
+        "cron/sync_datacp.php",
+        "cron/sync_anticorrupcion.php"
+      ],
+      "quality_gates": [
+        "PDO con ATTR_EMULATE_PREPARES = false y cero concatenación SQL.",
+        "Exactitud matemática verificada en deflactación IPC/USD MEP, exclusión de ausencias en huella ideológica y Similitud del Coseno en [0, 100].",
+        "Protección CLI / HMAC en scripts Cron y rate limiting activo por IP anonimizada."
+      ]
+    },
+    {
+      "stage": 3,
+      "id": "frontend-ux-worker",
+      "name": "Especialista Frontend React + Tailwind CSS (Data-First UI)",
+      "role": "Desarrollo de la SPA Mobile-First con estética inspirada en The Economist y Bloomberg, tipografía tabular para cifras monetarias y porcentuales, y las 4 vistas interactivas (Home, Radiografía del Legislador, Wizard Match Electoral, Resultados Split-Screen).",
+      "skills": [
+        "legisdata-ui-design-system",
+        "legisdata-architecture"
+      ],
+      "deliverables": [
+        "index.php",
+        "assets/app.js",
+        "assets/styles.css"
+      ],
+      "quality_gates": [
+        "Renderizado fluido de las 4 vistas sin recarga de página y soporte de rutas limpias / query params.",
+        "Gráficos interactivos de evolución patrimonial (Nominal vs. IPC Constante vs. USD MEP) y Radar / Barras de los 5 ejes temáticos.",
+        "Contraste WCAG AA+, diseño responsivo Mobile-First y uso estricto de font-variant-numeric: tabular-nums."
+      ]
+    },
+    {
+      "stage": 4,
+      "id": "sec-seo-qa-auditor",
+      "name": "Auditor de Seguridad Grado Bancario, SEO Top-Ranking & DevOps",
+      "role": "Endurecimiento de servidor Apache/Hostinger (.htaccess con HSTS, CSP, bloqueo de rutas sensibles), inyección SSR de metadatos dinámicos, Schema.org JSON-LD (GovernmentOrganization, Person, Dataset), sitemap.xml, robots.txt y despliegue en producción.",
+      "skills": [
+        "legisdata-bank-security",
+        "legisdata-seo-dominance"
+      ],
+      "deliverables": [
+        ".htaccess",
+        "robots.txt",
+        "sitemap.php",
+        "tests/verify_stage4.php"
+      ],
+      "quality_gates": [
+        "Cabeceras HTTP de grado bancario verificadas (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Permissions-Policy).",
+        "Bloqueo HTTP 403/404 comprobado sobre /database/*, /cron/*, .env y archivos .sql.",
+        "Validación de JSON-LD estructurado, OpenGraph dinámico por legislador y prueba integral E2E en producción."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+!.env.example
+api/credentials.local.php
+.DS_Store
+*.log
+*.zip
