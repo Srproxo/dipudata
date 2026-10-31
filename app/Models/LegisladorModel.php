@@ -17,6 +17,11 @@ class LegisladorModel
         $this->pdo = $pdo ?? Database::getConnection();
     }
 
+    public function getPdo(): ?PDO
+    {
+        return $this->pdo;
+    }
+
     /**
      * Retorna todos los ejes temáticos activos desde la base de datos relacional (Fase 2)
      * con fallback automático a la matriz predeterminada de 11 ejes.

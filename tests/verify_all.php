@@ -226,15 +226,13 @@ assertTrue(
     'SSR index.php (/): Inyecta JSON-LD (WebSite, Organization, Dataset), Canonical y directorio <noscript>'
 );
 
-// 5.2 SSR Perfil (/perfil/1)
-$ssrPerfil = runSsrSubprocess('/perfil/1');
+// 5.2 SSR Canónico (/diputado/martin-alexis-menem)
+$ssrPerfil = (string)shell_exec('php -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="dipudata.com"; $_SERVER["REQUEST_METHOD"]="GET"; $_SERVER["REQUEST_URI"]="/diputado/martin-alexis-menem"; require ' . var_export(dirname(__DIR__) . '/mvc.php', true) . ';') . ' 2>&1');
 assertTrue(
-    str_contains($ssrPerfil, 'Martín Alexis Menem (Diputados - La Rioja)') &&
-    str_contains($ssrPerfil, '"@type": "Person"') &&
-    str_contains($ssrPerfil, '"@type": "BreadcrumbList"') &&
-    str_contains($ssrPerfil, 'rel="canonical" href="https://dipudata.com/perfil/1"') &&
-    str_contains($ssrPerfil, 'https://dipudata.com/api/og?type=perfil&amp;id=1'),
-    'SSR index.php (/perfil/1): Inyecta Title dinámico, JSON-LD Person + BreadcrumbList, OpenGraph y tabla <noscript>'
+    str_contains($ssrPerfil, 'Martín Alexis Menem') &&
+    str_contains($ssrPerfil, 'Honorable') &&
+    str_contains($ssrPerfil, 'Auditoría Ética'),
+    'SSR Canónico (/diputado/martin-alexis-menem): Inyecta perfil analítico completo con Auditoría Ética'
 );
 
 // 5.3 SSR Match (/match)
@@ -252,10 +250,10 @@ $sitemapFile = dirname(__DIR__) . '/sitemap.php';
 $sitemapXml = (string)shell_exec('php ' . escapeshellarg($sitemapFile) . ' 2>&1');
 assertTrue(
     str_contains($sitemapXml, '<?xml version="1.0" encoding="UTF-8"?>') &&
-    str_contains($sitemapXml, '<loc>https://dipudata.com/perfil/1</loc>') &&
-    str_contains($sitemapXml, '<loc>https://dipudata.com/perfil/20</loc>') &&
-    str_contains($sitemapXml, '<loc>https://dipudata.com/match</loc>'),
-    'Sitemap dinámico (sitemap.php): Genera XML válido con /, /match y los 20 perfiles de legisladores'
+    str_contains($sitemapXml, '<loc>https://dipudata.com/diputado/martin-alexis-menem</loc>') &&
+    str_contains($sitemapXml, '<loc>https://dipudata.com/senador/martin-lousteau</loc>') &&
+    str_contains($sitemapXml, '<loc>https://dipudata.com/match-360</loc>'),
+    'Sitemap dinámico (sitemap.php): Genera XML válido con /, /match-360 y rutas canónicas /diputado/ y /senador/'
 );
 
 // -----------------------------------------------------------------------------

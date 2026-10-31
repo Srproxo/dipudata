@@ -106,6 +106,12 @@ $costoMensual = (float)($despacho['costo_mensual_ars'] ?? 0.0);
 $costoAnual = (float)($despacho['costo_anual_ars'] ?? 0.0);
 $proyectosAutorAnio = (int)($despacho['proyectos_autor_anio'] ?? 0);
 
+$auditoria = $data['auditoria'] ?? (new \App\Controllers\AuditorEngineController())->obtenerAuditoria((int)$leg['id']);
+$coherencia = $auditoria['coherencia_espejo'] ?? ['indice_coherencia' => 100.0, 'alertas_panquequismo' => []];
+$alianzas = $auditoria['grafo_alianzas'] ?? ['indice_transversalidad' => 0.0, 'bloques_aliados' => [], 'socios_frecuentes' => []];
+$conflictos = $auditoria['conflictos_interes'] ?? ['total_aportes_declarados_ars' => 0.0, 'alertas_conflicto' => [], 'sectores_financiadores' => [], 'nivel_riesgo_etico' => 'Bajo'];
+$promesas = $auditoria['promesas_campana'] ?? ['total_promesas' => 0, 'cumplidas' => 0, 'incumplidas' => 0, 'tasa_cumplimiento_pct' => 100.0, 'promesas' => []];
+
 send_view_headers();
 require __DIR__ . '/app/Views/layouts/header.php';
 ?>
@@ -468,6 +474,186 @@ require __DIR__ . '/app/Views/layouts/header.php';
         <p class="text-[11px] text-slate-400 font-mono">
             * Metodología de auditoría: El ratio de costo por proyecto se calcula dividiendo la masa salarial anualizada del despacho (incluyendo 13 sueldos por SAC) sobre la cantidad de proyectos de ley ingresados formalmente con expediente de autoría principal. Datos provistos y actualizados mediante sincronizador de datos n8n.buceo.co.
         </p>
+    </section>
+
+    <!-- Auditoría Ética & Integridad Parlamentaria (Master PRD) -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                        Master PRD · Auditoría Cívica
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">Integridad, Coherencia y Compromisos Electorales</span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Auditoría Ética & Transparencia Parlamentaria</h2>
+                <p class="text-sm text-slate-500">
+                    Evaluación cruzada de coherencia entre administraciones, alianzas de bancada, financiamiento privado y cumplimiento de promesas.
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold <?= ($conflictos['nivel_riesgo_etico'] ?? 'Bajo') === 'Bajo' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : (($conflictos['nivel_riesgo_etico'] ?? '') === 'Medio' ? 'bg-amber-50 text-amber-800 border border-amber-200' : 'bg-red-50 text-red-800 border border-red-200') ?>">
+                    Riesgo Ético Global: <?= e($conflictos['nivel_riesgo_etico'] ?? 'Bajo') ?>
+                </span>
+            </div>
+        </div>
+
+        <!-- Grid de 2x2 para las 4 dimensiones -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Card 1: Coherencia Histórica / Leyes Espejo (Panquequismo) -->
+            <div class="bg-slate-50 border border-slate-200/90 rounded-xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Coherencia Histórica</span>
+                        <h3 class="text-base font-bold text-slate-800">Leyes Espejo entre Gobiernos</h3>
+                    </div>
+                    <?php if (empty($coherencia['alertas_panquequismo'])): ?>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                        <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        100% Coherente
+                    </span>
+                    <?php else: ?>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800">
+                        <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Panquequismo Detectado
+                    </span>
+                    <?php endif; ?>
+                </div>
+                <p class="text-xs text-slate-600">
+                    Compara el sentido de voto en proyectos equivalentes presentados bajo administraciones de signo político opuesto.
+                </p>
+                <?php if (!empty($coherencia['alertas_panquequismo'])): ?>
+                    <div class="space-y-2">
+                        <?php foreach ($coherencia['alertas_panquequismo'] as $ap): ?>
+                            <div class="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-1">
+                                <div class="font-bold text-rose-900"><?= e($ap['ley_actual']) ?></div>
+                                <div class="text-rose-800 text-[11px]"><?= e($ap['descripcion']) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs text-slate-600 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        No se registraron cambios de postura en las leyes espejo analizadas.
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Card 2: Grafo de Alianzas Interbloque -->
+            <div class="bg-slate-50 border border-slate-200/90 rounded-xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Diálogo & Consenso</span>
+                        <h3 class="text-base font-bold text-slate-800">Grafo de Alianzas</h3>
+                    </div>
+                    <span class="font-mono text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full">
+                        <?= e(number_format((float)($alianzas['indice_transversalidad'] ?? 0), 1)) ?>% Transversal
+                    </span>
+                </div>
+                <p class="text-xs text-slate-600">
+                    Proporción de iniciativas legislativas firmadas conjuntamente con legisladores de bancadas opositoras.
+                </p>
+                <div class="space-y-2">
+                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Principales Socios Legislativos:</div>
+                    <?php if (!empty($alianzas['socios_frecuentes'])): ?>
+                        <div class="space-y-1.5">
+                            <?php foreach ($alianzas['socios_frecuentes'] as $soc): ?>
+                                <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-lg text-xs">
+                                    <div class="font-medium text-slate-900 truncate">
+                                        <?= e($soc['nombre']) ?>
+                                        <span class="text-slate-400 text-[11px]">(<?= e($soc['bloque']) ?>)</span>
+                                    </div>
+                                    <span class="font-mono text-[11px] font-semibold text-indigo-600 shrink-0">
+                                        <?= (int)$soc['proyectos_compartidos'] ?> proyectos
+                                    </span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs text-slate-500">
+                            No registra coautorías interbloque en el período auditado.
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Card 3: Conflictos de Interés (Financiamiento Privado) -->
+            <div class="bg-slate-50 border border-slate-200/90 rounded-xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Fondos Electorales</span>
+                        <h3 class="text-base font-bold text-slate-800">Financiamiento vs. Votos</h3>
+                    </div>
+                    <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-full <?= empty($conflictos['alertas_conflicto']) ? 'bg-slate-200 text-slate-700' : 'bg-amber-100 text-amber-800' ?>">
+                        <?= count($conflictos['alertas_conflicto'] ?? []) ?> <?= count($conflictos['alertas_conflicto'] ?? []) === 1 ? 'Alerta' : 'Alertas' ?>
+                    </span>
+                </div>
+                <div class="text-xs text-slate-600">
+                    Aportes privados declarados: <strong class="text-slate-900"><?= e(ars((float)($conflictos['total_aportes_declarados_ars'] ?? 0))) ?></strong> en campaña.
+                </div>
+                <?php if (!empty($conflictos['alertas_conflicto'])): ?>
+                    <div class="space-y-2">
+                        <?php foreach ($conflictos['alertas_conflicto'] as $ac): ?>
+                            <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs space-y-1">
+                                <div class="font-bold text-amber-900">Sector <?= e($ac['sector']) ?> (<?= e($ac['donante']) ?>)</div>
+                                <div class="text-amber-800 text-[11px] leading-relaxed"><?= e($ac['alerta']) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs text-slate-600 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        No se detectaron cruces de votación afín a aportantes privados directos.
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Card 4: Tracking de Promesas de Campaña -->
+            <div class="bg-slate-50 border border-slate-200/90 rounded-xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Contrato Electoral</span>
+                        <h3 class="text-base font-bold text-slate-800">Promesas de Campaña</h3>
+                    </div>
+                    <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full <?= (float)($promesas['tasa_cumplimiento_pct'] ?? 100) >= 75 ? 'bg-emerald-100 text-emerald-800' : ((float)($promesas['tasa_cumplimiento_pct'] ?? 100) >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800') ?>">
+                        <?= e(number_format((float)($promesas['tasa_cumplimiento_pct'] ?? 100), 1)) ?>% Cumplidas
+                    </span>
+                </div>
+                <p class="text-xs text-slate-600">
+                    Contraste objetivo entre compromisos asumidos en campaña y el voto emitido en las leyes respectivas:
+                </p>
+                <div class="space-y-2">
+                    <?php if (!empty($promesas['promesas'])): ?>
+                        <?php foreach ($promesas['promesas'] as $pr): ?>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs space-y-1">
+                                <div class="flex items-start justify-between gap-2">
+                                    <span class="font-medium text-slate-800">"<?= e($pr['promesa_texto']) ?>"</span>
+                                    <?php if ($pr['estado'] === 'Cumplida'): ?>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 shrink-0">
+                                            <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                            Cumplida
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 shrink-0">
+                                            <svg class="w-3 h-3 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                                            Incumplida
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="text-[11px] text-slate-500 font-mono">Ley: <?= e($pr['ley_vinculada']) ?> (Exp: <?= e($pr['expediente']) ?>)</div>
+                                <div class="text-[11px] text-slate-600 italic"><?= e($pr['descripcion_verificacion']) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs text-slate-500">
+                            No se registran promesas de campaña auditadas en el período.
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <!-- Votaciones -->
