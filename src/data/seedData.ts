@@ -29,6 +29,7 @@ export interface LegisladorRawSeed {
   foto_url: string;
   asistencia_historica: number;
   lealtad_partidaria: number;
+  mandatos: number;
 }
 
 export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
@@ -48,6 +49,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/3/35/MenemArmenia_%28cropped%29.jpg',
     asistencia_historica: 98.4,
     lealtad_partidaria: 99.1,
+    mandatos: 1,
   },
   {
     id: 2,
@@ -65,6 +67,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Jos%C3%A9_Luis_Espert_2021.jpg/400px-Jos%C3%A9_Luis_Espert_2021.jpg',
     asistencia_historica: 95.2,
     lealtad_partidaria: 96.5,
+    mandatos: 2,
   },
   {
     id: 3,
@@ -82,6 +85,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png',
     asistencia_historica: 96.8,
     lealtad_partidaria: 98.7,
+    mandatos: 1,
   },
   {
     id: 4,
@@ -99,6 +103,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png',
     asistencia_historica: 97.1,
     lealtad_partidaria: 98.9,
+    mandatos: 1,
   },
   {
     id: 5,
@@ -116,6 +121,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Cristian_Ritondo_2019.jpg/400px-Cristian_Ritondo_2019.jpg',
     asistencia_historica: 92.6,
     lealtad_partidaria: 94.3,
+    mandatos: 3,
   },
   {
     id: 6,
@@ -133,6 +139,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Silvia_Lospennato_2018.jpg/400px-Silvia_Lospennato_2018.jpg',
     asistencia_historica: 96.5,
     lealtad_partidaria: 91.8,
+    mandatos: 3,
   },
   {
     id: 7,
@@ -150,6 +157,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Mar%C3%ADa_Eugenia_Vidal_en_2019.jpg/400px-Mar%C3%ADa_Eugenia_Vidal_en_2019.jpg',
     asistencia_historica: 91.4,
     lealtad_partidaria: 93.2,
+    mandatos: 1,
   },
   {
     id: 8,
@@ -167,6 +175,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Guadalupe_Tagliaferri.jpg/400px-Guadalupe_Tagliaferri.jpg',
     asistencia_historica: 95.8,
     lealtad_partidaria: 86.4,
+    mandatos: 1,
   },
   {
     id: 9,
@@ -184,6 +193,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Rodrigo_de_Loredo.jpg/400px-Rodrigo_de_Loredo.jpg',
     asistencia_historica: 93.8,
     lealtad_partidaria: 89.5,
+    mandatos: 1,
   },
   {
     id: 10,
@@ -201,6 +211,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Karina_Banfi.jpg/400px-Karina_Banfi.jpg',
     asistencia_historica: 97.4,
     lealtad_partidaria: 91.2,
+    mandatos: 3,
   },
   {
     id: 11,
@@ -218,6 +229,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Mart%C3%ADn_Lousteau_2020.jpg/400px-Mart%C3%ADn_Lousteau_2020.jpg',
     asistencia_historica: 94.1,
     lealtad_partidaria: 82.6,
+    mandatos: 2,
   },
   {
     id: 12,
@@ -235,6 +247,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Germ%C3%A1n_Mart%C3%ADnez_Diputado.jpg/400px-Germ%C3%A1n_Mart%C3%ADnez_Diputado.jpg',
     asistencia_historica: 97.9,
     lealtad_partidaria: 98.4,
+    mandatos: 2,
   },
   {
     id: 13,
@@ -252,6 +265,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Leandro_Santoro_2021.jpg/400px-Leandro_Santoro_2021.jpg',
     asistencia_historica: 94.6,
     lealtad_partidaria: 95.8,
+    mandatos: 1,
   },
   {
     id: 14,
@@ -269,6 +283,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Victoria_Tolosa_Paz_2021.jpg/400px-Victoria_Tolosa_Paz_2021.jpg',
     asistencia_historica: 93.2,
     lealtad_partidaria: 96.9,
+    mandatos: 1,
   },
   {
     id: 15,
@@ -286,6 +301,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Jos%C3%A9_Mayans_2018.jpg/400px-Jos%C3%A9_Mayans_2018.jpg',
     asistencia_historica: 96.2,
     lealtad_partidaria: 97.5,
+    mandatos: 4,
   },
   {
     id: 16,
@@ -303,6 +319,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Juliana_Di_Tullio_2021.jpg/400px-Juliana_Di_Tullio_2021.jpg',
     asistencia_historica: 95.4,
     lealtad_partidaria: 98.8,
+    mandatos: 4,
   },
   {
     id: 17,
@@ -320,6 +337,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Miguel_%C3%81ngel_Pichetto_2019.jpg/400px-Miguel_%C3%81ngel_Pichetto_2019.jpg',
     asistencia_historica: 94.9,
     lealtad_partidaria: 88.2,
+    mandatos: 6,
   },
   {
     id: 18,
@@ -337,6 +355,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Juan_Manuel_L%C3%B3pez_diputado.jpg/400px-Juan_Manuel_L%C3%B3pez_diputado.jpg',
     asistencia_historica: 98.1,
     lealtad_partidaria: 94.7,
+    mandatos: 2,
   },
   {
     id: 19,
@@ -354,6 +373,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Myriam_Bregman_2021.jpg/400px-Myriam_Bregman_2021.jpg',
     asistencia_historica: 93.5,
     lealtad_partidaria: 99.4,
+    mandatos: 2,
   },
   {
     id: 20,
@@ -371,6 +391,7 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png',
     asistencia_historica: 94.3,
     lealtad_partidaria: 87.9,
+    mandatos: 1,
   },
 ];
 

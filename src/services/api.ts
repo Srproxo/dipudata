@@ -332,6 +332,9 @@ function normalizarLegisladorDesdeApi(item: Record<string, unknown>): Legislador
     lealtad_partidaria: Number(
       item.lealtad_partidaria ?? item.lealtad_pct ?? fallbackLocal?.lealtad_partidaria ?? 90
     ),
+    mandatos: Number(
+      item.mandatos ?? fallbackLocal?.mandatos ?? 1
+    ),
     patrimonio_usd_actual: Number(
       item.patrimonio_usd_actual ?? fallbackLocal?.patrimonio_usd_actual ?? 0
     ),

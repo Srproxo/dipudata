@@ -86,6 +86,7 @@ export interface LegisladorResumen {
   foto_url: string;
   asistencia_historica: number;
   lealtad_partidaria: number;
+  mandatos: number;
   patrimonio_usd_actual: number;
   crecimiento_real_usd_pct: number;
   vector_ideologico: VectorIdeologico;

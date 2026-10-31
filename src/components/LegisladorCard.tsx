@@ -69,7 +69,7 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
             </span>
           </div>
 
-          {/* Badges: Provincia y Bloque Político */}
+          {/* Badges: Provincia, Bloque Político y Mandatos */}
           <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
             <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
               <MapPin className="w-3 h-3 text-slate-500" />
@@ -84,6 +84,13 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
               )}`}
             >
               {legislador.bloque_actual}
+            </span>
+
+            <span
+              className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200/80"
+              title={`${legislador.mandatos} ${legislador.mandatos === 1 ? 'mandato parlamentario' : 'mandatos parlamentarios'}`}
+            >
+              <span>🏛️ {legislador.mandatos} {legislador.mandatos === 1 ? 'mandato' : 'mandatos'}</span>
             </span>
           </div>
         </div>
@@ -174,12 +181,21 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
         </div>
       </div>
 
-      {/* Footer de KPIs Tabulares (Asistencia, Lealtad y DDJJ en USD MEP) */}
+      {/* Footer de KPIs Tabulares (Presentismo, Lealtad y Capital USD MEP) */}
       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100 text-xs">
-        <div className="bg-slate-50 rounded-lg px-2.5 py-1.5 border border-slate-100">
-          <div className="text-[10px] text-slate-500 flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3 text-slate-400" />
-            <span>Asistencia</span>
+        <div className={`rounded-lg px-2.5 py-1.5 border transition-all ${
+          legislador.asistencia_historica >= 96
+            ? 'bg-emerald-50/80 border-emerald-200'
+            : 'bg-slate-50 border-slate-100'
+        }`}>
+          <div className="text-[10px] text-slate-500 flex items-center justify-between">
+            <span className="flex items-center gap-1">
+              <CheckCircle2 className={`w-3 h-3 ${legislador.asistencia_historica >= 96 ? 'text-emerald-600' : 'text-slate-400'}`} />
+              <span>Presentismo</span>
+            </span>
+            {legislador.asistencia_historica >= 96 && (
+              <span className="text-[10px]" title="Sobresaliente Presentismo">🏆</span>
+            )}
           </div>
           <div className="font-mono tabular-nums font-bold text-slate-900 mt-0.5">
             {formatPct(legislador.asistencia_historica)}
@@ -196,8 +212,17 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
           </div>
         </div>
 
-        <div className="bg-slate-50 rounded-lg px-2.5 py-1.5 border border-slate-100">
-          <div className="text-[10px] text-slate-500 truncate">DDJJ USD MEP</div>
+        <div className={`rounded-lg px-2.5 py-1.5 border transition-all ${
+          (legislador.patrimonio_usd_actual || 0) >= 400000
+            ? 'bg-amber-50/80 border-amber-200'
+            : 'bg-slate-50 border-slate-100'
+        }`}>
+          <div className="text-[10px] text-slate-500 flex items-center justify-between truncate">
+            <span>Capital USD</span>
+            {(legislador.patrimonio_usd_actual || 0) >= 400000 && (
+              <span className="text-[10px]" title="Mayor Capital Declarado">💰</span>
+            )}
+          </div>
           <div className="flex items-center justify-between gap-1 mt-0.5">
             <span className="font-mono tabular-nums font-bold text-slate-900 text-[11px] truncate">
               {formatUSD(legislador.patrimonio_usd_actual)}

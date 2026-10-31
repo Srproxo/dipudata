@@ -280,6 +280,7 @@ class LegisladorModel
                     'foto_url'           => (string)($mLeg['foto_url'] ?? ''),
                     'indice_lealtad'     => (float)($mLeg['lealtad_partidaria'] ?? $mLeg['lealtad_pct'] ?? 85.0),
                     'asistencia'         => (float)($mLeg['asistencia_historica'] ?? $mLeg['asistencia_pct'] ?? 90.0),
+                    'mandatos'           => (int)($mLeg['mandatos'] ?? 1),
                 ];
                 $existing[$mSlug] = true;
                 $existing[$mCuit] = true;
@@ -306,6 +307,7 @@ class LegisladorModel
                     'foto_url'           => (string)($mLeg['foto_url'] ?? ''),
                     'indice_lealtad'     => (float)($mLeg['lealtad_partidaria'] ?? $mLeg['lealtad_pct'] ?? 85.0),
                     'asistencia'         => (float)($mLeg['asistencia_historica'] ?? $mLeg['asistencia_pct'] ?? 90.0),
+                    'mandatos'           => (int)($mLeg['mandatos'] ?? 1),
                 ];
             }
             return $fullList;
@@ -450,6 +452,7 @@ class LegisladorModel
                     'foto_url'           => (string)($mLeg['foto_url'] ?? ''),
                     'indice_lealtad'     => (float)($mLeg['lealtad_partidaria'] ?? $mLeg['lealtad_pct'] ?? 85.0),
                     'asistencia'         => (float)($mLeg['asistencia_historica'] ?? $mLeg['asistencia_pct'] ?? 90.0),
+                    'mandatos'           => (int)($mLeg['mandatos'] ?? 1),
                 ];
             }
         }

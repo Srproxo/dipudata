@@ -31,13 +31,19 @@ import {
 
 type FiltroCamara = 'Todos' | 'Diputados' | 'Senadores';
 type FiltroEstado = 'Todos' | 'Activo' | 'Mandato Cumplido';
+type FiltroPresentismo = 'Todos' | 'excelente' | 'alta' | 'baja';
+type FiltroCapital = 'Todos' | 'alto' | 'medio' | 'inicial';
+type FiltroMandatos = 'Todos' | '1' | '2' | '3+';
 type OrdenCriterio =
   | 'nombre-asc'
   | 'nombre-desc'
   | 'asistencia-desc'
   | 'asistencia-asc'
-  | 'lealtad-desc'
   | 'patrimonio-desc'
+  | 'patrimonio-asc'
+  | 'mandatos-desc'
+  | 'mandatos-asc'
+  | 'lealtad-desc'
   | 'crecimiento-desc';
 
 const ESPACIOS_POLITICOS: Record<string, string[]> = {
@@ -75,6 +81,11 @@ export const HomeView: React.FC = () => {
   const [filtroEstado, setFiltroEstado] = useState<FiltroEstado>('Todos');
   const [filtroProvincia, setFiltroProvincia] = useState<string>('Todas');
   const [filtroBloque, setFiltroBloque] = useState<string>('Todos');
+
+  // Filtros Potentes: Presentismo, Capital y Mandatos
+  const [filtroPresentismo, setFiltroPresentismo] = useState<FiltroPresentismo>('Todos');
+  const [filtroCapital, setFiltroCapital] = useState<FiltroCapital>('Todos');
+  const [filtroMandatos, setFiltroMandatos] = useState<FiltroMandatos>('Todos');
 
   // Filtros Avanzados (Votaciones, Leyes, Partidos y Ejes)
   const [filtroEspacio, setFiltroEspacio] = useState<string>('Todos');
@@ -200,7 +211,42 @@ export const HomeView: React.FC = () => {
         if (filtroPosturaEje === 'Alta' && score < 75) return false;
       }
 
-      // 8. Búsqueda por texto
+      // 8. Filtro de Presentismo / Asistencia
+      if (filtroPresentismo === 'excelente' && leg.asistencia_historica < 96) {
+        return false;
+      }
+      if (filtroPresentismo === 'alta' && (leg.asistencia_historica < 93 || leg.asistencia_historica >= 96)) {
+        return false;
+      }
+      if (filtroPresentismo === 'baja' && leg.asistencia_historica >= 93) {
+        return false;
+      }
+
+      // 9. Filtro de Capital / Patrimonio (USD MEP)
+      const capUsd = leg.patrimonio_usd_actual || 0;
+      if (filtroCapital === 'alto' && capUsd < 400000) {
+        return false;
+      }
+      if (filtroCapital === 'medio' && (capUsd < 100000 || capUsd >= 400000)) {
+        return false;
+      }
+      if (filtroCapital === 'inicial' && capUsd >= 100000) {
+        return false;
+      }
+
+      // 10. Filtro de Mandatos Parlamentarios
+      const cantMandatos = leg.mandatos || 1;
+      if (filtroMandatos === '1' && cantMandatos !== 1) {
+        return false;
+      }
+      if (filtroMandatos === '2' && cantMandatos !== 2) {
+        return false;
+      }
+      if (filtroMandatos === '3+' && cantMandatos < 3) {
+        return false;
+      }
+
+      // 11. Búsqueda por texto
       if (q) {
         const matchText =
           leg.nombre_completo.toLowerCase().includes(q) ||
@@ -228,6 +274,12 @@ export const HomeView: React.FC = () => {
           return b.lealtad_partidaria - a.lealtad_partidaria;
         case 'patrimonio-desc':
           return (b.patrimonio_usd_actual || 0) - (a.patrimonio_usd_actual || 0);
+        case 'patrimonio-asc':
+          return (a.patrimonio_usd_actual || 0) - (b.patrimonio_usd_actual || 0);
+        case 'mandatos-desc':
+          return (b.mandatos || 1) - (a.mandatos || 1);
+        case 'mandatos-asc':
+          return (a.mandatos || 1) - (b.mandatos || 1);
         case 'crecimiento-desc':
           return (b.crecimiento_real_usd_pct || 0) - (a.crecimiento_real_usd_pct || 0);
         default:
@@ -241,6 +293,9 @@ export const HomeView: React.FC = () => {
     filtroEstado,
     filtroProvincia,
     filtroBloque,
+    filtroPresentismo,
+    filtroCapital,
+    filtroMandatos,
     filtroEspacio,
     filtroLey,
     filtroSentidoVoto,
@@ -283,6 +338,9 @@ export const HomeView: React.FC = () => {
     filtroEstado !== 'Todos' ||
     filtroProvincia !== 'Todas' ||
     filtroBloque !== 'Todos' ||
+    filtroPresentismo !== 'Todos' ||
+    filtroCapital !== 'Todos' ||
+    filtroMandatos !== 'Todos' ||
     cantidadFiltrosAvanzadosActivos > 0 ||
     orden !== 'nombre-asc';
 
@@ -292,6 +350,9 @@ export const HomeView: React.FC = () => {
     setFiltroEstado('Todos');
     setFiltroProvincia('Todas');
     setFiltroBloque('Todos');
+    setFiltroPresentismo('Todos');
+    setFiltroCapital('Todos');
+    setFiltroMandatos('Todos');
     setFiltroEspacio('Todos');
     setFiltroLey('Todas');
     setFiltroSentidoVoto('Todos');
@@ -405,6 +466,89 @@ export const HomeView: React.FC = () => {
                 ))}
               </div>
             )}
+            {/* FILTROS RÁPIDOS DESTACADOS: Mayor Presentismo, Mayor Capital, Más Mandatos */}
+            <div className="flex flex-wrap items-center gap-2 mt-3.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-0.5 flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                Filtros destacados:
+              </span>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (filtroPresentismo === 'excelente') {
+                    setFiltroPresentismo('Todos');
+                  } else {
+                    setFiltroPresentismo('excelente');
+                    setOrden('asistencia-desc');
+                  }
+                }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-sm ${
+                  filtroPresentismo === 'excelente'
+                    ? 'bg-emerald-700 text-white ring-2 ring-emerald-500/30'
+                    : 'bg-white hover:bg-emerald-50 text-slate-700 border border-slate-200 hover:border-emerald-300'
+                }`}
+              >
+                <span>🏆 Mayor Presentismo (≥96%)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (filtroCapital === 'alto') {
+                    setFiltroCapital('Todos');
+                  } else {
+                    setFiltroCapital('alto');
+                    setOrden('patrimonio-desc');
+                  }
+                }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-sm ${
+                  filtroCapital === 'alto'
+                    ? 'bg-amber-600 text-white ring-2 ring-amber-500/30'
+                    : 'bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 hover:border-amber-300'
+                }`}
+              >
+                <span>💰 Mayor Capital (&gt;US$ 400k)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (filtroMandatos === '3+') {
+                    setFiltroMandatos('Todos');
+                  } else {
+                    setFiltroMandatos('3+');
+                    setOrden('mandatos-desc');
+                  }
+                }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-sm ${
+                  filtroMandatos === '3+'
+                    ? 'bg-indigo-700 text-white ring-2 ring-indigo-500/30'
+                    : 'bg-white hover:bg-indigo-50 text-slate-700 border border-slate-200 hover:border-indigo-300'
+                }`}
+              >
+                <span>🏛️ Más Mandatos (+3 Trayectoria)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (filtroMandatos === '1') {
+                    setFiltroMandatos('Todos');
+                  } else {
+                    setFiltroMandatos('1');
+                    setOrden('mandatos-asc');
+                  }
+                }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-sm ${
+                  filtroMandatos === '1'
+                    ? 'bg-slate-900 text-white ring-2 ring-slate-700/30'
+                    : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+                }`}
+              >
+                <span>🆕 1er Mandato (Nuevos)</span>
+              </button>
+            </div>
           </div>
 
           {/* BARRA DE FILTROS PRINCIPALES */}
@@ -463,10 +607,40 @@ export const HomeView: React.FC = () => {
                   );
                 })}
               </div>
+
+              {/* Toggles de Mandatos Parlamentarios */}
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                  <span>🏛️</span>
+                  Mandatos:
+                </span>
+                {[
+                  { id: 'Todos', label: 'Todos' },
+                  { id: '1', label: '1er Mandato' },
+                  { id: '2', label: '2 Mandatos' },
+                  { id: '3+', label: '+3 Mandatos' },
+                ].map((m) => {
+                  const active = filtroMandatos === m.id;
+                  return (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => setFiltroMandatos(m.id as FiltroMandatos)}
+                      className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                        active
+                          ? 'bg-indigo-700 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                      }`}
+                    >
+                      {m.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Selectores de Provincia, Bloque y Ordenamiento */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+            {/* Selectores de Provincia, Bloque, Presentismo, Capital y Ordenamiento */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 pt-2">
               {/* Selector de Provincia */}
               <div>
                 <label
@@ -479,7 +653,7 @@ export const HomeView: React.FC = () => {
                   id="select-provincia"
                   value={filtroProvincia}
                   onChange={(e) => setFiltroProvincia(e.target.value)}
-                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
                 >
                   {provinciasDisponibles.map((prov) => (
                     <option key={prov} value={prov}>
@@ -495,19 +669,61 @@ export const HomeView: React.FC = () => {
                   htmlFor="select-bloque"
                   className="block text-xs font-semibold text-slate-500 uppercase mb-1"
                 >
-                  Bancada / Bloque:
+                  Bancada:
                 </label>
                 <select
                   id="select-bloque"
                   value={filtroBloque}
                   onChange={(e) => setFiltroBloque(e.target.value)}
-                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
                 >
                   {bloquesDisponibles.map((bloq) => (
                     <option key={bloq} value={bloq}>
                       {bloq}
                     </option>
                   ))}
+                </select>
+              </div>
+
+              {/* Selector de Presentismo */}
+              <div>
+                <label
+                  htmlFor="select-presentismo"
+                  className="block text-xs font-semibold text-slate-500 uppercase mb-1"
+                >
+                  Presentismo:
+                </label>
+                <select
+                  id="select-presentismo"
+                  value={filtroPresentismo}
+                  onChange={(e) => setFiltroPresentismo(e.target.value as FiltroPresentismo)}
+                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
+                >
+                  <option value="Todos">Cualquier asistencia</option>
+                  <option value="excelente">🏆 Sobresaliente (≥ 96%)</option>
+                  <option value="alta">Alta (93% - 96%)</option>
+                  <option value="baja">Baja (&lt; 93%)</option>
+                </select>
+              </div>
+
+              {/* Selector de Capital / Patrimonio */}
+              <div>
+                <label
+                  htmlFor="select-capital"
+                  className="block text-xs font-semibold text-slate-500 uppercase mb-1"
+                >
+                  Capital DDJJ:
+                </label>
+                <select
+                  id="select-capital"
+                  value={filtroCapital}
+                  onChange={(e) => setFiltroCapital(e.target.value as FiltroCapital)}
+                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
+                >
+                  <option value="Todos">Cualquier capital</option>
+                  <option value="alto">💰 Mayor Capital (&gt;US$ 400k)</option>
+                  <option value="medio">Medio (US$ 100k - 400k)</option>
+                  <option value="inicial">Inicial (&lt; US$ 100k)</option>
                 </select>
               </div>
 
@@ -523,15 +739,18 @@ export const HomeView: React.FC = () => {
                   id="select-orden"
                   value={orden}
                   onChange={(e) => setOrden(e.target.value as OrdenCriterio)}
-                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-300 px-3 py-2 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"
                 >
+                  <option value="asistencia-desc">🏆 Mayor Presentismo (%)</option>
+                  <option value="asistencia-asc">⚠️ Menor Presentismo (%)</option>
+                  <option value="patrimonio-desc">💰 Mayor Capital (USD MEP)</option>
+                  <option value="patrimonio-asc">📉 Menor Capital (USD MEP)</option>
+                  <option value="mandatos-desc">🏛️ Más Mandatos (Trayectoria)</option>
+                  <option value="mandatos-asc">🆕 Menos Mandatos (Nuevos)</option>
+                  <option value="crecimiento-desc">📈 Mayor Crecimiento Real (%)</option>
+                  <option value="lealtad-desc">Mayor Lealtad de Bloque (%)</option>
                   <option value="nombre-asc">Nombre (A → Z)</option>
                   <option value="nombre-desc">Nombre (Z → A)</option>
-                  <option value="asistencia-desc">Mayor Asistencia (%)</option>
-                  <option value="asistencia-asc">Menor Asistencia (%)</option>
-                  <option value="lealtad-desc">Mayor Lealtad de Bloque (%)</option>
-                  <option value="patrimonio-desc">Mayor Patrimonio (USD MEP)</option>
-                  <option value="crecimiento-desc">Mayor Crecimiento Real (%)</option>
                 </select>
               </div>
 
@@ -819,6 +1038,66 @@ export const HomeView: React.FC = () => {
                   </span>
                 )}
 
+                {filtroPresentismo !== 'Todos' && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
+                    <span>
+                      Presentismo:{' '}
+                      {filtroPresentismo === 'excelente'
+                        ? 'Sobresaliente (≥96%)'
+                        : filtroPresentismo === 'alta'
+                        ? 'Alta (93%-96%)'
+                        : 'Baja (<93%)'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setFiltroPresentismo('Todos')}
+                      className="hover:text-emerald-950"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+
+                {filtroCapital !== 'Todos' && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                    <span>
+                      Capital:{' '}
+                      {filtroCapital === 'alto'
+                        ? 'Mayor Capital (> US$ 400k)'
+                        : filtroCapital === 'medio'
+                        ? 'Medio (US$ 100k-400k)'
+                        : 'Inicial (< US$ 100k)'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setFiltroCapital('Todos')}
+                      className="hover:text-amber-950"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+
+                {filtroMandatos !== 'Todos' && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 border border-indigo-200">
+                    <span>
+                      Mandatos:{' '}
+                      {filtroMandatos === '1'
+                        ? '1er Mandato (Nuevos)'
+                        : filtroMandatos === '2'
+                        ? '2 Mandatos'
+                        : '+3 Mandatos (Veteranos)'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setFiltroMandatos('Todos')}
+                      className="hover:text-indigo-950"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+
                 {busqueda && (
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">
                     <span>Texto: &ldquo;{busqueda}&rdquo;</span>
@@ -1019,19 +1298,22 @@ export const HomeView: React.FC = () => {
                     <th scope="col" className="px-3 py-3">
                       Provincia
                     </th>
+                    <th scope="col" className="px-3 py-3 text-center">
+                      Mandatos
+                    </th>
                     {filtroLey !== 'Todas' && (
                       <th scope="col" className="px-3 py-3 text-center">
                         Voto en Ley
                       </th>
                     )}
                     <th scope="col" className="px-3 py-3 text-right">
-                      Asistencia
+                      Presentismo
                     </th>
                     <th scope="col" className="px-3 py-3 text-right">
                       Lealtad
                     </th>
                     <th scope="col" className="px-3 py-3 text-right">
-                      DDJJ USD
+                      Capital USD
                     </th>
                     <th scope="col" className="px-4 py-3 text-center">
                       Ficha
@@ -1093,6 +1375,20 @@ export const HomeView: React.FC = () => {
                             ? 'CABA'
                             : leg.provincia}
                         </td>
+                        <td className="px-3 py-3 whitespace-nowrap text-center text-xs">
+                          <span
+                            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-bold text-[11px] ${
+                              (leg.mandatos || 1) >= 3
+                                ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                                : (leg.mandatos || 1) === 2
+                                ? 'bg-indigo-100 text-indigo-800 border border-indigo-200'
+                                : 'bg-slate-100 text-slate-700 border border-slate-200'
+                            }`}
+                            title={`${leg.mandatos || 1} ${leg.mandatos === 1 ? 'mandato' : 'mandatos'}`}
+                          >
+                            🏛️ {leg.mandatos || 1} {(leg.mandatos || 1) === 1 ? 'mandato' : 'mandatos'}
+                          </span>
+                        </td>
                         {filtroLey !== 'Todas' && (
                           <td className="px-3 py-3 whitespace-nowrap text-center">
                             {votoLey ? (
@@ -1114,14 +1410,18 @@ export const HomeView: React.FC = () => {
                             )}
                           </td>
                         )}
-                        <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-slate-800 text-xs">
-                          {formatPct(leg.asistencia_historica)}
+                        <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-xs">
+                          <span className={leg.asistencia_historica >= 96 ? 'text-emerald-700' : 'text-slate-800'}>
+                            {leg.asistencia_historica >= 96 && <span className="mr-1">🏆</span>}
+                            {formatPct(leg.asistencia_historica)}
+                          </span>
                         </td>
                         <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-slate-800 text-xs">
                           {formatPct(leg.lealtad_partidaria)}
                         </td>
                         <td className="px-3 py-3 whitespace-nowrap text-right font-mono text-xs">
-                          <span className="font-bold text-slate-900">
+                          <span className={`font-bold ${(leg.patrimonio_usd_actual || 0) >= 400000 ? 'text-amber-700' : 'text-slate-900'}`}>
+                            {(leg.patrimonio_usd_actual || 0) >= 400000 && <span className="mr-1">💰</span>}
                             {formatUSD(leg.patrimonio_usd_actual)}
                           </span>
                         </td>
