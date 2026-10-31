@@ -17,17 +17,30 @@ class BlogModel
 
     public function all(): array
     {
+        $defaults = Database::getDefaultBlogArticles();
         if ($this->pdo) {
             try {
                 $stmt = $this->pdo->query("SELECT * FROM blog_articulos WHERE publicado = 1 ORDER BY fecha_publicacion DESC");
                 $rows = $stmt ? $stmt->fetchAll() : [];
                 if (!empty($rows)) {
+                    if (count($rows) >= count($defaults)) {
+                        return $rows;
+                    }
+                    $indexed = [];
+                    foreach ($rows as $r) {
+                        $indexed[$r['articulo_slug']] = $r;
+                    }
+                    foreach ($defaults as $d) {
+                        if (!isset($indexed[$d['articulo_slug']])) {
+                            $rows[] = $d;
+                        }
+                    }
                     return $rows;
                 }
             } catch (\Throwable) {
             }
         }
-        return Database::getDefaultBlogArticles();
+        return $defaults;
     }
 
     public function byCategoria(string $categoria): array
