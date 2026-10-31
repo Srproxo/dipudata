@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { fetchLegisladores } from '../services/api';
 import { LegisladorResumen } from '../types/legisdata';
-import { LEYES_SEED } from '../data/seedData';
+import { LEYES_SEED, TODAS_PROVINCIAS_ARGENTINA } from '../data/seedData';
 import { LegisladorCard } from '../components/LegisladorCard';
 import { SelectorMapaProvincias } from '../components/SelectorMapaProvincias';
 import { AvatarLegislador } from '../components/AvatarLegislador';
@@ -128,8 +128,11 @@ export const HomeView: React.FC = () => {
   }, []);
 
   const provinciasDisponibles = useMemo(() => {
-    const setProv = new Set(legisladores.map((l) => l.provincia));
-    return ['Todas', ...Array.from(setProv).sort()];
+    const setProv = new Set([
+      ...TODAS_PROVINCIAS_ARGENTINA,
+      ...legisladores.map((l) => l.provincia),
+    ]);
+    return ['Todas', ...Array.from(setProv).sort((a, b) => a.localeCompare(b, 'es'))];
   }, [legisladores]);
 
   const bloquesDisponibles = useMemo(() => {
