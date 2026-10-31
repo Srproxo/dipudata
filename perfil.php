@@ -42,6 +42,10 @@ if (($slugLegislador !== '' && $slugLegislador !== $leg['slug']) || ($camara !==
 $cargo = $leg['camara'] === 'Senadores' ? 'Senador/a Nacional' : 'Diputado/a Nacional';
 $partidoColores = partido_colores($leg['bloque'] ?? '');
 $fichaWiki = $data['ficha_wiki'] ?? [];
+$fotoUrl = !empty($leg['foto_url']) ? $leg['foto_url'] : ($fichaWiki['foto_url'] ?? null);
+if (empty($leg['foto_url']) && !empty($fotoUrl)) {
+    $leg['foto_url'] = $fotoUrl;
+}
 $real = $data['resumen']['crecimiento_real_pct'];
 $url = SITE_URL . $data['url'];
 
@@ -273,8 +277,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
     <!-- 1. Bio -->
     <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
         <div class="flex gap-5 items-start">
-            <?php if (!empty($leg['foto_url'])): ?>
-                <img src="<?= e($leg['foto_url']) ?>" alt="Foto de <?= e($leg['nombre']) ?>" width="96" height="96" class="w-24 h-24 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0" loading="eager">
+            <?php if (!empty($fotoUrl)): ?>
+                <img src="<?= e($fotoUrl) ?>" alt="Foto de <?= e($leg['nombre']) ?>" width="96" height="96" class="w-24 h-24 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0" loading="eager">
             <?php else: ?>
                 <div class="w-24 h-24 rounded-full bg-slate-100 border-2 <?= e($partidoColores['border']) ?> grid place-items-center text-2xl font-bold text-slate-500 shrink-0" aria-hidden="true"><?= e($iniciales) ?></div>
             <?php endif; ?>
@@ -1520,8 +1524,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto items-center">
                         <div class="flex items-center gap-5 md:col-span-2">
-                            <?php if (!empty($leg['foto_url'])): ?>
-                                <img src="<?= e($leg['foto_url']) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0">
+                            <?php if (!empty($fotoUrl)): ?>
+                                <img src="<?= e($fotoUrl) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 <?= e($partidoColores['border']) ?> shadow-sm shrink-0">
                             <?php else: ?>
                                 <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 border-2 <?= e($partidoColores['border']) ?> grid place-items-center text-3xl font-extrabold text-slate-400 shrink-0">
                                     <?= e($iniciales) ?>
