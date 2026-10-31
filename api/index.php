@@ -278,7 +278,7 @@ if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {
     $bloque    = Security::sanitizeString($_GET['bloque'] ?? '', 80);
     $estado    = Security::validateEnum($_GET['estado'] ?? '', ['Activo', 'Inactivo', 'Mandato Cumplido', 'Candidato'], '');
     $page      = Security::validateInt($_GET['page'] ?? 1, 1, 1000, 1);
-    $limit     = Security::validateInt($_GET['limit'] ?? 20, 1, 50, 20);
+    $limit     = Security::validateInt($_GET['limit'] ?? 250, 1, 1000, 250);
 
     $todos = fetchAllLegisladores($pdo);
 

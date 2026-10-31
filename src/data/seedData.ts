@@ -1293,6 +1293,24 @@ export const LEGISLADORES_RAW_SEED: LegisladorRawSeed[] = [
     lealtad_partidaria: 89.2,
     mandatos: 1,
   },
+  {
+    id: 71,
+    id_congreso: 'HCDN-1047',
+    cuit: '20-21852964-1',
+    wiki_slug: 'Luis_Picat',
+    nombre_completo: 'Luis Albino Picat',
+    camara: 'Diputados',
+    provincia: 'Córdoba',
+    bloque_actual: 'UCR',
+    estado: 'Activo',
+    biografia:
+      'Ingeniero agrónomo, productor porcino y dirigente agroindustrial cordobés, ex Intendente de Jesús María (2019-2023) y ex Presidente de la Sociedad Rural de Jesús María. Diputado Nacional por la Provincia de Córdoba integrante del bloque radical con fuerte defensa de la producción agropecuaria.',
+    foto_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png',
+    asistencia_historica: 96.6,
+    lealtad_partidaria: 91.2,
+    mandatos: 1,
+  },
 ];
 
 export const PATRIMONIO_NOMINAL_SEED: Record<number, Record<number, number>> = {
@@ -1366,6 +1384,7 @@ export const PATRIMONIO_NOMINAL_SEED: Record<number, Record<number, number>> = {
   68: { 2020: 31500000, 2021: 47500000, 2022: 89000000, 2023: 292000000, 2024: 362000000, 2025: 395000000 },
   69: { 2020: 21000000, 2021: 32000000, 2022: 60000000, 2023: 198000000, 2024: 245000000, 2025: 268000000 },
   70: { 2020: 27000000, 2021: 41000000, 2022: 77000000, 2023: 252000000, 2024: 312000000, 2025: 342000000 },
+  71: { 2020: 38500000, 2021: 58000000, 2022: 109000000, 2023: 360000000, 2024: 448000000, 2025: 490000000 },
 };
 
 export const LEYES_SEED: LeyParlamentaria[] = [
@@ -1595,6 +1614,7 @@ const VOTOS_MATRIX: Record<number, SentidoVoto[]> = {
   68: ['Afirmativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
   69: ['Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
   70: ['Afirmativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
+  71: ['Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Negativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Negativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Negativo', 'Afirmativo', 'Negativo'],
 };
 
 export function obtenerVotosSeedPorLegislador(legisladorId: number): Record<string, SentidoVoto> {

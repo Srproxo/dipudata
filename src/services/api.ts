@@ -358,7 +358,7 @@ function normalizarLegisladorDesdeApi(item: Record<string, unknown>): Legislador
 
 export async function fetchLegisladores(): Promise<LegisladorResumen[]> {
   try {
-    const res = await fetch('/api/legisladores', {
+    const res = await fetch('/api/legisladores?limit=300', {
       headers: { Accept: 'application/json' },
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

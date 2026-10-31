@@ -264,6 +264,7 @@ class Config
             [68, 'HSN-2023', '20-11258963-0', 'Pablo_Daniel_Blanco', 'Pablo Daniel Blanco', 'Senadores', 'Tierra del Fuego', 'UCR', 'Activo', 'Contador público y dirigente radical fueguino con extensa trayectoria parlamentaria provincial. Senador Nacional por Tierra del Fuego, férreo defensor de la Ley 19.640 de promoción industrial austral.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.50, 89.80],
             [69, 'HCDN-1046', '20-29852147-8', 'Mariano_Campero', 'Mariano Campero', 'Diputados', 'Tucumán', 'UCR', 'Activo', 'Abogado tucumano egresado de la UNT, ex dos veces Intendente municipal de Yerba Buena. Diputado Nacional por la Provincia de Tucumán integrante de la bancada radical con posiciones pro reformas nacionales.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.40, 88.90],
             [70, 'HSN-2024', '27-17852964-3', 'Beatriz_Avila', 'Beatriz Luisa Ávila', 'Senadores', 'Tucumán', 'Por la Justicia Social', 'Activo', 'Periodista y política tucumana referente del Partido por la Justicia Social, ex Diputada Nacional. Senadora Nacional por Tucumán con enfoque en obras comunitarias y derechos de la niñez.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 95.80, 89.20],
+            [71, 'HCDN-1047', '20-21852964-1', 'Luis_Picat', 'Luis Albino Picat', 'Diputados', 'Córdoba', 'UCR', 'Activo', 'Ingeniero agrónomo, productor porcino y dirigente agroindustrial cordobés, ex Intendente de Jesús María (2019-2023) y ex Presidente de la Sociedad Rural de Jesús María. Diputado Nacional por la Provincia de Córdoba integrante del bloque radical con fuerte defensa de la producción agropecuaria.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png', 96.60, 91.20],
         ];
 
         $legisladores = [];
@@ -288,7 +289,7 @@ class Config
                 'lealtad_partidaria'   => (float)$r[12],
                 'asistencia_pct'       => (float)$r[11],
                 'lealtad_pct'          => (float)$r[12],
-                'mandatos'             => [1=>1,2=>2,3=>1,4=>1,5=>3,6=>3,7=>1,8=>1,9=>1,10=>3,11=>2,12=>2,13=>1,14=>1,15=>4,16=>4,17=>6,18=>2,19=>2,20=>1,21=>2,22=>2,23=>1,24=>1,25=>2,26=>1,27=>1,28=>2,29=>1,30=>1,31=>3,32=>1,33=>3,34=>2,35=>1,36=>1,37=>2,38=>2,39=>1,40=>1,41=>2,42=>1,43=>1,44=>1,45=>1,46=>2,47=>3,48=>1,49=>3,50=>1,51=>1,52=>1,53=>1,54=>2,55=>1,56=>1,57=>1,58=>4,59=>1,60=>1,61=>1,62=>1,63=>2,64=>1,65=>1,66=>1,67=>1,68=>1,69=>1,70=>1][$id] ?? 1,
+                'mandatos'             => [1=>1,2=>2,3=>1,4=>1,5=>3,6=>3,7=>1,8=>1,9=>1,10=>3,11=>2,12=>2,13=>1,14=>1,15=>4,16=>4,17=>6,18=>2,19=>2,20=>1,21=>2,22=>2,23=>1,24=>1,25=>2,26=>1,27=>1,28=>2,29=>1,30=>1,31=>3,32=>1,33=>3,34=>2,35=>1,36=>1,37=>2,38=>2,39=>1,40=>1,41=>2,42=>1,43=>1,44=>1,45=>1,46=>2,47=>3,48=>1,49=>3,50=>1,51=>1,52=>1,53=>1,54=>2,55=>1,56=>1,57=>1,58=>4,59=>1,60=>1,61=>1,62=>1,63=>2,64=>1,65=>1,66=>1,67=>1,68=>1,69=>1,70=>1,71=>1][$id] ?? 1,
                 'updated_at'           => '2025-05-15 12:00:00',
             ];
         }
@@ -364,6 +365,7 @@ class Config
             68 => [2020 => 31500000.00, 2021 => 47500000.00, 2022 => 89000000.00, 2023 => 292000000.00, 2024 => 362000000.00, 2025 => 395000000.00],
             69 => [2020 => 21000000.00, 2021 => 32000000.00, 2022 => 60000000.00, 2023 => 198000000.00, 2024 => 245000000.00, 2025 => 268000000.00],
             70 => [2020 => 27000000.00, 2021 => 41000000.00, 2022 => 77000000.00, 2023 => 252000000.00, 2024 => 312000000.00, 2025 => 342000000.00],
+            71 => [2020 => 38500000.00, 2021 => 58000000.00, 2022 => 109000000.00, 2023 => 360000000.00, 2024 => 448000000.00, 2025 => 490000000.00],
         ];
 
         $leyes = [
@@ -568,6 +570,7 @@ class Config
             68 => ['Afirmativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
             69 => ['Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
             70 => ['Afirmativo', 'Abstencion', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Afirmativo', 'Abstencion', 'Afirmativo', 'Negativo'],
+            71 => ['Afirmativo', 'Afirmativo', 'Afirmativo', 'Negativo', 'Negativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Negativo', 'Negativo', 'Abstencion', 'Afirmativo', 'Negativo', 'Afirmativo', 'Negativo'],
         ];
 
         $votos = [];

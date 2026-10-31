@@ -165,8 +165,12 @@ export const HomeView: React.FC = () => {
 
     const filtrados = legisladores.filter((leg) => {
       // 1. Cámara
-      if (filtroCamara !== 'Todos' && leg.camara !== filtroCamara) {
-        return false;
+      if (filtroCamara !== 'Todos') {
+        const esSenadorLeg = (leg.camara || '').toLowerCase().startsWith('senad');
+        const esSenadorFiltro = filtroCamara.toLowerCase().startsWith('senad');
+        if (esSenadorLeg !== esSenadorFiltro) {
+          return false;
+        }
       }
 
       // 2. Estado (Activos vs. Mandato Cumplido)
