@@ -25,11 +25,23 @@ class LegisladorController
         $auditorModel = new \App\Models\AuditorModel($this->model->getPdo(), $this->model);
         $auditoria = $auditorModel->auditoriaCompleta((int)$leg['id']);
 
+        require_once __DIR__ . '/../../api/Algorithms.php';
+        $store = \LegisData\Config::getMemoryStore();
+        $configId = null;
+        foreach ($store['legisladores'] as $cid => $cleg) {
+            if ($cleg['slug'] === $leg['slug'] || mb_strtolower($cleg['nombre_completo']) === mb_strtolower($leg['nombre'])) {
+                $configId = $cid;
+                break;
+            }
+        }
+        $evolucion = \LegisData\Algorithms::calcularEvolucionPatrimonial($configId ?? (int)$leg['id'], $this->model->getPdo());
+
         return [
             'legislador'        => $leg,
             'url'               => LegisladorModel::urlPerfil($leg),
             'patrimonio'        => $patrimonio,
             'resumen'           => $this->model->resumenPatrimonial($patrimonio),
+            'evolucion'         => $evolucion,
             'perfil'            => $this->model->perfilTematico($leg['id_recinto']),
             'perfil_compuesto'  => $this->model->perfilCompuesto((int)$leg['id'], $leg['id_recinto']),
             'agenda'              => $this->model->agendaProyectos((int)$leg['id']),

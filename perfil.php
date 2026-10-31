@@ -112,6 +112,133 @@ $alianzas = $auditoria['grafo_alianzas'] ?? ['indice_transversalidad' => 0.0, 'b
 $conflictos = $auditoria['conflictos_interes'] ?? ['total_aportes_declarados_ars' => 0.0, 'alertas_conflicto' => [], 'sectores_financiadores' => [], 'nivel_riesgo_etico' => 'Bajo'];
 $promesas = $auditoria['promesas_campana'] ?? ['total_promesas' => 0, 'cumplidas' => 0, 'incumplidas' => 0, 'tasa_cumplimiento_pct' => 100.0, 'promesas' => []];
 
+// Pre-cálculo Gráficos: 1. Evolución Patrimonial Real (USD MEP)
+$evo = $data['evolucion'] ?? null;
+$serieEvo = !empty($evo['serie']) ? $evo['serie'] : [];
+$crecimientoRealUsd = (float)($evo['crecimiento_real_usd_pct'] ?? 0.0);
+$crecimientoConstantes = (float)($evo['crecimiento_pesos_constantes_pct'] ?? 0.0);
+$patrimonioInicialUsd = (float)($evo['patrimonio_inicial_usd'] ?? 0.0);
+$patrimonioActualUsd = (float)($evo['patrimonio_actual_usd'] ?? 0.0);
+$anioInicial = $evo['anio_inicial'] ?? (!empty($serieEvo) ? $serieEvo[0]['anio_fiscal'] : 2020);
+$anioActual = $evo['anio_actual'] ?? (!empty($serieEvo) ? $serieEvo[count($serieEvo) - 1]['anio_fiscal'] : 2025);
+$isPatrimonioCrecimiento = ($crecimientoRealUsd >= 0);
+
+$chartWidth = 680;
+$chartHeight = 270;
+$padLeft = 74;
+$padRight = 28;
+$padTop = 26;
+$padBottom = 42;
+$plotW = $chartWidth - $padLeft - $padRight;
+$plotH = $chartHeight - $padTop - $padBottom;
+
+$chartPoints = [];
+$linePath = '';
+$areaPath = '';
+$strokeColor = $isPatrimonioCrecimiento ? '#059669' : '#e11d48';
+$yTicks = [0, 0.33, 0.66, 1.0];
+$minVal = 0.0;
+$maxVal = 1.0;
+$valRange = 1.0;
+
+if (!empty($serieEvo)) {
+    $usdValues = array_map(fn($d) => (float)$d['patrimonio_usd'], $serieEvo);
+    $minVal = min($usdValues) * 0.88;
+    $maxVal = max($usdValues) * 1.08;
+    $valRange = max($maxVal - $minVal, 1.0);
+    $nPoints = count($serieEvo);
+
+    foreach ($serieEvo as $i => $d) {
+        $x = $nPoints === 1 ? $padLeft + $plotW / 2 : $padLeft + ($i / ($nPoints - 1)) * $plotW;
+        $y = $padTop + $plotH - (((float)$d['patrimonio_usd'] - $minVal) / $valRange) * $plotH;
+        $chartPoints[] = ['x' => $x, 'y' => $y, 'data' => $d];
+    }
+
+    $tension = 0.4;
+    $linePath = 'M ' . number_format($chartPoints[0]['x'], 1, '.', '') . ' ' . number_format($chartPoints[0]['y'], 1, '.', '');
+    for ($i = 0; $i < $nPoints - 1; $i++) {
+        $p0 = $chartPoints[$i === 0 ? 0 : $i - 1];
+        $p1 = $chartPoints[$i];
+        $p2 = $chartPoints[$i + 1];
+        $p3 = $chartPoints[$i + 2 < $nPoints ? $i + 2 : $i + 1];
+
+        $cp1x = $p1['x'] + (($p2['x'] - $p0['x']) / 6) * $tension * 2.2;
+        $cp1y = $p1['y'] + (($p2['y'] - $p0['y']) / 6) * $tension * 2.2;
+        $cp2x = $p2['x'] - (($p3['x'] - $p1['x']) / 6) * $tension * 2.2;
+        $cp2y = $p2['y'] - (($p3['y'] - $p1['y']) / 6) * $tension * 2.2;
+
+        $linePath .= sprintf(' C %.1f %.1f, %.1f %.1f, %.1f %.1f', $cp1x, $cp1y, $cp2x, $cp2y, $p2['x'], $p2['y']);
+    }
+
+    $lastX = number_format($chartPoints[$nPoints - 1]['x'], 1, '.', '');
+    $lastY = number_format($padTop + $plotH, 1, '.', '');
+    $firstX = number_format($chartPoints[0]['x'], 1, '.', '');
+    $areaPath = "{$linePath} L {$lastX} {$lastY} L {$firstX} {$lastY} Z";
+}
+
+// Pre-cálculo Gráficos: 2. Gráfico de Radar de Posicionamiento Temático
+$radarSize = 360;
+$radarCenter = $radarSize / 2;
+$radarRadius = 108;
+$radarAxes = array_keys($data['perfil']);
+$totalRadarAxes = max(1, count($radarAxes));
+$radarRings = [25, 50, 75, 100];
+
+$shortLabels = [
+    'Salud Pública'                     => 'Salud',
+    'Educación'                         => 'Educación',
+    'Educación Pública'                 => 'Educación',
+    'Apertura Comercial'                => 'Comercio',
+    'Industria Nacional'                => 'Industria',
+    'Previsión Social y Discapacidad'   => 'Jubilados',
+    'Medio Ambiente y Derechos Humanos' => 'Ambiente',
+    'Seguridad y Sistema Penal'         => 'Seguridad',
+    'Género y Cuidados'                 => 'Género',
+    'Federalismo y Agro'                => 'Federalismo',
+    'Transparencia Institucional'       => 'Transparencia',
+    'Tecnología y Trabajo'              => 'Tecnología',
+];
+
+$radarPolygonPoints = [];
+$radarVertices = [];
+foreach ($radarAxes as $i => $axisName) {
+    $val = (float)($data['perfil'][$axisName] ?? 0);
+    $angle = ($i * 2 * M_PI / $totalRadarAxes) - (M_PI / 2);
+    $r = (max(0, min(100, $val)) / 100) * $radarRadius;
+    $x = $radarCenter + $r * cos($angle);
+    $y = $radarCenter + $r * sin($angle);
+    $radarPolygonPoints[] = sprintf('%.1f,%.1f', $x, $y);
+
+    $outerX = $radarCenter + $radarRadius * cos($angle);
+    $outerY = $radarCenter + $radarRadius * sin($angle);
+    $labelDist = $radarRadius + 22;
+    $lblX = $radarCenter + $labelDist * cos($angle);
+    $lblY = $radarCenter + $labelDist * sin($angle);
+
+    $anchor = 'middle';
+    $cosVal = cos($angle);
+    if ($cosVal > 0.25) {
+        $anchor = 'start';
+    } elseif ($cosVal < -0.25) {
+        $anchor = 'end';
+    }
+
+    $radarVertices[] = [
+        'axis'      => $axisName,
+        'short'     => $shortLabels[$axisName] ?? $axisName,
+        'val'       => $val,
+        'angle'     => $angle,
+        'x'         => $x,
+        'y'         => $y,
+        'outerX'    => $outerX,
+        'outerY'    => $outerY,
+        'lblX'      => $lblX,
+        'lblY'      => $lblY,
+        'anchor'    => $anchor,
+    ];
+}
+$radarPointsStr = implode(' ', $radarPolygonPoints);
+
 send_view_headers();
 require __DIR__ . '/app/Views/layouts/header.php';
 ?>
@@ -164,55 +291,275 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </div>
     </aside>
 
-    <!-- 2. Patrimonio -->
-    <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-        <h2 class="text-xl font-bold tracking-tight">Evolución patrimonial ajustada por inflación</h2>
-        <p class="text-sm text-slate-500 mt-1">
-            Nominal <span class="font-mono"><?= e(pct($data['resumen']['crecimiento_nominal_pct'], true)) ?></span> ·
-            Inflación acumulada <span class="font-mono"><?= e(pct($data['resumen']['inflacion_acumulada_pct'])) ?></span> ·
-            Real <span class="font-mono font-semibold <?= $real >= 0 ? 'text-emerald-700' : 'text-rose-700' ?>"><?= e(pct($real, true)) ?></span>
-        </p>
-        <?php if ($data['patrimonio'] === []): ?>
-            <p class="mt-6 text-slate-500">Sin declaraciones juradas cargadas.</p>
-        <?php else: ?>
-        <div class="mt-6 space-y-4">
-            <?php foreach ($data['patrimonio'] as $p): $v = (float)$p['variacion_real_porcentaje']; ?>
-            <div class="grid grid-cols-[3rem_1fr_auto] items-center gap-3">
-                <span class="font-mono text-sm text-slate-500"><?= e($p['anio']) ?></span>
-                <div class="h-2.5 bg-slate-200 rounded-full overflow-hidden" role="img" aria-label="Patrimonio <?= e($p['anio']) ?>: <?= e(ars((float)$p['monto_declarado'])) ?>">
-                    <div class="h-full bg-slate-700 rounded-full" style="width: <?= round((float)$p['monto_declarado'] / $maxMonto * 100, 1) ?>%"></div>
+    <!-- 2. Patrimonio: Módulo Financiero con Gráfico Interactivo de Líneas y Área -->
+    <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+                        Módulo Financiero · Oficina Anticorrupción
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mt-0.5">
+                        Evolución Patrimonial Real (USD MEP)
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-1">
+                        Evolución patrimonial ajustada por inflación (IPC INDEC) y serie histórica en Dólar MEP.
+                    </p>
                 </div>
-                <span class="font-mono text-sm tabular-nums text-right w-44">
-                    <?= e(ars((float)$p['monto_declarado'])) ?>
-                    <span class="ml-1 <?= $v > 0 ? 'text-emerald-700' : ($v < 0 ? 'text-rose-700' : 'text-slate-400') ?>"><?= e(pct($v, true)) ?></span>
-                </span>
+
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-mono tabular-nums text-sm font-bold self-start sm:self-auto <?= $isPatrimonioCrecimiento ? 'text-emerald-700 bg-emerald-50 border border-emerald-200' : 'text-rose-700 bg-rose-50 border border-rose-200' ?>">
+                    <span class="text-base"><?= $isPatrimonioCrecimiento ? '▲' : '▼' ?></span>
+                    <div>
+                        <div class="text-[10px] font-sans uppercase tracking-wider opacity-80">
+                            Crecimiento real USD (<?= e($anioInicial) ?>–<?= e($anioActual) ?>)
+                        </div>
+                        <div class="text-base leading-tight">
+                            <?= e(pct($crecimientoRealUsd, true)) ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <?php endforeach; ?>
+
+            <!-- Tarjetas resumen del período -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-5">
+                <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5">
+                    <div class="text-xs text-slate-500 font-medium">Patrimonio Inicial (<?= e($anioInicial) ?>)</div>
+                    <div class="text-lg font-mono tabular-nums font-bold text-slate-900 mt-0.5">
+                        USD <?= number_format($patrimonioInicialUsd, 0, ',', '.') ?>
+                    </div>
+                    <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">
+                        ARS nominal: <?= e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) ?>
+                    </div>
+                </div>
+
+                <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5">
+                    <div class="text-xs text-slate-500 font-medium">Última DDJJ (<?= e($anioActual) ?>)</div>
+                    <div class="text-lg font-mono tabular-nums font-bold text-slate-900 mt-0.5">
+                        USD <?= number_format($patrimonioActualUsd, 0, ',', '.') ?>
+                    </div>
+                    <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">
+                        ARS nominal: <?= e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) ?>
+                    </div>
+                </div>
+
+                <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5">
+                    <div class="text-xs text-slate-500 font-medium">Variación en ARS Constantes (IPC)</div>
+                    <div class="text-lg font-mono tabular-nums font-bold mt-0.5 <?= $crecimientoConstantes >= 0 ? 'text-emerald-700' : 'text-rose-700' ?>">
+                        <?= e(pct($crecimientoConstantes, true)) ?>
+                    </div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">
+                        Deflactado por IPC acumulado INDEC
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico SVG Interactivo con Curva Suavizada Catmull-Rom (tension 0.4) -->
+            <?php if (!empty($serieEvo)): ?>
+            <div class="relative w-full overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/70 p-2 sm:p-4 my-4">
+                <svg id="svgPatrimonio" viewBox="0 0 <?= $chartWidth ?> <?= $chartHeight ?>" class="w-full h-auto overflow-visible select-none" role="img" aria-label="Gráfico de evolución patrimonial en Dólares MEP">
+                    <defs>
+                        <linearGradient id="patrimonioGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="<?= $strokeColor ?>" stopOpacity="0.22" />
+                            <stop offset="100%" stopColor="<?= $strokeColor ?>" stopOpacity="0.01" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Grilla horizontal punteada -->
+                    <?php foreach ($yTicks as $tickIdx => $tickPct):
+                        $tickVal = $minVal + $tickPct * $valRange;
+                        $tickY = $padTop + $plotH - $tickPct * $plotH;
+                    ?>
+                        <line x1="<?= $padLeft ?>" y1="<?= round($tickY, 1) ?>" x2="<?= $chartWidth - $padRight ?>" y2="<?= round($tickY, 1) ?>" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+                        <text x="<?= $padLeft - 10 ?>" y="<?= round($tickY + 4, 1) ?>" text-anchor="end" class="fill-slate-400 text-[11px] font-mono tabular-nums">
+                            USD <?= round($tickVal / 1000) ?>k
+                        </text>
+                    <?php endforeach; ?>
+
+                    <!-- Línea vertical activa (guía interactiva) -->
+                    <line id="lineaGuia" x1="<?= round($chartPoints[count($chartPoints)-1]['x'], 1) ?>" y1="<?= $padTop ?>" x2="<?= round($chartPoints[count($chartPoints)-1]['x'], 1) ?>" y2="<?= $padTop + $plotH ?>" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+
+                    <!-- Área y Curva Suavizada -->
+                    <path d="<?= $areaPath ?>" fill="url(#patrimonioGrad)" />
+                    <path d="<?= $linePath ?>" fill="none" stroke="<?= $strokeColor ?>" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+                    <!-- Puntos interactivos con touch/hover -->
+                    <?php foreach ($chartPoints as $idx => $pt):
+                        $isLast = ($idx === count($chartPoints) - 1);
+                        $d = $pt['data'];
+                    ?>
+                        <g class="cursor-pointer punto-grafico"
+                           data-index="<?= $idx ?>"
+                           data-anio="<?= e($d['anio_fiscal']) ?>"
+                           data-usd="<?= number_format((float)$d['patrimonio_usd'], 0, ',', '.') ?>"
+                           data-nominal="<?= e(ars((float)$d['monto_pesos_nominal'])) ?>"
+                           data-constante="<?= e(ars((float)$d['patrimonio_pesos_constantes'])) ?>"
+                           data-mep="<?= number_format((float)$d['dolar_mep_cierre'], 2, ',', '.') ?>"
+                           data-ipc="<?= number_format((float)$d['ipc_interanual'], 1, ',', '.') ?>"
+                           data-var="<?= e(pct((float)$d['variacion_interanual_usd_pct'], true)) ?>"
+                           data-x="<?= round($pt['x'], 1) ?>">
+                            <rect x="<?= round($pt['x'] - ($plotW / ($nPoints * 2)), 1) ?>" y="<?= $padTop ?>" width="<?= round($plotW / $nPoints, 1) ?>" height="<?= $plotH + $padBottom ?>" fill="transparent" />
+                            <circle class="circle-pt" cx="<?= round($pt['x'], 1) ?>" cy="<?= round($pt['y'], 1) ?>" r="<?= $isLast ? 6.5 : 4.5 ?>" fill="<?= $isLast ? $strokeColor : '#ffffff' ?>" stroke="<?= $strokeColor ?>" stroke-width="<?= $isLast ? 3 : 2.5 ?>" />
+                            <text x="<?= round($pt['x'], 1) ?>" y="<?= $padTop + $plotH + 24 ?>" text-anchor="middle" class="text-xs font-mono tabular-nums <?= $isLast ? 'fill-slate-900 font-bold' : 'fill-slate-500 font-medium' ?>">
+                                <?= e($d['anio_fiscal']) ?>
+                            </text>
+                        </g>
+                    <?php endforeach; ?>
+                </svg>
+            </div>
+
+            <!-- Inspector / Tooltip Interactivo -->
+            <?php $lastPt = $chartPoints[count($chartPoints)-1]['data']; ?>
+            <div id="inspectorPatrimonio" class="bg-slate-900 text-white rounded-xl p-4 shadow-sm border border-slate-800">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs uppercase tracking-wider font-semibold text-slate-400">Declaración Jurada Año Fiscal</span>
+                        <span id="inspAnio" class="font-mono tabular-nums font-bold text-sm px-2 py-0.5 rounded bg-slate-800 text-white">
+                            <?= e($lastPt['anio_fiscal']) ?>
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-slate-400 font-mono tabular-nums">
+                        <span>Dólar MEP (31/12): <strong id="inspMep" class="text-slate-200">$ <?= number_format((float)$lastPt['dolar_mep_cierre'], 2, ',', '.') ?></strong></span>
+                        <span>·</span>
+                        <span>IPC Anual: <strong id="inspIpc" class="text-slate-200"><?= number_format((float)$lastPt['ipc_interanual'], 1, ',', '.') ?>%</strong></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-slate-800/80 rounded-lg p-3 border border-slate-700/70">
+                        <div class="text-[11px] text-slate-400 uppercase font-medium">1. Pesos Nominales</div>
+                        <div id="inspNominal" class="text-base font-mono tabular-nums font-bold text-slate-100 mt-0.5">
+                            <?= e(ars((float)$lastPt['monto_pesos_nominal'])) ?>
+                        </div>
+                        <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">Declarado en Oficina Anticorrupción</div>
+                    </div>
+
+                    <div class="bg-slate-800/80 rounded-lg p-3 border border-slate-700/70">
+                        <div class="text-[11px] text-slate-400 uppercase font-medium">2. Pesos Constantes (IPC <?= e($anioActual) ?>)</div>
+                        <div id="inspConstante" class="text-base font-mono tabular-nums font-bold text-amber-300 mt-0.5">
+                            <?= e(ars((float)$lastPt['patrimonio_pesos_constantes'])) ?>
+                        </div>
+                        <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">Ajustado por inflación acumulada</div>
+                    </div>
+
+                    <div class="bg-slate-800/80 rounded-lg p-3 border border-emerald-500/30">
+                        <div class="text-[11px] text-emerald-300 uppercase font-medium">3. Equivalente en USD MEP</div>
+                        <div id="inspUsd" class="text-lg font-mono tabular-nums font-extrabold text-white mt-0.5">
+                            USD <?= number_format((float)$lastPt['patrimonio_usd'], 0, ',', '.') ?>
+                        </div>
+                        <div class="text-[11px] font-mono tabular-nums text-slate-300 mt-0.5">
+                            Variación anual: <strong id="inspVar" class="<?= (float)$lastPt['variacion_interanual_usd_pct'] >= 0 ? 'text-emerald-400' : 'text-rose-400' ?>"><?= e(pct((float)$lastPt['variacion_interanual_usd_pct'], true)) ?></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Tocá o pasá el cursor sobre cualquier año para auditar la conversión.</span>
+                    <span class="font-mono">Fuente: Oficina Anticorrupción / INDEC</span>
+                </div>
+            </div>
+            <?php else: ?>
+                <p class="mt-6 text-slate-500">Sin declaraciones juradas cargadas.</p>
+            <?php endif; ?>
         </div>
-        <p class="text-xs text-slate-400 mt-4">Variación real interanual = (Monto año / Monto año anterior) ÷ (1 + IPC) − 1. Fuente: DDJJ Oficina Anticorrupción.</p>
-        <?php endif; ?>
     </section>
 
-    <!-- 3. Ejes temáticos -->
-    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-        <h2 class="text-xl font-bold tracking-tight">Apoyo por eje temático</h2>
-        <p class="text-sm text-slate-500 mt-1">Votos afirmativos sobre votos emitidos (excluye ausencias).</p>
-        <div class="mt-6 space-y-4">
-            <?php foreach ($data['perfil'] as $eje => $valor):
-                $c = $colores[$eje] ?? $colorDefault;
-            ?>
-            <div>
-                <div class="flex justify-between text-sm mb-1.5">
-                    <span class="font-medium text-slate-800"><?= e($eje) ?></span>
-                    <span class="font-mono text-xs font-semibold <?= e($c['txt']) ?>"><?= e(pct($valor)) ?></span>
-                </div>
-                <div class="h-2 bg-slate-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
-                    <div class="h-full rounded-full <?= e($c['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
+    <!-- 3. Ejes temáticos: Gráfico de Radar Multidimensional + Barras Granulares -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
+        <div>
+            <div class="pb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Módulo Ideológico · Huella de Votación
+                </span>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-0.5">
+                    Posicionamiento por Ejes Temáticos
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">
+                    Radar multidimensional de afinidad parlamentaria (11 ejes) excluyendo ausencias.
+                </p>
+            </div>
+
+            <!-- Gráfico de Radar SVG -->
+            <div class="my-4 flex flex-col items-center">
+                <div class="w-full max-w-[340px] relative">
+                    <svg id="svgRadar" viewBox="0 0 <?= $radarSize ?> <?= $radarSize ?>" class="w-full h-auto overflow-visible select-none" role="img" aria-label="Gráfico de radar de posicionamiento en 11 ejes temáticos">
+                        <defs>
+                            <linearGradient id="radarGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#2563eb" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Anillos concéntricos de grilla (25%, 50%, 75%, 100%) -->
+                        <?php foreach ($radarRings as $ringPct):
+                            $ringPts = [];
+                            foreach ($radarAxes as $ri => $raxis) {
+                                $rangle = ($ri * 2 * M_PI / $totalRadarAxes) - (M_PI / 2);
+                                $rr = ($ringPct / 100) * $radarRadius;
+                                $rx = $radarCenter + $rr * cos($rangle);
+                                $ry = $radarCenter + $rr * sin($rangle);
+                                $ringPts[] = sprintf('%.1f,%.1f', $rx, $ry);
+                            }
+                        ?>
+                            <polygon points="<?= implode(' ', $ringPts) ?>" fill="none" stroke="#e2e8f0" stroke-width="1.2" />
+                            <text x="<?= $radarCenter + 4 ?>" y="<?= round($radarCenter - (($ringPct / 100) * $radarRadius) + 4, 1) ?>" class="fill-slate-400 text-[9px] font-mono">
+                                <?= $ringPct ?>%
+                            </text>
+                        <?php endforeach; ?>
+
+                        <!-- Spoke lines y etiquetas de ejes alrededor del radar -->
+                        <?php foreach ($radarVertices as $v): ?>
+                            <line x1="<?= $radarCenter ?>" y1="<?= $radarCenter ?>" x2="<?= round($v['outerX'], 1) ?>" y2="<?= round($v['outerY'], 1) ?>" stroke="#e2e8f0" stroke-width="1.2" />
+                            <text x="<?= round($v['lblX'], 1) ?>" y="<?= round($v['lblY'], 1) ?>" text-anchor="<?= $v['anchor'] ?>" dominant-baseline="middle" class="fill-slate-700 text-[10px] font-semibold">
+                                <?= e($v['short']) ?>
+                            </text>
+                        <?php endforeach; ?>
+
+                        <!-- Polígono de datos del legislador -->
+                        <polygon points="<?= $radarPointsStr ?>" fill="url(#radarGrad)" stroke="#2563eb" stroke-width="2.5" />
+
+                        <!-- Vértices del radar interactivos -->
+                        <?php foreach ($radarVertices as $vi => $v): ?>
+                            <circle class="radar-point cursor-pointer"
+                                    cx="<?= round($v['x'], 1) ?>"
+                                    cy="<?= round($v['y'], 1) ?>"
+                                    r="4.5"
+                                    fill="#2563eb"
+                                    stroke="#ffffff"
+                                    stroke-width="2"
+                                    data-axis="<?= e($v['axis']) ?>"
+                                    data-pct="<?= e(pct($v['val'])) ?>" />
+                        <?php endforeach; ?>
+                    </svg>
+
+                    <!-- Tooltip flotante del Radar -->
+                    <div id="radarTooltip" class="hidden absolute top-2 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1 pointer-events-none shadow-md font-mono text-center z-10 whitespace-nowrap">
+                        <span id="radarTooltipText"></span>
+                    </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+
+            <!-- Desglose granular con barras temáticas -->
+            <div class="pt-4 border-t border-slate-100 space-y-3">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Desglose por Voto Emitido</p>
+                <?php foreach ($data['perfil'] as $eje => $valor):
+                    $c = $colores[$eje] ?? $colorDefault;
+                ?>
+                <div class="barra-eje-item" data-axis="<?= e($eje) ?>">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="font-medium text-slate-700"><?= e($eje) ?></span>
+                        <span class="font-mono text-xs font-semibold <?= e($c['txt']) ?>"><?= e(pct($valor)) ?></span>
+                    </div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
+                        <div class="h-full rounded-full <?= e($c['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-        <a href="/match-360" class="mt-6 block text-center rounded-lg bg-slate-900 text-white text-sm font-semibold py-2.5 hover:bg-slate-800">¿Coincidís con este perfil? Hacé el Match 360</a>
+
+        <a href="/match-360" class="mt-6 block text-center rounded-xl bg-slate-900 text-white text-sm font-semibold py-3 hover:bg-slate-800 transition-colors shadow-sm">
+            ¿Coincidís con este perfil? Hacé el Match 360 ↗
+        </a>
     </section>
 
     <!-- Card: Defensa de su Provincia (Fase 4 - Tensión Partido vs. Provincia) -->
@@ -838,16 +1185,111 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </div>
     </section>
 
-    <script>
+    <script nonce="<?= csp_nonce() ?>">
     document.addEventListener('DOMContentLoaded', function () {
+        // 1. Filtro dinámico de proyectos
         const input = document.getElementById('filtroProyectos');
-        if (!input) return;
-        input.addEventListener('input', function () {
-            const query = this.value.toLowerCase().trim();
-            const filas = document.querySelectorAll('.fila-proyecto');
-            filas.forEach(function (fila) {
-                const texto = fila.textContent.toLowerCase();
-                fila.style.display = texto.includes(query) ? '' : 'none';
+        if (input) {
+            input.addEventListener('input', function () {
+                const query = this.value.toLowerCase().trim();
+                const filas = document.querySelectorAll('.fila-proyecto');
+                filas.forEach(function (fila) {
+                    const texto = fila.textContent.toLowerCase();
+                    fila.style.display = texto.includes(query) ? '' : 'none';
+                });
+            });
+        }
+
+        // 2. Interacción del Gráfico de Evolución Patrimonial Real (USD MEP)
+        const puntos = document.querySelectorAll('.punto-grafico');
+        const guia = document.getElementById('lineaGuia');
+        const inspAnio = document.getElementById('inspAnio');
+        const inspMep = document.getElementById('inspMep');
+        const inspIpc = document.getElementById('inspIpc');
+        const inspNominal = document.getElementById('inspNominal');
+        const inspConstante = document.getElementById('inspConstante');
+        const inspUsd = document.getElementById('inspUsd');
+        const inspVar = document.getElementById('inspVar');
+
+        puntos.forEach(function (pt) {
+            const update = function () {
+                const anio = pt.getAttribute('data-anio');
+                const usd = pt.getAttribute('data-usd');
+                const nominal = pt.getAttribute('data-nominal');
+                const constante = pt.getAttribute('data-constante');
+                const mep = pt.getAttribute('data-mep');
+                const ipc = pt.getAttribute('data-ipc');
+                const v = pt.getAttribute('data-var');
+                const x = pt.getAttribute('data-x');
+
+                if (guia && x) {
+                    guia.setAttribute('x1', x);
+                    guia.setAttribute('x2', x);
+                }
+                if (inspAnio) inspAnio.textContent = anio;
+                if (inspMep) inspMep.textContent = '$ ' + mep;
+                if (inspIpc) inspIpc.textContent = ipc + '%';
+                if (inspNominal) inspNominal.textContent = nominal;
+                if (inspConstante) inspConstante.textContent = constante;
+                if (inspUsd) inspUsd.textContent = 'USD ' + usd;
+                if (inspVar) {
+                    inspVar.textContent = v;
+                    const num = parseFloat(v.replace('%', '').replace('+', ''));
+                    inspVar.className = (num >= 0) ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold';
+                }
+
+                puntos.forEach(function (other) {
+                    const c = other.querySelector('.circle-pt');
+                    if (c) {
+                        const isCurrent = (other === pt);
+                        c.setAttribute('r', isCurrent ? '6.5' : '4.5');
+                        c.setAttribute('fill', isCurrent ? '<?= $strokeColor ?>' : '#ffffff');
+                    }
+                });
+            };
+
+            pt.addEventListener('mouseenter', update);
+            pt.addEventListener('click', update);
+            pt.addEventListener('touchstart', update, { passive: true });
+        });
+
+        // 3. Interacción del Gráfico de Radar de Votaciones
+        const radarPts = document.querySelectorAll('.radar-point');
+        const tooltip = document.getElementById('radarTooltip');
+        const tooltipText = document.getElementById('radarTooltipText');
+        const barraItems = document.querySelectorAll('.barra-eje-item');
+
+        radarPts.forEach(function (rpt) {
+            rpt.addEventListener('mouseenter', function () {
+                const axis = rpt.getAttribute('data-axis');
+                const pct = rpt.getAttribute('data-pct');
+                if (tooltip && tooltipText) {
+                    tooltipText.textContent = axis + ': ' + pct;
+                    tooltip.classList.remove('hidden');
+                }
+                rpt.setAttribute('r', '7');
+                barraItems.forEach(function (bi) {
+                    if (bi.getAttribute('data-axis') === axis) {
+                        bi.classList.add('bg-blue-50/80', 'p-1', 'rounded-lg');
+                    } else {
+                        bi.classList.remove('bg-blue-50/80', 'p-1', 'rounded-lg');
+                    }
+                });
+            });
+            rpt.addEventListener('mouseleave', function () {
+                if (tooltip) tooltip.classList.add('hidden');
+                rpt.setAttribute('r', '4.5');
+                barraItems.forEach(function (bi) {
+                    bi.classList.remove('bg-blue-50/80', 'p-1', 'rounded-lg');
+                });
+            });
+            rpt.addEventListener('click', function () {
+                const axis = rpt.getAttribute('data-axis');
+                const pct = rpt.getAttribute('data-pct');
+                if (tooltip && tooltipText) {
+                    tooltipText.textContent = axis + ': ' + pct;
+                    tooltip.classList.remove('hidden');
+                }
             });
         });
     });
