@@ -37,6 +37,10 @@ try {
     foreach ((new \App\Models\LegisladorModel())->all() as $l) {
         $mvcUrls[] = [\App\Models\LegisladorModel::urlPerfil($l), 'weekly', '0.9'];
     }
+    foreach ((new \App\Models\LegisladorModel())->ejes() as $e) {
+        $slug = $e['slug_seo'] ?? \App\Config\Database::slugify($e['nombre_eje'] ?? $e['nombre']);
+        $mvcUrls[] = ["/eje/{$slug}", 'weekly', '0.85'];
+    }
     $blogModel = new \App\Models\BlogModel();
     foreach (array_keys($blogModel->categorias()) as $cat) {
         $mvcUrls[] = ["/blog/{$cat}", 'weekly', '0.7'];

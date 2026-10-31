@@ -104,17 +104,17 @@ class Database
     public static function getDefaultEjes(): array
     {
         return [
-            1  => ['id' => 1,  'nombre_eje' => 'Salud Pública', 'descripcion' => 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.'],
-            2  => ['id' => 2,  'nombre_eje' => 'Educación', 'descripcion' => 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.'],
-            3  => ['id' => 3,  'nombre_eje' => 'Apertura Comercial', 'descripcion' => 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos bilaterales.'],
-            4  => ['id' => 4,  'nombre_eje' => 'Industria Nacional', 'descripcion' => 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.'],
-            5  => ['id' => 5,  'nombre_eje' => 'Previsión Social y Discapacidad', 'descripcion' => 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones no contributivas por discapacidad.'],
-            6  => ['id' => 6,  'nombre_eje' => 'Medio Ambiente y Derechos Humanos', 'descripcion' => 'Protección de glaciares y humedales, transición energética, soberanía ambiental y derechos humanos.'],
-            7  => ['id' => 7,  'nombre_eje' => 'Seguridad y Sistema Penal', 'descripcion' => 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.'],
-            8  => ['id' => 8,  'nombre_eje' => 'Género y Cuidados', 'descripcion' => 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.'],
-            9  => ['id' => 9,  'nombre_eje' => 'Federalismo y Agro', 'descripcion' => 'Distribución equitativa de coparticipación, retenciones agropecuarias y desarrollo regional.'],
-            10 => ['id' => 10, 'nombre_eje' => 'Transparencia Institucional', 'descripcion' => 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.'],
-            11 => ['id' => 11, 'nombre_eje' => 'Tecnología y Trabajo', 'descripcion' => 'Regulación del empleo en plataformas digitales, economía del conocimiento, telecomunicaciones e IA.'],
+            1  => ['id' => 1,  'nombre_eje' => 'Salud Pública', 'slug_seo' => 'salud-publica', 'descripcion' => 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.'],
+            2  => ['id' => 2,  'nombre_eje' => 'Educación', 'slug_seo' => 'educacion', 'descripcion' => 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.'],
+            3  => ['id' => 3,  'nombre_eje' => 'Apertura Comercial', 'slug_seo' => 'apertura-comercial', 'descripcion' => 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos bilaterales.'],
+            4  => ['id' => 4,  'nombre_eje' => 'Industria Nacional', 'slug_seo' => 'industria-nacional', 'descripcion' => 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.'],
+            5  => ['id' => 5,  'nombre_eje' => 'Previsión Social y Discapacidad', 'slug_seo' => 'prevision-social', 'descripcion' => 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones no contributivas por discapacidad.'],
+            6  => ['id' => 6,  'nombre_eje' => 'Medio Ambiente y Derechos Humanos', 'slug_seo' => 'medio-ambiente', 'descripcion' => 'Protección de glaciares y humedales, transición energética, soberanía ambiental y derechos humanos.'],
+            7  => ['id' => 7,  'nombre_eje' => 'Seguridad y Sistema Penal', 'slug_seo' => 'seguridad', 'descripcion' => 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.'],
+            8  => ['id' => 8,  'nombre_eje' => 'Género y Cuidados', 'slug_seo' => 'genero', 'descripcion' => 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.'],
+            9  => ['id' => 9,  'nombre_eje' => 'Federalismo y Agro', 'slug_seo' => 'federalismo', 'descripcion' => 'Distribución equitativa de coparticipación, retenciones agropecuarias y desarrollo regional.'],
+            10 => ['id' => 10, 'nombre_eje' => 'Transparencia Institucional', 'slug_seo' => 'transparencia', 'descripcion' => 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.'],
+            11 => ['id' => 11, 'nombre_eje' => 'Tecnología y Trabajo', 'slug_seo' => 'tecnologia', 'descripcion' => 'Regulación del empleo en plataformas digitales, economía del conocimiento, telecomunicaciones e IA.'],
         ];
     }
 

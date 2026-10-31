@@ -238,4 +238,13 @@ INSERT INTO promesas_campana (legislador_id, promesa_texto, ley_id_vinculada, es
 (7, 'Respaldar las partidas para investigación y educación superior universitaria', 3, 'Cumplida', 'Votó AFIRMATIVO en el Senado garantizando la mayoría especial para la ley de financiamiento universitario.')
 ON DUPLICATE KEY UPDATE estado = VALUES(estado);
 
+-- 11. conflictos_transparencia
+INSERT INTO conflictos_transparencia (legislador_id, tipo_alerta, descripcion_alerta, nivel_severidad) VALUES
+(1, 'Nepotismo', 'Designación formal de 2 asesores en despacho de la Presidencia de la Cámara con parentesco en 2° grado verificado.', 'Alta'),
+(1, 'Aportante_Campana', 'Aportante directo de campaña (Fintech Inversiones del Sur S.A. $18.5M ARS) vinculado al sector financiero favorecido en Ley de Bases.', 'Media'),
+(2, 'Nepotismo', 'Asesor contratado en nómina con coincidencia de apellido directo y vínculo en estudio jurídico societario.', 'Media'),
+(2, 'Aportante_Campana', 'Donación de campaña de desarrolladora inmobiliaria metropolitana ($25M ARS) previo a tratamiento de normativas de suelo.', 'Alta'),
+(8, 'Nepotismo', 'Familiar directo contratado como asesor de planta en el bloque oficialista provincial.', 'Alta')
+ON DUPLICATE KEY UPDATE descripcion_alerta = VALUES(descripcion_alerta);
+
 SET FOREIGN_KEY_CHECKS = 1;

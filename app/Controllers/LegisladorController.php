@@ -50,8 +50,34 @@ class LegisladorController
             'despacho'            => $this->model->despachoCostos((int)$leg['id'], 2024, $leg['id_recinto'] ?? null, $leg['slug'] ?? null),
             'media_camara_costo'  => $this->model->mediaCamaraCostoProyecto($leg['camara']),
             'auditoria'           => $auditoria,
+            'conflictos_transparencia' => $this->model->conflictosTransparencia((int)$leg['id']),
             'votaciones'          => $this->model->votaciones($leg['id_recinto']),
             'ficha_wiki'          => $this->model->fichaWikipedia($leg['slug'] ?? '', $leg),
+        ];
+    }
+
+    /**
+     * Datos para la vista de silo temático eje.php (/eje/{slug_seo}).
+     * @return array|null
+     */
+    public function eje(string $slugSeo): ?array
+    {
+        $eje = $this->model->findEjeBySlug($slugSeo);
+        if ($eje === null) {
+            return null;
+        }
+
+        $ejeId = (int)$eje['id'];
+        $leyes = $this->model->leyesPorEje($ejeId);
+        $ranking = $this->model->rankingPorEje($ejeId, 20);
+        $todosEjes = $this->model->ejes();
+        $otrosEjes = array_values(array_filter($todosEjes, fn($e) => (int)$e['id'] !== $ejeId));
+
+        return [
+            'eje'        => $eje,
+            'leyes'      => $leyes,
+            'ranking'    => $ranking,
+            'otros_ejes' => $otrosEjes,
         ];
     }
 

@@ -99,6 +99,20 @@ $badgeVoto = [
     'Abstención' => 'bg-slate-200 text-slate-600',
     'Ausente'    => 'bg-slate-200 text-slate-600',
 ];
+$ejesSlugMap = [
+    'Salud Pública'                     => 'salud-publica',
+    'Educación'                         => 'educacion',
+    'Educación Pública'                 => 'educacion',
+    'Apertura Comercial'                => 'apertura-comercial',
+    'Industria Nacional'                => 'industria-nacional',
+    'Previsión Social y Discapacidad'   => 'prevision-social',
+    'Medio Ambiente y Derechos Humanos' => 'medio-ambiente',
+    'Seguridad y Sistema Penal'         => 'seguridad',
+    'Género y Cuidados'                 => 'genero',
+    'Federalismo y Agro'                => 'federalismo',
+    'Transparencia Institucional'       => 'transparencia',
+    'Tecnología y Trabajo'              => 'tecnologia',
+];
 $maxMonto = max(array_map(fn($p) => (float)$p['monto_declarado'], $data['patrimonio']) ?: [1]);
 $iniciales = implode('', array_map(fn($p) => mb_substr($p, 0, 1), array_slice(explode(' ', $leg['nombre']), 0, 2)));
 
@@ -432,21 +446,364 @@ require __DIR__ . '/app/Views/layouts/header.php';
     <!-- KPIs -->
     <aside class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 grid grid-cols-2 lg:grid-cols-1 gap-6 content-start">
         <div>
-            <p class="text-sm text-slate-500">Asistencia histórica</p>
+            <p class="text-sm text-slate-500 flex items-center"><span>Asistencia histórica</span><?= tooltip_alpine("Porcentaje histórico de asistencia a votaciones y sesiones del recinto.") ?></p>
             <p class="font-mono text-3xl font-semibold mt-1"><?= e(pct((float)$leg['asistencia'])) ?></p>
         </div>
         <div>
-            <p class="text-sm text-slate-500">Lealtad partidaria</p>
+            <p class="text-sm text-slate-500 flex items-center"><span>Lealtad partidaria</span><?= tooltip_alpine("Porcentaje de disciplina parlamentaria y coincidencia de voto con su bloque.") ?></p>
             <p class="font-mono text-3xl font-semibold mt-1"><?= e(pct((float)$leg['indice_lealtad'])) ?></p>
         </div>
         <div class="col-span-2 lg:col-span-1 rounded-xl p-4 <?= $real >= 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' ?>">
-            <p class="text-sm font-medium">Crecimiento patrimonial real</p>
+            <p class="text-sm font-medium flex items-center justify-between"><span>Crecimiento patrimonial real</span><?= tooltip_alpine("Variación patrimonial real descontada la inflación acumulada (IPC INDEC).") ?></p>
             <p class="font-mono text-3xl font-semibold mt-1"><?= $real >= 0 ? '▲' : '▼' ?> <?= e(pct($real, true)) ?></p>
             <p class="text-xs mt-1 opacity-80">Descontada la inflación (IPC INDEC)</p>
         </div>
     </aside>
+</div> <!-- Cierre Header Grid (Bio + KPIs) -->
 
-    <!-- 2. Patrimonio: Módulo Financiero con Gráfico Interactivo de Líneas y Área -->
+
+<!-- ========================================================================= -->
+<!-- DIVULGACIÓN PROGRESIVA: PESTAÑAS HORIZONTALES CON ALPINE.JS (MASTER PRD)  -->
+<!-- ========================================================================= -->
+<div x-data="{ tab: 'votaciones' }" class="mt-8 space-y-6">
+    <!-- Barra de Pestañas Horizontales -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-1.5 sm:p-2 sticky top-20 z-30 backdrop-blur-md bg-white/95">
+        <nav class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2" aria-label="Secciones analíticas de perfil">
+            <button type="button" @click="tab = 'votaciones'" 
+                    :class="tab === 'votaciones' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium'"
+                    class="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                <span>📊</span>
+                <span>Votaciones por Eje</span>
+            </button>
+            <button type="button" @click="tab = 'agenda'" 
+                    :class="tab === 'agenda' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium'"
+                    class="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                <span>📜</span>
+                <span>Agenda Propia</span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded-full" :class="tab === 'agenda' ? 'bg-slate-800 text-slate-200' : 'bg-slate-200 text-slate-700'"><?= (int)($agenda['total_proyectos'] ?? 0) ?></span>
+            </button>
+            <button type="button" @click="tab = 'patrimonio'" 
+                    :class="tab === 'patrimonio' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium'"
+                    class="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                <span>📈</span>
+                <span>Patrimonio Real</span>
+            </button>
+            <button type="button" @click="tab = 'auditoria'" 
+                    :class="tab === 'auditoria' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium'"
+                    class="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2 relative">
+                <span>⚖️</span>
+                <span>Auditoría Ética</span>
+                <?php if ($alertasNepotismo > 0 || !empty($conflictos['alertas_conflicto']) || !empty($data['conflictos_transparencia'])): ?>
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse" title="Alertas éticas detectadas"></span>
+                <?php endif; ?>
+            </button>
+        </nav>
+    </div>
+
+    <!-- PESTAÑA 1: VOTACIONES -->
+    <div x-show="tab === 'votaciones'" x-cloak class="space-y-6">
+        <!-- 3. Ejes temáticos: Gráfico de Radar Multidimensional + Barras Granulares -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
+        <div>
+            <div class="pb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Módulo Ideológico · Huella de Votación
+                </span>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-0.5">
+                    Posicionamiento por Ejes Temáticos
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">
+                    Radar multidimensional de afinidad parlamentaria (11 ejes) excluyendo ausencias.
+                </p>
+            </div>
+
+            <!-- Gráfico de Radar SVG -->
+            <div class="my-4 flex flex-col items-center">
+                <div class="w-full max-w-[340px] relative">
+                    <svg id="svgRadar" viewBox="0 0 <?= $radarSize ?> <?= $radarSize ?>" class="w-full h-auto overflow-visible select-none" role="img" aria-label="Gráfico de radar de posicionamiento en 11 ejes temáticos">
+                        <defs>
+                            <linearGradient id="radarGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#2563eb" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Anillos concéntricos de grilla (25%, 50%, 75%, 100%) -->
+                        <?php foreach ($radarRings as $ringPct):
+                            $ringPts = [];
+                            foreach ($radarAxes as $ri => $raxis) {
+                                $rangle = ($ri * 2 * M_PI / $totalRadarAxes) - (M_PI / 2);
+                                $rr = ($ringPct / 100) * $radarRadius;
+                                $rx = $radarCenter + $rr * cos($rangle);
+                                $ry = $radarCenter + $rr * sin($rangle);
+                                $ringPts[] = sprintf('%.1f,%.1f', $rx, $ry);
+                            }
+                        ?>
+                            <polygon points="<?= implode(' ', $ringPts) ?>" fill="none" stroke="#e2e8f0" stroke-width="1.2" />
+                            <text x="<?= $radarCenter + 4 ?>" y="<?= round($radarCenter - (($ringPct / 100) * $radarRadius) + 4, 1) ?>" class="fill-slate-400 text-[9px] font-mono">
+                                <?= $ringPct ?>%
+                            </text>
+                        <?php endforeach; ?>
+
+                        <!-- Spoke lines y etiquetas de ejes alrededor del radar -->
+                        <?php foreach ($radarVertices as $v): ?>
+                            <line x1="<?= $radarCenter ?>" y1="<?= $radarCenter ?>" x2="<?= round($v['outerX'], 1) ?>" y2="<?= round($v['outerY'], 1) ?>" stroke="#e2e8f0" stroke-width="1.2" />
+                            <text x="<?= round($v['lblX'], 1) ?>" y="<?= round($v['lblY'], 1) ?>" text-anchor="<?= $v['anchor'] ?>" dominant-baseline="middle" class="fill-slate-700 text-[10px] font-semibold">
+                                <?= e($v['short']) ?>
+                            </text>
+                        <?php endforeach; ?>
+
+                        <!-- Polígono de datos del legislador -->
+                        <polygon points="<?= $radarPointsStr ?>" fill="url(#radarGrad)" stroke="#2563eb" stroke-width="2.5" />
+
+                        <!-- Vértices del radar interactivos -->
+                        <?php foreach ($radarVertices as $vi => $v): ?>
+                            <circle class="radar-point cursor-pointer"
+                                    cx="<?= round($v['x'], 1) ?>"
+                                    cy="<?= round($v['y'], 1) ?>"
+                                    r="4.5"
+                                    fill="#2563eb"
+                                    stroke="#ffffff"
+                                    stroke-width="2"
+                                    data-axis="<?= e($v['axis']) ?>"
+                                    data-pct="<?= e(pct($v['val'])) ?>" />
+                        <?php endforeach; ?>
+                    </svg>
+
+                    <!-- Tooltip flotante del Radar -->
+                    <div id="radarTooltip" class="hidden absolute top-2 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1 pointer-events-none shadow-md font-mono text-center z-10 whitespace-nowrap">
+                        <span id="radarTooltipText"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desglose granular con barras temáticas -->
+            <div class="pt-4 border-t border-slate-100 space-y-3">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Desglose por Voto Emitido</p>
+                <?php foreach ($data['perfil'] as $eje => $valor):
+                    $c = $colores[$eje] ?? $colorDefault;
+                ?>
+                <div class="barra-eje-item" data-axis="<?= e($eje) ?>">
+                    <div class="flex justify-between text-xs mb-1">
+                        <?php $slugEje = $ejesSlugMap[$eje] ?? \App\Config\Database::slugify($eje); ?>
+                        <a href="/eje/<?= e($slugEje) ?>" class="font-medium text-slate-800 hover:text-blue-600 hover:underline flex items-center gap-1 group">
+                            <span><?= e($eje) ?></span>
+                            <span class="text-slate-400 group-hover:text-blue-600 text-[10px]">↗</span>
+                        </a>
+                        <span class="font-mono text-xs font-semibold <?= e($c['txt']) ?>"><?= e(pct($valor)) ?></span>
+                    </div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
+                        <div class="h-full rounded-full <?= e($c['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <a href="/match-360" class="mt-6 block text-center rounded-xl bg-slate-900 text-white text-sm font-semibold py-3 hover:bg-slate-800 transition-colors shadow-sm">
+            ¿Coincidís con este perfil? Hacé el Match 360 ↗
+        </a>
+    </section>
+
+    
+        <!-- Votaciones -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <h2 class="text-xl font-bold tracking-tight p-6 pb-4">Votaciones nominales</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500">
+                    <tr><th class="text-left px-6 py-3">Ley</th><th class="text-left px-6 py-3">Eje</th><th class="text-left px-6 py-3">Fecha</th><th class="text-left px-6 py-3">Voto</th></tr>
+                </thead>
+                <tbody>
+                <?php foreach (array_slice($data['votaciones'], 0, 10) as $v): ?>
+                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                        <td class="px-6 py-3 min-w-64"><?= e($v['ley']) ?></td>
+                        <?php $slugEjeVoto = $ejesSlugMap[$v['eje_tematico']] ?? \App\Config\Database::slugify($v['eje_tematico']); ?>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            <a href="/eje/<?= e($slugEjeVoto) ?>" class="text-slate-600 hover:text-blue-600 hover:underline">
+                                <?= e($v['eje_tematico']) ?>
+                            </a>
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap font-mono text-slate-500"><?= e(date('d/m/Y', strtotime($v['fecha']))) ?></td>
+                        <td class="px-6 py-3"><span class="rounded-full px-2 py-0.5 text-xs font-medium <?= e($badgeVoto[$v['voto']] ?? '') ?>"><?= e($v['voto']) ?></span></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    
+    </div>
+
+    <!-- PESTAÑA 2: AGENDA PROPIA -->
+    <div x-show="tab === 'agenda'" x-cloak class="space-y-6">
+        <!-- 4. Agenda Legislativa Propia (Fase 3 - Proactividad e Iniciativa Parlamentaria) -->
+    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        Iniciativa Parlamentaria
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">Ponderación Proactiva (30%)</span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Agenda Legislativa Propia</h2>
+                <p class="text-sm text-slate-500">
+                    Proyectos de ley redactados y presentados en el Congreso. Mide el foco proactivo más allá de la disciplina partidaria en votaciones.
+                </p>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
+                    <span class="block text-slate-400 uppercase text-[10px]">Autor Principal</span>
+                    <strong class="text-slate-900 text-sm"><?= (int)($agenda['total_autor'] ?? 0) ?></strong>
+                </div>
+                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
+                    <span class="block text-slate-400 uppercase text-[10px]">Co-autor</span>
+                    <strong class="text-slate-700 text-sm"><?= (int)($agenda['total_coautor'] ?? 0) ?></strong>
+                </div>
+                <div class="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                    <span class="block text-indigo-600 uppercase text-[10px]">Total Proyectos</span>
+                    <strong class="text-indigo-900 text-sm"><?= (int)($agenda['total_proyectos'] ?? 0) ?></strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treemap Simple de los 3 Ejes Prioritarios -->
+        <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3 flex items-center justify-between">
+                <span>Top 3 Ejes de Concentración de Agenda</span>
+                <span class="text-xs font-normal text-slate-400 lowercase">ponderación: autor x2, co-autor x1</span>
+            </h3>
+            
+            <?php if (!empty($agenda['top3_ejes'])): ?>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <?php 
+                $treemapStyles = [
+                    0 => ['bg' => 'bg-indigo-50/70', 'border' => 'border-indigo-200', 'badge' => 'bg-indigo-600 text-white', 'text' => 'text-indigo-950', 'sub' => 'text-indigo-600', 'progress' => 'bg-indigo-600'],
+                    1 => ['bg' => 'bg-emerald-50/70', 'border' => 'border-emerald-200', 'badge' => 'bg-emerald-600 text-white', 'text' => 'text-emerald-950', 'sub' => 'text-emerald-600', 'progress' => 'bg-emerald-600'],
+                    2 => ['bg' => 'bg-amber-50/70', 'border' => 'border-amber-200', 'badge' => 'bg-amber-600 text-white', 'text' => 'text-amber-950', 'sub' => 'text-amber-600', 'progress' => 'bg-amber-600'],
+                ];
+                foreach ($agenda['top3_ejes'] as $idx => $item): 
+                    $st = $treemapStyles[$idx] ?? $treemapStyles[0];
+                ?>
+                <div class="rounded-xl border <?= $st['border'] ?> <?= $st['bg'] ?> p-4 transition-all hover:shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded <?= $st['badge'] ?>">
+                                #<?= $idx + 1 ?> Prioridad
+                            </span>
+                            <span class="font-mono text-lg font-bold <?= $st['sub'] ?>">
+                                <?= number_format((float)$item['porcentaje'], 1) ?>%
+                            </span>
+                        </div>
+                        <h4 class="font-bold <?= $st['text'] ?> text-base tracking-tight leading-snug">
+                            <?= e($item['eje']) ?>
+                        </h4>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200/60">
+                        <div class="flex justify-between text-xs text-slate-600 mb-1.5 font-mono">
+                            <span><?= (int)$item['proyectos'] ?> <?= (int)$item['proyectos'] === 1 ? 'proyecto' : 'proyectos' ?></span>
+                            <span><?= number_format((float)$item['puntos'], 1) ?> pts</span>
+                        </div>
+                        <div class="h-1.5 bg-slate-200/80 rounded-full overflow-hidden">
+                            <div class="h-full <?= $st['progress'] ?> rounded-full" style="width: <?= min(100, max(5, (float)$item['porcentaje'])) ?>%"></div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php else: ?>
+            <p class="text-sm text-slate-500 italic p-4 bg-slate-50 rounded-xl border border-slate-200">
+                No se registran iniciativas legislativas propias en el período analizado.
+            </p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Tabla Filtrable: Últimos 5 Proyectos como Autor Principal -->
+        <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500">
+                        Últimos Proyectos Presentados como Autor Principal
+                    </h3>
+                    <p class="text-xs text-slate-400">Iniciativas de autoría directa registradas con expediente oficial</p>
+                </div>
+                <div class="relative max-w-xs w-full">
+                    <input type="text" id="filtroProyectos" placeholder="Filtrar por texto o estado..." 
+                           class="w-full text-xs rounded-lg border border-slate-300 pl-8 pr-3 py-1.5 focus:border-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-800"
+                           aria-label="Filtrar proyectos de autoría">
+                    <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-sm" id="tablaProyectos">
+                    <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500 border-b border-slate-200">
+                        <tr>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Fecha</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Expediente</th>
+                            <th class="text-left px-4 py-3 min-w-[280px]">Título Sumario</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Eje Temático</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white">
+                    <?php 
+                    $badgeEstado = [
+                        'Sancionado'    => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                        'Media Sanción' => 'bg-sky-50 text-sky-700 border-sky-200',
+                        'Con Dictamen'  => 'bg-amber-50 text-amber-700 border-amber-200',
+                        'En Comisión'   => 'bg-slate-100 text-slate-700 border-slate-200',
+                        'En Trámite'    => 'bg-indigo-50 text-indigo-700 border-indigo-200',
+                    ];
+                    if (!empty($ultimosProyectos)):
+                        foreach ($ultimosProyectos as $p):
+                            $bCls = $badgeEstado[$p['estado_tramite']] ?? 'bg-slate-100 text-slate-600 border-slate-200';
+                    ?>
+                        <tr class="hover:bg-slate-50/70 transition-colors fila-proyecto">
+                            <td class="px-4 py-3 font-mono text-xs text-slate-500 whitespace-nowrap">
+                                <?= e(date('d/m/Y', strtotime($p['fecha_presentacion']))) ?>
+                            </td>
+                            <td class="px-4 py-3 font-mono text-xs font-semibold text-slate-700 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200"><?= e($p['expediente']) ?></span>
+                            </td>
+                            <td class="px-4 py-3 text-slate-800 text-xs sm:text-sm font-medium">
+                                <?= e($p['titulo_sumario']) ?>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap text-xs text-slate-600 font-medium">
+                                <?= e($p['eje_tematico']) ?>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap text-xs">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border <?= $bCls ?>">
+                                    <?= e($p['estado_tramite']) ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php 
+                        endforeach;
+                    else: 
+                    ?>
+                        <tr>
+                            <td colspan="5" class="px-4 py-6 text-center text-xs text-slate-400 italic">
+                                No se encontraron proyectos de autoría directa para este legislador.
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    
+    </div>
+
+    <!-- PESTAÑA 3: PATRIMONIO -->
+    <div x-show="tab === 'patrimonio'" x-cloak class="space-y-6">
+        <!-- 2. Patrimonio: Módulo Financiero con Gráfico Interactivo de Líneas y Área -->
     <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
         <div>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
@@ -618,266 +975,76 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </div>
     </section>
 
-    <!-- 3. Ejes temáticos: Gráfico de Radar Multidimensional + Barras Granulares -->
-    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
-        <div>
-            <div class="pb-3 border-b border-slate-100">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Módulo Ideológico · Huella de Votación
-                </span>
-                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-0.5">
-                    Posicionamiento por Ejes Temáticos
-                </h2>
-                <p class="text-xs text-slate-500 mt-1">
-                    Radar multidimensional de afinidad parlamentaria (11 ejes) excluyendo ausencias.
-                </p>
-            </div>
+    
+    </div>
 
-            <!-- Gráfico de Radar SVG -->
-            <div class="my-4 flex flex-col items-center">
-                <div class="w-full max-w-[340px] relative">
-                    <svg id="svgRadar" viewBox="0 0 <?= $radarSize ?> <?= $radarSize ?>" class="w-full h-auto overflow-visible select-none" role="img" aria-label="Gráfico de radar de posicionamiento en 11 ejes temáticos">
-                        <defs>
-                            <linearGradient id="radarGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#2563eb" stopOpacity="0.4" />
-                                <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.1" />
-                            </linearGradient>
-                        </defs>
-
-                        <!-- Anillos concéntricos de grilla (25%, 50%, 75%, 100%) -->
-                        <?php foreach ($radarRings as $ringPct):
-                            $ringPts = [];
-                            foreach ($radarAxes as $ri => $raxis) {
-                                $rangle = ($ri * 2 * M_PI / $totalRadarAxes) - (M_PI / 2);
-                                $rr = ($ringPct / 100) * $radarRadius;
-                                $rx = $radarCenter + $rr * cos($rangle);
-                                $ry = $radarCenter + $rr * sin($rangle);
-                                $ringPts[] = sprintf('%.1f,%.1f', $rx, $ry);
-                            }
-                        ?>
-                            <polygon points="<?= implode(' ', $ringPts) ?>" fill="none" stroke="#e2e8f0" stroke-width="1.2" />
-                            <text x="<?= $radarCenter + 4 ?>" y="<?= round($radarCenter - (($ringPct / 100) * $radarRadius) + 4, 1) ?>" class="fill-slate-400 text-[9px] font-mono">
-                                <?= $ringPct ?>%
-                            </text>
-                        <?php endforeach; ?>
-
-                        <!-- Spoke lines y etiquetas de ejes alrededor del radar -->
-                        <?php foreach ($radarVertices as $v): ?>
-                            <line x1="<?= $radarCenter ?>" y1="<?= $radarCenter ?>" x2="<?= round($v['outerX'], 1) ?>" y2="<?= round($v['outerY'], 1) ?>" stroke="#e2e8f0" stroke-width="1.2" />
-                            <text x="<?= round($v['lblX'], 1) ?>" y="<?= round($v['lblY'], 1) ?>" text-anchor="<?= $v['anchor'] ?>" dominant-baseline="middle" class="fill-slate-700 text-[10px] font-semibold">
-                                <?= e($v['short']) ?>
-                            </text>
-                        <?php endforeach; ?>
-
-                        <!-- Polígono de datos del legislador -->
-                        <polygon points="<?= $radarPointsStr ?>" fill="url(#radarGrad)" stroke="#2563eb" stroke-width="2.5" />
-
-                        <!-- Vértices del radar interactivos -->
-                        <?php foreach ($radarVertices as $vi => $v): ?>
-                            <circle class="radar-point cursor-pointer"
-                                    cx="<?= round($v['x'], 1) ?>"
-                                    cy="<?= round($v['y'], 1) ?>"
-                                    r="4.5"
-                                    fill="#2563eb"
-                                    stroke="#ffffff"
-                                    stroke-width="2"
-                                    data-axis="<?= e($v['axis']) ?>"
-                                    data-pct="<?= e(pct($v['val'])) ?>" />
-                        <?php endforeach; ?>
-                    </svg>
-
-                    <!-- Tooltip flotante del Radar -->
-                    <div id="radarTooltip" class="hidden absolute top-2 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1 pointer-events-none shadow-md font-mono text-center z-10 whitespace-nowrap">
-                        <span id="radarTooltipText"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Desglose granular con barras temáticas -->
-            <div class="pt-4 border-t border-slate-100 space-y-3">
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Desglose por Voto Emitido</p>
-                <?php foreach ($data['perfil'] as $eje => $valor):
-                    $c = $colores[$eje] ?? $colorDefault;
-                ?>
-                <div class="barra-eje-item" data-axis="<?= e($eje) ?>">
-                    <div class="flex justify-between text-xs mb-1">
-                        <span class="font-medium text-slate-700"><?= e($eje) ?></span>
-                        <span class="font-mono text-xs font-semibold <?= e($c['txt']) ?>"><?= e(pct($valor)) ?></span>
-                    </div>
-                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
-                        <div class="h-full rounded-full <?= e($c['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <a href="/match-360" class="mt-6 block text-center rounded-xl bg-slate-900 text-white text-sm font-semibold py-3 hover:bg-slate-800 transition-colors shadow-sm">
-            ¿Coincidís con este perfil? Hacé el Match 360 ↗
-        </a>
-    </section>
-
-    <!-- Card: Defensa de su Provincia (Fase 4 - Tensión Partido vs. Provincia) -->
-    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-            <div>
+    <!-- PESTAÑA 4: AUDITORÍA ÉTICA -->
+    <div x-show="tab === 'auditoria'" x-cloak class="space-y-6">
+        
+        <!-- Alertas de Integridad & Conflictos de Transparencia (Master PRD) -->
+        <?php if (!empty($data['conflictos_transparencia']) || $alertasNepotismo > 0): ?>
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        Auditoría Territorial & Federal
-                    </span>
-                    <span class="text-xs text-slate-400 font-mono">Provincia de <?= e($leg['provincia']) ?></span>
+                    <span class="w-3 h-3 rounded-full bg-rose-600 inline-block animate-ping"></span>
+                    <h3 class="text-base font-bold text-slate-900">Panel de Alertas de Transparencia y Ética Pública</h3>
                 </div>
-                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Defensa de su Provincia</h2>
-                <p class="text-sm text-slate-500">
-                    Auditoría de tensión entre disciplina de bloque partidario nacional y defensa de los intereses de <?= e($leg['provincia']) ?>.
-                </p>
+                <span class="text-xs font-mono text-slate-500">Auditoría Cruzada</span>
             </div>
-            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 self-start md:self-auto">
-                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                <?= count($defensaProv['alertas_conflicto']) ?> <?= count($defensaProv['alertas_conflicto']) === 1 ? 'Voto en conflicto' : 'Votos en conflicto' ?>
-            </span>
-            <?php else: ?>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start md:self-auto">
-                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                100% Alineado con <?= e($leg['provincia']) ?>
-            </span>
-            <?php endif; ?>
-        </div>
 
-        <!-- Métricas comparativas enfrentadas: Lealtad al Partido vs Defensa Provincial -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Métrica 1: Lealtad al Partido -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Disciplina Partidaria</span>
-                        <h3 class="text-base font-bold text-slate-900 mt-0.5">Índice de Lealtad al Partido</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Alertas de Nepotismo (Rojo) -->
+                <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/70 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-rose-800">
+                            <svg class="w-4 h-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Alerta de Nepotismo
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-rose-200 text-rose-900">Nivel Alto</span>
                     </div>
-                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-200 text-slate-800 font-mono">
-                        <?= e($leg['bloque']) ?>
-                    </span>
+                    <?php if (!empty($data['conflictos_transparencia'])): 
+                        $nep = array_filter($data['conflictos_transparencia'], fn($c) => $c['tipo_alerta'] === 'Nepotismo');
+                        foreach ($nep as $n): ?>
+                            <p class="text-xs text-rose-900 leading-relaxed font-medium"><?= e($n['descripcion_alerta']) ?></p>
+                        <?php endforeach; 
+                        if (empty($nep)): ?>
+                            <p class="text-xs text-rose-900 leading-relaxed font-medium">Designación de <?= $alertasNepotismo ?> asesores con coincidencia de apellido directo o grupo societario en la nómina de despacho.</p>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <p class="text-xs text-rose-900 leading-relaxed font-medium">Designación de <?= $alertasNepotismo ?> asesores con coincidencia de apellido directo o grupo societario en la nómina de despacho.</p>
+                    <?php endif; ?>
                 </div>
-                <div class="mt-4 flex items-baseline gap-2">
-                    <span class="font-mono text-3xl sm:text-4xl font-extrabold text-slate-900">
-                        <?= number_format((float)$defensaProv['indice_lealtad_partido'], 1, ',', '.') ?>%
-                    </span>
-                    <span class="text-xs text-slate-500">cohesión de voto con su bloque</span>
-                </div>
-                <div class="mt-3 w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-                    <div class="bg-slate-800 h-2.5 rounded-full" style="width: <?= min(100, max(0, (float)$defensaProv['indice_lealtad_partido'])) ?>%"></div>
-                </div>
-            </div>
 
-            <!-- Métrica 2: Defensa Provincial -->
-            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-5 flex flex-col justify-between">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-xs uppercase font-mono tracking-wider text-emerald-700">Compromiso Federal</span>
-                        <h3 class="text-base font-bold text-emerald-950 mt-0.5">Índice de Defensa Provincial</h3>
+                <!-- Alertas de Conflicto de Interés / Aportantes de Campaña (Amarillo) -->
+                <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/70 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
+                            <svg class="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Conflictos de Interés & Financiamiento
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-amber-200 text-amber-900">Alerta Amarilla</span>
                     </div>
-                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800 font-mono">
-                        <?= e($leg['provincia']) ?>
-                    </span>
-                </div>
-                <div class="mt-4 flex items-baseline gap-2">
-                    <span class="font-mono text-3xl sm:text-4xl font-extrabold <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'text-emerald-700' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'text-amber-700' : 'text-rose-700') ?>">
-                        <?= number_format((float)$defensaProv['indice_defensa_provincial'], 1, ',', '.') ?>%
-                    </span>
-                    <span class="text-xs text-emerald-800/80">ponderado por criticidad</span>
-                </div>
-                <div class="mt-3 w-full bg-emerald-200/80 rounded-full h-2.5 overflow-hidden">
-                    <div class="h-2.5 rounded-full <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'bg-emerald-600' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'bg-amber-500' : 'bg-rose-600') ?>" style="width: <?= min(100, max(0, (float)$defensaProv['indice_defensa_provincial'])) ?>%"></div>
+                    <?php if (!empty($data['conflictos_transparencia'])): 
+                        $apor = array_filter($data['conflictos_transparencia'], fn($c) => $c['tipo_alerta'] === 'Aportante_Campana');
+                        foreach ($apor as $ap): ?>
+                            <p class="text-xs text-amber-900 leading-relaxed"><?= e($ap['descripcion_alerta']) ?></p>
+                        <?php endforeach; 
+                        if (empty($apor)): ?>
+                            <p class="text-xs text-amber-900 leading-relaxed">Cruce de aportes privados de campaña electoral vinculados a sectores económicos favorecidos en leyes con voto afirmativo.</p>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <p class="text-xs text-amber-900 leading-relaxed">Cruce de aportes privados de campaña electoral vinculados a sectores económicos favorecidos en leyes con voto afirmativo.</p>
+                    <?php endif; ?>
                 </div>
             </div>
-        </div>
-
-        <!-- Indicador de Brecha de Tensión -->
-        <?php if ($defensaProv['brecha_tension'] > 0): ?>
-        <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center justify-between text-xs text-amber-900">
-            <span class="font-medium flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Tensión Partidaria Detectada: La lealtad a la cúpula supera a la defensa provincial en un <strong>+<?= number_format($defensaProv['brecha_tension'], 1, ',', '.') ?>%</strong>.
-            </span>
-            <span class="font-mono font-bold text-amber-800">Prioridad: Partido Nacional</span>
         </div>
         <?php endif; ?>
 
-        <!-- Tabla de Alertas: Votos en conflicto con su provincia -->
-        <div>
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
-                <span>Votos en conflicto con su provincia</span>
-                <span class="text-xs font-normal text-slate-400 lowercase">(votaciones que contradijeron a <?= e($leg['provincia']) ?>)</span>
-            </h3>
-
-            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
-            <div class="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/30">
-                <table class="w-full text-sm">
-                    <thead class="bg-amber-100/60 text-xs uppercase font-semibold text-amber-900 border-b border-amber-200">
-                        <tr>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Ley Evaluada</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Voto Legislador</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Interés Provincial</th>
-                            <th class="text-left px-4 py-3 min-w-[260px]">Contradicción con el Interés Regional</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Criticidad</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-amber-100 bg-white">
-                    <?php foreach ($defensaProv['alertas_conflicto'] as $alerta): 
-                        $badgeCrit = match ($alerta['nivel_criticidad']) {
-                            3 => 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
-                            2 => 'bg-amber-100 text-amber-800 border-amber-300',
-                            default => 'bg-slate-100 text-slate-700 border-slate-300',
-                        };
-                        $critTexto = match ($alerta['nivel_criticidad']) {
-                            3 => 'Nivel 3 (Crítica)',
-                            2 => 'Nivel 2 (Media)',
-                            default => 'Nivel 1 (Baja)',
-                        };
-                    ?>
-                        <tr class="hover:bg-amber-50/50 transition-colors">
-                            <td class="px-4 py-3 font-medium text-slate-900 text-xs sm:text-sm">
-                                <div><?= e($alerta['ley']) ?></div>
-                                <span class="font-mono text-[11px] text-slate-400"><?= e(date('d/m/Y', strtotime($alerta['fecha']))) ?></span>
-                            </td>
-                            <td class="px-4 py-3 whitespace-nowrap">
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold <?= $alerta['voto_legislador'] === 'Afirmativo' ? 'bg-emerald-100 text-emerald-800' : ($alerta['voto_legislador'] === 'Negativo' ? 'bg-rose-100 text-rose-800' : 'bg-slate-200 text-slate-700') ?>">
-                                    <?= e($alerta['voto_legislador']) ?>
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 whitespace-nowrap">
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
-                                    <?= e($alerta['voto_esperado_regional']) ?> (Favorable)
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-xs leading-relaxed text-slate-700">
-                                <?php if ($alerta['disciplina_partidaria_perjudicial']): ?>
-                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200 mb-1">
-                                    Voto por Disciplina Partidaria en perjuicio provincial
-                                </span>
-                                <?php endif; ?>
-                                <p class="text-slate-800 font-medium"><?= e($alerta['descripcion_impacto']) ?></p>
-                                <p class="text-[11px] text-slate-500 mt-1 italic"><?= e($alerta['motivo']) ?></p>
-                            </td>
-                            <td class="px-4 py-3 whitespace-nowrap text-xs">
-                                <span class="inline-flex items-center px-2 py-0.5 rounded border text-[11px] <?= $badgeCrit ?>">
-                                    <?= e($critTexto) ?>
-                                </span>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-            <?php else: ?>
-            <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/50 text-center text-xs text-emerald-900">
-                <strong>Sin votos en conflicto registrados:</strong> El legislador ha votado de forma consistente con las leyes de impacto regional para la provincia de <?= e($leg['provincia']) ?>.
-            </div>
-            <?php endif; ?>
-        </div>
-    </section>
-
-    <!-- Auditoría y Transparencia: Ratio de Eficiencia Legislativa (Fase 6 - n8n) -->
+        <!-- Auditoría y Transparencia: Ratio de Eficiencia Legislativa (Fase 6 - n8n) -->
     <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div>
@@ -978,7 +1145,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </p>
     </section>
 
-    <!-- Auditoría Ética & Integridad Parlamentaria (Master PRD) -->
+    
+        <!-- Auditoría Ética & Integridad Parlamentaria (Master PRD) -->
     <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div>
@@ -1158,189 +1326,171 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </div>
     </section>
 
-    <!-- Votaciones -->
-    <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <h2 class="text-xl font-bold tracking-tight p-6 pb-4">Votaciones nominales</h2>
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-                <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500">
-                    <tr><th class="text-left px-6 py-3">Ley</th><th class="text-left px-6 py-3">Eje</th><th class="text-left px-6 py-3">Fecha</th><th class="text-left px-6 py-3">Voto</th></tr>
-                </thead>
-                <tbody>
-                <?php foreach (array_slice($data['votaciones'], 0, 10) as $v): ?>
-                    <tr class="border-b border-slate-100 hover:bg-slate-50">
-                        <td class="px-6 py-3 min-w-64"><?= e($v['ley']) ?></td>
-                        <td class="px-6 py-3 whitespace-nowrap text-slate-500"><?= e($v['eje_tematico']) ?></td>
-                        <td class="px-6 py-3 whitespace-nowrap font-mono text-slate-500"><?= e(date('d/m/Y', strtotime($v['fecha']))) ?></td>
-                        <td class="px-6 py-3"><span class="rounded-full px-2 py-0.5 text-xs font-medium <?= e($badgeVoto[$v['voto']] ?? '') ?>"><?= e($v['voto']) ?></span></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- 4. Agenda Legislativa Propia (Fase 3 - Proactividad e Iniciativa Parlamentaria) -->
+    
+        <!-- Card: Defensa de su Provincia (Fase 4 - Tensión Partido vs. Provincia) -->
     <section class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
-                        Iniciativa Parlamentaria
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        Auditoría Territorial & Federal
                     </span>
-                    <span class="text-xs text-slate-400 font-mono">Ponderación Proactiva (30%)</span>
+                    <span class="text-xs text-slate-400 font-mono">Provincia de <?= e($leg['provincia']) ?></span>
                 </div>
-                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Agenda Legislativa Propia</h2>
+                <h2 class="text-xl font-bold tracking-tight text-slate-900 mt-1">Defensa de su Provincia</h2>
                 <p class="text-sm text-slate-500">
-                    Proyectos de ley redactados y presentados en el Congreso. Mide el foco proactivo más allá de la disciplina partidaria en votaciones.
+                    Auditoría de tensión entre disciplina de bloque partidario nacional y defensa de los intereses de <?= e($leg['provincia']) ?>.
                 </p>
             </div>
-            <div class="flex items-center gap-3 text-xs font-mono">
-                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
-                    <span class="block text-slate-400 uppercase text-[10px]">Autor Principal</span>
-                    <strong class="text-slate-900 text-sm"><?= (int)($agenda['total_autor'] ?? 0) ?></strong>
-                </div>
-                <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-center">
-                    <span class="block text-slate-400 uppercase text-[10px]">Co-autor</span>
-                    <strong class="text-slate-700 text-sm"><?= (int)($agenda['total_coautor'] ?? 0) ?></strong>
-                </div>
-                <div class="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
-                    <span class="block text-indigo-600 uppercase text-[10px]">Total Proyectos</span>
-                    <strong class="text-indigo-900 text-sm"><?= (int)($agenda['total_proyectos'] ?? 0) ?></strong>
-                </div>
-            </div>
-        </div>
-
-        <!-- Treemap Simple de los 3 Ejes Prioritarios -->
-        <div>
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3 flex items-center justify-between">
-                <span>Top 3 Ejes de Concentración de Agenda</span>
-                <span class="text-xs font-normal text-slate-400 lowercase">ponderación: autor x2, co-autor x1</span>
-            </h3>
-            
-            <?php if (!empty($agenda['top3_ejes'])): ?>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <?php 
-                $treemapStyles = [
-                    0 => ['bg' => 'bg-indigo-50/70', 'border' => 'border-indigo-200', 'badge' => 'bg-indigo-600 text-white', 'text' => 'text-indigo-950', 'sub' => 'text-indigo-600', 'progress' => 'bg-indigo-600'],
-                    1 => ['bg' => 'bg-emerald-50/70', 'border' => 'border-emerald-200', 'badge' => 'bg-emerald-600 text-white', 'text' => 'text-emerald-950', 'sub' => 'text-emerald-600', 'progress' => 'bg-emerald-600'],
-                    2 => ['bg' => 'bg-amber-50/70', 'border' => 'border-amber-200', 'badge' => 'bg-amber-600 text-white', 'text' => 'text-amber-950', 'sub' => 'text-amber-600', 'progress' => 'bg-amber-600'],
-                ];
-                foreach ($agenda['top3_ejes'] as $idx => $item): 
-                    $st = $treemapStyles[$idx] ?? $treemapStyles[0];
-                ?>
-                <div class="rounded-xl border <?= $st['border'] ?> <?= $st['bg'] ?> p-4 transition-all hover:shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded <?= $st['badge'] ?>">
-                                #<?= $idx + 1 ?> Prioridad
-                            </span>
-                            <span class="font-mono text-lg font-bold <?= $st['sub'] ?>">
-                                <?= number_format((float)$item['porcentaje'], 1) ?>%
-                            </span>
-                        </div>
-                        <h4 class="font-bold <?= $st['text'] ?> text-base tracking-tight leading-snug">
-                            <?= e($item['eje']) ?>
-                        </h4>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-200/60">
-                        <div class="flex justify-between text-xs text-slate-600 mb-1.5 font-mono">
-                            <span><?= (int)$item['proyectos'] ?> <?= (int)$item['proyectos'] === 1 ? 'proyecto' : 'proyectos' ?></span>
-                            <span><?= number_format((float)$item['puntos'], 1) ?> pts</span>
-                        </div>
-                        <div class="h-1.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div class="h-full <?= $st['progress'] ?> rounded-full" style="width: <?= min(100, max(5, (float)$item['porcentaje'])) ?>%"></div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
+            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 self-start md:self-auto">
+                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <?= count($defensaProv['alertas_conflicto']) ?> <?= count($defensaProv['alertas_conflicto']) === 1 ? 'Voto en conflicto' : 'Votos en conflicto' ?>
+            </span>
             <?php else: ?>
-            <p class="text-sm text-slate-500 italic p-4 bg-slate-50 rounded-xl border border-slate-200">
-                No se registran iniciativas legislativas propias en el período analizado.
-            </p>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start md:self-auto">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                100% Alineado con <?= e($leg['provincia']) ?>
+            </span>
             <?php endif; ?>
         </div>
 
-        <!-- Tabla Filtrable: Últimos 5 Proyectos como Autor Principal -->
-        <div class="pt-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500">
-                        Últimos Proyectos Presentados como Autor Principal
-                    </h3>
-                    <p class="text-xs text-slate-400">Iniciativas de autoría directa registradas con expediente oficial</p>
+        <!-- Métricas comparativas enfrentadas: Lealtad al Partido vs Defensa Provincial -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Métrica 1: Lealtad al Partido -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-slate-400">Disciplina Partidaria</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-0.5">Índice de Lealtad al Partido</h3>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-200 text-slate-800 font-mono">
+                        <?= e($leg['bloque']) ?>
+                    </span>
                 </div>
-                <div class="relative max-w-xs w-full">
-                    <input type="text" id="filtroProyectos" placeholder="Filtrar por texto o estado..." 
-                           class="w-full text-xs rounded-lg border border-slate-300 pl-8 pr-3 py-1.5 focus:border-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-800"
-                           aria-label="Filtrar proyectos de autoría">
-                    <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
+                <div class="mt-4 flex items-baseline gap-2">
+                    <span class="font-mono text-3xl sm:text-4xl font-extrabold text-slate-900">
+                        <?= number_format((float)$defensaProv['indice_lealtad_partido'], 1, ',', '.') ?>%
+                    </span>
+                    <span class="text-xs text-slate-500">cohesión de voto con su bloque</span>
+                </div>
+                <div class="mt-3 w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-slate-800 h-2.5 rounded-full" style="width: <?= min(100, max(0, (float)$defensaProv['indice_lealtad_partido'])) ?>%"></div>
                 </div>
             </div>
 
-            <div class="overflow-x-auto rounded-xl border border-slate-200">
-                <table class="w-full text-sm" id="tablaProyectos">
-                    <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500 border-b border-slate-200">
+            <!-- Métrica 2: Defensa Provincial -->
+            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase font-mono tracking-wider text-emerald-700">Compromiso Federal</span>
+                        <h3 class="text-base font-bold text-emerald-950 mt-0.5">Índice de Defensa Provincial</h3>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800 font-mono">
+                        <?= e($leg['provincia']) ?>
+                    </span>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                    <span class="font-mono text-3xl sm:text-4xl font-extrabold <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'text-emerald-700' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'text-amber-700' : 'text-rose-700') ?>">
+                        <?= number_format((float)$defensaProv['indice_defensa_provincial'], 1, ',', '.') ?>%
+                    </span>
+                    <span class="text-xs text-emerald-800/80">ponderado por criticidad</span>
+                </div>
+                <div class="mt-3 w-full bg-emerald-200/80 rounded-full h-2.5 overflow-hidden">
+                    <div class="h-2.5 rounded-full <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'bg-emerald-600' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'bg-amber-500' : 'bg-rose-600') ?>" style="width: <?= min(100, max(0, (float)$defensaProv['indice_defensa_provincial'])) ?>%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicador de Brecha de Tensión -->
+        <?php if ($defensaProv['brecha_tension'] > 0): ?>
+        <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center justify-between text-xs text-amber-900">
+            <span class="font-medium flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Tensión Partidaria Detectada: La lealtad a la cúpula supera a la defensa provincial en un <strong>+<?= number_format($defensaProv['brecha_tension'], 1, ',', '.') ?>%</strong>.
+            </span>
+            <span class="font-mono font-bold text-amber-800">Prioridad: Partido Nacional</span>
+        </div>
+        <?php endif; ?>
+
+        <!-- Tabla de Alertas: Votos en conflicto con su provincia -->
+        <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                <span>Votos en conflicto con su provincia</span>
+                <span class="text-xs font-normal text-slate-400 lowercase">(votaciones que contradijeron a <?= e($leg['provincia']) ?>)</span>
+            </h3>
+
+            <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
+            <div class="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/30">
+                <table class="w-full text-sm">
+                    <thead class="bg-amber-100/60 text-xs uppercase font-semibold text-amber-900 border-b border-amber-200">
                         <tr>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Fecha</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Expediente</th>
-                            <th class="text-left px-4 py-3 min-w-[280px]">Título Sumario</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Eje Temático</th>
-                            <th class="text-left px-4 py-3 whitespace-nowrap">Estado</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Ley Evaluada</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Voto Legislador</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Interés Provincial</th>
+                            <th class="text-left px-4 py-3 min-w-[260px]">Contradicción con el Interés Regional</th>
+                            <th class="text-left px-4 py-3 whitespace-nowrap">Criticidad</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 bg-white">
-                    <?php 
-                    $badgeEstado = [
-                        'Sancionado'    => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                        'Media Sanción' => 'bg-sky-50 text-sky-700 border-sky-200',
-                        'Con Dictamen'  => 'bg-amber-50 text-amber-700 border-amber-200',
-                        'En Comisión'   => 'bg-slate-100 text-slate-700 border-slate-200',
-                        'En Trámite'    => 'bg-indigo-50 text-indigo-700 border-indigo-200',
-                    ];
-                    if (!empty($ultimosProyectos)):
-                        foreach ($ultimosProyectos as $p):
-                            $bCls = $badgeEstado[$p['estado_tramite']] ?? 'bg-slate-100 text-slate-600 border-slate-200';
+                    <tbody class="divide-y divide-amber-100 bg-white">
+                    <?php foreach ($defensaProv['alertas_conflicto'] as $alerta): 
+                        $badgeCrit = match ($alerta['nivel_criticidad']) {
+                            3 => 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+                            2 => 'bg-amber-100 text-amber-800 border-amber-300',
+                            default => 'bg-slate-100 text-slate-700 border-slate-300',
+                        };
+                        $critTexto = match ($alerta['nivel_criticidad']) {
+                            3 => 'Nivel 3 (Crítica)',
+                            2 => 'Nivel 2 (Media)',
+                            default => 'Nivel 1 (Baja)',
+                        };
                     ?>
-                        <tr class="hover:bg-slate-50/70 transition-colors fila-proyecto">
-                            <td class="px-4 py-3 font-mono text-xs text-slate-500 whitespace-nowrap">
-                                <?= e(date('d/m/Y', strtotime($p['fecha_presentacion']))) ?>
+                        <tr class="hover:bg-amber-50/50 transition-colors">
+                            <td class="px-4 py-3 font-medium text-slate-900 text-xs sm:text-sm">
+                                <div><?= e($alerta['ley']) ?></div>
+                                <span class="font-mono text-[11px] text-slate-400"><?= e(date('d/m/Y', strtotime($alerta['fecha']))) ?></span>
                             </td>
-                            <td class="px-4 py-3 font-mono text-xs font-semibold text-slate-700 whitespace-nowrap">
-                                <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200"><?= e($p['expediente']) ?></span>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold <?= $alerta['voto_legislador'] === 'Afirmativo' ? 'bg-emerald-100 text-emerald-800' : ($alerta['voto_legislador'] === 'Negativo' ? 'bg-rose-100 text-rose-800' : 'bg-slate-200 text-slate-700') ?>">
+                                    <?= e($alerta['voto_legislador']) ?>
+                                </span>
                             </td>
-                            <td class="px-4 py-3 text-slate-800 text-xs sm:text-sm font-medium">
-                                <?= e($p['titulo_sumario']) ?>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                    <?= e($alerta['voto_esperado_regional']) ?> (Favorable)
+                                </span>
                             </td>
-                            <td class="px-4 py-3 whitespace-nowrap text-xs text-slate-600 font-medium">
-                                <?= e($p['eje_tematico']) ?>
+                            <td class="px-4 py-3 text-xs leading-relaxed text-slate-700">
+                                <?php if ($alerta['disciplina_partidaria_perjudicial']): ?>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200 mb-1">
+                                    Voto por Disciplina Partidaria en perjuicio provincial
+                                </span>
+                                <?php endif; ?>
+                                <p class="text-slate-800 font-medium"><?= e($alerta['descripcion_impacto']) ?></p>
+                                <p class="text-[11px] text-slate-500 mt-1 italic"><?= e($alerta['motivo']) ?></p>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap text-xs">
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border <?= $bCls ?>">
-                                    <?= e($p['estado_tramite']) ?>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded border text-[11px] <?= $badgeCrit ?>">
+                                    <?= e($critTexto) ?>
                                 </span>
                             </td>
                         </tr>
-                    <?php 
-                        endforeach;
-                    else: 
-                    ?>
-                        <tr>
-                            <td colspan="5" class="px-4 py-6 text-center text-xs text-slate-400 italic">
-                                No se encontraron proyectos de autoría directa para este legislador.
-                            </td>
-                        </tr>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
+            <?php else: ?>
+            <div class="p-5 rounded-xl border border-emerald-200 bg-emerald-50/50 text-center text-xs text-emerald-900">
+                <strong>Sin votos en conflicto registrados:</strong> El legislador ha votado de forma consistente con las leyes de impacto regional para la provincia de <?= e($leg['provincia']) ?>.
+            </div>
+            <?php endif; ?>
         </div>
     </section>
 
-    <script nonce="<?= csp_nonce() ?>">
+    
+    </div>
+</div>
+<script nonce="<?= csp_nonce() ?>">
     document.addEventListener('DOMContentLoaded', function () {
         // 1. Filtro dinámico de proyectos
         const input = document.getElementById('filtroProyectos');

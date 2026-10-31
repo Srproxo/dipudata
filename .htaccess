@@ -70,6 +70,7 @@ AddDefaultCharset UTF-8
     RewriteRule ^api/n8n/(.*)$ mvc.php [L,QSA]
     RewriteRule ^api/auditoria(.*)$ mvc.php [L,QSA]
     RewriteRule ^(diputado|senador)/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
+    RewriteRule ^eje/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
     RewriteRule ^perfil/(.*)$ mvc.php [L,QSA,NC]
     RewriteRule ^match/?$ /match-360 [R=301,L]
     RewriteRule ^match-360/?$ mvc.php [L,QSA]

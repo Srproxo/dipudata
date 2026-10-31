@@ -409,6 +409,53 @@ assert_test("AuditorEngineController: endpoint GET /api/auditoria/1 retorna las 
     isset($jsonAuditor['data']['despacho_costos'])
 );
 
+// --- MASTER PRD V2.0: ARQUITECTURA DE SILO & DIVULGACIÓN PROGRESIVA ---
+echo "\n--- MASTER PRD V2.0: ARQUITECTURA DE SILO & DIVULGACIÓN PROGRESIVA ---\n";
+
+$ejeSalud = $modelLeg->findEjeBySlug('salud-publica');
+assert_test("LegisladorModel: resolución de eje temático por slug SEO ('salud-publica')", 
+    $ejeSalud !== null && ($ejeSalud['nombre_eje'] ?? '') === 'Salud Pública'
+);
+
+$ejeSaludAlias = $modelLeg->findEjeBySlug('salud');
+assert_test("LegisladorModel: resolución de alias SEO ('salud' -> 'salud-publica')",
+    $ejeSaludAlias !== null && ($ejeSaludAlias['slug_seo'] ?? '') === 'salud-publica'
+);
+
+$leyesSalud = $modelLeg->leyesPorEje(1);
+assert_test("LegisladorModel: leyes tratadas por eje temático", count($leyesSalud) >= 1);
+
+$rankingSalud = $modelLeg->rankingPorEje(1, 10);
+assert_test("LegisladorModel: ranking de legisladores por afinidad en eje temático", 
+    count($rankingSalud) > 0 && isset($rankingSalud[0]['afinidad_eje'])
+);
+
+$conflictosLeg = $modelLeg->conflictosTransparencia(1);
+assert_test("LegisladorModel: tabla normalizada de conflictos de transparencia (nepotismo y donantes)",
+    count($conflictosLeg) >= 2 &&
+    in_array('Nepotismo', array_column($conflictosLeg, 'tipo_alerta'), true) &&
+    in_array('Aportante_Campana', array_column($conflictosLeg, 'tipo_alerta'), true)
+);
+
+$_SERVER['REQUEST_URI'] = '/eje/salud-publica';
+ob_start();
+require dirname(__DIR__) . '/mvc.php';
+$ejeHtml = ob_get_clean();
+assert_test("Router SEO: Silo Temático (/eje/salud-publica) renderizado con leyes y ranking",
+    str_contains($ejeHtml, 'Salud Pública en el Congreso') &&
+    str_contains($ejeHtml, 'Eje Temático del Congreso') &&
+    str_contains($ejeHtml, 'Postura de Legisladores') &&
+    str_contains($ejeHtml, 'Otros Ejes Temáticos del Congreso')
+);
+
+assert_test("Frontend UX: perfil.php implementa pestañas de Divulgación Progresiva y enlaces SEO a /eje/",
+    str_contains($perfilHtml, "x-data=\"{ tab: 'votaciones' }\"") &&
+    str_contains($perfilHtml, 'href="/eje/salud-publica"') &&
+    str_contains($perfilHtml, 'href="/eje/seguridad"') &&
+    str_contains($perfilHtml, 'tooltip_alpine') === false && // debe haber renderizado el HTML del tooltip
+    str_contains($perfilHtml, 'Panel de Alertas de Transparencia')
+);
+
 
 
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));

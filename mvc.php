@@ -71,6 +71,53 @@ switch (true) {
         require __DIR__ . '/perfil.php';
         break;
 
+    case (bool)preg_match("#^/eje/({$slug})$#", $path, $m):
+        $slugEje = $m[1];
+        try {
+            $data = (new \App\Controllers\LegisladorController())->eje($slugEje);
+        } catch (\Throwable) {
+            $data = (new \App\Controllers\LegisladorController(new \App\Models\LegisladorModel(null)))->eje($slugEje);
+        }
+        if ($data === null) {
+            render_404();
+            break;
+        }
+        $eje = $data['eje'];
+        $canonicalEje = $eje['slug_seo'] ?? \App\Config\Database::slugify($eje['nombre_eje'] ?? $eje['nombre']);
+        if ($slugEje !== $canonicalEje) {
+            header("Location: /eje/{$canonicalEje}", true, 301);
+            exit;
+        }
+        $nombreEje = $eje['nombre_eje'] ?? $eje['nombre'];
+        $urlEje = SITE_URL . "/eje/{$canonicalEje}";
+        render('eje', [
+            'title'       => "{$nombreEje} en el Congreso | Votaciones, Leyes y Posturas | DipuData",
+            'description' => "Votaciones nominales de diputados y senadores en {$nombreEje}. Proyectos de ley, disciplina de bloque y ranking de afinidad legislativa en Argentina.",
+            'canonical'   => $urlEje,
+            'jsonld'      => [
+                '@context' => 'https://schema.org',
+                '@graph'   => [
+                    [
+                        '@type'       => 'CollectionPage',
+                        'name'        => "Eje Temático: {$nombreEje}",
+                        'url'         => $urlEje,
+                        'description' => $eje['descripcion'] ?? '',
+                        'mainEntity'  => [
+                            '@type'           => 'ItemList',
+                            'itemListElement' => array_map(fn($l, $idx) => [
+                                '@type'    => 'ListItem',
+                                'position' => $idx + 1,
+                                'url'      => SITE_URL . \App\Models\LegisladorModel::urlPerfil($l),
+                                'name'     => $l['nombre'],
+                            ], $data['ranking'], array_keys($data['ranking'])),
+                        ],
+                    ],
+                    self_breadcrumb([['Ejes Temáticos', '/eje/salud-publica'], [$nombreEje, "/eje/{$canonicalEje}"]]),
+                ],
+            ],
+        ], $data);
+        break;
+
     case $path === '/match':
         header('Location: /match-360', true, 301);
         exit;

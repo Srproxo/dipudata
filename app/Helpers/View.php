@@ -30,6 +30,24 @@ function pct(float $v, bool $signo = false): string
 }
 
 /**
+ * Tooltip interactivo liviano con Alpine.js para métricas complejas.
+ */
+function tooltip_alpine(string $texto): string
+{
+    $safe = htmlspecialchars($texto, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    return <<<HTML
+<span x-data="{ open: false }" class="relative inline-flex items-center ml-1.5 align-middle">
+    <button type="button" @mouseenter="open = true" @mouseleave="open = false" @focus="open = true" @blur="open = false" class="text-slate-400 hover:text-slate-600 cursor-help focus:outline-none" aria-label="Información">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0-4h.01"/></svg>
+    </button>
+    <div x-show="open" x-cloak class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-2 text-xs font-normal text-white bg-slate-900 rounded-lg shadow-xl z-50 pointer-events-none transition-all">
+        {$safe}
+    </div>
+</span>
+HTML;
+}
+
+/**
  * Retorna los estilos y colores oficiales del bloque/partido político del legislador.
  *
  * @param string $bloque
@@ -207,7 +225,7 @@ function send_view_headers(int $status = 200): void
     Security::sendSecurityHeaders('text/html; charset=utf-8');
     $n = csp_nonce();
     header("Content-Security-Policy: default-src 'self'; "
-        . "script-src 'self' 'nonce-{$n}' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; "
+        . "script-src 'self' 'nonce-{$n}' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-eval'; "
         . "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         . "font-src 'self' https://fonts.gstatic.com; "
         . "img-src 'self' https://upload.wikimedia.org data:; "

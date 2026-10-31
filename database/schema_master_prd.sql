@@ -6,6 +6,7 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+DROP TABLE IF EXISTS conflictos_transparencia;
 DROP TABLE IF EXISTS promesas_campana;
 DROP TABLE IF EXISTS financiamiento_campana;
 DROP TABLE IF EXISTS leyes_impacto_provincial;
@@ -52,25 +53,27 @@ CREATE TABLE legisladores_master (
 CREATE TABLE ejes_tematicos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
+    slug_seo VARCHAR(100) NOT NULL UNIQUE COMMENT 'Slug SEO amigable (/eje/{slug_seo})',
     descripcion TEXT NULL,
     activo TINYINT(1) NOT NULL DEFAULT 1,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_ejes_slug (slug_seo),
     INDEX idx_ejes_activo (activo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO ejes_tematicos (id, nombre, descripcion, activo) VALUES
-(1,  'Salud', 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.', 1),
-(2,  'Educación', 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.', 1),
-(3,  'Industria', 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.', 1),
-(4,  'Comercio', 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos comerciales.', 1),
-(5,  'Previsión Social', 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones por discapacidad.', 1),
-(6,  'Medio Ambiente', 'Protección de glaciares y humedales, transición energética y soberanía ambiental.', 1),
-(7,  'Seguridad', 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.', 1),
-(8,  'Género', 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.', 1),
-(9,  'Federalismo', 'Distribución equitativa de coparticipación, retenciones agropecuarias y obras regionales.', 1),
-(10, 'Transparencia', 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.', 1),
-(11, 'Tecnología', 'Regulación laboral en plataformas digitales, economía del conocimiento e Inteligencia Artificial.', 1);
+INSERT INTO ejes_tematicos (id, nombre, slug_seo, descripcion, activo) VALUES
+(1,  'Salud', 'salud-publica', 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.', 1),
+(2,  'Educación', 'educacion', 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.', 1),
+(3,  'Industria', 'industria-nacional', 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.', 1),
+(4,  'Comercio', 'apertura-comercial', 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos comerciales.', 1),
+(5,  'Previsión Social', 'prevision-social', 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones por discapacidad.', 1),
+(6,  'Medio Ambiente', 'medio-ambiente', 'Protección de glaciares y humedales, transición energética y soberanía ambiental.', 1),
+(7,  'Seguridad', 'seguridad', 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.', 1),
+(8,  'Género', 'genero', 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.', 1),
+(9,  'Federalismo', 'federalismo', 'Distribución equitativa de coparticipación, retenciones agropecuarias y obras regionales.', 1),
+(10, 'Transparencia', 'transparencia', 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.', 1),
+(11, 'Tecnología', 'tecnologia', 'Regulación laboral en plataformas digitales, economía del conocimiento e Inteligencia Artificial.', 1);
 
 -- ============================================================================
 -- 3. TABLA: leyes
@@ -248,4 +251,21 @@ CREATE TABLE promesas_campana (
         ON UPDATE CASCADE ON DELETE CASCADE,
     INDEX idx_promesas_leg (legislador_id),
     INDEX idx_promesas_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
+-- 11. TABLA: conflictos_transparencia
+-- Registro de alertas de nepotismo y aportantes directos de campaña
+-- ============================================================================
+CREATE TABLE conflictos_transparencia (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    legislador_id INT UNSIGNED NOT NULL COMMENT 'FK a legisladores_master(id)',
+    tipo_alerta ENUM('Nepotismo', 'Aportante_Campana') NOT NULL,
+    descripcion_alerta TEXT NOT NULL,
+    nivel_severidad ENUM('Alta', 'Media', 'Informativa') NOT NULL DEFAULT 'Alta',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_conflictos_leg
+        FOREIGN KEY (legislador_id) REFERENCES legisladores_master(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    INDEX idx_conflictos_leg_tipo (legislador_id, tipo_alerta)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
