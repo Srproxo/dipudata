@@ -398,7 +398,10 @@ class Database
 
     public static function getDefaultBlogArticles(): array
     {
-        return [
+        require_once __DIR__ . '/BlogData.php';
+        $full50 = BlogData::all();
+
+        $legacy = [
             [
                 'categoria_slug'   => 'educacion-financiera',
                 'articulo_slug'    => 'como-auditar-patrimonio-legisladores-inflacion-ipc',
@@ -424,5 +427,7 @@ class Database
                     . '<p>En el polo opuesto del espectro parlamentario, Germán Martínez, José Mayans y Myriam Bregman concentraron sus votos afirmativos en los ejes de Salud Pública y Educación Pública, rechazando los capítulos de desregulación arancelaria, mientras que en el Senado Martín Lousteau marcó disidencias propias frente al oficialismo.</p>',
             ],
         ];
+
+        return array_merge($full50, $legacy);
     }
 }

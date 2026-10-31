@@ -58,6 +58,13 @@ class BlogController
 
     public static function nombreCategoria(string $slug): string
     {
-        return ucfirst(str_replace('-', ' ', $slug));
+        $map = [
+            'patrimonio-y-transparencia' => 'Patrimonio y Transparencia',
+            'anatomia-del-voto'          => 'Anatomía del Voto',
+            'educacion-civica'           => 'Educación Cívica',
+            'educacion-financiera'       => 'Educación Financiera',
+            'auditoria-legislativa'      => 'Auditoría Legislativa',
+        ];
+        return $map[$slug] ?? ucfirst(str_replace('-', ' ', $slug));
     }
 }
