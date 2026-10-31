@@ -36,6 +36,26 @@ switch (true) {
         (new MatchEngineController())->handle();
         break;
 
+    case $path === '/api/legisladores-master':
+        \LegisData\Security::sendSecurityHeaders('application/json; charset=utf-8');
+        $model = new \App\Models\LegisladorModel();
+        $items = $model->all();
+        $clean = array_map(static fn(array $l): array => [
+            'id'             => (int)$l['id'],
+            'id_recinto'     => (string)($l['id_recinto'] ?? ''),
+            'nombre'         => (string)$l['nombre'],
+            'slug'           => (string)$l['slug'],
+            'camara'         => (string)$l['camara'],
+            'provincia'      => (string)$l['provincia'],
+            'bloque'         => (string)$l['bloque'],
+            'cuit'           => (string)$l['cuit'],
+            'estado'         => (string)($l['estado'] ?? 'Activo'),
+            'indice_lealtad' => (float)($l['indice_lealtad'] ?? 0.0),
+            'asistencia'     => (float)($l['asistencia'] ?? 0.0),
+        ], $items);
+        echo json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        exit;
+
     case $path === '/api/n8n/update-despachos':
         (new \App\Controllers\ApiN8nController())->updateDespachos();
         break;

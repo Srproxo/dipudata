@@ -308,6 +308,25 @@ assert_test("ApiN8nController: autorización y persistencia exitosa vía n8n",
     is_array($jsonAuth) && ($jsonAuth['status'] ?? '') === 'ok' && ($jsonAuth['guardado'] ?? false) === true
 );
 
+// Test 7.5: Endpoint GET /api/legisladores-master para consumo de n8n
+$testMasterScript = dirname(__DIR__) . '/tests/test_master_runner.php';
+file_put_contents($testMasterScript, "<?php\n" .
+    '$_SERVER["REQUEST_METHOD"] = "GET";' . "\n" .
+    '$_SERVER["REQUEST_URI"] = "/api/legisladores-master";' . "\n" .
+    '$_SERVER["HTTP_HOST"] = "dipudata.com";' . "\n" .
+    'require_once dirname(__DIR__) . "/mvc.php";' . "\n"
+);
+$resMaster = shell_exec("cd " . escapeshellarg(dirname(__DIR__)) . " && php tests/test_master_runner.php 2>&1");
+@unlink($testMasterScript);
+$jsonMaster = json_decode((string)$resMaster, true);
+assert_test("Endpoint GET /api/legisladores-master: formato JSON con id e id_recinto para n8n",
+    is_array($jsonMaster) &&
+    count($jsonMaster) >= 8 &&
+    isset($jsonMaster[0]['id']) &&
+    isset($jsonMaster[0]['id_recinto']) &&
+    !empty($jsonMaster[0]['id_recinto'])
+);
+
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";
 echo sprintf(" RESUMEN FASES 2, 3, 4 Y 6: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);

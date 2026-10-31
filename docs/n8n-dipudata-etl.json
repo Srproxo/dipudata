@@ -1,0 +1,224 @@
+{
+  "name": "DipuData - ETL Despachos, Asesores y Nepotismo",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 3 1 * *"
+            }
+          ]
+        }
+      },
+      "id": "c1f7b8a2-3e4d-4c5b-9a1e-8f2d3c4b5a67",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://dipudata.com/api/legisladores-master",
+        "options": {}
+      },
+      "id": "a2b3c4d5-e6f7-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "HTTP Request Legisladores",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 200]
+    },
+    {
+      "parameters": {
+        "url": "REEMPLAZAR_URL_CSV_ASESORES_DATOS_ABIERTOS",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "b3c4d5e6-f7a8-4b5c-9d0e-1f2a3b4c5d6e",
+      "name": "Descargar Asesores",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 400]
+    },
+    {
+      "parameters": {
+        "operation": "csv",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "c4d5e6f7-a8b9-4c5d-0e1f-2a3b4c5d6e7f",
+      "name": "Extract CSV Asesores",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "url": "REEMPLAZAR_URL_CSV_PROYECTOS_DATACP",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "d5e6f7a8-b9c0-4d5e-1f2a-3b4c5d6e7f8a",
+      "name": "Descargar Proyectos",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 600],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "csv",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "e6f7a8b9-c0d1-4e5f-2a3b-4c5d6e7f8a9b",
+      "name": "Extract CSV Proyectos",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [700, 600]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener legisladores master de DipuData\nconst legisladores = $('HTTP Request Legisladores').all().map(item => item.json);\n\n// 2. Obtener lista de asesores parseada del CSV\nconst asesoresRows = $('Extract CSV Asesores').all().map(item => item.json);\n\n// 3. Obtener lista de proyectos de ley parseada del CSV\nconst proyectosRows = $('Extract CSV Proyectos').all().map(item => item.json);\n\n// Escala salarial aproximada mensual por categoría parlamentaria (HCDN / HSN)\nconst ESCALA_CATEGORIAS_ARS = {\n  'A-1': 2450000,\n  'A-2': 2100000,\n  'A-3': 1850000,\n  'A-4': 1600000,\n  'A-5': 1400000,\n  'A-6': 1250000,\n  'A-7': 1100000,\n  'A-8': 950000,\n  'A-9': 850000,\n  'A-10': 780000,\n  'A-11': 700000,\n  'A-12': 650000,\n  'A-13': 600000,\n  'A-14': 550000,\n  'default': 1500000\n};\n\nfunction extraerApellidos(nombreCompleto) {\n  if (!nombreCompleto) return [];\n  const ignorar = new Set(['de', 'del', 'la', 'las', 'los', 'san', 'y', 'el', 'di', 'da']);\n  return String(nombreCompleto)\n    .toLowerCase()\n    .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[^a-z\\s]/g, '')\n    .split(/\\s+/)\n    .filter(p => p.length >= 3 && !ignorar.has(p));\n}\n\nconst resultado = [];\n\nfor (const leg of legisladores) {\n  const legId = Number(leg.id);\n  const recinto = String(leg.id_recinto || '').trim();\n  const nombreLeg = String(leg.nombre || '').trim();\n  const apellidosLeg = new Set(extraerApellidos(nombreLeg));\n\n  // Filtrar asesores del legislador\n  const asesoresLeg = asesoresRows.filter(a => {\n    const asig = String(a.legislador_asignado || a.id_recinto || a.legislador || '').trim();\n    if (!asig) return false;\n    if (recinto && asig.toLowerCase() === recinto.toLowerCase()) return true;\n    return asig.toLowerCase() === nombreLeg.toLowerCase();\n  });\n\n  const totalAsesores = asesoresLeg.length;\n  let costoMensual = 0;\n  let alertasNepotismo = 0;\n  const detalleAsesores = [];\n\n  for (const as of asesoresLeg) {\n    const cat = String(as.categoria || 'default').toUpperCase().trim();\n    const sueldo = as.sueldo_mensual ? Number(as.sueldo_mensual) : (ESCALA_CATEGORIAS_ARS[cat] || ESCALA_CATEGORIAS_ARS['default']);\n    costoMensual += sueldo;\n\n    const nombreAsesor = String(as.nombre_asesor || as.nombre || '').trim();\n    const apellidosAsesor = extraerApellidos(nombreAsesor);\n    const coincide = apellidosAsesor.some(ap => apellidosLeg.has(ap));\n\n    if (coincide) {\n      alertasNepotismo++;\n    }\n\n    detalleAsesores.push({\n      nombre: nombreAsesor,\n      categoria: cat,\n      monto_mensual: sueldo,\n      alerta_nepotismo: coincide\n    });\n  }\n\n  const anio = 2024;\n  const costoAnual = costoMensual * 13; // 12 meses + SAC (Aguinaldo)\n\n  // Filtrar proyectos donde es Autor\n  const proyectosAutor = proyectosRows.filter(p => {\n    const pRecinto = String(p.legislador_id_recinto || p.id_recinto || p.legislador || '').trim();\n    const rol = String(p.rol || '').trim().toLowerCase();\n    const matchLeg = (recinto && pRecinto.toLowerCase() === recinto.toLowerCase()) || (pRecinto.toLowerCase() === nombreLeg.toLowerCase());\n    return matchLeg && (rol === 'autor' || rol === 'autor principal');\n  });\n\n  const cantProyectos = proyectosAutor.length;\n  const costoPorProyecto = cantProyectos > 0 ? Math.round((costoAnual / cantProyectos) * 100) / 100 : costoAnual;\n\n  resultado.push({\n    json: {\n      legislador_id: legId,\n      id_recinto: recinto,\n      nombre_legislador: nombreLeg,\n      anio: anio,\n      total_asesores: totalAsesores,\n      costo_mensual_ars: costoMensual,\n      costo_anual_ars: costoAnual,\n      alertas_nepotismo: alertasNepotismo,\n      proyectos_autor_anio: cantProyectos,\n      costo_por_proyecto_ars: costoPorProyecto,\n      detalle_asesores_json: JSON.stringify(detalleAsesores),\n      fuente: 'n8n.buceo.co'\n    }\n  });\n}\n\nreturn resultado;"
+      },
+      "id": "f7a8b9c0-d1e2-4f5a-3b4c-5d6e7f8a9b0c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [940, 400]
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "id": "a8b9c0d1-e2f3-4a5b-4c5d-6e7f8a9b0c1d",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1160, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dipudata.com/api/n8n/update-despachos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "b9c0d1e2-f3a4-4b5c-5d6e-7f8a9b0c1d2e",
+      "name": "Enviar a DipuData",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1380, 400]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Legisladores",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Descargar Asesores",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Descargar Proyectos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar Asesores": {
+      "main": [
+        [
+          {
+            "node": "Extract CSV Asesores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar Proyectos": {
+      "main": [
+        [
+          {
+            "node": "Extract CSV Proyectos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract CSV Asesores": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Enviar a DipuData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar a DipuData": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "DipuData"
+    },
+    {
+      "name": "ETL"
+    }
+  ]
+}
