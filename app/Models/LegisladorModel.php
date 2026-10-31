@@ -8,14 +8,47 @@ use PDO;
 
 class LegisladorModel
 {
-    public const EJES = ['Salud Pública', 'Educación Pública', 'Industria Nacional', 'Apertura Comercial'];
-
     private ?PDO $pdo;
     private ?array $csvCache = null;
+    private ?array $ejesCache = null;
 
     public function __construct(?PDO $pdo = null)
     {
         $this->pdo = $pdo ?? Database::getConnection();
+    }
+
+    /**
+     * Retorna todos los ejes temáticos activos desde la base de datos relacional (Fase 2)
+     * con fallback automático a la matriz predeterminada de 11 ejes.
+     * @return array<int, array{id:int, nombre_eje:string, descripcion:string}>
+     */
+    public function ejes(): array
+    {
+        if ($this->ejesCache !== null) {
+            return $this->ejesCache;
+        }
+
+        if ($this->pdo) {
+            try {
+                $stmt = $this->pdo->query("SELECT id, nombre_eje, descripcion FROM ejes_tematicos WHERE activo = 1 ORDER BY id ASC");
+                $rows = $stmt ? $stmt->fetchAll() : [];
+                if (!empty($rows)) {
+                    return $this->ejesCache = $rows;
+                }
+            } catch (\Throwable) {
+            }
+        }
+
+        return $this->ejesCache = array_values(Database::getDefaultEjes());
+    }
+
+    /**
+     * Lista plana de nombres de ejes temáticos activos.
+     * @return list<string>
+     */
+    public function nombresEjes(): array
+    {
+        return array_column($this->ejes(), 'nombre_eje');
     }
 
     public function all(): array
@@ -44,9 +77,25 @@ class LegisladorModel
     public function votaciones(string $idRecinto): array
     {
         if ($this->pdo) {
-            $stmt = $this->pdo->prepare("SELECT ley, eje_tematico, voto, fecha FROM votaciones WHERE id_recinto = :id ORDER BY fecha DESC");
-            $stmt->execute([':id' => $idRecinto]);
-            return $stmt->fetchAll();
+            try {
+                $stmt = $this->pdo->prepare("
+                    SELECT v.ley, COALESCE(e.nombre_eje, 'General') AS eje_tematico, v.eje_id, v.voto, v.fecha
+                    FROM votaciones v
+                    LEFT JOIN ejes_tematicos e ON v.eje_id = e.id
+                    WHERE v.id_recinto = :id
+                    ORDER BY v.fecha DESC
+                ");
+                $stmt->execute([':id' => $idRecinto]);
+                return $stmt->fetchAll();
+            } catch (\Throwable) {
+                try {
+                    $stmt = $this->pdo->prepare("SELECT ley, eje_tematico, voto, fecha FROM votaciones WHERE id_recinto = :id ORDER BY fecha DESC");
+                    $stmt->execute([':id' => $idRecinto]);
+                    return $stmt->fetchAll();
+                } catch (\Throwable) {
+                    return [];
+                }
+            }
         }
         $rows = $this->csv()['votaciones'][$idRecinto] ?? [];
         usort($rows, fn($a, $b) => strcmp($b['fecha'], $a['fecha']));
@@ -92,18 +141,25 @@ class LegisladorModel
     }
 
     /**
-     * Promedio de votos positivos por eje: Afirmativos / Emitidos * 100 (excluye Ausente).
+     * Promedio dinámico de votos positivos por eje temático:
+     * Afirmativos / Emitidos * 100 (excluye Ausente) iterando sobre los ejes activos de la base de datos.
+     * @return array<string, float>
      */
     public function perfilTematico(string $idRecinto): array
     {
-        $conteo = array_fill_keys(self::EJES, ['afirmativos' => 0, 'emitidos' => 0]);
+        $nombres = $this->nombresEjes();
+        $conteo = array_fill_keys($nombres, ['afirmativos' => 0, 'emitidos' => 0]);
         foreach ($this->votaciones($idRecinto) as $v) {
-            $eje = $v['eje_tematico'];
-            if (!isset($conteo[$eje]) || $v['voto'] === 'Ausente') {
+            $eje = $v['eje_tematico'] ?? null;
+            // Normalizar alias histórico si vino de datos antiguos
+            if ($eje === 'Educación Pública' && !isset($conteo[$eje]) && isset($conteo['Educación'])) {
+                $eje = 'Educación';
+            }
+            if ($eje === null || !isset($conteo[$eje]) || ($v['voto'] ?? '') === 'Ausente') {
                 continue;
             }
             $conteo[$eje]['emitidos']++;
-            if ($v['voto'] === 'Afirmativo') {
+            if (($v['voto'] ?? '') === 'Afirmativo') {
                 $conteo[$eje]['afirmativos']++;
             }
         }
@@ -131,6 +187,7 @@ class LegisladorModel
         $votaciones = [];
         $ddjj = [];
 
+        $ejesDefault = Database::getDefaultEjes();
         foreach (self::readCsv($base . 'votaciones_datacp.csv') as $r) {
             $id = $r['id_recinto'];
             if (!isset($legisladores[$id])) {
@@ -151,9 +208,12 @@ class LegisladorModel
                     'asistencia'         => (float)$r['asistencia'],
                 ];
             }
+            $ejeId = isset($r['eje_id']) && is_numeric($r['eje_id']) ? (int)$r['eje_id'] : 1;
+            $ejeNombre = $r['eje_tematico'] ?? ($ejesDefault[$ejeId]['nombre_eje'] ?? 'General');
             $votaciones[$id][] = [
                 'ley'          => $r['ley'],
-                'eje_tematico' => $r['eje_tematico'],
+                'eje_id'       => $ejeId,
+                'eje_tematico' => $ejeNombre,
                 'voto'         => $r['voto'],
                 'fecha'        => $r['fecha'],
             ];

@@ -23,16 +23,40 @@ class SyncDataController
     private const USER_AGENT = 'DipuDataBot/1.0 (https://dipudata.com; transparencia legislativa)';
 
     private const EJES = [
-        'salud publica'      => 'Salud Pública',
-        'salud'              => 'Salud Pública',
-        'educacion publica'  => 'Educación Pública',
-        'educacion'          => 'Educación Pública',
-        'industria nacional' => 'Industria Nacional',
-        'industria'          => 'Industria Nacional',
-        'proteccionismo'     => 'Industria Nacional',
-        'apertura comercial' => 'Apertura Comercial',
-        'mercadolibre'       => 'Apertura Comercial',
-        'libre mercado'      => 'Apertura Comercial',
+        'salud publica'                     => 1,
+        'salud'                             => 1,
+        'educacion publica'                 => 2,
+        'educacion'                         => 2,
+        'apertura comercial'                => 3,
+        'mercadolibre'                      => 3,
+        'libre mercado'                     => 3,
+        'industria nacional'                => 4,
+        'industria'                         => 4,
+        'proteccionismo'                    => 4,
+        'prevision social y discapacidad'   => 5,
+        'prevision social'                  => 5,
+        'jubilados'                         => 5,
+        'discapacidad'                      => 5,
+        'medio ambiente y derechos humanos' => 6,
+        'medio ambiente'                    => 6,
+        'derechos humanos'                  => 6,
+        'seguridad y sistema penal'         => 7,
+        'seguridad'                         => 7,
+        'penal'                             => 7,
+        'genero y cuidados'                 => 8,
+        'genero'                            => 8,
+        'cuidados'                          => 8,
+        'federalismo y agro'                => 9,
+        'federalismo'                       => 9,
+        'agro'                              => 9,
+        'campo'                             => 9,
+        'transparencia institucional'       => 10,
+        'transparencia'                     => 10,
+        'ficha limpia'                      => 10,
+        'tecnologia y trabajo'              => 11,
+        'tecnologia'                        => 11,
+        'trabajo'                           => 11,
+        'plataformas'                       => 11,
     ];
 
     private const VOTOS = [
@@ -88,9 +112,9 @@ class SyncDataController
                 indice_lealtad = VALUES(indice_lealtad), asistencia = VALUES(asistencia)
         ");
         $insVoto = $this->pdo->prepare("
-            INSERT INTO votaciones (id_recinto, ley, eje_tematico, voto, fecha)
-            VALUES (:id_recinto, :ley, :eje, :voto, :fecha)
-            ON DUPLICATE KEY UPDATE voto = VALUES(voto), eje_tematico = VALUES(eje_tematico)
+            INSERT INTO votaciones (id_recinto, ley, eje_id, voto, fecha)
+            VALUES (:id_recinto, :ley, :eje_id, :voto, :fecha)
+            ON DUPLICATE KEY UPDATE voto = VALUES(voto), eje_id = VALUES(eje_id)
         ");
 
         $ok = $descartadas = 0;
@@ -248,14 +272,20 @@ class SyncDataController
 
     private function normalizarVoto(array $f): ?array
     {
-        $eje = self::EJES[self::sinAcentos($f['eje_tematico'] ?? '')] ?? null;
+        $ejeId = null;
+        if (isset($f['eje_id']) && is_numeric($f['eje_id']) && (int)$f['eje_id'] >= 1 && (int)$f['eje_id'] <= 11) {
+            $ejeId = (int)$f['eje_id'];
+        } else {
+            $ejeId = self::EJES[self::sinAcentos($f['eje_tematico'] ?? '')] ?? null;
+        }
+
         $voto = self::VOTOS[self::sinAcentos($f['voto'] ?? '')] ?? null;
         $fecha = date_create_immutable((string)($f['fecha'] ?? ''));
         $ley = trim((string)($f['ley'] ?? ''));
-        if ($eje === null || $voto === null || $fecha === false || $ley === '') {
+        if ($ejeId === null || $voto === null || $fecha === false || $ley === '') {
             return null;
         }
-        return [':ley' => mb_substr($ley, 0, 255), ':eje' => $eje, ':voto' => $voto, ':fecha' => $fecha->format('Y-m-d')];
+        return [':ley' => mb_substr($ley, 0, 255), ':eje_id' => $ejeId, ':voto' => $voto, ':fecha' => $fecha->format('Y-m-d')];
     }
 
     public static function normalizarCuit(string $cuit): ?string

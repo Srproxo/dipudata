@@ -1,41 +1,96 @@
-id_recinto,nombre,camara,provincia,bloque,estado,cuit,nombre_wiki,indice_lealtad,asistencia,ley,eje_tematico,voto,fecha
-HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Afirmativo,2024-04-30
-HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Afirmativo,2024-09-12
-HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Financiamiento de Universidades Nacionales,Educación Pública,Negativo,2024-08-15
-HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Negativo,2024-10-02
-HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Negativo,2024-07-18
-HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Afirmativo,2024-04-30
-HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Afirmativo,2024-09-12
-HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Financiamiento de Universidades Nacionales,Educación Pública,Negativo,2024-08-15
-HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Abstención,2024-10-02
-HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-18
-HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Afirmativo,2024-04-30
-HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Afirmativo,2024-09-12
-HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-08-15
-HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-02
-HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-18
-HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Negativo,2024-04-30
-HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Negativo,2024-09-12
-HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-08-15
-HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-02
-HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-18
-HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Afirmativo,2024-04-30
-HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Negativo,2024-09-12
-HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-08-15
-HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-02
-HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-18
-HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Negativo,2024-04-30
-HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Negativo,2024-09-12
-HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-08-15
-HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-02
-HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Abstención,2024-07-18
-HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Negativo,2024-06-12
-HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Afirmativo,2024-09-19
-HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-09-12
-HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-10
-HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-25
-HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Ley Bases y Puntos de Partida (RIGI y Desregulación),Apertura Comercial,Negativo,2024-06-12
-HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Eliminación de Aranceles a Bienes Tecnológicos,Apertura Comercial,Negativo,2024-09-19
-HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Financiamiento de Universidades Nacionales,Educación Pública,Afirmativo,2024-09-12
-HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Emergencia Pediátrica y Hospitales Nacionales,Salud Pública,Afirmativo,2024-10-10
-HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Régimen de Promoción de la Industria Autopartista,Industria Nacional,Afirmativo,2024-07-25
+id_recinto,nombre,camara,provincia,bloque,estado,cuit,nombre_wiki,indice_lealtad,asistencia,ley,eje_id,eje_tematico,voto,fecha
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Negativo,2024-10-02
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Financiamiento de Universidades Nacionales,2,Educación,Negativo,2024-08-15
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Afirmativo,2024-04-30
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Negativo,2024-07-18
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Negativo,2024-06-05
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Negativo,2024-09-04
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Afirmativo,2024-09-25
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Negativo,2024-05-15
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-08-28
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Afirmativo,2024-10-16
+HCDN-1001,Martín Alexis Menem,Diputados,La Rioja,La Libertad Avanza,Activo,20-21458912-6,Martín_Menem,98.50,97.20,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Afirmativo,2024-07-03
+
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Abstención,2024-10-02
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Financiamiento de Universidades Nacionales,2,Educación,Negativo,2024-08-15
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Afirmativo,2024-04-30
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-18
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Negativo,2024-06-05
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Abstención,2024-09-04
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Afirmativo,2024-09-25
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Abstención,2024-05-15
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-08-28
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Afirmativo,2024-10-16
+HCDN-1002,Cristian Ritondo,Diputados,Buenos Aires,PRO,Activo,20-18234901-2,Cristian_Ritondo,94.20,93.80,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Afirmativo,2024-07-03
+
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-02
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-08-15
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Afirmativo,2024-04-30
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-18
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-06-05
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Afirmativo,2024-09-04
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Afirmativo,2024-09-25
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Afirmativo,2024-05-15
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-08-28
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Afirmativo,2024-10-16
+HCDN-1003,Rodrigo de Loredo,Diputados,Córdoba,UCR,Activo,20-27981234-5,Rodrigo_de_Loredo,89.40,95.10,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Abstención,2024-07-03
+
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-02
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-08-15
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Negativo,2024-04-30
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-18
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-06-05
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Afirmativo,2024-09-04
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Negativo,2024-09-25
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Afirmativo,2024-05-15
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Abstención,2024-08-28
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Negativo,2024-10-16
+HCDN-1004,Germán Martínez,Diputados,Santa Fe,Unión por la Patria,Activo,20-24112890-4,Germán_Martínez_(político),96.80,98.00,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Negativo,2024-07-03
+
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-02
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-08-15
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Afirmativo,2024-04-30
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-18
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-06-05
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Abstención,2024-09-04
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Afirmativo,2024-09-25
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Abstención,2024-05-15
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-08-28
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Afirmativo,2024-10-16
+HCDN-1005,Miguel Ángel Pichetto,Diputados,Buenos Aires,Encuentro Federal,Activo,20-10456789-5,Miguel_Ángel_Pichetto,86.50,91.40,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Afirmativo,2024-07-03
+
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-02
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-08-15
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Negativo,2024-04-30
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Abstención,2024-07-18
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-06-05
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Afirmativo,2024-09-04
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Negativo,2024-09-25
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Afirmativo,2024-05-15
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Negativo,2024-08-28
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Abstención,2024-10-16
+HCDN-1006,Myriam Bregman,Diputados,Ciudad Autónoma de Buenos Aires,Frente de Izquierda,Activo,27-22654321-5,Myriam_Bregman,99.10,94.60,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Negativo,2024-07-03
+
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-10
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-09-12
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Negativo,2024-06-12
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-25
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-08-22
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Afirmativo,2024-09-18
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Afirmativo,2024-10-03
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Afirmativo,2024-06-19
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-09-05
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Afirmativo,2024-10-24
+HSN-2001,Martín Lousteau,Senadores,Ciudad Autónoma de Buenos Aires,UCR,Activo,20-21789654-2,Martín_Lousteau,82.30,96.50,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Abstención,2024-08-01
+
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Emergencia Pediátrica y Hospitales Nacionales,1,Salud Pública,Afirmativo,2024-10-10
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Financiamiento de Universidades Nacionales,2,Educación,Afirmativo,2024-09-12
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Ley Bases y Puntos de Partida (RIGI y Desregulación),3,Apertura Comercial,Negativo,2024-06-12
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Régimen de Promoción de la Industria Autopartista,4,Industria Nacional,Afirmativo,2024-07-25
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Movilidad Jubilatoria y Pensiones por Discapacidad,5,Previsión Social y Discapacidad,Afirmativo,2024-08-22
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Ley de Presupuestos Mínimos de Humedales,6,Medio Ambiente y Derechos Humanos,Afirmativo,2024-09-18
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Ley Antimafias y Régimen Penal Juvenil,7,Seguridad y Sistema Penal,Negativo,2024-10-03
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Sistema Integral de Políticas de Cuidados,8,Género y Cuidados,Afirmativo,2024-06-19
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Baja de Retenciones al Agro y Fondos Provinciales,9,Federalismo y Agro,Afirmativo,2024-09-05
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Proyecto Ficha Limpia para Candidatos,10,Transparencia Institucional,Negativo,2024-10-24
+HSN-2002,José Mayans,Senadores,Formosa,Unión por la Patria,Activo,20-12876543-4,José_Mayans,97.40,95.00,Régimen Laboral para Plataformas Digitales,11,Tecnología y Trabajo,Negativo,2024-08-01

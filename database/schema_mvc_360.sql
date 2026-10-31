@@ -1,6 +1,6 @@
 -- ============================================================================
 -- DIPUDATA / MATCH ELECTORAL 360 — ESQUEMA SQL COMPLETO (MySQL 8.0+ / MariaDB)
--- Arquitectura de Datos Cívicos, Educación Financiera y Hub & Spoke SEO
+-- Arquitectura de Datos Cívicos, Educación Financiera y Hub & Spoke SEO (Fase 2)
 -- ============================================================================
 
 SET NAMES utf8mb4;
@@ -8,6 +8,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS blog_articulos;
 DROP TABLE IF EXISTS votaciones;
+DROP TABLE IF EXISTS ejes_tematicos;
 DROP TABLE IF EXISTS patrimonio_ddjj_cuit;
 DROP TABLE IF EXISTS legisladores_master;
 
@@ -40,10 +41,10 @@ CREATE TABLE legisladores_master (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 2. TABLA PATRIMONIAL: patrimonio_ddjj
+-- 2. TABLA PATRIMONIAL: patrimonio_ddjj_cuit
 -- Relacionada al CUIT del legislador. Almacena declaración nominal, IPC y variación real
 -- ============================================================================
-CREATE TABLE IF NOT EXISTS patrimonio_ddjj_cuit (
+CREATE TABLE patrimonio_ddjj_cuit (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     cuit VARCHAR(13) NOT NULL COMMENT 'FK hacia legisladores_master.cuit',
     anio YEAR NOT NULL COMMENT 'Año fiscal de la DDJJ ante Oficina Anticorrupción',
@@ -62,19 +63,41 @@ CREATE TABLE IF NOT EXISTS patrimonio_ddjj_cuit (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 3. TABLA DE VOTACIONES: votaciones
--- Relacionada al ID_Recinto. Clasificada en los 4 ejes del Match Electoral 360
+-- 3. TABLA DINÁMICA DE EJES TEMÁTICOS: ejes_tematicos
+-- Normalización relacional de la matriz temática (11 dimensiones)
+-- ============================================================================
+CREATE TABLE ejes_tematicos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre_eje VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT NULL,
+    activo TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_ejes_activo (activo)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO ejes_tematicos (id, nombre_eje, descripcion, activo) VALUES
+(1,  'Salud Pública', 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.', 1),
+(2,  'Educación', 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.', 1),
+(3,  'Apertura Comercial', 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos bilaterales.', 1),
+(4,  'Industria Nacional', 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.', 1),
+(5,  'Previsión Social y Discapacidad', 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones no contributivas por discapacidad.', 1),
+(6,  'Medio Ambiente y Derechos Humanos', 'Protección de glaciares y humedales, transición energética, soberanía ambiental y derechos humanos.', 1),
+(7,  'Seguridad y Sistema Penal', 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.', 1),
+(8,  'Género y Cuidados', 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.', 1),
+(9,  'Federalismo y Agro', 'Distribución equitativa de coparticipación, retenciones agropecuarias y desarrollo regional.', 1),
+(10, 'Transparencia Institucional', 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.', 1),
+(11, 'Tecnología y Trabajo', 'Regulación del empleo en plataformas digitales, economía del conocimiento, telecomunicaciones e IA.', 1);
+
+-- ============================================================================
+-- 4. TABLA DE VOTACIONES: votaciones
+-- Clave foránea eje_id referenciando a ejes_tematicos(id)
 -- ============================================================================
 CREATE TABLE votaciones (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_recinto VARCHAR(50) NOT NULL COMMENT 'FK hacia legisladores_master.id_recinto',
     ley VARCHAR(255) NOT NULL COMMENT 'Nombre o expediente de la ley votada',
-    eje_tematico ENUM(
-        'Salud Pública',
-        'Educación Pública',
-        'Industria Nacional',
-        'Apertura Comercial'
-    ) NOT NULL,
+    eje_id INT UNSIGNED NOT NULL COMMENT 'FK hacia ejes_tematicos.id',
     voto ENUM(
         'Afirmativo',
         'Negativo',
@@ -86,13 +109,16 @@ CREATE TABLE votaciones (
     CONSTRAINT fk_votaciones_id_recinto
         FOREIGN KEY (id_recinto) REFERENCES legisladores_master(id_recinto)
         ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_votaciones_eje
+        FOREIGN KEY (eje_id) REFERENCES ejes_tematicos(id)
+        ON UPDATE CASCADE ON DELETE RESTRICT,
     UNIQUE KEY uq_recinto_ley_fecha (id_recinto, ley, fecha),
-    INDEX idx_votaciones_recinto_eje (id_recinto, eje_tematico, voto),
+    INDEX idx_votaciones_recinto_eje_id (id_recinto, eje_id, voto),
     INDEX idx_votaciones_fecha (fecha DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 4. TABLA SEO HUB & SPOKE: blog_articulos
+-- 5. TABLA SEO HUB & SPOKE: blog_articulos
 -- Artículos de educación financiera y análisis legislativo (/blog/{categoria}/{slug})
 -- ============================================================================
 CREATE TABLE blog_articulos (

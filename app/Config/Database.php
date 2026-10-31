@@ -41,25 +41,30 @@ class Database
 
     private static function ensureMvcTables(PDO $pdo): void
     {
+        $hasEjes = false;
         try {
-            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM legisladores_master");
+            $stmt = $pdo->query("SELECT COUNT(*) AS c FROM ejes_tematicos");
             $row = $stmt ? $stmt->fetch() : false;
-            if ($row && (int)$row['c'] > 0) {
-                return;
+            if ($row && (int)$row['c'] >= 11) {
+                $hasEjes = true;
             }
         } catch (Throwable) {
-            // Crear tablas MVC 360 si aún no existen
+            $hasEjes = false;
         }
 
-        $schemaFile = dirname(__DIR__, 2) . '/database/schema_mvc_360.sql';
-        if (is_readable($schemaFile)) {
-            $sql = (string)file_get_contents($schemaFile);
-            foreach (explode(';', $sql) as $statement) {
-                $statement = trim($statement);
-                if ($statement !== '') {
-                    try {
-                        $pdo->exec($statement);
-                    } catch (Throwable) {
+        if (!$hasEjes) {
+            $migrationFile = dirname(__DIR__, 2) . '/database/migration_fase2.sql';
+            $schemaFile = dirname(__DIR__, 2) . '/database/schema_mvc_360.sql';
+            $fileToRun = is_readable($schemaFile) ? $schemaFile : $migrationFile;
+            if (is_readable($fileToRun)) {
+                $sql = (string)file_get_contents($fileToRun);
+                foreach (explode(';', $sql) as $statement) {
+                    $statement = trim($statement);
+                    if ($statement !== '') {
+                        try {
+                            $pdo->exec($statement);
+                        } catch (Throwable) {
+                        }
                     }
                 }
             }
@@ -88,8 +93,38 @@ class Database
         ];
     }
 
+    public static function getDefaultEjes(): array
+    {
+        return [
+            1  => ['id' => 1,  'nombre_eje' => 'Salud Pública', 'descripcion' => 'Políticas sanitarias, financiamiento hospitalario, vacunas y emergencias de salud pública.'],
+            2  => ['id' => 2,  'nombre_eje' => 'Educación', 'descripcion' => 'Presupuesto para universidades y escuelas, salario docente, infraestructura educativa e investigación.'],
+            3  => ['id' => 3,  'nombre_eje' => 'Apertura Comercial', 'descripcion' => 'Desregulación arancelaria, comercio exterior, importaciones libres y acuerdos bilaterales.'],
+            4  => ['id' => 4,  'nombre_eje' => 'Industria Nacional', 'descripcion' => 'Protección y estímulo a PyMEs industriales, empleo fabril y desarrollo de proveedores locales.'],
+            5  => ['id' => 5,  'nombre_eje' => 'Previsión Social y Discapacidad', 'descripcion' => 'Fórmula de movilidad jubilatoria, cobertura de medicamentos y pensiones no contributivas por discapacidad.'],
+            6  => ['id' => 6,  'nombre_eje' => 'Medio Ambiente y Derechos Humanos', 'descripcion' => 'Protección de glaciares y humedales, transición energética, soberanía ambiental y derechos humanos.'],
+            7  => ['id' => 7,  'nombre_eje' => 'Seguridad y Sistema Penal', 'descripcion' => 'Régimen penal juvenil, Código Penal, lucha contra el crimen organizado y endurecimiento de penas.'],
+            8  => ['id' => 8,  'nombre_eje' => 'Género y Cuidados', 'descripcion' => 'Sistema integral de cuidados, régimen de licencias laborales familiares y prevención de violencias.'],
+            9  => ['id' => 9,  'nombre_eje' => 'Federalismo y Agro', 'descripcion' => 'Distribución equitativa de coparticipación, retenciones agropecuarias y desarrollo regional.'],
+            10 => ['id' => 10, 'nombre_eje' => 'Transparencia Institucional', 'descripcion' => 'Ficha Limpia, declaraciones juradas públicas, acceso a la información y control del gasto político.'],
+            11 => ['id' => 11, 'nombre_eje' => 'Tecnología y Trabajo', 'descripcion' => 'Regulación del empleo en plataformas digitales, economía del conocimiento, telecomunicaciones e IA.'],
+        ];
+    }
+
     private static function importCsvSeeds(PDO $pdo, array $bios): void
     {
+        // 1. Sembrar ejes temáticos si no existen
+        $stmtEjes = $pdo->prepare("
+            INSERT INTO ejes_tematicos (id, nombre_eje, descripcion, activo)
+            VALUES (:id, :nombre, :desc, 1)
+            ON DUPLICATE KEY UPDATE nombre_eje = VALUES(nombre_eje), descripcion = VALUES(descripcion)
+        ");
+        foreach (self::getDefaultEjes() as $eje) {
+            $stmtEjes->execute([
+                ':id'     => $eje['id'],
+                ':nombre' => $eje['nombre_eje'],
+                ':desc'   => $eje['descripcion'],
+            ]);
+        }
 
         $csvVotos = dirname(__DIR__, 2) . '/storage/csv/votaciones_datacp.csv';
         if (is_readable($csvVotos) && ($handle = fopen($csvVotos, 'r')) !== false) {
@@ -106,9 +141,9 @@ class Database
                     asistencia = VALUES(asistencia)
             ");
             $stmtVoto = $pdo->prepare("
-                INSERT INTO votaciones (id_recinto, ley, eje_tematico, voto, fecha)
-                VALUES (:id_recinto, :ley, :eje_tematico, :voto, :fecha)
-                ON DUPLICATE KEY UPDATE voto = VALUES(voto)
+                INSERT INTO votaciones (id_recinto, ley, eje_id, voto, fecha)
+                VALUES (:id_recinto, :ley, :eje_id, :voto, :fecha)
+                ON DUPLICATE KEY UPDATE voto = VALUES(voto), eje_id = VALUES(eje_id)
             ");
 
             while (($row = fgetcsv($handle)) !== false) {
@@ -135,12 +170,14 @@ class Database
                     ':indice_lealtad' => (float)$data['indice_lealtad'],
                     ':asistencia'     => (float)$data['asistencia'],
                 ]);
+
+                $ejeId = isset($data['eje_id']) && is_numeric($data['eje_id']) ? (int)$data['eje_id'] : 1;
                 $stmtVoto->execute([
-                    ':id_recinto'   => $idRecinto,
-                    ':ley'          => trim((string)$data['ley']),
-                    ':eje_tematico' => trim((string)$data['eje_tematico']),
-                    ':voto'         => trim((string)$data['voto']),
-                    ':fecha'        => trim((string)$data['fecha']),
+                    ':id_recinto' => $idRecinto,
+                    ':ley'        => trim((string)$data['ley']),
+                    ':eje_id'     => $ejeId,
+                    ':voto'       => trim((string)$data['voto']),
+                    ':fecha'      => trim((string)$data['fecha']),
                 ]);
             }
             fclose($handle);

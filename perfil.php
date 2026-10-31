@@ -56,11 +56,20 @@ $meta = [
 ];
 
 $colores = [
-    'Salud Pública'      => ['bar' => 'bg-teal-500',   'txt' => 'text-teal-700'],
-    'Educación Pública'  => ['bar' => 'bg-blue-500',   'txt' => 'text-blue-700'],
-    'Industria Nacional' => ['bar' => 'bg-indigo-500', 'txt' => 'text-indigo-700'],
-    'Apertura Comercial' => ['bar' => 'bg-amber-500',  'txt' => 'text-amber-700'],
+    'Salud Pública'                     => ['bar' => 'bg-teal-500',    'txt' => 'text-teal-700'],
+    'Educación'                         => ['bar' => 'bg-blue-500',    'txt' => 'text-blue-700'],
+    'Educación Pública'                 => ['bar' => 'bg-blue-500',    'txt' => 'text-blue-700'],
+    'Apertura Comercial'                => ['bar' => 'bg-amber-500',   'txt' => 'text-amber-700'],
+    'Industria Nacional'                => ['bar' => 'bg-indigo-500',  'txt' => 'text-indigo-700'],
+    'Previsión Social y Discapacidad'   => ['bar' => 'bg-rose-500',    'txt' => 'text-rose-700'],
+    'Medio Ambiente y Derechos Humanos' => ['bar' => 'bg-emerald-500', 'txt' => 'text-emerald-700'],
+    'Seguridad y Sistema Penal'         => ['bar' => 'bg-slate-700',   'txt' => 'text-slate-800'],
+    'Género y Cuidados'                 => ['bar' => 'bg-fuchsia-500', 'txt' => 'text-fuchsia-700'],
+    'Federalismo y Agro'                => ['bar' => 'bg-lime-600',    'txt' => 'text-lime-800'],
+    'Transparencia Institucional'       => ['bar' => 'bg-cyan-600',    'txt' => 'text-cyan-800'],
+    'Tecnología y Trabajo'              => ['bar' => 'bg-violet-500',  'txt' => 'text-violet-700'],
 ];
+$colorDefault = ['bar' => 'bg-blue-600', 'txt' => 'text-blue-700'];
 $badgeVoto = [
     'Afirmativo' => 'bg-emerald-100 text-emerald-700',
     'Negativo'   => 'bg-rose-100 text-rose-700',
@@ -155,15 +164,17 @@ require __DIR__ . '/app/Views/layouts/header.php';
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
         <h2 class="text-xl font-bold tracking-tight">Apoyo por eje temático</h2>
         <p class="text-sm text-slate-500 mt-1">Votos afirmativos sobre votos emitidos (excluye ausencias).</p>
-        <div class="mt-6 space-y-5">
-            <?php foreach ($data['perfil'] as $eje => $valor): ?>
+        <div class="mt-6 space-y-4">
+            <?php foreach ($data['perfil'] as $eje => $valor):
+                $c = $colores[$eje] ?? $colorDefault;
+            ?>
             <div>
                 <div class="flex justify-between text-sm mb-1.5">
-                    <span class="font-medium"><?= e($eje) ?></span>
-                    <span class="font-mono <?= e($colores[$eje]['txt']) ?>"><?= e(pct($valor)) ?></span>
+                    <span class="font-medium text-slate-800"><?= e($eje) ?></span>
+                    <span class="font-mono text-xs font-semibold <?= e($c['txt']) ?>"><?= e(pct($valor)) ?></span>
                 </div>
-                <div class="h-2.5 bg-slate-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
-                    <div class="h-full rounded-full <?= e($colores[$eje]['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
+                <div class="h-2 bg-slate-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="<?= e($valor) ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?= e($eje) ?>">
+                    <div class="h-full rounded-full <?= e($c['bar']) ?>" style="width: <?= e($valor) ?>%"></div>
                 </div>
             </div>
             <?php endforeach; ?>
