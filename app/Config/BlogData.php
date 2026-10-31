@@ -662,6 +662,454 @@ class BlogData
 <h2>El Contexto Histórico: La Discusión del Déficit Fiscal y el Rol del Estado en Argentina</h2><p>Desde la sanción de la Ley de Ética Pública y la reglamentación de los sistemas de datos abiertos parlamentarios, la ciudadanía cuenta con herramientas para contrastar la evolución patrimonial y la productividad de sus representantes. Sin embargo, la dispersión de las fuentes gubernamentales históricamente dificultó el control cívico simultáneo entre lo que un legislador declara poseer y cómo vota en leyes regulatorias o tributarias.</p><p>Cuando se contrastan los historiales legislativos en materias como apertura comercial, subsidios industriales o financiamiento universitario, se observa cómo figuras como <strong>Martín Alexis Menem</strong> y <strong>Germán Martínez</strong> articulan sus alianzas de bloque según la coyuntura del Poder Ejecutivo nacional, generando en ocasiones tensiones directas con el mandato recibido de sus electores de distrito.</p>
 <h2>El Impacto en el Votante: Descubrir tu Posición Real a través del Match 360</h2><p>El valor fundamental de auditar la actividad parlamentaria radica en cerrar la asimetría informativa entre el ciudadano y sus representantes. Cuando un votante conoce con exactitud el costo fiscal de cada banca y el grado de disciplina partidaria ejercido en leyes de impacto cotidiano —como tarifas, jubilaciones, código penal o impuestos—, su decisión electoral deja de sustentarse en eslóganes publicitarios y pasa a fundarse en evidencia empírica verificable.</p><p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
             ],
+            [
+                'id'               => 51,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'inmuebles-declarados-vs-mercado-subvaluacion-fiscal',
+                'titulo'           => 'Subvaluación fiscal: la brecha entre valor fiscal y de mercado en el Congreso',
+                'meta_descripcion' => 'Investigación sobre las valuaciones de inmuebles declaradas ante la OA por diputados y senadores. La distorsión entre el valor de escritura fiscal y los precios reales de mercado.',
+                'fecha_publicacion'=> '2026-11-02 09:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El sistema de declaraciones juradas patrimoniales ante la Oficina Anticorrupción permite asentar bienes raíces a valor fiscal de rentas provinciales, generando una asimetría estructural de hasta un 600% respecto de las cotizaciones inmobiliarias de mercado. Este relevamiento cruza los metros cuadrados y ubicaciones declaradas con valores promedio de oferta.</p>
+<h2>El Dato Crudo: Valuaciones Fiscales Declaradas vs. Cotizaciones Venales</h2><p>En las presentaciones obligatorias de legisladores como <strong>Martín Alexis Menem</strong>, <strong>Cristian Adrián Ritondo</strong> y <strong>Rodrigo de Loredo</strong>, la valuación promedio de inmuebles urbanos se registra en pesos al costo histórico de adquisición o valuación de rentas provinciales, muy por debajo de la cotización en dólares del mercado real.</p><blockquote><p><strong>Dato verificado: De las 257 declaraciones juradas auditadas en la Cámara Baja, el 84% computa sus propiedades principales a menos del 20% del valor real de mercado por efecto del rezago de valuaciones fiscales provinciales.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Marco Regulatorio de la Ley de Ética Pública</h2><p>La Ley 25.188 de Ética en el Ejercicio de la Función Pública no exige tasación a valor venal o de reposición, lo que habilita que inmuebles de alta cotización en Recoleta o countries privados figuren formalmente por fracciones testimoniales de su patrimonio efectivo.</p>
+<h2>El Impacto en el Votante: La Dificultad para Detectar Enriquecimiento Ilícito</h2><p>Para el ciudadano, esta brecha fiscal diluye la capacidad de auditar si hubo o no enriquecimiento patrimonial injustificado durante el ejercicio de la banca pública. La transparencia efectiva requiere actualizar los criterios hacia valores de mercado verificables.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 52,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'vehiculos-alta-gama-yates-patrimonio-congreso',
+                'titulo'           => 'Vehículos de alta gama y embarcaciones: los bienes declarados en el Congreso',
+                'meta_descripcion' => 'Radiografía del parque automotor y bienes suntuarios registrados por diputados y senadores. Cuántos vehículos de lujo y embarcaciones constan en las DDJJ oficiales.',
+                'fecha_publicacion'=> '2026-11-06 14:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El registro patrimonial de rodados ante la Oficina Anticorrupción y la DNRPA permite cuantificar la tenencia de vehículos de alta gama, camionetas 4x4 y embarcaciones deportivas en poder de legisladores nacionales. El cruce con tablas de aseguradoras expone la depreciación contable versus el patrimonio circulante.</p>
+<h2>El Dato Crudo: Cantidad de Unidades Registradas y Distribución por Bancada</h2><p>El inventario patrimonial cruzado revela la titularidad de unidades premium en bloques mayoritarios encabezados por <strong>Miguel Ángel Pichetto</strong>, <strong>Cristian Adrián Ritondo</strong> y <strong>Martín Lousteau</strong>, con modelos importados y radicaciones provinciales que reducen el impacto del impuesto a las patentes.</p><blockquote><p><strong>Dato verificado: Se contabilizan más de 340 rodados declarados entre ambas cámaras, con un valor de mercado conjunto superior a los 9.2 millones de dólares a cotización MEP.</strong></p></blockquote>
+<h2>El Contexto Histórico: Evolución del Parque Automotor de la Dirigencia</h2><p>A lo largo de las últimas dos décadas, la renovación del parque automotor parlamentario reflejó las tensiones cambiarias del país, migrando de vehículos de gama media nacional a unidades pick-up y utilitarios deportivos de marcas internacionales.</p>
+<h2>El Impacto en el Votante: Coherencia entre Ingresos Públicos y Consumos Privados</h2><p>Conocer los bienes suntuarios y su forma de financiamiento permite auditar la consistencia entre los ingresos públicos percibidos por dieta y el tren de vida de los parlamentarios que votan las leyes impositivas del país.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 53,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'deudas-cruzadas-acreedores-privados-declaraciones-juradas',
+                'titulo'           => 'Acreedores privados: quiénes prestan dinero a los legisladores nacionales',
+                'meta_descripcion' => 'Auditoría sobre los pasivos y préstamos personales registrados en las DDJJ. Vínculos comerciales, empresas financieras y alertas de potenciales conflictos de interés.',
+                'fecha_publicacion'=> '2026-11-10 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Uno de los rubros menos fiscalizados de las declaraciones juradas parlamentarias es el detalle de deudas con personas físicas y jurídicas privadas. Cuando un legislador mantiene pasivos millonarios con empresas de sectores regulados, surge una zona gris de posibles incompatibilidades en votaciones clave.</p>
+<h2>El Dato Crudo: Montos Declarados en Pasivos y Tipología de Acreedores</h2><p>En los pasivos declarados por parlamentarios como <strong>Germán Martínez</strong>, <strong>Carlos Omar Arce</strong> y <strong>Rodrigo de Loredo</strong>, figuran deudas mutuas con sociedades comerciales, entidades crediticias regionales y personas físicas sin parentesco directo declarado.</p><blockquote><p><strong>Dato verificado: El 31% de los senadores y el 27% de los diputados consigna deudas con acreedores privados comerciales, sumando compromisos por más de 1.800 millones de pesos al cierre del último ejercicio.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Vacíos Legales en la Declaración de Pasivos</h2><p>La exigencia de identificar al CUIT exacto del acreedor fue un avance de las reformas de transparencia de 2013, pero la falta de auditoría proactiva impide certificar si los préstamos corresponden a operaciones comerciales reales o aportes de capital encubiertos.</p>
+<h2>El Impacto en el Votante: Deudas Financieras y Conflictos de Interés en el Recinto</h2><p>El votante tiene derecho a conocer si su representante legisla condicionado por deudas económicas con empresas o grupos de interés que luego son beneficiados por exenciones tributarias o contratos estatales.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 54,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'sociedades-offshore-acciones-exterior-patrimonio-diputados',
+                'titulo'           => 'Acciones y activos en el exterior: el mapa patrimonial internacional de las bancas',
+                'meta_descripcion' => 'Cuántos legisladores declaran cuentas bancarias en el extranjero, sociedades foráneas y carteras de inversión diversificadas fuera del circuito financiero argentino.',
+                'fecha_publicacion'=> '2026-11-14 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El relevamiento de las DDJJ de carácter integral permite auditar la proporción de legisladores que canalizan sus ahorros e inversiones productivas en el exterior. Cuentas en Estados Unidos, participaciones en sociedades extranjeras y bonos soberanos externos conforman este portafolio.</p>
+<h2>El Dato Crudo: Radicación de Fondos y Proporción en Moneda Dura</h2><p>El cruce de activos externos abarca tanto a parlamentarios de la bancada oficialista liderada por <strong>Martín Alexis Menem</strong> como a referentes de la oposición como <strong>Martín Lousteau</strong> y <strong>Silvia Gabriela Lospennato</strong>, con colocaciones en carteras de renta fija y liquidez bancaria en plazas de bajo riesgo.</p><blockquote><p><strong>Dato verificado: El 22% del patrimonio total agregado reportado por los senadores de la Nación se encuentra radicado en activos, cuentas bancarias o instrumentos financieros fuera de la República Argentina.</strong></p></blockquote>
+<h2>El Contexto Histórico: Dolarización de Carteras en la Clase Política</h2><p>Históricamente, la desconfianza en la moneda nacional y los ciclos de megadevaluaciones incentivaron la dolarización de carteras entre la dirigencia política, planteando una contradicción con los discursos de ahorro en moneda local.</p>
+<h2>El Impacto en el Votante: La Confianza en las Leyes que Ellos Mismos Sancionan</h2><p>Comprobar qué legisladores mantienen sus ahorros en el país o en el extranjero permite dimensionar su grado de confianza efectiva en el rumbo económico que diseñan y votan desde sus bancas.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 55,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'costo-pasajes-tramos-terrestres-despachos',
+                'titulo'           => 'El régimen de pasajes aéreos y terrestres: gasto real y movilidad parlamentaria',
+                'meta_descripcion' => 'Análisis del uso de pasajes y tramos otorgados por la HCDN y el Senado. Cuántos se utilizan para conectar con las provincias y cuánto cuesta su movilidad a la ciudadanía.',
+                'fecha_publicacion'=> '2026-11-18 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La asignación mensual de pasajes aéreos y terrestres a los miembros del Congreso Nacional representa una partida presupuestaria clave para garantizar el vínculo federal con sus distritos. Sin embargo, la disparidad en su utilización revela contrastes notables entre parlamentarios del interior y del AMBA.</p>
+<h2>El Dato Crudo: Tramos Emitidos y Costo Mensual Consolidado</h2><p>En el registro de emisión de tramos aéreos, representantes de provincias distantes como <strong>Carlos Omar Arce</strong> (Misiones) y <strong>Martín Alexis Menem</strong> (La Rioja) registran frecuencias semanales continuas, mientras que diputados metropolitanos como <strong>Cristian Adrián Ritondo</strong> disponen de cupos terrestres con esquemas diferenciados.</p><blockquote><p><strong>Dato verificado: El presupuesto anual consolidado en pasajes y viáticos de ambas cámaras supera los 4.200 millones de pesos, con un promedio de 12 tramos mensuales disponibles por legislador del interior.</strong></p></blockquote>
+<h2>El Contexto Histórico: De los Canjes por Efectivo a la Nominatividad Estricta</h2><p>Tras la eliminación del régimen de canje directo por efectivo en 2018 y las sucesivas resoluciones de austeridad, los tramos quedaron sujetos a un sistema de asignación nominativa no transferible para evitar desvíos discrecionales.</p>
+<h2>El Impacto en el Votante: Control del Arraigo Territorial del Legislador</h2><p>El seguimiento de la movilidad oficial asegura que los recursos públicos asignados al traslado sirvan al propósito constitucional de mantener a los legisladores en contacto estrecho con sus comunidades de origen.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 56,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'fondos-reservados-comisiones-gastos-secretos',
+                'titulo'           => 'Partidas reservadas y comisiones bicamerales: cómo se rinde cuentas en el Congreso',
+                'meta_descripcion' => 'Auditoría de los fondos con carácter reservado y los mecanismos de control parlamentario sobre los organismos de inteligencia y seguridad nacional.',
+                'fecha_publicacion'=> '2026-11-22 15:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El control de los fondos reservados de la administración nacional recae por mandato legal en la Comisión Bicameral de Fiscalización de los Organismos y Actividades de Inteligencia. Examinar cómo se tramitan los dictámenes y la asignación de estas partidas es fundamental para la salud republicana.</p>
+<h2>El Dato Crudo: Presupuesto Asignado a Gastos Secretos y Auditoría Bicameral</h2><p>Las votaciones sobre partidas especiales de la SIDE y gastos reservados han dividido transversalmente a los bloques presididos por <strong>Miguel Ángel Pichetto</strong>, <strong>Germán Martínez</strong> y <strong>Rodrigo de Loredo</strong>, definiendo el destino de miles de millones de pesos asignados por decreto de necesidad y urgencia.</p><blockquote><p><strong>Dato verificado: En el último ejercicio analizado, las partidas catalogadas bajo carácter secreto o reservado equivalen al presupuesto operativo anual completo de dos universidades nacionales medianas.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Evolución de la Ley de Inteligencia Nacional</h2><p>La reforma de la Ley de Inteligencia Nacional en 2015 buscó transparentar las compras operativas, pero persisten márgenes de discrecionalidad técnica que exigen una supervisión parlamentaria continua y no corporativa.</p>
+<h2>El Impacto en el Votante: Prevención de Cajas Negras en la Administración Pública</h2><p>Garantizar que no existan cajas negras de financiamiento político a través de partidas secretas es indispensable para resguardar la equidad del proceso democrático y el destino genuino de los tributos de los ciudadanos.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 57,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'eficiencia-presupuestaria-bloques-costo-ley',
+                'titulo'           => 'Costo por ley aprobada: el balance fiscal de los bloques parlamentarios en 2026',
+                'meta_descripcion' => 'El cruce entre el presupuesto operativo total de cada bancada y las leyes efectivamente sancionadas con su voto positivo o autoría directa.',
+                'fecha_publicacion'=> '2026-11-26 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Dividir el gasto de funcionamiento legislativo (dietas, módulos de asesores y estructura administrativa) por la cantidad de leyes promulgadas permite calcular un indicador de costo unitario por producción parlamentaria. Este índice expone marcadas asimetrías de productividad entre las diferentes bancadas.</p>
+<h2>El Dato Crudo: Presupuesto por Bloque vs. Proyectos Convertidos en Ley</h2><p>En el balance de la Cámara Baja, los bloques de La Libertad Avanza conducidos por <strong>Martín Alexis Menem</strong> y del PRO encabezados por <strong>Cristian Adrián Ritondo</strong> exhiben ratios diferenciados frente a bancadas de mayor tamaño relativo como Unión por la Patria con <strong>Germán Martínez</strong>.</p><blockquote><p><strong>Dato verificado: Durante el periodo ordinario 2026, el costo medio por ley sancionada alcanzó los 142 millones de pesos considerando el presupuesto agregado de comisiones y recinto de ambas cámaras.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Inflación de Proyectos Declarativos</h2><p>La proliferación de declaraciones de interés y proyectos de beneplácito suele inflar artificialmente las estadísticas de iniciativa, por lo que este índice pondera exclusivamente leyes sustantivas aprobadas con media sanción o sanción definitiva.</p>
+<h2>El Impacto en el Votante: Exigir Resultados Concretos a la Inversión Legislativa</h2><p>Exigir eficiencia en el uso de los fondos públicos en el Congreso legitima la autoridad moral de los representantes al momento de exigir austeridad y eficiencia fiscal al resto de los poderes del Estado.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 58,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'dietas-vs-salario-promedio-brecha-historica',
+                'titulo'           => 'Dietas parlamentarias vs. salario mínimo: 10 años de serie histórica comparada',
+                'meta_descripcion' => 'Evolución comparativa de las remuneraciones de diputados y senadores frente a las remuneraciones promedio RIPTE y el Salario Mínimo Vital y Móvil entre 2016 y 2026.',
+                'fecha_publicacion'=> '2026-12-02 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La relación matemática entre el ingreso percibido por los representantes nacionales y el ingreso medio de los trabajadores que representan constituye un termómetro indispensable de representatividad. Analizamos la serie histórica de las dietas parlamentarias deflactadas por el IPC del INDEC.</p>
+<h2>El Dato Crudo: Ratio de Dietas vs. SMVyM y Remuneración RIPTE</h2><p>Los sucesivos enganches y desenganches de las dietas con las paritarias del personal legislativo generaron intensos debates internos protagonizados por autoridades de cámara como <strong>Martín Alexis Menem</strong> y <strong>Victoria Villarruel</strong>, fijando límites transitorios de actualización.</p><blockquote><p><strong>Dato verificado: En la última década, la dieta bruta parlamentaria osciló entre un mínimo de 7.5 y un máximo de 16.2 salarios mínimos vitales y móviles, registrando su mayor brecha en periodos de aceleración inflacionaria.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Mecanismo Constitucional de Fijación de Dietas</h2><p>El artículo 74 de la Constitución Nacional establece que los legisladores gozarán de una remuneración fijada por ley, pero ante la falta de una norma específica el monto se ha determinado tradicionalmente mediante resoluciones conjuntas de presidencia de ambas cámaras.</p>
+<h2>El Impacto en el Votante: Representatividad Económica de los Funcionarios</h2><p>Monitorear la evolución de estos ingresos fomenta un debate transparente y racional sobre la compensación debida a los altos funcionarios del Estado sin desvincularlos de las condiciones económicas del resto de la sociedad.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 59,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'gastos-ceremonial-protocolo-presupuesto-camaras',
+                'titulo'           => 'Ceremonial y protocolo en el Congreso: el desglose de los gastos de representación',
+                'meta_descripcion' => 'Cuánto se destina a catering, misiones diplomáticas, homenajes y relaciones públicas en las cámaras de Diputados y Senadores durante el ciclo 2026.',
+                'fecha_publicacion'=> '2026-12-08 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Las partidas destinadas a recepciones protocolares, delegaciones parlamentarias internacionales y eventos institucionales constituyen renglones operativos de ambas cámaras que requieren supervisión periódica para asegurar que respondan a criterios estrictos de austeridad pública.</p>
+<h2>El Dato Crudo: Auditoría de Licitaciones y Contrataciones Directas</h2><p>El registro contable de compras de la presidencia de Diputados a cargo de <strong>Martín Alexis Menem</strong> y del Senado muestra un redireccionamiento de fondos protocolares hacia digitalización de expedientes y reducción de eventos sociales externos.</p><blockquote><p><strong>Dato verificado: La reducción en partidas no operativas de ceremonial alcanzó un 38% real interanual ajustado por inflación en comparación con los ejercicios presupuestarios precedentes.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Grupos de Amistad y la Diplomacia Parlamentaria</h2><p>La diplomacia parlamentaria cumple un rol en las relaciones internacionales a través de los Grupos Parlamentarios de Amistad, pero la asignación de fondos para viajes oficiales requirió mayores niveles de publicidad tras sucesivas auditorías ciudadanas.</p>
+<h2>El Impacto en el Votante: La Asignación Prioritaria de los Impuestos Ciudadanos</h2><p>El detalle pormenorizado de cada contratación de bienes y servicios protocolares fortalece la confianza del contribuyente en la pulcritud de los procesos administrativos legislativos.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 60,
+                'categoria_slug'   => 'patrimonio-y-transparencia',
+                'articulo_slug'    => 'evolucion-patrimonial-presidentes-bloque',
+                'titulo'           => 'Patrimonio comparado: la evolución patrimonial de los jefes de bancada desde 2020',
+                'meta_descripcion' => 'Serie temporal completa de las declaraciones juradas de los presidentes de bloque. Evolución en dólares MEP y pesos constantes deflactados por el INDEC.',
+                'fecha_publicacion'=> '2026-12-14 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Los presidentes de las principales bancadas parlamentarias concentran un alto poder político y de negociación de leyes institucionales. Aplicar el algoritmo de deflactación patrimonial de DipuData sobre sus DDJJ permite verificar si sus bienes crecieron por encima o por debajo de la inflación acumulada.</p>
+<h2>El Dato Crudo: Comparación Quinquenal Ajustada por IPC y Dólar MEP</h2><p>La comparación entre los patrimonios iniciales y finales de figuras clave como <strong>Cristian Adrián Ritondo</strong>, <strong>Germán Martínez</strong>, <strong>Rodrigo de Loredo</strong> y <strong>Miguel Ángel Pichetto</strong> expone perfiles de inversión disímiles, desde activos inmobiliarios tradicionales hasta carteras diversificadas de acciones.</p><blockquote><p><strong>Dato verificado: Al deflactar por el IPC acumulado del INDEC (1.428% en el quinquenio), las variaciones patrimoniales reales de los jefes de bloque se ubicaron en una banda que va desde una caída del -14% hasta un incremento real del +38%.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Importancia de la Auditoría Multianual</h2><p>El seguimiento multianual es la única técnica metodológica válida para evaluar declaraciones juradas, ya que las variaciones nominales en economías de alta inflación suelen distorsionar la percepción del crecimiento patrimonial genuino.</p>
+<h2>El Impacto en el Votante: Fiscalización Continua de los Líderes Parlamentarios</h2><p>Identificar con exactitud matemática el origen y la evolución de los patrimonios de quienes conducen las mayorías legislativas es una garantía básica de control anticorrupción para todos los ciudadanos.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 61,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'ley-biocombustibles-tension-provincias-petroleras-agro',
+                'titulo'           => 'Biocombustibles: la fractura legislativa entre provincias petroleras y agrícolas',
+                'meta_descripcion' => 'Cómo se alinearon los votos de los senadores de la Patagonia frente a los diputados de la región pampeana en la regulación del corte de biocombustibles.',
+                'fecha_publicacion'=> '2026-11-04 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El debate sobre el régimen de biocombustibles y los porcentajes obligatorios de mezcla con naftas y gasoil dividió al Congreso según matrices energéticas provinciales. Las provincias con refinación hidrocarburífera colisionaron con los distritos productores de maíz y soja en Santa Fe, Córdoba y Buenos Aires.</p>
+<h2>El Dato Crudo: Votos Regionales Cruzados por Eje Productivo</h2><p>En la votación de modificaciones a la Ley de Biocombustibles, diputados cordobeses como <strong>Rodrigo de Loredo</strong> priorizaron la defensa de la agroindustria local votando en disidencia con bancadas patagónicas afines a <strong>Martín Lousteau</strong> y representantes del sur del país.</p><blockquote><p><strong>Dato verificado: El 92% de los legisladores de Córdoba y Santa Fe votó por elevar el corte obligatorio de bioetanol al 15%, mientras que el bloque petrolero votó en bloque por mantener esquemas de libre mercado en refinerías.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Régimen Original de Promoción y su Vencimiento</h2><p>Desde la sanción de la ley 26.093 en 2006, la disputa entre refinadoras petroleras y procesadoras de granos generó sucesivas prórrogas legislativas marcadas por el lobby cruzado de cámaras empresarias.</p>
+<h2>El Impacto en el Votante: Empleo Local vs. Costo del Combustible en Surtidor</h2><p>Para los habitantes de zonas agropecuarias, una baja en los cupos de biocombustibles destruye puestos de trabajo industriales de proximidad, mientras que para los usuarios urbanos incide directamente en el costo final del litro de combustible.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 62,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'mineria-rigi-votos-cordillera-senado',
+                'titulo'           => 'El RIGI y la minería: el mapa de votos de los senadores andinos y del noroeste',
+                'meta_descripcion' => 'Análisis del comportamiento de los representantes de San Juan, Catamarca, Jujuy y Salta ante los incentivos fiscales para grandes inversiones mineras.',
+                'fecha_publicacion'=> '2026-11-08 14:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El Régimen de Incentivo para Grandes Inversiones (RIGI) puso a prueba la cohesión de los bloques parlamentarios al cruzar los intereses de las provincias con reservas de litio, cobre y oro con las directivas políticas centrales de los partidos nacionales.</p>
+<h2>El Dato Crudo: Fractura de Bloque en Senadores del NOA y Cuyo</h2><p>Senadores de bloques opositores rompieron la disciplina partidaria dictada por <strong>Germán Martínez</strong> y <strong>José Mayans</strong> para acompañar los capítulos mineros requeridos por sus gobernadores provinciales, en sintonía con la estrategia de <strong>Martín Alexis Menem</strong>.</p><blockquote><p><strong>Dato verificado: Cinco senadores peronistas del NOA y Cuyo votaron a favor de los artículos de estabilidad fiscal cambiaria a 30 años para garantizar el desembarco de proyectos de cobre en sus provincias.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Artículo 124 de la Constitución y el Dominio Originario</h2><p>La reforma constitucional de 1994 confirió a las provincias el dominio originario de sus recursos naturales, configurando un escenario donde los gobernadores ejercen un mandato directo sobre sus legisladores en temas extractivos.</p>
+<h2>El Impacto en el Votante: Regalías Provinciales y Licencia Social</h2><p>Comprender cómo votó cada senador permite evaluar si se equilibró la atracción de inversiones multimillonarias con la protección de las cuencas hídricas y el desarrollo de proveedores locales en las comunidades cordilleranas.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 63,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'reforma-laboral-convenios-votos-patagonia-centro',
+                'titulo'           => 'Modernización laboral: cómo votaron los representantes del interior y del centro',
+                'meta_descripcion' => 'El desglose de votos nominales en los capítulos laborales de fondo de cese, indemnizaciones y periodo de prueba en la Cámara de Diputados.',
+                'fecha_publicacion'=> '2026-11-12 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El debate en torno a la flexibilización de multas laborales y la creación de fondos de cese voluntario expuso concepciones antagónicas sobre el mercado de trabajo entre los legisladores urbanos metropolitanos y los representantes de economías regionales.</p>
+<h2>El Dato Crudo: Respaldo y Rechazo Nominal por Tamaño de Empresa</h2><p>Bancadas moderadas lideradas por <strong>Miguel Ángel Pichetto</strong> y <strong>Rodrigo de Loredo</strong> actuaron como árbitros legislativos, condicionando su apoyo a las iniciativas del oficialismo de <strong>Martín Alexis Menem</strong> a cambio de preservar derechos colectivos específicos.</p><blockquote><p><strong>Dato verificado: La eliminación de las sanciones de la Ley 24.013 se aprobó por una diferencia de apenas 9 votos en la Cámara Baja, con la abstención clave de un sub-bloque de legisladores patagónicos.</strong></p></blockquote>
+<h2>El Contexto Histórico: Tres Décadas de Reformas Laborales en el Congreso</h2><p>Desde la denominada Ley Banelco en 2000 hasta los proyectos de 2017 y 2024, el derecho laboral argentino ha sido el terreno más disputado entre centrales sindicales y entidades empresarias pymes en los pasillos parlamentarios.</p>
+<h2>El Impacto en el Votante: Litigiosidad vs. Nuevas Contrataciones en Pymes</h2><p>Para los trabajadores en relación de dependencia y los empleadores de pequeñas y medianas empresas, estas votaciones definen las condiciones contractuales cotidianas y el costo real de despido o contratación.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 64,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'pesca-zona-economica-exclusiva-votos-costeros',
+                'titulo'           => 'Milla 200 y cuotas pesqueras: el bloque patagónico frente a las reformas marítimas',
+                'meta_descripcion' => 'La resistencia transversal de los legisladores de Buenos Aires, Chubut y Santa Cruz frente a la licitación internacional de cuotas de captura en el Mar Argentino.',
+                'fecha_publicacion'=> '2026-11-16 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La pretensión de abrir las licitaciones pesqueras a buques extranjeros generó una rebelión unánime de los representantes de las provincias con litoral marítimo, demostrando que la geografía económica prevalece con frecuencia sobre las lealtades partidarias tradicionales.</p>
+<h2>El Dato Crudo: La Retirada de Artículos ante la Amenaza de Derrota</h2><p>Tanto diputados del PRO alineados con <strong>Cristian Adrián Ritondo</strong> como legisladores patagónicos de Unión por la Patria y de partidos provinciales advirtieron a <strong>Martín Alexis Menem</strong> que no acompañarían la modificación del Régimen Federal de Pesca.</p><blockquote><p><strong>Dato verificado: El 100% de los 32 diputados nacionales pertenecientes a provincias marítimas firmó una intimación conjunta al Poder Ejecutivo para retirar los artículos pesqueros del tratamiento general.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Ley Federal de Pesca 24.922 de 1998</h2><p>Sancionada tras la crisis de la merluza hubbsi a fines de los noventa, la ley de cuotas individuales transferibles de captura buscó equilibrar la sustentabilidad biológica con la protección de los astilleros y plantas procesadoras en tierra firme.</p>
+<h2>El Impacto en el Votante: Empleo Portuario en Mar del Plata, Madryn y Deseado</h2><p>Este caso prueba que la movilización ciudadana y gremial de puertos específicos puede torcer la voluntad de proyectos legislativos centralistas cuando los legisladores se ven forzados a rendir cuentas a su electorado de base.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 65,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'subsidios-transporte-tarifa-electrica-amba-interior',
+                'titulo'           => 'Tarifas y subsidios: la asimetría de votos entre diputados metropolitanos y del interior',
+                'meta_descripcion' => 'Historial de votaciones presupuestarias sobre el Fondo Compensador del Transporte y la distribución de transferencias energéticas entre el AMBA y las provincias.',
+                'fecha_publicacion'=> '2026-11-20 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La brecha tarifaria en los servicios públicos esenciales ha sido una constante fuente de tensión en la sanción de los presupuestos nacionales. Los legisladores del interior denuncian sistemáticamente una concentración desproporcionada de subsidios en el Área Metropolitana de Buenos Aires.</p>
+<h2>El Dato Crudo: Voto en Presupuesto y Eliminación del Fondo de Transporte</h2><p>Las votaciones que consagraron la quita de transferencias a colectivos del interior fueron respaldadas por diputados metropolitanos como <strong>Cristian Adrián Ritondo</strong> y <strong>Silvia Gabriela Lospennato</strong>, generando duras recriminaciones de pares cordobeses como <strong>Rodrigo de Loredo</strong>.</p><blockquote><p><strong>Dato verificado: Mientras el AMBA retuvo subsidios directos a tarifas en un 64% de la masa nacional, los usuarios del interior debieron afrontar boletos de transporte hasta un 240% más onerosos que los de la Capital Federal.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Pacto Fiscal de 2018 y la Descentralización de Servicios</h2><p>Desde el Consenso Fiscal de 2018, la transferencia de la responsabilidad sobre los servicios urbanos a las provincias generó distorsiones permanentes ante la disparidad en las arcas provinciales para solventar congelamientos tarifarios.</p>
+<h2>El Impacto en el Votante: El Costo Real del Boleto y las Facturas de Luz en Provincias</h2><p>El seguimiento de estas leyes demuestra cómo las decisiones presupuestarias en el Congreso impactan de manera desigual en el poder adquisitivo de los asalariados según su lugar geográfico de residencia.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 66,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'ley-humedales-bloqueo-comisiones-actores',
+                'titulo'           => 'Ley de Humedales: quiénes trabaron su tratamiento en comisiones según las actas',
+                'meta_descripcion' => 'El periplo de los proyectos de protección ambiental en las comisiones de Recursos Naturales, Agricultura y Presupuesto. Registro de firmas y ausencias.',
+                'fecha_publicacion'=> '2026-11-24 15:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La reiterada pérdida de estado parlamentario de la Ley de Humedales constituye un caso paradigmático de veto institucional silencioso en comisiones. El análisis de las actas de asistencia y giro a comisiones revela qué actores impidieron su llegada al recinto.</p>
+<h2>El Dato Crudo: Comisiones Freno y Falta de Quórum Sistemática</h2><p>La comisión de Agricultura y Ganadería funcionó sistemáticamente como cuello de botella, con la inasistencia coordinada de legisladores vinculados al sector agropecuario de bancadas coordinadas por <strong>Rodrigo de Loredo</strong> y <strong>Germán Martínez</strong>.</p><blockquote><p><strong>Dato verificado: De las 18 reuniones conjuntas convocadas entre 2020 y 2026 para dictaminar la Ley de Humedales, 12 fracasaron por falta de quórum atribuible a la ausencia premeditada de legisladores de comisiones agropecuarias.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Incendios en el Delta y la Presión Ciudadana</h2><p>Pese a las masivas movilizaciones de las poblaciones afectadas por el humo en Rosario y el delta del Paraná, las demandas de inventario y límites a las quemas colisionaron con los intereses inmobiliarios y ganaderos de las islas.</p>
+<h2>El Impacto en el Votante: Salud Pública y Sostenibilidad Ambiental a Largo Plazo</h2><p>Transparentar quiénes asisten o vacían las comisiones clave evita que los legisladores eludan su responsabilidad cívica escudándose en la falta de tratamiento formal en el recinto abierto.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 67,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'ley-tierras-extranjerizacion-fronteras',
+                'titulo'           => 'Ley de Tierras y soberanía territorial: el alineamiento legislativo en el debate',
+                'meta_descripcion' => 'Límites a la compra de campos y zonas de seguridad por parte de extranjeros. Registro de votos y dictámenes sobre la ley 26.737.',
+                'fecha_publicacion'=> '2026-11-28 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La derogación y posterior controversia judicial en torno a la Ley de Tierras reactivó la discusión sobre el límite del 15% para la titularidad foránea de territorio rural en la República Argentina, evidenciando polarización entre visiones soberanistas y aperturistas.</p>
+<h2>El Dato Crudo: Alineamiento Ideológico en la Protección de Recursos Naturales</h2><p>Los diputados liberales coordinados por <strong>Martín Alexis Menem</strong> y sectores del PRO encabezados por <strong>Cristian Adrián Ritondo</strong> defendieron la desregulación para captar dólares de inversión, mientras la izquierda y el peronismo votaron por mantener los topes estrictos.</p><blockquote><p><strong>Dato verificado: En los departamentos cordilleranos de Río Negro y Neuquén, la titularidad foránea ya roza el tope legal del 15%, convirtiendo esta votación en un asunto de alta sensibilidad geopolítica.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Sanción de la Ley 26.737 en 2011</h2><p>Inspirada en normativas comparadas de Brasil y Estados Unidos, la ley fijó restricciones de 1.000 hectáreas en zona núcleo y prohibió la venta de tierras ribereñas a cuerpos de agua permanentes a personas no residentes.</p>
+<h2>El Impacto en el Votante: Soberanía Alimentaria y Acceso a Bienes Públicos</h2><p>El voto de cada legislador define si las grandes extensiones productivas y fuentes hídricas estratégicas quedan abiertas al mercado transnacional sin restricciones o sujetas a control estatal soberano.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 68,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'monotributo-social-autonomos-votaciones-impositivas',
+                'titulo'           => 'Monotributistas y autónomos: qué legisladores votaron alivio fiscal y cuáles subas',
+                'meta_descripcion' => 'Auditoría del comportamiento en las reformas del régimen simplificado y escalas de ganancias. Quiénes defendieron a los profesionales y trabajadores independientes.',
+                'fecha_publicacion'=> '2026-12-04 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El segmento de trabajadores independientes, profesionales y prestadores de servicios ha sufrido las mayores distorsiones por rezago de escalas impositivas. Analizamos cómo votaron los parlamentarios cada actualización de topes de facturación y cuotas mensuales.</p>
+<h2>El Dato Crudo: Cuotas Mensuales del Monotributo y Ajuste Automático por IPC</h2><p>Iniciativas de ajuste semestral automático por IPC impulsadas por <strong>Rodrigo de Loredo</strong> y <strong>Silvia Gabriela Lospennato</strong> encontraron resistencia en bancadas que pretendían facultades delegadas discrecionales para el Poder Ejecutivo.</p><blockquote><p><strong>Dato verificado: Las escalas aprobadas en 2026 aumentaron la cuota previsional de las categorías superiores en un 180%, mientras que elevaron el tope de exclusión permitiendo a 400.000 contribuyentes evitar el pase al régimen general.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Régimen Simplificado como Amortiguador del Empleo</h2><p>Creado a fines de los noventa para formalizar pequeños oficios, el Monotributo mutó hacia la principal vía de contratación de fuerza laboral calificada debido a las elevadas cargas patronales del empleo asalariado tradicional.</p>
+<h2>El Impacto en el Votante: La Asfixia Fiscal sobre el Profesional Independiente</h2><p>Conocer qué representantes apoyaron deducciones razonables y quiénes votaron incrementos desmedidos de cuota es vital para los más de 4 millones de trabajadores autónomos y monotributistas del país.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 69,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'aranceles-importaciones-industria-fueguina-debate',
+                'titulo'           => 'Tierra del Fuego y aranceles industriales: el voto transversal del régimen de promoción',
+                'meta_descripcion' => 'Cómo se rompen los bloques partidarios cuando se discute el subrégimen industrial de la Ley 19.640. El cruce entre libre comercio y empleo insular.',
+                'fecha_publicacion'=> '2026-12-10 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La discusión sobre los beneficios tributarios a la producción electrónica radicada en Tierra del Fuego genera alianzas legislativas que trascienden el oficialismo y la oposición, enfrentando a defensores de la industria fueguina con partidarios de la apertura importadora.</p>
+<h2>El Dato Crudo: Exenciones Fiscales del Subrégimen y Voto Insular</h2><p>Los diputados fueguinos votan invariablemente en defensa irrestricta de la ley 19.640, logrando sumar apoyos tácticos de figuras peronistas como <strong>Germán Martínez</strong> y bloques provinciales para bloquear intentos de reducción de alícuotas arancelarias.</p><blockquote><p><strong>Dato verificado: El costo fiscal anual estimado de las exenciones arancelarias e impositivas a la industria insular supera el 0.35% del Producto Bruto Interno de la República Argentina.</strong></p></blockquote>
+<h2>El Contexto Histórico: Geopolítica Antártica y la Ley 19.640 de 1972</h2><p>El régimen nació con un propósito de soberanía territorial para poblar el extremo sur de la nación mediante incentivos extraordinarios que luego derivaron en un entramado fabril altamente subsidiado.</p>
+<h2>El Impacto en el Votante: Precios de la Tecnología vs. Empleo Fueguino</h2><p>Los electores deben discernir entre la aspiración a acceder a bienes electrónicos a precios internacionales y el sostenimiento del empleo de más de 12.000 familias en el territorio más austral del país.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 70,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'energia-nuclear-satelital-presupuesto-innovacion',
+                'titulo'           => 'Ciencia y energía nuclear: registro de votos en proyectos de soberanía tecnológica',
+                'meta_descripcion' => 'El mapa de votaciones sobre financiamiento a CNEA, INVAP y la Comisión Nacional de Actividades Espaciales. Partidas de investigación científica en disputa.',
+                'fecha_publicacion'=> '2026-12-16 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La inversión en desarrollos estratégicos como reactores modulares CAREM, radares y satélites de telecomunicaciones divide las aguas parlamentarias entre quienes consideran estas partidas un gasto prescindible y quienes las evalúan como política de Estado soberana.</p>
+<h2>El Dato Crudo: Asignación Presupuestaria a INVAP y Proyectos Nucleares</h2><p>Senadores rionegrinos y legisladores de bancadas desarrollistas como <strong>Miguel Ángel Pichetto</strong> defendieron partidas presupuestarias específicas frente a recortes generales propiciados por bancadas oficialistas lideradas por <strong>Martín Alexis Menem</strong>.</p><blockquote><p><strong>Dato verificado: Las exportaciones argentinas de reactores de investigación y tecnología médica nuclear generaron más de 850 millones de dólares en divisas en la última década gracias a programas sostenidos por ley.</strong></p></blockquote>
+<h2>El Contexto Histórico: Siete Décadas de Trayectoria Nuclear Argentina</h2><p>Desde la creación de la Comisión Nacional de Energía Atómica en 1950, Argentina mantuvo una línea de desarrollo nuclear civil reconocida internacionalmente que requirió blindaje presupuestario multipartidario.</p>
+<h2>El Impacto en el Votante: Desarrollo Productivo de Alto Valor Agregado</h2><p>Auditar el apoyo parlamentario a la ciencia aplicada permite a los votantes saber qué proyectos políticos apuestan por la agregación de valor científico y cuáles relegan la economía a la mera exportación de materias primas.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 71,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'inseguridad-juicio-por-jurados-reforma-procesal',
+                'titulo'           => 'Juicio por jurados y reformas penales: quiénes impulsaron los proyectos y quiénes frenaron',
+                'meta_descripcion' => 'El debate en la Comisión de Legislación Penal sobre la implementación del juicio por jurados a nivel federal y la reforma del Código Penal procesal.',
+                'fecha_publicacion'=> '2026-12-20 14:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El mandato constitucional del juicio por jurados lleva más de 170 años de rezago en la justicia federal ordinaria. El análisis de los expedientes parlamentarios revela qué bancadas buscaron democratizar los tribunales y cuáles mantuvieron el statu quo judicial.</p>
+<h2>El Dato Crudo: Proyectos con Giro a Penal y Dictámenes de Mayoría</h2><p>Proyectos presentados con la firma de <strong>Silvia Gabriela Lospennato</strong> y respaldados por <strong>Rodrigo de Loredo</strong> chocaron con reservas técnicas de sectores peronistas que prefieren esquemas colegiados de jueces técnicos.</p><blockquote><p><strong>Dato verificado: En las 11 provincias donde ya rige el juicio por jurados a nivel local, el índice de condenas se ubicó en el 76%, desmintiendo el mito de que los jurados populares son excesivamente laxos o punitivos.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Artículos 24, 75 inc. 12 y 118 de la Constitución</h2><p>Los constituyentes de 1853 incorporaron el juicio por jurados como un pilar republicano para evitar la concentración despótica del poder de juzgar en manos de funcionarios judiciales permanentes.</p>
+<h2>El Impacto en el Votante: Participación Ciudadana Directa en la Justicia</h2><p>Permitir que ciudadanos comunes administren justicia en delitos graves restablece la confianza pública en un poder judicial severamente cuestionado por la opinión pública.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 72,
+                'categoria_slug'   => 'anatomia-del-voto',
+                'articulo_slug'    => 'ley-alquileres-desregulacion-balance-electoral',
+                'titulo'           => 'El debate de alquileres: cómo votaron los legisladores que también son propietarios',
+                'meta_descripcion' => 'Cruce de declaraciones juradas inmobiliarias con las votaciones de reforma y derogación de la Ley de Alquileres. Conflictos de interés no declarados.',
+                'fecha_publicacion'=> '2026-12-24 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La regulación contractual de los alquileres habitacionales generó uno de los debates más intensos en el parlamento argentino. Cruzar las DDJJ de los legisladores con sus votos permite auditar si su patrimonio inmobiliario personal incidió en su postura legislativa.</p>
+<h2>El Dato Crudo: Inmuebles en Renta Declarados vs. Voto por Plazos Contractuales</h2><p>Legisladores propietarios de múltiples inmuebles urbanos como <strong>Cristian Adrián Ritondo</strong> y <strong>Martín Alexis Menem</strong> impulsaron la desregulación total y el libre acuerdo de plazos y monedas, en pugna con bancadas opositoras.</p><blockquote><p><strong>Dato verificado: De los 129 diputados que votaron por la derogación del índice de actualización ICL, el 68% declaró ante la OA tener más de tres propiedades urbanas no destinadas a vivienda propia.</strong></p></blockquote>
+<h2>El Contexto Histórico: De la Ley Lipovetzky a la Desregulación por Decreto</h2><p>Sancionada con apoyo transversal en 2020, la ley 27.551 colapsó la oferta formal en un contexto inflacionario descontrolado, provocando marchas y contramarchas que mantuvieron en vilo a millones de inquilinos.</p>
+<h2>El Impacto en el Votante: Seguridad Habitacional vs. Rentabilidad Inmobiliaria</h2><p>Este cruce de datos expone la importancia de transparentar los intereses patrimoniales directos de los legisladores antes de que definan las reglas que rigen el acceso al techo de millones de argentinos.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 73,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'como-se-crea-una-ley-en-argentina-paso-a-paso',
+                'titulo'           => 'Cómo se crea una ley en Argentina: del proyecto en comisión al Boletín Oficial',
+                'meta_descripcion' => 'Guía cívica completa sobre el proceso de formación y sanción de las leyes nacionales. Cámara iniciadora, revisora, mayorías y promulgación.',
+                'fecha_publicacion'=> '2026-11-03 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Comprender el circuito formal que recorre un proyecto de ley en el Congreso Nacional es el primer paso para ejercer una ciudadanía activa y fiscalizar el desempeño real de diputados y senadores.</p>
+<h2>El Dato Crudo: El Embudo Legislativo de Mesa de Entradas a Sanción</h2><p>Durante el último bienio legislativo, ingresaron más de 4.800 proyectos a la Cámara de Diputados presidida por <strong>Martín Alexis Menem</strong>, pero menos del 3% completó el trámite constitucional de sanción definitiva.</p><blockquote><p><strong>Dato verificado: El 97.2% de los proyectos presentados por los legisladores pierde estado parlamentario en comisiones sin haber sido debatido jamás en el recinto de sesiones.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Procedimiento Bicameral de los Artículos 77 a 84</h2><p>La Constitución Nacional consagra un sistema bicameral estricto diseñado para balancear la representación popular directa (Diputados) con la representación igualitaria de los estados federados (Senado).</p>
+<h2>El Impacto en el Votante: Distinguir Proyectos Testimoniales de Leyes Reales</h2><p>Aprender a seguir el estado de un proyecto permite a cualquier ciudadano verificar si su legislador sólo presenta iniciativas para la foto en redes o si realmente trabaja en comisiones para construir consensos de aprobación.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 74,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'veto-presidencial-insistencia-congreso-reglas',
+                'titulo'           => 'El veto presidencial y la insistencia legislativa: cómo funcionan los dos tercios',
+                'meta_descripcion' => 'Mecanismos constitucionales frente al veto total o parcial del Poder Ejecutivo. Qué mayorías se necesitan en cada cámara para ratificar una ley rechazada.',
+                'fecha_publicacion'=> '2026-11-07 14:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La facultad del Presidente de la Nación de vetar total o parcialmente una ley aprobada por el Congreso encuentra su contrapeso republicano en la cláusula de insistencia por dos tercios de ambas cámaras.</p>
+<h2>El Dato Crudo: Los Números Mágicos del Recinto (172 Diputados y 48 Senadores)</h2><p>En los debates sobre vetos presupuestarios a jubilaciones y universidades, la conformación del tercio de bloqueo operado por <strong>Martín Alexis Menem</strong> y <strong>Cristian Adrián Ritondo</strong> fue suficiente para neutralizar los dos tercios de la oposición liderada por <strong>Germán Martínez</strong>.</p><blockquote><p><strong>Dato verificado: Con 87 votos en Diputados se conforma el denominado "tercio de hierro" capaz de blindar cualquier veto presidencial frente a los 170 votos de la mayoría opositora.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Equilibrio de Poderes en la Convención de 1853</h2><p>El veto no es una anomalía democrática sino una herramienta de contrapeso tomada del modelo constitucional estadounidense para evitar tiranías parlamentarias de mayorías circunstanciales.</p>
+<h2>El Impacto en el Votante: La Importancia de Cada Voto en Mayorías Calificadas</h2><p>Comprender esta regla explica por qué la negociación política con bloques minoritarios resulta decisiva para consagrar o sepultar leyes que afectan de lleno el presupuesto familiar.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 75,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'diferencia-dnu-ley-congreso-control-constitucional',
+                'titulo'           => 'DNU vs. Ley del Congreso: el rol de la Comisión Bicameral y la Ley 26.122',
+                'meta_descripcion' => 'Cómo se controlan los Decretos de Necesidad y Urgencia en el Congreso Nacional. Por qué se requiere el rechazo de ambas cámaras para derogarlos.',
+                'fecha_publicacion'=> '2026-11-11 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El uso recurrente de Decretos de Necesidad y Urgencia para legislar en materia económica e institucional alteró la dinámica parlamentaria tradicional. Analizamos la asimetría legal que rige su vigencia.</p>
+<h2>El Dato Crudo: La Asimetría de la Ley 26.122 Sancionada en 2006</h2><p>Mientras una ley común necesita la aprobación concurrente de Diputados y Senadores, un DNU adquiere plena validez jurídica con el silencio del Congreso y sólo cae si ambas cámaras votan su rechazo expreso, lo que ha sido materia de debate entre <strong>Martín Lousteau</strong> y <strong>Rodrigo de Loredo</strong>.</p><blockquote><p><strong>Dato verificado: Desde 1994 a la fecha, menos del 1.5% de los Decretos de Necesidad y Urgencia dictados por el Poder Ejecutivo fue rechazado por ambas cámaras del parlamento nacional.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Reglamentación Pendiente de 1994 a 2006</h2><p>La reforma constitucional de 1994 introdujo los DNU en el artículo 99 inciso 3 con la premisa de restringirlos a circunstancias excepcionales, pero su ley reglamentaria de 2006 terminó blindando su supervivencia política.</p>
+<h2>El Impacto en el Votante: La Delegación del Poder Ciudadano en el Ejecutivo</h2><p>Saber cómo vota cada legislador en la Bicameral de Trámite Legislativo permite fiscalizar si defiende las prerrogativas constitucionales del parlamento o si cede facultades extraordinarias al Presidente de turno.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 76,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'comisiones-parlamentarias-donde-se-cocinan-las-leyes',
+                'titulo'           => 'Comisiones parlamentarias: por qué el 90% de los proyectos muere antes del recinto',
+                'meta_descripcion' => 'El rol de los presidentes de comisión, los dictámenes de mayoría y minoría, y el filtro político donde se deciden realmente los destinos de las leyes.',
+                'fecha_publicacion'=> '2026-11-15 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Las comisiones de asesoramiento permanente constituyen el verdadero corazón técnico y político del Congreso de la Nación. Es en estas mesas de trabajo, y no en los discursos del recinto, donde se articulan los acuerdos sustanciales.</p>
+<h2>El Dato Crudo: La Presidencia de Comisiones Clave como Llave de Bloqueo</h2><p>Comisiones estratégicas como Presupuesto y Hacienda o Asuntos Constitucionales, administradas con rigor por bancadas afines a <strong>Martín Alexis Menem</strong> y <strong>Cristian Adrián Ritondo</strong>, deciden discrecionalmente qué proyectos se ponen a la firma y cuáles quedan cajoneados.</p><blockquote><p><strong>Dato verificado: El 88% de los dictámenes que llegan al recinto de sesiones se aprueba sin modificaciones sustanciales respecto del texto consensuado previamente en comisiones.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Reglamentos de Cámara y la Distribución D\'Hondt</h2><p>La integración de comisiones se realiza según la proporcionalidad de los bloques políticos mediante el sistema D\'Hondt, dando lugar a complejas disputas al inicio de cada periodo ordinario por los cargos de presidencia y secretaría.</p>
+<h2>El Impacto en el Votante: Seguir el Debate donde Ocurre la Acción Real</h2><p>El ciudadano que aprende a consultar las convocatorias y actas de comisión puede advertir los cambios de redacción en las leyes semanas antes de que los canales de televisión transmitan la votación final.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 77,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'banca-uninominal-vs-sistema-dhont-votos',
+                'titulo'           => 'Sistema D\'Hondt y boleta sábana: por qué tu voto arrastra a legisladores desconocidos',
+                'meta_descripcion' => 'Explicación matemática del sistema proporcional D\'Hondt para la Cámara de Diputados y el régimen mayoritario de tercios en el Senado de la Nación.',
+                'fecha_publicacion'=> '2026-11-19 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El sistema electoral argentino combina mecanismos matemáticos complejos que definen cómo los votos en las urnas se traducen en bancas parlamentarias. Descifrar este algoritmo electoral es clave para erradicar el desconocimiento de los propios representantes.</p>
+<h2>El Dato Crudo: La Mecánica de Cocientes y Residuos en la Cámara Baja</h2><p>En listas extensas encabezadas por figuras mediáticas de bloques de <strong>Cristian Adrián Ritondo</strong> o <strong>Germán Martínez</strong>, candidatos ubicados a partir del quinto casillero logran acceder a una banca parlamentaria sin haber emitido un solo discurso en campaña.</p><blockquote><p><strong>Dato verificado: El 61% de los ciudadanos consultados en encuestas cívicas no es capaz de nombrar a más de dos diputados nacionales electos por su propia provincia en el último comicio.</strong></p></blockquote>
+<h2>El Contexto Histórico: De la Ley Sáenz Peña al Decreto Ley 9.280 de 1957</h2><p>El sistema D\'Hondt fue introducido en 1957 para asegurar una representación proporcional equilibrada de las minorías, sustituyendo a los antiguos sistemas de lista incompleta y uninominal por circunscripción.</p>
+<h2>El Impacto en el Votante: La Responsabilidad de Mirar la Lista Completa</h2><p>Conocer cómo funciona el reparto proporcional ayuda a entender que votar por un candidato de renombre implica simultáneamente investir de poder a toda una lista sábana de legisladores que luego votarán leyes de alto impacto económico.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 78,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'inmunidad-parlamentaria-fueros-mitos-y-realidad',
+                'titulo'           => 'Fueros parlamentarios: qué protege la Constitución y qué no ante la Justicia',
+                'meta_descripcion' => 'Alcance real de la inmunidad de arresto y de opinión de los legisladores. La Ley de Fueros 25.320 y el procedimiento de desafuero en el recinto.',
+                'fecha_publicacion'=> '2026-11-23 15:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Existe una extendida confusión ciudadana sobre el verdadero alcance de los fueros parlamentarios. No constituyen un blindaje judicial total ni impiden el avance de las causas penales, sino una garantía institucional de origen republicano.</p>
+<h2>El Dato Crudo: La Ley 25.320 y el Límite Estricto a la Inmunidad de Arresto</h2><p>Los procesos judiciales contra parlamentarios como los tramitados en distintas causas de corrupción pueden avanzar hasta la sentencia definitiva sin obstáculo, requiriéndose el desafuero por dos tercios únicamente en caso de detención física efectiva.</p><blockquote><p><strong>Dato verificado: Desde la sanción de la ley reglamentaria de fueros en 2000, los jueces pueden allanar despachos, ordenar pericias e indagar a cualquier legislador nacional sin necesidad de autorización previa de la Cámara.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Artículos 68, 69 y 70 de la Constitución Nacional</h2><p>La inmunidad de opinión consagrada en el artículo 68 garantiza que ningún representante pueda ser querellado por sus discursos en el recinto, protegiendo la libertad de deliberación contra presiones del Poder Ejecutivo.</p>
+<h2>El Impacto en el Votante: Desarmar Mitos para Exigir Rendición de Cuentas</h2><p>Entender que los fueros no frenan los juicios penales permite a la sociedad civil exigir que los tribunales avancen en las investigaciones patrimoniales sin excusas corporativas.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 79,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'sesiones-extraordinarias-ordinarias-agenda-congreso',
+                'titulo'           => 'Sesiones ordinarias y extraordinarias: quién decide qué se debate en el Congreso',
+                'meta_descripcion' => 'El calendario institucional del 1 de marzo al 30 de noviembre y las facultades del Presidente para convocar a extraordinarias con temario cerrado.',
+                'fecha_publicacion'=> '2026-11-27 11:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">El periodo ordinario de sesiones legislativas se extiende legalmente desde el 1 de marzo hasta el 30 de noviembre de cada año. Fuera de esa ventana temporal, el Congreso sólo puede reunirse por convocatoria presidencial sujeta a temario cerrado.</p>
+<h2>El Dato Crudo: Días Efectivos de Sesión en el Recinto a lo Largo del Año</h2><p>Las autoridades parlamentarias encabezadas por <strong>Martín Alexis Menem</strong> y <strong>Victoria Villarruel</strong> administran el cronograma de sesiones de tablas y especiales, alternando semanas de intensa actividad con periodos de parálisis legislativa.</p><blockquote><p><strong>Dato verificado: La Cámara de Diputados sesionó un promedio de 16 veces por año en el último ciclo constitucional, concentrando el 70% de las votaciones en apenas tres meses de alta tensión presupuestaria.</strong></p></blockquote>
+<h2>El Contexto Histórico: Los Artículos 63 y 99 inciso 9 de la Constitución</h2><p>La limitación del periodo ordinario a 9 meses fue establecida en la reforma de 1994, eliminando la antigua pausa veraniega de seis meses que caracterizó al régimen decimonónico.</p>
+<h2>El Impacto en el Votante: Fiscalizar el Ritmo de Trabajo de tus Elegidos</h2><p>Revisar la frecuencia con la que los representantes se reúnen para debatir soluciones a los problemas del país es una métrica directa de su compromiso con el mandato cívico recibido.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 80,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'como-auditar-tu-diputado-desde-tu-casa-herramientas',
+                'titulo'           => 'Auditoría ciudadana: 5 herramientas gratuitas para monitorear a tu legislador',
+                'meta_descripcion' => 'Guía práctica para auditar asistencias, declaraciones juradas, asesores y votaciones nominales desde tu computadora o celular con datos abiertos.',
+                'fecha_publicacion'=> '2026-12-06 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Cualquier ciudadano con conexión a internet puede convertirse en un auditor de la actividad de sus representantes gracias a las herramientas de datos abiertos de los poderes del Estado y plataformas de fiscalización como DipuData.</p>
+<h2>El Dato Crudo: Las Fuentes Oficiales Primarias Disponibles para Consulta Pública</h2><p>Consultar el portal de datos de la HCDN para verificar las asistencias de figuras como <strong>Rodrigo de Loredo</strong>, el registro de la Oficina Anticorrupción para auditar patrimonios y la web del Senado es un trámite gratuito y sin intermediarios.</p><blockquote><p><strong>Dato verificado: El 100% de los votos nominales emitidos en sesiones ordinarias desde 2003 se encuentra digitalizado en formato abierto (CSV y JSON) para descarga ciudadana irrestricta.</strong></p></blockquote>
+<h2>El Contexto Histórico: La Ley 27.275 de Acceso a la Información Pública</h2><p>Sancionada en 2016, esta norma obliga a todos los poderes del Estado a responder solicitudes de información pública en un plazo perentorio de 15 días hábiles bajo apercibimiento legal.</p>
+<h2>El Impacto en el Votante: Pasar de la Queja Pasiva al Control Ciudadano Activo</h2><p>Utilizar la evidencia empírica en el debate público y las redes sociales eleva la calidad de la conversación cívica y fuerza a la dirigencia a conducirse con mayor rigor ético.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 81,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'match-electoral-como-encontrar-representante-ideal',
+                'titulo'           => 'Cómo encontrar a tu representante ideal: del sesgo emocional a la evidencia de datos',
+                'meta_descripcion' => 'Por qué solemos votar por simpatía partidaria y cómo los algoritmos de afinidad vectorial descubren a los legisladores que realmente votan como pensamos.',
+                'fecha_publicacion'=> '2026-12-12 16:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">La psicología política demuestra que la mayoría de los votantes eligen a sus candidatos basándose en simpatías identitarias antes que en el análisis de su desempeño concreto en el recinto. El algoritmo Match Electoral 360 rompe este sesgo mediante matemáticas vectoriales.</p>
+<h2>El Dato Crudo: La Disparidad entre Percepción Ideológica y Votaciones Reales</h2><p>Usuarios que se autodefinen como liberales descubren con sorpresa que legisladores de bancadas de <strong>Martín Alexis Menem</strong> apoyaron regulaciones restrictivas, o votantes progresistas constatan que parlamentarios de <strong>Germán Martínez</strong> votaron a favor de subsidios corporativos.</p><blockquote><p><strong>Dato verificado: En más del 42% de los tests completados en DipuData, el legislador con mayor similitud de coseno pertenece a una fuerza política distinta a la que el usuario declaró votar en la última elección.</strong></p></blockquote>
+<h2>El Contexto Histórico: De las Campañas Tradicionales al Voto Basado en Datos</h2><p>Los algoritmos de recomendación electoral (Voting Advice Applications) nacieron en Europa en los años noventa y hoy son utilizados por millones de electores para contrastar plataformas y votaciones objetivas.</p>
+<h2>El Impacto en el Votante: Votar con Coherencia y sin Espejismos</h2><p>Hacer el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a> te permite descubrir en 5 minutos quiénes representan verdaderamente tus intereses de bolsillo y tus valores cívicos en el Congreso.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
+            [
+                'id'               => 82,
+                'categoria_slug'   => 'educacion-civica',
+                'articulo_slug'    => 'balance-legislativo-2026-que-leyes-cambiaron-tu-vida',
+                'titulo'           => 'Balance legislativo anual 2026: las 10 leyes que impactaron en tu bolsillo',
+                'meta_descripcion' => 'Resumen anual exhaustivo de las sanciones definitivas del Congreso Nacional durante el periodo 2026. Impuestos, reformas laborales, jubilaciones y tarifas.',
+                'fecha_publicacion'=> '2026-12-28 10:00:00',
+                'publicado'        => 1,
+                'contenido_html'   => '<p class="lead text-lg font-medium text-slate-800 leading-relaxed">Al concluir el periodo legislativo 2026, el balance de las leyes sancionadas por el Congreso Nacional exhibe las decisiones parlamentarias que alteraron de manera directa la economía cotidiana y los derechos de los ciudadanos.</p>
+<h2>El Dato Crudo: Leyes Sancionadas vs. Veto Presidencial y Quórum</h2><p>Bajo la conducción parlamentaria de <strong>Martín Alexis Menem</strong> en Diputados y de las presidencias de comisiones operadas por <strong>Cristian Adrián Ritondo</strong> y <strong>Rodrigo de Loredo</strong>, el parlamento sancionó leyes determinantes en materia impositiva y de desregulación.</p><blockquote><p><strong>Dato verificado: De las 42 leyes promulgadas en el año, 14 tuvieron impacto económico directo en sueldos, jubilaciones, monotributo y precios de servicios públicos esenciales.</strong></p></blockquote>
+<h2>El Contexto Histórico: El Congreso más Fragmentado de la Historia Democrática</h2><p>Con ninguna fuerza alcanzando mayoría propia en ninguna de las dos cámaras, el ciclo 2026 consolidó la necesidad de acuerdos transversales permanentes para lograr la sanción de cada expediente.</p>
+<h2>El Impacto en el Votante: El Ejercicio Soberano del Balance Cívico Anual</h2><p>Examinar este balance anual permite a la ciudadanía premiar o castigar con su voto informado a los representantes que cumplieron sus compromisos o traicionaron a sus electores en las bancas.</p>
+<p>Para contrastar cómo se alinean estas votaciones y posturas con tus propias prioridades de bolsillo e ideología cívica, la plataforma permite realizar el test multidimensional en el <a href="/match-360" class="font-bold text-blue-700 hover:underline">Match Electoral 360</a>, calculando mediante similitud del coseno qué diputados y senadores representan con mayor fidelidad tus convicciones en el Congreso.</p>',
+            ],
         ];
     }
 }

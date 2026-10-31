@@ -15,37 +15,56 @@ class BlogModel
         $this->pdo = $pdo ?? Database::getConnection();
     }
 
-    public function all(): array
+    public function all(bool $soloPublicados = false): array
     {
         $defaults = Database::getDefaultBlogArticles();
+        $articulos = $defaults;
         if ($this->pdo) {
             try {
                 $stmt = $this->pdo->query("SELECT * FROM blog_articulos WHERE publicado = 1 ORDER BY fecha_publicacion DESC");
                 $rows = $stmt ? $stmt->fetchAll() : [];
                 if (!empty($rows)) {
                     if (count($rows) >= count($defaults)) {
-                        return $rows;
-                    }
-                    $indexed = [];
-                    foreach ($rows as $r) {
-                        $indexed[$r['articulo_slug']] = $r;
-                    }
-                    foreach ($defaults as $d) {
-                        if (!isset($indexed[$d['articulo_slug']])) {
-                            $rows[] = $d;
+                        $articulos = $rows;
+                    } else {
+                        $indexed = [];
+                        foreach ($rows as $r) {
+                            $indexed[$r['articulo_slug']] = $r;
                         }
+                        foreach ($defaults as $d) {
+                            if (!isset($indexed[$d['articulo_slug']])) {
+                                $rows[] = $d;
+                            }
+                        }
+                        $articulos = $rows;
                     }
-                    return $rows;
                 }
             } catch (\Throwable) {
             }
         }
-        return $defaults;
+        if ($soloPublicados) {
+            $now = time();
+            return array_values(array_filter($articulos, fn($a) => strtotime($a['fecha_publicacion']) <= $now));
+        }
+        return $articulos;
     }
 
-    public function byCategoria(string $categoria): array
+    public function publicados(): array
     {
-        return array_values(array_filter($this->all(), fn($a) => $a['categoria_slug'] === $categoria));
+        return $this->all(true);
+    }
+
+    public function programados(): array
+    {
+        $now = time();
+        $futuros = array_filter($this->all(false), fn($a) => strtotime($a['fecha_publicacion']) > $now);
+        usort($futuros, fn($a, $b) => strcmp($a['fecha_publicacion'], $b['fecha_publicacion']));
+        return array_values($futuros);
+    }
+
+    public function byCategoria(string $categoria, bool $soloPublicados = false): array
+    {
+        return array_values(array_filter($this->all($soloPublicados), fn($a) => $a['categoria_slug'] === $categoria));
     }
 
     public function find(string $categoria, string $slug): ?array

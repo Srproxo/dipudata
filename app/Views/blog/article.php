@@ -13,6 +13,12 @@ use App\Models\LegisladorModel;
         <?php if (!empty($articulo['fecha_publicacion'])): ?>
         <time datetime="<?= e(date('c', strtotime($articulo['fecha_publicacion']))) ?>" class="block font-mono text-sm text-slate-400 mt-3"><?= e(date('d/m/Y', strtotime($articulo['fecha_publicacion']))) ?></time>
         <?php endif; ?>
+        <?php if (!empty($esProgramado)): ?>
+        <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-800 font-medium">
+            <span class="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span><strong>Informe Programado:</strong> Publicación oficial prevista para el <?= e(date('d/m/Y', strtotime($articulo['fecha_publicacion']))) ?>. Vista previa de auditoría cívica habilitada.</span>
+        </div>
+        <?php endif; ?>
         <div class="mt-8 space-y-5 leading-relaxed text-slate-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-slate-900 [&_h2]:pt-4">
             <?= $html /* HTML editorial de confianza (tabla blog_articulos) con enlaces generados por InternalLinker */ ?>
         </div>

@@ -26,13 +26,25 @@ class BlogController
 
     public function hub(): array
     {
-        return ['categorias' => $this->blog->categorias(), 'articulos' => $this->blog->all()];
+        return [
+            'categorias'  => $this->blog->categorias(),
+            'articulos'   => $this->blog->publicados(),
+            'programados' => $this->blog->programados(),
+        ];
     }
 
     public function categoria(string $categoria): ?array
     {
-        $articulos = $this->blog->byCategoria($categoria);
-        return $articulos === [] ? null : ['categoria' => $categoria, 'articulos' => $articulos];
+        $publicados = $this->blog->byCategoria($categoria, true);
+        $programados = array_values(array_filter($this->blog->programados(), fn($a) => $a['categoria_slug'] === $categoria));
+        if ($publicados === [] && $programados === []) {
+            return null;
+        }
+        return [
+            'categoria'   => $categoria,
+            'articulos'   => $publicados,
+            'programados' => $programados,
+        ];
     }
 
     public function articulo(string $categoria, string $slug): ?array
@@ -48,11 +60,14 @@ class BlogController
             fn($a) => $a['articulo_slug'] !== $slug
         ));
 
+        $esProgramado = !empty($art['fecha_publicacion']) && (strtotime($art['fecha_publicacion']) > time());
+
         return [
             'articulo'     => $art,
             'html'         => $linkeado['html'],
             'mencionados'  => $linkeado['enlazados'],
             'relacionados' => array_slice($relacionados, 0, 3),
+            'esProgramado' => $esProgramado,
         ];
     }
 

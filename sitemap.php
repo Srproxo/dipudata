@@ -45,7 +45,9 @@ try {
     foreach (array_keys($blogModel->categorias()) as $cat) {
         $mvcUrls[] = ["/blog/{$cat}", 'weekly', '0.7'];
     }
-    foreach ($blogModel->all() as $a) {
+    $incluirTodos = isset($_GET['todos']) && $_GET['todos'] === '1';
+    $articulosSitemap = $incluirTodos ? $blogModel->all() : $blogModel->publicados();
+    foreach ($articulosSitemap as $a) {
         $mvcUrls[] = ["/blog/{$a['categoria_slug']}/{$a['articulo_slug']}", 'monthly', '0.8'];
     }
 } catch (Throwable) {
