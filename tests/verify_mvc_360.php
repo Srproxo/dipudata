@@ -336,6 +336,76 @@ assert_test("LegisladorModel::urlPerfil genera prefijo /diputado/ para Diputados
     \App\Models\LegisladorModel::urlPerfil(['camara' => 'Diputados', 'slug' => 'martin-alexis-menem']) === '/diputado/martin-alexis-menem'
 );
 
+// 9. Master PRD Etapa 2: AuditorEngineController y AuditorModel
+echo "\n--- MASTER PRD ETAPA 2: CONTROLADORES Y MODELOS DE AUDITORÍA ÉTICA ---\n";
+$auditorModel = new \App\Models\AuditorModel();
+
+// 9.1: Coherencia histórica / Panquequismo en leyes espejo
+$coherenciaMenem = $auditorModel->coherenciaHistorica(1);
+assert_test("AuditorModel: cálculo de coherencia histórica en leyes espejo (Menem)",
+    isset($coherenciaMenem['indice_coherencia']) &&
+    $coherenciaMenem['indice_coherencia'] >= 0.0 &&
+    $coherenciaMenem['indice_coherencia'] <= 100.0 &&
+    is_array($coherenciaMenem['alertas_panquequismo'])
+);
+
+$coherenciaDeLoredo = $auditorModel->coherenciaHistorica(3);
+assert_test("AuditorModel: detección de panquequismo en Ley de Manejo del Fuego (De Loredo)",
+    $coherenciaDeLoredo['votos_incoherentes'] >= 1 &&
+    count($coherenciaDeLoredo['alertas_panquequismo']) >= 1
+);
+
+// 9.2: Grafo de alianzas interbloque
+$alianzas = $auditorModel->grafoAlianzas(1);
+assert_test("AuditorModel: grafo de alianzas y cálculo de transversalidad interbloque",
+    isset($alianzas['indice_transversalidad']) &&
+    $alianzas['total_proyectos_firmados'] > 0 &&
+    is_array($alianzas['bloques_aliados']) &&
+    is_array($alianzas['socios_frecuentes'])
+);
+
+// 9.3: Conflictos de interés (Financiamiento privado vs. Votaciones)
+$conflictosMenem = $auditorModel->conflictosInteres(1);
+assert_test("AuditorModel: cruce de financiamiento de campaña con votos sectoriales (Menem)",
+    $conflictosMenem['total_aportes_declarados_ars'] > 0 &&
+    count($conflictosMenem['sectores_financiadores']) >= 2 &&
+    count($conflictosMenem['alertas_conflicto']) >= 1 &&
+    str_contains($conflictosMenem['alertas_conflicto'][0]['sector'], 'Fintech')
+);
+
+// 9.4: Tracking de promesas de campaña
+$promesas = $auditorModel->trackingPromesas(3);
+assert_test("AuditorModel: tracking de promesas con estado Cumplida e Incumplida (De Loredo)",
+    $promesas['total_promesas'] >= 2 &&
+    $promesas['cumplidas'] >= 1 &&
+    $promesas['incumplidas'] >= 1 &&
+    $promesas['tasa_cumplimiento_pct'] > 0
+);
+
+// 9.5: Endpoint REST AuditorEngineController
+$testAuditorScript = dirname(__DIR__) . '/tests/test_auditor_runner.php';
+file_put_contents($testAuditorScript, "<?php\n" .
+    '$_SERVER["REQUEST_METHOD"] = "GET";' . "\n" .
+    '$_SERVER["REQUEST_URI"] = "/api/auditoria/1";' . "\n" .
+    '$_SERVER["HTTP_HOST"] = "dipudata.com";' . "\n" .
+    'require_once dirname(__DIR__) . "/mvc.php";' . "\n"
+);
+$resAuditor = shell_exec("cd " . escapeshellarg(dirname(__DIR__)) . " && php tests/test_auditor_runner.php 2>&1");
+@unlink($testAuditorScript);
+$jsonAuditor = json_decode((string)$resAuditor, true);
+
+assert_test("AuditorEngineController: endpoint GET /api/auditoria/1 retorna las 5 dimensiones éticas",
+    is_array($jsonAuditor) &&
+    ($jsonAuditor['status'] ?? '') === 'ok' &&
+    isset($jsonAuditor['data']['defensa_provincial']) &&
+    isset($jsonAuditor['data']['coherencia_espejo']) &&
+    isset($jsonAuditor['data']['grafo_alianzas']) &&
+    isset($jsonAuditor['data']['conflictos_interes']) &&
+    isset($jsonAuditor['data']['promesas_campana']) &&
+    isset($jsonAuditor['data']['despacho_costos'])
+);
+
+
 
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";

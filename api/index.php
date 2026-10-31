@@ -240,6 +240,15 @@ if ($method === 'GET' && ($route === '/legisladores-master' || $route === '/legi
 }
 
 // ============================================================================
+// RUTA 0B: GET /api/auditoria/* (Motor de Auditoría Ética Master PRD)
+// ============================================================================
+if ($method === 'GET' && preg_match('#^/auditoria(?:/(.*))?$#', $route, $audMatches)) {
+    require_once dirname(__DIR__) . '/app/bootstrap.php';
+    (new \App\Controllers\AuditorEngineController())->handle($audMatches[1] ?? '');
+    exit;
+}
+
+// ============================================================================
 // RUTA 1: GET /api/legisladores (Listado paginado + Búsqueda + Filtros + KPIs)
 // ============================================================================
 if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {

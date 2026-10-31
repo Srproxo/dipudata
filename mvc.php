@@ -103,6 +103,11 @@ switch (true) {
         (new \App\Controllers\ApiN8nController())->updateDespachos();
         break;
 
+    case (bool)preg_match('#^/api/auditoria(?:/(.*))?$#', $path, $m):
+        $sub = $m[1] ?? '';
+        (new \App\Controllers\AuditorEngineController())->handle($sub);
+        break;
+
     case $path === '/blog':
         try {
             $data = (new BlogController())->hub();
