@@ -18,7 +18,14 @@ class BlogModel
     public function all(): array
     {
         if ($this->pdo) {
-            return $this->pdo->query("SELECT * FROM blog_articulos WHERE publicado = 1 ORDER BY fecha_publicacion DESC")->fetchAll();
+            try {
+                $stmt = $this->pdo->query("SELECT * FROM blog_articulos WHERE publicado = 1 ORDER BY fecha_publicacion DESC");
+                $rows = $stmt ? $stmt->fetchAll() : [];
+                if (!empty($rows)) {
+                    return $rows;
+                }
+            } catch (\Throwable) {
+            }
         }
         return Database::getDefaultBlogArticles();
     }
@@ -31,12 +38,18 @@ class BlogModel
     public function find(string $categoria, string $slug): ?array
     {
         if ($this->pdo) {
-            $stmt = $this->pdo->prepare("
-                SELECT * FROM blog_articulos
-                WHERE categoria_slug = :cat AND articulo_slug = :slug AND publicado = 1 LIMIT 1
-            ");
-            $stmt->execute([':cat' => $categoria, ':slug' => $slug]);
-            return $stmt->fetch() ?: null;
+            try {
+                $stmt = $this->pdo->prepare("
+                    SELECT * FROM blog_articulos
+                    WHERE categoria_slug = :cat AND articulo_slug = :slug AND publicado = 1 LIMIT 1
+                ");
+                $stmt->execute([':cat' => $categoria, ':slug' => $slug]);
+                $row = $stmt->fetch();
+                if ($row) {
+                    return $row;
+                }
+            } catch (\Throwable) {
+            }
         }
         foreach (Database::getDefaultBlogArticles() as $a) {
             if ($a['categoria_slug'] === $categoria && $a['articulo_slug'] === $slug) {

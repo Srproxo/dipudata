@@ -33,7 +33,7 @@ class LegisladorController
             'agenda'              => $this->model->agendaProyectos((int)$leg['id']),
             'ultimos_proyectos'   => $this->model->ultimosProyectosAutor((int)$leg['id'], 5),
             'defensa_provincial'  => $this->model->calcularDefensaProvincial((int)$leg['id']),
-            'despacho'            => $this->model->despachoCostos((int)$leg['id']),
+            'despacho'            => $this->model->despachoCostos((int)$leg['id'], 2024, $leg['id_recinto'] ?? null, $leg['slug'] ?? null),
             'media_camara_costo'  => $this->model->mediaCamaraCostoProyecto($leg['camara']),
             'votaciones'          => $this->model->votaciones($leg['id_recinto']),
         ];

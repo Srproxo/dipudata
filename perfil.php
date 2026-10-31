@@ -15,7 +15,15 @@ use App\Models\LegisladorModel;
 $slugLegislador ??= (string)preg_replace('/[^a-z0-9\-]/', '', strtolower((string)($_GET['slug'] ?? '')));
 $camara ??= null;
 
-$data = $slugLegislador !== '' ? (new LegisladorController())->perfil($slugLegislador, $camara) : null;
+try {
+    $data = $slugLegislador !== '' ? (new LegisladorController())->perfil($slugLegislador, $camara) : null;
+} catch (\Throwable) {
+    try {
+        $data = $slugLegislador !== '' ? (new LegisladorController(new LegisladorModel(null)))->perfil($slugLegislador, $camara) : null;
+    } catch (\Throwable) {
+        $data = null;
+    }
+}
 if ($data === null) {
     render_404();
     return;

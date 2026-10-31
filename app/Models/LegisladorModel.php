@@ -54,7 +54,14 @@ class LegisladorModel
     public function all(): array
     {
         if ($this->pdo) {
-            return $this->pdo->query("SELECT * FROM legisladores_master WHERE estado = 'Activo' ORDER BY nombre")->fetchAll();
+            try {
+                $stmt = $this->pdo->query("SELECT * FROM legisladores_master WHERE estado = 'Activo' ORDER BY nombre");
+                $rows = $stmt ? $stmt->fetchAll() : [];
+                if (!empty($rows)) {
+                    return $rows;
+                }
+            } catch (\Throwable) {
+            }
         }
         return array_values($this->csv()['legisladores']);
     }
@@ -62,9 +69,15 @@ class LegisladorModel
     public function findBySlug(string $slug): ?array
     {
         if ($this->pdo) {
-            $stmt = $this->pdo->prepare("SELECT * FROM legisladores_master WHERE slug = :slug LIMIT 1");
-            $stmt->execute([':slug' => $slug]);
-            return $stmt->fetch() ?: null;
+            try {
+                $stmt = $this->pdo->prepare("SELECT * FROM legisladores_master WHERE slug = :slug LIMIT 1");
+                $stmt->execute([':slug' => $slug]);
+                $row = $stmt->fetch();
+                if ($row) {
+                    return $row;
+                }
+            } catch (\Throwable) {
+            }
         }
         foreach ($this->csv()['legisladores'] as $leg) {
             if ($leg['slug'] === $slug) {
@@ -105,12 +118,18 @@ class LegisladorModel
     public function patrimonio(string $cuit): array
     {
         if ($this->pdo) {
-            $stmt = $this->pdo->prepare("
-                SELECT anio, monto_declarado, ajuste_inflacion_ipc, variacion_real_porcentaje
-                FROM patrimonio_ddjj_cuit WHERE cuit = :cuit ORDER BY anio ASC
-            ");
-            $stmt->execute([':cuit' => $cuit]);
-            return $stmt->fetchAll();
+            try {
+                $stmt = $this->pdo->prepare("
+                    SELECT anio, monto_declarado, ajuste_inflacion_ipc, variacion_real_porcentaje
+                    FROM patrimonio_ddjj_cuit WHERE cuit = :cuit ORDER BY anio ASC
+                ");
+                $stmt->execute([':cuit' => $cuit]);
+                $rows = $stmt->fetchAll();
+                if (!empty($rows)) {
+                    return $rows;
+                }
+            } catch (\Throwable) {
+            }
         }
         return $this->csv()['ddjj'][$cuit] ?? [];
     }
@@ -596,12 +615,24 @@ class LegisladorModel
     /**
      * Retorna la información de costos de despacho, asesores y alertas de nepotismo (Fase 6 - n8n).
      */
-    public function despachoCostos(int $legisladorId, int $anio = 2024): ?array
+    public function despachoCostos(int $legisladorId, int $anio = 2024, ?string $idRecinto = null, ?string $slug = null): ?array
     {
         if ($this->pdo) {
             try {
-                $stmt = $this->pdo->prepare("SELECT * FROM despacho_costos WHERE legislador_id = :id AND anio = :anio LIMIT 1");
-                $stmt->execute([':id' => $legisladorId, ':anio' => $anio]);
+                $stmt = $this->pdo->prepare("
+                    SELECT dc.*
+                    FROM despacho_costos dc
+                    LEFT JOIN legisladores_master lm ON dc.legislador_id = lm.id
+                    WHERE (dc.legislador_id = :id OR (lm.id_recinto IS NOT NULL AND lm.id_recinto = :recinto) OR (lm.slug IS NOT NULL AND lm.slug = :slug))
+                      AND dc.anio = :anio
+                    LIMIT 1
+                ");
+                $stmt->execute([
+                    ':id'      => $legisladorId,
+                    ':recinto' => (string)($idRecinto ?? ''),
+                    ':slug'    => (string)($slug ?? ''),
+                    ':anio'    => $anio,
+                ]);
                 $row = $stmt->fetch();
                 if ($row) {
                     return $row;
@@ -610,7 +641,29 @@ class LegisladorModel
             }
         }
 
-        return $this->csv()['despacho_costos'][$legisladorId] ?? null;
+        $despachos = $this->csv()['despacho_costos'] ?? [];
+        if (isset($despachos[$legisladorId])) {
+            return $despachos[$legisladorId];
+        }
+
+        $recintoToId = [
+            'HCDN-1001' => 1,
+            'HCDN-1002' => 2,
+            'HCDN-1003' => 3,
+            'HCDN-1004' => 4,
+            'HCDN-1005' => 5,
+            'HCDN-1006' => 6,
+            'HSN-2001'  => 7,
+            'HSN-2002'  => 8,
+        ];
+        if ($idRecinto !== null && isset($recintoToId[$idRecinto])) {
+            $mappedId = $recintoToId[$idRecinto];
+            if (isset($despachos[$mappedId])) {
+                return $despachos[$mappedId];
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -729,6 +782,9 @@ class LegisladorModel
             if ($fp !== false) {
                 fputcsv($fp, ['legislador_id', 'anio', 'total_asesores', 'costo_mensual_ars', 'costo_anual_ars', 'alertas_nepotismo', 'proyectos_autor_anio', 'costo_por_proyecto_ars'], ',', '"', '\\');
                 foreach ($todos as $t) {
+                    if ((int)($t['legislador_id'] ?? 0) <= 0) {
+                        continue;
+                    }
                     fputcsv($fp, [
                         $t['legislador_id'],
                         $t['anio'],

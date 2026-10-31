@@ -41,7 +41,11 @@ switch (true) {
         break;
 
     case $path === '/blog':
-        $data = (new BlogController())->hub();
+        try {
+            $data = (new BlogController())->hub();
+        } catch (\Throwable) {
+            $data = (new BlogController(new \App\Models\BlogModel(null), new \App\Models\LegisladorModel(null)))->hub();
+        }
         render('blog/hub', [
             'title'       => 'Blog DipuData | Periodismo de datos legislativos y educación financiera',
             'description' => 'Análisis de votaciones del Congreso, auditoría de declaraciones juradas ajustadas por inflación y guías de educación financiera cívica.',
@@ -51,7 +55,11 @@ switch (true) {
         break;
 
     case (bool)preg_match("#^/blog/({$slug})$#", $path, $m):
-        $data = (new BlogController())->categoria($m[1]);
+        try {
+            $data = (new BlogController())->categoria($m[1]);
+        } catch (\Throwable) {
+            $data = (new BlogController(new \App\Models\BlogModel(null), new \App\Models\LegisladorModel(null)))->categoria($m[1]);
+        }
         if ($data === null) {
             render_404();
             break;
@@ -66,7 +74,11 @@ switch (true) {
         break;
 
     case (bool)preg_match("#^/blog/({$slug})/({$slug})$#", $path, $m):
-        $data = (new BlogController())->articulo($m[1], $m[2]);
+        try {
+            $data = (new BlogController())->articulo($m[1], $m[2]);
+        } catch (\Throwable) {
+            $data = (new BlogController(new \App\Models\BlogModel(null), new \App\Models\LegisladorModel(null)))->articulo($m[1], $m[2]);
+        }
         if ($data === null) {
             render_404();
             break;

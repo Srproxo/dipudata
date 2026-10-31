@@ -74,15 +74,17 @@ class Database
                     }
                 }
             }
+            self::seedInitialData($pdo);
         }
-
-        self::seedInitialData($pdo);
     }
 
     public static function seedInitialData(PDO $pdo): void
     {
-        $bios = self::bios();
-        self::importCsvSeeds($pdo, $bios);
+        try {
+            $bios = self::bios();
+            self::importCsvSeeds($pdo, $bios);
+        } catch (Throwable) {
+        }
     }
 
     public static function bios(): array
@@ -119,236 +121,278 @@ class Database
     private static function importCsvSeeds(PDO $pdo, array $bios): void
     {
         // 1. Sembrar ejes temáticos si no existen
-        $stmtEjes = $pdo->prepare("
-            INSERT INTO ejes_tematicos (id, nombre_eje, descripcion, activo)
-            VALUES (:id, :nombre, :desc, 1)
-            ON DUPLICATE KEY UPDATE nombre_eje = VALUES(nombre_eje), descripcion = VALUES(descripcion)
-        ");
-        foreach (self::getDefaultEjes() as $eje) {
-            $stmtEjes->execute([
-                ':id'     => $eje['id'],
-                ':nombre' => $eje['nombre_eje'],
-                ':desc'   => $eje['descripcion'],
-            ]);
-        }
-
-        $csvVotos = dirname(__DIR__, 2) . '/storage/csv/votaciones_datacp.csv';
-        if (is_readable($csvVotos) && ($handle = fopen($csvVotos, 'r')) !== false) {
-            $headers = fgetcsv($handle);
-            $stmtLeg = $pdo->prepare("
-                INSERT INTO legisladores_master
-                    (nombre, slug, camara, provincia, bloque, estado, id_recinto, cuit, nombre_wiki, biografia_extracto, indice_lealtad, asistencia)
-                VALUES
-                    (:nombre, :slug, :camara, :provincia, :bloque, :estado, :id_recinto, :cuit, :nombre_wiki, :bio, :indice_lealtad, :asistencia)
-                ON DUPLICATE KEY UPDATE
-                    nombre = VALUES(nombre),
-                    bloque = VALUES(bloque),
-                    indice_lealtad = VALUES(indice_lealtad),
-                    asistencia = VALUES(asistencia)
+        try {
+            $stmtEjes = $pdo->prepare("
+                INSERT INTO ejes_tematicos (id, nombre_eje, descripcion, activo)
+                VALUES (:id, :nombre, :desc, 1)
+                ON DUPLICATE KEY UPDATE nombre_eje = VALUES(nombre_eje), descripcion = VALUES(descripcion)
             ");
-            $stmtVoto = $pdo->prepare("
-                INSERT INTO votaciones (id_recinto, ley, eje_id, voto, fecha)
-                VALUES (:id_recinto, :ley, :eje_id, :voto, :fecha)
-                ON DUPLICATE KEY UPDATE voto = VALUES(voto), eje_id = VALUES(eje_id)
-            ");
-
-            while (($row = fgetcsv($handle)) !== false) {
-                if (!$headers || count($row) < count($headers)) {
-                    continue;
-                }
-                $data = array_combine($headers, $row);
-                if (!is_array($data)) {
-                    continue;
-                }
-                $idRecinto = trim((string)$data['id_recinto']);
-                $nombre = trim((string)$data['nombre']);
-                $stmtLeg->execute([
-                    ':nombre'         => $nombre,
-                    ':slug'           => self::slugify($nombre),
-                    ':camara'         => trim((string)$data['camara']),
-                    ':provincia'      => trim((string)$data['provincia']),
-                    ':bloque'         => trim((string)$data['bloque']),
-                    ':estado'         => trim((string)$data['estado']),
-                    ':id_recinto'     => $idRecinto,
-                    ':cuit'           => trim((string)$data['cuit']),
-                    ':nombre_wiki'    => trim((string)$data['nombre_wiki']),
-                    ':bio'            => $bios[$idRecinto] ?? 'Legislador Nacional del Congreso de la Nación Argentina.',
-                    ':indice_lealtad' => (float)$data['indice_lealtad'],
-                    ':asistencia'     => (float)$data['asistencia'],
-                ]);
-
-                $ejeId = isset($data['eje_id']) && is_numeric($data['eje_id']) ? (int)$data['eje_id'] : 1;
-                $stmtVoto->execute([
-                    ':id_recinto' => $idRecinto,
-                    ':ley'        => trim((string)$data['ley']),
-                    ':eje_id'     => $ejeId,
-                    ':voto'       => trim((string)$data['voto']),
-                    ':fecha'      => trim((string)$data['fecha']),
+            foreach (self::getDefaultEjes() as $eje) {
+                $stmtEjes->execute([
+                    ':id'     => $eje['id'],
+                    ':nombre' => $eje['nombre_eje'],
+                    ':desc'   => $eje['descripcion'],
                 ]);
             }
-            fclose($handle);
+        } catch (Throwable) {
         }
 
-        $csvDdjj = dirname(__DIR__, 2) . '/storage/csv/ddjj_anticorrupcion.csv';
-        if (is_readable($csvDdjj) && ($handle = fopen($csvDdjj, 'r')) !== false) {
-            $headers = fgetcsv($handle);
-            $stmtDdjj = $pdo->prepare("
-                INSERT INTO patrimonio_ddjj_cuit (cuit, anio, monto_declarado, ajuste_inflacion_ipc, variacion_real_porcentaje)
-                VALUES (:cuit, :anio, :monto_declarado, :ajuste_inflacion_ipc, :variacion_real_porcentaje)
-                ON DUPLICATE KEY UPDATE
-                    monto_declarado = VALUES(monto_declarado),
-                    ajuste_inflacion_ipc = VALUES(ajuste_inflacion_ipc),
-                    variacion_real_porcentaje = VALUES(variacion_real_porcentaje)
-            ");
-            while (($row = fgetcsv($handle)) !== false) {
-                if (!$headers || count($row) < count($headers)) {
-                    continue;
+        try {
+            $csvVotos = dirname(__DIR__, 2) . '/storage/csv/votaciones_datacp.csv';
+            if (is_readable($csvVotos) && ($handle = fopen($csvVotos, 'r')) !== false) {
+                $headers = fgetcsv($handle);
+                $stmtLeg = $pdo->prepare("
+                    INSERT INTO legisladores_master
+                        (nombre, slug, camara, provincia, bloque, estado, id_recinto, cuit, nombre_wiki, biografia_extracto, indice_lealtad, asistencia)
+                    VALUES
+                        (:nombre, :slug, :camara, :provincia, :bloque, :estado, :id_recinto, :cuit, :nombre_wiki, :bio, :indice_lealtad, :asistencia)
+                    ON DUPLICATE KEY UPDATE
+                        nombre = VALUES(nombre),
+                        bloque = VALUES(bloque),
+                        indice_lealtad = VALUES(indice_lealtad),
+                        asistencia = VALUES(asistencia)
+                ");
+                $stmtVoto = $pdo->prepare("
+                    INSERT INTO votaciones (id_recinto, ley, eje_id, voto, fecha)
+                    VALUES (:id_recinto, :ley, :eje_id, :voto, :fecha)
+                    ON DUPLICATE KEY UPDATE voto = VALUES(voto), eje_id = VALUES(eje_id)
+                ");
+
+                while (($row = fgetcsv($handle)) !== false) {
+                    if (!$headers || count($row) < count($headers)) {
+                        continue;
+                    }
+                    $data = array_combine($headers, $row);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+                    $idRecinto = trim((string)$data['id_recinto']);
+                    $nombre = trim((string)$data['nombre']);
+                    try {
+                        $stmtLeg->execute([
+                            ':nombre'         => $nombre,
+                            ':slug'           => self::slugify($nombre),
+                            ':camara'         => trim((string)$data['camara']),
+                            ':provincia'      => trim((string)$data['provincia']),
+                            ':bloque'         => trim((string)$data['bloque']),
+                            ':estado'         => trim((string)$data['estado']),
+                            ':id_recinto'     => $idRecinto,
+                            ':cuit'           => trim((string)$data['cuit']),
+                            ':nombre_wiki'    => trim((string)$data['nombre_wiki']),
+                            ':bio'            => $bios[$idRecinto] ?? 'Legislador Nacional del Congreso de la Nación Argentina.',
+                            ':indice_lealtad' => (float)$data['indice_lealtad'],
+                            ':asistencia'     => (float)$data['asistencia'],
+                        ]);
+                    } catch (Throwable) {
+                    }
+
+                    try {
+                        $ejeId = isset($data['eje_id']) && is_numeric($data['eje_id']) ? (int)$data['eje_id'] : 1;
+                        $stmtVoto->execute([
+                            ':id_recinto' => $idRecinto,
+                            ':ley'        => trim((string)$data['ley']),
+                            ':eje_id'     => $ejeId,
+                            ':voto'       => trim((string)$data['voto']),
+                            ':fecha'      => trim((string)$data['fecha']),
+                        ]);
+                    } catch (Throwable) {
+                    }
                 }
-                $data = array_combine($headers, $row);
-                if (!is_array($data)) {
-                    continue;
-                }
-                $stmtDdjj->execute([
-                    ':cuit'                      => trim((string)$data['cuit']),
-                    ':anio'                      => (int)$data['anio'],
-                    ':monto_declarado'           => (float)$data['monto_declarado'],
-                    ':ajuste_inflacion_ipc'      => (float)$data['ajuste_inflacion_ipc'],
-                    ':variacion_real_porcentaje' => (float)$data['variacion_real_porcentaje'],
-                ]);
+                fclose($handle);
             }
-            fclose($handle);
+        } catch (Throwable) {
         }
 
-        $stmtBlog = $pdo->prepare("
-            INSERT INTO blog_articulos (categoria_slug, articulo_slug, titulo, meta_descripcion, contenido_html, publicado)
-            VALUES (:cat, :slug, :titulo, :meta, :html, 1)
-            ON DUPLICATE KEY UPDATE titulo = VALUES(titulo), contenido_html = VALUES(contenido_html)
-        ");
+        try {
+            $csvDdjj = dirname(__DIR__, 2) . '/storage/csv/ddjj_anticorrupcion.csv';
+            if (is_readable($csvDdjj) && ($handle = fopen($csvDdjj, 'r')) !== false) {
+                $headers = fgetcsv($handle);
+                $stmtDdjj = $pdo->prepare("
+                    INSERT INTO patrimonio_ddjj_cuit (cuit, anio, monto_declarado, ajuste_inflacion_ipc, variacion_real_porcentaje)
+                    VALUES (:cuit, :anio, :monto_declarado, :ajuste_inflacion_ipc, :variacion_real_porcentaje)
+                    ON DUPLICATE KEY UPDATE
+                        monto_declarado = VALUES(monto_declarado),
+                        ajuste_inflacion_ipc = VALUES(ajuste_inflacion_ipc),
+                        variacion_real_porcentaje = VALUES(variacion_real_porcentaje)
+                ");
+                while (($row = fgetcsv($handle)) !== false) {
+                    if (!$headers || count($row) < count($headers)) {
+                        continue;
+                    }
+                    $data = array_combine($headers, $row);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+                    try {
+                        $stmtDdjj->execute([
+                            ':cuit'                      => trim((string)$data['cuit']),
+                            ':anio'                      => (int)$data['anio'],
+                            ':monto_declarado'           => (float)$data['monto_declarado'],
+                            ':ajuste_inflacion_ipc'      => (float)$data['ajuste_inflacion_ipc'],
+                            ':variacion_real_porcentaje' => (float)$data['variacion_real_porcentaje'],
+                        ]);
+                    } catch (Throwable) {
+                    }
+                }
+                fclose($handle);
+            }
+        } catch (Throwable) {
+        }
 
-        $articulos = self::getDefaultBlogArticles();
-        foreach ($articulos as $art) {
-            $stmtBlog->execute([
-                ':cat'    => $art['categoria_slug'],
-                ':slug'   => $art['articulo_slug'],
-                ':titulo' => $art['titulo'],
-                ':meta'   => $art['meta_descripcion'],
-                ':html'   => $art['contenido_html'],
-            ]);
+        try {
+            $stmtBlog = $pdo->prepare("
+                INSERT INTO blog_articulos (categoria_slug, articulo_slug, titulo, meta_descripcion, contenido_html, publicado)
+                VALUES (:cat, :slug, :titulo, :meta, :html, 1)
+                ON DUPLICATE KEY UPDATE titulo = VALUES(titulo), contenido_html = VALUES(contenido_html)
+            ");
+
+            $articulos = self::getDefaultBlogArticles();
+            foreach ($articulos as $art) {
+                try {
+                    $stmtBlog->execute([
+                        ':cat'    => $art['categoria_slug'],
+                        ':slug'   => $art['articulo_slug'],
+                        ':titulo' => $art['titulo'],
+                        ':meta'   => $art['meta_descripcion'],
+                        ':html'   => $art['contenido_html'],
+                    ]);
+                } catch (Throwable) {
+                }
+            }
+        } catch (Throwable) {
         }
 
         // 3. Sembrar Proyectos de Ley e Iniciativa Legislativa (Fase 3)
-        $csvProyectos = dirname(__DIR__, 2) . '/storage/csv/proyectos_iniciativa.csv';
-        if (is_readable($csvProyectos) && ($handle = fopen($csvProyectos, 'r')) !== false) {
-            $headers = fgetcsv($handle);
-            $stmtProy = $pdo->prepare("
-                INSERT INTO proyectos (expediente, titulo_sumario, fecha_presentacion, eje_id, estado_tramite)
-                VALUES (:expediente, :titulo, :fecha, :eje_id, :estado)
-                ON DUPLICATE KEY UPDATE
-                    titulo_sumario = VALUES(titulo_sumario),
-                    estado_tramite = VALUES(estado_tramite),
-                    eje_id = VALUES(eje_id)
-            ");
-            $stmtFirma = $pdo->prepare("
-                INSERT INTO proyectos_firmas (proyecto_id, legislador_id, rol)
-                SELECT p.id, l.id, :rol
-                FROM proyectos p, legisladores_master l
-                WHERE p.expediente = :expediente AND l.id_recinto = :id_recinto
-                ON DUPLICATE KEY UPDATE rol = VALUES(rol)
-            ");
+        try {
+            $csvProyectos = dirname(__DIR__, 2) . '/storage/csv/proyectos_iniciativa.csv';
+            if (is_readable($csvProyectos) && ($handle = fopen($csvProyectos, 'r')) !== false) {
+                $headers = fgetcsv($handle);
+                $stmtProy = $pdo->prepare("
+                    INSERT INTO proyectos (expediente, titulo_sumario, fecha_presentacion, eje_id, estado_tramite)
+                    VALUES (:expediente, :titulo, :fecha, :eje_id, :estado)
+                    ON DUPLICATE KEY UPDATE
+                        titulo_sumario = VALUES(titulo_sumario),
+                        estado_tramite = VALUES(estado_tramite),
+                        eje_id = VALUES(eje_id)
+                ");
+                $stmtFirma = $pdo->prepare("
+                    INSERT INTO proyectos_firmas (proyecto_id, legislador_id, rol)
+                    SELECT p.id, l.id, :rol
+                    FROM proyectos p, legisladores_master l
+                    WHERE p.expediente = :expediente AND l.id_recinto = :id_recinto
+                    ON DUPLICATE KEY UPDATE rol = VALUES(rol)
+                ");
 
-            while (($row = fgetcsv($handle)) !== false) {
-                if (!$headers || count($row) < count($headers)) {
-                    continue;
+                while (($row = fgetcsv($handle)) !== false) {
+                    if (!$headers || count($row) < count($headers)) {
+                        continue;
+                    }
+                    $data = array_combine($headers, $row);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+                    $exp = trim((string)$data['expediente']);
+                    try {
+                        $stmtProy->execute([
+                            ':expediente' => $exp,
+                            ':titulo'     => trim((string)$data['titulo_sumario']),
+                            ':fecha'      => trim((string)$data['fecha_presentacion']),
+                            ':eje_id'     => (int)$data['eje_id'],
+                            ':estado'     => trim((string)$data['estado_tramite']),
+                        ]);
+                        $stmtFirma->execute([
+                            ':rol'        => trim((string)$data['rol']),
+                            ':expediente' => $exp,
+                            ':id_recinto' => trim((string)$data['legislador_id_recinto']),
+                        ]);
+                    } catch (Throwable) {
+                    }
                 }
-                $data = array_combine($headers, $row);
-                if (!is_array($data)) {
-                    continue;
-                }
-                $exp = trim((string)$data['expediente']);
-                $stmtProy->execute([
-                    ':expediente' => $exp,
-                    ':titulo'     => trim((string)$data['titulo_sumario']),
-                    ':fecha'      => trim((string)$data['fecha_presentacion']),
-                    ':eje_id'     => (int)$data['eje_id'],
-                    ':estado'     => trim((string)$data['estado_tramite']),
-                ]);
-                $stmtFirma->execute([
-                    ':rol'        => trim((string)$data['rol']),
-                    ':expediente' => $exp,
-                    ':id_recinto' => trim((string)$data['legislador_id_recinto']),
-                ]);
+                fclose($handle);
             }
-            fclose($handle);
+        } catch (Throwable) {
         }
 
         // 4. Sembrar Mapeo de Impacto Provincial (Fase 4 - Tensión Partido vs Provincia)
-        $csvImpacto = dirname(__DIR__, 2) . '/storage/csv/leyes_impacto_provincial.csv';
-        if (is_readable($csvImpacto) && ($handle = fopen($csvImpacto, 'r')) !== false) {
-            $headers = fgetcsv($handle);
-            $stmtImpacto = $pdo->prepare("
-                INSERT INTO leyes_impacto_provincial (ley, provincia, voto_esperado_regional, nivel_criticidad, descripcion_impacto, ley_id)
-                VALUES (:ley, :provincia, :voto_esperado, :criticidad, :descripcion, (SELECT id FROM votaciones WHERE ley = :ley_match LIMIT 1))
-                ON DUPLICATE KEY UPDATE
-                    voto_esperado_regional = VALUES(voto_esperado_regional),
-                    nivel_criticidad = VALUES(nivel_criticidad),
-                    descripcion_impacto = VALUES(descripcion_impacto)
-            ");
-            while (($row = fgetcsv($handle)) !== false) {
-                if (!$headers || count($row) < count($headers)) {
-                    continue;
+        try {
+            $csvImpacto = dirname(__DIR__, 2) . '/storage/csv/leyes_impacto_provincial.csv';
+            if (is_readable($csvImpacto) && ($handle = fopen($csvImpacto, 'r')) !== false) {
+                $headers = fgetcsv($handle);
+                $stmtImpacto = $pdo->prepare("
+                    INSERT INTO leyes_impacto_provincial (ley, provincia, voto_esperado_regional, nivel_criticidad, descripcion_impacto, ley_id)
+                    VALUES (:ley, :provincia, :voto_esperado, :criticidad, :descripcion, (SELECT id FROM votaciones WHERE ley = :ley_match LIMIT 1))
+                    ON DUPLICATE KEY UPDATE
+                        voto_esperado_regional = VALUES(voto_esperado_regional),
+                        nivel_criticidad = VALUES(nivel_criticidad),
+                        descripcion_impacto = VALUES(descripcion_impacto)
+                ");
+                while (($row = fgetcsv($handle)) !== false) {
+                    if (!$headers || count($row) < count($headers)) {
+                        continue;
+                    }
+                    $data = array_combine($headers, $row);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+                    $ley = trim((string)$data['ley']);
+                    try {
+                        $stmtImpacto->execute([
+                            ':ley'           => $ley,
+                            ':ley_match'     => $ley,
+                            ':provincia'     => trim((string)$data['provincia']),
+                            ':voto_esperado' => trim((string)$data['voto_esperado_regional']),
+                            ':criticidad'    => (int)$data['nivel_criticidad'],
+                            ':descripcion'   => trim((string)$data['descripcion_impacto']),
+                        ]);
+                    } catch (Throwable) {
+                    }
                 }
-                $data = array_combine($headers, $row);
-                if (!is_array($data)) {
-                    continue;
-                }
-                $ley = trim((string)$data['ley']);
-                $stmtImpacto->execute([
-                    ':ley'           => $ley,
-                    ':ley_match'     => $ley,
-                    ':provincia'     => trim((string)$data['provincia']),
-                    ':voto_esperado' => trim((string)$data['voto_esperado_regional']),
-                    ':criticidad'    => (int)$data['nivel_criticidad'],
-                    ':descripcion'   => trim((string)$data['descripcion_impacto']),
-                ]);
+                fclose($handle);
             }
-            fclose($handle);
+        } catch (Throwable) {
         }
 
         // 5. Sembrar Costos de Despacho y Nepotismo (Fase 6 - n8n)
-        $csvDespachos = dirname(__DIR__, 2) . '/storage/csv/despacho_costos.csv';
-        if (is_readable($csvDespachos) && ($handle = fopen($csvDespachos, 'r')) !== false) {
-            $headers = fgetcsv($handle);
-            $stmtDespacho = $pdo->prepare("
-                INSERT INTO despacho_costos (legislador_id, anio, total_asesores, costo_mensual_ars, costo_anual_ars, alertas_nepotismo, proyectos_autor_anio, costo_por_proyecto_ars)
-                VALUES (:leg_id, :anio, :asesores, :costo_m, :costo_a, :nepotismo, :proy, :costo_p)
-                ON DUPLICATE KEY UPDATE
-                    total_asesores = VALUES(total_asesores),
-                    costo_mensual_ars = VALUES(costo_mensual_ars),
-                    costo_anual_ars = VALUES(costo_anual_ars),
-                    alertas_nepotismo = VALUES(alertas_nepotismo),
-                    proyectos_autor_anio = VALUES(proyectos_autor_anio),
-                    costo_por_proyecto_ars = VALUES(costo_por_proyecto_ars)
-            ");
-            while (($row = fgetcsv($handle)) !== false) {
-                if (!$headers || count($row) < count($headers)) {
-                    continue;
+        try {
+            $csvDespachos = dirname(__DIR__, 2) . '/storage/csv/despacho_costos.csv';
+            if (is_readable($csvDespachos) && ($handle = fopen($csvDespachos, 'r')) !== false) {
+                $headers = fgetcsv($handle);
+                $stmtDespacho = $pdo->prepare("
+                    INSERT INTO despacho_costos (legislador_id, anio, total_asesores, costo_mensual_ars, costo_anual_ars, alertas_nepotismo, proyectos_autor_anio, costo_por_proyecto_ars)
+                    VALUES (:leg_id, :anio, :asesores, :costo_m, :costo_a, :nepotismo, :proy, :costo_p)
+                    ON DUPLICATE KEY UPDATE
+                        total_asesores = VALUES(total_asesores),
+                        costo_mensual_ars = VALUES(costo_mensual_ars),
+                        costo_anual_ars = VALUES(costo_anual_ars),
+                        alertas_nepotismo = VALUES(alertas_nepotismo),
+                        proyectos_autor_anio = VALUES(proyectos_autor_anio),
+                        costo_por_proyecto_ars = VALUES(costo_por_proyecto_ars)
+                ");
+                while (($row = fgetcsv($handle)) !== false) {
+                    if (!$headers || count($row) < count($headers)) {
+                        continue;
+                    }
+                    $data = array_combine($headers, $row);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+                    try {
+                        $stmtDespacho->execute([
+                            ':leg_id'    => (int)$data['legislador_id'],
+                            ':anio'      => (int)$data['anio'],
+                            ':asesores'  => (int)$data['total_asesores'],
+                            ':costo_m'   => (float)$data['costo_mensual_ars'],
+                            ':costo_a'   => (float)$data['costo_anual_ars'],
+                            ':nepotismo' => (int)$data['alertas_nepotismo'],
+                            ':proy'      => (int)$data['proyectos_autor_anio'],
+                            ':costo_p'   => (float)$data['costo_por_proyecto_ars'],
+                        ]);
+                    } catch (Throwable) {
+                    }
                 }
-                $data = array_combine($headers, $row);
-                if (!is_array($data)) {
-                    continue;
-                }
-                $stmtDespacho->execute([
-                    ':leg_id'    => (int)$data['legislador_id'],
-                    ':anio'      => (int)$data['anio'],
-                    ':asesores'  => (int)$data['total_asesores'],
-                    ':costo_m'   => (float)$data['costo_mensual_ars'],
-                    ':costo_a'   => (float)$data['costo_anual_ars'],
-                    ':nepotismo' => (int)$data['alertas_nepotismo'],
-                    ':proy'      => (int)$data['proyectos_autor_anio'],
-                    ':costo_p'   => (float)$data['costo_por_proyecto_ars'],
-                ]);
+                fclose($handle);
             }
-            fclose($handle);
+        } catch (Throwable) {
         }
     }
 
