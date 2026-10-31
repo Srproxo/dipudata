@@ -1316,46 +1316,56 @@ require __DIR__ . '/app/Views/layouts/header.php';
     <!-- ========================================================================= -->
     <!-- MODAL DE PRESENTACIÓN ESTILO POWERPOINT (SLIDES 16:9 / MODO PRESENTACIÓN)  -->
     <!-- ========================================================================= -->
-    <div id="modalPresentacion" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md flex flex-col justify-between overflow-y-auto lg:overflow-hidden select-none p-3 sm:p-5 md:p-6 text-white font-sans" role="dialog" aria-modal="true" aria-label="Modo Presentación Diapositivas">
+    <style nonce="<?= csp_nonce() ?>">
+    @media print {
+        body * { visibility: hidden !important; }
+        #modalPresentacion, #modalPresentacion * { visibility: visible !important; }
+        #modalPresentacion { position: fixed !important; inset: 0 !important; background: white !important; z-index: 99999 !important; padding: 0 !important; }
+        #modalPresentacion header, #modalPresentacion footer { display: none !important; }
+        #modalPresentacion main { padding: 0 !important; margin: 0 !important; }
+        #slideViewport { border: none !important; box-shadow: none !important; width: 100% !important; min-height: 100vh !important; }
+    }
+    </style>
+    <div id="modalPresentacion" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex flex-col justify-between overflow-y-auto lg:overflow-hidden select-none p-3 sm:p-5 md:p-6 font-sans text-slate-900" role="dialog" aria-modal="true" aria-label="Modo Presentación Diapositivas">
         
         <!-- Header de la Barra de Controles de la Presentación -->
-        <header class="w-full max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800 shrink-0">
+        <header class="w-full max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/80 shrink-0">
             <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-amber-400 text-slate-950 shadow-sm">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold tracking-wider uppercase bg-slate-900 text-white shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
                     DipuData Slides
                 </span>
-                <span class="text-xs sm:text-sm font-semibold text-slate-300 truncate max-w-xs sm:max-w-md">
+                <span class="text-xs sm:text-sm font-semibold text-slate-800 truncate max-w-xs sm:max-w-md">
                     <?= e($leg['nombre']) ?> · <?= e($cargo) ?> (<?= e($leg['provincia']) ?>)
                 </span>
             </div>
 
             <!-- Contador de Diapositiva y Botones de Acción -->
             <div class="flex items-center gap-2">
-                <div class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1 text-xs font-mono tabular-nums text-slate-300">
-                    Diapositiva <span id="currentSlideNum" class="text-amber-400 font-bold text-sm">1</span> / 7
+                <div class="bg-white border border-slate-200 rounded-lg px-3 py-1 text-xs font-mono tabular-nums text-slate-700 shadow-sm">
+                    Diapositiva <span id="currentSlideNum" class="text-blue-600 font-bold text-sm">1</span> / 7
                 </div>
 
-                <button id="btnSlidePrev" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs font-semibold text-slate-200 transition-colors" title="Diapositiva anterior (Flecha Izquierda)">
+                <button id="btnSlidePrev" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors shadow-sm" title="Diapositiva anterior (Flecha Izquierda)">
                     ◀ <span class="hidden sm:inline">Anterior</span>
                 </button>
-                <button id="btnSlideNext" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors shadow-sm" title="Siguiente diapositiva (Flecha Derecha / Espacio)">
+                <button id="btnSlideNext" type="button" class="p-1.5 sm:px-3 sm:py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors shadow-sm" title="Siguiente diapositiva (Flecha Derecha / Espacio)">
                     <span class="hidden sm:inline">Siguiente</span> ▶
                 </button>
 
-                <div class="h-4 w-px bg-slate-800 mx-1"></div>
+                <div class="h-4 w-px bg-slate-300 mx-1"></div>
 
-                <button id="btnToggleFullscreen" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 transition-colors" title="Alternar Pantalla Completa (F)">
+                <button id="btnToggleFullscreen" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors shadow-sm" title="Alternar Pantalla Completa (F)">
                     ⛶ <span class="hidden md:inline text-[11px]">Pantalla Completa</span>
                 </button>
 
-                <button id="btnPrintSlides" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 transition-colors" title="Imprimir o Exportar en PDF (Ctrl+P)">
+                <button id="btnPrintSlides" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 transition-colors shadow-sm" title="Imprimir o Exportar en PDF (Ctrl+P)">
                     🖨 <span class="hidden md:inline text-[11px]">Exportar PDF</span>
                 </button>
 
-                <button id="btnCerrarPresentacion" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-rose-950/60 hover:bg-rose-900 border border-rose-800/80 text-xs text-rose-200 font-bold transition-colors" title="Cerrar Modo Presentación (Esc)">
+                <button id="btnCerrarPresentacion" type="button" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 text-xs text-rose-700 font-bold transition-colors shadow-sm" title="Cerrar Modo Presentación (Esc)">
                     ✕ <span class="hidden sm:inline">Salir</span>
                 </button>
             </div>
@@ -1363,12 +1373,12 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
         <!-- Escenario Principal: Diapositiva 16:9 -->
         <main class="w-full max-w-6xl mx-auto my-auto py-2 flex items-center justify-center grow">
-            <div id="slideViewport" class="w-full aspect-[16/9] min-h-[420px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800/80 rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+            <div id="slideViewport" class="w-full aspect-[16/9] min-h-[440px] bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-slate-900">
                 
                 <!-- DIAPOSITIVA 1: Portada Ejecutiva y Ficha Técnica -->
                 <div class="slide-deck-card active h-full flex flex-col justify-between" data-slide="1">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 01 · Resumen Ejecutivo
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1379,24 +1389,24 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto items-center">
                         <div class="flex items-center gap-5 md:col-span-2">
                             <?php if (!empty($leg['foto_url'])): ?>
-                                <img src="<?= e($leg['foto_url']) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-amber-400/80 shadow-lg shrink-0">
+                                <img src="<?= e($leg['foto_url']) ?>" alt="Foto oficial" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 border-slate-200 shadow-sm shrink-0">
                             <?php else: ?>
-                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-slate-800 border-2 border-slate-700 grid place-items-center text-3xl font-extrabold text-slate-400 shrink-0">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 border-2 border-slate-200 grid place-items-center text-3xl font-extrabold text-slate-400 shrink-0">
                                     <?= e($iniciales) ?>
                                 </div>
                             <?php endif; ?>
                             <div class="min-w-0">
-                                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
                                     <?= e($leg['nombre']) ?>
                                 </h2>
-                                <p class="text-sm sm:text-base text-slate-400 mt-1 font-medium">
+                                <p class="text-sm sm:text-base text-slate-500 mt-1 font-medium">
                                     <?= e($cargo) ?> · <?= e($leg['provincia']) ?>
                                 </p>
                                 <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-slate-800 text-slate-200 border border-slate-700">
+                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
                                         <?= e($leg['bloque']) ?>
                                     </span>
-                                    <span class="px-2 py-0.5 rounded-md text-xs font-mono bg-slate-800/60 text-slate-400 border border-slate-800">
+                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-50 text-slate-500 border border-slate-200">
                                         CUIT <?= e($leg['cuit']) ?>
                                     </span>
                                 </div>
@@ -1404,54 +1414,54 @@ require __DIR__ . '/app/Views/layouts/header.php';
                         </div>
 
                         <!-- Tarjeta de dictamen de integridad -->
-                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                             <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Estatus Ético Cívico</span>
-                            <div class="text-base font-bold mt-1 <?= ($conflictos['nivel_riesgo_etico'] ?? 'Bajo') === 'Bajo' ? 'text-emerald-400' : 'text-amber-400' ?>">
+                            <div class="text-base font-bold mt-1 <?= ($conflictos['nivel_riesgo_etico'] ?? 'Bajo') === 'Bajo' ? 'text-emerald-700' : 'text-amber-700' ?>">
                                 Riesgo <?= e($conflictos['nivel_riesgo_etico'] ?? 'Bajo') ?>
                             </div>
-                            <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
                                 Auditoría integral cruzando patrimonio, disciplina de bloque y promesas electorales.
                             </p>
                         </div>
                     </div>
 
                     <!-- 4 Tarjetas de KPIs Principales de Portada -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-800/80">
-                        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-100">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
                             <span class="text-[10px] uppercase font-mono text-slate-400">Asistencia Recinto</span>
-                            <div class="text-xl sm:text-2xl font-mono font-bold text-white mt-0.5">
+                            <div class="text-xl sm:text-2xl font-mono font-bold text-slate-900 mt-0.5">
                                 <?= e(pct((float)$leg['asistencia'])) ?>
                             </div>
-                            <span class="text-[10px] text-slate-500">Sesiones ordinarias</span>
+                            <span class="text-[10px] text-slate-400">Sesiones ordinarias</span>
                         </div>
-                        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
                             <span class="text-[10px] uppercase font-mono text-slate-400">Lealtad Partidaria</span>
-                            <div class="text-xl sm:text-2xl font-mono font-bold text-white mt-0.5">
+                            <div class="text-xl sm:text-2xl font-mono font-bold text-slate-900 mt-0.5">
                                 <?= e(pct((float)$leg['indice_lealtad'])) ?>
                             </div>
-                            <span class="text-[10px] text-slate-500">Coincidencia de bloque</span>
+                            <span class="text-[10px] text-slate-400">Coincidencia de bloque</span>
                         </div>
-                        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
                             <span class="text-[10px] uppercase font-mono text-slate-400">Patrimonio Real USD</span>
-                            <div class="text-xl sm:text-2xl font-mono font-bold mt-0.5 <?= $crecimientoRealUsd >= 0 ? 'text-emerald-400' : 'text-rose-400' ?>">
+                            <div class="text-xl sm:text-2xl font-mono font-bold mt-0.5 <?= $crecimientoRealUsd >= 0 ? 'text-emerald-700' : 'text-rose-700' ?>">
                                 <?= $crecimientoRealUsd >= 0 ? '▲' : '▼' ?> <?= e(pct($crecimientoRealUsd, true)) ?>
                             </div>
-                            <span class="text-[10px] text-slate-500">Dólar MEP (2020–2025)</span>
+                            <span class="text-[10px] text-slate-400">Dólar MEP (2020–2025)</span>
                         </div>
-                        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
                             <span class="text-[10px] uppercase font-mono text-slate-400">Defensa Provincial</span>
-                            <div class="text-xl sm:text-2xl font-mono font-bold text-sky-400 mt-0.5">
+                            <div class="text-xl sm:text-2xl font-mono font-bold text-slate-900 mt-0.5">
                                 <?= number_format($defensaProv['indice_defensa_provincial'] ?? 100, 1) ?>%
                             </div>
-                            <span class="text-[10px] text-slate-500">Alineación con su provincia</span>
+                            <span class="text-[10px] text-slate-400">Alineación con su provincia</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- DIAPOSITIVA 2: Evolución Patrimonial Real (USD MEP) -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="2">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 02 · Módulo Financiero
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1462,33 +1472,38 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     <div class="my-auto space-y-4">
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div>
-                                <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                                     Evolución Patrimonial Neta en Dólares MEP
                                 </h3>
-                                <p class="text-xs text-slate-400">
+                                <p class="text-xs text-slate-500">
                                     Moneda dura deflactada: comparativa entre valuación inicial y última DDJJ presentada.
                                 </p>
                             </div>
-                            <div class="px-3.5 py-1.5 rounded-xl font-mono text-sm font-bold <?= $crecimientoRealUsd >= 0 ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-800' : 'bg-rose-950/80 text-rose-400 border border-rose-800' ?>">
+                            <div class="px-3.5 py-1.5 rounded-xl font-mono text-sm font-bold <?= $crecimientoRealUsd >= 0 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200' ?>">
                                 <?= $crecimientoRealUsd >= 0 ? '▲ Crecimiento Real:' : '▼ Variación Real:' ?> <?= e(pct($crecimientoRealUsd, true)) ?> USD
                             </div>
                         </div>
 
                         <!-- Gráfico de líneas horizontal Catmull-Rom para presentación -->
                         <?php if (!empty($serieEvo)): ?>
-                        <div class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3">
+                        <div class="w-full bg-slate-50/70 border border-slate-200/80 rounded-xl p-3">
                             <svg viewBox="0 0 <?= $chartWidth ?> <?= $chartHeight ?>" class="w-full h-32 sm:h-44 overflow-visible">
                                 <defs>
                                     <linearGradient id="deckPatrimonioGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.3" />
-                                        <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.0" />
+                                        <stop offset="0%" stopColor="<?= $strokeColor ?>" stopOpacity="0.22" />
+                                        <stop offset="100%" stopColor="<?= $strokeColor ?>" stopOpacity="0.01" />
                                     </linearGradient>
                                 </defs>
+                                <?php foreach ($yTicks as $tickPct):
+                                    $tickY = $padTop + $plotH - $tickPct * $plotH;
+                                ?>
+                                    <line x1="<?= $padLeft ?>" y1="<?= round($tickY, 1) ?>" x2="<?= $chartWidth - $padRight ?>" y2="<?= round($tickY, 1) ?>" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+                                <?php endforeach; ?>
                                 <path d="<?= $areaPath ?>" fill="url(#deckPatrimonioGrad)" />
-                                <path d="<?= $linePath ?>" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+                                <path d="<?= $linePath ?>" fill="none" stroke="<?= $strokeColor ?>" stroke-width="3" stroke-linecap="round" />
                                 <?php foreach ($chartPoints as $pt): ?>
-                                    <circle cx="<?= number_format($pt['x'], 1, '.', '') ?>" cy="<?= number_format($pt['y'], 1, '.', '') ?>" r="5" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5" />
-                                    <text x="<?= number_format($pt['x'], 1, '.', '') ?>" y="<?= number_format($chartHeight - 6, 1, '.', '') ?>" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">
+                                    <circle cx="<?= number_format($pt['x'], 1, '.', '') ?>" cy="<?= number_format($pt['y'], 1, '.', '') ?>" r="5" fill="#ffffff" stroke="<?= $strokeColor ?>" stroke-width="2.5" />
+                                    <text x="<?= number_format($pt['x'], 1, '.', '') ?>" y="<?= number_format($chartHeight - 6, 1, '.', '') ?>" text-anchor="middle" fill="#64748b" font-size="10" font-family="monospace">
                                         <?= e($pt['data']['anio_fiscal']) ?>
                                     </text>
                                 <?php endforeach; ?>
@@ -1498,31 +1513,31 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                         <!-- Tarjetas Comparativas de Montos -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-3">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">Patrimonio Inicial (<?= e($anioInicial) ?>)</span>
-                                <div class="text-base sm:text-lg font-mono font-bold text-white mt-0.5">
+                                <div class="text-base sm:text-lg font-mono font-bold text-slate-900 mt-0.5">
                                     USD <?= number_format($patrimonioInicialUsd, 0, ',', '.') ?>
                                 </div>
-                                <span class="text-[10px] font-mono text-slate-500">ARS: <?= e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) ?></span>
+                                <span class="text-[11px] font-mono text-slate-400">ARS: <?= e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) ?></span>
                             </div>
-                            <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-3">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">Última DDJJ (<?= e($anioActual) ?>)</span>
-                                <div class="text-base sm:text-lg font-mono font-bold text-white mt-0.5">
+                                <div class="text-base sm:text-lg font-mono font-bold text-slate-900 mt-0.5">
                                     USD <?= number_format($patrimonioActualUsd, 0, ',', '.') ?>
                                 </div>
-                                <span class="text-[10px] font-mono text-slate-500">ARS: <?= e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) ?></span>
+                                <span class="text-[11px] font-mono text-slate-400">ARS: <?= e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) ?></span>
                             </div>
-                            <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-3">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">ARS Constantes (Deflactado IPC)</span>
-                                <div class="text-base sm:text-lg font-mono font-bold mt-0.5 <?= $crecimientoConstantes >= 0 ? 'text-emerald-400' : 'text-rose-400' ?>">
+                                <div class="text-base sm:text-lg font-mono font-bold mt-0.5 <?= $crecimientoConstantes >= 0 ? 'text-emerald-700' : 'text-rose-700' ?>">
                                     <?= e(pct($crecimientoConstantes, true)) ?>
                                 </div>
-                                <span class="text-[10px] text-slate-500">Impacto de inflación acumulada</span>
+                                <span class="text-[11px] text-slate-400">Impacto de inflación acumulada</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Fuente: Declaraciones Juradas Patrimoniales Integrales (Ley 25.188)</span>
                         <span>Cotización Dólar MEP BCRA / Rava Bursátil</span>
                     </div>
@@ -1530,8 +1545,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                 <!-- DIAPOSITIVA 3: Radar de Posicionamiento Ideológico (11 Ejes) -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="3">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 03 · Perfil Ideológico 360
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1546,41 +1561,42 @@ require __DIR__ . '/app/Views/layouts/header.php';
                                     <?php foreach ($radarRings as $ring):
                                         $rRadius = ($ring / 100) * $radarRadius;
                                     ?>
-                                        <circle cx="<?= $radarCenter ?>" cy="<?= $radarCenter ?>" r="<?= $rRadius ?>" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="2,2" />
+                                        <circle cx="<?= $radarCenter ?>" cy="<?= $radarCenter ?>" r="<?= $rRadius ?>" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2" />
                                     <?php endforeach; ?>
                                     <?php foreach ($radarVertices as $v): ?>
-                                        <line x1="<?= $radarCenter ?>" y1="<?= $radarCenter ?>" x2="<?= $v['outerX'] ?>" y2="<?= $v['outerY'] ?>" stroke="#1e293b" stroke-width="1.5" />
-                                        <text x="<?= $v['lblX'] ?>" y="<?= $v['lblY'] ?>" text-anchor="<?= $v['anchor'] ?>" fill="#94a3b8" font-size="9" font-family="sans-serif">
+                                        <line x1="<?= $radarCenter ?>" y1="<?= $radarCenter ?>" x2="<?= $v['outerX'] ?>" y2="<?= $v['outerY'] ?>" stroke="#cbd5e1" stroke-width="1" />
+                                        <text x="<?= $v['lblX'] ?>" y="<?= $v['lblY'] ?>" text-anchor="<?= $v['anchor'] ?>" fill="#475569" font-size="9" font-family="sans-serif" font-weight="500">
                                             <?= e($v['short']) ?>
                                         </text>
                                     <?php endforeach; ?>
-                                    <polygon points="<?= $radarPointsStr ?>" fill="rgba(56, 189, 248, 0.35)" stroke="#38bdf8" stroke-width="2" />
+                                    <polygon points="<?= $radarPointsStr ?>" fill="rgba(37, 99, 235, 0.16)" stroke="#2563eb" stroke-width="2" />
                                 </svg>
                             </div>
                         </div>
 
                         <!-- Barras de Afinidad Temática Destacadas -->
                         <div class="space-y-3">
-                            <h3 class="text-base sm:text-lg font-bold text-white">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">
                                 Afinidades de Voto por Eje Temático
                             </h3>
-                            <p class="text-xs text-slate-400">
+                            <p class="text-xs text-slate-500">
                                 Porcentaje de votos afirmativos sobre emitidos en leyes clave de la gestión actual.
                             </p>
-                            <div class="space-y-2 mt-2">
+                            <div class="space-y-2.5 mt-2">
                                 <?php 
                                 $topEjes = $data['perfil'];
                                 arsort($topEjes);
                                 $top3 = array_slice($topEjes, 0, 4, true);
                                 foreach ($top3 as $nombreEje => $porcentaje):
+                                    $colBar = $colores[$nombreEje] ?? 'bg-blue-600';
                                 ?>
                                 <div>
-                                    <div class="flex justify-between text-xs font-medium mb-0.5">
-                                        <span class="text-slate-300"><?= e($nombreEje) ?></span>
-                                        <span class="font-mono font-bold text-amber-400"><?= number_format($porcentaje, 1) ?>%</span>
+                                    <div class="flex justify-between text-xs font-medium mb-1">
+                                        <span class="text-slate-700"><?= e($nombreEje) ?></span>
+                                        <span class="font-mono font-bold text-slate-900"><?= number_format($porcentaje, 1) ?>%</span>
                                     </div>
-                                    <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-blue-500 rounded-full" style="width: <?= max(0, min(100, $porcentaje)) ?>%"></div>
+                                    <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full <?= e($colBar) ?> rounded-full" style="width: <?= max(0, min(100, $porcentaje)) ?>%"></div>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
@@ -1588,7 +1604,7 @@ require __DIR__ . '/app/Views/layouts/header.php';
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Ponderación: 70% Votaciones Nominales + 30% Iniciativa de Proyectos</span>
                         <span>Vértices: 11 Ejes Constitucionales</span>
                     </div>
@@ -1596,8 +1612,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                 <!-- DIAPOSITIVA 4: Iniciativa Parlamentaria y Proyectos Clave -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 04 · Iniciativa Legislativa
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1607,58 +1623,58 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                     <div class="my-auto space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Total Proyectos</span>
-                                <div class="text-2xl font-mono font-extrabold text-white mt-0.5">
+                                <div class="text-2xl font-mono font-extrabold text-slate-900 mt-0.5">
                                     <?= (int)$agenda['total_proyectos'] ?>
                                 </div>
-                                <span class="text-[10px] text-slate-500">Iniciativas registradas</span>
+                                <span class="text-[10px] text-slate-400">Iniciativas registradas</span>
                             </div>
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Autor Principal</span>
-                                <div class="text-2xl font-mono font-extrabold text-blue-400 mt-0.5">
+                                <div class="text-2xl font-mono font-extrabold text-blue-600 mt-0.5">
                                     <?= (int)$agenda['total_autor'] ?>
                                 </div>
-                                <span class="text-[10px] text-slate-500">Peso doble (2.0) en agenda</span>
+                                <span class="text-[10px] text-slate-400">Peso doble (2.0) en agenda</span>
                             </div>
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Co-autorías</span>
-                                <div class="text-2xl font-mono font-extrabold text-slate-300 mt-0.5">
+                                <div class="text-2xl font-mono font-extrabold text-slate-700 mt-0.5">
                                     <?= (int)$agenda['total_coautor'] ?>
                                 </div>
-                                <span class="text-[10px] text-slate-500">Firmas compartidas (1.0)</span>
+                                <span class="text-[10px] text-slate-400">Firmas compartidas (1.0)</span>
                             </div>
                         </div>
 
                         <!-- Últimos proyectos presentados como Autor -->
                         <div>
-                            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+                            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-500 mb-2 font-semibold">
                                 Proyectos de Autoría Principal Destacados:
                             </h4>
                             <div class="space-y-2">
                                 <?php if (!empty($ultimosProyectos)): ?>
                                     <?php foreach (array_slice($ultimosProyectos, 0, 3) as $pr): ?>
-                                    <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-2.5 flex items-center justify-between gap-3">
+                                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between gap-3">
                                         <div class="min-w-0">
                                             <div class="flex items-center gap-2">
-                                                <span class="font-mono text-xs font-bold text-amber-400"><?= e($pr['expediente']) ?></span>
-                                                <span class="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-300"><?= e($pr['eje_tematico']) ?></span>
+                                                <span class="font-mono text-xs font-bold text-blue-700"><?= e($pr['expediente']) ?></span>
+                                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200/70 text-slate-700 font-medium"><?= e($pr['eje_tematico']) ?></span>
                                             </div>
-                                            <p class="text-xs text-slate-200 truncate mt-0.5"><?= e($pr['titulo_sumario']) ?></p>
+                                            <p class="text-xs text-slate-800 font-medium truncate mt-0.5"><?= e($pr['titulo_sumario']) ?></p>
                                         </div>
-                                        <span class="text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded bg-emerald-950/50 border border-emerald-800 shrink-0">
+                                        <span class="text-[10px] font-mono text-emerald-700 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 shrink-0 font-medium">
                                             <?= e($pr['estado_tramite']) ?>
                                         </span>
                                     </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <p class="text-xs text-slate-500 italic">No registra proyectos de autoría propia en el período evaluado.</p>
+                                    <p class="text-xs text-slate-400 italic">No registra proyectos de autoría propia en el período evaluado.</p>
                                 <?php endif; ?>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Fuente: Mesa de Entradas H. Cámara de Diputados / Senado de la Nación</span>
                         <span>Fórmula: W_autor = 2.0 | W_coautor = 1.0</span>
                     </div>
@@ -1666,8 +1682,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                 <!-- DIAPOSITIVA 5: Tensión Federal: Defensa Provincial vs. Disciplina de Bloque -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="5">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 05 · Tensión Federal
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1677,23 +1693,23 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                     <div class="my-auto space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Defensa Provincial</span>
-                                <div class="text-3xl font-mono font-extrabold text-sky-400 mt-1">
+                                <div class="text-3xl font-mono font-extrabold text-blue-600 mt-1">
                                     <?= number_format($defensaProv['indice_defensa_provincial'] ?? 100, 1) ?>%
                                 </div>
                                 <p class="text-[10px] text-slate-500 mt-1">Alineación con intereses de <?= e($leg['provincia']) ?></p>
                             </div>
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Lealtad al Bloque</span>
-                                <div class="text-3xl font-mono font-extrabold text-slate-200 mt-1">
+                                <div class="text-3xl font-mono font-extrabold text-slate-900 mt-1">
                                     <?= number_format($defensaProv['indice_lealtad_partido'] ?? 100, 1) ?>%
                                 </div>
                                 <p class="text-[10px] text-slate-500 mt-1">Acatamiento a la cúpula de <?= e($leg['bloque']) ?></p>
                             </div>
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Brecha de Tensión</span>
-                                <div class="text-3xl font-mono font-extrabold mt-1 <?= ($defensaProv['brecha_tension'] ?? 0) > 15 ? 'text-rose-400' : 'text-emerald-400' ?>">
+                                <div class="text-3xl font-mono font-extrabold mt-1 <?= ($defensaProv['brecha_tension'] ?? 0) > 15 ? 'text-rose-600' : 'text-emerald-600' ?>">
                                     <?= number_format($defensaProv['brecha_tension'] ?? 0, 1) ?> pts
                                 </div>
                                 <p class="text-[10px] text-slate-500 mt-1">Divergencia entre partido y provincia</p>
@@ -1702,25 +1718,25 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                         <!-- Votos en conflicto con su provincia -->
                         <div>
-                            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+                            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-500 mb-2 font-semibold">
                                 Auditoría de Votaciones de Impacto Regional:
                             </h4>
                             <div class="space-y-2">
                                 <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
                                     <?php foreach (array_slice($defensaProv['alertas_conflicto'], 0, 2) as $ac): ?>
-                                    <div class="bg-rose-950/40 border border-rose-900/60 rounded-lg p-3">
-                                        <div class="flex items-center justify-between text-xs font-bold text-rose-300">
+                                    <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">
+                                        <div class="flex items-center justify-between text-xs font-bold text-rose-900">
                                             <span><?= e($ac['ley']) ?></span>
-                                            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-rose-900 text-rose-200">
+                                            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold">
                                                 Votó: <?= e($ac['voto_legislador']) ?> (Esperado: <?= e($ac['voto_esperado_regional']) ?>)
                                             </span>
                                         </div>
-                                        <p class="text-[11px] text-slate-300 mt-1"><?= e($ac['motivo']) ?></p>
+                                        <p class="text-[11px] text-rose-700 mt-1"><?= e($ac['motivo']) ?></p>
                                     </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <div class="bg-emerald-950/40 border border-emerald-900/60 rounded-lg p-3 flex items-center gap-2 text-xs text-emerald-300">
-                                        <span>✔</span>
+                                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center gap-2 text-xs text-emerald-800 font-medium">
+                                        <span class="font-bold">✔</span>
                                         <span>No registra votaciones en conflicto con las leyes estratégicas de <?= e($leg['provincia']) ?>.</span>
                                     </div>
                                 <?php endif; ?>
@@ -1728,7 +1744,7 @@ require __DIR__ . '/app/Views/layouts/header.php';
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Cruce: Voto Nominal vs. Posición Mayoritaria de Bloque</span>
                         <span>Matriz de Impacto Provincial (Leyes 2020–2024)</span>
                     </div>
@@ -1736,8 +1752,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                 <!-- DIAPOSITIVA 6: Eficiencia de Despacho, Asesores y Costo por Proyecto -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="6">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 06 · Eficiencia de Despacho
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1747,25 +1763,25 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                     <div class="my-auto space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Total de Asesores</span>
-                                <div class="text-3xl font-mono font-extrabold text-white mt-1">
+                                <div class="text-3xl font-mono font-extrabold text-slate-900 mt-1">
                                     <?= (int)$totalAsesores ?>
                                 </div>
                                 <span class="text-[10px] text-slate-500">Masa salarial: <?= e(ars($costoMensual)) ?>/mes</span>
                             </div>
 
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Costo por Proyecto Propio</span>
-                                <div class="text-2xl font-mono font-extrabold mt-1 <?= $superaMedia ? 'text-rose-400' : 'text-emerald-400' ?>">
+                                <div class="text-2xl font-mono font-extrabold mt-1 <?= $superaMedia ? 'text-rose-600' : 'text-emerald-600' ?>">
                                     <?= e(ars($costoPorProyecto)) ?>
                                 </div>
                                 <span class="text-[10px] text-slate-500">Media Cámara: <?= e(ars($mediaCamaraCosto)) ?></span>
                             </div>
 
-                            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono uppercase text-slate-400">Alertas de Nepotismo</span>
-                                <div class="text-2xl font-mono font-extrabold mt-1 <?= $alertasNepotismo > 0 ? 'text-rose-400' : 'text-emerald-400' ?>">
+                                <div class="text-2xl font-mono font-extrabold mt-1 <?= $alertasNepotismo > 0 ? 'text-rose-600' : 'text-emerald-600' ?>">
                                     <?= (int)$alertasNepotismo ?> <?= $alertasNepotismo === 0 ? '✔' : '⚠' ?>
                                 </div>
                                 <span class="text-[10px] text-slate-500"><?= $alertasNepotismo === 0 ? 'Sin coincidencias familiares' : 'Posible familiar en nómina' ?></span>
@@ -1773,13 +1789,13 @@ require __DIR__ . '/app/Views/layouts/header.php';
                         </div>
 
                         <!-- Cuadro explicativo metodológico -->
-                        <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4 text-xs text-slate-300 leading-relaxed">
-                            <strong class="text-amber-400 font-mono uppercase">Ratio de Retorno Cívico:</strong>
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-xs text-slate-600 leading-relaxed">
+                            <strong class="text-slate-900 font-mono uppercase">Ratio de Retorno Cívico:</strong>
                             El costo por proyecto se calcula contrastando la erogación anual del despacho (salarios + SAC de asesores en nómina) sobre las iniciativas de ley con expediente formal ingresadas como autoría exclusiva en el año parlamentario analizado.
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Fuente: Datos Abiertos HCDN / Senado de la Nación</span>
                         <span>Pipeline ETL: n8n.buceo.co /api/n8n/update-despachos</span>
                     </div>
@@ -1787,8 +1803,8 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
                 <!-- DIAPOSITIVA 7: Auditoría Ética, Coherencia Histórica y Promesas -->
                 <div class="slide-deck-card hidden h-full flex flex-col justify-between" data-slide="7">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-                        <span class="text-xs uppercase font-mono tracking-widest text-amber-400 font-semibold">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                        <span class="text-xs uppercase font-mono tracking-widest text-slate-400 font-semibold">
                             Diapositiva 07 · Auditoría Ética & Integridad
                         </span>
                         <span class="text-[11px] font-mono text-slate-400">
@@ -1797,48 +1813,48 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
-                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                             <span class="text-[10px] font-mono uppercase text-slate-400">Coherencia en Leyes Espejo</span>
-                            <div class="text-2xl font-mono font-extrabold text-white mt-1">
+                            <div class="text-2xl font-mono font-extrabold text-slate-900 mt-1">
                                 <?= number_format($coherencia['indice_coherencia'] ?? 100, 1) ?>%
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">
+                            <p class="text-xs text-slate-500 mt-1">
                                 <?= empty($coherencia['alertas_panquequismo']) ? 'Sin cambios de voto ante la misma ley bajo distintos signos de gobierno.' : 'Alerta de inconsistencia ante proyectos idénticos.' ?>
                             </p>
                         </div>
 
-                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                             <span class="text-[10px] font-mono uppercase text-slate-400">Alianzas Transversales</span>
-                            <div class="text-2xl font-mono font-extrabold text-blue-400 mt-1">
+                            <div class="text-2xl font-mono font-extrabold text-blue-600 mt-1">
                                 <?= number_format($alianzas['indice_transversalidad'] ?? 0, 1) ?>%
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">
+                            <p class="text-xs text-slate-500 mt-1">
                                 Capacidad de generar acuerdos parlamentarios y co-firmar proyectos con fuerzas opositoras.
                             </p>
                         </div>
 
-                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                             <span class="text-[10px] font-mono uppercase text-slate-400">Cumplimiento de Promesas</span>
-                            <div class="text-2xl font-mono font-extrabold mt-1 <?= ($promesas['tasa_cumplimiento_pct'] ?? 100) >= 70 ? 'text-emerald-400' : 'text-amber-400' ?>">
+                            <div class="text-2xl font-mono font-extrabold mt-1 <?= ($promesas['tasa_cumplimiento_pct'] ?? 100) >= 70 ? 'text-emerald-600' : 'text-amber-600' ?>">
                                 <?= number_format($promesas['tasa_cumplimiento_pct'] ?? 100, 1) ?>%
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">
+                            <p class="text-xs text-slate-500 mt-1">
                                 Promesas de campaña electoral ratificadas en votaciones del recinto (<?= (int)($promesas['cumplidas'] ?? 0) ?> cumplidas, <?= (int)($promesas['incumplidas'] ?? 0) ?> pendientes).
                             </p>
                         </div>
 
-                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                             <span class="text-[10px] font-mono uppercase text-slate-400">Financiamiento Privado</span>
-                            <div class="text-2xl font-mono font-extrabold text-amber-400 mt-1">
+                            <div class="text-2xl font-mono font-extrabold text-slate-900 mt-1">
                                 <?= e(ars((float)($conflictos['total_aportes_declarados_ars'] ?? 0))) ?>
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">
+                            <p class="text-xs text-slate-500 mt-1">
                                 Cruce entre aportes de campaña electoral y votación de regímenes sectoriales.
                             </p>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                         <span>Dictamen Final: DipuData / Match Electoral 360</span>
                         <span>dipudata.com · Plataforma Cívica Independiente</span>
                     </div>
@@ -1848,43 +1864,43 @@ require __DIR__ . '/app/Views/layouts/header.php';
         </main>
 
         <!-- Dock Inferior: Selector de Diapositivas e Instrucciones de Teclado -->
-        <footer class="w-full max-w-6xl mx-auto pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <footer class="w-full max-w-6xl mx-auto pt-3 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3 shrink-0">
             <div class="flex items-center gap-1.5 overflow-x-auto py-1">
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-amber-400 text-slate-950 font-bold transition-all" data-target="1">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-sm transition-all" data-target="1">
                     1. Portada
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="2">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="2">
                     2. Patrimonio
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="3">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="3">
                     3. Radar 11 Ejes
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="4">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="4">
                     4. Proyectos
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="5">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="5">
                     5. Tensión Federal
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="6">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="6">
                     6. Despacho
                 </button>
-                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all" data-target="7">
+                <button type="button" class="slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all" data-target="7">
                     7. Auditoría Ética
                 </button>
             </div>
 
-            <div class="hidden lg:flex items-center gap-2 text-[11px] font-mono text-slate-400">
-                <kbd class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">←</kbd>
-                <kbd class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">→</kbd>
+            <div class="hidden lg:flex items-center gap-2 text-[11px] font-mono text-slate-500">
+                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">←</kbd>
+                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">→</kbd>
                 <span>Navegar</span>
                 <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">Espacio</kbd>
+                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">Espacio</kbd>
                 <span>Avanzar</span>
                 <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">F</kbd>
+                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">F</kbd>
                 <span>Pantalla Completa</span>
                 <span class="mx-1">·</span>
-                <kbd class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">Esc</kbd>
+                <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-200 shadow-sm text-slate-700">Esc</kbd>
                 <span>Salir</span>
             </div>
         </footer>
@@ -1927,9 +1943,9 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 navDots.forEach(function (d) {
                     var target = parseInt(d.getAttribute('data-target'), 10);
                     if (target === currentSlide) {
-                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition-all';
+                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-sm transition-all';
                     } else {
-                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all';
+                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all';
                     }
                 });
 
