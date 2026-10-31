@@ -28,10 +28,10 @@ import {
   formatPct,
   formatUSD,
   getBloqueBadgeStyle,
+  getLegisladorUrl,
   getVotoBadgeClasses,
   getVotoLabel,
 } from '../utils/formatters';
-import { actualizarMetaSeo } from '../utils/seo';
 
 const MAX_LEYES_POR_PAGINA = 10;
 
@@ -50,18 +50,13 @@ export const PerfilLegisladorView: React.FC = () => {
     setFiltroEjeVotos('Todos');
 
     fetchLegisladorPerfil(id ?? '1').then((data) => {
+      if (data) {
+        const canonical = getLegisladorUrl(data);
+        window.location.replace(canonical);
+        return;
+      }
       setPerfil(data);
       setLoading(false);
-
-      if (data) {
-        const cargo = data.camara === 'Senadores' ? 'Senador/a' : 'Diputado/a';
-        actualizarMetaSeo({
-          title: `${data.nombre_completo} (${cargo} - ${data.provincia}) | Votaciones, Patrimonio DDJJ y Asistencia | DipuData — LegisData`,
-          description: `Radiografía parlamentaria y patrimonial de ${data.nombre_completo} (${data.bloque_actual}). Asistencia: ${data.asistencia_historica}%, Lealtad: ${data.lealtad_partidaria}%, DDJJ USD MEP: ${formatUSD(data.patrimonio_usd_actual)}.`,
-          canonicalPath: `/perfil/${data.id}`,
-          ogImage: `https://dipudata.com/api/og?type=perfil&id=${data.id}`,
-        });
-      }
     });
   }, [id]);
 

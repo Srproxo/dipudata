@@ -22,6 +22,49 @@ $path = '/' . trim((string)parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PAT
 $slug = '[a-z0-9]+(?:-[a-z0-9]+)*';
 
 switch (true) {
+    case (bool)preg_match('#^/perfil/([^/]+)$#', $path, $m):
+        $ident = trim($m[1]);
+        $slug = null;
+        $prefix = '/diputado/';
+
+        $model = new \App\Models\LegisladorModel();
+        $leg = is_numeric($ident) ? $model->findById((int)$ident) : $model->findBySlug($ident);
+        if ($leg) {
+            $prefix = str_starts_with(strtolower((string)$leg['camara']), 'senad') ? '/senador/' : '/diputado/';
+            $slug = $leg['slug'] ?? null;
+        }
+        if (!$slug) {
+            $db = \App\Config\Database::getConnection();
+            if ($db) {
+                try {
+                    $stmt = $db->prepare('SELECT camara, wiki_slug, slug FROM legisladores WHERE id = ? OR wiki_slug = ? LIMIT 1');
+                    $stmt->execute([$ident, $ident]);
+                    $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                    if ($row) {
+                        $prefix = str_starts_with(strtolower((string)$row['camara']), 'senad') ? '/senador/' : '/diputado/';
+                        $slug = !empty($row['slug']) ? $row['slug'] : strtolower(str_replace('_', '-', (string)$row['wiki_slug']));
+                    }
+                } catch (\Throwable) {}
+            }
+        }
+        if (!$slug) {
+            require_once __DIR__ . '/api/config.php';
+            $all = \LegisData\Config::getMemoryStore()['legisladores'] ?? [];
+            foreach ($all as $l) {
+                if ((is_numeric($ident) && (int)$l['id'] === (int)$ident) || strcasecmp((string)($l['slug'] ?? ''), $ident) === 0 || strcasecmp((string)($l['wiki_slug'] ?? ''), $ident) === 0) {
+                    $prefix = str_starts_with(strtolower((string)$l['camara']), 'senad') ? '/senador/' : '/diputado/';
+                    $slug = !empty($l['slug']) ? $l['slug'] : strtolower(str_replace('_', '-', (string)$l['wiki_slug']));
+                    break;
+                }
+            }
+        }
+        if ($slug) {
+            header("Location: {$prefix}{$slug}", true, 301);
+            exit;
+        }
+        header('Location: /', true, 302);
+        exit;
+
     case (bool)preg_match("#^/(diputado|senador)/({$slug})$#", $path, $m):
         $camara = $m[1] === 'senador' ? 'Senadores' : 'Diputados';
         $slugLegislador = $m[2];

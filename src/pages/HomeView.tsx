@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Search,
   Sparkles,
@@ -17,12 +17,11 @@ import { LegisladorCard } from '../components/LegisladorCard';
 import { SelectorMapaProvincias } from '../components/SelectorMapaProvincias';
 import { AvatarLegislador } from '../components/AvatarLegislador';
 import { actualizarMetaSeo } from '../utils/seo';
-import { formatPct, getBloqueBadgeStyle } from '../utils/formatters';
+import { formatPct, getBloqueBadgeStyle, getLegisladorUrl } from '../utils/formatters';
 
 type FiltroCamara = 'Todos' | 'Diputados' | 'Senadores';
 
 export const HomeView: React.FC = () => {
-  const navigate = useNavigate();
   const [legisladores, setLegisladores] = useState<LegisladorResumen[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -197,7 +196,7 @@ export const HomeView: React.FC = () => {
                     type="button"
                     onClick={() => {
                       setMostrarSugerencias(false);
-                      navigate(`/perfil/${sug.id}`);
+                      window.location.href = getLegisladorUrl(sug);
                     }}
                     className="w-full px-4 py-3 text-left hover:bg-slate-50 flex items-center justify-between gap-3 transition-colors"
                   >

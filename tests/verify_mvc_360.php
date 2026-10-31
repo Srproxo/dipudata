@@ -327,6 +327,16 @@ assert_test("Endpoint GET /api/legisladores-master: formato JSON con id e id_rec
     !empty($jsonMaster[0]['id_recinto'])
 );
 
+// 8. Fase 7: Unificación de URLs y Redirección 301
+echo "\n--- FASE 7: UNIFICACIÓN DE ENLACES Y REDIRECCIÓN 301 ---\n";
+assert_test("LegisladorModel::urlPerfil genera prefijo /senador/ para Senadores",
+    \App\Models\LegisladorModel::urlPerfil(['camara' => 'Senadores', 'slug' => 'martin-lousteau']) === '/senador/martin-lousteau'
+);
+assert_test("LegisladorModel::urlPerfil genera prefijo /diputado/ para Diputados",
+    \App\Models\LegisladorModel::urlPerfil(['camara' => 'Diputados', 'slug' => 'martin-alexis-menem']) === '/diputado/martin-alexis-menem'
+);
+
+
 $fallaron = count(array_filter($tests, fn($t) => !$t['pass']));
 echo "\n------------------------------------------------------------------------------\n";
 echo sprintf(" RESUMEN FASES 2, 3, 4 Y 6: %d PASARON | %d FALLARON\n", count($tests) - $fallaron, $fallaron);

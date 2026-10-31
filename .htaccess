@@ -69,6 +69,7 @@ AddDefaultCharset UTF-8
     RewriteRule ^api/legisladores-master/?$ mvc.php [L,QSA]
     RewriteRule ^api/n8n/(.*)$ mvc.php [L,QSA]
     RewriteRule ^(diputado|senador)/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
+    RewriteRule ^perfil/(.*)$ mvc.php [L,QSA,NC]
     RewriteRule ^match-360/?$ mvc.php [L,QSA]
     RewriteRule ^blog(/.*)?$ mvc.php [L,QSA]
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
   TrendingUp,
@@ -14,6 +13,7 @@ import {
   formatPct,
   formatUSD,
   getBloqueBadgeStyle,
+  getLegisladorUrl,
 } from '../utils/formatters';
 
 interface LegisladorCardProps {
@@ -24,10 +24,11 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({ legislador }) =>
   const isPatrimonioPositivo = legislador.crecimiento_real_usd_pct >= 0;
   const cargoLabel =
     legislador.camara === 'Senadores' ? 'Senador/a Nacional' : 'Diputado/a Nacional';
+  const perfilUrl = getLegisladorUrl(legislador);
 
   return (
-    <Link
-      to={`/perfil/${legislador.id}`}
+    <a
+      href={perfilUrl}
       className="group bg-white rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-slate-300 transition-all p-5 flex flex-col justify-between gap-4"
     >
       {/* Header Flexbox: Avatar circular 64x64 a la izquierda, Nombre y Cargo a la derecha */}
@@ -176,6 +177,6 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({ legislador }) =>
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };

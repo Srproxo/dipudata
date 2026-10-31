@@ -132,159 +132,24 @@ $ogImage = $baseUrl . '/api/og?type=home';
 $jsonLdSchemas = [];
 $noscriptHtml = '';
 
-// RUTA A: /perfil/{id}
+// RUTA A: /perfil/{id} -> Redirección 301 Permanente hacia la URL canónica SEO (/diputado/{slug} o /senador/{slug})
 if (preg_match('#^/perfil/([^/]+)$#', $cleanPath, $matches)) {
     $rawIdentifier = Security::sanitizeString($matches[1], 100);
     $legislador = ssrFindLegislador($pdo, $rawIdentifier);
 
     if ($legislador !== null) {
-        $legId = (int)$legislador['id'];
-        $nombre = (string)$legislador['nombre_completo'];
-        $camara = (string)$legislador['camara'];
-        $cargo = str_starts_with(strtolower($camara), 'diputad') ? 'Diputado/a Nacional' : 'Senador/a Nacional';
-        $provincia = (string)$legislador['provincia'];
-        $bloque = (string)$legislador['bloque_actual'];
-        $asist = number_format((float)$legislador['asistencia_historica'], 1);
-        $lealtad = number_format((float)$legislador['lealtad_partidaria'], 1);
-        $wikiSlug = (string)$legislador['wiki_slug'];
-        $biografia = (string)$legislador['biografia'];
-        $fotoUrl = (string)$legislador['foto_url'];
+        $camara = (string)($legislador['camara'] ?? 'Diputados');
+        $prefix = str_starts_with(strtolower($camara), 'senad') ? '/senador/' : '/diputado/';
+        $slug = !empty($legislador['slug'])
+            ? (string)$legislador['slug']
+            : (!empty($legislador['wiki_slug']) ? strtolower(str_replace('_', '-', (string)$legislador['wiki_slug'])) : (string)$legislador['id']);
 
-        $patrimonio = Algorithms::calcularEvolucionPatrimonial($legId, $pdo);
-        $perfilTematico = Algorithms::calcularPerfilTematico($legId, $pdo);
-        $votos = ssrFetchVotos($pdo, $legId);
-
-        $usdActual = number_format((float)$patrimonio['patrimonio_actual_usd'], 0, ',', '.');
-        $varUsdSign = $patrimonio['crecimiento_real_usd_pct'] >= 0 ? '+' : '';
-        $varUsd = $varUsdSign . number_format((float)$patrimonio['crecimiento_real_usd_pct'], 1) . '%';
-
-        $seoTitle = "{$nombre} ({$camara} - {$provincia}) | Votaciones, Patrimonio DDJJ y Asistencia | DipuData — LegisData";
-        $seoDescription = "Radiografía parlamentaria y patrimonial de {$nombre} ({$cargo} por {$provincia}, Bloque {$bloque}). Asistencia histórica: {$asist}%, Lealtad partidaria: {$lealtad}%, Patrimonio DDJJ deflactado: USD {$usdActual} ({$varUsd} real en USD MEP). Auditá sus votaciones nominales en el Congreso Argentino.";
-        $canonicalUrl = "{$baseUrl}/perfil/{$legId}";
-        $ogType = 'profile';
-        $ogImage = "{$baseUrl}/api/og?type=perfil&id={$legId}";
-
-        $jsonLdSchemas[] = [
-            '@context'    => 'https://schema.org',
-            '@type'       => 'Person',
-            '@id'         => "{$canonicalUrl}#person",
-            'name'        => $nombre,
-            'jobTitle'    => "{$cargo} de la Nación Argentina ({$camara})",
-            'description' => $biografia,
-            'image'       => $fotoUrl,
-            'url'         => $canonicalUrl,
-            'affiliation' => [
-                '@type' => 'Organization',
-                'name'  => "Bloque Parlamentario {$bloque}",
-            ],
-            'workLocation' => [
-                '@type'   => 'Place',
-                'name'    => "Honorable Congreso de la Nación Argentina — Representante por {$provincia}",
-                'address' => [
-                    '@type'           => 'PostalAddress',
-                    'addressRegion'   => $provincia,
-                    'addressCountry'  => 'AR',
-                ],
-            ],
-            'sameAs' => [
-                "https://es.wikipedia.org/wiki/" . rawurlencode($wikiSlug),
-            ],
-        ];
-
-        $jsonLdSchemas[] = [
-            '@context'        => 'https://schema.org',
-            '@type'           => 'BreadcrumbList',
-            'itemListElement' => [
-                [
-                    '@type'    => 'ListItem',
-                    'position' => 1,
-                    'name'     => 'DipuData — Congreso Argentino',
-                    'item'     => "{$baseUrl}/",
-                ],
-                [
-                    '@type'    => 'ListItem',
-                    'position' => 2,
-                    'name'     => $camara,
-                    'item'     => "{$baseUrl}/?camara=" . rawurlencode($camara),
-                ],
-                [
-                    '@type'    => 'ListItem',
-                    'position' => 3,
-                    'name'     => $nombre,
-                    'item'     => $canonicalUrl,
-                ],
-            ],
-        ];
-
-        // Construir tabla semántica <noscript> para indexación completa en Googlebot
-        $escNombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
-        $escCargo = htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8');
-        $escProvincia = htmlspecialchars($provincia, ENT_QUOTES, 'UTF-8');
-        $escBloque = htmlspecialchars($bloque, ENT_QUOTES, 'UTF-8');
-        $escBio = htmlspecialchars($biografia, ENT_QUOTES, 'UTF-8');
-        $escCuit = htmlspecialchars((string)$legislador['cuit'], ENT_QUOTES, 'UTF-8');
-
-        $rowsVotosHtml = '';
-        foreach ($votos as $v) {
-            $leyIdEsc = htmlspecialchars((string)$v['ley_id'], ENT_QUOTES, 'UTF-8');
-            $tituloEsc = htmlspecialchars((string)$v['titulo'], ENT_QUOTES, 'UTF-8');
-            $ejeEsc = htmlspecialchars((string)$v['eje_tematico'], ENT_QUOTES, 'UTF-8');
-            $fechaEsc = htmlspecialchars((string)$v['fecha_votacion'], ENT_QUOTES, 'UTF-8');
-            $sentidoEsc = htmlspecialchars((string)$v['sentido_voto'], ENT_QUOTES, 'UTF-8');
-            $rowsVotosHtml .= "<tr><td>{$leyIdEsc}</td><td>{$tituloEsc}</td><td>{$ejeEsc}</td><td>{$fechaEsc}</td><td><strong>{$sentidoEsc}</strong></td></tr>";
-        }
-
-        $rowsPatrimonioHtml = '';
-        foreach ($patrimonio['serie'] as $pRow) {
-            $anioP = (int)$pRow['anio_fiscal'];
-            $nomP = number_format((float)$pRow['monto_pesos_nominal'], 0, ',', '.');
-            $constP = number_format((float)$pRow['patrimonio_pesos_constantes'], 0, ',', '.');
-            $usdP = number_format((float)$pRow['patrimonio_usd'], 0, ',', '.');
-            $mepP = number_format((float)$pRow['dolar_mep_cierre'], 2, ',', '.');
-            $rowsPatrimonioHtml .= "<tr><td>{$anioP}</td><td>ARS {$nomP}</td><td>ARS {$constP}</td><td>USD {$usdP}</td><td>ARS {$mepP}</td></tr>";
-        }
-
-        $noscriptHtml = <<<HTML
-        <article class="seo-noscript-profile">
-          <header>
-            <h1>{$escNombre} — {$escCargo} por {$escProvincia} ({$escBloque})</h1>
-            <p><strong>CUIT Oficial:</strong> {$escCuit} | <strong>Cámara:</strong> {$camara} | <strong>Distrito:</strong> {$escProvincia} | <strong>Bloque:</strong> {$escBloque}</p>
-            <p>{$escBio}</p>
-          </header>
-          <section>
-            <h2>Indicadores Clave de Desempeño Parlamentario y Patrimonial</h2>
-            <ul>
-              <li><strong>Asistencia Histórica a Sesiones:</strong> {$asist}%</li>
-              <li><strong>Lealtad Partidaria al Bloque {$escBloque}:</strong> {$lealtad}%</li>
-              <li><strong>Patrimonio Declarado Actual (Deflactado USD MEP):</strong> USD {$usdActual} (Variación Real: {$varUsd})</li>
-              <li><strong>Huella Ideológica de Votación:</strong> Salud {$perfilTematico['vectores']['Salud']}% | Educación {$perfilTematico['vectores']['Educacion']}% | Libre Mercado {$perfilTematico['vectores']['MercadoLibre']}% | Proteccionismo {$perfilTematico['vectores']['Proteccionismo']}% | Laboral {$perfilTematico['vectores']['Laboral']}%</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Evolución Patrimonial Deflactada (Declaraciones Juradas Oficina Anticorrupción)</h2>
-            <table>
-              <thead>
-                <tr><th>Año Fiscal</th><th>Patrimonio Nominal (ARS)</th><th>Pesos Constantes (Ajustado IPC)</th><th>Patrimonio Real (USD MEP)</th><th>Tipo de Cambio MEP</th></tr>
-              </thead>
-              <tbody>{$rowsPatrimonioHtml}</tbody>
-            </table>
-          </section>
-          <section>
-            <h2>Historial de Votaciones Nominales en Leyes Clave</h2>
-            <table>
-              <thead>
-                <tr><th>Expediente / Ley</th><th>Proyecto de Ley</th><th>Eje Temático</th><th>Fecha</th><th>Voto Emitido</th></tr>
-              </thead>
-              <tbody>{$rowsVotosHtml}</tbody>
-            </table>
-          </section>
-          <nav><a href="{$baseUrl}/">Volver al Directorio del Congreso Argentino</a> | <a href="{$baseUrl}/match">Calcular Match Electoral</a></nav>
-        </article>
-HTML;
-    } else {
-        http_response_code(404);
-        $seoTitle = 'Legislador no encontrado | DipuData — LegisData';
+        header("Location: {$baseUrl}{$prefix}{$slug}", true, 301);
+        exit;
     }
+
+    header("Location: {$baseUrl}/", true, 302);
+    exit;
 }
 // RUTA B: /match
 elseif ($cleanPath === '/match') {
@@ -399,7 +264,11 @@ else {
         $lProv = htmlspecialchars((string)$leg['provincia'], ENT_QUOTES, 'UTF-8');
         $lBloque = htmlspecialchars((string)$leg['bloque_actual'], ENT_QUOTES, 'UTF-8');
         $lAsist = number_format((float)$leg['asistencia_historica'], 1);
-        $linksHtml .= "<li><a href=\"{$baseUrl}/perfil/{$lId}\"><strong>{$lNombre}</strong> — {$lCamara} por {$lProv} ({$lBloque}) — Asistencia: {$lAsist}%</a></li>\n";
+        $lPrefix = str_starts_with(strtolower((string)$leg['camara']), 'senad') ? '/senador/' : '/diputado/';
+        $lSlug = !empty($leg['slug'])
+            ? (string)$leg['slug']
+            : (!empty($leg['wiki_slug']) ? strtolower(str_replace('_', '-', (string)$leg['wiki_slug'])) : (string)$lId);
+        $linksHtml .= "<li><a href=\"{$baseUrl}{$lPrefix}{$lSlug}\"><strong>{$lNombre}</strong> — {$lCamara} por {$lProv} ({$lBloque}) — Asistencia: {$lAsist}%</a></li>\n";
     }
 
     $noscriptHtml = <<<HTML

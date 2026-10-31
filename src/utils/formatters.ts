@@ -131,3 +131,17 @@ export function getInitials(nombreCompleto: string): string {
     .map((n) => n[0]?.toUpperCase() ?? '')
     .join('');
 }
+
+export function getLegisladorUrl(leg: {
+  camara?: string;
+  slug?: string;
+  wiki_slug?: string;
+  id?: number | string;
+}): string {
+  const c = (leg.camara || '').toLowerCase();
+  const isSenador = c.includes('senad');
+  const prefix = isSenador ? '/senador/' : '/diputado/';
+  const slug = leg.slug || leg.wiki_slug?.toLowerCase().replace(/_/g, '-') || String(leg.id || '');
+  return `${prefix}${slug}`;
+}
+
