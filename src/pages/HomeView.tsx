@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Search,
   Sparkles,
@@ -337,13 +336,13 @@ export const HomeView: React.FC = () => {
             </div>
           </div>
 
-          <Link
-            to="/match"
+          <a
+            href="/match-360"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shrink-0"
           >
-            <span>Iniciar Match Electoral</span>
+            <span>Iniciar Match Electoral 360</span>
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
         </div>
 
         {/* Selector Visual Interactivo por Regiones y Provincias */}

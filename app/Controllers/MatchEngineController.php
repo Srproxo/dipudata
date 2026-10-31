@@ -60,6 +60,8 @@ class MatchEngineController
         // 8. Género y Cuidados
         ['id' => 'q15', 'eje' => 'Género y Cuidados', 'tipo' => 'ideologica', 'invertida' => false,
          'texto' => 'El Estado debe legislar un sistema integral de cuidados y ampliar licencias parentales compartidas para cerrar brechas laborales.'],
+        ['id' => 'q15b', 'eje' => 'Género y Cuidados', 'tipo' => 'material', 'invertida' => false,
+         'texto' => 'En tu hogar o entorno asumís tareas de cuidado no remuneradas (menores, adultos mayores o enfermos) sin suficiente apoyo de infraestructura pública.'],
 
         // 9. Federalismo y Agro (Nuevo)
         ['id' => 'q16', 'eje' => 'Federalismo y Agro', 'tipo' => 'material', 'invertida' => false,
@@ -70,10 +72,14 @@ class MatchEngineController
         // 10. Transparencia Institucional
         ['id' => 'q18', 'eje' => 'Transparencia Institucional', 'tipo' => 'ideologica', 'invertida' => false,
          'texto' => 'Ninguna persona condenada en segunda instancia por delitos contra la administración pública debería poder ser candidata electoral (Ficha Limpia).'],
+        ['id' => 'q18b', 'eje' => 'Transparencia Institucional', 'tipo' => 'material', 'invertida' => false,
+         'texto' => 'Considerás indispensable auditar en tiempo real el patrimonio, contrataciones de asesores y pasajes de todos los legisladores mediante portales abiertos.'],
 
         // 11. Tecnología y Trabajo
         ['id' => 'q19', 'eje' => 'Tecnología y Trabajo', 'tipo' => 'ideologica', 'invertida' => false,
          'texto' => 'Los repartidores y trabajadores de aplicaciones digitales deben contar con derechos laborales garantizados (ART, aportes y salario mínimo).'],
+        ['id' => 'q19b', 'eje' => 'Tecnología y Trabajo', 'tipo' => 'material', 'invertida' => false,
+         'texto' => 'El Congreso debe incentivar impositivamente la industria del software, la inteligencia artificial y la exportación de servicios tecnológicos de valor agregado.'],
     ];
 
     public const OPCIONES = [

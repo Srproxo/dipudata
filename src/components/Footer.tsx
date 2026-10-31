@@ -73,13 +73,13 @@ export const Footer: React.FC = () => {
               >
                 Buscador de Representantes
               </Link>
-              <Link
-                to="/match"
+              <a
+                href="/match-360"
                 className="text-xs font-medium px-3 py-1.5 rounded-md bg-slate-900 text-white hover:bg-slate-800 transition-colors inline-flex items-center gap-1"
               >
-                <span>Test Match Electoral</span>
+                <span>Test Match Electoral 360</span>
                 <ExternalLink className="w-3 h-3" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

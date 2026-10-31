@@ -28,7 +28,7 @@ import {
 import { actualizarMetaSeo } from '../utils/seo';
 
 export const MatchElectoralView: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const totalPreguntas = PREGUNTAS_MATCH_ELECTORAL.length; // 8 preguntas
 
   const [pasoActual, setPasoActual] = useState<number>(0);
@@ -40,36 +40,9 @@ export const MatchElectoralView: React.FC = () => {
   const [legisladorComparadoIdx, setLegisladorComparadoIdx] = useState<number>(0);
   const [copiadoShare, setCopiadoShare] = useState<boolean>(false);
 
-  // Si la URL trae parámetros compartidos (?s=80&e=90&m=30&p=75), reconstruimos el Match automáticamente
   useEffect(() => {
-    const s = searchParams.get('s');
-    const e = searchParams.get('e');
-    const m = searchParams.get('m');
-    const p = searchParams.get('p');
-
-    if (s !== null && e !== null && m !== null && p !== null) {
-      const vecShared = {
-        Salud: Math.max(0, Math.min(100, Number(s) || 50)),
-        Educacion: Math.max(0, Math.min(100, Number(e) || 50)),
-        MercadoLibre: Math.max(0, Math.min(100, Number(m) || 50)),
-        Proteccionismo: Math.max(0, Math.min(100, Number(p) || 50)),
-      };
-      setCalculando(true);
-      enviarMatchElectoral(vecShared).then((res) => {
-        setResultadoMatch(res);
-        setCalculando(false);
-      });
-    } else {
-      actualizarMetaSeo({
-        title:
-          'Match Electoral Legislativo — ¿Qué Diputado o Senador vota como vos? | LegisData DipuData',
-        description:
-          'Cuestionario interactivo de 8 preguntas sobre leyes reales sancionadas en el Congreso Argentino. Calculá tu Similitud de Coseno con cada representante.',
-        canonicalPath: '/match',
-        ogImage: 'https://dipudata.com/api/og?type=match',
-      });
-    }
-  }, [searchParams]);
+    window.location.replace('/match-360');
+  }, []);
 
   // Actualizar metadatos SEO cuando se obtienen los resultados del Match
   useEffect(() => {

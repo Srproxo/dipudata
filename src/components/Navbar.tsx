@@ -54,8 +54,8 @@ export const Navbar: React.FC = () => {
             <span>Legisladores</span>
           </Link>
 
-          <Link
-            to="/match"
+          <a
+            href="/match-360"
             className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all ${
               isMatch
                 ? 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-500/30'
@@ -63,8 +63,8 @@ export const Navbar: React.FC = () => {
             }`}
           >
             <Sparkles className="w-4 h-4 text-blue-500" />
-            <span>Match Electoral</span>
-          </Link>
+            <span>Match 360</span>
+          </a>
         </nav>
       </div>
     </header>

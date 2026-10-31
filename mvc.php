@@ -71,6 +71,10 @@ switch (true) {
         require __DIR__ . '/perfil.php';
         break;
 
+    case $path === '/match':
+        header('Location: /match-360', true, 301);
+        exit;
+
     case $path === '/match-360':
         require __DIR__ . '/match.php';
         break;
