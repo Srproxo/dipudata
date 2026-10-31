@@ -87,15 +87,33 @@ function fetchAllLegisladores(?PDO $pdo): array
                     $r['lealtad_pct'] = (float)$r['lealtad_pct'];
                 }
                 unset($r);
-                return $rows;
             }
         } catch (Throwable) {
-            // Continúa al fallback en memoria
+            $rows = [];
         }
     }
 
     $store = Config::getMemoryStore();
-    return array_values($store['legisladores']);
+    $memoryLegisladores = array_values($store['legisladores'] ?? []);
+
+    if (empty($rows)) {
+        return $memoryLegisladores;
+    }
+
+    $existing = [];
+    foreach ($rows as $r) {
+        if (!empty($r['cuit'])) $existing[$r['cuit']] = true;
+        if (!empty($r['id_congreso'])) $existing[$r['id_congreso']] = true;
+    }
+    foreach ($memoryLegisladores as $memLeg) {
+        $cuit = $memLeg['cuit'] ?? '';
+        $cong = $memLeg['id_congreso'] ?? '';
+        if (!isset($existing[$cuit]) && !isset($existing[$cong])) {
+            $rows[] = $memLeg;
+        }
+    }
+
+    return $rows;
 }
 
 /**
