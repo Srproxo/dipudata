@@ -258,11 +258,11 @@ require __DIR__ . '/app/Views/layouts/header.php';
         <span class="text-slate-900 font-semibold"><?= e($leg['nombre']) ?></span>
     </div>
     <div class="flex items-center gap-2">
-        <button id="btnAbrirPresentacion" type="button" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm hover:shadow transition-all border border-slate-700/60 hover:border-slate-500 group focus:outline-none focus:ring-2 focus:ring-amber-400">
-            <svg class="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="btnAbrirPresentacion" data-action="abrir-presentacion" type="button" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm hover:shadow transition-all border border-slate-700/60 hover:border-slate-500 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-amber-400">
+            <svg class="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
             </svg>
-            <span>Modo Presentación (Slides 16:9)</span>
+            <span class="pointer-events-none">Modo Presentación (Slides 16:9)</span>
         </button>
     </div>
 </nav>
@@ -1891,146 +1891,170 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
     </div>
 
-    <!-- Script de Control del Modo Presentación PowerPoint -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const modal = document.getElementById('modalPresentacion');
-        const btnAbrir = document.getElementById('btnAbrirPresentacion');
-        const btnCerrar = document.getElementById('btnCerrarPresentacion');
-        const btnPrev = document.getElementById('btnSlidePrev');
-        const btnNext = document.getElementById('btnSlideNext');
-        const btnFs = document.getElementById('btnToggleFullscreen');
-        const btnPrint = document.getElementById('btnPrintSlides');
-        const slideCards = document.querySelectorAll('.slide-deck-card');
-        const navDots = document.querySelectorAll('.slide-nav-dot');
-        const counterNum = document.getElementById('currentSlideNum');
-        const totalSlides = slideCards.length;
-        let currentSlide = 1;
+    <!-- Script de Control del Modo Presentación PowerPoint con CSP Nonce Estricto -->
+    <script nonce="<?= csp_nonce() ?>">
+    (function () {
+        function initPresentacion() {
+            var modal = document.getElementById('modalPresentacion');
+            var btnAbrir = document.getElementById('btnAbrirPresentacion');
+            var btnCerrar = document.getElementById('btnCerrarPresentacion');
+            var btnPrev = document.getElementById('btnSlidePrev');
+            var btnNext = document.getElementById('btnSlideNext');
+            var btnFs = document.getElementById('btnToggleFullscreen');
+            var btnPrint = document.getElementById('btnPrintSlides');
+            var slideCards = document.querySelectorAll('.slide-deck-card');
+            var navDots = document.querySelectorAll('.slide-nav-dot');
+            var counterNum = document.getElementById('currentSlideNum');
+            var totalSlides = slideCards.length;
+            var currentSlide = 1;
 
-        function showSlide(n) {
-            if (n < 1) n = 1;
-            if (n > totalSlides) n = totalSlides;
-            currentSlide = n;
+            function showSlide(n) {
+                if (n < 1) n = 1;
+                if (n > totalSlides) n = totalSlides;
+                currentSlide = n;
 
-            slideCards.forEach(function (c) {
-                const sNum = parseInt(c.getAttribute('data-slide'), 10);
-                if (sNum === currentSlide) {
-                    c.classList.remove('hidden');
-                    c.classList.add('flex');
-                } else {
-                    c.classList.add('hidden');
-                    c.classList.remove('flex');
+                slideCards.forEach(function (c) {
+                    var sNum = parseInt(c.getAttribute('data-slide'), 10);
+                    if (sNum === currentSlide) {
+                        c.classList.remove('hidden');
+                        c.classList.add('flex');
+                    } else {
+                        c.classList.add('hidden');
+                        c.classList.remove('flex');
+                    }
+                });
+
+                navDots.forEach(function (d) {
+                    var target = parseInt(d.getAttribute('data-target'), 10);
+                    if (target === currentSlide) {
+                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition-all';
+                    } else {
+                        d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all';
+                    }
+                });
+
+                if (counterNum) counterNum.textContent = currentSlide;
+            }
+
+            function abrirModal() {
+                if (!modal) return;
+                modal.classList.remove('hidden');
+                modal.style.display = 'flex';
+                document.body.classList.add('overflow-hidden');
+                showSlide(currentSlide);
+                try {
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('modo', 'presentacion');
+                    window.history.replaceState({}, '', url.toString());
+                } catch (e) {}
+            }
+
+            function cerrarModal() {
+                if (!modal) return;
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+                document.body.classList.remove('overflow-hidden');
+                if (document.fullscreenElement) {
+                    try { document.exitFullscreen(); } catch (e) {}
+                }
+                try {
+                    var url = new URL(window.location.href);
+                    url.searchParams.delete('modo');
+                    url.searchParams.delete('slides');
+                    window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+                } catch (e) {}
+            }
+
+            // Exponer globalmente para fallback
+            window.abrirPresentacionModal = abrirModal;
+            window.cerrarPresentacionModal = cerrarModal;
+            window.cambiarSlidePresentacion = showSlide;
+
+            if (btnAbrir) btnAbrir.addEventListener('click', abrirModal);
+            if (btnCerrar) btnCerrar.addEventListener('click', cerrarModal);
+
+            // Delegación de eventos en el documento para el botón de apertura y botones dentro del modal
+            document.addEventListener('click', function (e) {
+                var trigger = e.target.closest('#btnAbrirPresentacion, [data-action="abrir-presentacion"]');
+                if (trigger) {
+                    e.preventDefault();
+                    abrirModal();
                 }
             });
 
-            navDots.forEach(function (d) {
-                const target = parseInt(d.getAttribute('data-target'), 10);
-                if (target === currentSlide) {
-                    d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition-all';
-                } else {
-                    d.className = 'slide-nav-dot px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white transition-all';
+            if (btnPrev) {
+                btnPrev.addEventListener('click', function () {
+                    showSlide(currentSlide - 1);
+                });
+            }
+            if (btnNext) {
+                btnNext.addEventListener('click', function () {
+                    showSlide(currentSlide + 1);
+                });
+            }
+
+            navDots.forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    var t = parseInt(dot.getAttribute('data-target'), 10);
+                    if (!isNaN(t)) showSlide(t);
+                });
+            });
+
+            if (btnFs) {
+                btnFs.addEventListener('click', function () {
+                    if (!document.fullscreenElement) {
+                        if (modal.requestFullscreen) {
+                            modal.requestFullscreen();
+                        } else if (modal.webkitRequestFullscreen) {
+                            modal.webkitRequestFullscreen();
+                        }
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                });
+            }
+
+            if (btnPrint) {
+                btnPrint.addEventListener('click', function () {
+                    window.print();
+                });
+            }
+
+            // Navegación por Teclado
+            window.addEventListener('keydown', function (e) {
+                if (!modal || modal.classList.contains('hidden') || modal.style.display === 'none') return;
+
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    showSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    showSlide(currentSlide - 1);
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cerrarModal();
+                } else if (e.key === 'f' || e.key === 'F') {
+                    if (btnFs) btnFs.click();
                 }
             });
 
-            if (counterNum) counterNum.textContent = currentSlide;
-        }
-
-        function abrirModal() {
-            if (!modal) return;
-            modal.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-            showSlide(currentSlide);
+            // Apertura automática si viene el parámetro ?modo=presentacion o ?slides=1
             try {
-                const url = new URL(window.location.href);
-                url.searchParams.set('modo', 'presentacion');
-                window.history.replaceState({}, '', url.toString());
+                var params = new URLSearchParams(window.location.search);
+                if (params.get('modo') === 'presentacion' || params.get('slides') === '1') {
+                    abrirModal();
+                }
             } catch (e) {}
         }
 
-        function cerrarModal() {
-            if (!modal) return;
-            modal.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-            if (document.fullscreenElement) {
-                try { document.exitFullscreen(); } catch (e) {}
-            }
-            try {
-                const url = new URL(window.location.href);
-                url.searchParams.delete('modo');
-                url.searchParams.delete('slides');
-                window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
-            } catch (e) {}
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPresentacion);
+        } else {
+            initPresentacion();
         }
-
-        if (btnAbrir) btnAbrir.addEventListener('click', abrirModal);
-        if (btnCerrar) btnCerrar.addEventListener('click', cerrarModal);
-
-        if (btnPrev) {
-            btnPrev.addEventListener('click', function () {
-                showSlide(currentSlide - 1);
-            });
-        }
-        if (btnNext) {
-            btnNext.addEventListener('click', function () {
-                showSlide(currentSlide + 1);
-            });
-        }
-
-        navDots.forEach(function (dot) {
-            dot.addEventListener('click', function () {
-                const t = parseInt(dot.getAttribute('data-target'), 10);
-                if (!isNaN(t)) showSlide(t);
-            });
-        });
-
-        if (btnFs) {
-            btnFs.addEventListener('click', function () {
-                if (!document.fullscreenElement) {
-                    if (modal.requestFullscreen) {
-                        modal.requestFullscreen();
-                    } else if (modal.webkitRequestFullscreen) {
-                        modal.webkitRequestFullscreen();
-                    }
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    }
-                }
-            });
-        }
-
-        if (btnPrint) {
-            btnPrint.addEventListener('click', function () {
-                window.print();
-            });
-        }
-
-        // Navegación por Teclado
-        window.addEventListener('keydown', function (e) {
-            if (!modal || modal.classList.contains('hidden')) return;
-
-            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-                e.preventDefault();
-                showSlide(currentSlide + 1);
-            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-                e.preventDefault();
-                showSlide(currentSlide - 1);
-            } else if (e.key === 'Escape') {
-                e.preventDefault();
-                cerrarModal();
-            } else if (e.key === 'f' || e.key === 'F') {
-                if (btnFs) btnFs.click();
-            }
-        });
-
-        // Apertura automática si viene el parámetro ?modo=presentacion o ?slides=1
-        try {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('modo') === 'presentacion' || params.get('slides') === '1') {
-                abrirModal();
-            }
-        } catch (e) {}
-    });
+    })();
     </script>
 </div>
 <?php require __DIR__ . '/app/Views/layouts/footer.php'; ?>
