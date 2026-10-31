@@ -297,6 +297,45 @@ class Config
             ];
         }
 
+        // Cargar padrón maestro consolidado 1993-2026 (2.202 legisladores) si existe
+        $masterFile = dirname(__DIR__) . '/storage/legisladores_master.json';
+        if (file_exists($masterFile)) {
+            $masterData = json_decode(file_get_contents($masterFile), true) ?: [];
+            foreach ($masterData as $m) {
+                $mId = (int)($m['id'] ?? 0);
+                if ($mId <= 72 && isset($legisladores[$mId])) {
+                    $legisladores[$mId]['estado'] = $m['estado'] ?? $legisladores[$mId]['estado'];
+                    if (!empty($m['url_hcdn'])) $legisladores[$mId]['url_hcdn'] = $m['url_hcdn'];
+                    if (!empty($m['url_comisiones'])) $legisladores[$mId]['url_comisiones'] = $m['url_comisiones'];
+                    continue;
+                }
+                $mSlug = $m['slug'] ?? preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', $m['nombre_completo'] ?? '')));
+                $legisladores[$mId] = [
+                    'id'                   => $mId,
+                    'id_congreso'          => (string)($m['id_congreso'] ?? "HCDN-{$mId}"),
+                    'cuit'                 => (string)($m['cuit'] ?? ''),
+                    'wiki_slug'            => (string)($m['wiki_slug'] ?? ''),
+                    'slug'                 => $mSlug,
+                    'nombre_completo'      => (string)$m['nombre_completo'],
+                    'camara'               => (string)$m['camara'],
+                    'provincia'            => (string)$m['provincia'],
+                    'bloque_actual'        => (string)($m['bloque_actual'] ?? 'General'),
+                    'bloque'               => (string)($m['bloque_actual'] ?? 'General'),
+                    'estado'               => (string)($m['estado'] ?? 'Activo'),
+                    'biografia'            => (string)($m['biografia'] ?? ''),
+                    'foto_url'             => (string)($m['foto_url'] ?? ''),
+                    'asistencia_historica' => (float)($m['asistencia_historica'] ?? 90.0),
+                    'lealtad_partidaria'   => (float)($m['lealtad_partidaria'] ?? 90.0),
+                    'asistencia_pct'       => (float)($m['asistencia_historica'] ?? 90.0),
+                    'lealtad_pct'          => (float)($m['lealtad_partidaria'] ?? 90.0),
+                    'mandatos'             => (int)($m['mandatos'] ?? 1),
+                    'url_hcdn'             => $m['url_hcdn'] ?? null,
+                    'url_comisiones'       => $m['url_comisiones'] ?? null,
+                    'updated_at'           => '2025-05-15 12:00:00',
+                ];
+            }
+        }
+
         $patrimonioSeries = [
             1  => [2020 => 48500000.00, 2021 => 72400000.00, 2022 => 134800000.00, 2023 => 445000000.00, 2024 => 568000000.00, 2025 => 652000000.00],
             2  => [2020 => 39200000.00, 2021 => 58900000.00, 2022 => 104500000.00, 2023 => 338000000.00, 2024 => 412000000.00, 2025 => 436000000.00],
