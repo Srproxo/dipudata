@@ -76,9 +76,11 @@ switch (true) {
         ));
         break;
 
-    case (bool)preg_match("#^/diputado/({$S})/proyectos$#", $path, $m):
-        $l = Datos::legislador('Diputados', $m[1]);
-        $pr = $l ? Datos::proyectos($m[1]) : null;
+    case (bool)preg_match("#^/(diputado|senador)/({$S})/proyectos$#", $path, $m):
+        $camaraP = $m[1] === 'senador' ? 'Senadores' : 'Diputados';
+        $m = [$m[0], $m[2], $m[1]];
+        $l = Datos::legislador($camaraP, $m[1]);
+        $pr = $l ? Datos::proyectos($m[1], $camaraP) : null;
         if (!$l || !$pr) { render_404(); break; }
         $tipo = is_string($_GET['tipo'] ?? null) && isset($pr['resumen']['por_tipo'][$_GET['tipo']]) ? (string)$_GET['tipo'] : '';
         $resSel = is_string($_GET['resultado'] ?? null) && isset($pr['resumen']['por_resultado'][$_GET['resultado']]) ? (string)$_GET['resultado'] : '';
@@ -98,10 +100,10 @@ switch (true) {
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
         $lista = array_slice($lista, ($pagina - 1) * 50, 50);
         $filtrado = $tipo || $resSel || $q !== '' || $pagina > 1;
-        render('proyectos_diputado', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
             'Proyectos de ' . $l['nombre'],
-            'Proyectos parlamentarios en los que figura ' . $l['nombre'] . ' como autor/a (' . $pr['resumen']['total'] . ') y qué pasó con ellos, según los datos abiertos de la Cámara de Diputados.',
-            '/diputado/' . $m[1] . '/proyectos', 'legisladores', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+            'Proyectos parlamentarios en los que figura ' . $l['nombre'] . ' como autor/a o firmante (' . $pr['resumen']['total'] . ') y qué pasó con ellos, según los registros oficiales del Congreso.',
+            Datos::urlLegislador($l) . '/proyectos', 'legisladores', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
         ));
         break;
 

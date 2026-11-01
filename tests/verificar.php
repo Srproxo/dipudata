@@ -171,7 +171,25 @@ foreach ($dip as $l) {
     }
 }
 ok($malPy === 0 && $conPy > 200 && $totPy === ($pm['de_diputados_actuales'] ?? -1), 'los proyectos de ' . $conPy . ' diputados cuadran con su resumen, sin repetidos entre diputados (' . $totPy . ')');
-ok(!glob(__DIR__ . '/../storage/verificado/proyectos/s-*.json'), 'no hay proyectos atribuidos a senadores (el Senado no publica ese conjunto como datos abiertos)');
+// Proyectos de los senadores: salen de la página de cada senador (ID oficial); solo proyectos, sin resultado inventado
+$spMal = 0; $spN = 0; $spTot = 0; $vistosSp = [];
+foreach ($sen as $l) {
+    $pr = Datos::proyectos($l['slug'], 'Senadores');
+    if (!$pr) { continue; }
+    $spN++; $r = $pr['resumen']; $spTot += count($pr['proyectos']);
+    if ($r['total'] !== count($pr['proyectos']) || array_sum($r['por_tipo']) !== $r['total'] || ($r['camara'] ?? '') !== 'Senadores') { $spMal++; }
+    if (array_diff(array_keys($r['por_tipo']), ['Ley', 'Declaracion', 'Comunicacion', 'Resolucion', 'Decreto'])) { $spMal++; }
+    foreach ($pr['proyectos'] as $x) {
+        if (!preg_match('#^\d+\.\d{2}/S/(PL|PD|PC|PR|DE)$#', $x[0]) || $x[5] !== '' || $x[1] < '2001-01-01' || $x[1] > date('Y-m-d')) { $spMal++; }
+        $y = (int)substr($x[0], strpos($x[0], '.') + 1, 2);
+        if (!preg_match('#^' . substr($x[0], 0, strpos($x[0], '.')) . '/' . sprintf('%02d', $y) . '$#', $x[3])) { $spMal++; }
+        $k = $l['slug'] . $x[0];
+        if (isset($vistosSp[$k])) { $spMal++; }
+        $vistosSp[$k] = true;
+    }
+}
+ok($spMal === 0 && $spN >= 65 && $spTot === ($pm['senado_proyectos'] ?? -1), 'los proyectos de ' . $spN . ' senadores son proyectos con expediente válido, sin repetidos y sin resultado (' . $spTot . ')');
+ok(($pm['senado_expediente_invalido'] ?? 1) === 0 && ($pm['senado_no_es_proyecto'] ?? 0) > 0, 'las comunicaciones y notas del Senado (códigos CO y CC) no se publican como proyectos');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

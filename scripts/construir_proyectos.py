@@ -19,6 +19,12 @@ Salidas (storage/verificado/proyectos/):
   <slug>.json  {"resumen": {...}, "proyectos": [[id, fecha, tipo, expediente, titulo, resultado, fecha_resultado], ...]} de más nuevo a más viejo
   _meta.json   cobertura y descartes
 
+Senado: no hay conjunto abierto de proyectos; se usa la lista de cada senador en senado.gob.ar (scripts/bajar_proyectos_senado.py), donde el
+senador se identifica por el ID oficial de la URL. Se publican los proyectos de ley, declaración, comunicación, resolución y decreto (códigos PL, PD,
+PC, PR y DE del expediente); las comunicaciones y notas (CO, CC) no son proyectos y se descartan. El año del expediente tiene que ser el de la fecha de
+mesa de entradas (o el anterior en enero a marzo: la numeración sigue el período parlamentario). La página del Senado no informa qué pasó con cada proyecto.
+Las salidas del Senado se guardan como s-<slug>.json.
+
 Uso:  python3 -I scripts/construir_proyectos.py   (después de construir_datos.py)
 """
 import collections, csv, gzip, html, json, re, shutil, sys, unicodedata
@@ -39,8 +45,49 @@ def leer_csv(nombre):
         yield from csv.DictReader(f)
 
 
+def recortar(t: str, n: int = 400) -> str:
+    """Recorta en el límite de una palabra y marca el corte."""
+    t = re.sub(r"\s+", " ", t).strip()
+    return t if len(t) <= n else t[:n].rsplit(" ", 1)[0] + "…"
+
+
+TIPOS_SEN = {"PL": "Ley", "PD": "Declaracion", "PC": "Comunicacion", "PR": "Resolucion", "DE": "Decreto"}
+
+
+def senado(legs_todos, cuenta):
+    """Proyectos de los senadores actuales según su página en senado.gob.ar, atribuidos por ID oficial."""
+    ruta = OFI.parent / "senado" / "proyectos_senadores.json.gz"
+    if not ruta.exists():
+        return {}
+    por_id = {l["id_senado"]: l["slug"] for l in legs_todos if l["camara"] == "Senadores" and l.get("id_senado")}
+    datos = json.loads(gzip.open(ruta, "rt", encoding="utf-8").read())["senadores"]
+    out = {}
+    for sid, lista in datos.items():
+        slug = por_id.get(int(sid))
+        if not slug:
+            continue
+        for ref, exp, fecha, extracto in lista:
+            m = re.match(r"^(\d+)\.(\d{2})/S/(\w+)$", ref)
+            e = re.match(r"^(\d+)/(\d{2})$", exp)
+            cuenta["senado_total"] += 1
+            if not m or not e or e[1] != m[1] or e[2] != m[2]:
+                cuenta["senado_expediente_invalido"] += 1
+                continue
+            if m[3] not in TIPOS_SEN:
+                cuenta["senado_no_es_proyecto"] += 1
+                continue
+            anio_f, mes_f, anio_e = int(fecha[2:4]), int(fecha[5:7]), int(m[2])
+            if not (anio_f == anio_e or (anio_f == (anio_e + 1) % 100 and mes_f <= 3)):
+                cuenta["senado_fecha_inconsistente"] += 1
+                continue
+            cuenta["senado_proyectos"] += 1
+            out.setdefault(slug, []).append([ref, fecha, TIPOS_SEN[m[3]], exp, recortar(extracto), "", ""])
+    return out
+
+
 def main() -> int:
-    legs = [l for l in json.loads((SAL / "legisladores.json").read_text(encoding="utf-8")) if l["camara"] == "Diputados"]
+    legs_todos = json.loads((SAL / "legisladores.json").read_text(encoding="utf-8"))
+    legs = [l for l in legs_todos if l["camara"] == "Diputados"]
     actual = {l["hcdn_id"]: l["slug"] for l in legs if l.get("hcdn_id")}
 
     # Mandatos por nombre completo
@@ -92,8 +139,9 @@ def main() -> int:
         cuenta["de_diputados_actuales"] += 1
         r = res.get(p["PROYECTO_ID"])
         por_dip[actual[hid]].append([p["PROYECTO_ID"], fecha, p["TIPO"].capitalize(), p["EXP_DIPUTADOS"].strip(),
-                                     re.sub(r"\s+", " ", html.unescape(p["TITULO"])).strip()[:260], r[1] if r else "", r[0] if r else ""])
+                                     recortar(html.unescape(p["TITULO"])), r[1] if r else "", r[0] if r else ""])
 
+    por_sen = senado(legs_todos, cuenta)
     salida = SAL / "proyectos"
     if salida.exists():
         shutil.rmtree(salida)
@@ -105,7 +153,14 @@ def main() -> int:
         resumen = {"total": len(lista), "por_tipo": dict(tipos.most_common()), "por_resultado": dict(resultados.most_common()),
                    "desde": lista[-1][1], "hasta": lista[0][1]}
         (salida / f"{slug}.json").write_text(json.dumps({"resumen": resumen, "proyectos": lista}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    meta = {k: cuenta[k] for k in ("total", "origen_senado", "cruzados", "cruzados_por_primer_nombre", "autor_sin_padron", "fuera_de_mandato", "nombre_ambiguo", "de_diputados_actuales")}
+    for slug, lista in por_sen.items():
+        lista.sort(key=lambda x: (x[1], x[0]), reverse=True)
+        tipos = collections.Counter(x[2] for x in lista)
+        resumen = {"camara": "Senadores", "total": len(lista), "por_tipo": dict(tipos.most_common()), "por_resultado": {"Sin resolución registrada": len(lista)},
+                   "desde": lista[-1][1], "hasta": lista[0][1]}
+        (salida / f"s-{slug}.json").write_text(json.dumps({"resumen": resumen, "proyectos": lista}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    meta = {k: cuenta[k] for k in ("total", "origen_senado", "cruzados", "cruzados_por_primer_nombre", "autor_sin_padron", "fuera_de_mandato", "nombre_ambiguo", "de_diputados_actuales", "senado_total", "senado_proyectos", "senado_no_es_proyecto", "senado_expediente_invalido", "senado_fecha_inconsistente")}
+    meta["senadores_con_proyectos"] = len(por_sen)
     meta["diputados_con_proyectos"] = len(por_dip)
     meta["con_resultado"] = sum(1 for l in por_dip.values() for x in l if x[5])
     meta["desde"] = min((l[-1][1] for l in por_dip.values()), default="")
