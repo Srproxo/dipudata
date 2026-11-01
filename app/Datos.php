@@ -71,6 +71,31 @@ final class Datos
         ));
     }
 
+    /** @return list<array> cabeceras de las votaciones nominales, de la más reciente a la más antigua */
+    public static function votaciones(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/votaciones/indice.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    /** @return array{bloques:array,votos:list<array>}|null */
+    public static function votacion(string $id): ?array
+    {
+        if (!preg_match('/^\d{1,6}$/', $id)) {
+            return null;
+        }
+        $ruta = RAIZ . "/storage/verificado/votaciones/actas/{$id}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : null;
+    }
+
+    /** Resumen de participación en votaciones nominales de un diputado actual (o null). */
+    public static function participacion(string $slug): ?array
+    {
+        return self::leer('votaciones_diputados')[$slug] ?? null;
+    }
+
     /** @return list<array> */
     public static function interbloques(): array
     {

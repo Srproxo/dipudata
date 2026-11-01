@@ -5,6 +5,7 @@ $nav = [
     'congreso'     => ['/congreso', 'Cómo funciona'],
     'bloques'      => ['/congreso/bloques', 'Bloques'],
     'provincias'   => ['/congreso/provincias', 'Provincias'],
+    'votaciones'   => ['/votaciones', 'Votaciones'],
     'senado'       => ['/senado', 'Senado'],
     'metodologia'  => ['/metodologia', 'Metodología'],
 ];
@@ -62,6 +63,7 @@ $inf = \App\Datos::informe();
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
         <li><a href="/congreso/bloques">Bloques</a></li>
         <li><a href="/congreso/provincias">Provincias</a></li>
+        <li><a href="/votaciones">Votaciones de Diputados</a></li>
         <li><a href="/senado">Registros del Senado</a></li>
       </ul>
     </div>

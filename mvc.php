@@ -179,6 +179,47 @@ switch (true) {
         ));
         break;
 
+    case $path === '/votaciones':
+        $todas = Datos::votaciones();
+        $anios = array_values(array_unique(array_map(static fn($v) => substr($v['f'], 0, 4), $todas)));
+        $anio = is_string($_GET['anio'] ?? null) && in_array($_GET['anio'], $anios, true) ? $_GET['anio'] : '';
+        $res = in_array($_GET['resultado'] ?? '', ['AFIRMATIVO', 'NEGATIVO'], true) ? (string)$_GET['resultado'] : '';
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $lista = array_values(array_filter($todas, static function (array $v) use ($anio, $res, $nq): bool {
+            if ($anio && substr($v['f'], 0, 4) !== $anio) return false;
+            if ($res && $v['res'] !== $res) return false;
+            if ($nq !== '') {
+                $hay = ' ' . Datos::normalizar($v['t']) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+            }
+            return true;
+        }));
+        $total = count($lista);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $lista = array_slice($lista, ($pagina - 1) * 50, 50);
+        $filtrado = $anio || $res || $q !== '' || $pagina > 1;
+        render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+            'Votaciones nominales de la Cámara de Diputados',
+            'Cada votación nominal de Diputados entre 2011 y 2020, con su resultado y cómo votó cada diputado. Fuente: datos abiertos de la HCDN.',
+            '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/votaciones/(\d{1,6})$#', $path, $m):
+        $cab = null;
+        foreach (Datos::votaciones() as $v) { if ($v['id'] === $m[1]) { $cab = $v; break; } }
+        $det = $cab ? Datos::votacion($m[1]) : null;
+        if (!$cab || !$det) { render_404(); break; }
+        $filtro = in_array($_GET['voto'] ?? '', ['A', 'N', 'B', 'U'], true) ? (string)$_GET['voto'] : '';
+        render('votacion', compact('cab', 'det', 'filtro'), pagina_meta(
+            'Votación del ' . fecha_es($cab['f']) . ': ' . mb_substr($cab['t'], 0, 80),
+            $cab['t'] . ' Resultado: ' . strtolower($cab['res']) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada diputado.',
+            '/votaciones/' . $m[1], 'votaciones', ['robots' => $filtro ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/metodologia':
         render('metodologia', [], pagina_meta(
             'Metodología y fuentes',
@@ -197,9 +238,10 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
+        foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
         foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }

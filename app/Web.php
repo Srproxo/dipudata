@@ -129,3 +129,28 @@ function url_con(array $cambios): string
     $q = array_filter(array_merge($_GET, $cambios), static fn($v) => $v !== '' && $v !== null);
     return strtok((string)($_SERVER['REQUEST_URI'] ?? '/'), '?') . ($q ? '?' . http_build_query($q) : '');
 }
+
+/** 'ABDALA DE MATARAZZO Norma Amanda' -> 'Norma Amanda Abdala de Matarazzo' */
+function nombre_acta(string $n): string
+{
+    $ap = [];
+    $no = [];
+    foreach (preg_split('/\s+/', trim($n)) ?: [] as $w) {
+        if ($w === mb_strtoupper($w, 'UTF-8') && preg_match('/\p{L}/u', $w)) { $ap[] = $w; } else { $no[] = $w; }
+    }
+    $t = static function (array $ws): string {
+        $min = ['de', 'del', 'la', 'las', 'los', 'y', 'e'];
+        $o = [];
+        foreach ($ws as $i => $w) {
+            $l = mb_strtolower($w, 'UTF-8');
+            $o[] = ($i > 0 && in_array($l, $min, true)) ? $l : mb_convert_case($l, MB_CASE_TITLE, 'UTF-8');
+        }
+        return implode(' ', $o);
+    };
+    return trim(implode(' ', array_filter([implode(' ', $no), $t($ap)])));
+}
+
+function etiqueta_voto(string $c): string
+{
+    return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside'][$c] ?? $c;
+}

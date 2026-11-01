@@ -165,3 +165,16 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .articulo .sub { margin: 1.5rem 0 .4rem; font: 700 1.05rem/1.3 var(--sans); }
 .lista-simple { margin: 0 0 1rem; padding-left: 1.2rem; }
 .lista-simple li { font-size: .95rem; line-height: 1.5; padding: .1rem 0; }
+
+/* Votaciones */
+.res-si { color: #166534; } .res-no { color: #991b1b; }
+.voto { display: inline-block; padding: .05rem .5rem; font-size: .8125rem; font-weight: 600; border: 1px solid var(--linea-fuerte); }
+.voto-A { color: #166534; border-color: #86efac; background: #f0fdf4; }
+.voto-N { color: #991b1b; border-color: #fca5a5; background: #fef2f2; }
+.voto-B { color: #854d0e; border-color: #fde047; background: #fefce8; }
+.voto-U, .voto-P { color: var(--tenue); background: var(--fondo); }
+.conteo a[aria-current="true"] { font-weight: 700; color: var(--tinta); text-decoration: none; }
+.participacion { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0; border-top: 1px solid var(--tinta); }
+.participacion div { padding: .8rem .25rem; border-bottom: 1px solid var(--linea); }
+.participacion dt { font-size: .8125rem; color: var(--tenue); }
+.participacion dd { margin: .1rem 0 0; font: 700 1.6rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }

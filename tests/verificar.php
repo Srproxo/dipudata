@@ -44,5 +44,20 @@ ok(!array_filter($dip, fn($l) => isset($l['mandatos'])), 'no se publica un conte
 $presid = array_filter(Datos::bloques('Diputados'), fn($b) => !empty($b['presidente']));
 ok(count($presid) >= 20, 'casi todos los bloques de Diputados tienen presidente (hay ' . count($presid) . ' de ' . count(Datos::bloques('Diputados')) . ')');
 
+$vot = Datos::votaciones();
+ok(count($vot) === 999, 'hay 999 votaciones nominales publicadas (hay ' . count($vot) . ')');
+$malV = 0;
+foreach ($vot as $v) {
+    $d = Datos::votacion($v['id']);
+    $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'P' => 0];
+    foreach ($d['votos'] ?? [] as $x) { $c[$x[3]]++; }
+    if ([$c['A'], $c['N'], $c['B'], $c['U']] !== [$v['a'], $v['n'], $v['b'], $v['u']]) { $malV++; }
+}
+ok($malV === 0, 'el detalle voto por voto de cada votación coincide con su cabecera');
+$part = array_filter($dip, fn($l) => Datos::participacion($l['slug']) !== null);
+ok(count($part) > 30, 'hay historial de votaciones para diputados que ya ejercían (' . count($part) . ')');
+$pctMal = array_filter($part, fn($l) => ($p = Datos::participacion($l['slug'])) && ($p['asistencia_pct'] < 0 || $p['asistencia_pct'] > 100 || ($p['coincidencia_bloque_pct'] ?? 0) > 100));
+ok(!$pctMal, 'ningún porcentaje de participación sale de 0 a 100');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
