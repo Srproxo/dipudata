@@ -8,7 +8,10 @@ $nav = [
     'senado'       => ['/senado', 'Senado'],
 ];
 $mas = [
+    'comisiones'  => ['/comisiones', 'Comisiones'],
     'provincias'  => ['/congreso/provincias', 'Provincias'],
+    'viajes'      => ['/viajes', 'Pasajes y misiones'],
+    'remuneraciones' => ['/remuneraciones', 'Cuánto cobran'],
     'subsidios'   => ['/subsidios', 'Subsidios'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
     'metodologia' => ['/metodologia', 'Metodología'],
@@ -78,6 +81,9 @@ $inf = \App\Datos::informe();
         <li><a href="/congreso/provincias">Provincias</a></li>
         <li><a href="/votaciones">Votaciones de Diputados</a></li>
         <li><a href="/leyes">Leyes</a></li>
+        <li><a href="/comisiones">Comisiones</a></li>
+        <li><a href="/viajes">Pasajes y misiones</a></li>
+        <li><a href="/remuneraciones">Cuánto cobran</a></li>
         <li><a href="/subsidios">Subsidios</a></li>
         <li><a href="/senado">Registros del Senado</a></li>
       </ul>

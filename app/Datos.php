@@ -116,6 +116,53 @@ final class Datos
         return self::leer('subsidios_diputados')[$slug] ?? [];
     }
 
+    /** @return list<array> comisiones de Diputados con sus integrantes */
+    public static function comisionesDiputados(): array
+    {
+        return self::leer('comisiones_diputados');
+    }
+
+    public static function comision(string $slug): ?array
+    {
+        foreach (self::comisionesDiputados() as $c) {
+            if ($c['slug'] === $slug) {
+                return $c;
+            }
+        }
+        return null;
+    }
+
+    /** @return list<array{nombre:string,slug:string,cargo:string}> comisiones en las que está un diputado */
+    public static function comisionesDe(string $slug): array
+    {
+        $out = [];
+        foreach (self::comisionesDiputados() as $c) {
+            foreach ($c['integrantes'] as $m) {
+                if ($m['slug'] === $slug) {
+                    $out[] = ['nombre' => $c['nombre'], 'slug' => $c['slug'], 'cargo' => $m['cargo']];
+                }
+            }
+        }
+        return $out;
+    }
+
+    /** @return array{semestres:array,desde_mandato_actual:string,actual:array,por_diputado:array} */
+    public static function viajes(): array
+    {
+        return self::leer('viajes');
+    }
+
+    /** @return list<array> */
+    public static function misiones(): array
+    {
+        return self::leer('misiones');
+    }
+
+    public static function remuneraciones(): array
+    {
+        return self::leer('remuneraciones');
+    }
+
     /** @return list<array> cabeceras de las votaciones nominales, de la más reciente a la más antigua */
     public static function votaciones(): array
     {

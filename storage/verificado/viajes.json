@@ -1,0 +1,4944 @@
+{
+ "semestres": {
+  "2023_s1": 4214,
+  "2023_s2": 5086,
+  "2024_s1": 6097,
+  "2024_s2": 6262,
+  "2025_s1": 5504,
+  "2025_s2": 5415,
+  "2026_s1": 5713
+ },
+ "desde_mandato_actual": "2025-12-10",
+ "actual": {
+  "anibal-tortoriello": {
+   "aereo": 32,
+   "terrestre": 0,
+   "total": 32
+  },
+  "sergio-guillermo-casas": {
+   "aereo": 30,
+   "terrestre": 0,
+   "total": 30
+  },
+  "laura-rodriguez-machado": {
+   "aereo": 42,
+   "terrestre": 0,
+   "total": 42
+  },
+  "jorge-rizzotti": {
+   "aereo": 35,
+   "terrestre": 0,
+   "total": 35
+  },
+  "varinia-lis-marin": {
+   "aereo": 20,
+   "terrestre": 16,
+   "total": 36
+  },
+  "nancy-sand": {
+   "aereo": 30,
+   "terrestre": 0,
+   "total": 30
+  },
+  "hilda-aguirre": {
+   "aereo": 20,
+   "terrestre": 6,
+   "total": 26
+  },
+  "estela-mary-neder": {
+   "aereo": 38,
+   "terrestre": 2,
+   "total": 40
+  },
+  "maria-graciela-parola": {
+   "aereo": 21,
+   "terrestre": 4,
+   "total": 25
+  },
+  "gabriela-pedrali": {
+   "aereo": 39,
+   "terrestre": 0,
+   "total": 39
+  },
+  "gerardo-cipolini": {
+   "aereo": 25,
+   "terrestre": 0,
+   "total": 25
+  },
+  "pamela-fernanda-verasay": {
+   "aereo": 50,
+   "terrestre": 0,
+   "total": 50
+  },
+  "carlos-mario-gutierrez": {
+   "aereo": 33,
+   "terrestre": 0,
+   "total": 33
+  },
+  "lisandro-nieri": {
+   "aereo": 45,
+   "terrestre": 0,
+   "total": 45
+  },
+  "aldo-leiva": {
+   "aereo": 54,
+   "terrestre": 0,
+   "total": 54
+  },
+  "juan-marino": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "romina-del-pla": {
+   "aereo": 0,
+   "terrestre": 2,
+   "total": 2
+  },
+  "myriam-teresa-bregman": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "alvaro-martinez": {
+   "aereo": 45,
+   "terrestre": 0,
+   "total": 45
+  },
+  "ricardo-daives": {
+   "aereo": 14,
+   "terrestre": 0,
+   "total": 14
+  },
+  "natalia-de-la-sota": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "hugo-yasky": {
+   "aereo": 6,
+   "terrestre": 0,
+   "total": 6
+  },
+  "maximiliano-ferraro": {
+   "aereo": 5,
+   "terrestre": 0,
+   "total": 5
+  },
+  "gabriela-estevez": {
+   "aereo": 46,
+   "terrestre": 0,
+   "total": 46
+  },
+  "karina-banfi": {
+   "aereo": 15,
+   "terrestre": 0,
+   "total": 15
+  },
+  "agustina-lucrecia-propato": {
+   "aereo": 11,
+   "terrestre": 0,
+   "total": 11
+  },
+  "eduardo-felix-valdes": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "ignacio-antonio-garcia-aresca": {
+   "aereo": 17,
+   "terrestre": 0,
+   "total": 17
+  },
+  "itai-hagman": {
+   "aereo": 3,
+   "terrestre": 6,
+   "total": 9
+  },
+  "natalia-zaracho": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "cecilia-moreau": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "alvaro-gonzalez": {
+   "aereo": 1,
+   "terrestre": 0,
+   "total": 1
+  },
+  "mariano-campero": {
+   "aereo": 57,
+   "terrestre": 0,
+   "total": 57
+  },
+  "lorena-villaverde": {
+   "aereo": 53,
+   "terrestre": 0,
+   "total": 53
+  },
+  "esteban-paulon": {
+   "aereo": 25,
+   "terrestre": 0,
+   "total": 25
+  },
+  "ariel-rauschenberger": {
+   "aereo": 23,
+   "terrestre": 35,
+   "total": 58
+  },
+  "pablo-raul-yedlin": {
+   "aereo": 49,
+   "terrestre": 0,
+   "total": 49
+  },
+  "jose-gomez": {
+   "aereo": 22,
+   "terrestre": 0,
+   "total": 22
+  },
+  "andrea-freites": {
+   "aereo": 41,
+   "terrestre": 1,
+   "total": 42
+  },
+  "julio-moreno-ovalle": {
+   "aereo": 53,
+   "terrestre": 0,
+   "total": 53
+  },
+  "romina-diez": {
+   "aereo": 16,
+   "terrestre": 0,
+   "total": 16
+  },
+  "mercedes-llano": {
+   "aereo": 48,
+   "terrestre": 0,
+   "total": 48
+  },
+  "jorge-chica": {
+   "aereo": 55,
+   "terrestre": 0,
+   "total": 55
+  },
+  "emmanuel-bianchetti": {
+   "aereo": 54,
+   "terrestre": 0,
+   "total": 54
+  },
+  "ana-maria-ianni": {
+   "aereo": 30,
+   "terrestre": 0,
+   "total": 30
+  },
+  "jose-peluc": {
+   "aereo": 44,
+   "terrestre": 0,
+   "total": 44
+  },
+  "lisandro-almiron": {
+   "aereo": 45,
+   "terrestre": 0,
+   "total": 45
+  },
+  "luis-eugenio-basterra": {
+   "aereo": 45,
+   "terrestre": 0,
+   "total": 45
+  },
+  "daniel-vancsik": {
+   "aereo": 40,
+   "terrestre": 0,
+   "total": 40
+  },
+  "facundo-correa-llano": {
+   "aereo": 42,
+   "terrestre": 0,
+   "total": 42
+  },
+  "jorge-neri-araujo-hernandez": {
+   "aereo": 28,
+   "terrestre": 0,
+   "total": 28
+  },
+  "cesar-treffinger": {
+   "aereo": 34,
+   "terrestre": 0,
+   "total": 34
+  },
+  "pablo-todero": {
+   "aereo": 41,
+   "terrestre": 0,
+   "total": 41
+  },
+  "alberto-arrua": {
+   "aereo": 40,
+   "terrestre": 2,
+   "total": 42
+  },
+  "gerardo-huesen": {
+   "aereo": 52,
+   "terrestre": 0,
+   "total": 52
+  },
+  "martin-ardohain": {
+   "aereo": 34,
+   "terrestre": 13,
+   "total": 47
+  },
+  "alejandra-torres": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "gerardo-gustavo-gonzalez": {
+   "aereo": 44,
+   "terrestre": 8,
+   "total": 52
+  },
+  "elia-marina-fernandez": {
+   "aereo": 38,
+   "terrestre": 0,
+   "total": 38
+  },
+  "lourdes-micaela-arrieta": {
+   "aereo": 43,
+   "terrestre": 1,
+   "total": 44
+  },
+  "yamila-ruiz": {
+   "aereo": 43,
+   "terrestre": 0,
+   "total": 43
+  },
+  "nancy-picon-martinez": {
+   "aereo": 51,
+   "terrestre": 0,
+   "total": 51
+  },
+  "guillermo-snopek": {
+   "aereo": 54,
+   "terrestre": 0,
+   "total": 54
+  },
+  "roxana-monzon": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "manuel-quintar": {
+   "aereo": 57,
+   "terrestre": 0,
+   "total": 57
+  },
+  "santiago-pauli": {
+   "aereo": 53,
+   "terrestre": 0,
+   "total": 53
+  },
+  "sergio-eduardo-capozzi": {
+   "aereo": 37,
+   "terrestre": 0,
+   "total": 37
+  },
+  "nicolas-mayoraz": {
+   "aereo": 37,
+   "terrestre": 0,
+   "total": 37
+  },
+  "juliana-santillan-juarez-brahim": {
+   "aereo": 32,
+   "terrestre": 4,
+   "total": 36
+  },
+  "veronica-razzini": {
+   "aereo": 48,
+   "terrestre": 0,
+   "total": 48
+  },
+  "yolanda-vega": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "gabriel-bornoroni": {
+   "aereo": 50,
+   "terrestre": 0,
+   "total": 50
+  },
+  "carlos-garcia": {
+   "aereo": 41,
+   "terrestre": 0,
+   "total": 41
+  },
+  "sebastian-noblega": {
+   "aereo": 39,
+   "terrestre": 0,
+   "total": 39
+  },
+  "pablo-outes": {
+   "aereo": 33,
+   "terrestre": 0,
+   "total": 33
+  },
+  "gustavo-bordet": {
+   "aereo": 21,
+   "terrestre": 5,
+   "total": 26
+  },
+  "luis-albino-picat": {
+   "aereo": 31,
+   "terrestre": 0,
+   "total": 31
+  },
+  "fernanda-avila": {
+   "aereo": 6,
+   "terrestre": 0,
+   "total": 6
+  },
+  "martin-aveiro": {
+   "aereo": 44,
+   "terrestre": 0,
+   "total": 44
+  },
+  "christian-alejandro-zulli": {
+   "aereo": 34,
+   "terrestre": 0,
+   "total": 34
+  },
+  "pablo-ansaloni": {
+   "aereo": 8,
+   "terrestre": 0,
+   "total": 8
+  },
+  "damian-arabia": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "celia-campitelli": {
+   "aereo": 19,
+   "terrestre": 7,
+   "total": 26
+  },
+  "florencia-carignano": {
+   "aereo": 20,
+   "terrestre": 0,
+   "total": 20
+  },
+  "eduardo-falcone": {
+   "aereo": 0,
+   "terrestre": 5,
+   "total": 5
+  },
+  "alida-ferreyra": {
+   "aereo": 12,
+   "terrestre": 3,
+   "total": 15
+  },
+  "silvana-giudici": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "pablo-juliano": {
+   "aereo": 8,
+   "terrestre": 0,
+   "total": 8
+  },
+  "gladys-medina": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "martin-alexis-menem": {
+   "aereo": 12,
+   "terrestre": 0,
+   "total": 12
+  },
+  "guillermo-montenegro": {
+   "aereo": 9,
+   "terrestre": 0,
+   "total": 9
+  },
+  "lorena-pokoik": {
+   "aereo": 2,
+   "terrestre": 3,
+   "total": 5
+  },
+  "maria-celeste-ponce": {
+   "aereo": 7,
+   "terrestre": 0,
+   "total": 7
+  },
+  "santiago-santurio": {
+   "aereo": 6,
+   "terrestre": 0,
+   "total": 6
+  },
+  "sabrina-selva": {
+   "aereo": 12,
+   "terrestre": 0,
+   "total": 12
+  },
+  "julia-strada": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "victoria-tolosa-paz": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "martin-yeza": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "oscar-zago": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "lilia-lemoine": {
+   "aereo": 14,
+   "terrestre": 6,
+   "total": 20
+  },
+  "nicolas-emma": {
+   "aereo": 1,
+   "terrestre": 0,
+   "total": 1
+  },
+  "jose-federico-tournier": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "luana-volnovich": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "carlos-daniel-castagneto": {
+   "aereo": 8,
+   "terrestre": 0,
+   "total": 8
+  },
+  "andres-ariel-laumann": {
+   "aereo": 41,
+   "terrestre": 1,
+   "total": 42
+  },
+  "carlos-alberto-almena": {
+   "aereo": 34,
+   "terrestre": 13,
+   "total": 47
+  },
+  "andrea-fernanda-vera": {
+   "aereo": 10,
+   "terrestre": 2,
+   "total": 12
+  },
+  "eliana-bruno": {
+   "aereo": 36,
+   "terrestre": 1,
+   "total": 37
+  },
+  "moira-lanesan-sancho": {
+   "aereo": 38,
+   "terrestre": 0,
+   "total": 38
+  },
+  "valentina-ravera": {
+   "aereo": 32,
+   "terrestre": 19,
+   "total": 51
+  },
+  "maria-graciela-de-la-rosa": {
+   "aereo": 37,
+   "terrestre": 0,
+   "total": 37
+  },
+  "diogenes-ignacio-gonzalez": {
+   "aereo": 43,
+   "terrestre": 0,
+   "total": 43
+  },
+  "carlos-raul-zapata": {
+   "aereo": 55,
+   "terrestre": 0,
+   "total": 55
+  },
+  "miguel-rodriguez": {
+   "aereo": 53,
+   "terrestre": 0,
+   "total": 53
+  },
+  "adriana-cristina-serquis": {
+   "aereo": 53,
+   "terrestre": 3,
+   "total": 56
+  },
+  "barbara-andreussi": {
+   "aereo": 48,
+   "terrestre": 0,
+   "total": 48
+  },
+  "monica-becerra": {
+   "aereo": 35,
+   "terrestre": 4,
+   "total": 39
+  },
+  "maria-virginia-gallardo": {
+   "aereo": 33,
+   "terrestre": 2,
+   "total": 35
+  },
+  "beltran-benedit": {
+   "aereo": 37,
+   "terrestre": 0,
+   "total": 37
+  },
+  "adrian-brizuela": {
+   "aereo": 47,
+   "terrestre": 5,
+   "total": 52
+  },
+  "luis-petri": {
+   "aereo": 43,
+   "terrestre": 0,
+   "total": 43
+  },
+  "fernando-monguillot": {
+   "aereo": 27,
+   "terrestre": 0,
+   "total": 27
+  },
+  "jose-luis-garrido": {
+   "aereo": 54,
+   "terrestre": 0,
+   "total": 54
+  },
+  "abel-chiconi": {
+   "aereo": 41,
+   "terrestre": 3,
+   "total": 44
+  },
+  "atilio-basualdo": {
+   "aereo": 33,
+   "terrestre": 0,
+   "total": 33
+  },
+  "marcelo-mango": {
+   "aereo": 45,
+   "terrestre": 3,
+   "total": 48
+  },
+  "javier-noguera": {
+   "aereo": 35,
+   "terrestre": 0,
+   "total": 35
+  },
+  "cecilia-lopez-pasquali": {
+   "aereo": 33,
+   "terrestre": 0,
+   "total": 33
+  },
+  "alfredo-gonzales": {
+   "aereo": 41,
+   "terrestre": 0,
+   "total": 41
+  },
+  "soledad-mondaca": {
+   "aereo": 45,
+   "terrestre": 0,
+   "total": 45
+  },
+  "jairo-guzman": {
+   "aereo": 44,
+   "terrestre": 2,
+   "total": 46
+  },
+  "maria-gabriela-flores": {
+   "aereo": 49,
+   "terrestre": 1,
+   "total": 50
+  },
+  "juan-pablo-luque": {
+   "aereo": 33,
+   "terrestre": 0,
+   "total": 33
+  },
+  "juan-pablo-montenegro": {
+   "aereo": 26,
+   "terrestre": 13,
+   "total": 39
+  },
+  "cristian-andino": {
+   "aereo": 41,
+   "terrestre": 3,
+   "total": 44
+  },
+  "soledad-molinuevo": {
+   "aereo": 47,
+   "terrestre": 0,
+   "total": 47
+  },
+  "julieta-metral-asensio": {
+   "aereo": 48,
+   "terrestre": 0,
+   "total": 48
+  },
+  "paulo-agustin-tita": {
+   "aereo": 27,
+   "terrestre": 0,
+   "total": 27
+  },
+  "carolina-basualdo": {
+   "aereo": 39,
+   "terrestre": 0,
+   "total": 39
+  },
+  "juan-carlos-molina": {
+   "aereo": 52,
+   "terrestre": 0,
+   "total": 52
+  },
+  "carlos-gustavo-jaime-quiroga": {
+   "aereo": 35,
+   "terrestre": 0,
+   "total": 35
+  },
+  "bernardo-biella": {
+   "aereo": 20,
+   "terrestre": 0,
+   "total": 20
+  },
+  "jorge-mukdise": {
+   "aereo": 38,
+   "terrestre": 0,
+   "total": 38
+  },
+  "gaston-riesco": {
+   "aereo": 43,
+   "terrestre": 0,
+   "total": 43
+  },
+  "karina-maureira": {
+   "aereo": 32,
+   "terrestre": 0,
+   "total": 32
+  },
+  "rosario-goitia": {
+   "aereo": 44,
+   "terrestre": 0,
+   "total": 44
+  },
+  "claudia-maria-palladino": {
+   "aereo": 30,
+   "terrestre": 0,
+   "total": 30
+  },
+  "marcelo-barbur": {
+   "aereo": 38,
+   "terrestre": 0,
+   "total": 38
+  },
+  "juan-fernando-brugge": {
+   "aereo": 52,
+   "terrestre": 0,
+   "total": 52
+  },
+  "sergio-dolce": {
+   "aereo": 38,
+   "terrestre": 0,
+   "total": 38
+  },
+  "dario-schneider": {
+   "aereo": 36,
+   "terrestre": 1,
+   "total": 37
+  },
+  "pablo-farias": {
+   "aereo": 34,
+   "terrestre": 0,
+   "total": 34
+  },
+  "federico-agustin-pelli": {
+   "aereo": 38,
+   "terrestre": 2,
+   "total": 40
+  },
+  "gino-visconti": {
+   "aereo": 50,
+   "terrestre": 1,
+   "total": 51
+  },
+  "emir-felix": {
+   "aereo": 44,
+   "terrestre": 0,
+   "total": 44
+  },
+  "maira-frias": {
+   "aereo": 42,
+   "terrestre": 0,
+   "total": 42
+  },
+  "claudio-alvarez": {
+   "aereo": 47,
+   "terrestre": 0,
+   "total": 47
+  },
+  "gonzalo-roca": {
+   "aereo": 50,
+   "terrestre": 0,
+   "total": 50
+  },
+  "maria-ines-zigaran": {
+   "aereo": 39,
+   "terrestre": 0,
+   "total": 39
+  },
+  "maura-gruber": {
+   "aereo": 49,
+   "terrestre": 0,
+   "total": 49
+  },
+  "diego-hartfield": {
+   "aereo": 41,
+   "terrestre": 0,
+   "total": 41
+  },
+  "belen-avico": {
+   "aereo": 47,
+   "terrestre": 11,
+   "total": 58
+  },
+  "alicia-fregonese": {
+   "aereo": 3,
+   "terrestre": 0,
+   "total": 3
+  },
+  "enrique-lluch": {
+   "aereo": 47,
+   "terrestre": 0,
+   "total": 47
+  },
+  "julieta-marisol-campo": {
+   "aereo": 43,
+   "terrestre": 0,
+   "total": 43
+  },
+  "blanca-ines-osuna": {
+   "aereo": 36,
+   "terrestre": 0,
+   "total": 36
+  },
+  "jorge-fernandez": {
+   "aereo": 37,
+   "terrestre": 0,
+   "total": 37
+  },
+  "raul-hadad": {
+   "aereo": 38,
+   "terrestre": 1,
+   "total": 39
+  },
+  "marcos-patino-brizuela": {
+   "aereo": 48,
+   "terrestre": 0,
+   "total": 48
+  },
+  "maria-cecilia-ibanez": {
+   "aereo": 51,
+   "terrestre": 4,
+   "total": 55
+  },
+  "guillermo-cesar-aguero": {
+   "aereo": 40,
+   "terrestre": 0,
+   "total": 40
+  },
+  "jimena-lopez": {
+   "aereo": 5,
+   "terrestre": 32,
+   "total": 37
+  },
+  "abelardo-ferran": {
+   "aereo": 0,
+   "terrestre": 35,
+   "total": 35
+  },
+  "agustin-pellegrini": {
+   "aereo": 9,
+   "terrestre": 0,
+   "total": 9
+  },
+  "jose-glinski": {
+   "aereo": 34,
+   "terrestre": 0,
+   "total": 34
+  },
+  "matias-molle": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "alejandrina-borgatta": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "laura-soldano": {
+   "aereo": 26,
+   "terrestre": 1,
+   "total": 27
+  },
+  "martin-matzkin": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "caren-tepp": {
+   "aereo": 24,
+   "terrestre": 0,
+   "total": 24
+  },
+  "gabriela-luciana-munoz": {
+   "aereo": 25,
+   "terrestre": 0,
+   "total": 25
+  },
+  "juan-grabois": {
+   "aereo": 6,
+   "terrestre": 0,
+   "total": 6
+  },
+  "maria-luisa-gonzalez-estevarena": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "maria-lorena-petrovich": {
+   "aereo": 7,
+   "terrestre": 0,
+   "total": 7
+  },
+  "yamile-tomassoni": {
+   "aereo": 16,
+   "terrestre": 9,
+   "total": 25
+  },
+  "antonela-giampieri": {
+   "aereo": 5,
+   "terrestre": 0,
+   "total": 5
+  },
+  "javier-sanchez-wrba": {
+   "aereo": 2,
+   "terrestre": 1,
+   "total": 3
+  },
+  "ruben-dario-torres": {
+   "aereo": 7,
+   "terrestre": 2,
+   "total": 9
+  },
+  "nicolas-alfredo-trotta": {
+   "aereo": 8,
+   "terrestre": 0,
+   "total": 8
+  },
+  "juan-schiaretti": {
+   "aereo": 11,
+   "terrestre": 0,
+   "total": 11
+  },
+  "fernando-de-andreis": {
+   "aereo": 14,
+   "terrestre": 0,
+   "total": 14
+  },
+  "sebastian-pareja": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "jose-nunez": {
+   "aereo": 15,
+   "terrestre": 0,
+   "total": 15
+  },
+  "alejandro-carrancio": {
+   "aereo": 27,
+   "terrestre": 0,
+   "total": 27
+  },
+  "lucia-campora": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "gladys-humenuk": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "miriam-niveyro": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "marianela-marclay": {
+   "aereo": 2,
+   "terrestre": 3,
+   "total": 5
+  },
+  "jorge-taiana": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "martin-lousteau": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "gisela-scaglia": {
+   "aereo": 10,
+   "terrestre": 0,
+   "total": 10
+  },
+  "johanna-sabrina-longo": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "nicolas-massot": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "hugo-antonio-moyano": {
+   "aereo": 6,
+   "terrestre": 0,
+   "total": 6
+  },
+  "maria-teresa-garcia": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "fernanda-mino": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "agustin-oscar-rossi": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "horacio-pietragalla-corti": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  },
+  "nicolas-del-cano": {
+   "aereo": 4,
+   "terrestre": 0,
+   "total": 4
+  },
+  "patricia-holzman": {
+   "aereo": 2,
+   "terrestre": 0,
+   "total": 2
+  }
+ },
+ "por_diputado": {
+  "anibal-tortoriello": {
+   "2023_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2023_s2": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2024_s1": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2024_s2": {
+    "aereo": 18,
+    "total": 18
+   },
+   "2025_s1": {
+    "aereo": 18,
+    "total": 18
+   },
+   "2025_s2": {
+    "aereo": 22,
+    "total": 22
+   },
+   "2026_s1": {
+    "aereo": 27,
+    "total": 27
+   }
+  },
+  "sergio-guillermo-casas": {
+   "2023_s1": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2023_s2": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2024_s1": {
+    "aereo": 32,
+    "total": 32
+   },
+   "2024_s2": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s2": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2026_s1": {
+    "aereo": 23,
+    "total": 23
+   }
+  },
+  "laura-rodriguez-machado": {
+   "2023_s1": {
+    "aereo": 37,
+    "terrestre": 2,
+    "total": 39
+   },
+   "2023_s2": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2024_s1": {
+    "aereo": 42,
+    "terrestre": 3,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2026_s1": {
+    "aereo": 38,
+    "total": 38
+   }
+  },
+  "jorge-rizzotti": {
+   "2023_s1": {
+    "aereo": 25,
+    "terrestre": 1,
+    "total": 26
+   },
+   "2023_s2": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2024_s1": {
+    "aereo": 42,
+    "terrestre": 2,
+    "total": 44
+   },
+   "2024_s2": {
+    "aereo": 34,
+    "terrestre": 1,
+    "total": 35
+   },
+   "2025_s1": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2025_s2": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "varinia-lis-marin": {
+   "2023_s1": {
+    "terrestre": 13,
+    "aereo": 7,
+    "total": 20
+   },
+   "2023_s2": {
+    "aereo": 24,
+    "terrestre": 6,
+    "total": 30
+   },
+   "2024_s1": {
+    "aereo": 25,
+    "terrestre": 20,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 25,
+    "terrestre": 18,
+    "total": 43
+   },
+   "2025_s1": {
+    "terrestre": 18,
+    "aereo": 27,
+    "total": 45
+   },
+   "2025_s2": {
+    "aereo": 14,
+    "terrestre": 13,
+    "total": 27
+   },
+   "2026_s1": {
+    "aereo": 18,
+    "terrestre": 15,
+    "total": 33
+   }
+  },
+  "nancy-sand": {
+   "2023_s1": {
+    "aereo": 24,
+    "total": 24
+   },
+   "2023_s2": {
+    "aereo": 21,
+    "terrestre": 1,
+    "total": 22
+   },
+   "2024_s1": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2024_s2": {
+    "aereo": 31,
+    "total": 31
+   },
+   "2025_s1": {
+    "aereo": 32,
+    "terrestre": 1,
+    "total": 33
+   },
+   "2025_s2": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2026_s1": {
+    "aereo": 28,
+    "total": 28
+   }
+  },
+  "hilda-aguirre": {
+   "2023_s1": {
+    "aereo": 6,
+    "terrestre": 9,
+    "total": 15
+   },
+   "2023_s2": {
+    "aereo": 7,
+    "terrestre": 12,
+    "total": 19
+   },
+   "2024_s1": {
+    "aereo": 15,
+    "terrestre": 9,
+    "total": 24
+   },
+   "2024_s2": {
+    "terrestre": 9,
+    "aereo": 21,
+    "total": 30
+   },
+   "2025_s1": {
+    "aereo": 17,
+    "terrestre": 6,
+    "total": 23
+   },
+   "2025_s2": {
+    "aereo": 20,
+    "terrestre": 2,
+    "total": 22
+   },
+   "2026_s1": {
+    "aereo": 16,
+    "terrestre": 5,
+    "total": 21
+   }
+  },
+  "estela-mary-neder": {
+   "2023_s1": {
+    "aereo": 15,
+    "total": 15
+   },
+   "2023_s2": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2024_s1": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2024_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s1": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2025_s2": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2026_s1": {
+    "aereo": 30,
+    "terrestre": 2,
+    "total": 32
+   }
+  },
+  "maria-graciela-parola": {
+   "2023_s1": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2023_s2": {
+    "aereo": 22,
+    "total": 22
+   },
+   "2024_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 39,
+    "total": 39
+   },
+   "2025_s1": {
+    "aereo": 20,
+    "terrestre": 4,
+    "total": 24
+   },
+   "2025_s2": {
+    "aereo": 22,
+    "terrestre": 1,
+    "total": 23
+   },
+   "2026_s1": {
+    "aereo": 19,
+    "terrestre": 4,
+    "total": 23
+   }
+  },
+  "gabriela-pedrali": {
+   "2023_s1": {
+    "aereo": 18,
+    "total": 18
+   },
+   "2023_s2": {
+    "aereo": 27,
+    "total": 27
+   },
+   "2024_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2024_s2": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2025_s1": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2025_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2026_s1": {
+    "aereo": 35,
+    "total": 35
+   }
+  },
+  "gerardo-cipolini": {
+   "2023_s1": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2023_s2": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2024_s1": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2024_s2": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2025_s1": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2025_s2": {
+    "aereo": 20,
+    "total": 20
+   },
+   "2026_s1": {
+    "aereo": 22,
+    "total": 22
+   }
+  },
+  "pamela-fernanda-verasay": {
+   "2023_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2023_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2024_s1": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2024_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 41,
+    "total": 41
+   },
+   "2025_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "carlos-mario-gutierrez": {
+   "2023_s1": {
+    "aereo": 21,
+    "terrestre": 3,
+    "total": 24
+   },
+   "2023_s2": {
+    "terrestre": 7,
+    "aereo": 19,
+    "total": 26
+   },
+   "2024_s1": {
+    "aereo": 35,
+    "terrestre": 13,
+    "total": 48
+   },
+   "2024_s2": {
+    "aereo": 42,
+    "terrestre": 1,
+    "total": 43
+   },
+   "2025_s1": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2025_s2": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2026_s1": {
+    "aereo": 28,
+    "total": 28
+   }
+  },
+  "lisandro-nieri": {
+   "2023_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2023_s2": {
+    "aereo": 32,
+    "total": 32
+   },
+   "2024_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 50,
+    "total": 50
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2026_s1": {
+    "aereo": 38,
+    "total": 38
+   }
+  },
+  "aldo-leiva": {
+   "2023_s1": {
+    "aereo": 17,
+    "total": 17
+   },
+   "2023_s2": {
+    "aereo": 21,
+    "total": 21
+   },
+   "2024_s1": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2024_s2": {
+    "aereo": 39,
+    "total": 39
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s2": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2026_s1": {
+    "aereo": 49,
+    "total": 49
+   }
+  },
+  "sabrina-ajmechet": {
+   "2023_s1": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2023_s2": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2024_s1": {
+    "aereo": 9,
+    "total": 9
+   },
+   "2024_s2": {
+    "aereo": 9,
+    "total": 9
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "juan-marino": {
+   "2023_s1": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "romina-del-pla": {
+   "2023_s1": {
+    "aereo": 22,
+    "total": 22
+   },
+   "2023_s2": {
+    "aereo": 19,
+    "terrestre": 1,
+    "total": 20
+   },
+   "2024_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "terrestre": 2,
+    "total": 2
+   }
+  },
+  "myriam-teresa-bregman": {
+   "2023_s1": {
+    "aereo": 18,
+    "total": 18
+   },
+   "2023_s2": {
+    "aereo": 9,
+    "total": 9
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "alvaro-martinez": {
+   "2023_s1": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2023_s2": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2024_s1": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2024_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2025_s1": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s2": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2026_s1": {
+    "aereo": 40,
+    "total": 40
+   }
+  },
+  "ricardo-daives": {
+   "2023_s1": {
+    "aereo": 27,
+    "terrestre": 2,
+    "total": 29
+   },
+   "2023_s2": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2024_s1": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2024_s2": {
+    "aereo": 23,
+    "terrestre": 2,
+    "total": 25
+   },
+   "2025_s1": {
+    "aereo": 17,
+    "total": 17
+   },
+   "2025_s2": {
+    "aereo": 15,
+    "total": 15
+   },
+   "2026_s1": {
+    "aereo": 13,
+    "total": 13
+   }
+  },
+  "natalia-de-la-sota": {
+   "2023_s1": {
+    "aereo": 20,
+    "total": 20
+   },
+   "2023_s2": {
+    "aereo": 30,
+    "terrestre": 1,
+    "total": 31
+   },
+   "2024_s1": {
+    "aereo": 31,
+    "total": 31
+   },
+   "2024_s2": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s1": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2025_s2": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "hugo-yasky": {
+   "2023_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s2": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2025_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s2": {
+    "aereo": 9,
+    "total": 9
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "maximiliano-ferraro": {
+   "2023_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 5,
+    "total": 5
+   }
+  },
+  "gabriela-estevez": {
+   "2023_s1": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2023_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2024_s1": {
+    "aereo": 50,
+    "total": 50
+   },
+   "2024_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 53,
+    "total": 53
+   },
+   "2025_s2": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "karina-banfi": {
+   "2023_s1": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2023_s2": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2024_s1": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2025_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2025_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2026_s1": {
+    "aereo": 13,
+    "total": 13
+   }
+  },
+  "agustina-lucrecia-propato": {
+   "2023_s1": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2023_s2": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2024_s1": {
+    "aereo": 21,
+    "terrestre": 1,
+    "total": 22
+   },
+   "2024_s2": {
+    "aereo": 24,
+    "total": 24
+   },
+   "2025_s1": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2025_s2": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2026_s1": {
+    "aereo": 7,
+    "total": 7
+   }
+  },
+  "eduardo-felix-valdes": {
+   "2023_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2023_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "vanesa-raquel-siley": {
+   "2023_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "ignacio-antonio-garcia-aresca": {
+   "2023_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2023_s2": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2024_s1": {
+    "aereo": 31,
+    "total": 31
+   },
+   "2024_s2": {
+    "aereo": 22,
+    "total": 22
+   },
+   "2025_s1": {
+    "aereo": 21,
+    "total": 21
+   },
+   "2025_s2": {
+    "aereo": 17,
+    "total": 17
+   },
+   "2026_s1": {
+    "aereo": 13,
+    "total": 13
+   }
+  },
+  "itai-hagman": {
+   "2023_s1": {
+    "terrestre": 1,
+    "aereo": 2,
+    "total": 3
+   },
+   "2024_s1": {
+    "terrestre": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 3,
+    "terrestre": 1,
+    "total": 4
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "terrestre": 3,
+    "total": 7
+   },
+   "2026_s1": {
+    "aereo": 3,
+    "terrestre": 6,
+    "total": 9
+   }
+  },
+  "natalia-zaracho": {
+   "2023_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "monica-frade": {
+   "2023_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "german-pedro-martinez": {
+   "2023_s1": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2024_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "cecilia-moreau": {
+   "2023_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "alvaro-gonzalez": {
+   "2023_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2023_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s1": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2025_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 1,
+    "total": 1
+   }
+  },
+  "mariano-campero": {
+   "2023_s2": {
+    "aereo": 7,
+    "terrestre": 1,
+    "total": 8
+   },
+   "2024_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 46,
+    "terrestre": 1,
+    "total": 47
+   },
+   "2025_s1": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2025_s2": {
+    "aereo": 50,
+    "total": 50
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "lorena-villaverde": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 26,
+    "total": 26
+   },
+   "2024_s2": {
+    "aereo": 42,
+    "total": 42
+   },
+   "2025_s1": {
+    "aereo": 49,
+    "total": 49
+   },
+   "2025_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2026_s1": {
+    "aereo": 45,
+    "total": 45
+   }
+  },
+  "rocio-bonacci": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 21,
+    "total": 21
+   },
+   "2024_s2": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2025_s1": {
+    "aereo": 14,
+    "terrestre": 2,
+    "total": 16
+   },
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "esteban-paulon": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 25,
+    "terrestre": 3,
+    "total": 28
+   },
+   "2024_s2": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2025_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2025_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2026_s1": {
+    "aereo": 24,
+    "total": 24
+   }
+  },
+  "ariel-rauschenberger": {
+   "2023_s2": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2024_s1": {
+    "terrestre": 17,
+    "aereo": 26,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 33,
+    "terrestre": 15,
+    "total": 48
+   },
+   "2025_s1": {
+    "aereo": 35,
+    "terrestre": 14,
+    "total": 49
+   },
+   "2025_s2": {
+    "aereo": 30,
+    "terrestre": 21,
+    "total": 51
+   },
+   "2026_s1": {
+    "terrestre": 32,
+    "aereo": 18,
+    "total": 50
+   }
+  },
+  "pablo-raul-yedlin": {
+   "2023_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2024_s1": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2024_s2": {
+    "aereo": 49,
+    "total": 49
+   },
+   "2025_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2025_s2": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2026_s1": {
+    "aereo": 43,
+    "total": 43
+   }
+  },
+  "jose-gomez": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2024_s2": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2025_s1": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2025_s2": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2026_s1": {
+    "aereo": 20,
+    "total": 20
+   }
+  },
+  "andrea-freites": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2024_s2": {
+    "aereo": 41,
+    "total": 41
+   },
+   "2025_s1": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s2": {
+    "aereo": 37,
+    "terrestre": 1,
+    "total": 38
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "terrestre": 1,
+    "total": 37
+   }
+  },
+  "julio-moreno-ovalle": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2024_s2": {
+    "aereo": 42,
+    "terrestre": 1,
+    "total": 43
+   },
+   "2025_s1": {
+    "aereo": 42,
+    "total": 42
+   },
+   "2025_s2": {
+    "aereo": 42,
+    "terrestre": 1,
+    "total": 43
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "romina-diez": {
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 32,
+    "total": 32
+   },
+   "2024_s2": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2025_s1": {
+    "aereo": 17,
+    "total": 17
+   },
+   "2025_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2026_s1": {
+    "aereo": 15,
+    "total": 15
+   }
+  },
+  "mercedes-llano": {
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 47,
+    "terrestre": 3,
+    "total": 50
+   },
+   "2024_s2": {
+    "aereo": 45,
+    "terrestre": 1,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 35,
+    "terrestre": 1,
+    "total": 36
+   },
+   "2025_s2": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2026_s1": {
+    "aereo": 43,
+    "total": 43
+   }
+  },
+  "jorge-chica": {
+   "2023_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2024_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2025_s1": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2025_s2": {
+    "aereo": 52,
+    "total": 52
+   },
+   "2026_s1": {
+    "aereo": 52,
+    "total": 52
+   }
+  },
+  "emmanuel-bianchetti": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 43,
+    "terrestre": 4,
+    "total": 47
+   },
+   "2024_s2": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "ana-maria-ianni": {
+   "2023_s2": {
+    "terrestre": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 40,
+    "terrestre": 2,
+    "total": 42
+   },
+   "2024_s2": {
+    "aereo": 39,
+    "total": 39
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "terrestre": 3,
+    "total": 37
+   },
+   "2025_s2": {
+    "aereo": 31,
+    "terrestre": 1,
+    "total": 32
+   },
+   "2026_s1": {
+    "aereo": 27,
+    "total": 27
+   }
+  },
+  "jose-peluc": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 42,
+    "total": 42
+   },
+   "2025_s1": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2025_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "lisandro-almiron": {
+   "2023_s2": {
+    "aereo": 5,
+    "terrestre": 1,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 44,
+    "terrestre": 5,
+    "total": 49
+   },
+   "2024_s2": {
+    "aereo": 50,
+    "total": 50
+   },
+   "2025_s1": {
+    "aereo": 35,
+    "terrestre": 1,
+    "total": 36
+   },
+   "2025_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "luis-eugenio-basterra": {
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2025_s1": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2025_s2": {
+    "aereo": 31,
+    "total": 31
+   },
+   "2026_s1": {
+    "aereo": 40,
+    "total": 40
+   }
+  },
+  "daniel-vancsik": {
+   "2023_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2024_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2025_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "facundo-correa-llano": {
+   "2023_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s1": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2024_s2": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2025_s1": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2025_s2": {
+    "aereo": 40,
+    "total": 40
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "jorge-neri-araujo-hernandez": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 28,
+    "terrestre": 3,
+    "total": 31
+   },
+   "2024_s2": {
+    "aereo": 29,
+    "terrestre": 2,
+    "total": 31
+   },
+   "2025_s1": {
+    "aereo": 27,
+    "total": 27
+   },
+   "2025_s2": {
+    "aereo": 32,
+    "total": 32
+   },
+   "2026_s1": {
+    "aereo": 23,
+    "total": 23
+   }
+  },
+  "cesar-treffinger": {
+   "2023_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2024_s1": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2024_s2": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2025_s1": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2025_s2": {
+    "aereo": 39,
+    "total": 39
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "pablo-todero": {
+   "2023_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s1": {
+    "aereo": 41,
+    "total": 41
+   },
+   "2024_s2": {
+    "aereo": 40,
+    "total": 40
+   },
+   "2025_s1": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2025_s2": {
+    "aereo": 39,
+    "terrestre": 1,
+    "total": 40
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "alberto-arrua": {
+   "2023_s2": {
+    "aereo": 5,
+    "terrestre": 1,
+    "total": 6
+   },
+   "2024_s1": {
+    "aereo": 36,
+    "terrestre": 2,
+    "total": 38
+   },
+   "2024_s2": {
+    "aereo": 51,
+    "terrestre": 2,
+    "total": 53
+   },
+   "2025_s1": {
+    "aereo": 18,
+    "total": 18
+   },
+   "2025_s2": {
+    "aereo": 31,
+    "terrestre": 3,
+    "total": 34
+   },
+   "2026_s1": {
+    "aereo": 34,
+    "terrestre": 1,
+    "total": 35
+   }
+  },
+  "gerardo-huesen": {
+   "2023_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s1": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2024_s2": {
+    "aereo": 48,
+    "total": 48
+   },
+   "2025_s1": {
+    "aereo": 42,
+    "total": 42
+   },
+   "2025_s2": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "martin-ardohain": {
+   "2023_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s1": {
+    "aereo": 32,
+    "terrestre": 13,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 43,
+    "terrestre": 8,
+    "total": 51
+   },
+   "2025_s1": {
+    "aereo": 31,
+    "terrestre": 10,
+    "total": 41
+   },
+   "2025_s2": {
+    "aereo": 29,
+    "terrestre": 23,
+    "total": 52
+   },
+   "2026_s1": {
+    "terrestre": 11,
+    "aereo": 29,
+    "total": 40
+   }
+  },
+  "alejandra-torres": {
+   "2023_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2024_s1": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2024_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2025_s1": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s2": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "gerardo-gustavo-gonzalez": {
+   "2023_s2": {
+    "aereo": 2,
+    "terrestre": 1,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 41,
+    "terrestre": 3,
+    "total": 44
+   },
+   "2024_s2": {
+    "terrestre": 5,
+    "aereo": 14,
+    "total": 19
+   },
+   "2025_s1": {
+    "terrestre": 25,
+    "aereo": 1,
+    "total": 26
+   },
+   "2025_s2": {
+    "aereo": 9,
+    "terrestre": 5,
+    "total": 14
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "terrestre": 8,
+    "total": 50
+   }
+  },
+  "elia-marina-fernandez": {
+   "2023_s2": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2024_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2024_s2": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2025_s1": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2025_s2": {
+    "aereo": 26,
+    "total": 26
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "lourdes-micaela-arrieta": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2024_s2": {
+    "aereo": 45,
+    "terrestre": 1,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2025_s2": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "terrestre": 1,
+    "total": 37
+   }
+  },
+  "yamila-ruiz": {
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2025_s1": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s2": {
+    "aereo": 40,
+    "total": 40
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "nancy-picon-martinez": {
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 47,
+    "terrestre": 3,
+    "total": 50
+   },
+   "2024_s2": {
+    "aereo": 45,
+    "terrestre": 3,
+    "total": 48
+   },
+   "2025_s1": {
+    "aereo": 42,
+    "terrestre": 2,
+    "total": 44
+   },
+   "2025_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2026_s1": {
+    "aereo": 48,
+    "total": 48
+   }
+  },
+  "guillermo-snopek": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s1": {
+    "aereo": 39,
+    "terrestre": 1,
+    "total": 40
+   },
+   "2025_s2": {
+    "aereo": 42,
+    "total": 42
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "roxana-monzon": {
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 22,
+    "total": 22
+   },
+   "2024_s2": {
+    "aereo": 32,
+    "total": 32
+   },
+   "2025_s1": {
+    "aereo": 15,
+    "total": 15
+   },
+   "2025_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "manuel-quintar": {
+   "2023_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2024_s2": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2025_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s2": {
+    "aereo": 49,
+    "total": 49
+   },
+   "2026_s1": {
+    "aereo": 51,
+    "total": 51
+   }
+  },
+  "santiago-pauli": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2024_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s2": {
+    "aereo": 60,
+    "total": 60
+   },
+   "2026_s1": {
+    "aereo": 45,
+    "total": 45
+   }
+  },
+  "sergio-eduardo-capozzi": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 41,
+    "terrestre": 2,
+    "total": 43
+   },
+   "2024_s2": {
+    "aereo": 41,
+    "total": 41
+   },
+   "2025_s1": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2025_s2": {
+    "aereo": 35,
+    "terrestre": 1,
+    "total": 36
+   },
+   "2026_s1": {
+    "aereo": 31,
+    "total": 31
+   }
+  },
+  "nicolas-mayoraz": {
+   "2023_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2024_s2": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2025_s1": {
+    "aereo": 29,
+    "terrestre": 1,
+    "total": 30
+   },
+   "2025_s2": {
+    "aereo": 9,
+    "total": 9
+   },
+   "2026_s1": {
+    "aereo": 37,
+    "total": 37
+   }
+  },
+  "juliana-santillan-juarez-brahim": {
+   "2023_s2": {
+    "terrestre": 2,
+    "aereo": 2,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 40,
+    "terrestre": 16,
+    "total": 56
+   },
+   "2024_s2": {
+    "aereo": 35,
+    "terrestre": 4,
+    "total": 39
+   },
+   "2025_s1": {
+    "terrestre": 9,
+    "aereo": 36,
+    "total": 45
+   },
+   "2025_s2": {
+    "aereo": 33,
+    "terrestre": 3,
+    "total": 36
+   },
+   "2026_s1": {
+    "terrestre": 4,
+    "aereo": 26,
+    "total": 30
+   }
+  },
+  "veronica-razzini": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 36,
+    "total": 36
+   },
+   "2024_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s1": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2025_s2": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "yolanda-vega": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 40,
+    "total": 40
+   },
+   "2024_s2": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2025_s1": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2026_s1": {
+    "aereo": 34,
+    "total": 34
+   }
+  },
+  "gabriel-bornoroni": {
+   "2023_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2024_s1": {
+    "aereo": 54,
+    "total": 54
+   },
+   "2024_s2": {
+    "aereo": 49,
+    "terrestre": 1,
+    "total": 50
+   },
+   "2025_s1": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2025_s2": {
+    "aereo": 53,
+    "total": 53
+   },
+   "2026_s1": {
+    "aereo": 45,
+    "total": 45
+   }
+  },
+  "carlos-garcia": {
+   "2023_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2024_s1": {
+    "aereo": 31,
+    "terrestre": 2,
+    "total": 33
+   },
+   "2024_s2": {
+    "aereo": 41,
+    "terrestre": 1,
+    "total": 42
+   },
+   "2025_s1": {
+    "aereo": 44,
+    "total": 44
+   },
+   "2025_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "sebastian-noblega": {
+   "2023_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2024_s2": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s1": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2025_s2": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "pablo-outes": {
+   "2023_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2024_s1": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2024_s2": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2025_s1": {
+    "aereo": 27,
+    "total": 27
+   },
+   "2025_s2": {
+    "aereo": 23,
+    "total": 23
+   },
+   "2026_s1": {
+    "aereo": 27,
+    "total": 27
+   }
+  },
+  "gustavo-bordet": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 30,
+    "terrestre": 1,
+    "total": 31
+   },
+   "2024_s2": {
+    "aereo": 18,
+    "terrestre": 3,
+    "total": 21
+   },
+   "2025_s1": {
+    "aereo": 12,
+    "terrestre": 12,
+    "total": 24
+   },
+   "2025_s2": {
+    "terrestre": 4,
+    "aereo": 8,
+    "total": 12
+   },
+   "2026_s1": {
+    "aereo": 21,
+    "terrestre": 3,
+    "total": 24
+   }
+  },
+  "luis-albino-picat": {
+   "2023_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2024_s1": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2024_s2": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2025_s1": {
+    "aereo": 29,
+    "total": 29
+   },
+   "2025_s2": {
+    "aereo": 37,
+    "total": 37
+   },
+   "2026_s1": {
+    "aereo": 23,
+    "total": 23
+   }
+  },
+  "fernanda-avila": {
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2024_s2": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2025_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s2": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "martin-aveiro": {
+   "2023_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 46,
+    "total": 46
+   },
+   "2024_s2": {
+    "aereo": 41,
+    "total": 41
+   },
+   "2025_s1": {
+    "aereo": 45,
+    "total": 45
+   },
+   "2025_s2": {
+    "aereo": 43,
+    "total": 43
+   },
+   "2026_s1": {
+    "aereo": 41,
+    "total": 41
+   }
+  },
+  "christian-alejandro-zulli": {
+   "2023_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s1": {
+    "aereo": 38,
+    "total": 38
+   },
+   "2024_s2": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2025_s1": {
+    "aereo": 35,
+    "total": 35
+   },
+   "2025_s2": {
+    "aereo": 22,
+    "terrestre": 1,
+    "total": 23
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "paula-andrea-penacca": {
+   "2023_s2": {
+    "aereo": 3,
+    "terrestre": 1,
+    "total": 4
+   },
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s1": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2025_s2": {
+    "terrestre": 3,
+    "aereo": 1,
+    "total": 4
+   }
+  },
+  "pablo-ansaloni": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 8,
+    "total": 8
+   }
+  },
+  "damian-arabia": {
+   "2024_s1": {
+    "aereo": 15,
+    "total": 15
+   },
+   "2024_s2": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2025_s1": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2025_s2": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "celia-campitelli": {
+   "2024_s1": {
+    "aereo": 24,
+    "terrestre": 6,
+    "total": 30
+   },
+   "2024_s2": {
+    "aereo": 19,
+    "terrestre": 1,
+    "total": 20
+   },
+   "2025_s1": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2025_s2": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2026_s1": {
+    "aereo": 17,
+    "terrestre": 7,
+    "total": 24
+   }
+  },
+  "florencia-carignano": {
+   "2024_s1": {
+    "aereo": 28,
+    "total": 28
+   },
+   "2024_s2": {
+    "aereo": 33,
+    "total": 33
+   },
+   "2025_s1": {
+    "aereo": 24,
+    "total": 24
+   },
+   "2025_s2": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2026_s1": {
+    "aereo": 16,
+    "total": 16
+   }
+  },
+  "mariela-coletta": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "eduardo-falcone": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 4,
+    "terrestre": 5,
+    "total": 9
+   },
+   "2025_s1": {
+    "terrestre": 4,
+    "total": 4
+   },
+   "2025_s2": {
+    "terrestre": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "terrestre": 2,
+    "total": 2
+   }
+  },
+  "daiana-fernandez-molero": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "alida-ferreyra": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2025_s1": {
+    "terrestre": 1,
+    "aereo": 3,
+    "total": 4
+   },
+   "2025_s2": {
+    "terrestre": 5,
+    "aereo": 17,
+    "total": 22
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "terrestre": 1,
+    "total": 11
+   }
+  },
+  "silvana-giudici": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "pablo-juliano": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 8,
+    "total": 8
+   }
+  },
+  "gladys-medina": {
+   "2024_s1": {
+    "aereo": 25,
+    "total": 25
+   },
+   "2024_s2": {
+    "aereo": 34,
+    "total": 34
+   },
+   "2025_s1": {
+    "aereo": 30,
+    "total": 30
+   },
+   "2025_s2": {
+    "aereo": 16,
+    "total": 16
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "martin-alexis-menem": {
+   "2024_s1": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2024_s2": {
+    "aereo": 14,
+    "total": 14
+   },
+   "2025_s1": {
+    "aereo": 12,
+    "total": 12
+   },
+   "2025_s2": {
+    "aereo": 24,
+    "total": 24
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "guillermo-montenegro": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2025_s1": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 7,
+    "total": 7
+   }
+  },
+  "lorena-pokoik": {
+   "2024_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2024_s2": {
+    "terrestre": 1,
+    "total": 1
+   },
+   "2025_s1": {
+    "aereo": 5,
+    "terrestre": 1,
+    "total": 6
+   },
+   "2025_s2": {
+    "terrestre": 2,
+    "aereo": 2,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "terrestre": 1,
+    "total": 3
+   }
+  },
+  "maria-celeste-ponce": {
+   "2024_s1": {
+    "terrestre": 1,
+    "aereo": 2,
+    "total": 3
+   },
+   "2024_s2": {
+    "aereo": 7,
+    "terrestre": 1,
+    "total": 8
+   },
+   "2025_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2026_s1": {
+    "aereo": 7,
+    "total": 7
+   }
+  },
+  "santiago-santurio": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 6,
+    "total": 6
+   }
+  },
+  "sabrina-selva": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 13,
+    "total": 13
+   },
+   "2025_s1": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "julia-strada": {
+   "2024_s1": {
+    "aereo": 10,
+    "total": 10
+   },
+   "2024_s2": {
+    "aereo": 7,
+    "terrestre": 2,
+    "total": 9
+   },
+   "2025_s1": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2025_s2": {
+    "aereo": 17,
+    "terrestre": 3,
+    "total": 20
+   },
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "victoria-tolosa-paz": {
+   "2024_s1": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2024_s2": {
+    "aereo": 19,
+    "total": 19
+   },
+   "2025_s1": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "martin-yeza": {
+   "2024_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2024_s2": {
+    "aereo": 11,
+    "total": 11
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 7,
+    "total": 7
+   }
+  },
+  "oscar-zago": {
+   "2024_s1": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2024_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "lilia-lemoine": {
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s1": {
+    "aereo": 7,
+    "terrestre": 1,
+    "total": 8
+   },
+   "2025_s2": {
+    "terrestre": 1,
+    "aereo": 2,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 14,
+    "terrestre": 6,
+    "total": 20
+   }
+  },
+  "santiago-cafiero": {
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "maria-florencia-de-sensi": {
+   "2024_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "nicolas-emma": {
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 1,
+    "total": 1
+   }
+  },
+  "alejandro-finocchiaro": {
+   "2024_s2": {
+    "aereo": 8,
+    "total": 8
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "jose-federico-tournier": {
+   "2024_s2": {
+    "terrestre": 6,
+    "total": 6
+   },
+   "2025_s1": {
+    "aereo": 5,
+    "terrestre": 25,
+    "total": 30
+   },
+   "2025_s2": {
+    "aereo": 17,
+    "terrestre": 1,
+    "total": 18
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "luana-volnovich": {
+   "2024_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2025_s1": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "carlos-daniel-castagneto": {
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 8,
+    "total": 8
+   }
+  },
+  "luciana-potenza": {
+   "2025_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "andres-ariel-laumann": {
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "terrestre": 1,
+    "total": 37
+   }
+  },
+  "carlos-alberto-almena": {
+   "2025_s2": {
+    "aereo": 3,
+    "terrestre": 3,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 31,
+    "terrestre": 10,
+    "total": 41
+   }
+  },
+  "andrea-fernanda-vera": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 8,
+    "terrestre": 2,
+    "total": 10
+   }
+  },
+  "eliana-bruno": {
+   "2025_s2": {
+    "aereo": 3,
+    "terrestre": 1,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "moira-lanesan-sancho": {
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "total": 33
+   }
+  },
+  "valentina-ravera": {
+   "2025_s2": {
+    "aereo": 1,
+    "terrestre": 4,
+    "total": 5
+   },
+   "2026_s1": {
+    "terrestre": 15,
+    "aereo": 31,
+    "total": 46
+   }
+  },
+  "maria-graciela-de-la-rosa": {
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "diogenes-ignacio-gonzalez": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 39,
+    "total": 39
+   }
+  },
+  "carlos-raul-zapata": {
+   "2025_s2": {
+    "aereo": 54,
+    "total": 54
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "miguel-rodriguez": {
+   "2025_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "adriana-cristina-serquis": {
+   "2025_s2": {
+    "aereo": 7,
+    "terrestre": 1,
+    "total": 8
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "terrestre": 2,
+    "total": 48
+   }
+  },
+  "barbara-andreussi": {
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "monica-becerra": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "terrestre": 4,
+    "total": 36
+   }
+  },
+  "maria-virginia-gallardo": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "terrestre": 2,
+    "total": 31
+   }
+  },
+  "beltran-benedit": {
+   "2025_s2": {
+    "aereo": 32,
+    "terrestre": 1,
+    "total": 33
+   },
+   "2026_s1": {
+    "aereo": 31,
+    "total": 31
+   }
+  },
+  "adrian-brizuela": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 43,
+    "terrestre": 5,
+    "total": 48
+   }
+  },
+  "luis-petri": {
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 37,
+    "total": 37
+   }
+  },
+  "fernando-monguillot": {
+   "2025_s2": {
+    "aereo": 5,
+    "total": 5
+   },
+   "2026_s1": {
+    "aereo": 22,
+    "total": 22
+   }
+  },
+  "jose-luis-garrido": {
+   "2025_s2": {
+    "aereo": 51,
+    "total": 51
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "abel-chiconi": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 37,
+    "terrestre": 3,
+    "total": 40
+   }
+  },
+  "atilio-basualdo": {
+   "2025_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "marcelo-mango": {
+   "2025_s2": {
+    "terrestre": 1,
+    "aereo": 3,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "terrestre": 2,
+    "total": 44
+   }
+  },
+  "javier-noguera": {
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "cecilia-lopez-pasquali": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "alfredo-gonzales": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 38,
+    "total": 38
+   }
+  },
+  "soledad-mondaca": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "jairo-guzman": {
+   "2025_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 43,
+    "terrestre": 2,
+    "total": 45
+   }
+  },
+  "maria-gabriela-flores": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "terrestre": 1,
+    "total": 47
+   }
+  },
+  "juan-pablo-luque": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 30,
+    "total": 30
+   }
+  },
+  "juan-pablo-montenegro": {
+   "2025_s2": {
+    "terrestre": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 26,
+    "terrestre": 12,
+    "total": 38
+   }
+  },
+  "cristian-andino": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 39,
+    "terrestre": 3,
+    "total": 42
+   }
+  },
+  "soledad-molinuevo": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 45,
+    "total": 45
+   }
+  },
+  "julieta-metral-asensio": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "paulo-agustin-tita": {
+   "2025_s2": {
+    "aereo": 4,
+    "total": 4
+   },
+   "2026_s1": {
+    "aereo": 23,
+    "total": 23
+   }
+  },
+  "carolina-basualdo": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "juan-carlos-molina": {
+   "2025_s2": {
+    "aereo": 7,
+    "total": 7
+   },
+   "2026_s1": {
+    "aereo": 45,
+    "total": 45
+   }
+  },
+  "carlos-gustavo-jaime-quiroga": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "bernardo-biella": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 18,
+    "total": 18
+   }
+  },
+  "jorge-mukdise": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "gaston-riesco": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 41,
+    "total": 41
+   }
+  },
+  "karina-maureira": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "rosario-goitia": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "claudia-maria-palladino": {
+   "2025_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 29,
+    "total": 29
+   }
+  },
+  "marcelo-barbur": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "juan-fernando-brugge": {
+   "2025_s2": {
+    "aereo": 50,
+    "total": 50
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "sergio-dolce": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 35,
+    "total": 35
+   }
+  },
+  "dario-schneider": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 33,
+    "terrestre": 1,
+    "total": 34
+   }
+  },
+  "pablo-farias": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "federico-agustin-pelli": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "terrestre": 2,
+    "total": 38
+   }
+  },
+  "gino-visconti": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 48,
+    "terrestre": 1,
+    "total": 49
+   }
+  },
+  "emir-felix": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 41,
+    "total": 41
+   }
+  },
+  "maira-frias": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 40,
+    "total": 40
+   }
+  },
+  "claudio-alvarez": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 44,
+    "total": 44
+   }
+  },
+  "gonzalo-roca": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "maria-ines-zigaran": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 36,
+    "total": 36
+   }
+  },
+  "maura-gruber": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 47,
+    "total": 47
+   }
+  },
+  "diego-hartfield": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 38,
+    "total": 38
+   }
+  },
+  "belen-avico": {
+   "2025_s2": {
+    "terrestre": 18,
+    "aereo": 32,
+    "total": 50
+   },
+   "2026_s1": {
+    "aereo": 43,
+    "terrestre": 7,
+    "total": 50
+   }
+  },
+  "alicia-fregonese": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 1,
+    "total": 1
+   }
+  },
+  "enrique-lluch": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 44,
+    "total": 44
+   }
+  },
+  "julieta-marisol-campo": {
+   "2025_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 42,
+    "total": 42
+   }
+  },
+  "blanca-ines-osuna": {
+   "2025_s2": {
+    "aereo": 47,
+    "total": 47
+   },
+   "2026_s1": {
+    "aereo": 32,
+    "total": 32
+   }
+  },
+  "jorge-fernandez": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 34,
+    "total": 34
+   }
+  },
+  "raul-hadad": {
+   "2025_s2": {
+    "aereo": 3,
+    "total": 3
+   },
+   "2026_s1": {
+    "aereo": 35,
+    "terrestre": 1,
+    "total": 36
+   }
+  },
+  "marcos-patino-brizuela": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "total": 46
+   }
+  },
+  "maria-cecilia-ibanez": {
+   "2025_s2": {
+    "aereo": 44,
+    "terrestre": 2,
+    "total": 46
+   },
+   "2026_s1": {
+    "aereo": 46,
+    "terrestre": 3,
+    "total": 49
+   }
+  },
+  "guillermo-cesar-aguero": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 38,
+    "total": 38
+   }
+  },
+  "jimena-lopez": {
+   "2025_s2": {
+    "terrestre": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "terrestre": 30,
+    "aereo": 5,
+    "total": 35
+   }
+  },
+  "abelardo-ferran": {
+   "2025_s2": {
+    "terrestre": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "terrestre": 33,
+    "total": 33
+   }
+  },
+  "agustin-pellegrini": {
+   "2025_s2": {
+    "aereo": 1,
+    "total": 1
+   },
+   "2026_s1": {
+    "aereo": 8,
+    "total": 8
+   }
+  },
+  "jose-glinski": {
+   "2025_s2": {
+    "aereo": 28,
+    "terrestre": 1,
+    "total": 29
+   },
+   "2026_s1": {
+    "aereo": 30,
+    "total": 30
+   }
+  },
+  "juan-carlos-giordano": {
+   "2025_s2": {
+    "aereo": 6,
+    "total": 6
+   }
+  },
+  "matias-molle": {
+   "2025_s2": {
+    "aereo": 2,
+    "total": 2
+   },
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "alejandrina-borgatta": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "laura-soldano": {
+   "2026_s1": {
+    "aereo": 26,
+    "terrestre": 1,
+    "total": 27
+   }
+  },
+  "martin-matzkin": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "caren-tepp": {
+   "2026_s1": {
+    "aereo": 24,
+    "total": 24
+   }
+  },
+  "gabriela-luciana-munoz": {
+   "2026_s1": {
+    "aereo": 25,
+    "total": 25
+   }
+  },
+  "juan-grabois": {
+   "2026_s1": {
+    "aereo": 6,
+    "total": 6
+   }
+  },
+  "maria-luisa-gonzalez-estevarena": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "maria-lorena-petrovich": {
+   "2026_s1": {
+    "aereo": 7,
+    "total": 7
+   }
+  },
+  "yamile-tomassoni": {
+   "2026_s1": {
+    "aereo": 16,
+    "terrestre": 9,
+    "total": 25
+   }
+  },
+  "antonela-giampieri": {
+   "2026_s1": {
+    "aereo": 5,
+    "total": 5
+   }
+  },
+  "javier-sanchez-wrba": {
+   "2026_s1": {
+    "terrestre": 1,
+    "aereo": 2,
+    "total": 3
+   }
+  },
+  "ruben-dario-torres": {
+   "2026_s1": {
+    "aereo": 7,
+    "terrestre": 2,
+    "total": 9
+   }
+  },
+  "nicolas-alfredo-trotta": {
+   "2026_s1": {
+    "aereo": 8,
+    "total": 8
+   }
+  },
+  "juan-schiaretti": {
+   "2026_s1": {
+    "aereo": 11,
+    "total": 11
+   }
+  },
+  "fernando-de-andreis": {
+   "2026_s1": {
+    "aereo": 14,
+    "total": 14
+   }
+  },
+  "sebastian-pareja": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "jose-nunez": {
+   "2026_s1": {
+    "aereo": 15,
+    "total": 15
+   }
+  },
+  "alejandro-carrancio": {
+   "2026_s1": {
+    "aereo": 27,
+    "total": 27
+   }
+  },
+  "lucia-campora": {
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "gladys-humenuk": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "miriam-niveyro": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "marianela-marclay": {
+   "2026_s1": {
+    "terrestre": 3,
+    "aereo": 2,
+    "total": 5
+   }
+  },
+  "jorge-taiana": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "martin-lousteau": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "gisela-scaglia": {
+   "2026_s1": {
+    "aereo": 10,
+    "total": 10
+   }
+  },
+  "johanna-sabrina-longo": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "nicolas-massot": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "hugo-antonio-moyano": {
+   "2026_s1": {
+    "aereo": 6,
+    "total": 6
+   }
+  },
+  "maria-teresa-garcia": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "fernanda-mino": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "agustin-oscar-rossi": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "horacio-pietragalla-corti": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  },
+  "nicolas-del-cano": {
+   "2026_s1": {
+    "aereo": 4,
+    "total": 4
+   }
+  },
+  "patricia-holzman": {
+   "2026_s1": {
+    "aereo": 2,
+    "total": 2
+   }
+  }
+ }
+}

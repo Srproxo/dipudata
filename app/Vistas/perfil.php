@@ -110,6 +110,33 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </section>
 <?php endif; ?>
 
+<?php if (!$esSen): $com = Datos::comisionesDe($l['slug']); $vj = Datos::viajes(); $vjA = $vj['actual'][$l['slug']] ?? null; $vjS = $vj['por_diputado'][$l['slug']] ?? []; ?>
+<?php if ($com): ?>
+<section class="seccion" aria-labelledby="comisiones">
+  <h2 id="comisiones" class="seccion-titulo">Comisiones</h2>
+  <ul class="lista-chips">
+    <?php foreach ($com as $c): ?><li><a href="/comisiones/<?= e($c['slug']) ?>"><?= e($c['nombre']) ?></a><span class="tenue"><?= e($c['cargo']) ?></span></li><?php endforeach; ?>
+  </ul>
+  <p class="tenue pequeno">Comisiones permanentes según la integración publicada por la Cámara de Diputados en junio de 2026.</p>
+</section>
+<?php endif; ?>
+<?php if ($vjA || $vjS): ?>
+<section class="seccion" aria-labelledby="pasajes">
+  <h2 id="pasajes" class="seccion-titulo">Pasajes emitidos a su pedido</h2>
+  <div class="tabla-caja"><table class="tabla" style="max-width:40rem">
+    <thead><tr><th scope="col">Período</th><th scope="col" class="der">Aéreos</th><th scope="col" class="der">Terrestres</th><th scope="col" class="der">Total de tramos</th></tr></thead>
+    <tbody>
+    <?php if ($vjA): ?><tr><td><b>Desde el 10/12/2025</b></td><td class="der num" data-etiqueta="Aéreos"><?= (int)$vjA['aereo'] ?></td><td class="der num" data-etiqueta="Terrestres"><?= (int)$vjA['terrestre'] ?></td><td class="der num" data-etiqueta="Total"><b><?= (int)$vjA['total'] ?></b></td></tr><?php endif; ?>
+    <?php krsort($vjS); foreach ($vjS as $sem => $c): [$an, $sm] = explode('_s', $sem); ?>
+      <tr><td><?= $sm === '1' ? 'Enero a junio' : 'Julio a diciembre' ?> de <?= e($an) ?></td><td class="der num" data-etiqueta="Aéreos"><?= (int)($c['aereo'] ?? 0) ?></td><td class="der num" data-etiqueta="Terrestres"><?= (int)($c['terrestre'] ?? 0) ?></td><td class="der num" data-etiqueta="Total"><?= (int)$c['total'] ?></td></tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Cada tramo es un pasaje que la Cámara emitió a pedido del diputado. La Cámara aclara que los tramos "no implican viajes efectivamente realizados", y no publica su costo. Quien vive lejos de la Capital necesita más pasajes para ir y volver al recinto. <a href="/viajes">Más sobre pasajes y misiones oficiales</a>.</p>
+</section>
+<?php endif; ?>
+<?php endif; ?>
+
 <?php $sub = !$esSen ? Datos::subsidiosDiputado($l['slug']) : []; ?>
 <?php if ($sub): ?>
 <section class="seccion" aria-labelledby="subs">

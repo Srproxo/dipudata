@@ -1,0 +1,58 @@
+{
+ "remuneraciones": [
+  {
+   "concepto": "Dieta",
+   "importe": 6125805.18
+  },
+  {
+   "concepto": "Gastos de Representación",
+   "importe": 464489.12
+  }
+ ],
+ "desarraigo": [
+  {
+   "concepto": "Desarraigo",
+   "importe": 328751.12
+  }
+ ],
+ "movilidad": [
+  {
+   "concepto": "Movilidad opción 2",
+   "importe": 100000.0
+  },
+  {
+   "concepto": "Movilidad opción 3",
+   "importe": 250000.0
+  },
+  {
+   "concepto": "Movilidad opción 4",
+   "importe": 350000.0
+  },
+  {
+   "concepto": "Movilidad opción 5",
+   "importe": 455000.0
+  }
+ ],
+ "descuentos": [
+  {
+   "concepto": "Aporte Obra Social DIG",
+   "importe": -121367.71
+  },
+  {
+   "concepto": "Aporte Jubilatorio DIG",
+   "importe": -445014.95
+  },
+  {
+   "concepto": "Aporte Ley 19032 DIG",
+   "importe": -121367.71
+  },
+  {
+   "concepto": "Circulo de Legisladores",
+   "importe": -30629.03
+  },
+  {
+   "concepto": "Imp. a las Ganancias",
+   "importe": -684503.02
+  }
+ ]
+}
