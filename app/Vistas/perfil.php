@@ -31,6 +31,8 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
       <div><dt>Distrito</dt><dd><?= e($l['provincia']) ?></dd></div>
       <div><dt>Bloque</dt><dd><?= e($l['bloque']) ?></dd></div>
       <?php if ($l['mandato']): ?><div><dt>Mandato</dt><dd class="num"><?= e($l['mandato']) ?></dd></div><?php endif; ?>
+      <?php if (!empty($l['preside_bloque'])): ?><div><dt>Cargo en el bloque</dt><dd>Presidente del bloque</dd></div><?php endif; ?>
+      <?php if (!empty($l['interbloque'])): ?><div><dt>Interbloque</dt><dd><?= e($l['interbloque']) ?></dd></div><?php endif; ?>
       <?php if (!empty($l['alianza'])): ?><div><dt>Alianza electoral</dt><dd><?= e($l['alianza']) ?></dd></div><?php endif; ?>
       <?php if ($l['jura']): ?><div><dt>Juró el</dt><dd><?= e(fecha_es($l['jura'])) ?></dd></div><?php endif; ?>
       <?php if ($l['inicio'] && $l['inicio'] !== $l['jura']): ?><div><dt>Inicio del mandato</dt><dd><?= e(fecha_es($l['inicio'])) ?></dd></div><?php endif; ?>
@@ -54,6 +56,29 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
     <p class="tenue pequeno" style="margin-top:1.25rem">Asistencia, votaciones y otras métricas se vuelven a publicar cuando estén calculadas desde las actas oficiales. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
   </section>
 </div>
+
+<?php if (!empty($l['trayectoria'])): ?>
+<section class="seccion" aria-labelledby="trayectoria">
+  <h2 id="trayectoria" class="seccion-titulo">Trayectoria en la Cámara</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Período</th><th scope="col">Distrito</th><th scope="col">Bloque</th></tr></thead>
+    <tbody>
+    <?php foreach ($l['trayectoria'] as $m): ?>
+      <tr>
+        <td class="num nowrap" data-etiqueta="Período"><?= e(substr($m['inicio'], 0, 4)) ?>–<?= e(substr($m['fin'], 0, 4)) ?></td>
+        <td data-etiqueta="Distrito"><?= e($m['distrito']) ?></td>
+        <td data-etiqueta="Bloque">
+          <?php foreach ($m['bloques'] as $b): ?>
+            <span class="block"><?= e($b['nombre']) ?><?= count($m['bloques']) > 1 ? ' <span class="tenue pequeno">(desde ' . e(fecha_es($b['desde'])) . ')</span>' : '' ?></span>
+          <?php endforeach; ?>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Mandatos y bloques registrados por la Cámara de Diputados desde 2007. Si el legislador ejerció antes de esa fecha, esos mandatos no figuran acá.</p>
+</section>
+<?php endif; ?>
 
 <?php if ($mismaProv): ?>
 <section class="seccion" aria-labelledby="misma-prov">

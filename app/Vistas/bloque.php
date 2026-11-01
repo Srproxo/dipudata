@@ -11,6 +11,13 @@ ksort($porProv);
 <h1 class="titulo"><i class="punto punto-grande" style="background:<?= e(color_bloque($b['nombre_oficial'])) ?>"></i><?= e($b['nombre']) ?></h1>
 <p class="bajada"><?= (int)$b['cantidad'] ?> <?= (int)$b['cantidad'] === 1 ? 'integrante' : 'integrantes' ?> de <?= count($b['provincias']) ?> <?= count($b['provincias']) === 1 ? 'provincia' : 'provincias' ?>.</p>
 
+<?php if (!empty($b['presidente']) || !empty($b['interbloque'])): ?>
+<dl class="ficha" style="max-width:34rem;margin-top:1.5rem">
+  <?php if (!empty($b['presidente'])): ?><div><dt>Presidente del bloque</dt><dd><?= !empty($b['presidente_slug']) ? '<a href="/diputado/' . e($b['presidente_slug']) . '">' . e($b['presidente']) . '</a>' : e($b['presidente']) ?></dd></div><?php endif; ?>
+  <?php if (!empty($b['interbloque'])): ?><div><dt>Interbloque</dt><dd><?= e($b['interbloque']) ?></dd></div><?php endif; ?>
+</dl>
+<?php endif; ?>
+
 <section class="seccion" aria-labelledby="int">
   <h2 id="int" class="seccion-titulo">Quiénes lo integran</h2>
   <div class="tabla-caja"><table class="tabla">

@@ -29,7 +29,10 @@
    "Santa Fe",
    "Tierra del Fuego",
    "Tucumán"
-  ]
+  ],
+  "presidente": "Gabriel Bornoroni",
+  "presidente_slug": "gabriel-bornoroni",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -59,7 +62,10 @@
    "Santiago del Estero",
    "Tierra del Fuego",
    "Tucumán"
-  ]
+  ],
+  "presidente": "Germán Pedro Martínez",
+  "presidente_slug": "german-pedro-martinez",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -76,7 +82,10 @@
    "Mendoza",
    "Río Negro",
    "Santa Fe"
-  ]
+  ],
+  "presidente": "Gisela Scaglia",
+  "presidente_slug": "gisela-scaglia",
+  "interbloque": "Unidos"
  },
  {
   "camara": "Diputados",
@@ -90,7 +99,10 @@
    "Entre Ríos",
    "La Pampa",
    "Misiones"
-  ]
+  ],
+  "presidente": "Cristian A. Ritondo",
+  "presidente_slug": "cristian-a-ritondo",
+  "interbloque": "Fuerza del Cambio"
  },
  {
   "camara": "Diputados",
@@ -103,7 +115,10 @@
    "Misiones",
    "Salta",
    "San Luis"
-  ]
+  ],
+  "presidente": "Alberto Arrúa",
+  "presidente_slug": "alberto-arrua",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -116,7 +131,10 @@
    "Corrientes",
    "Entre Ríos",
    "Mendoza"
-  ]
+  ],
+  "presidente": "Pamela Fernanda Verasay",
+  "presidente_slug": "pamela-fernanda-verasay",
+  "interbloque": "Fuerza del Cambio"
  },
  {
   "camara": "Diputados",
@@ -126,7 +144,10 @@
   "cantidad": 3,
   "provincias": [
    "Catamarca"
-  ]
+  ],
+  "presidente": "Sebastián Nóblega",
+  "presidente_slug": "sebastian-noblega",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -136,18 +157,24 @@
   "cantidad": 3,
   "provincias": [
    "Tucumán"
-  ]
+  ],
+  "presidente": "Gladys Medina",
+  "presidente_slug": "gladys-medina",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
-  "nombre": "Coalicion Civica",
-  "nombre_oficial": "COALICION CIVICA",
+  "nombre": "Coalición Cívica",
+  "nombre_oficial": "COALICIÓN CÍVICA",
   "slug": "coalicion-civica",
   "cantidad": 2,
   "provincias": [
    "Buenos Aires",
    "Ciudad Autónoma de Buenos Aires"
-  ]
+  ],
+  "presidente": "Maximiliano Ferraro",
+  "presidente_slug": "maximiliano-ferraro",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -157,7 +184,10 @@
   "cantidad": 2,
   "provincias": [
    "Buenos Aires"
-  ]
+  ],
+  "presidente": "Miguel Ángel Pichetto",
+  "presidente_slug": "miguel-angel-pichetto",
+  "interbloque": "Unidos"
  },
  {
   "camara": "Diputados",
@@ -168,18 +198,24 @@
   "provincias": [
    "Buenos Aires",
    "Ciudad Autónoma de Buenos Aires"
-  ]
+  ],
+  "presidente": "Oscar Zago",
+  "presidente_slug": "oscar-zago",
+  "interbloque": "Fuerza del Cambio"
  },
  {
   "camara": "Diputados",
-  "nombre": "PTS-Frente de Izquierda y de Trabajadores Unidad",
-  "nombre_oficial": "PTS-FRENTE DE IZQUIERDA Y DE TRABAJADORES UNIDAD",
+  "nombre": "PTS - Frente de Izquierda y de Trabajadores - Unidad",
+  "nombre_oficial": "PTS - FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD",
   "slug": "pts-frente-de-izquierda-y-de-trabajadores-unidad",
   "cantidad": 2,
   "provincias": [
    "Buenos Aires",
    "Ciudad Autónoma de Buenos Aires"
-  ]
+  ],
+  "presidente": "Myriam Bregman",
+  "presidente_slug": "myriam-teresa-bregman",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -189,17 +225,23 @@
   "cantidad": 2,
   "provincias": [
    "San Luis"
-  ]
+  ],
+  "presidente": "Jorge Fernández",
+  "presidente_slug": "jorge-fernandez",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
-  "nombre": "Produccion y Trabajo",
-  "nombre_oficial": "PRODUCCION Y TRABAJO",
+  "nombre": "Producción y Trabajo",
+  "nombre_oficial": "PRODUCCIÓN Y TRABAJO",
   "slug": "produccion-y-trabajo",
   "cantidad": 2,
   "provincias": [
    "San Juan"
-  ]
+  ],
+  "presidente": "Nancy Viviana Picón Martínez",
+  "presidente_slug": "nancy-picon-martinez",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -209,7 +251,10 @@
   "cantidad": 1,
   "provincias": [
    "Buenos Aires"
-  ]
+  ],
+  "presidente": "Karina Banfi",
+  "presidente_slug": "karina-banfi",
+  "interbloque": "Fuerza del Cambio"
  },
  {
   "camara": "Diputados",
@@ -219,7 +264,10 @@
   "cantidad": 1,
   "provincias": [
    "Buenos Aires"
-  ]
+  ],
+  "presidente": "Marcela Marina Pagano",
+  "presidente_slug": "marcela-marina-pagano",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -229,7 +277,10 @@
   "cantidad": 1,
   "provincias": [
    "Córdoba"
-  ]
+  ],
+  "presidente": "Natalia de la Sota",
+  "presidente_slug": "natalia-de-la-sota",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -239,7 +290,10 @@
   "cantidad": 1,
   "provincias": [
    "Buenos Aires"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -249,17 +303,23 @@
   "cantidad": 1,
   "provincias": [
    "Neuquén"
-  ]
+  ],
+  "presidente": "Karina Maureira",
+  "presidente_slug": "karina-maureira",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
-  "nombre": "Partido Obrero en el Frente de Izquierda y de Trabajadores-Unidad",
-  "nombre_oficial": "PARTIDO OBRERO EN EL FRENTE DE IZQUIERDA Y DE TRABAJADORES-UNIDAD",
-  "slug": "partido-obrero-en-el-frente-de-izquierda-y-de-trabajadores-unidad",
+  "nombre": "PO - FIT - U - Partido Obrero en el Frente de Izquierda y de Trabajadores - Unidad",
+  "nombre_oficial": "PO - FIT - U - PARTIDO OBRERO EN EL FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD",
+  "slug": "po-fit-u-partido-obrero-en-el-frente-de-izquierda-y-de-trabajadores-unidad",
   "cantidad": 1,
   "provincias": [
    "Buenos Aires"
-  ]
+  ],
+  "presidente": "Romina Del Plá",
+  "presidente_slug": "romina-del-pla",
+  "interbloque": null
  },
  {
   "camara": "Diputados",
@@ -269,7 +329,10 @@
   "cantidad": 1,
   "provincias": [
    "Santa Cruz"
-  ]
+  ],
+  "presidente": "José Luis Garrido",
+  "presidente_slug": "jose-luis-garrido",
+  "interbloque": "Fuerza del Cambio"
  },
  {
   "camara": "Senadores",
@@ -295,7 +358,10 @@
    "Santiago del Estero",
    "Tierra del Fuego",
    "Tucumán"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -317,7 +383,10 @@
    "San Juan",
    "San Luis",
    "Tierra del Fuego"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -333,7 +402,10 @@
    "La Pampa",
    "Mendoza",
    "Santa Fe"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -345,7 +417,10 @@
    "Catamarca",
    "Jujuy",
    "Tucumán"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -357,7 +432,10 @@
    "Chubut",
    "La Pampa",
    "Misiones"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -367,7 +445,10 @@
   "cantidad": 2,
   "provincias": [
    "Santiago del Estero"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -377,7 +458,10 @@
   "cantidad": 2,
   "provincias": [
    "Santa Cruz"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -387,7 +471,10 @@
   "cantidad": 2,
   "provincias": [
    "Misiones"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -398,7 +485,10 @@
   "provincias": [
    "Corrientes",
    "Córdoba"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -408,7 +498,10 @@
   "cantidad": 1,
   "provincias": [
    "Chubut"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -418,7 +511,10 @@
   "cantidad": 1,
   "provincias": [
    "Tucumán"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -428,7 +524,10 @@
   "cantidad": 1,
   "provincias": [
    "San Luis"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -438,7 +537,10 @@
   "cantidad": 1,
   "provincias": [
    "Neuquén"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  },
  {
   "camara": "Senadores",
@@ -448,6 +550,9 @@
   "cantidad": 1,
   "provincias": [
    "Salta"
-  ]
+  ],
+  "presidente": null,
+  "presidente_slug": null,
+  "interbloque": null
  }
 ]

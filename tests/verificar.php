@@ -37,5 +37,12 @@ ok(!array_filter($todos, fn($l) => $l['foto'] && !preg_match('#^https://(api\.ar
 $cod = (string)shell_exec('grep -rl "legisladores_master" ' . escapeshellarg(__DIR__ . '/../app') . ' ' . escapeshellarg(__DIR__ . '/../api') . ' ' . escapeshellarg(__DIR__ . '/../mvc.php') . ' 2>/dev/null');
 ok(trim($cod) === '', 'ningún código PHP del sitio lee legisladores_master.json');
 
+ok(array_sum(array_column(Datos::interbloques(), 'cantidad')) === 42, 'los interbloques suman 42 diputados, como informa la HCDN');
+ok(count(array_filter($dip, fn($l) => !empty($l['hcdn_id']))) === 257, 'los 257 diputados tienen su ID oficial de la HCDN');
+ok(count(array_filter($dip, fn($l) => !empty($l['trayectoria']))) === 257, 'los 257 diputados tienen trayectoria registrada');
+ok(!array_filter($dip, fn($l) => isset($l['mandatos'])), 'no se publica un conteo de mandatos (el histórico oficial arranca en 2007)');
+$presid = array_filter(Datos::bloques('Diputados'), fn($b) => !empty($b['presidente']));
+ok(count($presid) >= 20, 'casi todos los bloques de Diputados tienen presidente (hay ' . count($presid) . ' de ' . count(Datos::bloques('Diputados')) . ')');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

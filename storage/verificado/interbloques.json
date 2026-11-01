@@ -1,0 +1,29 @@
+[
+ {
+  "camara": "Diputados",
+  "nombre": "Fuerza del Cambio",
+  "slug": "fuerza-del-cambio",
+  "cantidad": 22,
+  "presidente": "Cristian A. Ritondo",
+  "presidente_slug": "cristian-a-ritondo",
+  "bloques": [
+   "Adelante Buenos Aires",
+   "MID - Movimiento de Integración y Desarrollo",
+   "PRO",
+   "Por Santa Cruz",
+   "UCR - Unión Cívica Radical"
+  ]
+ },
+ {
+  "camara": "Diputados",
+  "nombre": "Unidos",
+  "slug": "unidos",
+  "cantidad": 20,
+  "presidente": "Gisela Scaglia",
+  "presidente_slug": "gisela-scaglia",
+  "bloques": [
+   "Encuentro Federal",
+   "Provincias Unidas"
+  ]
+ }
+]
