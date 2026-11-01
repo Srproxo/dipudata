@@ -10,6 +10,26 @@ $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== 
 <h1 class="titulo">Quién ocupa cada banca.</h1>
 <p class="bajada">Los <?= $nDip ?> diputados y <?= $nSen ?> senadores en ejercicio, con su bloque, su provincia y sus fechas de mandato. Todo sale de registros oficiales y cada dato indica su fuente.</p>
 
+<form class="buscador" method="get" action="/#directorio" role="search">
+  <label for="buscar-nombre" class="buscador-t">Buscá un legislador por nombre</label>
+  <div class="buscador-fila">
+    <input id="buscar-nombre" type="search" name="q" maxlength="80" placeholder="Apellido o nombre" autocomplete="off">
+    <button class="boton" type="submit">Buscar</button>
+  </div>
+</form>
+
+<section class="seccion" aria-labelledby="atajos">
+  <h2 id="atajos" class="seccion-titulo">Lo que más se busca</h2>
+  <ul class="atajos">
+    <li><a href="/votaciones"><b>Cómo votó cada uno</b><span>Votaciones nominales de Diputados y del Senado, una por una.</span></a></li>
+    <li><a href="/leyes"><b>Leyes</b><span>Las leyes sancionadas, con su sumario y sus fechas.</span></a></li>
+    <li><a href="/remuneraciones"><b>Cuánto cobran</b><span>La dieta y los adicionales que publica la Cámara.</span></a></li>
+    <li><a href="/viajes"><b>Pasajes y misiones</b><span>Pasajes emitidos y misiones oficiales de los diputados.</span></a></li>
+    <li><a href="/comisiones"><b>Comisiones</b><span>Quién integra cada comisión de Diputados.</span></a></li>
+    <li><a href="/congreso/bloques"><b>Bloques</b><span>Cuántos legisladores tiene cada bloque.</span></a></li>
+  </ul>
+</section>
+
 <div class="dos-col composicion">
 <?php foreach ($comp as $camara => $bloques): $total = array_sum(array_column($bloques, 'cantidad')); ?>
   <section aria-label="Composición de <?= e($camara) ?>">

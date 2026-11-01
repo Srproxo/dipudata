@@ -194,6 +194,24 @@ final class Datos
         return self::leer('votaciones_mandato_actual')['_meta'] ?? [];
     }
 
+    /** @return array{resumen:array,proyectos:list<array>}|null proyectos de un diputado actual (donde figura como autor) */
+    public static function proyectos(string $slug): ?array
+    {
+        if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)) {
+            return null;
+        }
+        $ruta = RAIZ . "/storage/verificado/proyectos/{$slug}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : null;
+    }
+
+    public static function proyectosMeta(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
     /** @return list<array> estadísticas de un senador actual en mandatos anteriores al 10/12/2025 (una fila por mandato) */
     public static function senadoAnteriores(string $slug): array
     {

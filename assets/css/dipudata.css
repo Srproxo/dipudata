@@ -199,3 +199,19 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .pestanas { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--tinta); margin-top: 1.5rem; }
 .pestanas a { padding: .65rem 1rem; font-size: .9375rem; color: var(--tinta-2); text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -1px; min-height: 44px; display: inline-flex; align-items: center; }
 .pestanas a[aria-current="page"] { color: var(--tinta); font-weight: 700; border-bottom-color: var(--acento); }
+
+/* Portada y resumen de perfil */
+.buscador { margin-top: 2rem; max-width: 36rem; }
+.buscador-t { display: block; margin-bottom: .4rem; font-size: .875rem; font-weight: 600; color: var(--tinta-2); }
+.buscador-fila { display: flex; gap: .5rem; }
+.buscador-fila input { flex: 1; min-width: 0; min-height: 44px; padding: .5rem .8rem; font: inherit; border: 1px solid var(--linea-fuerte); background: #fff; }
+.atajos { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.atajos a { display: grid; align-content: start; gap: .2rem; height: 100%; padding: .9rem 1rem; border: 1px solid var(--linea); text-decoration: none; color: var(--tinta); }
+.atajos a:hover { border-color: var(--acento); background: var(--fondo); }
+.atajos b { font: 700 1.05rem/1.25 var(--serif); }
+.atajos span { font-size: .9rem; color: var(--tinta-2); }
+.resumen { margin-top: 1.75rem; padding: 1rem 1.25rem; border-left: 4px solid var(--acento); background: var(--fondo); max-width: 48rem; }
+.resumen-t { margin: 0 0 .5rem; font: 700 1.1rem/1.2 var(--serif); }
+.resumen ul { margin: 0; padding-left: 1.1rem; }
+.resumen li { padding: .15rem 0; line-height: 1.5; }
+.resumen-atajos { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; margin: .75rem 0 0; font-size: .9rem; }

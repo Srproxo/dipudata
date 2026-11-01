@@ -128,5 +128,22 @@ foreach ($sv as $v) { $d = Datos::votacion($v['id']); if (count($d['votos'] ?? [
 ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado tienen los 72 votos de los senadores (' . count($sv) . ')');
 ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'] ?? 0) === 183 && empty($meta['excluidas']), 'las 141 votaciones de Diputados y las 183 del Senado son válidas y ninguna quedó excluida');
 
+// Proyectos parlamentarios: cada proyecto tiene un solo autor, el resumen cuadra con la lista y solo hay diputados actuales
+$pm = Datos::proyectosMeta();
+ok(($pm['cruzados'] ?? 0) > 100000 && ($pm['nombre_ambiguo'] ?? 1) === 0, 'el cruce de autores por nombre completo y mandato no deja casos ambiguos (' . ($pm['cruzados'] ?? 0) . ' proyectos cruzados)');
+$vistosPy = []; $malPy = 0; $conPy = 0; $totPy = 0;
+foreach ($dip as $l) {
+    $pr = Datos::proyectos($l['slug']);
+    if (!$pr) { continue; }
+    $conPy++; $r = $pr['resumen']; $totPy += count($pr['proyectos']);
+    if ($r['total'] !== count($pr['proyectos']) || array_sum($r['por_tipo']) !== $r['total'] || array_sum($r['por_resultado']) !== $r['total']) { $malPy++; }
+    foreach ($pr['proyectos'] as $x) {
+        if (isset($vistosPy[$x[0]]) || $x[1] < '2008-01-01' || $x[1] > ($pm['hasta'] ?? '9999') || ($x[6] !== '' && $x[6] < '2008-01-01')) { $malPy++; }
+        $vistosPy[$x[0]] = true;
+    }
+}
+ok($malPy === 0 && $conPy > 200 && $totPy === ($pm['de_diputados_actuales'] ?? -1), 'los proyectos de ' . $conPy . ' diputados cuadran con su resumen, sin repetidos entre diputados (' . $totPy . ')');
+ok(!glob(__DIR__ . '/../storage/verificado/proyectos/s-*.json'), 'no hay proyectos atribuidos a senadores (el Senado no publica ese conjunto como datos abiertos)');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

@@ -23,6 +23,30 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </header>
 
 
+<?php
+// Resumen: solo frases armadas con datos ya verificados más abajo en la página.
+$resFrases = [];
+$resFrases[] = $cargo . ' por ' . $l['provincia'] . ', del bloque ' . $l['bloque'] . ($l['mandato'] ? ', con mandato ' . $l['mandato'] : '') . '.';
+$maR = Datos::mandatoActual($l['camara'], $l['slug']);
+if ($maR) { $resFrases[] = 'Desde el 10 de diciembre de 2025 hubo ' . (int)$maR['votaciones'] . ' votaciones nominales en su cámara: votó en ' . (int)$maR['emitio'] . ($maR['voto_pct'] !== null ? ' (' . number_format((float)$maR['voto_pct'], 0, ',', '') . '%)' : '') . '.'; }
+$saR = $esSen ? Datos::senadoAnteriores($l['slug']) : [];
+if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')) . ' votaciones nominales anteriores en el Senado, de ' . count($saR) . ' ' . (count($saR) === 1 ? 'mandato' : 'mandatos') . '.'; }
+$pyR = !$esSen ? Datos::proyectos($l['slug']) : null;
+if ($pyR) { $resFrases[] = 'Figura como autor/a de ' . number_format((int)$pyR['resumen']['total'], 0, ',', '.') . ' proyectos en Diputados.'; }
+?>
+<section class="resumen" aria-labelledby="resumen-t">
+  <h2 id="resumen-t" class="resumen-t">En pocas palabras</h2>
+  <ul>
+    <?php foreach ($resFrases as $f): ?><li><?= e($f) ?></li><?php endforeach; ?>
+  </ul>
+  <p class="resumen-atajos">
+    <?php if ($maR): ?><a href="#mandato-actual">Votaciones</a><?php endif; ?>
+    <?php if ($saR): ?><a href="#senado-anterior">Votaciones anteriores</a><?php endif; ?>
+    <?php if ($pyR): ?><a href="#proyectos">Proyectos</a><?php endif; ?>
+    <a href="#ficha">Ficha y fuentes</a>
+  </p>
+</section>
+
 <div class="dos-col perfil-grilla">
   <section aria-labelledby="ficha">
     <h2 id="ficha" class="seccion-titulo">Ficha</h2>
@@ -110,6 +134,32 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
     <?php if ($par['coincidencia_bloque_pct'] !== null): ?><div><dt>Votó como la mayoría de su bloque</dt><dd><?= e(number_format((float)$par['coincidencia_bloque_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
   </dl>
   <p class="tenue pequeno">Entre el <?= e(fecha_es($par['desde'])) ?> y el <?= e(fecha_es($par['hasta'])) ?>: <?= (int)$par['afirmativos'] ?> votos afirmativos, <?= (int)$par['negativos'] ?> negativos y <?= (int)$par['abstenciones'] ?> abstenciones. Cubre solo el tiempo en que ejerció en esos años, según los datos abiertos de la Cámara; no incluye su mandato actual. "Ausente" significa que no emitió voto en esa votación, sin importar el motivo. <a href="/votaciones">Ver todas las votaciones</a>.</p>
+</section>
+<?php endif; ?>
+
+<?php $pry = !$esSen ? Datos::proyectos($l['slug']) : null; ?>
+<?php if ($pry): $rs = $pry['resumen']; ?>
+<section class="seccion" aria-labelledby="proyectos">
+  <h2 id="proyectos" class="seccion-titulo">Proyectos presentados</h2>
+  <dl class="participacion">
+    <div><dt>Proyectos como autor/a</dt><dd><?= number_format((int)$rs['total'], 0, ',', '.') ?></dd></div>
+    <?php foreach (array_slice($rs['por_tipo'], 0, 3, true) as $t => $n): ?><div><dt><?= e($t === 'Ley' ? 'Proyectos de ley' : ($t === 'Resolucion' ? 'De resolución' : ($t === 'Declaracion' ? 'De declaración' : $t))) ?></dt><dd><?= (int)$n ?></dd></div><?php endforeach; ?>
+    <?php $res = (int)$rs['total'] - (int)($rs['por_resultado']['Sin resolución registrada'] ?? 0); ?>
+    <div><dt>Con resolución registrada</dt><dd><?= $res ?></dd></div>
+  </dl>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Fecha</th><th scope="col">Proyecto</th><th scope="col">Qué pasó</th></tr></thead>
+    <tbody>
+    <?php foreach (array_slice($pry['proyectos'], 0, 5) as $x): ?>
+      <tr>
+        <td class="num nowrap" data-etiqueta="Fecha"><?= e(date('d/m/Y', strtotime($x[1]))) ?></td>
+        <td><?= e(mb_strlen($x[4]) > 160 ? mb_substr($x[4], 0, 160) . '…' : $x[4]) ?><span class="tenue pequeno block"><?= e($x[2]) ?> · <?= e($x[3] ?: 'sin número') ?></span></td>
+        <td data-etiqueta="Qué pasó"><?= $x[5] ? e(ucfirst(mb_strtolower($x[5]))) : '<span class="tenue">Sin resolución registrada</span>' ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Entre el <?= e(fecha_es($rs['desde'])) ?> y el <?= e(fecha_es($rs['hasta'])) ?>. El archivo oficial registra un solo autor por proyecto, sin cofirmantes. "Sin resolución registrada" no significa rechazado: el proyecto no figura entre los que la Cámara resolvió. <a href="/diputado/<?= e($l['slug']) ?>/proyectos">Ver los <?= number_format((int)$rs['total'], 0, ',', '.') ?> proyectos</a>.</p>
 </section>
 <?php endif; ?>
 
