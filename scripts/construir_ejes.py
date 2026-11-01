@@ -68,8 +68,9 @@ def main() -> int:
     if ruta_s.exists():
         for ref, g in json.load(gzip.open(ruta_s))["giros"].items():
             primero = next((x for x in g if x[1] == 1), g[0] if g else None)
-            if primero:
-                giro_senado[ref] = primero[0]
+            nombre = re.sub(r"\s*(ORDEN DE GIRO:.*|Solo para conocimiento\s*:?)\s*$", "", primero[0]).strip() if primero else ""
+            if nombre:  # algunas páginas viejas traen la fila del giro sin el nombre de la comisión
+                giro_senado[ref] = nombre
 
     exp_a_id = {}
     with gzip.open(OFI / "hcdn" / "proyectos_parlamentarios.csv.gz", "rt", encoding="utf-8-sig") as f:
