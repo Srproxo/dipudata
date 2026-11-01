@@ -72,6 +72,32 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </section>
 <?php endif; ?>
 
+<?php $sa = $esSen ? Datos::senadoAnteriores($l['slug']) : []; $sm = Datos::senadoAnterioresMeta(); ?>
+<?php if ($sa): ?>
+<section class="seccion" aria-labelledby="senado-anterior">
+  <h2 id="senado-anterior" class="seccion-titulo">Votaciones nominales en el Senado, <?= e(substr($sm['desde'], 0, 4)) ?> a 2025</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Mandato</th><th scope="col">Período con votaciones</th><th scope="col" class="der">Votaciones</th><th scope="col" class="der">Votó</th><th scope="col" class="der">No votó</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">Como su bloque</th></tr></thead>
+    <tbody>
+    <?php foreach ($sa as $m): ?>
+      <tr>
+        <td class="num" data-etiqueta="Mandato"><?= e($m['mandato'] ?: 'Sin dato') ?></td>
+        <td class="nowrap" data-etiqueta="Período"><?= e(fecha_es($m['desde'])) ?> a <?= e(fecha_es($m['hasta'])) ?></td>
+        <td class="der num" data-etiqueta="Votaciones"><?= (int)$m['votaciones'] ?></td>
+        <td class="der num" data-etiqueta="Votó"><?= (int)$m['emitio'] ?><?= $m['voto_pct'] !== null ? ' (' . e(number_format((float)$m['voto_pct'], 0, ',', '')) . '%)' : '' ?></td>
+        <td class="der num" data-etiqueta="No votó"><?= (int)$m['ausente'] ?></td>
+        <td class="der num" data-etiqueta="A favor"><?= (int)$m['afirmativos'] ?></td>
+        <td class="der num" data-etiqueta="En contra"><?= (int)$m['negativos'] ?></td>
+        <td class="der num" data-etiqueta="Abstenciones"><?= (int)$m['abstenciones'] ?></td>
+        <td class="der num" data-etiqueta="Como su bloque"><?= $m['coincidencia_bloque_pct'] !== null ? e(number_format((float)$m['coincidencia_bloque_pct'], 1, ',', '')) . '%' : '—' ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Votaciones nominales del Senado entre el <?= e(fecha_es($sm['desde'])) ?> y el 9 de diciembre de 2025, tomadas de senado.gob.ar y agrupadas por mandato; el período indicado va de la primera a la última votación registrada en cada mandato. No es el historial completo: solo están las votaciones nominales publicadas por el Senado y se cuentan las que se pudieron verificar contra sus totales. "No votó" incluye toda vez que no figura un voto, sin importar el motivo. "Como su bloque" usa el bloque que figura en cada votación y solo se calcula con 20 votaciones o más. <a href="/votaciones?camara=S">Ver las votaciones del Senado</a>.</p>
+</section>
+<?php endif; ?>
+
 <?php $par = !$esSen ? Datos::participacion($l['slug']) : null; ?>
 <?php if ($par): ?>
 <section class="seccion" aria-labelledby="participacion">

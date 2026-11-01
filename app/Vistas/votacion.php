@@ -13,7 +13,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
   <div><dt>Fecha y hora</dt><dd><?= e(fecha_es($cab['f'])) ?>, <?= e($cab['h']) ?></dd></div>
   <div><dt>Resultado</dt><dd><b class="res-<?= $cab['res'] === 'AFIRMATIVO' ? 'si' : 'no' ?>"><?= $cab['res'] === 'AFIRMATIVO' ? 'Afirmativo' : 'Negativo' ?></b></dd></div>
   <div><dt>Mayoría requerida</dt><dd><?= e($cab['m']) ?></dd></div>
-  <div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div>
+  <?php if (!empty($cab['pres'])): ?><div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div><?php endif; ?>
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>
 </dl>
 
@@ -34,7 +34,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 <?php if (!empty($det['nota'])): ?><p class="aviso"><?= e($det['nota']) ?></p><?php endif; ?>
 
 <section class="seccion" aria-labelledby="por-bloque">
-  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque<?= !empty($det['camara']) ? ' <span class="tenue pequeno">(según el bloque actual de cada legislador)</span>' : '' ?></h2>
+  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque<?= !empty($det['bloque_en_acta']) ? ' <span class="tenue pequeno">(según el bloque que figura en el acta)</span>' : (!empty($det['camara']) ? ' <span class="tenue pequeno">(según el bloque actual de cada legislador)</span>' : '') ?></h2>
   <div class="tabla-caja"><table class="tabla">
     <thead><tr><th scope="col">Bloque</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">Ausentes</th></tr></thead>
     <tbody>

@@ -194,6 +194,18 @@ final class Datos
         return self::leer('votaciones_mandato_actual')['_meta'] ?? [];
     }
 
+    /** @return list<array> estadísticas de un senador actual en mandatos anteriores al 10/12/2025 (una fila por mandato) */
+    public static function senadoAnteriores(string $slug): array
+    {
+        $r = self::leer('votaciones_senado_anteriores')['s:' . $slug] ?? [];
+        return array_values(array_filter($r, static fn($x) => ($x['votaciones'] ?? 0) > 0));
+    }
+
+    public static function senadoAnterioresMeta(): array
+    {
+        return self::leer('votaciones_senado_anteriores')['_meta'] ?? [];
+    }
+
     /** Resumen de participación en votaciones nominales de un diputado actual (o null). */
     public static function participacion(string $slug): ?array
     {
