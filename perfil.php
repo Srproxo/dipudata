@@ -559,6 +559,76 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <?php endif; ?>
             </div>
         </div>
+
+        <!-- Comisiones Oficiales Asignadas (HCDN / Senado) -->
+        <?php if (!empty($leg['comisiones'])): ?>
+        <div class="col-span-2 lg:col-span-1 rounded-xl p-4 bg-slate-50 border border-slate-200/80 space-y-2.5">
+            <div class="flex items-center justify-between text-xs text-slate-700 font-bold uppercase tracking-wider">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    Comisiones Asignadas (<?= count($leg['comisiones']) ?>)
+                </span>
+                <?php if (!empty($leg['banca'])): ?>
+                    <span class="font-mono text-[11px] font-bold text-slate-600 bg-white border border-slate-200 px-2 py-0.5 rounded">Banca #<?= e((string)$leg['banca']) ?></span>
+                <?php endif; ?>
+            </div>
+            <ul class="space-y-1.5 text-xs">
+                <?php foreach ($leg['comisiones'] as $com): ?>
+                    <li class="flex items-center justify-between gap-2 p-1.5 bg-white rounded-lg border border-slate-200/60">
+                        <span class="text-slate-800 font-medium text-[11px] truncate" title="<?= e($com['nombre']) ?>">
+                            <?= e($com['nombre']) ?>
+                        </span>
+                        <span class="shrink-0 px-2 py-0.5 rounded text-[10px] font-bold <?= $com['cargo'] === 'Presidente' ? 'bg-amber-100 text-amber-800 border border-amber-200' : ($com['cargo'] === 'Vicepresidente' ? 'bg-blue-100 text-blue-800 border border-blue-200' : 'bg-slate-100 text-slate-600 border border-slate-200') ?>">
+                            <?= e($com['cargo']) ?>
+                        </span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
+
+        <!-- Actividad Institucional: Viajes, Despacho y Dieta Oficial -->
+        <?php if (!empty($leg['viajes_ultimos_12_meses']) || !empty($leg['personal_despacho']) || !empty($leg['dieta']) || !empty($leg['banca'])): ?>
+        <div class="col-span-2 lg:col-span-1 rounded-xl p-4 bg-amber-50/50 border border-amber-200/80 space-y-2.5">
+            <div class="text-xs text-amber-900 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Transparencia & Actividad Oficial
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <?php if (isset($leg['viajes_ultimos_12_meses'])): ?>
+                <div class="p-2 bg-white rounded-lg border border-amber-100 text-center">
+                    <span class="block text-[10px] uppercase font-mono text-slate-400">Viajes Oficiales</span>
+                    <span class="font-bold text-slate-900 font-mono text-sm">✈️ <?= (int)$leg['viajes_ultimos_12_meses'] ?></span>
+                    <span class="block text-[9px] text-slate-500 mt-0.5">últimos 12 meses</span>
+                </div>
+                <?php endif; ?>
+
+                <?php if (!empty($leg['banca'])): ?>
+                <div class="p-2 bg-white rounded-lg border border-amber-100 text-center">
+                    <span class="block text-[10px] uppercase font-mono text-slate-400">Banca en Recinto</span>
+                    <span class="font-bold text-slate-900 font-mono text-sm">🏛️ #<?= e((string)$leg['banca']) ?></span>
+                    <span class="block text-[9px] text-slate-500 mt-0.5">HCDN Oficial</span>
+                </div>
+                <?php endif; ?>
+
+                <?php if (!empty($leg['personal_despacho']['agentes'])): ?>
+                <div class="p-2 bg-white rounded-lg border border-amber-100 text-center">
+                    <span class="block text-[10px] uppercase font-mono text-slate-400">Planta Despacho</span>
+                    <span class="font-bold text-slate-900 font-mono text-sm">👥 <?= (int)$leg['personal_despacho']['agentes'] ?> agentes</span>
+                    <span class="block text-[9px] text-slate-500 mt-0.5">~$<?= number_format($leg['personal_despacho']['gasto_mensual'] / 1000000, 1) ?>M/mes</span>
+                </div>
+                <?php endif; ?>
+
+                <?php if (!empty($leg['dieta']['bruto_mensual'])): ?>
+                <div class="p-2 bg-white rounded-lg border border-amber-100 text-center">
+                    <span class="block text-[10px] uppercase font-mono text-slate-400">Dieta Bruta</span>
+                    <span class="font-bold text-slate-900 font-mono text-sm">~$<?= number_format($leg['dieta']['bruto_mensual'] / 1000000, 1) ?>M</span>
+                    <span class="block text-[9px] text-slate-500 mt-0.5"><?= !empty($leg['dieta']['renuncia_aumento']) ? '✅ Renunció aumento' : 'Dieta vigente' ?></span>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endif; ?>
     </aside>
 </div> <!-- Cierre Header Grid (Bio + KPIs) -->
 

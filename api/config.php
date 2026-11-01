@@ -307,31 +307,52 @@ class Config
                     $legisladores[$mId]['estado'] = $m['estado'] ?? $legisladores[$mId]['estado'];
                     if (!empty($m['url_hcdn'])) $legisladores[$mId]['url_hcdn'] = $m['url_hcdn'];
                     if (!empty($m['url_comisiones'])) $legisladores[$mId]['url_comisiones'] = $m['url_comisiones'];
+                    if (!empty($m['foto_url'])) $legisladores[$mId]['foto_url'] = $m['foto_url'];
+                    if (isset($m['asistencia_historica'])) {
+                        $legisladores[$mId]['asistencia_historica'] = (float)$m['asistencia_historica'];
+                        $legisladores[$mId]['asistencia_pct'] = (float)$m['asistencia_historica'];
+                    }
+                    if (isset($m['lealtad_partidaria'])) {
+                        $legisladores[$mId]['lealtad_partidaria'] = (float)$m['lealtad_partidaria'];
+                        $legisladores[$mId]['lealtad_pct'] = (float)$m['lealtad_partidaria'];
+                    }
+                    if (isset($m['comisiones'])) $legisladores[$mId]['comisiones'] = $m['comisiones'];
+                    if (isset($m['viajes_ultimos_12_meses'])) $legisladores[$mId]['viajes_ultimos_12_meses'] = (int)$m['viajes_ultimos_12_meses'];
+                    if (isset($m['banca'])) $legisladores[$mId]['banca'] = $m['banca'];
+                    if (isset($m['personal_despacho'])) $legisladores[$mId]['personal_despacho'] = $m['personal_despacho'];
+                    if (isset($m['dieta'])) $legisladores[$mId]['dieta'] = $m['dieta'];
+                    if (isset($m['votaciones_metricas'])) $legisladores[$mId]['votaciones_metricas'] = $m['votaciones_metricas'];
                     continue;
                 }
                 $mSlug = $m['slug'] ?? preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', $m['nombre_completo'] ?? '')));
                 $legisladores[$mId] = [
-                    'id'                   => $mId,
-                    'id_congreso'          => (string)($m['id_congreso'] ?? "HCDN-{$mId}"),
-                    'cuit'                 => (string)($m['cuit'] ?? ''),
-                    'wiki_slug'            => (string)($m['wiki_slug'] ?? ''),
-                    'slug'                 => $mSlug,
-                    'nombre_completo'      => (string)$m['nombre_completo'],
-                    'camara'               => (string)$m['camara'],
-                    'provincia'            => (string)$m['provincia'],
-                    'bloque_actual'        => (string)($m['bloque_actual'] ?? 'General'),
-                    'bloque'               => (string)($m['bloque_actual'] ?? 'General'),
-                    'estado'               => (string)($m['estado'] ?? 'Activo'),
-                    'biografia'            => (string)($m['biografia'] ?? ''),
-                    'foto_url'             => (string)($m['foto_url'] ?? ''),
-                    'asistencia_historica' => (float)($m['asistencia_historica'] ?? 90.0),
-                    'lealtad_partidaria'   => (float)($m['lealtad_partidaria'] ?? 90.0),
-                    'asistencia_pct'       => (float)($m['asistencia_historica'] ?? 90.0),
-                    'lealtad_pct'          => (float)($m['lealtad_partidaria'] ?? 90.0),
-                    'mandatos'             => (int)($m['mandatos'] ?? 1),
-                    'url_hcdn'             => $m['url_hcdn'] ?? null,
-                    'url_comisiones'       => $m['url_comisiones'] ?? null,
-                    'updated_at'           => '2025-05-15 12:00:00',
+                    'id'                      => $mId,
+                    'id_congreso'             => (string)($m['id_congreso'] ?? "HCDN-{$mId}"),
+                    'cuit'                    => (string)($m['cuit'] ?? ''),
+                    'wiki_slug'               => (string)($m['wiki_slug'] ?? ''),
+                    'slug'                    => $mSlug,
+                    'nombre_completo'         => (string)$m['nombre_completo'],
+                    'camara'                  => (string)$m['camara'],
+                    'provincia'               => (string)$m['provincia'],
+                    'bloque_actual'           => (string)($m['bloque_actual'] ?? 'General'),
+                    'bloque'                  => (string)($m['bloque_actual'] ?? 'General'),
+                    'estado'                  => (string)($m['estado'] ?? 'Activo'),
+                    'biografia'               => (string)($m['biografia'] ?? ''),
+                    'foto_url'                => (string)($m['foto_url'] ?? ''),
+                    'asistencia_historica'    => (float)($m['asistencia_historica'] ?? 90.0),
+                    'lealtad_partidaria'      => (float)($m['lealtad_partidaria'] ?? 90.0),
+                    'asistencia_pct'          => (float)($m['asistencia_historica'] ?? 90.0),
+                    'lealtad_pct'             => (float)($m['lealtad_partidaria'] ?? 90.0),
+                    'mandatos'                => (int)($m['mandatos'] ?? 1),
+                    'url_hcdn'                => $m['url_hcdn'] ?? null,
+                    'url_comisiones'          => $m['url_comisiones'] ?? null,
+                    'comisiones'              => $m['comisiones'] ?? [],
+                    'viajes_ultimos_12_meses' => (int)($m['viajes_ultimos_12_meses'] ?? 0),
+                    'banca'                   => $m['banca'] ?? null,
+                    'personal_despacho'       => $m['personal_despacho'] ?? null,
+                    'dieta'                   => $m['dieta'] ?? null,
+                    'votaciones_metricas'     => $m['votaciones_metricas'] ?? null,
+                    'updated_at'              => '2025-05-15 12:00:00',
                 ];
             }
         }
