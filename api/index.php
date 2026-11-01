@@ -278,7 +278,7 @@ if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {
     $bloque    = Security::sanitizeString($_GET['bloque'] ?? '', 80);
     $estado    = Security::validateEnum($_GET['estado'] ?? '', ['Activo', 'Inactivo', 'Mandato Cumplido', 'Candidato'], '');
     $page      = Security::validateInt($_GET['page'] ?? 1, 1, 1000, 1);
-    $limit     = Security::validateInt($_GET['limit'] ?? 250, 1, 1000, 250);
+    $limit     = Security::validateInt($_GET['limit'] ?? 250, 1, 3500, 250);
 
     $todos = fetchAllLegisladores($pdo);
 
@@ -364,6 +364,8 @@ if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {
             'crecimiento_real_usd_pct'            => $patrimonio['crecimiento_real_usd_pct'],
             'tendencia'                           => $patrimonio['tendencia'],
         ];
+        $leg['patrimonio_usd_actual'] = $patrimonio['patrimonio_actual_usd'];
+        $leg['crecimiento_real_usd_pct'] = $patrimonio['crecimiento_real_usd_pct'];
         $items[] = $leg;
     }
 

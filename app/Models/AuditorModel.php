@@ -531,8 +531,42 @@ class AuditorModel
                 ['bloque' => 'PRO', 'total' => 1, 'porcentaje' => 33.3],
             ],
             'socios_frecuentes'        => [
-                ['nombre' => 'Miguel Ángel Pichetto', 'bloque' => 'Encuentro Federal', 'camara' => 'Diputados', 'proyectos_compartidos' => 2],
-                ['nombre' => 'Cristian Ritondo', 'bloque' => 'PRO', 'camara' => 'Diputados', 'proyectos_compartidos' => 1],
+                [
+                    'nombre'                => 'Miguel Ángel Pichetto',
+                    'slug'                  => 'miguel-angel-pichetto',
+                    'bloque'                => 'Encuentro Federal',
+                    'camara'                => 'Diputados',
+                    'proyectos_compartidos' => 2,
+                    'proyectos'             => [
+                        [
+                            'expediente' => '1240-D-2024',
+                            'titulo'     => 'Régimen de Promoción de Biocombustibles y Economías Regionales',
+                            'ley_slug'   => 'paquete-fiscal',
+                            'coautores'  => ['Emilio Monzó', 'Nicolás Massot', 'Florencio Randazzo'],
+                        ],
+                        [
+                            'expediente' => '0445-D-2024',
+                            'titulo'     => 'Compensación de Cajas Previsionales Provinciales no Transferidas',
+                            'ley_slug'   => 'movilidad-jubilatoria',
+                            'coautores'  => ['Alejandra Torres', 'Carlos Gutiérrez'],
+                        ],
+                    ],
+                ],
+                [
+                    'nombre'                => 'Cristian Ritondo',
+                    'slug'                  => 'cristian-ritondo',
+                    'bloque'                => 'PRO',
+                    'camara'                => 'Diputados',
+                    'proyectos_compartidos' => 1,
+                    'proyectos'             => [
+                        [
+                            'expediente' => '0210-D-2024',
+                            'titulo'     => 'Ley de Seguridad Interior y Abordaje Integral del Crimen Organizado',
+                            'ley_slug'   => 'ley-antimafias',
+                            'coautores'  => ['Diego Santilli', 'María Eugenia Vidal'],
+                        ],
+                    ],
+                ],
             ],
         ];
     }
@@ -580,6 +614,7 @@ class AuditorModel
                 'id'                       => 1,
                 'promesa_texto'            => 'Garantizar el financiamiento de las universidades públicas nacionales',
                 'ley_vinculada'            => 'Ley de Financiamiento Integral de Universidades Nacionales',
+                'ley_slug'                 => 'financiamiento-universitario',
                 'expediente'               => '0045-D-2024',
                 'estado'                   => 'Cumplida',
                 'descripcion_verificacion' => 'Votó AFIRMATIVO en la ley de financiamiento universitario.',
@@ -591,6 +626,7 @@ class AuditorModel
                 'id'                       => 2,
                 'promesa_texto'            => 'Defender de forma irrestricta los bosques nativos de Córdoba',
                 'ley_vinculada'            => 'Modificación a la Ley de Manejo del Fuego',
+                'ley_slug'                 => 'manejo-del-fuego',
                 'expediente'               => '0091-D-2024',
                 'estado'                   => 'Incumplida',
                 'descripcion_verificacion' => 'Votó AFIRMATIVO en la flexibilización de plazos para quemas en perjuicio provincial.',

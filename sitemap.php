@@ -30,6 +30,7 @@ $today = gmdate('Y-m-d');
 $mvcUrls = [
     ['/', 'daily', '1.0'],
     ['/match-360', 'weekly', '0.9'],
+    ['/leyes', 'daily', '0.9'],
     ['/blog', 'daily', '0.8'],
 ];
 
@@ -40,6 +41,10 @@ try {
     foreach ((new \App\Models\LegisladorModel())->ejes() as $e) {
         $slug = $e['slug_seo'] ?? \App\Config\Database::slugify($e['nombre_eje'] ?? $e['nombre']);
         $mvcUrls[] = ["/eje/{$slug}", 'weekly', '0.85'];
+    }
+    $leyModel = new \App\Models\LeyModel();
+    foreach ($leyModel->catalogo() as $slugLey => $lData) {
+        $mvcUrls[] = ["/ley/{$slugLey}", 'weekly', '0.85'];
     }
     $blogModel = new \App\Models\BlogModel();
     foreach (array_keys($blogModel->categorias()) as $cat) {

@@ -6,6 +6,9 @@ import {
   MapPin,
   CheckCircle2,
   Users,
+  Phone,
+  Mail,
+  MessageCircle,
 } from 'lucide-react';
 import { LegisladorResumen } from '../types/legisdata';
 import { AvatarLegislador } from './AvatarLegislador';
@@ -14,6 +17,7 @@ import {
   formatUSD,
   getBloqueBadgeStyle,
   getLegisladorUrl,
+  getMandatoYContacto,
 } from '../utils/formatters';
 
 interface LegisladorCardProps {
@@ -33,6 +37,7 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
   const perfilUrl = getLegisladorUrl(legislador);
   const esActivo = legislador.estado === 'Activo';
   const votoFiltrado = filtroLey && legislador.votos ? legislador.votos[filtroLey] : null;
+  const mandatoContacto = getMandatoYContacto(legislador);
 
   return (
     <a
@@ -92,6 +97,19 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
             >
               <span>🏛️ {legislador.mandatos} {legislador.mandatos === 1 ? 'mandato' : 'mandatos'}</span>
             </span>
+
+            {mandatoContacto.esActivo ? (
+              <span
+                className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200"
+                title={`Fin de mandato: 10 de diciembre de ${mandatoContacto.anioFin} (${mandatoContacto.mesesRestantes} meses restantes)`}
+              >
+                <span>⏳ Renueva {mandatoContacto.anioFin}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-500 border border-slate-200">
+                <span>Mandato Cumplido</span>
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -224,24 +242,91 @@ export const LegisladorCard: React.FC<LegisladorCardProps> = ({
             )}
           </div>
           <div className="flex items-center justify-between gap-1 mt-0.5">
-            <span className="font-mono tabular-nums font-bold text-slate-900 text-[11px] truncate">
-              {formatUSD(legislador.patrimonio_usd_actual)}
-            </span>
-            <span
-              className={`inline-flex items-center font-mono tabular-nums text-[10px] font-semibold px-1 py-0.2 rounded ${
-                isPatrimonioPositivo
-                  ? 'text-emerald-700 bg-emerald-100'
-                  : 'text-rose-700 bg-rose-100'
-              }`}
-            >
-              {isPatrimonioPositivo ? (
-                <TrendingUp className="w-2.5 h-2.5 mr-0.5" />
-              ) : (
-                <TrendingDown className="w-2.5 h-2.5 mr-0.5" />
-              )}
-              {formatPct(legislador.crecimiento_real_usd_pct, true)}
-            </span>
+            {(legislador.patrimonio_usd_actual || 0) > 0 ? (
+              <>
+                <span className="font-mono tabular-nums font-bold text-slate-900 text-[11px] truncate">
+                  {formatUSD(legislador.patrimonio_usd_actual)}
+                </span>
+                <span
+                  className={`inline-flex items-center font-mono tabular-nums text-[10px] font-semibold px-1 py-0.2 rounded ${
+                    isPatrimonioPositivo
+                      ? 'text-emerald-700 bg-emerald-100'
+                      : 'text-rose-700 bg-rose-100'
+                  }`}
+                >
+                  {isPatrimonioPositivo ? (
+                    <TrendingUp className="w-2.5 h-2.5 mr-0.5" />
+                  ) : (
+                    <TrendingDown className="w-2.5 h-2.5 mr-0.5" />
+                  )}
+                  {formatPct(legislador.crecimiento_real_usd_pct, true)}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="font-mono tabular-nums text-slate-400 text-[11px] italic">
+                  Sin DDJJ
+                </span>
+                <span className="text-[10px] text-slate-400 bg-slate-100 px-1 py-0.5 rounded border border-slate-200">
+                  En trámite
+                </span>
+              </>
+            )}
           </div>
+        </div>
+      </div>
+
+      {/* Barra de Contacto Directo Ciudadano & Redes */}
+      <div
+        className="pt-2.5 mt-2 border-t border-slate-100 flex items-center justify-between gap-1 text-xs"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-500 truncate" title={`Despacho: ${mandatoContacto.telefono}`}>
+          <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = `tel:${mandatoContacto.telefono.replace(/[^0-9+]/g, '')}`;
+            }}
+            className="hover:text-blue-700 hover:underline font-mono truncate cursor-pointer"
+          >
+            {mandatoContacto.telefono}
+          </span>
+        </div>
+        <div className="flex items-center gap-1 shrink-0">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = `mailto:${mandatoContacto.email}`;
+            }}
+            className="p-1.5 rounded-md hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition"
+            title={`Email oficial: ${mandatoContacto.email}`}
+          >
+            <Mail className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(mandatoContacto.xUrl, '_blank', 'noopener,noreferrer');
+            }}
+            className="p-1.5 rounded-md hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition font-mono text-[10px] font-bold"
+            title="Buscar en X / Twitter"
+          >
+            𝕏
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(mandatoContacto.whatsappUrl, '_blank', 'noopener,noreferrer');
+            }}
+            className="p-1.5 rounded-md hover:bg-emerald-50 text-emerald-600 hover:text-emerald-700 transition"
+            title="Enviar mensaje por WhatsApp al despacho"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </a>

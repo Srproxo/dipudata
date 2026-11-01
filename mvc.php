@@ -118,6 +118,70 @@ switch (true) {
         ], $data);
         break;
 
+    case (bool)preg_match("#^/ley/({$slug})$#", $path, $m):
+        $slugLey = $m[1];
+        try {
+            $data = (new \App\Controllers\LegisladorController())->ley($slugLey);
+        } catch (\Throwable) {
+            $data = (new \App\Controllers\LegisladorController(new \App\Models\LegisladorModel(null)))->ley($slugLey);
+        }
+        if ($data === null) {
+            render_404();
+            break;
+        }
+        $ley = $data['ley'];
+        $urlLey = SITE_URL . "/ley/{$ley['slug']}";
+        render('ley', [
+            'title'       => "{$ley['titulo_corto']} ({$ley['expediente']}) | Resumen, Votación Nominal y Debate | DipuData",
+            'description' => "Auditoría cívica de {$ley['titulo_corto']}. De qué trata, quién la presentó, qué implica y quién votó a favor o en contra en el Congreso de la Nación.",
+            'canonical'   => $urlLey,
+            'jsonld'      => [
+                '@context' => 'https://schema.org',
+                '@graph'   => [
+                    [
+                        '@type'                 => 'Legislation',
+                        'name'                  => $ley['titulo'],
+                        'alternateName'         => $ley['titulo_corto'],
+                        'legislationIdentifier' => $ley['expediente'],
+                        'url'                   => $urlLey,
+                        'legislationDate'       => $ley['fecha_votacion'],
+                        'abstract'              => $ley['resumen'],
+                        'creator'               => [
+                            '@type' => 'Organization',
+                            'name'  => $ley['quien_la_presento'],
+                        ],
+                    ],
+                    self_breadcrumb([['Leyes Tratadas', '/leyes'], [$ley['titulo_corto'], "/ley/{$ley['slug']}"]]),
+                ],
+            ],
+        ], $data);
+        break;
+
+    case $path === '/leyes':
+        try {
+            $data = (new \App\Controllers\LegisladorController())->leyes();
+        } catch (\Throwable) {
+            $data = (new \App\Controllers\LegisladorController(new \App\Models\LegisladorModel(null)))->leyes();
+        }
+        render('leyes_hub', [
+            'title'       => 'Leyes Clave del Congreso de la Nación | Votaciones Nominales y Resúmenes | DipuData',
+            'description' => 'Directorio y archivo de leyes votadas en el Congreso Nacional. De qué tratan, quién las presentó, qué implican y cómo votó cada diputado y senador.',
+            'canonical'   => SITE_URL . '/leyes',
+            'jsonld'      => [
+                '@context' => 'https://schema.org',
+                '@graph'   => [
+                    [
+                        '@type'       => 'CollectionPage',
+                        'name'        => 'Leyes Clave del Congreso de la Nación',
+                        'url'         => SITE_URL . '/leyes',
+                        'description' => 'Archivo cívico de leyes votadas con desglose nominal de votos por bloque y provincia.',
+                    ],
+                    self_breadcrumb([['Leyes Tratadas', '/leyes']]),
+                ],
+            ],
+        ], $data);
+        break;
+
     case $path === '/match':
         header('Location: /match-360', true, 301);
         exit;

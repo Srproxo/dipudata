@@ -54,6 +54,7 @@ class LegisladorController
             'conflictos_transparencia' => $this->model->conflictosTransparencia((int)$leg['id']),
             'votaciones'          => $this->model->votaciones($leg['id_recinto']),
             'ficha_wiki'          => $this->model->fichaWikipedia($leg['slug'] ?? '', $leg),
+            'mandato_contacto'    => $this->model->obtenerDatosMandatoYContacto($leg),
         ];
     }
 
@@ -85,5 +86,40 @@ class LegisladorController
     public function listado(): array
     {
         return $this->model->all();
+    }
+
+    /**
+     * Datos para la vista de ley (/ley/{slug}).
+     * @return array|null
+     */
+    public function ley(string $slug): ?array
+    {
+        $leyModel = new \App\Models\LeyModel($this->model->getPdo());
+        $votacion = $leyModel->obtenerVotacionCompleta($slug);
+        if ($votacion === null) {
+            return null;
+        }
+
+        $todosEjes = $this->model->ejes();
+        $catalogo = $leyModel->catalogo();
+        $otrasLeyes = array_values(array_filter($catalogo, fn($l) => $l['slug'] !== $slug));
+
+        return array_merge($votacion, [
+            'todos_ejes'  => $todosEjes,
+            'otras_leyes' => array_slice($otrasLeyes, 0, 6),
+        ]);
+    }
+
+    /**
+     * Catálogo completo de leyes tratadas (/leyes).
+     * @return array
+     */
+    public function leyes(): array
+    {
+        $leyModel = new \App\Models\LeyModel($this->model->getPdo());
+        return [
+            'leyes'      => array_map(fn($l) => \App\Models\LeyModel::enriquecerLey($l), array_values($leyModel->catalogo())),
+            'todos_ejes' => $this->model->ejes(),
+        ];
     }
 }

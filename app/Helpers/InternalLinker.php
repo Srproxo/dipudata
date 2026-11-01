@@ -4,16 +4,118 @@ declare(strict_types=1);
 namespace App\Helpers;
 
 use App\Models\LegisladorModel;
+use App\Models\LeyModel;
 
 /**
- * Inyecta enlaces internos (Spoke -> Perfil) en el HTML de artículos del blog.
+ * Inyecta enlaces internos (Spoke -> Perfil, Ley, Eje) en el HTML.
  * - Solo reemplaza en nodos de texto (nunca dentro de <a>, <h1-6>, <script>, <style> ni atributos).
- * - Enlaza solo la primera mención de cada legislador (evita sobre-optimización).
- * - Prioriza nombres más largos para evitar coincidencias parciales.
+ * - Enlaza solo la primera mención de cada entidad (evita sobre-optimización).
+ * - Prioriza cadenas más largas para evitar coincidencias parciales.
  */
 class InternalLinker
 {
     private const ZONAS_EXCLUIDAS = ['a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'script', 'style', 'code', 'pre'];
+
+    /**
+     * Enlace canónico a una ley.
+     */
+    public static function urlLey(string $slug): string
+    {
+        return '/ley/' . rawurlencode($slug);
+    }
+
+    /**
+     * Enlaza automáticamente cualquier mención de una ley en un texto plano o HTML.
+     */
+    public static function linkearLey(string $nombreLey, ?string $textoVisible = null): string
+    {
+        $leyModel = new LeyModel();
+        $ley = $leyModel->findByName($nombreLey) ?? $leyModel->findBySlug($nombreLey);
+        $visible = $textoVisible ?? $nombreLey;
+
+        if ($ley) {
+            $url = self::urlLey($ley['slug']);
+            $titulo = htmlspecialchars("Ficha técnica, votación y resumen de: {$ley['titulo']}", ENT_QUOTES, 'UTF-8');
+            return sprintf(
+                '<a href="%s" title="%s" class="text-blue-600 hover:text-blue-800 font-semibold underline decoration-blue-300 hover:decoration-blue-600 underline-offset-2 transition-colors">%s</a>',
+                htmlspecialchars($url, ENT_QUOTES, 'UTF-8'),
+                $titulo,
+                htmlspecialchars($visible, ENT_QUOTES, 'UTF-8')
+            );
+        }
+
+        return htmlspecialchars($visible, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Inyecta enlaces a leyes en fragmentos HTML o de texto.
+     */
+    public static function injectLeyes(string $html, int $maxLinks = 10): string
+    {
+        $leyModel = new LeyModel();
+        $catalogo = $leyModel->catalogo();
+
+        $anclasLeyes = [];
+        foreach ($catalogo as $ley) {
+            $url = self::urlLey($ley['slug']);
+            $anclaItem = [
+                'url'    => $url,
+                'titulo' => sprintf('Debate, resumen y votación nominal: %s (%s)', $ley['titulo_corto'], $ley['expediente']),
+                'slug'   => $ley['slug'],
+            ];
+            $anclasLeyes[$ley['titulo']] = $anclaItem;
+            $anclasLeyes[$ley['titulo_corto']] = $anclaItem;
+            foreach ($ley['aliases'] as $alias) {
+                if (!isset($anclasLeyes[$alias])) {
+                    $anclasLeyes[$alias] = $anclaItem;
+                }
+            }
+        }
+
+        uksort($anclasLeyes, fn($a, $b) => mb_strlen($b) <=> mb_strlen($a));
+
+        $partes = preg_split('/(<[^>]+>)/u', $html, -1, PREG_SPLIT_DELIM_CAPTURE) ?: [$html];
+        $pila = [];
+        $enlazados = [];
+
+        foreach ($partes as $i => $parte) {
+            if ($parte === '') continue;
+            if ($parte[0] === '<') {
+                if (preg_match('#^<\s*(/)?\s*([a-z0-9]+)#i', $parte, $m)) {
+                    $tag = strtolower($m[2]);
+                    if (in_array($tag, self::ZONAS_EXCLUIDAS, true)) {
+                        $m[1] === '/' ? array_pop($pila) : $pila[] = $tag;
+                    }
+                }
+                continue;
+            }
+            if ($pila !== [] || count($enlazados) >= $maxLinks) {
+                continue;
+            }
+            foreach ($anclasLeyes as $nombre => $a) {
+                if (isset($enlazados[$a['slug']]) || count($enlazados) >= $maxLinks) {
+                    continue;
+                }
+                $patron = '/(?<![\p{L}\p{N}])' . preg_quote(htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'), '/') . '(?![\p{L}\p{N}])/u';
+                $nuevo = preg_replace_callback($patron, function ($m) use ($a) {
+                    return sprintf(
+                        '<a href="%s" title="%s" class="text-blue-700 font-semibold underline decoration-blue-300 underline-offset-2 hover:decoration-blue-700">%s</a>',
+                        htmlspecialchars($a['url'], ENT_QUOTES, 'UTF-8'),
+                        htmlspecialchars($a['titulo'], ENT_QUOTES, 'UTF-8'),
+                        $m[0]
+                    );
+                }, $parte, 1, $count);
+                if ($count > 0 && $nuevo !== null) {
+                    $parte = $nuevo;
+                    $enlazados[$a['slug']] = true;
+                    $partes[$i] = $parte;
+                    break;
+                }
+            }
+        }
+
+        return implode('', $partes);
+    }
 
     /** @param array<int, array> $legisladores */
     public static function inject(string $html, array $legisladores, int $maxLinks = 10): array

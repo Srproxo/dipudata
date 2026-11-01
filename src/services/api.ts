@@ -338,10 +338,16 @@ function normalizarLegisladorDesdeApi(item: Record<string, unknown>): Legislador
       item.mandatos ?? fallbackLocal?.mandatos ?? 1
     ),
     patrimonio_usd_actual: Number(
-      item.patrimonio_usd_actual ?? fallbackLocal?.patrimonio_usd_actual ?? 0
+      item.patrimonio_usd_actual ??
+        (item.patrimonio_resumen as Record<string, unknown> | undefined)?.patrimonio_actual_usd ??
+        fallbackLocal?.patrimonio_usd_actual ??
+        0
     ),
     crecimiento_real_usd_pct: Number(
-      item.crecimiento_real_usd_pct ?? fallbackLocal?.crecimiento_real_usd_pct ?? 0
+      item.crecimiento_real_usd_pct ??
+        (item.patrimonio_resumen as Record<string, unknown> | undefined)?.crecimiento_real_usd_pct ??
+        fallbackLocal?.crecimiento_real_usd_pct ??
+        0
     ),
     vector_ideologico: {
       Salud: Number(vectorRaw.Salud ?? fallbackLocal?.vector_ideologico.Salud ?? 50),
@@ -360,7 +366,7 @@ function normalizarLegisladorDesdeApi(item: Record<string, unknown>): Legislador
 
 export async function fetchLegisladores(): Promise<LegisladorResumen[]> {
   try {
-    const res = await fetch('/api/legisladores?limit=300', {
+    const res = await fetch('/api/legisladores?limit=2500', {
       headers: { Accept: 'application/json' },
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

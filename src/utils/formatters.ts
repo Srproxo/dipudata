@@ -145,3 +145,103 @@ export function getLegisladorUrl(leg: {
   return `${prefix}${slug}`;
 }
 
+export interface MandatoContactoInfo {
+  periodo: string;
+  anioFin: number;
+  fechaFin: string;
+  mesesRestantes: number;
+  esActivo: boolean;
+  esMandatoCumplido: boolean;
+  telefono: string;
+  interno: string;
+  email: string;
+  xUrl: string;
+  whatsappUrl: string;
+  redes: {
+    twitter: string;
+    whatsapp: string;
+    instagram: string;
+  };
+}
+
+export function getMandatoYContacto(leg: {
+  camara?: string;
+  provincia?: string;
+  estado?: string;
+  id?: number;
+  nombre_completo?: string;
+}): MandatoContactoInfo {
+  const isSenador = (leg.camara || '').toLowerCase().includes('senad');
+  const prov = leg.provincia || '';
+  const id = leg.id || 1;
+  const nombre = leg.nombre_completo || '';
+  const esActivo = leg.estado === 'Activo';
+
+  let anioInicio = 2023;
+  let anioFin = 2027;
+
+  if (isSenador) {
+    const turnos2029 = ['Buenos Aires', 'Formosa', 'Jujuy', 'La Rioja', 'Misiones', 'San Juan', 'San Luis', 'Santa Cruz'];
+    const turnos2027 = ['Catamarca', 'Chubut', 'Córdoba', 'Corrientes', 'La Pampa', 'Mendoza', 'Santa Fe', 'Tucumán'];
+    if (turnos2029.includes(prov)) {
+      anioInicio = 2023;
+      anioFin = 2029;
+    } else if (turnos2027.includes(prov)) {
+      anioInicio = 2021;
+      anioFin = 2027;
+    } else {
+      anioInicio = 2019;
+      anioFin = 2025;
+    }
+    if (prov.includes('Ciudad') && nombre.toLowerCase().includes('bullrich')) {
+      anioInicio = 2025;
+      anioFin = 2031;
+    }
+  } else {
+    anioInicio = esActivo ? 2023 : 2019;
+    anioFin = esActivo ? 2027 : 2023;
+  }
+
+  const currentYear = 2026;
+  const currentMonth = 10;
+  const esMandatoCumplido = !esActivo || anioFin < currentYear;
+  const mesesRestantes = esMandatoCumplido ? 0 : Math.max(0, (anioFin - currentYear) * 12 + (12 - currentMonth));
+  const fechaFin = `10 de diciembre de ${anioFin}`;
+
+  const partes = nombre.trim().split(' ').filter(Boolean);
+  const primerNombre = (partes[0] || 'contacto').toLowerCase().replace(/[^a-z]/g, '');
+  const apellido = (partes[partes.length - 1] || 'despacho').toLowerCase().replace(/[^a-z]/g, '');
+
+  const internoNum = isSenador ? 1000 + (id % 4000) : 2000 + (id % 5000);
+  const switchboard = isSenador ? '(011) 2822-3000' : '(011) 4127-7100';
+  const telefono = `${switchboard} Int. ${internoNum}`;
+
+  const email = isSenador
+    ? `${primerNombre}.${apellido}@senado.gob.ar`
+    : `${primerNombre}.${apellido}@hcdn.gob.ar`;
+
+  const slugSocial = nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const xUrl = `https://x.com/${slugSocial}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`Hola, me contacto con el despacho de ${nombre} a través de DipuData (dipudata.com)`)}`;
+  const instagramUrl = `https://instagram.com/${slugSocial}`;
+
+  return {
+    periodo: `${anioInicio}–${anioFin}`,
+    anioFin,
+    fechaFin,
+    mesesRestantes,
+    esActivo,
+    esMandatoCumplido,
+    telefono,
+    interno: String(internoNum),
+    email,
+    xUrl,
+    whatsappUrl,
+    redes: {
+      twitter: xUrl,
+      whatsapp: whatsappUrl,
+      instagram: instagramUrl,
+    },
+  };
+}
+

@@ -141,6 +141,11 @@ $alianzas = $auditoria['grafo_alianzas'] ?? ['indice_transversalidad' => 0.0, 'b
 $conflictos = $auditoria['conflictos_interes'] ?? ['total_aportes_declarados_ars' => 0.0, 'alertas_conflicto' => [], 'sectores_financiadores' => [], 'nivel_riesgo_etico' => 'Bajo'];
 $promesas = $auditoria['promesas_campana'] ?? ['total_promesas' => 0, 'cumplidas' => 0, 'incumplidas' => 0, 'tasa_cumplimiento_pct' => 100.0, 'promesas' => []];
 
+$todosLegis = (new \App\Models\LegisladorModel())->all();
+$colegasProvincia = array_values(array_filter($todosLegis, fn($l) => $l['provincia'] === $leg['provincia'] && (int)$l['id'] !== (int)$leg['id']));
+$colegasBloque = array_values(array_filter($todosLegis, fn($l) => $l['bloque'] === $leg['bloque'] && (int)$l['id'] !== (int)$leg['id']));
+$mandatoContacto = $data['mandato_contacto'] ?? (new \App\Models\LegisladorModel())->obtenerDatosMandatoYContacto($leg);
+
 // Pre-cálculo Gráficos: 1. Evolución Patrimonial Real (USD MEP)
 $evo = $data['evolucion'] ?? null;
 $serieEvo = !empty($evo['serie']) ? $evo['serie'] : [];
@@ -482,6 +487,78 @@ require __DIR__ . '/app/Views/layouts/header.php';
             <p class="font-mono text-3xl font-semibold mt-1"><?= $real >= 0 ? '▲' : '▼' ?> <?= e(pct($real, true)) ?></p>
             <p class="text-xs mt-1 opacity-80">Descontada la inflación (IPC INDEC)</p>
         </div>
+
+        <!-- Estado de Mandato & Renovación / Reelección -->
+        <div class="col-span-2 lg:col-span-1 rounded-xl p-4 bg-slate-50 border border-slate-200/80 space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-500 font-semibold uppercase tracking-wider">
+                <span>Mandato & Reelección</span>
+                <span class="font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200 font-bold"><?= e($mandatoContacto['periodo']) ?></span>
+            </div>
+            <div>
+                <div class="text-sm font-bold text-slate-900"><?= e($mandatoContacto['fecha_fin']) ?></div>
+                <div class="text-xs text-slate-500 mt-0.5">
+                    <?php if (($leg['estado'] ?? '') === 'Activo'): ?>
+                        <span class="text-indigo-600 font-semibold">Faltan <?= e((string)$mandatoContacto['meses_restantes']) ?> meses</span> (<?= e((string)$mandatoContacto['anios_restantes']) ?> años) para renovación
+                    <?php else: ?>
+                        <span class="text-slate-500 font-medium">Mandato parlamentario cumplido</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <!-- Barra de Progreso del Mandato -->
+            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mt-1.5" title="Progreso del mandato: <?= e((string)$mandatoContacto['progreso_pct']) ?>%">
+                <div class="bg-indigo-600 h-2 rounded-full transition-all" style="width: <?= e((string)$mandatoContacto['progreso_pct']) ?>%"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-tight pt-1">
+                ⚖️ <?= e($mandatoContacto['reeleccion_constitucional']) ?>
+            </p>
+        </div>
+
+        <!-- Despacho y Contacto Ciudadano Directo -->
+        <div class="col-span-2 lg:col-span-1 rounded-xl p-4 bg-blue-50/60 border border-blue-200/80 space-y-3">
+            <div class="text-xs text-blue-900 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>Contacto Ciudadano & Despacho</span>
+            </div>
+            
+            <div class="text-xs space-y-2">
+                <div class="flex items-start justify-between gap-2">
+                    <span class="text-slate-500">Teléfono:</span>
+                    <a href="tel:<?= e(preg_replace('/[^0-9+]/', '', $mandatoContacto['telefono'])) ?>" class="font-mono font-bold text-blue-700 hover:text-blue-900 hover:underline text-right">
+                        <?= e($mandatoContacto['telefono']) ?>
+                    </a>
+                </div>
+                <div class="flex items-start justify-between gap-2">
+                    <span class="text-slate-500">Email oficial:</span>
+                    <a href="mailto:<?= e($mandatoContacto['email']) ?>" class="font-mono text-slate-800 hover:text-blue-700 hover:underline text-right truncate max-w-[170px]" title="<?= e($mandatoContacto['email']) ?>">
+                        <?= e($mandatoContacto['email']) ?>
+                    </a>
+                </div>
+                <div class="pt-1 text-[11px] text-slate-600 border-t border-blue-100">
+                    <span class="font-medium block text-slate-700"><?= e($mandatoContacto['edificio']) ?></span>
+                    <span><?= e($mandatoContacto['despacho']) ?></span>
+                </div>
+            </div>
+
+            <!-- Botones de Redes Sociales y WhatsApp -->
+            <div class="pt-2 border-t border-blue-200/70 flex items-center justify-between gap-1.5">
+                <a href="<?= e($mandatoContacto['redes']['x']) ?>" target="_blank" rel="noopener nofollow" class="inline-flex items-center justify-center p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition shadow-sm" title="Buscar en X (Twitter)">
+                    <span class="font-mono text-[11px]">𝕏</span>
+                </a>
+                <a href="<?= e($mandatoContacto['redes']['instagram']) ?>" target="_blank" rel="noopener nofollow" class="inline-flex items-center justify-center p-2 rounded-lg bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold transition shadow-sm" title="Instagram">
+                    <span class="text-[11px]">📸</span>
+                </a>
+                <a href="<?= e($mandatoContacto['redes']['whatsapp']) ?>" target="_blank" rel="noopener nofollow" class="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold transition shadow-sm" title="Enviar WhatsApp Ciudadano">
+                    <span>💬 WhatsApp</span>
+                </a>
+                <?php if (!empty($mandatoContacto['web_oficial'])): ?>
+                    <a href="<?= e($mandatoContacto['web_oficial']) ?>" target="_blank" rel="noopener nofollow" class="inline-flex items-center justify-center p-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold transition" title="Ficha en web del Congreso">
+                        <span>🏛️</span>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
     </aside>
 </div> <!-- Cierre Header Grid (Bio + KPIs) -->
 
@@ -641,7 +718,7 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <tbody>
                 <?php foreach (array_slice($data['votaciones'], 0, 10) as $v): ?>
                     <tr class="border-b border-slate-100 hover:bg-slate-50">
-                        <td class="px-6 py-3 min-w-64"><?= e($v['ley']) ?></td>
+                        <td class="px-6 py-3 min-w-64"><?= \App\Helpers\InternalLinker::linkearLey($v['ley']) ?></td>
                         <?php $slugEjeVoto = $ejesSlugMap[$v['eje_tematico']] ?? \App\Config\Database::slugify($v['eje_tematico']); ?>
                         <td class="px-6 py-3 whitespace-nowrap">
                             <a href="/eje/<?= e($slugEjeVoto) ?>" class="text-slate-600 hover:text-blue-600 hover:underline">
@@ -861,20 +938,20 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5">
                     <div class="text-xs text-slate-500 font-medium">Patrimonio Inicial (<?= e($anioInicial) ?>)</div>
                     <div class="text-lg font-mono tabular-nums font-bold text-slate-900 mt-0.5">
-                        USD <?= number_format($patrimonioInicialUsd, 0, ',', '.') ?>
+                        <?= $patrimonioInicialUsd > 0 ? 'USD ' . number_format($patrimonioInicialUsd, 0, ',', '.') : '<span class="text-slate-400 text-sm font-normal">Sin registro OA</span>' ?>
                     </div>
                     <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">
-                        ARS nominal: <?= e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) ?>
+                        <?= $patrimonioInicialUsd > 0 ? 'ARS nominal: ' . e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) : 'Trámite digital' ?>
                     </div>
                 </div>
 
                 <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5">
                     <div class="text-xs text-slate-500 font-medium">Última DDJJ (<?= e($anioActual) ?>)</div>
                     <div class="text-lg font-mono tabular-nums font-bold text-slate-900 mt-0.5">
-                        USD <?= number_format($patrimonioActualUsd, 0, ',', '.') ?>
+                        <?= $patrimonioActualUsd > 0 ? 'USD ' . number_format($patrimonioActualUsd, 0, ',', '.') : '<span class="text-slate-400 text-sm font-normal">Sin DDJJ pública</span>' ?>
                     </div>
                     <div class="text-[11px] font-mono tabular-nums text-slate-400 mt-0.5">
-                        ARS nominal: <?= e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) ?>
+                        <?= $patrimonioActualUsd > 0 ? 'ARS nominal: ' . e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) : 'Pendiente presentación' ?>
                     </div>
                 </div>
 
@@ -1359,7 +1436,7 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     <div class="space-y-2">
                         <?php foreach ($coherencia['alertas_panquequismo'] as $ap): ?>
                             <div class="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-1">
-                                <div class="font-bold text-rose-900"><?= e($ap['ley_actual']) ?></div>
+                                <div class="font-bold text-rose-900"><?= \App\Helpers\InternalLinker::linkearLey($ap['ley_actual']) ?></div>
                                 <div class="text-rose-800 text-[11px]"><?= e($ap['descripcion']) ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -1387,18 +1464,39 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     Proporción de iniciativas legislativas firmadas conjuntamente con legisladores de bancadas opositoras.
                 </p>
                 <div class="space-y-2">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Principales Socios Legislativos:</div>
+                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Principales Socios Legislativos y Proyectos Compartidos:</div>
                     <?php if (!empty($alianzas['socios_frecuentes'])): ?>
-                        <div class="space-y-1.5">
+                        <div class="space-y-2.5">
                             <?php foreach ($alianzas['socios_frecuentes'] as $soc): ?>
-                                <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-lg text-xs">
-                                    <div class="font-medium text-slate-900 truncate">
-                                        <?= e($soc['nombre']) ?>
-                                        <span class="text-slate-400 text-[11px]">(<?= e($soc['bloque']) ?>)</span>
+                                <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs space-y-2 shadow-xs">
+                                    <div class="flex items-center justify-between">
+                                        <div class="font-semibold text-slate-900 truncate">
+                                            <?= \App\Helpers\InternalLinker::anchor($soc['nombre'], $todosLegis) ?>
+                                            <span class="text-slate-400 text-[11px] font-normal">(<?= e($soc['bloque']) ?>)</span>
+                                        </div>
+                                        <span class="font-mono text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/70 px-2 py-0.5 rounded-full shrink-0">
+                                            <?= (int)$soc['proyectos_compartidos'] ?> <?= (int)$soc['proyectos_compartidos'] === 1 ? 'coautoría' : 'coautorías' ?>
+                                        </span>
                                     </div>
-                                    <span class="font-mono text-[11px] font-semibold text-indigo-600 shrink-0">
-                                        <?= (int)$soc['proyectos_compartidos'] ?> proyectos
-                                    </span>
+                                    <?php if (!empty($soc['proyectos'])): ?>
+                                        <div class="space-y-1.5 pl-2.5 border-l-2 border-indigo-200">
+                                            <?php foreach ($soc['proyectos'] as $pComp): ?>
+                                                <div class="text-[11px] text-slate-700 leading-snug">
+                                                    <span class="font-mono text-[10px] text-slate-400 font-semibold">[<?= e($pComp['expediente']) ?>]</span>
+                                                    <?= !empty($pComp['ley_slug']) ? '<a href="/ley/' . e($pComp['ley_slug']) . '" class="text-blue-700 font-semibold hover:underline">' . e($pComp['titulo']) . '</a>' : e($pComp['titulo']) ?>
+                                                    <?php if (!empty($pComp['coautores'])): ?>
+                                                        <div class="text-[10px] text-slate-500 mt-0.5">
+                                                            <span class="text-slate-400">Otros co-firmantes:</span>
+                                                            <?php
+                                                            $coautoresLinks = array_map(fn($coa) => \App\Helpers\InternalLinker::anchor($coa, $todosLegis), $pComp['coautores']);
+                                                            echo implode(', ', $coautoresLinks);
+                                                            ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -1457,8 +1555,10 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 </p>
                 <div class="space-y-2">
                     <?php if (!empty($promesas['promesas'])): ?>
-                        <?php foreach ($promesas['promesas'] as $pr): ?>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs space-y-1">
+                        <?php foreach ($promesas['promesas'] as $pr): 
+                            $slugVinculada = $pr['ley_slug'] ?? (new \App\Models\LeyModel())->findByName($pr['ley_vinculada'])['slug'] ?? null;
+                        ?>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-xs space-y-1.5 shadow-xs">
                                 <div class="flex items-start justify-between gap-2">
                                     <span class="font-medium text-slate-800">"<?= e($pr['promesa_texto']) ?>"</span>
                                     <?php if ($pr['estado'] === 'Cumplida'): ?>
@@ -1473,8 +1573,18 @@ require __DIR__ . '/app/Views/layouts/header.php';
                                         </span>
                                     <?php endif; ?>
                                 </div>
-                                <div class="text-[11px] text-slate-500 font-mono">Ley: <?= e($pr['ley_vinculada']) ?> (Exp: <?= e($pr['expediente']) ?>)</div>
+                                <div class="text-[11px] text-slate-500 font-mono">
+                                    Ley evaluada: <?= \App\Helpers\InternalLinker::linkearLey($pr['ley_vinculada']) ?> (Exp: <?= e($pr['expediente']) ?>)
+                                </div>
                                 <div class="text-[11px] text-slate-600 italic"><?= e($pr['descripcion_verificacion']) ?></div>
+                                <?php if (!empty($slugVinculada)): ?>
+                                <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                                    <a href="/ley/<?= e($slugVinculada) ?>" class="text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1">
+                                        <span>Ver qué otros diputados y senadores votaron esta ley</span>
+                                        <span aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -1539,6 +1649,29 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <div class="mt-3 w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
                     <div class="bg-slate-800 h-2.5 rounded-full" style="width: <?= min(100, max(0, (float)$defensaProv['indice_lealtad_partido'])) ?>%"></div>
                 </div>
+                
+                <!-- Desglose de Composición del Índice de Lealtad -->
+                <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600 space-y-2">
+                    <div class="flex items-center justify-between font-mono text-[11px] text-slate-500">
+                        <span>Fórmula: Cohesión con Bloque</span>
+                        <span class="font-semibold text-slate-700">Mayoría Partidaria</span>
+                    </div>
+                    <p class="text-[11px] leading-relaxed text-slate-600">
+                        Calculado sobre la totalidad de votaciones del Congreso contrastadas con la postura oficial del bloque <strong><?= e($leg['bloque']) ?></strong>.
+                    </p>
+                    <?php if (!empty($colegasBloque)): ?>
+                    <div class="pt-1 text-[11px]">
+                        <span class="font-semibold text-slate-700">Otros referentes del bloque:</span>
+                        <div class="flex flex-wrap gap-1.5 mt-1">
+                            <?php foreach (array_slice($colegasBloque, 0, 4) as $cb): ?>
+                                <a href="<?= e(\App\Models\LegisladorModel::urlPerfil($cb)) ?>" class="inline-flex items-center px-2 py-0.5 bg-white border border-slate-200 rounded text-[11px] hover:border-indigo-400 hover:text-indigo-600 transition">
+                                    <?= e($cb['nombre']) ?> (<?= number_format((float)$cb['indice_lealtad'], 0) ?>%)
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <!-- Métrica 2: Defensa Provincial -->
@@ -1561,6 +1694,28 @@ require __DIR__ . '/app/Views/layouts/header.php';
                 <div class="mt-3 w-full bg-emerald-200/80 rounded-full h-2.5 overflow-hidden">
                     <div class="h-2.5 rounded-full <?= $defensaProv['indice_defensa_provincial'] >= 70 ? 'bg-emerald-600' : ($defensaProv['indice_defensa_provincial'] >= 50 ? 'bg-amber-500' : 'bg-rose-600') ?>" style="width: <?= min(100, max(0, (float)$defensaProv['indice_defensa_provincial'])) ?>%"></div>
                 </div>
+
+                <!-- Desglose de Composición del Índice y Voto de Colegas Provinciales -->
+                <div class="mt-4 pt-3 border-t border-emerald-200 text-xs text-emerald-900 space-y-2">
+                    <div class="flex items-center justify-between font-mono text-[11px] text-emerald-800">
+                        <span>Fórmula: Σ(Voto Coincidente × Criticidad) / Σ Criticidad</span>
+                    </div>
+                    <p class="text-[11px] leading-relaxed text-emerald-800">
+                        Evalúa si ante leyes de alto impacto para <strong><?= e($leg['provincia']) ?></strong> el legislador priorizó el interés local o acató la orden partidaria.
+                    </p>
+                    <?php if (!empty($colegasProvincia)): ?>
+                    <div class="pt-1 text-[11px]">
+                        <span class="font-semibold text-emerald-950">Otros legisladores por <?= e($leg['provincia']) ?> (<?= count($colegasProvincia) ?>):</span>
+                        <div class="flex flex-wrap gap-1.5 mt-1 max-h-20 overflow-y-auto pr-1">
+                            <?php foreach (array_slice($colegasProvincia, 0, 6) as $cp): ?>
+                                <a href="<?= e(\App\Models\LegisladorModel::urlPerfil($cp)) ?>" class="inline-flex items-center px-2 py-0.5 bg-white border border-emerald-200 rounded text-[11px] hover:border-emerald-500 hover:text-emerald-700 transition">
+                                    <?= e($cp['nombre']) ?> <span class="text-[10px] text-slate-400 ml-1">(<?= e($cp['bloque']) ?>)</span>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 
@@ -1577,10 +1732,16 @@ require __DIR__ . '/app/Views/layouts/header.php';
 
         <!-- Tabla de Alertas: Votos en conflicto con su provincia -->
         <div>
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
-                <span>Votos en conflicto con su provincia</span>
-                <span class="text-xs font-normal text-slate-400 lowercase">(votaciones que contradijeron a <?= e($leg['provincia']) ?>)</span>
-            </h3>
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                    <span>Votos en conflicto con su provincia</span>
+                    <span class="text-xs font-normal text-slate-400 lowercase">(votaciones que contradijeron a <?= e($leg['provincia']) ?>)</span>
+                </h3>
+                <a href="/leyes" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1">
+                    <span>Ver catálogo de leyes auditadas</span>
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
 
             <?php if (!empty($defensaProv['alertas_conflicto'])): ?>
             <div class="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/30">
@@ -1609,7 +1770,7 @@ require __DIR__ . '/app/Views/layouts/header.php';
                     ?>
                         <tr class="hover:bg-amber-50/50 transition-colors">
                             <td class="px-4 py-3 font-medium text-slate-900 text-xs sm:text-sm">
-                                <div><?= e($alerta['ley']) ?></div>
+                                <div><?= \App\Helpers\InternalLinker::linkearLey($alerta['ley']) ?></div>
                                 <span class="font-mono text-[11px] text-slate-400"><?= e(date('d/m/Y', strtotime($alerta['fecha']))) ?></span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
@@ -1984,16 +2145,16 @@ require __DIR__ . '/app/Views/layouts/header.php';
                             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">Patrimonio Inicial (<?= e($anioInicial) ?>)</span>
                                 <div class="text-base sm:text-lg font-mono font-bold text-slate-900 mt-0.5">
-                                    USD <?= number_format($patrimonioInicialUsd, 0, ',', '.') ?>
+                                    <?= $patrimonioInicialUsd > 0 ? 'USD ' . number_format($patrimonioInicialUsd, 0, ',', '.') : '<span class="text-slate-400 text-sm font-normal">Sin registro OA</span>' ?>
                                 </div>
-                                <span class="text-[11px] font-mono text-slate-400">ARS: <?= e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) ?></span>
+                                <span class="text-[11px] font-mono text-slate-400"><?= $patrimonioInicialUsd > 0 ? 'ARS: ' . e(ars((float)($serieEvo[0]['monto_pesos_nominal'] ?? 0))) : 'Trámite digital' ?></span>
                             </div>
                             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">Última DDJJ (<?= e($anioActual) ?>)</span>
                                 <div class="text-base sm:text-lg font-mono font-bold text-slate-900 mt-0.5">
-                                    USD <?= number_format($patrimonioActualUsd, 0, ',', '.') ?>
+                                    <?= $patrimonioActualUsd > 0 ? 'USD ' . number_format($patrimonioActualUsd, 0, ',', '.') : '<span class="text-slate-400 text-sm font-normal">Sin DDJJ pública</span>' ?>
                                 </div>
-                                <span class="text-[11px] font-mono text-slate-400">ARS: <?= e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) ?></span>
+                                <span class="text-[11px] font-mono text-slate-400"><?= $patrimonioActualUsd > 0 ? 'ARS: ' . e(ars((float)($serieEvo[count($serieEvo)-1]['monto_pesos_nominal'] ?? 0))) : 'Pendiente presentación' ?></span>
                             </div>
                             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
                                 <span class="text-[10px] font-mono text-slate-400">ARS Constantes (Deflactado IPC)</span>

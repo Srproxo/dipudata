@@ -14,6 +14,10 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
+  Layers,
+  Phone,
+  Mail,
+  MessageCircle,
 } from 'lucide-react';
 import { fetchLegisladores } from '../services/api';
 import { LegisladorResumen } from '../types/legisdata';
@@ -27,6 +31,7 @@ import {
   formatUSD,
   getBloqueBadgeStyle,
   getLegisladorUrl,
+  getMandatoYContacto,
 } from '../utils/formatters';
 
 type FiltroCamara = 'Todos' | 'Diputados' | 'Senadores';
@@ -34,6 +39,7 @@ type FiltroEstado = 'Todos' | 'Activo' | 'Mandato Cumplido';
 type FiltroPresentismo = 'Todos' | 'excelente' | 'alta' | 'baja';
 type FiltroCapital = 'Todos' | 'alto' | 'medio' | 'inicial';
 type FiltroMandatos = 'Todos' | '1' | '2' | '3+';
+type TipoAgrupacion = 'ninguna' | 'bloque' | 'provincia' | 'camara' | 'voto_ley';
 type OrdenCriterio =
   | 'nombre-asc'
   | 'nombre-desc'
@@ -74,6 +80,8 @@ export const HomeView: React.FC = () => {
   const [busqueda, setBusqueda] = useState<string>('');
   const [mostrarSugerencias, setMostrarSugerencias] = useState<boolean>(false);
   const [modoVista, setModoVista] = useState<'grid' | 'tabla'>('grid');
+  const [tipoAgrupacion, setTipoAgrupacion] = useState<TipoAgrupacion>('ninguna');
+  const [leyAgrupacion, setLeyAgrupacion] = useState<string>('ley-de-bases');
   const [mostrarFiltrosAvanzados, setMostrarFiltrosAvanzados] = useState<boolean>(false);
 
   // Filtros Básicos
@@ -328,6 +336,418 @@ export const HomeView: React.FC = () => {
     );
     return sum / legisladoresFiltrados.length;
   }, [legisladoresFiltrados]);
+
+  interface GrupoLegisladores {
+    id: string;
+    titulo: string;
+    subtitulo: string;
+    items: LegisladorResumen[];
+    badgeColor: string;
+    leySlug?: string;
+  }
+
+  const grupos = useMemo((): GrupoLegisladores[] | null => {
+    if (tipoAgrupacion === 'ninguna') return null;
+
+    if (tipoAgrupacion === 'bloque') {
+      const map = new Map<string, LegisladorResumen[]>();
+      for (const leg of legisladoresFiltrados) {
+        const b = leg.bloque_actual || 'Sin Bloque';
+        if (!map.has(b)) map.set(b, []);
+        map.get(b)!.push(leg);
+      }
+      return Array.from(map.entries())
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(([nombre, items]) => ({
+          id: nombre,
+          titulo: nombre,
+          subtitulo: `${items.length} representantes (${((items.length / Math.max(1, legisladoresFiltrados.length)) * 100).toFixed(1)}%)`,
+          items,
+          badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        }));
+    }
+
+    if (tipoAgrupacion === 'provincia') {
+      const map = new Map<string, LegisladorResumen[]>();
+      for (const leg of legisladoresFiltrados) {
+        const p = leg.provincia || 'Otras';
+        if (!map.has(p)) map.set(p, []);
+        map.get(p)!.push(leg);
+      }
+      return Array.from(map.entries())
+        .sort((a, b) => a[0].localeCompare(b[0], 'es'))
+        .map(([nombre, items]) => {
+          const dips = items.filter(
+            (l) => !(l.camara || '').toLowerCase().startsWith('senad')
+          ).length;
+          const sens = items.filter((l) =>
+            (l.camara || '').toLowerCase().startsWith('senad')
+          ).length;
+          return {
+            id: nombre,
+            titulo: nombre,
+            subtitulo: `${dips} Diputados · ${sens} Senadores (Total: ${items.length})`,
+            items,
+            badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+          };
+        });
+    }
+
+    if (tipoAgrupacion === 'camara') {
+      const dips = legisladoresFiltrados.filter(
+        (l) => !(l.camara || '').toLowerCase().startsWith('senad')
+      );
+      const sens = legisladoresFiltrados.filter((l) =>
+        (l.camara || '').toLowerCase().startsWith('senad')
+      );
+      return [
+        {
+          id: 'diputados',
+          titulo: '🏛️ Cámara de Diputados de la Nación',
+          subtitulo: `${dips.length} bancas en el padrón`,
+          items: dips,
+          badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
+        },
+        {
+          id: 'senadores',
+          titulo: '⚖️ Senado de la Nación',
+          subtitulo: `${sens.length} bancas en el padrón`,
+          items: sens,
+          badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
+        },
+      ].filter((g) => g.items.length > 0);
+    }
+
+    if (tipoAgrupacion === 'voto_ley') {
+      const leyId = filtroLey !== 'Todas' ? filtroLey : leyAgrupacion;
+      const afirmativos: LegisladorResumen[] = [];
+      const negativos: LegisladorResumen[] = [];
+      const abstenciones: LegisladorResumen[] = [];
+      const ausentes: LegisladorResumen[] = [];
+
+      for (const leg of legisladoresFiltrados) {
+        const v = leg.votos ? leg.votos[leyId] : undefined;
+        if (v === 'Afirmativo') afirmativos.push(leg);
+        else if (v === 'Negativo') negativos.push(leg);
+        else if (v === 'Abstencion') abstenciones.push(leg);
+        else ausentes.push(leg);
+      }
+
+      const totalVotantes = Math.max(1, legisladoresFiltrados.length);
+
+      return [
+        {
+          id: 'afirmativo',
+          titulo: '🟢 Votos Afirmativos (A Favor)',
+          subtitulo: `${afirmativos.length} votos (${((afirmativos.length / totalVotantes) * 100).toFixed(1)}%)`,
+          items: afirmativos,
+          badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          leySlug: leyId,
+        },
+        {
+          id: 'negativo',
+          titulo: '🔴 Votos Negativos (En Contra)',
+          subtitulo: `${negativos.length} votos (${((negativos.length / totalVotantes) * 100).toFixed(1)}%)`,
+          items: negativos,
+          badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
+          leySlug: leyId,
+        },
+        {
+          id: 'abstencion',
+          titulo: '🟡 Abstenciones',
+          subtitulo: `${abstenciones.length} votos (${((abstenciones.length / totalVotantes) * 100).toFixed(1)}%)`,
+          items: abstenciones,
+          badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+          leySlug: leyId,
+        },
+        {
+          id: 'ausente',
+          titulo: '⚪ Ausentes / No Votó',
+          subtitulo: `${ausentes.length} no computados (${((ausentes.length / totalVotantes) * 100).toFixed(1)}%)`,
+          items: ausentes,
+          badgeColor: 'bg-slate-100 text-slate-700 border-slate-300',
+          leySlug: leyId,
+        },
+      ];
+    }
+
+    return null;
+  }, [tipoAgrupacion, legisladoresFiltrados, filtroLey, leyAgrupacion]);
+
+  const renderListaLegisladores = (
+    items: LegisladorResumen[],
+    customLeySlug?: string
+  ) => {
+    if (modoVista === 'grid') {
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {items.map((leg) => (
+            <LegisladorCard
+              key={leg.id}
+              legislador={leg}
+              filtroLey={customLeySlug || (filtroLey !== 'Todas' ? filtroLey : undefined)}
+              tituloLey={
+                customLeySlug
+                  ? LEYES_SEED.find((l) => l.id === customLeySlug)?.titulo
+                  : leySeleccionada?.titulo
+              }
+            />
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <tr>
+                <th scope="col" className="px-4 py-3">
+                  Legislador
+                </th>
+                <th scope="col" className="px-3 py-3">
+                  Cámara
+                </th>
+                <th scope="col" className="px-3 py-3">
+                  Estado
+                </th>
+                <th scope="col" className="px-3 py-3">
+                  Bancada
+                </th>
+                <th scope="col" className="px-3 py-3">
+                  Provincia
+                </th>
+                <th scope="col" className="px-3 py-3 text-center">
+                  Mandato / Renovación
+                </th>
+                {(customLeySlug || filtroLey !== 'Todas') && (
+                  <th scope="col" className="px-3 py-3 text-center">
+                    Voto en Ley
+                  </th>
+                )}
+                <th scope="col" className="px-3 py-3 text-right">
+                  Presentismo
+                </th>
+                <th scope="col" className="px-3 py-3 text-right">
+                  Lealtad
+                </th>
+                <th scope="col" className="px-3 py-3 text-right">
+                  Capital USD
+                </th>
+                <th scope="col" className="px-3 py-3 text-center">
+                  Contacto Despacho
+                </th>
+                <th scope="col" className="px-4 py-3 text-center">
+                  Ficha
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 font-normal">
+              {items.map((leg) => {
+                const perfilUrl = getLegisladorUrl(leg);
+                const mandatoInfo = getMandatoYContacto(leg);
+                const targetLey =
+                  customLeySlug || (filtroLey !== 'Todas' ? filtroLey : undefined);
+                const votoLey =
+                  targetLey && leg.votos ? leg.votos[targetLey] : null;
+
+                return (
+                  <tr
+                    key={leg.id}
+                    className="hover:bg-slate-50/80 transition-colors"
+                  >
+                    <td className="px-4 py-3">
+                      <a
+                        href={perfilUrl}
+                        className="flex items-center gap-3 font-bold text-slate-900 hover:text-blue-600 truncate"
+                      >
+                        <AvatarLegislador
+                          src={leg.foto_url}
+                          nombre={leg.nombre_completo}
+                          size="sm"
+                        />
+                        <span className="truncate">{leg.nombre_completo}</span>
+                      </a>
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-xs text-slate-600">
+                      {leg.camara}
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap">
+                      <span
+                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                          leg.estado === 'Activo'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-slate-100 text-slate-600 border border-slate-200'
+                        }`}
+                      >
+                        {leg.estado === 'Activo' && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        )}
+                        {leg.estado}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getBloqueBadgeStyle(
+                          leg.bloque_actual
+                        )}`}
+                      >
+                        {leg.bloque_actual}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-xs text-slate-600">
+                      {leg.provincia === 'Ciudad Autónoma de Buenos Aires'
+                        ? 'CABA'
+                        : leg.provincia}
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-center text-xs">
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="font-semibold text-slate-800 text-[11px]">
+                          {mandatoInfo.periodo}
+                        </span>
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                            mandatoInfo.esMandatoCumplido
+                              ? 'bg-slate-100 text-slate-600 border border-slate-200'
+                              : mandatoInfo.mesesRestantes <= 18
+                              ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          }`}
+                          title={mandatoInfo.esMandatoCumplido ? 'Mandato cumplido' : `Vence el ${mandatoInfo.fechaFin} (${mandatoInfo.mesesRestantes} meses restantes)`}
+                        >
+                          {mandatoInfo.esMandatoCumplido
+                            ? 'Cumplido'
+                            : `⏳ Renueva ${mandatoInfo.anioFin} (${mandatoInfo.mesesRestantes}m)`}
+                        </span>
+                      </div>
+                    </td>
+                    {targetLey && (
+                      <td className="px-3 py-3 whitespace-nowrap text-center">
+                        {votoLey ? (
+                          <span
+                            className={`font-bold text-[11px] px-2.5 py-0.5 rounded-full ${
+                              votoLey === 'Afirmativo'
+                                ? 'bg-emerald-100 text-emerald-800'
+                                : votoLey === 'Negativo'
+                                ? 'bg-rose-100 text-rose-800'
+                                : votoLey === 'Abstencion'
+                                ? 'bg-amber-100 text-amber-800'
+                                : 'bg-slate-200 text-slate-700'
+                            }`}
+                          >
+                            {votoLey}
+                          </span>
+                        ) : (
+                          <span className="text-slate-400 text-xs">—</span>
+                        )}
+                      </td>
+                    )}
+                    <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-xs">
+                      <span
+                        className={
+                          leg.asistencia_historica >= 96
+                            ? 'text-emerald-700'
+                            : 'text-slate-800'
+                        }
+                      >
+                        {leg.asistencia_historica >= 96 && (
+                          <span className="mr-1">🏆</span>
+                        )}
+                        {formatPct(leg.asistencia_historica)}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-slate-800 text-xs">
+                      {formatPct(leg.lealtad_partidaria)}
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-right font-mono text-xs">
+                      {(leg.patrimonio_usd_actual || 0) > 0 ? (
+                        <span
+                          className={`font-bold ${
+                            (leg.patrimonio_usd_actual || 0) >= 400000
+                              ? 'text-amber-700'
+                              : 'text-slate-900'
+                          }`}
+                        >
+                          {(leg.patrimonio_usd_actual || 0) >= 400000 && (
+                            <span className="mr-1">💰</span>
+                          )}
+                          {formatUSD(leg.patrimonio_usd_actual)}
+                        </span>
+                      ) : (
+                        <span
+                          className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-500 border border-slate-200"
+                          title="Sin declaración jurada pública registrada ante la Oficina Anticorrupción para este período"
+                        >
+                          Sin DDJJ
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-3 whitespace-nowrap text-center">
+                      <div
+                        className="inline-flex items-center gap-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {mandatoInfo.telefono && (
+                          <a
+                            href={`tel:${mandatoInfo.telefono.replace(/\s+/g, '')}`}
+                            title={`Llamar a despacho: ${mandatoInfo.telefono} (Int. ${mandatoInfo.interno})`}
+                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-emerald-100 text-slate-600 hover:text-emerald-700 flex items-center justify-center transition-colors shadow-xs"
+                          >
+                            <Phone className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        {mandatoInfo.email && (
+                          <a
+                            href={`mailto:${mandatoInfo.email}`}
+                            title={`Email institucional: ${mandatoInfo.email}`}
+                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-700 flex items-center justify-center transition-colors shadow-xs"
+                          >
+                            <Mail className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        {mandatoInfo.redes.twitter && (
+                          <a
+                            href={mandatoInfo.redes.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Cuenta oficial en 𝕏"
+                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-900 text-slate-700 hover:text-white flex items-center justify-center transition-colors font-bold text-[10px] shadow-xs"
+                          >
+                            𝕏
+                          </a>
+                        )}
+                        {mandatoInfo.redes.whatsapp && (
+                          <a
+                            href={mandatoInfo.redes.whatsapp}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Contacto vía WhatsApp"
+                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-emerald-500 text-slate-700 hover:text-white flex items-center justify-center transition-colors shadow-xs"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap text-center">
+                      <a
+                        href={perfilUrl}
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900"
+                      >
+                        <span>Ver</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
 
   const cantidadFiltrosAvanzadosActivos = useMemo(() => {
     let count = 0;
@@ -1232,6 +1652,93 @@ export const HomeView: React.FC = () => {
           </div>
         </div>
 
+        {/* Barra de Opciones de Agrupación Visual */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1 mr-1">
+              <Layers className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Agrupar por:</span>
+            </span>
+            <button
+              type="button"
+              onClick={() => setTipoAgrupacion('ninguna')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tipoAgrupacion === 'ninguna'
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              Sin agrupar
+            </button>
+            <button
+              type="button"
+              onClick={() => setTipoAgrupacion('bloque')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tipoAgrupacion === 'bloque'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              🏛️ Partido / Bloque
+            </button>
+            <button
+              type="button"
+              onClick={() => setTipoAgrupacion('provincia')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tipoAgrupacion === 'provincia'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              🌾 Provincia
+            </button>
+            <button
+              type="button"
+              onClick={() => setTipoAgrupacion('camara')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tipoAgrupacion === 'camara'
+                  ? 'bg-purple-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              ⚖️ Diputados vs Senadores
+            </button>
+            <button
+              type="button"
+              onClick={() => setTipoAgrupacion('voto_ley')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tipoAgrupacion === 'voto_ley'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              🗳️ Desglose por Voto Emitido
+            </button>
+          </div>
+
+          {tipoAgrupacion === 'voto_ley' && (
+            <div className="flex items-center gap-2">
+              <label htmlFor="select-ley-agrup" className="text-xs text-slate-500 font-medium">
+                Ley a desglosar:
+              </label>
+              <select
+                id="select-ley-agrup"
+                value={filtroLey !== 'Todas' ? filtroLey : leyAgrupacion}
+                onChange={(e) => {
+                  setLeyAgrupacion(e.target.value);
+                }}
+                className="px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                {LEYES_SEED.map((ley) => (
+                  <option key={ley.id} value={ley.id}>
+                    {ley.titulo}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
         {/* LISTADO DE RESULTADOS */}
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -1271,183 +1778,44 @@ export const HomeView: React.FC = () => {
               <span>Restablecer todos los filtros</span>
             </button>
           </div>
-        ) : modoVista === 'grid' ? (
-          /* MODO CUADRÍCULA DE TARJETAS */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {legisladoresFiltrados.map((leg) => (
-              <LegisladorCard
-                key={leg.id}
-                legislador={leg}
-                filtroLey={filtroLey !== 'Todas' ? filtroLey : undefined}
-                tituloLey={leySeleccionada?.titulo}
-              />
+        ) : grupos !== null ? (
+          /* MODO AGRUPADO (POR BLOQUE, PROVINCIA, CÁMARA O VOTO EMITIDO) */
+          <div className="space-y-8">
+            {grupos.map((grupo) => (
+              <section
+                key={grupo.id}
+                className="bg-white/70 rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200/80">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-black text-slate-900 tracking-tight">
+                        {grupo.titulo}
+                      </h3>
+                      <span
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${grupo.badgeColor}`}
+                      >
+                        {grupo.items.length}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-0.5">{grupo.subtitulo}</p>
+                  </div>
+                  {grupo.leySlug && (
+                    <a
+                      href={`/ley/${grupo.leySlug}`}
+                      className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1 self-start sm:self-auto"
+                    >
+                      <span>Ver dossier cívico de la ley</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+                {renderListaLegisladores(grupo.items, grupo.leySlug)}
+              </section>
             ))}
           </div>
         ) : (
-          /* MODO TABLA COMPACTA */
-          <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                  <tr>
-                    <th scope="col" className="px-4 py-3">
-                      Legislador
-                    </th>
-                    <th scope="col" className="px-3 py-3">
-                      Cámara
-                    </th>
-                    <th scope="col" className="px-3 py-3">
-                      Estado
-                    </th>
-                    <th scope="col" className="px-3 py-3">
-                      Bancada
-                    </th>
-                    <th scope="col" className="px-3 py-3">
-                      Provincia
-                    </th>
-                    <th scope="col" className="px-3 py-3 text-center">
-                      Mandatos
-                    </th>
-                    {filtroLey !== 'Todas' && (
-                      <th scope="col" className="px-3 py-3 text-center">
-                        Voto en Ley
-                      </th>
-                    )}
-                    <th scope="col" className="px-3 py-3 text-right">
-                      Presentismo
-                    </th>
-                    <th scope="col" className="px-3 py-3 text-right">
-                      Lealtad
-                    </th>
-                    <th scope="col" className="px-3 py-3 text-right">
-                      Capital USD
-                    </th>
-                    <th scope="col" className="px-4 py-3 text-center">
-                      Ficha
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 font-normal">
-                  {legisladoresFiltrados.map((leg) => {
-                    const perfilUrl = getLegisladorUrl(leg);
-                    const votoLey =
-                      filtroLey !== 'Todas' && leg.votos ? leg.votos[filtroLey] : null;
-
-                    return (
-                      <tr
-                        key={leg.id}
-                        className="hover:bg-slate-50/80 transition-colors"
-                      >
-                        <td className="px-4 py-3">
-                          <a
-                            href={perfilUrl}
-                            className="flex items-center gap-3 font-bold text-slate-900 hover:text-blue-600 truncate"
-                          >
-                            <AvatarLegislador
-                              src={leg.foto_url}
-                              nombre={leg.nombre_completo}
-                              size="sm"
-                            />
-                            <span className="truncate">{leg.nombre_completo}</span>
-                          </a>
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-xs text-slate-600">
-                          {leg.camara}
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap">
-                          <span
-                            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                              leg.estado === 'Activo'
-                                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                : 'bg-slate-100 text-slate-600 border border-slate-200'
-                            }`}
-                          >
-                            {leg.estado === 'Activo' && (
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            )}
-                            {leg.estado}
-                          </span>
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap">
-                          <span
-                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getBloqueBadgeStyle(
-                              leg.bloque_actual
-                            )}`}
-                          >
-                            {leg.bloque_actual}
-                          </span>
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-xs text-slate-600">
-                          {leg.provincia === 'Ciudad Autónoma de Buenos Aires'
-                            ? 'CABA'
-                            : leg.provincia}
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-center text-xs">
-                          <span
-                            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-bold text-[11px] ${
-                              (leg.mandatos || 1) >= 3
-                                ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                                : (leg.mandatos || 1) === 2
-                                ? 'bg-indigo-100 text-indigo-800 border border-indigo-200'
-                                : 'bg-slate-100 text-slate-700 border border-slate-200'
-                            }`}
-                            title={`${leg.mandatos || 1} ${leg.mandatos === 1 ? 'mandato' : 'mandatos'}`}
-                          >
-                            🏛️ {leg.mandatos || 1} {(leg.mandatos || 1) === 1 ? 'mandato' : 'mandatos'}
-                          </span>
-                        </td>
-                        {filtroLey !== 'Todas' && (
-                          <td className="px-3 py-3 whitespace-nowrap text-center">
-                            {votoLey ? (
-                              <span
-                                className={`font-bold text-[11px] px-2.5 py-0.5 rounded-full ${
-                                  votoLey === 'Afirmativo'
-                                    ? 'bg-emerald-100 text-emerald-800'
-                                    : votoLey === 'Negativo'
-                                    ? 'bg-rose-100 text-rose-800'
-                                    : votoLey === 'Abstencion'
-                                    ? 'bg-amber-100 text-amber-800'
-                                    : 'bg-slate-200 text-slate-700'
-                                }`}
-                              >
-                                {votoLey}
-                              </span>
-                            ) : (
-                              <span className="text-slate-400 text-xs">—</span>
-                            )}
-                          </td>
-                        )}
-                        <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-xs">
-                          <span className={leg.asistencia_historica >= 96 ? 'text-emerald-700' : 'text-slate-800'}>
-                            {leg.asistencia_historica >= 96 && <span className="mr-1">🏆</span>}
-                            {formatPct(leg.asistencia_historica)}
-                          </span>
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right font-mono font-bold text-slate-800 text-xs">
-                          {formatPct(leg.lealtad_partidaria)}
-                        </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right font-mono text-xs">
-                          <span className={`font-bold ${(leg.patrimonio_usd_actual || 0) >= 400000 ? 'text-amber-700' : 'text-slate-900'}`}>
-                            {(leg.patrimonio_usd_actual || 0) >= 400000 && <span className="mr-1">💰</span>}
-                            {formatUSD(leg.patrimonio_usd_actual)}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 whitespace-nowrap text-center">
-                          <a
-                            href={perfilUrl}
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900"
-                          >
-                            <span>Ver</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          renderListaLegisladores(legisladoresFiltrados)
         )}
       </div>
     </div>
