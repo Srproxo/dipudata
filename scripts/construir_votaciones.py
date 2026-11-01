@@ -85,6 +85,30 @@ def cargar_ad(nombre):
     return list(unicas.values())
 
 
+def senado_primario():
+    """Votaciones del Senado bajadas de senado.gob.ar, con la forma que usa procesar_recientes."""
+    ruta = next(iter(sorted(glob.glob(str(RAIZ / "storage" / "oficial" / "senado" / "votaciones_desde_*.json.gz")))), None)
+    if not ruta:
+        return []
+    cod = {"A": "si", "N": "no", "B": "abstencion", "U": "ausente", "X": "lev.vot."}
+    out = []
+    with gzip.open(ruta, "rt", encoding="utf-8") as f:
+        for v in json.load(f):
+            cuenta = collections.Counter(x[4] for x in v["votos"])
+            a, n, b, u = v["afirmativos"], v["negativos"], v["abstenciones"], v["ausentes"]
+            rec = (cuenta["A"], cuenta["N"], cuenta["B"], cuenta["U"])
+            nota = None
+            if (a, n, b, u) != rec and (a, n, b, u) == tuple(2 * x for x in rec):
+                # La página del Senado repite los totales (y la tabla): vale el recuento voto por voto.
+                a, n, b, u = rec
+                nota = "La página del Senado muestra esta votación con los totales duplicados; se usa el recuento voto por voto."
+            out.append({"actaId": v["id"], "acta": v["acta"], "fecha_local": v["fecha"], "hora": v["hora"], "titulo": v["titulo"], "descripcion": v["tipo"],
+                        "resultado": v["resultado"], "mayoria": v["mayoria"], "afirmativos": a, "negativos": n, "abstenciones": b, "ausentes": u,
+                        "presidente": "", "nota_origen": nota,
+                        "votos": [{"nombre": x[1], "voto": cod[x[4]], "sid": x[0]} for x in v["votos"]]})
+    return out
+
+
 def procesar_recientes(legs, salida, indice):
     """Votaciones del mandato actual. Devuelve las estadísticas por legislador."""
     por_camara = {}
@@ -99,16 +123,18 @@ def procesar_recientes(legs, salida, indice):
     stats = collections.defaultdict(collections.Counter)
     meta = {"desde": "2025-12-10", "hasta": "", "validas": collections.Counter(), "excluidas": collections.Counter(), "sin_cruzar": collections.Counter()}
 
-    for camara, datos in (("Diputados", cargar_ad("diputados_actas")), ("Senadores", cargar_ad("senado_actas"))):
+    por_sid = {l["id_senado"]: l for l in legs if l["camara"] == "Senadores" and l.get("id_senado")}
+    for camara, datos in (("Diputados", cargar_ad("diputados_actas")), ("Senadores", senado_primario())):
         for a in datos:
-            fecha, hora = a_hora_local(a["fecha"])
+            fecha, hora = (a["fecha_local"], a["hora"]) if "fecha_local" in a else a_hora_local(a["fecha"])
             es_dip = camara == "Diputados"
             aid = str(a["id"]) if es_dip else f"S{a['actaId']}"
             filas, por_bloque, codigos = [], collections.defaultdict(collections.Counter), collections.Counter()
             for v in a["votos"]:
                 nombre = v["diputado"] if es_dip else v["nombre"]
                 ap, _, no = nombre.partition(",")
-                leg = por_camara[camara].get((frozenset(norm(ap).split()), (norm(no).split() or [""])[0]))
+                leg = por_sid.get(v.get("sid")) if not es_dip else None
+                leg = leg or por_camara[camara].get((frozenset(norm(ap).split()), (norm(no).split() or [""])[0]))
                 cod = CODIGO_AD.get((v["tipoVoto"] if es_dip else v["voto"]).strip().lower(), "X")
                 codigos[cod] += 1
                 if not leg:
@@ -127,7 +153,7 @@ def procesar_recientes(legs, salida, indice):
             titulo_ = (a["titulo"] or "").strip() or (a.get("descripcion") or "").strip()
             if not es_dip and a.get("descripcion") and a["descripcion"].strip().lower() not in titulo_.lower():
                 titulo_ = f'{titulo_} ({a["descripcion"].strip().capitalize()})'
-            nota = None if cuadra else ("En esta votación hay un diputado presente que no emitió voto y el detalle lo registra como ausente; "
+            nota = a.get("nota_origen") if cuadra else ("En esta votación hay un diputado presente que no emitió voto y el detalle lo registra como ausente; "
                                        "no se sabe cuál, por eso no se cuenta en las estadísticas de cada uno." if es_dip and codigos["U"] - h["u"] == 1
                                        else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno.")
             indice.append({

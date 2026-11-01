@@ -181,6 +181,7 @@ def main() -> int:
             "mandato": mandato, "jura": None, "inicio": fecha_iso_iso(r["D_REAL"]), "sexo": None,
             "email": r["EMAIL"].strip() or None, "telefono": r["TELEFONO"].strip() or None,
             "foto": foto, "slug_previo": (m or {}).get("slug"), "verificado": True,
+            "id_senado": int(r["ID"]) if str(r.get("ID", "")).isdigit() else None,
             "fuentes": {
                 "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
                 "foto": "Senado de la Nación" if foto else None,

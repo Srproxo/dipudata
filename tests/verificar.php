@@ -122,5 +122,11 @@ ok($malVj === 0, 'en los pasajes, aéreos + terrestres = total');
 $rem = Datos::remuneraciones();
 ok(!empty($rem['remuneraciones'][0]['importe']) && $rem['remuneraciones'][0]['importe'] > 1000000, 'la dieta publicada es un importe razonable');
 
+$sv = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S');
+$malSv = 0;
+foreach ($sv as $v) { $d = Datos::votacion($v['id']); if (count($d['votos'] ?? []) !== 72) { $malSv++; } }
+ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado tienen los 72 votos de los senadores (' . count($sv) . ')');
+ok(($meta['excluidas']['Senadores'] ?? 0) === 0, 'ninguna votación del Senado quedó excluida de las estadísticas');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
