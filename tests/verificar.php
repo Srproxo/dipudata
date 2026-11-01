@@ -85,5 +85,18 @@ $exp = 0;
 foreach ($vot as $v) { $d = Datos::votacion($v["id"]); $exp += count($d["expedientes"] ?? []); }
 ok($exp > 1500, 'las votaciones traen sus expedientes (' . $exp . ')');
 
+$conDj = 0; $djMal = 0; $djCuit = 0;
+foreach ($todos as $l) {
+    $dj = Datos::ddjj($l['camara'], $l['slug']);
+    if ($dj) { $conDj++; }
+    foreach ($dj as $d) {
+        if ($d['bienes_final'] < 0 || $d['deudas_final'] < 0 || abs($d['patrimonio_neto_final'] - ($d['bienes_final'] - $d['deudas_final'])) > 0.01) { $djMal++; }
+        if (isset($d['cuit'])) { $djCuit++; }
+    }
+}
+ok($conDj >= 80, 'hay declaraciones juradas de legisladores en ejercicio (' . $conDj . ')');
+ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
+ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

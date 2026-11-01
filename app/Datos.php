@@ -104,6 +104,12 @@ final class Datos
         return is_array($d) ? $d : [];
     }
 
+    /** @return list<array> declaraciones juradas patrimoniales de un legislador actual, de la más reciente a la más antigua */
+    public static function ddjj(string $camara, string $slug): array
+    {
+        return self::leer('ddjj')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? [];
+    }
+
     /** @return array<string,array{n:int,total:float}> subsidios por año de un diputado actual */
     public static function subsidiosDiputado(string $slug): array
     {
