@@ -143,6 +143,10 @@ ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'
 $sm = Datos::senadoAnterioresMeta();
 ok(($sm['excluidas'] ?? 1) === 0 && ($sm['validas'] ?? 0) > 2500 && ($sm['desde'] ?? '') < '2005-12-31' && ($sm['hasta'] ?? '9') <= '2025-12-09', 'las votaciones anteriores del Senado (' . ($sm['validas'] ?? 0) . ') son válidas, de 2005 al 9/12/2025');
 ok(($sm['control_id']['con_id'] ?? 0) > 10000 && ($sm['control_id']['coincide'] ?? -1) === ($sm['control_id']['con_id'] ?? 0), 'el cruce de senadores por nombre y mandato coincide con el ID oficial en todas las filas que lo traen (' . ($sm['control_id']['coincide'] ?? 0) . ')');
+$resMal = array_filter($vot, fn($v) => !in_array((string)($v['res'] ?? ''), ['AFIRMATIVO', 'NEGATIVO', 'EMPATE', ''], true));
+ok(!$resMal, 'todo resultado de votación es afirmativo, negativo, empate o "sin resultado publicado" (' . count($resMal) . ' con otro valor)');
+$anul = 0; foreach ($sv as $v) { $n = (string)(Datos::votacion($v['id'])['nota'] ?? ''); if (str_contains($n, 'anulada, cancelada o levantada')) { $anul++; } }
+ok(($sm['anuladas'] ?? -1) > 0 && $anul === $sm['anuladas'], 'las ' . $anul . ' votaciones del Senado anuladas, canceladas o levantadas se muestran con aviso y no se cuentan');
 $saMal = 0; $saN = 0;
 foreach ($sen as $l) {
     foreach (Datos::senadoAnteriores($l['slug']) as $m) {

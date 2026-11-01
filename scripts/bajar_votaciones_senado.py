@@ -12,7 +12,7 @@ Cada votación se valida más adelante: los totales de la cabecera deben coincid
 Es reanudable: el archivo guarda qué números ya se consultaron y se reescribe cada tanto. Hay una pausa de cortesía entre pedidos.
 Los números mayores al último con datos se vuelven a consultar siempre (así entran las votaciones nuevas).
 
-Uso:  python3 -I scripts/bajar_votaciones_senado.py [desde_id] [hasta_id]
+Uso:  python3 -I scripts/bajar_votaciones_senado.py [desde_id] [hasta_id] [--reintentar-vacias]
 """
 import concurrent.futures, gzip, html, json, re, sys, time, urllib.request
 from pathlib import Path
@@ -43,15 +43,21 @@ def limpiar(t: str) -> str:
 
 def interpretar(n: int, t: str):
     txt = limpiar(t)
-    m = re.search(r"Acta Nro:\s*(\d+)\s+(.*?)\s+(\d{2})/(\d{2})/(\d{4})\s*-\s*(\d{2}:\d{2})?\s*:?\s*(.*?)\s*(\d+)\s+AFIRMATIVOS\s+(\d+)\s+NEGATIVOS\s+(\d+)\s+ABSTENCIONES\s+(\d+)\s+AUSENTES", txt)
+    # El título puede faltar ("Acta Nro: 57 30/11/2016 - ..."); una página sin acta muestra "Acta Nro:" sin número.
+    m = re.search(r"Acta Nro:\s*(\d+)\s+(.*?)\s*(\d{2})/(\d{2})/(\d{4})\s*-\s*(\d{2}:\d{2})?\s*:?\s*(.*?)\s*(\d+)\s+AFIRMATIVOS\s+(\d+)\s+NEGATIVOS\s+(\d+)\s+ABSTENCIONES\s+(\d+)\s+AUSENTES", txt)
     if not m:
         return None
     # Entre la hora y los totales viene "<mayoría> <RESULTADO> <tipo de votación>"; la mayoría puede estar vacía.
     resto = m[7].strip()
-    r = re.search(r"\b(AFIRMATIVO|NEGATIVO)\b", resto)
+    # El resultado suele ser AFIRMATIVO o NEGATIVO; también aparecen EMPATE, CANCELADA / LEV.VOT. (votación levantada)
+    # y, en algunas páginas, AUSENTE o ABSTENCION en lugar de un resultado.
+    r = re.search(r"\b(AFIRMATIVO|NEGATIVO|EMPATE|AUSENTE|ABSTENCI[OÓ]N|CANCELADA(?:\s+LEV\.\s?VOT\.)?|LEV\.\s?VOT\.)", resto)
     if not r:
         return None
     mayoria, resultado, tipo = resto[:r.start()].strip(), r.group(1), resto[r.end():].strip()
+    cancelada = resultado.startswith(("CANCELADA", "LEV"))
+    if resultado not in ("AFIRMATIVO", "NEGATIVO", "EMPATE"):
+        resultado = ""  # la página no informa un resultado
     votos = []
     for fila in re.findall(r"<tr[^>]*>(.*?)</tr>", t, flags=re.S):
         sid = re.search(r"/senadores/senador/(\d+)", fila)
@@ -69,7 +75,10 @@ def interpretar(n: int, t: str):
             vistos.add(k)
             unicos.append(v)
     votos = unicos
-    return {"id": n, "acta": int(m[1]), "titulo": m[2].strip(), "fecha": f"{m[5]}-{m[4]}-{m[3]}", "hora": m[6] or "", "mayoria": mayoria,
+    titulo = m[2].strip()
+    # Votaciones que el Senado registra como anuladas, canceladas o levantadas: se guardan marcadas y no se cuentan.
+    anulada = cancelada or bool(re.search(r"VOTACI[OÓ]N (ANULADA|CANCELADA)", titulo, re.I))
+    return {"id": n, "acta": int(m[1]), "titulo": titulo, "anulada": anulada, "fecha": f"{m[5]}-{m[4]}-{m[3]}", "hora": m[6] or "", "mayoria": mayoria,
             "resultado": resultado, "tipo": tipo, "afirmativos": int(m[8]), "negativos": int(m[9]), "abstenciones": int(m[10]),
             "ausentes": int(m[11]), "votos": votos}
 
@@ -90,8 +99,9 @@ def traer(n: int):
 
 
 def main() -> int:
-    desde = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-    hasta = int(sys.argv[2]) if len(sys.argv) > 2 else 3400
+    nums = [int(a) for a in sys.argv[1:] if a.isdigit()]
+    desde = nums[0] if nums else 1
+    hasta = nums[1] if len(nums) > 1 else 3400
     est = {"fuente": "https://www.senado.gob.ar/votaciones/detalleActa/{id}", "desde_fecha": DESDE, "consultados": [], "votaciones": []}
     if ARCHIVO.exists():
         with gzip.open(ARCHIVO, "rt", encoding="utf-8") as f:
@@ -100,7 +110,9 @@ def main() -> int:
     hecho = set(est["consultados"])
     ultimo = max(por_id) if por_id else 0
     sin_datos_seguidos = 0
-    pendientes = [n for n in range(desde, hasta + 1) if not (n in hecho and n <= ultimo)]
+    # --reintentar-vacias vuelve a pedir las páginas leídas sin acta (sirve cuando se mejora la lectura de la página).
+    reintentar = "--reintentar-vacias" in sys.argv
+    pendientes = [n for n in range(desde, hasta + 1) if not (n in hecho and n <= ultimo) or (reintentar and n in hecho and n not in por_id)]
     # Pocos hilos (cada uno con su pausa): unos 3 pedidos por segundo como máximo.
     with concurrent.futures.ThreadPoolExecutor(HILOS) as pool:
         for i in range(0, len(pendientes), 30):

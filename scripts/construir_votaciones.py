@@ -88,6 +88,12 @@ def cargar_ad(nombre):
 CORTE_ACTUAL = "2025-12-10"
 
 
+def resultado_normal(r) -> str:
+    """AFIRMATIVO, NEGATIVO o EMPATE; vacío si la fuente no informa un resultado (por ejemplo, una votación levantada)."""
+    r = str(r or "").strip().lower()
+    return "AFIRMATIVO" if r.startswith("afirm") else "NEGATIVO" if r.startswith("negat") else "EMPATE" if r.startswith("empat") else ""
+
+
 def senado_votaciones():
     """Todas las votaciones del Senado bajadas de senado.gob.ar (desde 2005)."""
     ruta = RAIZ / "storage" / "oficial" / "senado" / "votaciones_senado.json.gz"
@@ -114,7 +120,7 @@ def senado_primario(anteriores=False):
             nota = "La página del Senado muestra esta votación con los totales duplicados; se usa el recuento voto por voto."
         out.append({"actaId": v["id"], "acta": v["acta"], "fecha_local": v["fecha"], "hora": v["hora"], "titulo": v["titulo"], "descripcion": v["tipo"],
                     "resultado": v["resultado"], "mayoria": v["mayoria"], "afirmativos": a, "negativos": n, "abstenciones": b, "ausentes": u,
-                    "presidente": "", "nota_origen": nota,
+                    "presidente": "", "nota_origen": nota, "anulada": bool(v.get("anulada")),
                     "votos": [{"nombre": x[1], "voto": cod[x[4]], "sid": x[0], "bloque": x[2], "provincia": x[3]} for x in v["votos"]]})
     return out
 
@@ -182,7 +188,7 @@ def procesar_recientes(legs, salida, indice):
             h = {"a": a["votosAfirmativos"] if es_dip else a["afirmativos"], "n": a["votosNegativos"] if es_dip else a["negativos"],
                  "b": a["abstenciones"], "u": a["ausentes"]}
             cuadra = (codigos["A"], codigos["N"], codigos["B"], codigos["U"]) == (h["a"], h["n"], h["b"], h["u"])
-            res = "AFIRMATIVO" if str(a["resultado"]).lower().startswith("afirm") else "NEGATIVO"
+            res = resultado_normal(a["resultado"])
             sesion = a.get("sesion") or ""
             tipo = (re.search(r"Sesi[oó]n\s+([A-Za-zÁÉÍÓÚáéíóúñ ]+?)(?:\s+-|$)", sesion) or [None, ""])[1].strip() if es_dip else "nominal"
             titulo_ = (a["titulo"] or "").strip() or (a.get("descripcion") or "").strip()
@@ -258,7 +264,7 @@ def procesar_senado_anterior(legs, salida, indice):
     sin_cruzar = collections.Counter()
     tam = collections.Counter()
     datos = senado_primario(anteriores=True)
-    validas = excluidas = vacias = 0
+    validas = excluidas = vacias = anuladas = 0
     for a in datos:
         fecha = a["fecha_local"]
         if not a["votos"] and not (a["afirmativos"] or a["negativos"] or a["abstenciones"] or a["ausentes"]):
@@ -301,8 +307,13 @@ def procesar_senado_anterior(legs, salida, indice):
         nota = a.get("nota_origen") if cuadra else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno."
         if cuadra and codigos["X"]:
             nota = f'En el registro oficial de esta votación, {codigos["X"]} fila(s) figuran sin voto anotado; los totales de la cabecera no las cuentan y tampoco se cuentan en las estadísticas.'
+        if a.get("anulada"):
+            # El Senado la registra como anulada, cancelada o levantada: se muestra tal cual y no se cuenta.
+            cuadra = False
+            nota = "El Senado registra esta votación como anulada, cancelada o levantada; se muestra tal como figura y no se cuenta en las estadísticas de nadie."
+            anuladas += 1
         aid = f"S{a['actaId']}"
-        res = "AFIRMATIVO" if str(a["resultado"]).lower().startswith("afirm") else "NEGATIVO"
+        res = resultado_normal(a["resultado"])
         indice.append({"id": aid, "c": "S", "p": 0, "f": fecha, "h": a["hora"], "s": "nominal", "r": 0, "t": titulo_, "res": res,
                        "m": (a.get("mayoria") or "").replace(" — ", " · "), "a": h[0], "n": h[1], "b": h[2], "u": h[3],
                        "pres": "", "tiene_detalle": True, "e": []})
@@ -310,7 +321,7 @@ def procesar_senado_anterior(legs, salida, indice):
             {"bloques": {b: dict(cn) for b, cn in sorted(por_bloque.items())}, "votos": filas, "expedientes": [], "nota": nota, "camara": "Senadores", "bloque_en_acta": True},
             ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         if not cuadra:
-            excluidas += 1
+            excluidas += int(not a.get("anulada"))
             continue
         validas += 1
         mayoria = {}
@@ -352,7 +363,7 @@ def procesar_senado_anterior(legs, salida, indice):
                           "coincidencia_bloque_n": st["cb_n"]})
         resumen[k] = lista
     anios = collections.Counter(a["fecha_local"][:4] for a in datos)
-    resumen["_meta"] = {"validas": validas, "excluidas": excluidas, "actas_vacias": vacias, "desde": min((a["fecha_local"] for a in datos), default=""),
+    resumen["_meta"] = {"validas": validas, "excluidas": excluidas, "anuladas": anuladas, "actas_vacias": vacias, "desde": min((a["fecha_local"] for a in datos), default=""),
                         "hasta": max((a["fecha_local"] for a in datos), default=""), "por_anio": dict(sorted(anios.items())),
                         "control_id": dict(control), "votos_sin_cruzar": sin_cruzar["sin_id"]}
     print(f"Senado anterior: {validas} válidas, {excluidas} excluidas; control de cruce por nombre contra ID oficial: {control['coincide']}/{control['con_id']}; "

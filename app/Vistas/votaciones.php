@@ -42,7 +42,7 @@
       <td data-etiqueta="Cámara"><?= ($v['c'] ?? 'D') === 'S' ? 'Senado' : 'Diputados' ?></td>
       <td><a href="/votaciones/<?= e($v['id']) ?>"><?= e(mb_strlen($v['t']) > 170 ? mb_substr($v['t'], 0, 170) . '…' : $v['t']) ?></a>
           <span class="tenue pequeno block"><?= !empty($v['p']) ? 'Período ' . (int)$v['p'] . ' · ' : '' ?><?= !empty($v['s']) ? 'sesión ' . e(strtolower($v['s'])) . ' · ' : '' ?><?= e($v['m']) ?></span></td>
-      <td data-etiqueta="Resultado"><b class="res-<?= $v['res'] === 'AFIRMATIVO' ? 'si' : 'no' ?>"><?= $v['res'] === 'AFIRMATIVO' ? 'Afirmativo' : 'Negativo' ?></b></td>
+      <td data-etiqueta="Resultado"><?= resultado_votacion((string)$v['res']) ?></td>
       <td class="der num" data-etiqueta="A favor"><?= (int)$v['a'] ?></td>
       <td class="der num" data-etiqueta="En contra"><?= (int)$v['n'] ?></td>
       <td class="der num" data-etiqueta="Abstenciones"><?= (int)$v['b'] ?></td>
