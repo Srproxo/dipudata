@@ -53,9 +53,41 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
         <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span class="num"><?= e($l['telefono']) ?></span></li><?php endif; ?>
       </ul>
     <?php endif; ?>
-    <p class="tenue pequeno" style="margin-top:1.25rem">Asistencia, votaciones y otras métricas se vuelven a publicar cuando estén calculadas desde las actas oficiales. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
+    <p class="tenue pequeno" style="margin-top:1.25rem">Las métricas del mandato actual se publican cuando la Cámara libere sus votaciones recientes. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
   </section>
 </div>
+
+<?php $par = !$esSen ? Datos::participacion($l['slug']) : null; ?>
+<?php if ($par): ?>
+<section class="seccion" aria-labelledby="participacion">
+  <h2 id="participacion" class="seccion-titulo">Votaciones nominales entre <?= e(substr($par['desde'], 0, 4)) ?> y <?= e(substr($par['hasta'], 0, 4)) ?></h2>
+  <dl class="participacion">
+    <div><dt>Votaciones registradas</dt><dd><?= number_format((int)$par['actas'], 0, ',', '.') ?></dd></div>
+    <div><dt>Presente</dt><dd><?= number_format((int)$par['presente'], 0, ',', '.') ?></dd></div>
+    <div><dt>Ausente</dt><dd><?= number_format((int)$par['ausente'], 0, ',', '.') ?></dd></div>
+    <?php if ($par['asistencia_pct'] !== null): ?><div><dt>Presencia en las votaciones</dt><dd><?= e(number_format((float)$par['asistencia_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
+    <?php if ($par['coincidencia_bloque_pct'] !== null): ?><div><dt>Votó como la mayoría de su bloque</dt><dd><?= e(number_format((float)$par['coincidencia_bloque_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
+  </dl>
+  <p class="tenue pequeno">Entre el <?= e(fecha_es($par['desde'])) ?> y el <?= e(fecha_es($par['hasta'])) ?>: <?= (int)$par['afirmativos'] ?> votos afirmativos, <?= (int)$par['negativos'] ?> negativos y <?= (int)$par['abstenciones'] ?> abstenciones. Cubre solo el tiempo en que ejerció en esos años, según los datos abiertos de la Cámara; no incluye su mandato actual. "Ausente" significa que no emitió voto en esa votación, sin importar el motivo. <a href="/votaciones">Ver todas las votaciones</a>.</p>
+</section>
+<?php endif; ?>
+
+<?php $sub = !$esSen ? Datos::subsidiosDiputado($l['slug']) : []; ?>
+<?php if ($sub): ?>
+<section class="seccion" aria-labelledby="subs">
+  <h2 id="subs" class="seccion-titulo">Subsidios asociados en el registro de la Cámara</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Año</th><th scope="col" class="der">Subsidios</th><th scope="col" class="der">Total</th><th scope="col"></th></tr></thead>
+    <tbody>
+    <?php foreach ($sub as $anio => $r): ?>
+      <tr><td class="num"><?= e($anio) ?></td><td class="der num" data-etiqueta="Subsidios"><?= (int)$r['n'] ?></td><td class="der num" data-etiqueta="Total"><?= e(monto_ars((string)$r['total'])) ?></td>
+          <td><a href="/subsidios?anio=<?= e($anio) ?>&amp;diputado=<?= e($l['slug']) ?>">Ver detalle</a></td></tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Es lo que figura en el registro oficial de subsidios de la Cámara (2021 a 2023), asociado a este diputado. No indica cómo se decidió cada subsidio. <a href="/subsidios">Más sobre los subsidios</a>.</p>
+</section>
+<?php endif; ?>
 
 <?php if (!empty($l['trayectoria'])): ?>
 <section class="seccion" aria-labelledby="trayectoria">

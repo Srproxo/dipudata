@@ -71,6 +71,70 @@ final class Datos
         ));
     }
 
+    /** @return list<array{0:int,1:string,2:string,3:string}> [numero, titulo, fecha sancion, referencias] */
+    public static function leyes(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/leyes/indice.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    public static function ley(int $n): ?array
+    {
+        $ruta = RAIZ . "/storage/verificado/leyes/ley/{$n}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : null;
+    }
+
+    /** @return array<string,array> resumen por año de subsidios (y 'covid') */
+    public static function subsidiosIndice(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/subsidios/indice.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    public static function subsidios(string $anio): array
+    {
+        if (!preg_match('/^(\d{4}|covid)$/', $anio)) {
+            return [];
+        }
+        $ruta = RAIZ . "/storage/verificado/subsidios/{$anio}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    /** @return array<string,array{n:int,total:float}> subsidios por año de un diputado actual */
+    public static function subsidiosDiputado(string $slug): array
+    {
+        return self::leer('subsidios_diputados')[$slug] ?? [];
+    }
+
+    /** @return list<array> cabeceras de las votaciones nominales, de la más reciente a la más antigua */
+    public static function votaciones(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/votaciones/indice.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    /** @return array{bloques:array,votos:list<array>}|null */
+    public static function votacion(string $id): ?array
+    {
+        if (!preg_match('/^\d{1,6}$/', $id)) {
+            return null;
+        }
+        $ruta = RAIZ . "/storage/verificado/votaciones/actas/{$id}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : null;
+    }
+
+    /** Resumen de participación en votaciones nominales de un diputado actual (o null). */
+    public static function participacion(string $slug): ?array
+    {
+        return self::leer('votaciones_diputados')[$slug] ?? null;
+    }
+
     /** @return list<array> */
     public static function interbloques(): array
     {

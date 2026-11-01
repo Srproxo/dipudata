@@ -179,6 +179,115 @@ switch (true) {
         ));
         break;
 
+    case $path === '/leyes':
+        $todas = Datos::leyes();
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $anios = array_values(array_unique(array_filter(array_map(static fn($l) => substr($l[2], 0, 4), $todas))));
+        $anio = is_string($_GET['anio'] ?? null) && in_array($_GET['anio'], $anios, true) ? $_GET['anio'] : '';
+        $nq = Datos::normalizar($q);
+        $lista = array_values(array_filter($todas, static function (array $l) use ($nq, $anio): bool {
+            if ($anio && substr($l[2], 0, 4) !== $anio) return false;
+            if ($nq === '') return true;
+            $hay = ' ' . Datos::normalizar($l[0] . ' ' . $l[1] . ' ' . $l[3]) . ' ';
+            foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+            return true;
+        }));
+        $total = count($lista);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $lista = array_slice($lista, ($pagina - 1) * 50, 50);
+        render('leyes', compact('lista', 'anios', 'anio', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+            'Leyes sancionadas por el Congreso argentino',
+            'Más de mil leyes sancionadas entre 2008 y 2020, con su sumario y sus fechas. Buscá por número, tema o palabra clave. Fuente: datos abiertos de la HCDN.',
+            '/leyes', 'leyes', ['robots' => ($q !== '' || $anio || $pagina > 1) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/leyes/(\d{3,6})$#', $path, $m):
+        $ley = Datos::ley((int)$m[1]);
+        if (!$ley) { render_404(); break; }
+        render('ley', ['ley' => $ley], pagina_meta(
+            'Ley ' . number_format((int)$ley['n'], 0, ',', '.') . ': ' . mb_substr($ley['t'] ?? '', 0, 90),
+            'Ley ' . $ley['n'] . ($ley['t'] ?? '' ? ': ' . mb_substr($ley['t'], 0, 150) : '') . '. Sumario y fechas según la Cámara de Diputados.',
+            '/leyes/' . $ley['n'], 'leyes'
+        ));
+        break;
+
+    case $path === '/subsidios':
+        $idx = Datos::subsidiosIndice();
+        $anios = array_keys($idx);
+        $anio = is_string($_GET['anio'] ?? null) && isset($idx[$_GET['anio']]) ? $_GET['anio'] : (string)($anios[count($anios) - 2] ?? '2023');
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $items = Datos::subsidios($anio);
+        $dipSel = is_string($_GET['diputado'] ?? null) && preg_match('/^[a-z0-9-]{3,80}$/', $_GET['diputado']) ? $_GET['diputado'] : '';
+        if ($dipSel) {
+            $items = array_values(array_filter($items, static fn($it) => ($it['s'] ?? '') === $dipSel));
+        }
+        if ($nq !== '') {
+            $items = array_values(array_filter($items, static function (array $it) use ($nq): bool {
+                $hay = ' ' . Datos::normalizar(($it['b'] ?? '') . ' ' . ($it['d'] ?? '') . ' ' . ($it['p'] ?? '') . ' ' . ($it['a'] ?? '')) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+                return true;
+            }));
+        }
+        $total = count($items);
+        $suma = array_sum(array_column($items, 'm'));
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $items = array_slice($items, ($pagina - 1) * 50, 50);
+        render('subsidios', compact('idx', 'anio', 'q', 'items', 'total', 'suma', 'pagina', 'paginas', 'dipSel'), pagina_meta(
+            'Subsidios de la Cámara de Diputados',
+            'Subsidios que otorgó la Cámara de Diputados entre 2020 y 2023: a quién, por cuánto y a pedido de qué diputado figura en el registro oficial.',
+            '/subsidios', 'subsidios', ['robots' => ($q !== '' || $dipSel || $pagina > 1 || isset($_GET['anio'])) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/ley/(\d+)$#', $path, $m):
+        ir('/leyes/' . $m[1]);
+
+    case $path === '/votaciones':
+        $todas = Datos::votaciones();
+        $anios = array_values(array_unique(array_map(static fn($v) => substr($v['f'], 0, 4), $todas)));
+        $anio = is_string($_GET['anio'] ?? null) && in_array($_GET['anio'], $anios, true) ? $_GET['anio'] : '';
+        $res = in_array($_GET['resultado'] ?? '', ['AFIRMATIVO', 'NEGATIVO'], true) ? (string)$_GET['resultado'] : '';
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $lista = array_values(array_filter($todas, static function (array $v) use ($anio, $res, $nq): bool {
+            if ($anio && substr($v['f'], 0, 4) !== $anio) return false;
+            if ($res && $v['res'] !== $res) return false;
+            if ($nq !== '') {
+                $hay = ' ' . Datos::normalizar($v['t']) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+            }
+            return true;
+        }));
+        $total = count($lista);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $lista = array_slice($lista, ($pagina - 1) * 50, 50);
+        $filtrado = $anio || $res || $q !== '' || $pagina > 1;
+        render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+            'Votaciones nominales de la Cámara de Diputados',
+            'Cada votación nominal de Diputados entre 2011 y 2020, con su resultado y cómo votó cada diputado. Fuente: datos abiertos de la HCDN.',
+            '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/votaciones/(\d{1,6})$#', $path, $m):
+        $cab = null;
+        foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
+        foreach (Datos::votaciones() as $v) { if ($v['id'] === $m[1]) { $cab = $v; break; } }
+        $det = $cab ? Datos::votacion($m[1]) : null;
+        if (!$cab || !$det) { render_404(); break; }
+        $filtro = in_array($_GET['voto'] ?? '', ['A', 'N', 'B', 'U'], true) ? (string)$_GET['voto'] : '';
+        render('votacion', compact('cab', 'det', 'filtro'), pagina_meta(
+            'Votación del ' . fecha_es($cab['f']) . ': ' . mb_substr($cab['t'], 0, 80),
+            $cab['t'] . ' Resultado: ' . strtolower($cab['res']) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada diputado.',
+            '/votaciones/' . $m[1], 'votaciones', ['robots' => $filtro ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/metodologia':
         render('metodologia', [], pagina_meta(
             'Metodología y fuentes',
@@ -190,16 +299,17 @@ switch (true) {
     case (bool)preg_match('#^/blog(/|$)#', $path):
         ir('/congreso');
 
-    case (bool)preg_match('#^/(eje|ley|leyes|match|match-360)(/|$)#', $path):
+    case (bool)preg_match('#^/(eje|ley|match|match-360)(/|$)#', $path):
         header('Retry-After: 86400');
         render('en_revision', [], pagina_meta('Sección en revisión', 'Estamos verificando estos datos contra las fuentes oficiales.', '/', '', ['robots' => 'noindex, follow']), 503);
         break;
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
+        foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
         foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }

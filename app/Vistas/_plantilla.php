@@ -2,12 +2,18 @@
 /** @var array $meta @var string $contenido */
 $nav = [
     'legisladores' => ['/', 'Legisladores'],
-    'congreso'     => ['/congreso', 'Cómo funciona'],
+    'votaciones'   => ['/votaciones', 'Votaciones'],
+    'leyes'        => ['/leyes', 'Leyes'],
     'bloques'      => ['/congreso/bloques', 'Bloques'],
-    'provincias'   => ['/congreso/provincias', 'Provincias'],
     'senado'       => ['/senado', 'Senado'],
-    'metodologia'  => ['/metodologia', 'Metodología'],
 ];
+$mas = [
+    'provincias'  => ['/congreso/provincias', 'Provincias'],
+    'subsidios'   => ['/subsidios', 'Subsidios'],
+    'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
+    'metodologia' => ['/metodologia', 'Metodología'],
+];
+$masActivo = isset($mas[$meta['seccion']]);
 $inf = \App\Datos::informe();
 ?>
 <!DOCTYPE html>
@@ -42,6 +48,14 @@ $inf = \App\Datos::informe();
       <?php foreach ($nav as $clave => [$href, $texto]): ?>
         <a href="<?= e($href) ?>"<?= $meta['seccion'] === $clave ? ' aria-current="page"' : '' ?>><?= e($texto) ?></a>
       <?php endforeach; ?>
+      <details class="mas"<?= $masActivo ? ' data-activo' : '' ?>>
+        <summary>Más</summary>
+        <div class="mas-panel">
+          <?php foreach ($mas as $clave => [$href, $texto]): ?>
+            <a href="<?= e($href) ?>"<?= $meta['seccion'] === $clave ? ' aria-current="page"' : '' ?>><?= e($texto) ?></a>
+          <?php endforeach; ?>
+        </div>
+      </details>
     </nav>
   </div>
 </header>
@@ -62,6 +76,9 @@ $inf = \App\Datos::informe();
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
         <li><a href="/congreso/bloques">Bloques</a></li>
         <li><a href="/congreso/provincias">Provincias</a></li>
+        <li><a href="/votaciones">Votaciones de Diputados</a></li>
+        <li><a href="/leyes">Leyes</a></li>
+        <li><a href="/subsidios">Subsidios</a></li>
         <li><a href="/senado">Registros del Senado</a></li>
       </ul>
     </div>

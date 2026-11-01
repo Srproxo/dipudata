@@ -11,13 +11,15 @@
     <li><strong>Senadores:</strong> padrón de senadores en ejercicio que publica el Senado de la Nación como dato abierto: nombre, provincia, bloque, mandato, foto y contacto institucional.</li>
     <li><strong>Registros del Senado:</strong> versiones taquigráficas, asuntos entrados, boletines, decretos, resoluciones, disposiciones, normativa y licitaciones, tal como los publica el Senado. Los textos no se modifican.</li>
     <li><strong>Fotos:</strong> ArgentinaDatos. Si una foto falta, se muestran las iniciales.</li>
+    <li><strong>Votaciones, leyes y subsidios de Diputados:</strong> datos abiertos de la Cámara de Diputados. Las votaciones (2011 a 2020) se validan voto por voto contra el total de cada una. De las leyes se publican el número, el sumario y las fechas de sanción y de publicación; no se publican los campos de promulgación y veto del archivo, porque traen el mismo valor en todas las filas. De los subsidios no se publican los CUIT.</li>
     <li><strong>Textos sobre el Congreso:</strong> redactados a partir de la Constitución Nacional.</li>
   </ul>
   <h2>Qué retiramos y por qué</h2>
   <p>Una auditoría interna encontró datos sin respaldo en la versión anterior del sitio: números de CUIT generados al azar, porcentajes de asistencia y de lealtad de bloque con valores de relleno, montos de patrimonio sin fuente y alertas que se atribuían a legisladores reales sin evidencia. Todo eso se retiró. Las secciones de votaciones, rankings, comparaciones y notas se vuelven a publicar solo cuando sus datos estén calculados desde las actas oficiales.</p>
   <h2>Qué viene</h2>
   <ul>
-    <li>Asistencia y votaciones calculadas desde las actas nominales de cada cámara.</li>
+    <li>Votaciones, leyes y subsidios posteriores a 2020 y 2023, cuando la Cámara los publique.</li>
+    <li>Asistencia y votaciones del Senado.</li>
     <li>Integrantes de las comisiones de ambas cámaras.</li>
     <li>Registros equivalentes de la Cámara de Diputados.</li>
   </ul>
