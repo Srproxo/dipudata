@@ -5,6 +5,7 @@ $nav = [
     'congreso'     => ['/congreso', 'Cómo funciona'],
     'bloques'      => ['/congreso/bloques', 'Bloques'],
     'provincias'   => ['/congreso/provincias', 'Provincias'],
+    'senado'       => ['/senado', 'Registros del Senado'],
     'metodologia'  => ['/metodologia', 'Metodología'],
 ];
 $inf = \App\Datos::informe();
@@ -61,13 +62,14 @@ $inf = \App\Datos::informe();
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
         <li><a href="/congreso/bloques">Bloques</a></li>
         <li><a href="/congreso/provincias">Provincias</a></li>
+        <li><a href="/senado">Registros del Senado</a></li>
       </ul>
     </div>
     <div>
       <p class="pie-titulo">Fuentes</p>
       <ul>
         <li><a href="https://datos.hcdn.gob.ar/" rel="noopener">Datos abiertos de Diputados</a></li>
-        <li><a href="https://www.senado.gob.ar/" rel="noopener">Senado de la Nación</a></li>
+        <li><a href="https://www.senado.gob.ar/" rel="noopener">Senado de la Nación (datos abiertos)</a></li>
         <li><a href="https://www.congreso.gob.ar/constitucionNacional.php" rel="noopener">Constitución Nacional</a></li>
         <li><a href="/metodologia">Cómo trabajamos</a></li>
       </ul>

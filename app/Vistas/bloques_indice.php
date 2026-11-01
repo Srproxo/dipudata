@@ -24,4 +24,4 @@
   </table></div>
 </section>
 <?php endforeach; ?>
-<p class="fuente-pie">Fuente: padrón oficial de diputados en ejercicio (HCDN) y padrón del Senado en verificación. Las cantidades se calculan a partir del padrón, no se cargan a mano.</p>
+<p class="fuente-pie">Fuente: padrón oficial de diputados en ejercicio (HCDN) y padrón de senadores en ejercicio (Senado de la Nación). Las cantidades se calculan a partir del padrón, no se cargan a mano.</p>

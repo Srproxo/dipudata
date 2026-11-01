@@ -152,3 +152,16 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .barra + .tabla-caja { margin-top: 1.1rem; }
 .perfil-cabeza .avatar { box-shadow: none; }
 .tabla td.celda-nombre { justify-content: flex-start; }
+
+/* Registros del Senado */
+.nowrap { white-space: nowrap; }
+.block { display: block; margin-top: .15rem; }
+.tabla-docs td { vertical-align: top; }
+.docs-links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .35rem; }
+.paginas { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--linea); }
+.contacto { margin: 0; padding: 0; list-style: none; }
+.contacto li { padding: .55rem 0; border-bottom: 1px solid var(--linea); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+@media (max-width: 40rem) { .tabla-docs td { display: block; } .tabla-docs td::before { display: inline; margin-right: .5rem; } }
+.articulo .sub { margin: 1.5rem 0 .4rem; font: 700 1.05rem/1.3 var(--sans); }
+.lista-simple { margin: 0 0 1rem; padding-left: 1.2rem; }
+.lista-simple li { font-size: .95rem; line-height: 1.5; padding: .1rem 0; }

@@ -4,20 +4,23 @@ Construye storage/verificado/*.json, la única fuente de datos que lee el sitio.
 
 Entradas (todas dentro del repositorio):
   storage/hcdn/diputados_actuales.csv   Padrón oficial de diputados en ejercicio (datos.hcdn.gob.ar)
-  storage/legisladores_master.json      Solo se toman: nombre, provincia, bloque (senadores), foto y slug.
+  storage/oficial/senado/senadores_activos.json.gz   Padrón oficial de senadores en ejercicio (Senado de la Nación)
+  storage/oficial/senado/senadores_no_activos.json.gz  Ex senadores (se usa para controlar el padrón)
+  storage/legisladores_master.json      Solo se toman la foto y el slug de los diputados, para no cambiar URLs.
                                         Se IGNORAN cuit, asistencia, lealtad, votaciones, patrimonio, biografía:
                                         eran valores generados sin fuente.
-  scripts/senado_excepciones.json       Correcciones al padrón del Senado, con motivo.
 
 Uso:  python3 -I scripts/construir_datos.py
 """
 import csv, json, re, sys, unicodedata, collections, datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _carga import filas
+
 RAIZ = Path(__file__).resolve().parent.parent
 HCDN = RAIZ / "storage" / "hcdn" / "diputados_actuales.csv"
 MASTER = RAIZ / "storage" / "legisladores_master.json"
-EXCEP = RAIZ / "scripts" / "senado_excepciones.json"
 SALIDA = RAIZ / "storage" / "verificado"
 
 PROVINCIAS = {
@@ -30,13 +33,14 @@ PROVINCIAS = {
     "MISIONES": "Misiones", "NEUQUEN": "Neuquén", "RIO NEGRO": "Río Negro", "SALTA": "Salta",
     "SAN JUAN": "San Juan", "SAN LUIS": "San Luis", "SANTA CRUZ": "Santa Cruz", "SANTA FE": "Santa Fe",
     "SANTIAGO DEL ESTERO": "Santiago del Estero", "TIERRA DEL FUEGO": "Tierra del Fuego", "TUCUMAN": "Tucumán",
+    "TIERRA DEL FUEGO, ANTARTIDA E ISLAS DEL ATLANTICO SUR": "Tierra del Fuego",
 }
 SIGLAS = {"PRO", "UCR", "MID", "PTS", "FIT", "PO", "CC", "ARI", "LLA", "UXP"}
 MINUSCULAS = {"de", "del", "la", "las", "los", "y", "e", "en", "el", "por", "a"}
 # Los senadores vienen con siglas o nombres abreviados: se llevan al nombre oficial del bloque.
 ALIAS_BLOQUE = {
     "LLA": "LA LIBERTAD AVANZA", "UXP": "UNIÓN POR LA PATRIA", "UCR": "UCR - UNIÓN CÍVICA RADICAL",
-    "PJ": "JUSTICIALISTA", "FRENTE PRO": "PRO",
+    "PJ": "JUSTICIALISTA",
 }
 
 
@@ -69,7 +73,8 @@ def titulo(s: str) -> str:
         elif i > 0 and p.lower() in MINUSCULAS:
             out.append(p.lower())
         else:
-            out.append(p[:1].upper() + p[1:].lower())
+            w = p[:1].upper() + p[1:].lower()
+            out.append(re.sub(r"(\'|-)([a-záéíóúñ])", lambda m: m.group(1) + m.group(2).upper(), w))
     return "".join(out)
 
 
@@ -86,9 +91,13 @@ def fecha_iso(s: str):
         return None
 
 
+def fecha_iso_iso(s: str):
+    s = (s or "").strip()
+    return s if re.match(r"^\d{4}-\d{2}-\d{2}$", s) else None
+
+
 def main() -> int:
     master = json.loads(MASTER.read_text(encoding="utf-8"))
-    excep = json.loads(EXCEP.read_text(encoding="utf-8"))
     avisos = []
 
     # Índice del master por nombre normalizado (tokens ordenados) + provincia
@@ -144,30 +153,27 @@ def main() -> int:
                 },
             })
 
-    # ---- Senadores: padrón del proyecto menos las excepciones documentadas
-    fuera = {norm(e["nombre"]): e["motivo"] for e in excep["fuera_del_padron"]}
+    # ---- Senadores: padrón oficial del Senado de la Nación (datos abiertos)
+    idx_sen = {}
     for m in master:
-        if m["camara"] != "Senadores" or m["estado"] != "Activo":
-            continue
-        if norm(m["nombre_completo"]) in fuera:
-            continue
+        if m["camara"] == "Senadores":
+            idx_sen.setdefault(clave(m["nombre_completo"], provincia(m["provincia"])), []).append(m)
+    for r in filas("senadores_activos"):
+        nombre = titulo(f'{r["NOMBRE"].strip()} {r["APELLIDO"].strip()}')
+        prov = provincia(r["PROVINCIA"])
+        m = (idx_sen.get(clave(nombre, prov)) or [None])[0]
+        mandato = f'{r["D_LEGAL"][:4]}-{r["C_LEGAL"][:4]}' if r["D_LEGAL"][:4].isdigit() and r["C_LEGAL"][:4].isdigit() else None
+        foto = r["FOTO"].strip() if r["FOTO"].strip().startswith("https://www.senado.gob.ar/") else None
         legisladores.append({
-            "nombre": m["nombre_completo"],
-            "apellido": None,
-            "camara": "Senadores",
-            "provincia": provincia(m["provincia"]),
-            "bloque": titulo(bloque_oficial(m["bloque_actual"])),
-            "bloque_oficial": bloque_oficial(m["bloque_actual"]),
-            "mandato": None,
-            "jura": None,
-            "inicio": None,
-            "sexo": None,
-            "foto": m.get("foto_url") or None,
-            "slug_previo": m.get("slug"),
-            "verificado": False,
+            "nombre": nombre, "apellido": titulo(r["APELLIDO"].strip()), "camara": "Senadores", "provincia": prov,
+            "bloque": titulo(bloque_oficial(r["BLOQUE"])), "bloque_oficial": bloque_oficial(r["BLOQUE"]),
+            "alianza": titulo(r["PARTIDO O ALIANZA"].strip()) if r["PARTIDO O ALIANZA"].strip() else None,
+            "mandato": mandato, "jura": None, "inicio": fecha_iso_iso(r["D_REAL"]), "sexo": None,
+            "email": r["EMAIL"].strip() or None, "telefono": r["TELEFONO"].strip() or None,
+            "foto": foto, "slug_previo": (m or {}).get("slug"), "verificado": True,
             "fuentes": {
-                "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-                "foto": "ArgentinaDatos" if m.get("foto_url") else None,
+                "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+                "foto": "Senado de la Nación" if foto else None,
             },
         })
 
@@ -208,15 +214,17 @@ def main() -> int:
     for p in provincias:
         if p["senadores"] > 3:
             sys.exit(f"ERROR: {p['nombre']} tiene {p['senadores']} senadores (máximo 3)")
-        if p["senadores"] < 3:
-            avisos.append(f"Senado: {p['nombre']} figura con {p['senadores']} de 3 senadores; falta verificar contra senado.gob.ar")
+        if p["senadores"] != 3:
+            sys.exit(f"ERROR: {p['nombre']} tiene {p['senadores']} senadores (deben ser 3)")
+    if len(sen) != 72:
+        sys.exit(f"ERROR: se esperaban 72 senadores y hay {len(sen)}")
     if len({l["slug"] for l in legisladores if l["camara"] == "Diputados"}) != len(dip):
         sys.exit("ERROR: slugs duplicados")
 
     informe = {
         "generado": datetime.date.today().isoformat(),
         "diputados": len(dip), "senadores": len(sen), "senadores_esperados": 72,
-        "fuera_del_padron": excep["fuera_del_padron"], "avisos": avisos,
+        "avisos": avisos,
     }
     SALIDA.mkdir(parents=True, exist_ok=True)
     for nombre, datos in (("legisladores", legisladores), ("bloques", bloques), ("provincias", provincias), ("informe", informe)):

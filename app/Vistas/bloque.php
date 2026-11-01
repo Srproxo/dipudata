@@ -10,7 +10,6 @@ ksort($porProv);
 <p class="antetitulo">Bloque en <?= $esSen ? 'el Senado' : 'la Cámara de Diputados' ?></p>
 <h1 class="titulo"><i class="punto punto-grande" style="background:<?= e(color_bloque($b['nombre_oficial'])) ?>"></i><?= e($b['nombre']) ?></h1>
 <p class="bajada"><?= (int)$b['cantidad'] ?> <?= (int)$b['cantidad'] === 1 ? 'integrante' : 'integrantes' ?> de <?= count($b['provincias']) ?> <?= count($b['provincias']) === 1 ? 'provincia' : 'provincias' ?>.</p>
-<?php if (!$esSen): ?><?php else: ?><p class="aviso">El padrón del Senado se está contrastando con senado.gob.ar; la composición puede tener ajustes.</p><?php endif; ?>
 
 <section class="seccion" aria-labelledby="int">
   <h2 id="int" class="seccion-titulo">Quiénes lo integran</h2>

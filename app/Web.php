@@ -75,7 +75,7 @@ function encabezados_seguridad(string $tipo = 'text/html; charset=utf-8', int $m
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
     header('Strict-Transport-Security: max-age=63072000; includeSubDomains');
-    header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://api.argentinadatos.com data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'");
+    header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://api.argentinadatos.com https://www.senado.gob.ar data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'");
     header($maxAge > 0 ? "Cache-Control: public, max-age={$maxAge}, s-maxage={$maxAge}" : 'Cache-Control: no-store');
 }
 
@@ -116,4 +116,16 @@ function slug_provincia(string $nombre): string
         }
     }
     return '';
+}
+
+function monto_ars(string $n): string
+{
+    return is_numeric($n) ? '$ ' . number_format((float)$n, 2, ',', '.') : '';
+}
+
+/** Enlace de paginación conservando los filtros. */
+function url_con(array $cambios): string
+{
+    $q = array_filter(array_merge($_GET, $cambios), static fn($v) => $v !== '' && $v !== null);
+    return strtok((string)($_SERVER['REQUEST_URI'] ?? '/'), '?') . ($q ? '?' . http_build_query($q) : '');
 }

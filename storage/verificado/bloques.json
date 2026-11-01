@@ -273,48 +273,28 @@
  },
  {
   "camara": "Senadores",
-  "nombre": "Unión por la Patria",
-  "nombre_oficial": "UNIÓN POR LA PATRIA",
-  "slug": "union-por-la-patria",
-  "cantidad": 30,
+  "nombre": "Justicialista",
+  "nombre_oficial": "JUSTICIALISTA",
+  "slug": "justicialista",
+  "cantidad": 22,
   "provincias": [
    "Buenos Aires",
    "Catamarca",
    "Chaco",
    "Chubut",
    "Ciudad Autónoma de Buenos Aires",
+   "Entre Ríos",
    "Formosa",
-   "Jujuy",
    "La Pampa",
    "La Rioja",
    "Mendoza",
-   "Neuquén",
    "Río Negro",
-   "Salta",
    "San Juan",
-   "San Luis",
    "Santa Cruz",
    "Santa Fe",
+   "Santiago del Estero",
    "Tierra del Fuego",
    "Tucumán"
-  ]
- },
- {
-  "camara": "Senadores",
-  "nombre": "UCR - Unión Cívica Radical",
-  "nombre_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "slug": "ucr-union-civica-radical",
-  "cantidad": 12,
-  "provincias": [
-   "Buenos Aires",
-   "Catamarca",
-   "Chaco",
-   "Corrientes",
-   "Entre Ríos",
-   "La Pampa",
-   "Mendoza",
-   "Santa Fe",
-   "Tierra del Fuego"
   ]
  },
  {
@@ -322,37 +302,61 @@
   "nombre": "La Libertad Avanza",
   "nombre_oficial": "LA LIBERTAD AVANZA",
   "slug": "la-libertad-avanza",
-  "cantidad": 7,
+  "cantidad": 21,
   "provincias": [
+   "Chaco",
    "Ciudad Autónoma de Buenos Aires",
-   "Jujuy",
-   "La Rioja",
-   "San Juan",
-   "San Luis"
-  ]
- },
- {
-  "camara": "Senadores",
-  "nombre": "PRO",
-  "nombre_oficial": "PRO",
-  "slug": "pro",
-  "cantidad": 5,
-  "provincias": [
    "Córdoba",
    "Entre Ríos",
-   "La Pampa",
-   "Misiones"
+   "Formosa",
+   "Jujuy",
+   "La Rioja",
+   "Neuquén",
+   "Río Negro",
+   "Salta",
+   "San Juan",
+   "San Luis",
+   "Tierra del Fuego"
   ]
  },
  {
   "camara": "Senadores",
-  "nombre": "Cambio Federal",
-  "nombre_oficial": "CAMBIO FEDERAL",
-  "slug": "cambio-federal",
+  "nombre": "UCR - Unión Cívica Radical",
+  "nombre_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "slug": "ucr-union-civica-radical",
+  "cantidad": 10,
+  "provincias": [
+   "Buenos Aires",
+   "Catamarca",
+   "Chaco",
+   "Corrientes",
+   "La Pampa",
+   "Mendoza",
+   "Santa Fe"
+  ]
+ },
+ {
+  "camara": "Senadores",
+  "nombre": "Convicción Federal",
+  "nombre_oficial": "CONVICCIÓN FEDERAL",
+  "slug": "conviccion-federal",
+  "cantidad": 3,
+  "provincias": [
+   "Catamarca",
+   "Jujuy",
+   "Tucumán"
+  ]
+ },
+ {
+  "camara": "Senadores",
+  "nombre": "Frente PRO",
+  "nombre_oficial": "FRENTE PRO",
+  "slug": "frente-pro",
   "cantidad": 3,
   "provincias": [
    "Chubut",
-   "Salta"
+   "La Pampa",
+   "Misiones"
   ]
  },
  {
@@ -360,29 +364,29 @@
   "nombre": "Frente Cívico por Santiago",
   "nombre_oficial": "FRENTE CÍVICO POR SANTIAGO",
   "slug": "frente-civico-por-santiago",
-  "cantidad": 3,
+  "cantidad": 2,
   "provincias": [
    "Santiago del Estero"
   ]
  },
  {
   "camara": "Senadores",
-  "nombre": "Innovación Federal",
-  "nombre_oficial": "INNOVACIÓN FEDERAL",
-  "slug": "innovacion-federal",
+  "nombre": "Movere Santa Cruz",
+  "nombre_oficial": "MOVERE SANTA CRUZ",
+  "slug": "movere-santa-cruz",
   "cantidad": 2,
   "provincias": [
-   "Misiones"
+   "Santa Cruz"
   ]
  },
  {
   "camara": "Senadores",
-  "nombre": "Por Santa Cruz",
-  "nombre_oficial": "POR SANTA CRUZ",
-  "slug": "por-santa-cruz",
+  "nombre": "Movimiento por Misiones",
+  "nombre_oficial": "MOVIMIENTO POR MISIONES",
+  "slug": "movimiento-por-misiones",
   "cantidad": 2,
   "provincias": [
-   "Santa Cruz"
+   "Misiones"
   ]
  },
  {
@@ -393,14 +397,44 @@
   "cantidad": 2,
   "provincias": [
    "Corrientes",
-   "Entre Ríos"
+   "Córdoba"
   ]
  },
  {
   "camara": "Senadores",
-  "nombre": "Comunidad Neuquén",
-  "nombre_oficial": "COMUNIDAD NEUQUÉN",
-  "slug": "comunidad-neuquen",
+  "nombre": "Despierta Chubut",
+  "nombre_oficial": "DESPIERTA CHUBUT",
+  "slug": "despierta-chubut",
+  "cantidad": 1,
+  "provincias": [
+   "Chubut"
+  ]
+ },
+ {
+  "camara": "Senadores",
+  "nombre": "Independencia",
+  "nombre_oficial": "INDEPENDENCIA",
+  "slug": "independencia",
+  "cantidad": 1,
+  "provincias": [
+   "Tucumán"
+  ]
+ },
+ {
+  "camara": "Senadores",
+  "nombre": "Justicia Social Federal",
+  "nombre_oficial": "JUSTICIA SOCIAL FEDERAL",
+  "slug": "justicia-social-federal",
+  "cantidad": 1,
+  "provincias": [
+   "San Luis"
+  ]
+ },
+ {
+  "camara": "Senadores",
+  "nombre": "La Neuquinidad",
+  "nombre_oficial": "LA NEUQUINIDAD",
+  "slug": "la-neuquinidad",
   "cantidad": 1,
   "provincias": [
    "Neuquén"
@@ -408,42 +442,12 @@
  },
  {
   "camara": "Senadores",
-  "nombre": "Encuentro Federal",
-  "nombre_oficial": "ENCUENTRO FEDERAL",
-  "slug": "encuentro-federal",
+  "nombre": "Primero los Salteños",
+  "nombre_oficial": "PRIMERO LOS SALTEÑOS",
+  "slug": "primero-los-saltenos",
   "cantidad": 1,
   "provincias": [
-   "Córdoba"
-  ]
- },
- {
-  "camara": "Senadores",
-  "nombre": "Juntos Somos Río Negro",
-  "nombre_oficial": "JUNTOS SOMOS RÍO NEGRO",
-  "slug": "juntos-somos-rio-negro",
-  "cantidad": 1,
-  "provincias": [
-   "Río Negro"
-  ]
- },
- {
-  "camara": "Senadores",
-  "nombre": "Libertad, Trabajo y Progreso",
-  "nombre_oficial": "LIBERTAD, TRABAJO Y PROGRESO",
-  "slug": "libertad-trabajo-y-progreso",
-  "cantidad": 1,
-  "provincias": [
-   "Formosa"
-  ]
- },
- {
-  "camara": "Senadores",
-  "nombre": "Por la Justicia Social",
-  "nombre_oficial": "POR LA JUSTICIA SOCIAL",
-  "slug": "por-la-justicia-social",
-  "cantidad": 1,
-  "provincias": [
-   "Tucumán"
+   "Salta"
   ]
  }
 ]

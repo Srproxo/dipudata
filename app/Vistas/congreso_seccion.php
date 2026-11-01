@@ -10,7 +10,17 @@ use App\Datos;
     <?php foreach ($s['partes'] as [$h, $parrafos]): ?>
       <h2><?= e($h) ?></h2>
       <?php foreach ($parrafos as $p): ?><p><?= e($p) ?></p><?php endforeach; ?>
-      <?php if (($s['datos'] ?? '') && $h !== '' && str_starts_with($h, 'Quiénes')):
+      <?php if (($s['datos'] ?? '') === 'comisiones-senado' && $h === 'Las comisiones del Senado'):
+        $porTipo = [];
+        foreach (Datos::comisionesSenado() as $c) { $porTipo[$c['tipo']][] = $c['nombre']; }
+        ?>
+        <p>El Senado tiene hoy <strong class="num"><?= count(Datos::comisionesSenado()) ?></strong> comisiones, según su listado oficial:</p>
+        <?php foreach ($porTipo as $tipo => $nombres): ?>
+          <h3 class="sub"><?= e(ucfirst(mb_strtolower($tipo, 'UTF-8'))) ?> <span class="tenue num">(<?= count($nombres) ?>)</span></h3>
+          <ul class="lista-simple"><?php foreach ($nombres as $n): ?><li><?= e(trim((string)preg_replace('/\s+/', ' ', mb_convert_case(mb_strtolower($n, 'UTF-8'), MB_CASE_TITLE, 'UTF-8')))) ?></li><?php endforeach; ?></ul>
+        <?php endforeach; ?>
+      <?php endif; ?>
+      <?php if (($s['datos'] ?? '') && ($s['datos'] === 'diputados' || $s['datos'] === 'senado') && $h !== '' && str_starts_with($h, 'Quiénes')):
         $camara = $s['datos'] === 'senado' ? 'Senadores' : 'Diputados';
         $bl = Datos::bloques($camara); $tot = array_sum(array_column($bl, 'cantidad')); ?>
         <p>Hoy la cámara tiene <strong class="num"><?= (int)$tot ?></strong> integrantes repartidos en <strong class="num"><?= count($bl) ?></strong> bloques.</p>
