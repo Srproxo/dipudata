@@ -22,9 +22,6 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
   </div>
 </header>
 
-<?php if (!$l['verificado']): ?>
-  <p class="aviso"><strong>Datos en verificación.</strong> El padrón del Senado de este sitio todavía se está contrastando con senado.gob.ar. Si encontrás un error, escribinos y lo corregimos.</p>
-<?php endif; ?>
 
 <div class="dos-col perfil-grilla">
   <section aria-labelledby="ficha">
@@ -34,6 +31,7 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
       <div><dt>Distrito</dt><dd><?= e($l['provincia']) ?></dd></div>
       <div><dt>Bloque</dt><dd><?= e($l['bloque']) ?></dd></div>
       <?php if ($l['mandato']): ?><div><dt>Mandato</dt><dd class="num"><?= e($l['mandato']) ?></dd></div><?php endif; ?>
+      <?php if (!empty($l['alianza'])): ?><div><dt>Alianza electoral</dt><dd><?= e($l['alianza']) ?></dd></div><?php endif; ?>
       <?php if ($l['jura']): ?><div><dt>Juró el</dt><dd><?= e(fecha_es($l['jura'])) ?></dd></div><?php endif; ?>
       <?php if ($l['inicio'] && $l['inicio'] !== $l['jura']): ?><div><dt>Inicio del mandato</dt><dd><?= e(fecha_es($l['inicio'])) ?></dd></div><?php endif; ?>
     </dl>
@@ -46,7 +44,14 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
         <li><span class="fuente-campo"><?= e(ucfirst($campo)) ?></span><span class="fuente-origen"><?= e($fuente) ?></span></li>
       <?php endforeach; ?>
     </ul>
-    <p class="tenue pequeno">Asistencia, votaciones y otras métricas se vuelven a publicar cuando estén calculadas desde las actas oficiales. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
+    <?php if (!empty($l['email']) || !empty($l['telefono'])): ?>
+      <h3 class="seccion-titulo" style="font-size:1.05rem;margin-top:1.5rem">Contacto institucional</h3>
+      <ul class="contacto">
+        <?php if (!empty($l['email'])): ?><li><span class="tenue">Correo</span><a href="mailto:<?= e($l['email']) ?>"><?= e($l['email']) ?></a></li><?php endif; ?>
+        <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span class="num"><?= e($l['telefono']) ?></span></li><?php endif; ?>
+      </ul>
+    <?php endif; ?>
+    <p class="tenue pequeno" style="margin-top:1.25rem">Asistencia, votaciones y otras métricas se vuelven a publicar cuando estén calculadas desde las actas oficiales. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
   </section>
 </div>
 

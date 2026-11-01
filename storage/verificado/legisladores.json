@@ -1,41 +1,47 @@
 [
  {
   "nombre": "Maximiliano Abad",
-  "apellido": null,
+  "apellido": "Abad",
   "camara": "Senadores",
   "provincia": "Buenos Aires",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/546.gif",
-  "verificado": false,
+  "email": "maximiliano.abad@senado.gob.ar",
+  "telefono": "1045 / 1046",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/546.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "maximiliano-abad"
  },
  {
-  "nombre": "Bartolomé Abdala",
-  "apellido": null,
+  "nombre": "Bartolomé Esteban Abdala",
+  "apellido": "Abdala",
   "camara": "Senadores",
   "provincia": "San Luis",
   "bloque": "La Libertad Avanza",
   "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/564.gif",
-  "verificado": false,
+  "email": "bartolome.abdala@senado.gob.ar",
+  "telefono": "1501 / 1503",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/564.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "bartolome-abdala"
+  "slug": "bartolome-esteban-abdala"
  },
  {
   "nombre": "Guillermo César Agüero",
@@ -114,6 +120,28 @@
   "slug": "ernesto-pipi-ali"
  },
  {
+  "nombre": "Romina María Almeida",
+  "apellido": "Almeida",
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "romina.almeida@senado.gob.ar",
+  "telefono": "3522 / 3523",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/583.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "romina-maria-almeida"
+ },
+ {
   "nombre": "Carlos Alberto Almena",
   "apellido": "Almena",
   "camara": "Diputados",
@@ -171,6 +199,28 @@
   "slug": "claudio-alvarez"
  },
  {
+  "nombre": "Carmen Alvarez Rivero",
+  "apellido": "Alvarez Rivero",
+  "camara": "Senadores",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
+  "jura": null,
+  "inicio": "2021-12-10",
+  "sexo": null,
+  "email": "carmen.alvarez@senado.gob.ar",
+  "telefono": "1393 / 1383",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/522.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "carmen-alvarez-rivero"
+ },
+ {
   "nombre": "Cristian Andino",
   "apellido": "Andino",
   "camara": "Diputados",
@@ -190,23 +240,26 @@
   "slug": "cristian-andino"
  },
  {
-  "nombre": "Guillermo Andrada",
-  "apellido": null,
+  "nombre": "Guillermo Eduardo Andrada",
+  "apellido": "Andrada",
   "camara": "Senadores",
   "provincia": "Catamarca",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Convicción Federal",
+  "bloque_oficial": "CONVICCIÓN FEDERAL",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/519.gif",
-  "verificado": false,
+  "email": "guillermo.andrada@senado.gob.ar",
+  "telefono": "3562 / 3564",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/519.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "guillermo-andrada"
+  "slug": "guillermo-eduardo-andrada"
  },
  {
   "nombre": "Javier Andrade",
@@ -245,25 +298,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "barbara-andreussi"
- },
- {
-  "nombre": "Alfredo De Angeli",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Entre Ríos",
-  "bloque": "PRO",
-  "bloque_oficial": "PRO",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/438.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "alfredo-de-angeli"
  },
  {
   "nombre": "Pablo Ansaloni",
@@ -324,20 +358,23 @@
  },
  {
   "nombre": "Carlos Omar Arce",
-  "apellido": null,
+  "apellido": "Arce",
   "camara": "Senadores",
   "provincia": "Misiones",
-  "bloque": "Innovación Federal",
-  "bloque_oficial": "INNOVACIÓN FEDERAL",
-  "mandato": null,
+  "bloque": "Movimiento por Misiones",
+  "bloque_oficial": "MOVIMIENTO POR MISIONES",
+  "alianza": "Frente Renovador de la Concordia-Innovación Federal",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/558.gif",
-  "verificado": false,
+  "email": "carlos.arce@senado.gob.ar",
+  "telefono": "1201 / 1203",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/558.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "carlos-omar-arce"
  },
@@ -361,23 +398,26 @@
   "slug": "martin-ardohain"
  },
  {
-  "nombre": "Ivana Arrascaeta",
-  "apellido": null,
+  "nombre": "Ivanna Marcela Arrascaeta",
+  "apellido": "Arrascaeta",
   "camara": "Senadores",
   "provincia": "San Luis",
   "bloque": "La Libertad Avanza",
   "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png",
-  "verificado": false,
+  "email": "ivanna.arrascaeta@senado.gob.ar",
+  "telefono": "3235 / 3286 / 3288",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/565.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "ivana-arrascaeta"
+  "slug": "ivanna-marcela-arrascaeta"
  },
  {
   "nombre": "Lourdes Micaela Arrieta",
@@ -419,20 +459,23 @@
  },
  {
   "nombre": "Ezequiel Atauche",
-  "apellido": null,
+  "apellido": "Atauche",
   "camara": "Senadores",
   "provincia": "Jujuy",
   "bloque": "La Libertad Avanza",
   "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
+  "alianza": "Partido Renovador Federal",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/552.gif",
-  "verificado": false,
+  "email": "ezequiel.atauche@senado.gob.ar",
+  "telefono": "8083 / 8905",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/552.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "ezequiel-atauche"
  },
@@ -475,21 +518,24 @@
   "slug": "belen-avico"
  },
  {
-  "nombre": "Beatriz Luisa Ávila",
-  "apellido": null,
+  "nombre": "Beatriz Luisa Avila",
+  "apellido": "Avila",
   "camara": "Senadores",
   "provincia": "Tucumán",
-  "bloque": "Por la Justicia Social",
-  "bloque_oficial": "POR LA JUSTICIA SOCIAL",
-  "mandato": null,
+  "bloque": "Independencia",
+  "bloque_oficial": "INDEPENDENCIA",
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/541.gif",
-  "verificado": false,
+  "email": "beatriz.avila@senado.gob.ar",
+  "telefono": "3508 / 1086",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/541.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "beatriz-luisa-avila"
  },
@@ -530,6 +576,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "jorge-antonio-avila"
+ },
+ {
+  "nombre": "Adán Humberto Bahl",
+  "apellido": "Bahl",
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Fuerza Entre Ríos",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "adan.bahl@senado.gob.ar",
+  "telefono": "1330 / 1031",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/584.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "adan-humberto-bahl"
  },
  {
   "nombre": "Karina Banfi",
@@ -646,23 +714,26 @@
   "slug": "monica-becerra"
  },
  {
-  "nombre": "Vilma Bedia",
-  "apellido": null,
+  "nombre": "Vilma Facunda Bedia",
+  "apellido": "Bedia",
   "camara": "Senadores",
   "provincia": "Jujuy",
   "bloque": "La Libertad Avanza",
   "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
+  "alianza": "Partido Renovador Federal",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/553.gif",
-  "verificado": false,
+  "email": "vilma.bedia@senado.gob.ar",
+  "telefono": "3415 / 3416",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/553.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "vilma-bedia"
+  "slug": "vilma-facunda-bedia"
  },
  {
   "nombre": "Beltrán Benedit",
@@ -703,21 +774,46 @@
   "slug": "bertie-benegas-lynch"
  },
  {
+  "nombre": "Joaquín Alberto Benegas Lynch",
+  "apellido": "Benegas Lynch",
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "joaquin.benegaslynch@senado.gob.ar",
+  "telefono": "3580 / 3581",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/582.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "joaquin-alberto-benegas-lynch"
+ },
+ {
   "nombre": "Daniel Pablo Bensusán",
-  "apellido": null,
+  "apellido": "Bensusán",
   "camara": "Senadores",
   "provincia": "La Pampa",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/532.gif",
-  "verificado": false,
+  "email": "daniel.bensusan@senado.gob.ar",
+  "telefono": "1305 / 1307 / 1310",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/532.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "daniel-pablo-bensusan"
  },
@@ -758,25 +854,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "bernardo-biella"
- },
- {
-  "nombre": "Pablo Daniel Blanco",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Tierra del Fuego",
-  "bloque": "UCR - Unión Cívica Radical",
-  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/511.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "pablo-daniel-blanco"
  },
  {
   "nombre": "Rocío Bonacci",
@@ -951,20 +1028,23 @@
  },
  {
   "nombre": "Patricia Bullrich",
-  "apellido": null,
+  "apellido": "Bullrich",
   "camara": "Senadores",
   "provincia": "Ciudad Autónoma de Buenos Aires",
   "bloque": "La Libertad Avanza",
   "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/580.gif",
-  "verificado": false,
+  "email": "patricia.bullrich@senado.gob.ar",
+  "telefono": "1153 / 8751",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/580.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "patricia-bullrich"
  },
@@ -1064,6 +1144,28 @@
   "slug": "lucia-campora"
  },
  {
+  "nombre": "Jorge Milton Capitanich",
+  "apellido": "Capitanich",
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Fuerza Patria",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "jorge.capitanich@senado.gob.ar",
+  "telefono": "1355 / 1156",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/285.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "jorge-milton-capitanich"
+ },
+ {
   "nombre": "Sergio Eduardo Capozzi",
   "apellido": "Capozzi",
   "camara": "Diputados",
@@ -1084,20 +1186,23 @@
  },
  {
   "nombre": "José María Carambia",
-  "apellido": null,
+  "apellido": "Carambia",
   "camara": "Senadores",
   "provincia": "Santa Cruz",
-  "bloque": "Por Santa Cruz",
-  "bloque_oficial": "POR SANTA CRUZ",
-  "mandato": null,
+  "bloque": "Movere Santa Cruz",
+  "bloque_oficial": "MOVERE SANTA CRUZ",
+  "alianza": "Alianza por Santa Cruz",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/567.gif",
-  "verificado": false,
+  "email": "jose.carambia@senado.gob.ar",
+  "telefono": "3408 / 3410",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/567.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "jose-maria-carambia"
  },
@@ -1197,6 +1302,28 @@
   "slug": "giselle-castelnuovo"
  },
  {
+  "nombre": "Mario Pablo Cervi",
+  "apellido": "Cervi",
+  "camara": "Senadores",
+  "provincia": "Neuquén",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "mario.cervi@senado.gob.ar",
+  "telefono": "1060 / 3779",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/586.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "mario-pablo-cervi"
+ },
+ {
   "nombre": "Jorge Chica",
   "apellido": "Chica",
   "camara": "Diputados",
@@ -1292,23 +1419,26 @@
   "slug": "mariela-coletta"
  },
  {
-  "nombre": "Lucía Corpacci",
-  "apellido": null,
+  "nombre": "Lucía Benigna Corpacci",
+  "apellido": "Corpacci",
   "camara": "Senadores",
   "provincia": "Catamarca",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/398.gif",
-  "verificado": false,
+  "email": "lucia.corpacci@senado.gob.ar",
+  "telefono": "1435 / 1403",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/398.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "lucia-corpacci"
+  "slug": "lucia-benigna-corpacci"
  },
  {
   "nombre": "Facundo Correa Llano",
@@ -1330,42 +1460,70 @@
   "slug": "facundo-correa-llano"
  },
  {
-  "nombre": "Carmen Lucila Crexell",
-  "apellido": null,
+  "nombre": "Julieta Corroza",
+  "apellido": "Corroza",
   "camara": "Senadores",
   "provincia": "Neuquén",
-  "bloque": "Comunidad Neuquén",
-  "bloque_oficial": "COMUNIDAD NEUQUÉN",
-  "mandato": null,
+  "bloque": "La Neuquinidad",
+  "bloque_oficial": "LA NEUQUINIDAD",
+  "alianza": "La Neuquinidad",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/440.gif",
-  "verificado": false,
+  "email": "julieta.corroza@senado.gob.ar",
+  "telefono": "1491 / 1493",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/587.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "carmen-lucila-crexell"
+  "slug": "julieta-corroza"
  },
  {
-  "nombre": "Andrea Cristina",
-  "apellido": null,
+  "nombre": "Agustín Pedro Coto",
+  "apellido": "Coto",
+  "camara": "Senadores",
+  "provincia": "Tierra del Fuego",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "agustin.coto@senado.gob.ar",
+  "telefono": "3302 / 3390",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/595.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "agustin-pedro-coto"
+ },
+ {
+  "nombre": "Andrea Marcela Cristina",
+  "apellido": "Cristina",
   "camara": "Senadores",
   "provincia": "Chubut",
-  "bloque": "Cambio Federal",
-  "bloque_oficial": "CAMBIO FEDERAL",
-  "mandato": null,
+  "bloque": "Frente PRO",
+  "bloque_oficial": "FRENTE PRO",
+  "alianza": "Juntos por el Cambio Chubut",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/570.gif",
-  "verificado": false,
+  "email": "andrea.cristina@senado.gob.ar",
+  "telefono": "3451 / 3453",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/570.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "andrea-cristina"
+  "slug": "andrea-marcela-cristina"
  },
  {
   "nombre": "Ricardo Daives",
@@ -1444,6 +1602,28 @@
   "slug": "natalia-de-la-sota"
  },
  {
+  "nombre": "Eduardo Enrique de Pedro",
+  "apellido": "De Pedro",
+  "camara": "Senadores",
+  "provincia": "Buenos Aires",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
+  "jura": null,
+  "inicio": "2023-12-10",
+  "sexo": null,
+  "email": "eduardo.depedro@senado.gob.ar",
+  "telefono": "1315 / 1318",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/545.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "eduardo-enrique-de-pedro"
+ },
+ {
   "nombre": "María Florencia De Sensi",
   "apellido": "De Sensi",
   "camara": "Diputados",
@@ -1461,25 +1641,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "maria-florencia-de-sensi"
- },
- {
-  "nombre": "Sonia Rojas Decut",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Misiones",
-  "bloque": "Innovación Federal",
-  "bloque_oficial": "INNOVACIÓN FEDERAL",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/559.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "sonia-rojas-decut"
  },
  {
   "nombre": "Nicolás del Caño",
@@ -1518,6 +1679,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "romina-del-pla"
+ },
+ {
+  "nombre": "Juliana Di Tullio",
+  "apellido": "Di Tullio",
+  "camara": "Senadores",
+  "provincia": "Buenos Aires",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
+  "jura": null,
+  "inicio": "2023-12-10",
+  "sexo": null,
+  "email": "juliana.ditullio@senado.gob.ar",
+  "telefono": "1084 / 1098",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/517.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "juliana-di-tullio"
  },
  {
   "nombre": "Fernanda Díaz",
@@ -1577,44 +1760,6 @@
   "slug": "sergio-dolce"
  },
  {
-  "nombre": "Martín Doñate",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Río Negro",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/505.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "martin-donate"
- },
- {
-  "nombre": "María Eugenia Duré",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Tierra del Fuego",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/512.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "maria-eugenia-dure"
- },
- {
   "nombre": "Nicolás Emma",
   "apellido": "Emma",
   "camara": "Diputados",
@@ -1635,20 +1780,23 @@
  },
  {
   "nombre": "Carlos Mauricio Espínola",
-  "apellido": null,
+  "apellido": "Espínola",
   "camara": "Senadores",
   "provincia": "Corrientes",
   "bloque": "Provincias Unidas",
   "bloque_oficial": "PROVINCIAS UNIDAS",
-  "mandato": null,
+  "alianza": "Frente Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/461.gif",
-  "verificado": false,
+  "email": "carlos.espinola@senado.gob.ar",
+  "telefono": "1218 / 3190",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/461.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "carlos-mauricio-espinola"
  },
@@ -1691,23 +1839,26 @@
   "slug": "eduardo-falcone"
  },
  {
-  "nombre": "Flavio Fama",
-  "apellido": null,
+  "nombre": "Flavio Sergio Fama",
+  "apellido": "Fama",
   "camara": "Senadores",
   "provincia": "Catamarca",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/520.gif",
-  "verificado": false,
+  "email": "flavio.fama@senado.gob.ar",
+  "telefono": "1395 / 3515",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/520.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "flavio-fama"
+  "slug": "flavio-sergio-fama"
  },
  {
   "nombre": "Alejandro Fargosi",
@@ -1822,6 +1973,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "daiana-fernandez-molero"
+ },
+ {
+  "nombre": "Anabel Fernández Sagasti",
+  "apellido": "Fernández Sagasti",
+  "camara": "Senadores",
+  "provincia": "Mendoza",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Justicialista",
+  "mandato": "2021-2027",
+  "jura": null,
+  "inicio": "2021-12-10",
+  "sexo": null,
+  "email": "anabel.fernandezsagasti@senado.gob.ar",
+  "telefono": "1535 / 1467",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/468.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "anabel-fernandez-sagasti"
  },
  {
   "nombre": "Abelardo Ferrán",
@@ -2014,40 +2187,68 @@
   "slug": "maira-frias"
  },
  {
-  "nombre": "Natalia Gadano",
-  "apellido": null,
+  "nombre": "Enzo Paolo Fullone",
+  "apellido": "Fullone",
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-26",
+  "sexo": null,
+  "email": "enzo.fullone@senado.gob.ar",
+  "telefono": "3589 / 3591",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/590.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "enzo-paolo-fullone"
+ },
+ {
+  "nombre": "Natalia Elena Gadano",
+  "apellido": "Gadano",
   "camara": "Senadores",
   "provincia": "Santa Cruz",
-  "bloque": "Por Santa Cruz",
-  "bloque_oficial": "POR SANTA CRUZ",
-  "mandato": null,
+  "bloque": "Movere Santa Cruz",
+  "bloque_oficial": "MOVERE SANTA CRUZ",
+  "alianza": "Alianza por Santa Cruz",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/568.gif",
-  "verificado": false,
+  "email": "natalia.gadano@senado.gob.ar",
+  "telefono": "3353 / 3358",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/568.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "natalia-gadano"
+  "slug": "natalia-elena-gadano"
  },
  {
   "nombre": "Eduardo Horacio Galaretto",
-  "apellido": null,
+  "apellido": "Galaretto",
   "camara": "Senadores",
   "provincia": "Santa Fe",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/573.gif",
-  "verificado": false,
+  "email": "eduardo.galaretto@senado.gob.ar",
+  "telefono": "3543 / 3544",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/573.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "eduardo-horacio-galaretto"
  },
@@ -2204,23 +2405,26 @@
   "slug": "antonela-giampieri"
  },
  {
-  "nombre": "Nora del Valle Giménez",
-  "apellido": null,
+  "nombre": "María Celeste Giménez Navarro",
+  "apellido": "Giménez Navarro",
   "camara": "Senadores",
-  "provincia": "Salta",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "provincia": "San Juan",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/507.gif",
-  "verificado": false,
+  "email": "mcgimeneznavarro@senado.gob.ar",
+  "telefono": "1342 / 1332",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/562.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "nora-del-valle-gimenez"
+  "slug": "maria-celeste-gimenez-navarro"
  },
  {
   "nombre": "Juan Carlos Giordano",
@@ -2297,6 +2501,50 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "jose-glinski"
+ },
+ {
+  "nombre": "Juan Cruz Godoy",
+  "apellido": "Godoy",
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "juancruz.godoy@senado.gob.ar",
+  "telefono": "3590 / 3588",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/578.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "juan-cruz-godoy"
+ },
+ {
+  "nombre": "Enrique Martín Goerling Lara",
+  "apellido": "Goerling Lara",
+  "camara": "Senadores",
+  "provincia": "Misiones",
+  "bloque": "Frente PRO",
+  "bloque_oficial": "FRENTE PRO",
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2023-2029",
+  "jura": null,
+  "inicio": "2023-12-10",
+  "sexo": null,
+  "email": "martin.goerling@senado.gob.ar",
+  "telefono": "3126 / 3135",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/560.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "enrique-martin-goerling-lara"
  },
  {
   "nombre": "Rosario Goitia",
@@ -2414,20 +2662,23 @@
  },
  {
   "nombre": "María Teresa Margarita González",
-  "apellido": null,
+  "apellido": "González",
   "camara": "Senadores",
   "provincia": "Formosa",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/477.gif",
-  "verificado": false,
+  "email": "maria.gonzalez@senado.gob.ar",
+  "telefono": "1325 /1327",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/477.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "maria-teresa-margarita-gonzalez"
  },
@@ -2546,6 +2797,28 @@
   "slug": "jairo-guzman"
  },
  {
+  "nombre": "Gonzalo Guzmán Coraita",
+  "apellido": "Guzmán Coraita",
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "gonzalo.guzman@senado.gob.ar",
+  "telefono": "3550 / 3552",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/592.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "gonzalo-guzman-coraita"
+ },
+ {
   "nombre": "Raúl Hadad",
   "apellido": "Hadad",
   "camara": "Diputados",
@@ -2642,20 +2915,23 @@
  },
  {
   "nombre": "María Victoria Huala",
-  "apellido": null,
+  "apellido": "Huala",
   "camara": "Senadores",
   "provincia": "La Pampa",
-  "bloque": "PRO",
-  "bloque_oficial": "PRO",
-  "mandato": null,
+  "bloque": "Frente PRO",
+  "bloque_oficial": "FRENTE PRO",
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/531.gif",
-  "verificado": false,
+  "email": "victoria.huala@senado.gob.ar",
+  "telefono": "8340 / 3471",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/531.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "maria-victoria-huala"
  },
@@ -2756,20 +3032,23 @@
  },
  {
   "nombre": "Luis Alfredo Juez",
-  "apellido": null,
+  "apellido": "Juez",
   "camara": "Senadores",
   "provincia": "Córdoba",
-  "bloque": "PRO",
-  "bloque_oficial": "PRO",
-  "mandato": null,
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/400.gif",
-  "verificado": false,
+  "email": "luis.juez@senado.gob.ar",
+  "telefono": "1374 / 1378",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/400.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "luis-alfredo-juez"
  },
@@ -2794,41 +3073,47 @@
  },
  {
   "nombre": "Mariana Juri",
-  "apellido": null,
+  "apellido": "Juri",
   "camara": "Senadores",
   "provincia": "Mendoza",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Frente Cambia Mendoza",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/534.gif",
-  "verificado": false,
+  "email": "mariana.juri@senado.gob.ar",
+  "telefono": "1450 / 1453",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/534.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "mariana-juri"
  },
  {
-  "nombre": "Alicia Kirchner",
-  "apellido": null,
+  "nombre": "Alicia Margarita Antonia Kirchner",
+  "apellido": "Kirchner",
   "camara": "Senadores",
   "provincia": "Santa Cruz",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/366.gif",
-  "verificado": false,
+  "email": "alicia.kirchner@senado.gob.ar",
+  "telefono": "1389 / 1390",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/366.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "alicia-kirchner"
+  "slug": "alicia-margarita-antonia-kirchner"
  },
  {
   "nombre": "Máximo Carlos Kirchner",
@@ -2850,42 +3135,26 @@
   "slug": "maximo-carlos-kirchner"
  },
  {
-  "nombre": "Daniel Kroneberger",
-  "apellido": null,
+  "nombre": "Daniel Ricardo Kroneberger",
+  "apellido": "Kroneberger",
   "camara": "Senadores",
   "provincia": "La Pampa",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/530.gif",
-  "verificado": false,
+  "email": "daniel.kroneberger@senado.gob.ar",
+  "telefono": "1321 / 1324",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/530.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "daniel-kroneberger"
- },
- {
-  "nombre": "Edgardo Darío Kueider",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Entre Ríos",
-  "bloque": "Provincias Unidas",
-  "bloque_oficial": "PROVINCIAS UNIDAS",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/502.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "edgardo-dario-kueider"
+  "slug": "daniel-ricardo-kroneberger"
  },
  {
   "nombre": "Moira Lanesan Sancho",
@@ -2907,44 +3176,6 @@
   "slug": "moira-lanesan-sancho"
  },
  {
-  "nombre": "Martín Goerling Lara",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Misiones",
-  "bloque": "PRO",
-  "bloque_oficial": "PRO",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/560.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "martin-goerling-lara"
- },
- {
-  "nombre": "Silvina García Larraburu",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Río Negro",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/441.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "silvina-garcia-larraburu"
- },
- {
   "nombre": "Andrés Ariel Laumann",
   "apellido": "Laumann",
   "camara": "Diputados",
@@ -2962,25 +3193,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "andres-ariel-laumann"
- },
- {
-  "nombre": "Sergio Leavy",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Salta",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/508.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "sergio-leavy"
  },
  {
   "nombre": "Aldo Leiva",
@@ -3040,40 +3252,46 @@
   "slug": "andres-leone"
  },
  {
-  "nombre": "Marcelo Lewandowski",
-  "apellido": null,
+  "nombre": "Marcelo Néstor Lewandowski",
+  "apellido": "Lewandowski",
   "camara": "Senadores",
   "provincia": "Santa Fe",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/538.gif",
-  "verificado": false,
+  "email": "marcelo.lewandowski@senado.gob.ar",
+  "telefono": "1213 / 1215",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/538.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "marcelo-lewandowski"
+  "slug": "marcelo-nestor-lewandowski"
  },
  {
   "nombre": "Carlos Alberto Linares",
-  "apellido": null,
+  "apellido": "Linares",
   "camara": "Senadores",
   "provincia": "Chubut",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/529.gif",
-  "verificado": false,
+  "email": "carlos.linares@senado.gob.ar",
+  "telefono": "1373 / 1371",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/529.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "carlos-alberto-linares"
  },
@@ -3136,22 +3354,47 @@
  },
  {
   "nombre": "Cándida Cristina López",
-  "apellido": null,
+  "apellido": "López",
   "camara": "Senadores",
   "provincia": "Tierra del Fuego",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Frente de Todos",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/574.gif",
-  "verificado": false,
+  "email": "cristina.lopez@senado.gob.ar",
+  "telefono": "1235",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/574.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "candida-cristina-lopez"
+ },
+ {
+  "nombre": "Claudia Cecilia López",
+  "apellido": "López",
+  "camara": "Senadores",
+  "provincia": "La Rioja",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2023-2029",
+  "jura": null,
+  "inicio": "2026-10-29",
+  "sexo": null,
+  "email": null,
+  "telefono": null,
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/597.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "claudia-cecilia-lopez"
  },
  {
   "nombre": "Jimena López",
@@ -3174,20 +3417,23 @@
  },
  {
   "nombre": "María Florencia López",
-  "apellido": null,
+  "apellido": "López",
   "camara": "Senadores",
   "provincia": "La Rioja",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/555.gif",
-  "verificado": false,
+  "email": "florencia.lopez@senado.gob.ar",
+  "telefono": "1282 / 3530",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/555.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "maria-florencia-lopez"
  },
@@ -3212,20 +3458,23 @@
  },
  {
   "nombre": "Carolina Losada",
-  "apellido": null,
+  "apellido": "Losada",
   "camara": "Senadores",
   "provincia": "Santa Fe",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Juntos por el Cambio",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/536.gif",
-  "verificado": false,
+  "email": "carolina.losada@senado.gob.ar",
+  "telefono": "5421 / 1426",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/536.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "carolina-losada"
  },
@@ -3246,25 +3495,6 @@
    "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)"
   },
   "slug": "martin-lousteau"
- },
- {
-  "nombre": "Bruno Olivera Lucero",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "San Juan",
-  "bloque": "La Libertad Avanza",
-  "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/563.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "bruno-olivera-lucero"
  },
  {
   "nombre": "Juan Pablo Luque",
@@ -3344,20 +3574,23 @@
  },
  {
   "nombre": "Juan Luis Manzur",
-  "apellido": null,
+  "apellido": "Manzur",
   "camara": "Senadores",
   "provincia": "Tucumán",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-09",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/576.gif",
-  "verificado": false,
+  "email": "juan.manzur@senado.gob.ar",
+  "telefono": "1354/1380",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/576.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "juan-luis-manzur"
  },
@@ -3417,6 +3650,50 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "juan-marino"
+ },
+ {
+  "nombre": "Ana Inés Marks",
+  "apellido": "Marks",
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Fuerza Patria",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "ana.marks@senado.gob.ar",
+  "telefono": "3574 / 3577",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/589.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "ana-ines-marks"
+ },
+ {
+  "nombre": "Nadia Judith Márquez",
+  "apellido": "Márquez",
+  "camara": "Senadores",
+  "provincia": "Neuquén",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "nadia.marquez@senado.gob.ar",
+  "telefono": "3556 / 3557",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/585.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "nadia-judith-marquez"
  },
  {
   "nombre": "Álvaro Martínez",
@@ -3515,20 +3792,23 @@
  },
  {
   "nombre": "José Miguel Ángel Mayans",
-  "apellido": null,
+  "apellido": "Mayans",
   "camara": "Senadores",
   "provincia": "Formosa",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/294.gif",
-  "verificado": false,
+  "email": "mayans@senado.gob.ar",
+  "telefono": "1023 / 1036 / 1039",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/294.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "jose-miguel-angel-mayans"
  },
@@ -3571,23 +3851,26 @@
   "slug": "gladys-medina"
  },
  {
-  "nombre": "Sandra Mendoza",
-  "apellido": null,
+  "nombre": "Sandra Mariela Mendoza",
+  "apellido": "Mendoza",
   "camara": "Senadores",
   "provincia": "Tucumán",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Convicción Federal",
+  "bloque_oficial": "CONVICCIÓN FEDERAL",
+  "alianza": "Frente de Todos",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/540.gif",
-  "verificado": false,
+  "email": "sandra.mendoza@senado.gob.ar",
+  "telefono": "1477/ 1479",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/540.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "sandra-mendoza"
+  "slug": "sandra-mariela-mendoza"
  },
  {
   "nombre": "Martín Menem",
@@ -3666,23 +3949,26 @@
   "slug": "fernanda-mino"
  },
  {
-  "nombre": "Carolina Moisés",
-  "apellido": null,
+  "nombre": "María Carolina Moises",
+  "apellido": "Moises",
   "camara": "Senadores",
   "provincia": "Jujuy",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Convicción Federal",
+  "bloque_oficial": "CONVICCIÓN FEDERAL",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/554.gif",
-  "verificado": false,
+  "email": "maria.moises@senado.gob.ar",
+  "telefono": "3194",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/554.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "carolina-moises"
+  "slug": "maria-carolina-moises"
  },
  {
   "nombre": "Juan Carlos Molina",
@@ -3780,23 +4066,26 @@
   "slug": "fernando-monguillot"
  },
  {
-  "nombre": "Gerardo Montenegro",
-  "apellido": null,
+  "nombre": "María Belén Monte de Oca",
+  "apellido": "Monte de Oca",
   "camara": "Senadores",
-  "provincia": "Santiago del Estero",
-  "bloque": "Frente Cívico por Santiago",
-  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
-  "mandato": null,
+  "provincia": "Tierra del Fuego",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/446.gif",
-  "verificado": false,
+  "email": "belen.montedeoca@senado.gob.ar",
+  "telefono": "3462 / 3464",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/596.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "gerardo-montenegro"
+  "slug": "maria-belen-monte-de-oca"
  },
  {
   "nombre": "Guillermo Montenegro",
@@ -3835,6 +4124,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "juan-pablo-montenegro"
+ },
+ {
+  "nombre": "Agustín Aníbal Monteverde",
+  "apellido": "Monteverde",
+  "camara": "Senadores",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "agustin.monteverde@senado.gob.ar",
+  "telefono": "1251 / 1255",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/581.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "agustin-anibal-monteverde"
  },
  {
   "nombre": "Roxana Monzón",
@@ -3892,6 +4203,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "cecilia-moreau"
+ },
+ {
+  "nombre": "Elia Esther del Carmen Moreno",
+  "apellido": "Moreno",
+  "camara": "Senadores",
+  "provincia": "Santiago del Estero",
+  "bloque": "Frente Cívico por Santiago",
+  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
+  "alianza": "Frente Cívico por Santiago",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "elia.moreno@senado.gob.ar",
+  "telefono": "3504 / 3512",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/594.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "elia-esther-del-carmen-moreno"
  },
  {
   "nombre": "Julio Moreno Ovalle",
@@ -3970,25 +4303,6 @@
   "slug": "gabriela-luciana-munoz"
  },
  {
-  "nombre": "María Celeste Giménez Navarro",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "San Juan",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/562.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "maria-celeste-gimenez-navarro"
- },
- {
   "nombre": "Estela Mary Neder",
   "apellido": "Neder",
   "camara": "Diputados",
@@ -4009,20 +4323,23 @@
  },
  {
   "nombre": "José Emilio Neder",
-  "apellido": null,
+  "apellido": "Neder",
   "camara": "Senadores",
   "provincia": "Santiago del Estero",
-  "bloque": "Frente Cívico por Santiago",
-  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Frente Fuerza Patria Peronista",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/510.gif",
-  "verificado": false,
+  "email": "jose.neder@senado.gob.ar",
+  "telefono": "1090 / 1093",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/510.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "jose-emilio-neder"
  },
@@ -4141,23 +4458,26 @@
   "slug": "joaquin-ojeda"
  },
  {
-  "nombre": "Stella Maris Olalla",
-  "apellido": null,
+  "nombre": "Bruno Antonio Olivera Lucero",
+  "apellido": "Olivera Lucero",
   "camara": "Senadores",
-  "provincia": "Entre Ríos",
-  "bloque": "UCR - Unión Cívica Radical",
-  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "provincia": "San Juan",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/503.gif",
-  "verificado": false,
+  "email": "bruno.olivera@senado.gob.ar",
+  "telefono": "3436 / 3437",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/563.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "stella-maris-olalla"
+  "slug": "bruno-antonio-olivera-lucero"
  },
  {
   "nombre": "Kelly Olmos",
@@ -4177,6 +4497,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "kelly-olmos"
+ },
+ {
+  "nombre": "María Emilia Orozco",
+  "apellido": "Orozco",
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "maria.orozco@senado.gob.ar",
+  "telefono": null,
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/591.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "maria-emilia-orozco"
  },
  {
   "nombre": "Blanca Inés Osuna",
@@ -4236,25 +4578,6 @@
   "slug": "marcela-marina-pagano"
  },
  {
-  "nombre": "Juan Carlos Pagotto",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "La Rioja",
-  "bloque": "La Libertad Avanza",
-  "bloque_oficial": "LA LIBERTAD AVANZA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/557.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "juan-carlos-pagotto"
- },
- {
   "nombre": "Sergio Omar Palazzo",
   "apellido": "Palazzo",
   "camara": "Diputados",
@@ -4293,23 +4616,26 @@
   "slug": "claudia-maria-palladino"
  },
  {
-  "nombre": "Francisco Paoltroni",
-  "apellido": null,
+  "nombre": "Francisco Manuel Paoltroni",
+  "apellido": "Paoltroni",
   "camara": "Senadores",
   "provincia": "Formosa",
-  "bloque": "Libertad, Trabajo y Progreso",
-  "bloque_oficial": "LIBERTAD, TRABAJO Y PROGRESO",
-  "mandato": null,
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/551.gif",
-  "verificado": false,
+  "email": "francisco.paoltroni@senado.gob.ar",
+  "telefono": "3872 / 3874",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/551.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "francisco-paoltroni"
+  "slug": "francisco-manuel-paoltroni"
  },
  {
   "nombre": "Sebastián Pareja",
@@ -4348,25 +4674,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "maria-graciela-parola"
- },
- {
-  "nombre": "Oscar Parrilli",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Neuquén",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/504.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "oscar-parrilli"
  },
  {
   "nombre": "Marcos Patiño Brizuela",
@@ -4443,25 +4750,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "gabriela-pedrali"
- },
- {
-  "nombre": "Eduardo de Pedro",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Buenos Aires",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/46.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "eduardo-de-pedro"
  },
  {
   "nombre": "Agustín Pellegrini",
@@ -4807,20 +5095,23 @@
  },
  {
   "nombre": "Mariano Recalde",
-  "apellido": null,
+  "apellido": "Recalde",
   "camara": "Senadores",
   "provincia": "Ciudad Autónoma de Buenos Aires",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Fuerza Patria",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/498.gif",
-  "verificado": false,
+  "email": "mariano.recalde@senado.gob.ar",
+  "telefono": "3429 / 3440",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/498.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "mariano-recalde"
  },
@@ -4844,23 +5135,26 @@
   "slug": "karen-reichardt"
  },
  {
-  "nombre": "Fernando Rejal",
-  "apellido": null,
+  "nombre": "Jesús Fernando Rejal",
+  "apellido": "Rejal",
   "camara": "Senadores",
   "provincia": "La Rioja",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/556.gif",
-  "verificado": false,
+  "email": "jesus.rejal@senado.gob.ar",
+  "telefono": "1011 / 1013",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/556.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "fernando-rejal"
+  "slug": "jesus-fernando-rejal"
  },
  {
   "nombre": "Gastón Riesco",
@@ -4898,25 +5192,6 @@
    "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)"
   },
   "slug": "cristian-a-ritondo"
- },
- {
-  "nombre": "Carmen Álvarez Rivero",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Córdoba",
-  "bloque": "PRO",
-  "bloque_oficial": "PRO",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/522.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "carmen-alvarez-rivero"
  },
  {
   "nombre": "Jorge Rizzotti",
@@ -4976,25 +5251,6 @@
   "slug": "gonzalo-roca"
  },
  {
-  "nombre": "Antonio Rodas",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Chaco",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/500.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "antonio-rodas"
- },
- {
   "nombre": "Miguel Rodríguez",
   "apellido": "Rodríguez",
   "camara": "Diputados",
@@ -5033,23 +5289,26 @@
   "slug": "laura-rodriguez-machado"
  },
  {
-  "nombre": "Juan Carlos Romero",
-  "apellido": null,
+  "nombre": "Sonia Elizabeth Rojas Decut",
+  "apellido": "Rojas Decut",
   "camara": "Senadores",
-  "provincia": "Salta",
-  "bloque": "Cambio Federal",
-  "bloque_oficial": "CAMBIO FEDERAL",
-  "mandato": null,
+  "provincia": "Misiones",
+  "bloque": "Movimiento por Misiones",
+  "bloque_oficial": "MOVIMIENTO POR MISIONES",
+  "alianza": "Frente Renovador de la Concordia-Innovación Federal",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/35.gif",
-  "verificado": false,
+  "email": "sonia.rojas@senado.gob.ar",
+  "telefono": "3456 / 3459",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/559.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "juan-carlos-romero"
+  "slug": "sonia-elizabeth-rojas-decut"
  },
  {
   "nombre": "Agustín Oscar Rossi",
@@ -5071,6 +5330,28 @@
   "slug": "agustin-oscar-rossi"
  },
  {
+  "nombre": "Flavia Gabriela Royon",
+  "apellido": "Royon",
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "Primero los Salteños",
+  "bloque_oficial": "PRIMERO LOS SALTEÑOS",
+  "alianza": "Primero los Salteños",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "flavia.royon@senado.gob.ar",
+  "telefono": "1222 / 1225",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/593.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "flavia-gabriela-royon"
+ },
+ {
   "nombre": "Yamila Ruíz",
   "apellido": "Ruíz",
   "camara": "Diputados",
@@ -5090,42 +5371,26 @@
   "slug": "yamila-ruiz"
  },
  {
-  "nombre": "Anabel Fernández Sagasti",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Mendoza",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/468.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "anabel-fernandez-sagasti"
- },
- {
-  "nombre": "Fernando Salino",
-  "apellido": null,
+  "nombre": "Fernando Aldo Salino",
+  "apellido": "Salino",
   "camara": "Senadores",
   "provincia": "San Luis",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicia Social Federal",
+  "bloque_oficial": "JUSTICIA SOCIAL FEDERAL",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/566.gif",
-  "verificado": false,
+  "email": "fernando.salino@senado.gob.ar",
+  "telefono": "1521 / 1524",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/566.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "fernando-salino"
+  "slug": "fernando-aldo-salino"
  },
  {
   "nombre": "Marina Dorotea Salzmann",
@@ -5223,25 +5488,6 @@
   "slug": "santiago-santurio"
  },
  {
-  "nombre": "Silvia Sapag",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Neuquén",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/251.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "silvia-sapag"
- },
- {
   "nombre": "Gisela Scaglia",
   "apellido": "Scaglia",
   "camara": "Diputados",
@@ -5297,6 +5543,28 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "dario-schneider"
+ },
+ {
+  "nombre": "Silvana Lorena Schneider",
+  "apellido": "Schneider",
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "alianza": "Alianza la Libertad Avanza",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "silvana.schneider@senado.gob.ar",
+  "telefono": "1230 / 8718",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/579.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "silvana-lorena-schneider"
  },
  {
   "nombre": "Sabrina Selva",
@@ -5356,25 +5624,6 @@
   "slug": "vanesa-raquel-siley"
  },
  {
-  "nombre": "Mónica Silva",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Río Negro",
-  "bloque": "Juntos Somos Río Negro",
-  "bloque_oficial": "JUNTOS SOMOS RÍO NEGRO",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/572.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "monica-silva"
- },
- {
   "nombre": "Guillermo Snopek",
   "apellido": "Snopek",
   "camara": "Diputados",
@@ -5413,6 +5662,28 @@
   "slug": "laura-soldano"
  },
  {
+  "nombre": "Martin Ignacio Soria",
+  "apellido": "Soria",
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Fuerza Patria",
+  "mandato": "2025-2031",
+  "jura": null,
+  "inicio": "2025-12-10",
+  "sexo": null,
+  "email": "martin.soria@senado.gob.ar",
+  "telefono": "1080 / 1072",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/588.gif",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
+  },
+  "slug": "martin-ignacio-soria"
+ },
+ {
   "nombre": "Julia Strada",
   "apellido": "Strada",
   "camara": "Diputados",
@@ -5433,20 +5704,23 @@
  },
  {
   "nombre": "Rodolfo Alejandro Suárez",
-  "apellido": null,
+  "apellido": "Suárez",
   "camara": "Senadores",
   "provincia": "Mendoza",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Frente Cambia Mendoza",
+  "mandato": "2023-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/571.gif",
-  "verificado": false,
+  "email": "rodolfo.suarez@senado.gob.ar",
+  "telefono": "1460",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/571.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "rodolfo-alejandro-suarez"
  },
@@ -5509,20 +5783,23 @@
  },
  {
   "nombre": "Edith Elizabeth Terenzi",
-  "apellido": null,
+  "apellido": "Terenzi",
   "camara": "Senadores",
   "provincia": "Chubut",
-  "bloque": "Cambio Federal",
-  "bloque_oficial": "CAMBIO FEDERAL",
-  "mandato": null,
+  "bloque": "Despierta Chubut",
+  "bloque_oficial": "DESPIERTA CHUBUT",
+  "alianza": "Juntos por el Cambio Chubut",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/528.gif",
-  "verificado": false,
+  "email": "edith.terenzi@senado.gob.ar",
+  "telefono": "3536 / 3539",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/528.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "edith-elizabeth-terenzi"
  },
@@ -5717,42 +5994,26 @@
   "slug": "nicolas-alfredo-trotta"
  },
  {
-  "nombre": "Juliana Di Tullio",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Buenos Aires",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/517.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "juliana-di-tullio"
- },
- {
-  "nombre": "Sergio Uñac",
-  "apellido": null,
+  "nombre": "Sergio Mauricio Uñac",
+  "apellido": "Uñac",
   "camara": "Senadores",
   "provincia": "San Juan",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
+  "bloque": "Justicialista",
+  "bloque_oficial": "JUSTICIALISTA",
+  "alianza": "Alianza Unión por la Patria",
+  "mandato": "2023-2029",
   "jura": null,
-  "inicio": null,
+  "inicio": "2023-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/561.gif",
-  "verificado": false,
+  "email": "sergio.unac@senado.gob.ar",
+  "telefono": "1433 / 1445",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/561.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "sergio-unac"
+  "slug": "sergio-mauricio-unac"
  },
  {
   "nombre": "Hernán Urien",
@@ -5793,23 +6054,26 @@
   "slug": "eduardo-felix-valdes"
  },
  {
-  "nombre": "Gabriela Valenzuela",
-  "apellido": null,
+  "nombre": "Mercedes Gabriela Valenzuela",
+  "apellido": "Valenzuela",
   "camara": "Senadores",
   "provincia": "Corrientes",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Eco + Vamos Corrientes",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/525.gif",
-  "verificado": false,
+  "email": "mercedes.valenzuela@senado.gob.ar",
+  "telefono": "3400 / 3402",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/525.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "gabriela-valenzuela"
+  "slug": "mercedes-gabriela-valenzuela"
  },
  {
   "nombre": "Daniel Vancsik",
@@ -5926,40 +6190,24 @@
   "slug": "pamela-fernanda-verasay"
  },
  {
-  "nombre": "María Inés Pilatti Vergara",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Chaco",
-  "bloque": "Unión por la Patria",
-  "bloque_oficial": "UNIÓN POR LA PATRIA",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/435.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "maria-ines-pilatti-vergara"
- },
- {
-  "nombre": "María Alejandra Vigo",
-  "apellido": null,
+  "nombre": "Alejandra María Vigo",
+  "apellido": "Vigo",
   "camara": "Senadores",
   "provincia": "Córdoba",
-  "bloque": "Encuentro Federal",
-  "bloque_oficial": "ENCUENTRO FEDERAL",
-  "mandato": null,
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "alianza": "Hacemos por Córdoba",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Alejandra_Vigo_2022.jpg/400px-Alejandra_Vigo_2022.jpg",
-  "verificado": false,
+  "email": "alejandra.vigo@senado.gob.ar",
+  "telefono": "1441 / 1444",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/523.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
   "slug": "maria-alejandra-vigo"
  },
@@ -5983,23 +6231,26 @@
   "slug": "lorena-villaverde"
  },
  {
-  "nombre": "Eduardo Vischi",
-  "apellido": null,
+  "nombre": "Eduardo Alejandro Vischi",
+  "apellido": "Vischi",
   "camara": "Senadores",
   "provincia": "Corrientes",
   "bloque": "UCR - Unión Cívica Radical",
   "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
+  "alianza": "Eco + Vamos Corrientes",
+  "mandato": "2021-2027",
   "jura": null,
-  "inicio": null,
+  "inicio": "2021-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/524.gif",
-  "verificado": false,
+  "email": "eduardo.vischi@senado.gob.ar",
+  "telefono": "3185 / 3188",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/524.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "eduardo-vischi"
+  "slug": "eduardo-alejandro-vischi"
  },
  {
   "nombre": "Gino Visconti",
@@ -6116,23 +6367,26 @@
   "slug": "oscar-zago"
  },
  {
-  "nombre": "Claudia Ledesma Abdala de Zamora",
-  "apellido": null,
+  "nombre": "Gerardo Zamora",
+  "apellido": "Zamora",
   "camara": "Senadores",
   "provincia": "Santiago del Estero",
   "bloque": "Frente Cívico por Santiago",
   "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
-  "mandato": null,
+  "alianza": "Frente Cívico por Santiago",
+  "mandato": "2025-2031",
   "jura": null,
-  "inicio": null,
+  "inicio": "2025-12-10",
   "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/509.gif",
-  "verificado": false,
+  "email": "gerardo.zamora@senado.gob.ar",
+  "telefono": "8763 / 8834",
+  "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/450.gif",
+  "verificado": true,
   "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
+   "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
+   "foto": "Senado de la Nación"
   },
-  "slug": "claudia-ledesma-abdala-de-zamora"
+  "slug": "gerardo-zamora"
  },
  {
   "nombre": "Carlos Raúl Zapata",
@@ -6190,25 +6444,6 @@
    "foto": "ArgentinaDatos"
   },
   "slug": "maria-ines-zigaran"
- },
- {
-  "nombre": "Víctor Zimmermann",
-  "apellido": null,
-  "camara": "Senadores",
-  "provincia": "Chaco",
-  "bloque": "UCR - Unión Cívica Radical",
-  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
-  "mandato": null,
-  "jura": null,
-  "inicio": null,
-  "sexo": null,
-  "foto": "https://api.argentinadatos.com/static/senado/senadores/501.gif",
-  "verificado": false,
-  "fuentes": {
-   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
-   "foto": "ArgentinaDatos"
-  },
-  "slug": "victor-zimmermann"
  },
  {
   "nombre": "Christian Alejandro Zulli",

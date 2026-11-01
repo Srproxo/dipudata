@@ -138,6 +138,47 @@ switch (true) {
         ));
         break;
 
+    case $path === '/senado':
+        render('senado_indice', [], pagina_meta(
+            'Registros del Senado de la Nación',
+            'Versiones taquigráficas, decretos, resoluciones, disposiciones y licitaciones del Senado, con búsqueda por año y por palabra.',
+            '/senado', 'senado'
+        ));
+        break;
+
+    case (bool)preg_match("#^/senado/({$S})$#", $path, $m):
+        $tipo = $m[1];
+        $t = Datos::docsIndice()[$tipo] ?? null;
+        if (!$t) { render_404(); break; }
+        $anios = array_map('strval', array_keys($t['anios']));
+        $permiteTodos = $t['total'] <= 3000;
+        $anio = is_string($_GET['anio'] ?? null) ? $_GET['anio'] : '';
+        if (!in_array($anio, $anios, true) && !($anio === 'todos' && $permiteTodos)) {
+            $anio = $permiteTodos ? 'todos' : $anios[0];
+        }
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $items = Datos::docs($tipo, $anio);
+        if ($nq !== '') {
+            $items = array_values(array_filter($items, static function (array $it) use ($nq): bool {
+                $hay = ' ' . Datos::normalizar(($it['n'] ?? '') . ' ' . ($it['t'] ?? '') . ' ' . ($it['e'] ?? '')) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+                return true;
+            }));
+        }
+        $total = count($items);
+        $porPagina = 50;
+        $paginas = max(1, (int)ceil($total / $porPagina));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $items = array_slice($items, ($pagina - 1) * $porPagina, $porPagina);
+        $filtrado = $q !== '' || (isset($_GET['anio']) && $_GET['anio'] !== '') || $pagina > 1;
+        render('senado_docs', compact('tipo', 't', 'anio', 'q', 'pagina', 'paginas', 'total', 'items', 'anios', 'permiteTodos'), pagina_meta(
+            $t['titulo'] . ' del Senado',
+            $t['descripcion'] . ' Fuente: Senado de la Nación, datos abiertos.',
+            '/senado/' . $tipo, 'senado', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/metodologia':
         render('metodologia', [], pagina_meta(
             'Metodología y fuentes',
@@ -156,8 +197,9 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
+        foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
         foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }

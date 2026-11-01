@@ -1,7 +1,0 @@
-{
-  "descripcion": "Correcciones al padrón de senadores de storage/legisladores_master.json. Cada una debe citar su fuente.",
-  "fuera_del_padron": [
-    {"nombre": "Martín Lousteau", "motivo": "Mandato terminado en diciembre de 2025 (padrón del Senado consultado el 1-nov-2026)."},
-    {"nombre": "Guadalupe Tagliaferri", "motivo": "Mandato terminado en diciembre de 2025 (padrón del Senado consultado el 1-nov-2026)."}
-  ]
-}

@@ -4,11 +4,12 @@
 <p class="bajada">DipuData publica información sobre el Congreso solo cuando puede decir de dónde sale. Esta página explica qué hay, qué no hay todavía y por qué.</p>
 <div class="articulo">
   <h2>Qué publicamos hoy</h2>
-  <p>El padrón de legisladores en ejercicio con su cámara, su provincia y su bloque; las fechas de mandato de los diputados; y una guía sobre cómo funciona el Congreso. Los bloques y las provincias se calculan a partir del padrón: nunca se cargan a mano.</p>
+  <p>El padrón de legisladores en ejercicio con su cámara, su provincia, su bloque y su mandato; los registros administrativos y parlamentarios del Senado; y una guía sobre cómo funciona el Congreso. Los bloques y las provincias se calculan a partir del padrón: nunca se cargan a mano.</p>
   <h2>De dónde salen los datos</h2>
   <ul>
     <li><strong>Diputados:</strong> padrón oficial de diputados en ejercicio publicado por la Cámara de Diputados en sus datos abiertos (datos.hcdn.gob.ar).</li>
-    <li><strong>Senadores:</strong> padrón cargado previamente en el proyecto. Está en proceso de verificación contra senado.gob.ar y se marca como tal en cada ficha.</li>
+    <li><strong>Senadores:</strong> padrón de senadores en ejercicio que publica el Senado de la Nación como dato abierto: nombre, provincia, bloque, mandato, foto y contacto institucional.</li>
+    <li><strong>Registros del Senado:</strong> versiones taquigráficas, asuntos entrados, boletines, decretos, resoluciones, disposiciones, normativa y licitaciones, tal como los publica el Senado. Los textos no se modifican.</li>
     <li><strong>Fotos:</strong> ArgentinaDatos. Si una foto falta, se muestran las iniciales.</li>
     <li><strong>Textos sobre el Congreso:</strong> redactados a partir de la Constitución Nacional.</li>
   </ul>
@@ -17,8 +18,8 @@
   <h2>Qué viene</h2>
   <ul>
     <li>Asistencia y votaciones calculadas desde las actas nominales de cada cámara.</li>
-    <li>Comisiones y sus integrantes.</li>
-    <li>Verificación completa del padrón del Senado.</li>
+    <li>Integrantes de las comisiones de ambas cámaras.</li>
+    <li>Registros equivalentes de la Cámara de Diputados.</li>
   </ul>
   <h2>Correcciones</h2>
   <p>Si encontrás un dato incorrecto, avisanos con el enlace de la ficha y la fuente que lo desmiente. Corregimos y dejamos constancia.</p>

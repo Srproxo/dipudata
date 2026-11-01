@@ -27,7 +27,7 @@ final class Datos
     {
         $todos = array_map(static function (array $l): array {
             // Solo se muestran fotos servidas por el host que declara la CSP.
-            if (!empty($l['foto']) && !str_starts_with((string)$l['foto'], 'https://api.argentinadatos.com/')) {
+            if (!empty($l['foto']) && !preg_match('#^https://(api\.argentinadatos\.com|www\.senado\.gob\.ar)/#', (string)$l['foto'])) {
                 $l['foto'] = null;
             }
             return $l;
@@ -90,6 +90,39 @@ final class Datos
     public static function informe(): array
     {
         return self::leer('informe');
+    }
+
+    /** @return array<string,array> tipo => {titulo, familia, descripcion, total, anios, fuente} */
+    public static function docsIndice(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/senado_docs/indice.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    /** Registros de un tipo y año (o de todos los años si $anio === 'todos'). */
+    public static function docs(string $tipo, string $anio): array
+    {
+        $idx = self::docsIndice();
+        if (!isset($idx[$tipo]) || !preg_match('/^(\d{4}|todos)$/', $anio)) {
+            return [];
+        }
+        $anios = $anio === 'todos' ? array_keys($idx[$tipo]['anios']) : [$anio];
+        $out = [];
+        foreach ($anios as $a) {
+            $ruta = RAIZ . "/storage/verificado/senado_docs/{$tipo}/{$a}.json";
+            $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+            if (is_array($d)) {
+                array_push($out, ...$d);
+            }
+        }
+        return $out;
+    }
+
+    /** @return list<array{nombre:string,tipo:string}> */
+    public static function comisionesSenado(): array
+    {
+        return self::leer('comisiones_senado');
     }
 
     public static function urlLegislador(array $l): string

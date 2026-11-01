@@ -104,8 +104,10 @@ function secciones_congreso(): array
                 ['Tipos', [
                     'Hay comisiones permanentes, que existen en cada período, y comisiones especiales o investigadoras, que se crean para un asunto puntual. Las comisiones bicamerales están integradas por diputados y senadores.',
                 ]],
+                ['Las comisiones del Senado', []],
             ],
-            'fuentes' => [['Cámara de Diputados: El Congreso explicado', 'https://www.hcdn.gob.ar/congreso_explicado/index.html']],
+            'datos' => 'comisiones-senado',
+            'fuentes' => [['Cámara de Diputados: El Congreso explicado', 'https://www.hcdn.gob.ar/congreso_explicado/index.html'], ['Senado de la Nación, datos abiertos', 'https://www.senado.gob.ar/']],
         ],
         'sesiones' => [
             'titulo' => 'Las sesiones',
