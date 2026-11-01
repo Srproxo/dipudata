@@ -5,17 +5,22 @@ Construye las votaciones nominales de Diputados a partir de los archivos oficial
 actas_detalle_*.csv.gz  (y los expedientes_*.csv.gz) de storage/oficial/hcdn/votaciones/, de modo que agregar un período nuevo
 es copiar sus dos archivos y volver a correr el script.
 
+Además incorpora las votaciones del mandato actual (desde el 10/12/2025) de Diputados y Senado, bajadas con
+scripts/bajar_votaciones_recientes.py. Cada una se valida contra su cabecera; las que no cuadran se muestran pero no entran
+en las estadísticas por persona.
+
 Salidas (storage/verificado/):
   votaciones/indice.json         cabecera de cada votación
   votaciones/actas/<id>.json     cómo votó cada diputado en esa votación
-  votaciones_diputados.json      resumen por diputado actual (slug -> estadísticas)
+  votaciones_diputados.json      resumen 2011-2020 por diputado actual (slug -> estadísticas)
+  votaciones_mandato_actual.json resumen desde el 10/12/2025 por legislador actual (slug o "s:slug")
 
 El detalle no trae ID de persona: el cruce con los diputados actuales es por apellido, primer nombre
 y provincia, y solo se acepta si es único.
 
 Uso:  python3 -I scripts/construir_votaciones.py   (después de construir_datos.py)
 """
-import collections, csv, glob, gzip, json, re, shutil, sys, unicodedata
+import collections, csv, datetime, glob, gzip, json, re, shutil, sys, unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -48,6 +53,129 @@ def leer(patron):
             yield from csv.DictReader(fh)
 
 
+AD = RAIZ / "storage" / "oficial" / "argentinadatos"
+CODIGO_AD = {"afirmativo": "A", "negativo": "N", "abstencion": "B", "ausente": "U", "presidente": "P",
+             "si": "A", "no": "N", "no emite": "E", "lev.vot.": "X"}
+
+
+def nombre_directo(n: str) -> str:
+    """'Aguero, Guillermo Cesar' -> 'Guillermo Cesar Aguero'"""
+    ap, _, no = n.partition(",")
+    return re.sub(r"\s+", " ", f"{no.strip()} {ap.strip()}").strip() if no else n.strip()
+
+
+def a_hora_local(utc: str):
+    """Las fechas vienen en UTC ('2025-12-17T17:55:00.000Z'): se pasan a hora argentina (UTC-3)."""
+    d = datetime.datetime.strptime(utc[:19], "%Y-%m-%dT%H:%M:%S") - datetime.timedelta(hours=3)
+    return d.date().isoformat(), d.strftime("%H:%M")
+
+
+def cargar_ad(nombre):
+    ruta = next(iter(sorted(glob.glob(str(AD / f"{nombre}_desde_*.json.gz")))), None)
+    if not ruta:
+        return []
+    with gzip.open(ruta, "rt", encoding="utf-8") as f:
+        datos = json.load(f)
+    # La fuente repite algunas votaciones (misma acta, mismos votos, a veces con el título vacío): se queda la más completa.
+    unicas = {}
+    for a in datos:
+        k = str(a.get("actaId", a.get("id")))
+        if k not in unicas or len(a.get("titulo") or "") > len(unicas[k].get("titulo") or ""):
+            unicas[k] = a
+    return list(unicas.values())
+
+
+def procesar_recientes(legs, salida, indice):
+    """Votaciones del mandato actual. Devuelve las estadísticas por legislador."""
+    por_camara = {}
+    for camara in ("Diputados", "Senadores"):
+        c = collections.defaultdict(list)
+        for l in legs:
+            if l["camara"] == camara:
+                c[(frozenset(norm(l["apellido"] or l["nombre"].split()[-1]).split()),
+                   (norm(l["nombre"].replace(l["apellido"] or "", "", 1)).split() or [""])[0])].append(l)
+        por_camara[camara] = {k: v[0] for k, v in c.items() if len(v) == 1}
+    tam_bloque = collections.Counter((l["camara"], l["bloque_oficial"]) for l in legs)
+    stats = collections.defaultdict(collections.Counter)
+    meta = {"desde": "2025-12-10", "hasta": "", "validas": collections.Counter(), "excluidas": collections.Counter(), "sin_cruzar": collections.Counter()}
+
+    for camara, datos in (("Diputados", cargar_ad("diputados_actas")), ("Senadores", cargar_ad("senado_actas"))):
+        for a in datos:
+            fecha, hora = a_hora_local(a["fecha"])
+            es_dip = camara == "Diputados"
+            aid = str(a["id"]) if es_dip else f"S{a['actaId']}"
+            filas, por_bloque, codigos = [], collections.defaultdict(collections.Counter), collections.Counter()
+            for v in a["votos"]:
+                nombre = v["diputado"] if es_dip else v["nombre"]
+                ap, _, no = nombre.partition(",")
+                leg = por_camara[camara].get((frozenset(norm(ap).split()), (norm(no).split() or [""])[0]))
+                cod = CODIGO_AD.get((v["tipoVoto"] if es_dip else v["voto"]).strip().lower(), "X")
+                codigos[cod] += 1
+                if not leg:
+                    meta["sin_cruzar"][camara] += 1
+                fila = [nombre_directo(nombre), leg["bloque"] if leg else "", leg["provincia"] if leg else "", cod]
+                if leg:
+                    fila.append(leg["slug"] if es_dip else "s:" + leg["slug"])
+                filas.append(fila)
+                por_bloque[fila[1] or "Sin dato"][cod] += 1
+            h = {"a": a["votosAfirmativos"] if es_dip else a["afirmativos"], "n": a["votosNegativos"] if es_dip else a["negativos"],
+                 "b": a["abstenciones"], "u": a["ausentes"]}
+            cuadra = (codigos["A"], codigos["N"], codigos["B"], codigos["U"]) == (h["a"], h["n"], h["b"], h["u"])
+            res = "AFIRMATIVO" if str(a["resultado"]).lower().startswith("afirm") else "NEGATIVO"
+            sesion = a.get("sesion") or ""
+            tipo = (re.search(r"Sesi[oó]n\s+([A-Za-zÁÉÍÓÚáéíóúñ ]+?)(?:\s+-|$)", sesion) or [None, ""])[1].strip() if es_dip else "nominal"
+            titulo_ = (a["titulo"] or "").strip() or (a.get("descripcion") or "").strip()
+            if not es_dip and a.get("descripcion") and a["descripcion"].strip().lower() not in titulo_.lower():
+                titulo_ = f'{titulo_} ({a["descripcion"].strip().capitalize()})'
+            nota = None if cuadra else ("En esta votación hay un diputado presente que no emitió voto y el detalle lo registra como ausente; "
+                                       "no se sabe cuál, por eso no se cuenta en las estadísticas de cada uno." if es_dip and codigos["U"] - h["u"] == 1
+                                       else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno.")
+            indice.append({
+                "id": aid, "c": "D" if es_dip else "S", "p": int(a["periodo"]) if es_dip else 0, "f": fecha, "h": hora, "s": tipo,
+                "r": int(a["reunion"]) if es_dip and str(a.get("reunion", "")).isdigit() else 0, "t": titulo_, "res": res,
+                "m": (a.get("mayoria") or "").replace(" — ", " · "), "a": h["a"], "n": h["n"], "b": h["b"], "u": h["u"],
+                "pres": nombre_directo(a.get("presidente") or ""), "tiene_detalle": True, "e": [],
+            })
+            (salida / "actas" / f"{aid}.json").write_text(json.dumps(
+                {"bloques": {b: dict(cn) for b, cn in sorted(por_bloque.items())}, "votos": filas, "expedientes": [], "nota": nota,
+                 "camara": camara}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+            meta["hasta"] = max(meta["hasta"], fecha)
+            if not cuadra:
+                meta["excluidas"][camara] += 1
+                continue
+            meta["validas"][camara] += 1
+            mayoria = {}
+            for b, cn in por_bloque.items():
+                top = sorted(((x, cn[x]) for x in "ANB" if cn[x]), key=lambda kv: -kv[1])
+                mayoria[b] = top[0][0] if top and (len(top) == 1 or top[0][1] > top[1][1]) else None
+            for f in filas:
+                if len(f) < 5:
+                    continue
+                st, cod = stats[f[4]], f[3]
+                if cod in "ANB":
+                    st["emitio"] += 1
+                    st[cod] += 1
+                elif cod == "U":
+                    st["ausente"] += 1
+                else:
+                    continue
+                if cod in "ANB" and mayoria.get(f[1]) and tam_bloque[(camara, next((l["bloque_oficial"] for l in legs if l["slug"] == f[4].replace("s:", "") and l["camara"] == camara), ""))] >= 3:
+                    st["cb_n"] += 1
+                    st["cb"] += int(cod == mayoria[f[1]])
+    resumen = {}
+    for k, st in stats.items():
+        total = st["emitio"] + st["ausente"]
+        resumen[k] = {"votaciones": total, "emitio": st["emitio"], "ausente": st["ausente"],
+                      "afirmativos": st["A"], "negativos": st["N"], "abstenciones": st["B"],
+                      "voto_pct": round(st["emitio"] / total * 100, 1) if total else None,
+                      "coincidencia_bloque_pct": round(st["cb"] / st["cb_n"] * 100, 1) if st["cb_n"] >= 20 else None,
+                      "coincidencia_bloque_n": st["cb_n"]}
+    resumen["_meta"] = {"desde": meta["desde"], "hasta": meta["hasta"], "validas": dict(meta["validas"]), "excluidas": dict(meta["excluidas"])}
+    print(f"mandato actual: {dict(meta['validas'])} votaciones válidas, {dict(meta['excluidas'])} excluidas, "
+          f"{dict(meta['sin_cruzar'])} votos sin cruzar con un legislador actual; {len(resumen) - 1} legisladores con estadísticas")
+    return resumen
+
+
 def main() -> int:
     cab = {r["acta_id"]: r for r in leer("actas_cabecera_*.csv.gz")}
     if not cab:
@@ -67,7 +195,8 @@ def main() -> int:
             exps[r["acta_id"]].append([r["expediente"].strip(), r["titulo"].strip(), r["od"].strip()])
 
     # Diputados actuales: (apellido, primer nombre, distrito) -> slug, solo si es único
-    legs = [l for l in json.loads((SAL / "legisladores.json").read_text(encoding="utf-8")) if l["camara"] == "Diputados"]
+    legs_todos = json.loads((SAL / "legisladores.json").read_text(encoding="utf-8"))
+    legs = [l for l in legs_todos if l["camara"] == "Diputados"]
     clave_actual = collections.defaultdict(list)
     for l in legs:
         ap = norm(l["apellido"] or "")
@@ -138,8 +267,10 @@ def main() -> int:
             "m": f'{c["base_mayoria"]} · {c["tipo_mayoria"]}',
             "a": int(c["votos_afirmativos"]), "n": int(c["votos_negativos"]), "b": int(c["abstenciones"]), "u": int(c["ausentes"]),
             "pres": c["presidente_nombre"].strip(), "tiene_detalle": bool(filas),
-            "e": [x[0] for x in exps.get(aid, [])],
+            "e": [x[0] for x in exps.get(aid, [])], "c": "D",
         })
+    actual = procesar_recientes(legs_todos, salida, indice)
+    (SAL / "votaciones_mandato_actual.json").write_text(json.dumps(actual, ensure_ascii=False, indent=1), encoding="utf-8")
     indice.sort(key=lambda x: (x["f"], x["h"]), reverse=True)
     (salida / "indice.json").write_text(json.dumps(indice, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 

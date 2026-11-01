@@ -45,11 +45,12 @@ $presid = array_filter(Datos::bloques('Diputados'), fn($b) => !empty($b['preside
 ok(count($presid) >= 20, 'casi todos los bloques de Diputados tienen presidente (hay ' . count($presid) . ' de ' . count(Datos::bloques('Diputados')) . ')');
 
 $vot = Datos::votaciones();
-ok(count($vot) === 999, 'hay 999 votaciones nominales publicadas (hay ' . count($vot) . ')');
+ok(count($vot) >= 1300 && count(array_unique(array_column($vot, 'id'))) === count($vot), 'hay más de 1.300 votaciones nominales, sin repetidos (hay ' . count($vot) . ')');
 $malV = 0;
 foreach ($vot as $v) {
     $d = Datos::votacion($v['id']);
-    $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'P' => 0];
+    if (!empty($d['nota'])) { continue; } // las que no cuadran se muestran con aviso y no entran en las estadísticas
+    $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'P' => 0, 'E' => 0, 'X' => 0];
     foreach ($d['votos'] ?? [] as $x) { $c[$x[3]]++; }
     if ([$c['A'], $c['N'], $c['B'], $c['U']] !== [$v['a'], $v['n'], $v['b'], $v['u']]) { $malV++; }
 }
@@ -97,6 +98,17 @@ foreach ($todos as $l) {
 ok($conDj >= 80, 'hay declaraciones juradas de legisladores en ejercicio (' . $conDj . ')');
 ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
 ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
+
+$meta = Datos::mandatoActualMeta();
+ok(($meta['validas']['Diputados'] ?? 0) >= 100 && ($meta['validas']['Senadores'] ?? 0) >= 150, 'hay votaciones válidas del mandato actual en ambas cámaras');
+$maMal = 0; $maN = 0;
+foreach ($todos as $l) {
+    $r = Datos::mandatoActual($l['camara'], $l['slug']);
+    if (!$r) { continue; }
+    $maN++;
+    if ($r['emitio'] + $r['ausente'] !== $r['votaciones'] || $r['afirmativos'] + $r['negativos'] + $r['abstenciones'] !== $r['emitio'] || $r['voto_pct'] < 0 || $r['voto_pct'] > 100) { $maMal++; }
+}
+ok($maMal === 0 && $maN > 250, 'las estadísticas del mandato actual son coherentes (' . $maN . ' legisladores)');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

@@ -53,9 +53,24 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
         <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span class="num"><?= e($l['telefono']) ?></span></li><?php endif; ?>
       </ul>
     <?php endif; ?>
-    <p class="tenue pequeno" style="margin-top:1.25rem">Las métricas del mandato actual se publican cuando la Cámara libere sus votaciones recientes. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
+    <p class="tenue pequeno" style="margin-top:1.25rem">Los datos de votación del mandato actual y los de años anteriores se explican más abajo. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
   </section>
 </div>
+
+<?php $ma = Datos::mandatoActual($l['camara'], $l['slug']); $mm = Datos::mandatoActualMeta(); ?>
+<?php if ($ma): ?>
+<section class="seccion" aria-labelledby="mandato-actual">
+  <h2 id="mandato-actual" class="seccion-titulo">Votaciones nominales desde el 10 de diciembre de 2025</h2>
+  <dl class="participacion">
+    <div><dt>Votaciones consideradas</dt><dd><?= (int)$ma['votaciones'] ?></dd></div>
+    <div><dt>Emitió su voto</dt><dd><?= (int)$ma['emitio'] ?></dd></div>
+    <div><dt>No votó</dt><dd><?= (int)$ma['ausente'] ?></dd></div>
+    <?php if ($ma['voto_pct'] !== null): ?><div><dt>Votó en el</dt><dd><?= e(number_format((float)$ma['voto_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
+    <?php if ($ma['coincidencia_bloque_pct'] !== null): ?><div><dt>Votó como la mayoría de su bloque</dt><dd><?= e(number_format((float)$ma['coincidencia_bloque_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
+  </dl>
+  <p class="tenue pequeno">De las votaciones consideradas, <?= (int)$ma['afirmativos'] ?> fueron votos afirmativos, <?= (int)$ma['negativos'] ?> negativos y <?= (int)$ma['abstenciones'] ?> abstenciones, hasta el <?= e(fecha_es($mm['hasta'] ?? null)) ?>. "No votó" incluye todas las veces que no figura un voto, sin importar el motivo (licencia, ausencia u otro). La coincidencia con el bloque usa el bloque actual y solo se calcula con 20 votaciones o más y bloques de 3 o más integrantes. No se cuentan las votaciones en las que el legislador presidía la sesión ni las que no se pueden verificar. <a href="/votaciones">Ver todas las votaciones</a>.</p>
+</section>
+<?php endif; ?>
 
 <?php $par = !$esSen ? Datos::participacion($l['slug']) : null; ?>
 <?php if ($par): ?>

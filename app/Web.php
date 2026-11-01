@@ -152,5 +152,5 @@ function nombre_acta(string $n): string
 
 function etiqueta_voto(string $c): string
 {
-    return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside'][$c] ?? $c;
+    return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside', 'E' => 'No emite voto', 'X' => 'Sin dato'][$c] ?? $c;
 }
