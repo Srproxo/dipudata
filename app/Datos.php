@@ -205,6 +205,18 @@ final class Datos
         return is_array($d) ? $d : null;
     }
 
+    /** Ejes temáticos de un legislador actual (clave: slug, o "s:slug" para senadores): proyectos y votos por eje, o null. */
+    public static function ejes(string $camara, string $slug): ?array
+    {
+        $r = self::leer('ejes')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? null;
+        return is_array($r) ? $r : null;
+    }
+
+    public static function ejesMeta(): array
+    {
+        return self::leer('ejes')['_meta'] ?? [];
+    }
+
     public static function proyectosMeta(): array
     {
         $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';

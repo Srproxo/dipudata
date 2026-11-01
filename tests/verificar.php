@@ -191,5 +191,20 @@ foreach ($sen as $l) {
 ok($spMal === 0 && $spN >= 65 && $spTot === ($pm['senado_proyectos'] ?? -1), 'los proyectos de ' . $spN . ' senadores son proyectos con expediente válido, sin repetidos y sin resultado (' . $spTot . ')');
 ok(($pm['senado_expediente_invalido'] ?? 1) === 0 && ($pm['senado_no_es_proyecto'] ?? 0) > 0, 'las comunicaciones y notas del Senado (códigos CO y CC) no se publican como proyectos');
 
+$em = Datos::ejesMeta();
+$ejesMal = 0; $ejesN = 0;
+foreach ($todos as $l) {
+    $e = Datos::ejes($l['camara'], $l['slug']);
+    if (!$e) { continue; }
+    $ejesN++;
+    if ($e['con_eje'] > $e['con_giro'] || $e['con_giro'] > $e['proyectos']) { $ejesMal++; }
+    foreach ($e['ejes'] as $nombre => $x) {
+        if (!in_array($nombre, $em['ejes'] ?? [], true) || $x['proyectos'] > $e['con_eje']) { $ejesMal++; }
+        if (isset($x['votos']) && ($x['afirmativos'] > $x['votos'] || $x['votos'] < 1)) { $ejesMal++; }
+    }
+}
+ok(count($em['ejes'] ?? []) === 11 && $ejesMal === 0 && $ejesN >= 200, 'ejes temáticos: 11 ejes, ' . $ejesN . ' legisladores, cuentas por eje dentro de sus totales');
+ok(($em['proyectos_con_eje'] ?? 0) <= ($em['proyectos_con_giro'] ?? -1), 'ningún proyecto tiene eje sin tener giro a comisión');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
