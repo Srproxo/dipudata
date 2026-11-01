@@ -159,3 +159,15 @@ function etiqueta_tipo(string $t): string
 {
     return ['Declaracion' => 'Declaración', 'Resolucion' => 'Resolución', 'Comunicacion' => 'Comunicación', 'Ley' => 'Proyecto de ley'][$t] ?? $t;
 }
+
+/** Resultado de una votación: etiqueta y clase de color (también empate, o sin resultado publicado). */
+function resultado_votacion(string $r): string
+{
+    [$clase, $t] = match ($r) {
+        'AFIRMATIVO' => ['si', 'Afirmativo'],
+        'NEGATIVO' => ['no', 'Negativo'],
+        'EMPATE' => ['neutro', 'Empate'],
+        default => ['neutro', 'Sin resultado publicado'],
+    };
+    return '<b class="res-' . $clase . '">' . $t . '</b>';
+}
