@@ -58,4 +58,4 @@
   <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>" rel="next">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; endif; ?>
-<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las votaciones publicadas por la Cámara de Diputados y por el Senado, a través de ArgentinaDatos. Cada votación se verifica voto por voto contra sus totales.</p>
+<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las de Diputados a través de ArgentinaDatos y las del Senado directamente de senado.gob.ar. Cada votación se verifica voto por voto contra sus totales.</p>

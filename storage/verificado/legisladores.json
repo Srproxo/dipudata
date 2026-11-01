@@ -15,6 +15,7 @@
   "telefono": "1045 / 1046",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/546.gif",
   "verificado": true,
+  "id_senado": 546,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -39,6 +40,7 @@
   "telefono": "1501 / 1503",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/564.gif",
   "verificado": true,
+  "id_senado": 564,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -274,6 +276,7 @@
   "telefono": "3522 / 3523",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/583.gif",
   "verificado": true,
+  "id_senado": 583,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -425,6 +428,7 @@
   "telefono": "1393 / 1383",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/522.gif",
   "verificado": true,
+  "id_senado": 522,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -488,6 +492,7 @@
   "telefono": "3562 / 3564",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/519.gif",
   "verificado": true,
+  "id_senado": 519,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -730,6 +735,7 @@
   "telefono": "1201 / 1203",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/558.gif",
   "verificado": true,
+  "id_senado": 558,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -794,6 +800,7 @@
   "telefono": "3235 / 3286 / 3288",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/565.gif",
   "verificado": true,
+  "id_senado": 565,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -942,6 +949,7 @@
   "telefono": "8083 / 8905",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/552.gif",
   "verificado": true,
+  "id_senado": 552,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -1049,6 +1057,7 @@
   "telefono": "3508 / 1086",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/541.gif",
   "verificado": true,
+  "id_senado": 541,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -1172,6 +1181,7 @@
   "telefono": "1330 / 1031",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/584.gif",
   "verificado": true,
+  "id_senado": 584,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -1507,6 +1517,7 @@
   "telefono": "3415 / 3416",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/553.gif",
   "verificado": true,
+  "id_senado": 553,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -1609,6 +1620,7 @@
   "telefono": "3580 / 3581",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/582.gif",
   "verificado": true,
+  "id_senado": 582,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -1633,6 +1645,7 @@
   "telefono": "1305 / 1307 / 1310",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/532.gif",
   "verificado": true,
+  "id_senado": 532,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -2192,6 +2205,7 @@
   "telefono": "1153 / 8751",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/580.gif",
   "verificado": true,
+  "id_senado": 580,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -2426,6 +2440,7 @@
   "telefono": "1355 / 1156",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/285.gif",
   "verificado": true,
+  "id_senado": 285,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -2495,6 +2510,7 @@
   "telefono": "3408 / 3410",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/567.gif",
   "verificado": true,
+  "id_senado": 567,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -2753,6 +2769,7 @@
   "telefono": "1060 / 3779",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/586.gif",
   "verificado": true,
+  "id_senado": 586,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3010,6 +3027,7 @@
   "telefono": "1435 / 1403",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/398.gif",
   "verificado": true,
+  "id_senado": 398,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3073,6 +3091,7 @@
   "telefono": "1491 / 1493",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/587.gif",
   "verificado": true,
+  "id_senado": 587,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3097,6 +3116,7 @@
   "telefono": "3302 / 3390",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/595.gif",
   "verificado": true,
+  "id_senado": 595,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3121,6 +3141,7 @@
   "telefono": "3451 / 3453",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/570.gif",
   "verificado": true,
+  "id_senado": 570,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3366,6 +3387,7 @@
   "telefono": "1315 / 1318",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/545.gif",
   "verificado": true,
+  "id_senado": 545,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3656,6 +3678,7 @@
   "telefono": "1084 / 1098",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/517.gif",
   "verificado": true,
+  "id_senado": 517,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3854,6 +3877,7 @@
   "telefono": "1218 / 3190",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/461.gif",
   "verificado": true,
+  "id_senado": 461,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -3988,6 +4012,7 @@
   "telefono": "1395 / 3515",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/520.gif",
   "verificado": true,
+  "id_senado": 520,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -4286,6 +4311,7 @@
   "telefono": "1535 / 1467",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/468.gif",
   "verificado": true,
+  "id_senado": 468,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -4779,6 +4805,7 @@
   "telefono": "3589 / 3591",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/590.gif",
   "verificado": true,
+  "id_senado": 590,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -4803,6 +4830,7 @@
   "telefono": "3353 / 3358",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/568.gif",
   "verificado": true,
+  "id_senado": 568,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -4827,6 +4855,7 @@
   "telefono": "3543 / 3544",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/573.gif",
   "verificado": true,
+  "id_senado": 573,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -5225,6 +5254,7 @@
   "telefono": "1342 / 1332",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/562.gif",
   "verificado": true,
+  "id_senado": 562,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -5469,6 +5499,7 @@
   "telefono": "3590 / 3588",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/578.gif",
   "verificado": true,
+  "id_senado": 578,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -5493,6 +5524,7 @@
   "telefono": "3126 / 3135",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/560.gif",
   "verificado": true,
+  "id_senado": 560,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -5804,6 +5836,7 @@
   "telefono": "1325 /1327",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/477.gif",
   "verificado": true,
+  "id_senado": 477,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6104,6 +6137,7 @@
   "telefono": "3550 / 3552",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/592.gif",
   "verificado": true,
+  "id_senado": 592,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6354,6 +6388,7 @@
   "telefono": "8340 / 3471",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/531.gif",
   "verificado": true,
+  "id_senado": 531,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6596,6 +6631,7 @@
   "telefono": "1374 / 1378",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/400.gif",
   "verificado": true,
+  "id_senado": 400,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6670,6 +6706,7 @@
   "telefono": "1450 / 1453",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/534.gif",
   "verificado": true,
+  "id_senado": 534,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6694,6 +6731,7 @@
   "telefono": "1389 / 1390",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/366.gif",
   "verificado": true,
+  "id_senado": 366,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -6783,6 +6821,7 @@
   "telefono": "1321 / 1324",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/530.gif",
   "verificado": true,
+  "id_senado": 530,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7015,6 +7054,7 @@
   "telefono": "1213 / 1215",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/538.gif",
   "verificado": true,
+  "id_senado": 538,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7039,6 +7079,7 @@
   "telefono": "1373 / 1371",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/529.gif",
   "verificado": true,
+  "id_senado": 529,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7180,6 +7221,7 @@
   "telefono": "1235",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/574.gif",
   "verificado": true,
+  "id_senado": 574,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7204,6 +7246,7 @@
   "telefono": null,
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/597.gif",
   "verificado": true,
+  "id_senado": 597,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7280,6 +7323,7 @@
   "telefono": "1282 / 3530",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/555.gif",
   "verificado": true,
+  "id_senado": 555,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7343,6 +7387,7 @@
   "telefono": "5421 / 1426",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/536.gif",
   "verificado": true,
+  "id_senado": 536,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7593,6 +7638,7 @@
   "telefono": "1354/1380",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/576.gif",
   "verificado": true,
+  "id_senado": 576,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7765,6 +7811,7 @@
   "telefono": "3574 / 3577",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/589.gif",
   "verificado": true,
+  "id_senado": 589,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -7789,6 +7836,7 @@
   "telefono": "3556 / 3557",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/585.gif",
   "verificado": true,
+  "id_senado": 585,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8083,6 +8131,7 @@
   "telefono": "1023 / 1036 / 1039",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/294.gif",
   "verificado": true,
+  "id_senado": 294,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8221,6 +8270,7 @@
   "telefono": "1477/ 1479",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/540.gif",
   "verificado": true,
+  "id_senado": 540,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8401,6 +8451,7 @@
   "telefono": "3194",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/554.gif",
   "verificado": true,
+  "id_senado": 554,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8620,6 +8671,7 @@
   "telefono": "3462 / 3464",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/596.gif",
   "verificado": true,
+  "id_senado": 596,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8722,6 +8774,7 @@
   "telefono": "1251 / 1255",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/581.gif",
   "verificado": true,
+  "id_senado": 581,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -8904,6 +8957,7 @@
   "telefono": "3504 / 3512",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/594.gif",
   "verificado": true,
+  "id_senado": 594,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -9159,6 +9213,7 @@
   "telefono": "1090 / 1093",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/510.gif",
   "verificado": true,
+  "id_senado": 510,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -9473,6 +9528,7 @@
   "telefono": "3436 / 3437",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/563.gif",
   "verificado": true,
+  "id_senado": 563,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -9536,6 +9592,7 @@
   "telefono": null,
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/591.gif",
   "verificado": true,
+  "id_senado": 591,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -9811,6 +9868,7 @@
   "telefono": "3872 / 3874",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/551.gif",
   "verificado": true,
+  "id_senado": 551,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -10960,6 +11018,7 @@
   "telefono": "3429 / 3440",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/498.gif",
   "verificado": true,
+  "id_senado": 498,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -11023,6 +11082,7 @@
   "telefono": "1011 / 1013",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/556.gif",
   "verificado": true,
+  "id_senado": 556,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -11380,6 +11440,7 @@
   "telefono": "3456 / 3459",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/559.gif",
   "verificado": true,
+  "id_senado": 559,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -11474,6 +11535,7 @@
   "telefono": "1222 / 1225",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/593.gif",
   "verificado": true,
+  "id_senado": 593,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -11542,6 +11604,7 @@
   "telefono": "1521 / 1524",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/566.gif",
   "verificado": true,
+  "id_senado": 566,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -11952,6 +12015,7 @@
   "telefono": "1230 / 8718",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/579.gif",
   "verificado": true,
+  "id_senado": 579,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -12245,6 +12309,7 @@
   "telefono": "1080 / 1072",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/588.gif",
   "verificado": true,
+  "id_senado": 588,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -12318,6 +12383,7 @@
   "telefono": "1460",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/571.gif",
   "verificado": true,
+  "id_senado": 571,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -12485,6 +12551,7 @@
   "telefono": "3536 / 3539",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/528.gif",
   "verificado": true,
+  "id_senado": 528,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -12966,6 +13033,7 @@
   "telefono": "1433 / 1445",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/561.gif",
   "verificado": true,
+  "id_senado": 561,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -13081,6 +13149,7 @@
   "telefono": "3400 / 3402",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/525.gif",
   "verificado": true,
+  "id_senado": 525,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -13373,6 +13442,7 @@
   "telefono": "1441 / 1444",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/523.gif",
   "verificado": true,
+  "id_senado": 523,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -13436,6 +13506,7 @@
   "telefono": "3185 / 3188",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/524.gif",
   "verificado": true,
+  "id_senado": 524,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"
@@ -13786,6 +13857,7 @@
   "telefono": "8763 / 8834",
   "foto": "https://www.senado.gob.ar/bundles/senadosenadores/images/fsena/450.gif",
   "verificado": true,
+  "id_senado": 450,
   "fuentes": {
    "nombre, provincia, bloque, mandato, contacto": "Padrón de senadores en ejercicio, Senado de la Nación (datos abiertos)",
    "foto": "Senado de la Nación"

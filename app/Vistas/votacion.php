@@ -72,4 +72,4 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     </tbody>
   </table></div>
 </section>
-<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? 'votaciones publicadas por ' . ($esSen ? 'el Senado' : 'la Cámara de Diputados') . ' (vía ArgentinaDatos). El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>
+<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? ($esSen ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar).' : 'votaciones nominales publicadas por la Cámara de Diputados, a través de ArgentinaDatos; los totales de las 141 votaciones coinciden con los de datacp.ar.') . ' El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>

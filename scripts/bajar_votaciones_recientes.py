@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
 Descarga de ArgentinaDatos (api.argentinadatos.com, réplica de las votaciones publicadas por la HCDN y el Senado)
-las votaciones nominales del mandato actual y las guarda en storage/oficial/argentinadatos/.
+las votaciones nominales de Diputados del mandato actual y las guarda en storage/oficial/argentinadatos/.
 
-Solo se guardan las votaciones desde el 10/12/2025. Las actas anteriores de ArgentinaDatos no se usan: para los
+Solo se guardan las votaciones desde el 10/12/2025. Las del Senado NO se toman de acá: ArgentinaDatos difiere del Senado en 16% de las votaciones (verificado
+contra senado.gob.ar); se bajan con scripts/bajar_votaciones_senado.py. Las actas anteriores de ArgentinaDatos no se usan: para los
 períodos 129 a 137 vienen en cero y para el resto la cobertura es parcial (la fuente oficial de la HCDN llega hasta 2020).
 
 Uso:  python3 -I scripts/bajar_votaciones_recientes.py
@@ -23,7 +24,7 @@ def bajar(ruta: str):
 
 def main() -> int:
     DEST.mkdir(parents=True, exist_ok=True)
-    for ruta, nombre in (("diputados/actas", "diputados_actas"), ("senado/actas", "senado_actas")):
+    for ruta, nombre in (("diputados/actas", "diputados_actas"),):
         datos = [a for a in bajar(ruta) if (a.get("fecha") or "") >= DESDE]
         with gzip.open(DEST / f"{nombre}_desde_{DESDE}.json.gz", "wt", encoding="utf-8") as f:
             json.dump(datos, f, ensure_ascii=False, separators=(",", ":"))
