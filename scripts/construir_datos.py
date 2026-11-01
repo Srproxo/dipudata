@@ -6,13 +6,17 @@ Entradas (todas dentro del repositorio):
   storage/hcdn/diputados_actuales.csv   Padrón oficial de diputados en ejercicio (datos.hcdn.gob.ar)
   storage/oficial/senado/senadores_activos.json.gz   Padrón oficial de senadores en ejercicio (Senado de la Nación)
   storage/oficial/senado/senadores_no_activos.json.gz  Ex senadores (se usa para controlar el padrón)
+  storage/oficial/hcdn/composicion_por_bloques.csv     Bloque de cada diputado (fuente de la pertenencia)
+  storage/oficial/hcdn/composicion_por_interbloque.csv Interbloque de cada diputado
+  storage/oficial/hcdn/diputados_historico.json.gz     Todos los mandatos de diputados (ID oficial, períodos, bloques)
+  storage/oficial/hcdn/listado_bloques.csv / listado_interbloques.csv  Presidentes de bloque e interbloque
   storage/legisladores_master.json      Solo se toman la foto y el slug de los diputados, para no cambiar URLs.
                                         Se IGNORAN cuit, asistencia, lealtad, votaciones, patrimonio, biografía:
                                         eran valores generados sin fuente.
 
 Uso:  python3 -I scripts/construir_datos.py
 """
-import csv, json, re, sys, unicodedata, collections, datetime
+import csv, gzip, json, re, sys, unicodedata, collections, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -20,6 +24,7 @@ from _carga import filas
 
 RAIZ = Path(__file__).resolve().parent.parent
 HCDN = RAIZ / "storage" / "hcdn" / "diputados_actuales.csv"
+OFI_HCDN = RAIZ / "storage" / "oficial" / "hcdn"
 MASTER = RAIZ / "storage" / "legisladores_master.json"
 SALIDA = RAIZ / "storage" / "verificado"
 
@@ -42,6 +47,11 @@ ALIAS_BLOQUE = {
     "LLA": "LA LIBERTAD AVANZA", "UXP": "UNIÓN POR LA PATRIA", "UCR": "UCR - UNIÓN CÍVICA RADICAL",
     "PJ": "JUSTICIALISTA",
 }
+
+
+def leer_csv(ruta):
+    with Path(ruta).open(encoding="utf-8", newline="") as f:
+        return [r for r in csv.DictReader(f) if any(v for v in r.values())]
 
 
 def sin_tildes(s: str) -> str:
@@ -187,6 +197,82 @@ def main() -> int:
         l["fuentes"] = {k: v for k, v in l["fuentes"].items() if v}
     legisladores.sort(key=lambda l: (norm(l["apellido"] or l["nombre"].split()[-1]), norm(l["nombre"])))
 
+
+    # ---- Bloques e interbloques de Diputados: composición oficial (más reciente que el padrón)
+    def buscar_dip(ap: str, no: str):
+        tk = set(norm(f"{no} {ap}").split())
+        c = [l for l in legisladores if l["camara"] == "Diputados"
+             and (tk <= set(norm(l["nombre"]).split()) or set(norm(l["nombre"]).split()) <= tk)]
+        if len(c) > 1:
+            exacto = [l for l in c if set(norm(l["nombre"]).split()) == tk]
+            c = exacto or c
+        if len(c) == 1:
+            return c[0]
+        # apellido con otra grafía (p. ej. Veresay / Verasay): mismo nombre de pila y apellido parecido
+        import difflib
+        nombres = set(norm(no).split())
+        c = [l for l in legisladores if l["camara"] == "Diputados" and nombres <= set(norm(l["nombre"]).split())
+             and difflib.SequenceMatcher(None, norm(ap), norm(l["apellido"] or l["nombre"].split()[-1])).ratio() >= 0.8]
+        return c[0] if len(c) == 1 else None
+
+    for r in leer_csv(OFI_HCDN / "composicion_por_bloques.csv"):
+        l = buscar_dip(r["APELLIDO"], r["NOMBRE"])
+        if not l:
+            avisos.append(f"Composición de bloques: sin diputado para {r['APELLIDO']}, {r['NOMBRE']}")
+            continue
+        oficial = bloque_oficial(r["BLOQUE"])
+        if norm(oficial) != norm(l["bloque_oficial"]):
+            avisos.append(f"Bloque de {l['nombre']}: padrón dice {l['bloque_oficial']}, composición dice {oficial} (se usa la composición)")
+        l["bloque_oficial"], l["bloque"] = oficial, titulo(oficial)
+        l["fuentes"]["bloque"] = "Composición actual por bloques, HCDN (datos.hcdn.gob.ar)"
+    for l in legisladores:
+        l["interbloque"] = None
+    for r in leer_csv(OFI_HCDN / "composicion_por_interbloque.csv"):
+        l = buscar_dip(r["APELLIDO"], r["NOMBRE"])
+        if l:
+            l["interbloque"] = titulo(re.sub(r"^INTERBLOQUE\s+", "", r["INTERBLOQUE"].strip().upper()))
+            l["fuentes"]["interbloque"] = "Composición actual por interbloque, HCDN (datos.hcdn.gob.ar)"
+        else:
+            avisos.append(f"Composición de interbloques: sin diputado para {r['APELLIDO']}, {r['NOMBRE']}")
+    presidentes = {}
+    for r in leer_csv(OFI_HCDN / "listado_bloques.csv"):
+        l = buscar_dip(r["DIPUTADO_APELLIDO"], r["DIPUTADO_NOMBRE"])
+        if l:
+            presidentes[l["bloque_oficial"]] = l
+            l["preside_bloque"] = True
+        else:
+            avisos.append(f"Presidente de bloque sin diputado: {r['DIPUTADO_APELLIDO']}, {r['DIPUTADO_NOMBRE']} ({r['BLOQUE']})")
+    for l in legisladores:
+        l.setdefault("preside_bloque", False)
+
+
+    # ---- Trayectoria: mandatos y bloques anteriores, del histórico oficial de la HCDN
+    txt = gzip.open(OFI_HCDN / "diputados_historico.json.gz", "rt", encoding="utf-8", errors="replace").read()
+    hist = json.loads(re.sub(r",(\s*[}\]])", r"\1", txt), strict=False)
+    hoy = datetime.date.today().isoformat()
+    vigentes = [h for h in hist if h["FIN"][:10] >= hoy]
+    for l in legisladores:
+        if l["camara"] != "Diputados":
+            continue
+        tk = set(norm(l["nombre"]).split())
+        ids = {h["ID"] for h in vigentes
+               if provincia(h["DISTRITO"]) == l["provincia"]
+               and (set(norm(f'{h["NOMBRE"]} {h["APELLIDO"]}').split()) >= tk or set(norm(f'{h["NOMBRE"]} {h["APELLIDO"]}').split()) <= tk)}
+        if len(ids) != 1:
+            avisos.append(f"Histórico HCDN: {len(ids)} coincidencias para {l['nombre']}")
+            l["hcdn_id"], l["trayectoria"] = None, []
+            continue
+        hid = ids.pop()
+        mandatos = collections.OrderedDict()
+        for h in sorted((x for x in hist if x["ID"] == hid), key=lambda x: (x["INICIO"], x["BLOQUE_INICIO"]), reverse=True):
+            k = (h["INICIO"][:10], h["FIN"][:10], h["DISTRITO"])
+            m = mandatos.setdefault(k, {"inicio": k[0], "fin": k[1], "cese": h["CESE"][:10] if h.get("CESE") else None,
+                                        "distrito": provincia(h["DISTRITO"]), "bloques": []})
+            m["bloques"].append({"nombre": titulo(bloque_oficial(h["BLOQUE"])), "desde": h["BLOQUE_INICIO"][:10], "hasta": h["BLOQUE_FIN"][:10]})
+        l["hcdn_id"] = hid
+        l["trayectoria"] = list(mandatos.values())
+        l["fuentes"]["trayectoria"] = "Histórico de diputados 2007-2027, HCDN (datos.hcdn.gob.ar). No incluye mandatos anteriores a 2007"
+
     # ---- Bloques y provincias (derivados del padrón, nunca cargados a mano)
     bloques = []
     for camara in ("Diputados", "Senadores"):
@@ -195,16 +281,37 @@ def main() -> int:
             if l["camara"] == camara:
                 c[(l["bloque"], l["bloque_oficial"])].append(l)
         for (nombre, oficial), miembros in sorted(c.items(), key=lambda kv: (-len(kv[1]), kv[0][0])):
+            pres = presidentes.get(oficial) if camara == "Diputados" else None
+            inter = sorted({m["interbloque"] for m in miembros if m.get("interbloque")})
             bloques.append({
                 "camara": camara, "nombre": nombre, "nombre_oficial": oficial, "slug": slugify(nombre),
                 "cantidad": len(miembros),
                 "provincias": sorted({m["provincia"] for m in miembros}),
+                "presidente": pres["nombre"] if pres else None,
+                "presidente_slug": pres["slug"] if pres else None,
+                "interbloque": inter[0] if len(inter) == 1 else None,
             })
     provincias = []
     for nombre in sorted(set(PROVINCIAS.values()), key=norm):
         d = [l for l in legisladores if l["provincia"] == nombre and l["camara"] == "Diputados"]
         s = [l for l in legisladores if l["provincia"] == nombre and l["camara"] == "Senadores"]
         provincias.append({"nombre": nombre, "slug": slugify(nombre), "diputados": len(d), "senadores": len(s)})
+
+    interbloques = []
+    pres_int = {}
+    for r in leer_csv(OFI_HCDN / "listado_interbloques.csv"):
+        ap, _, no = r["PRESIDENTE"].partition(",")
+        pres_int[titulo(re.sub(r"^INTERBLOQUE\s+", "", r["INTERBLOQUE"].upper()))] = (buscar_dip(ap.strip(), no.strip()), int(r["CANTIDAD"]))
+    for nombre in sorted({l["interbloque"] for l in legisladores if l.get("interbloque")}):
+        miembros = [l for l in legisladores if l.get("interbloque") == nombre]
+        pres, esperado = pres_int.get(nombre, (None, None))
+        if esperado is not None and esperado != len(miembros):
+            avisos.append(f"Interbloque {nombre}: el listado dice {esperado} y la composición {len(miembros)}")
+        interbloques.append({
+            "camara": "Diputados", "nombre": nombre, "slug": slugify(nombre), "cantidad": len(miembros),
+            "presidente": pres["nombre"] if pres else None, "presidente_slug": pres["slug"] if pres else None,
+            "bloques": sorted({m["bloque"] for m in miembros}),
+        })
 
     # ---- Controles de integridad: el script falla si algo no cuadra
     dip = [l for l in legisladores if l["camara"] == "Diputados"]
@@ -227,7 +334,7 @@ def main() -> int:
         "avisos": avisos,
     }
     SALIDA.mkdir(parents=True, exist_ok=True)
-    for nombre, datos in (("legisladores", legisladores), ("bloques", bloques), ("provincias", provincias), ("informe", informe)):
+    for nombre, datos in (("legisladores", legisladores), ("bloques", bloques), ("interbloques", interbloques), ("provincias", provincias), ("informe", informe)):
         (SALIDA / f"{nombre}.json").write_text(json.dumps(datos, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{len(dip)} diputados, {len(sen)} senadores, {len(bloques)} bloques, {len(provincias)} provincias")
     for a in avisos:

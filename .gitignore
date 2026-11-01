@@ -6,3 +6,5 @@ api/credentials.local.php
 .DS_Store
 *.log
 *.zip
+__pycache__/
+*.pyc

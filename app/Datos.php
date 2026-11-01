@@ -72,6 +72,12 @@ final class Datos
     }
 
     /** @return list<array> */
+    public static function interbloques(): array
+    {
+        return self::leer('interbloques');
+    }
+
+    /** @return list<array> */
     public static function provincias(): array
     {
         return self::leer('provincias');

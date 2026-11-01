@@ -24,4 +24,24 @@
   </table></div>
 </section>
 <?php endforeach; ?>
-<p class="fuente-pie">Fuente: padrón oficial de diputados en ejercicio (HCDN) y padrón de senadores en ejercicio (Senado de la Nación). Las cantidades se calculan a partir del padrón, no se cargan a mano.</p>
+
+<?php if (Datos::interbloques()): ?>
+<section class="seccion" id="interbloques" aria-labelledby="t-inter">
+  <div class="fila-titulo"><h2 id="t-inter" class="seccion-titulo" style="margin:0">Interbloques de Diputados</h2></div>
+  <p class="tenue">Un interbloque reúne a varios bloques que actúan juntos en la Cámara.</p>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Interbloque</th><th scope="col" class="der">Diputados</th><th scope="col">Preside</th><th scope="col">Bloques que lo integran</th></tr></thead>
+    <tbody>
+    <?php foreach (Datos::interbloques() as $ib): ?>
+      <tr>
+        <td><b><?= e($ib['nombre']) ?></b></td>
+        <td class="der num" data-etiqueta="Diputados"><?= (int)$ib['cantidad'] ?></td>
+        <td data-etiqueta="Preside"><?= !empty($ib['presidente_slug']) ? '<a href="/diputado/' . e($ib['presidente_slug']) . '">' . e($ib['presidente']) . '</a>' : e($ib['presidente'] ?? '—') ?></td>
+        <td class="tenue" data-etiqueta="Bloques"><?= e(implode(', ', $ib['bloques'])) ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+</section>
+<?php endif; ?>
+<p class="fuente-pie">Fuente: composición actual por bloques e interbloques de la Cámara de Diputados (datos.hcdn.gob.ar) y padrón de senadores en ejercicio (Senado de la Nación). Las cantidades se calculan a partir del padrón, no se cargan a mano.</p>
