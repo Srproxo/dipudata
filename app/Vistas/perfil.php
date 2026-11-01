@@ -101,18 +101,15 @@ if ($pyR) { $resFrases[] = 'Figura como autor/a de ' . number_format((int)$pyR['
 <section class="seccion" aria-labelledby="senado-anterior">
   <h2 id="senado-anterior" class="seccion-titulo">Votaciones nominales en el Senado, <?= e(substr($sm['desde'], 0, 4)) ?> a 2025</h2>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Mandato</th><th scope="col">Período con votaciones</th><th scope="col" class="der">Votaciones</th><th scope="col" class="der">Votó</th><th scope="col" class="der">No votó</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">Como su bloque</th></tr></thead>
+    <thead><tr><th scope="col">Mandato</th><th scope="col">Período con votaciones</th><th scope="col" class="der">Votaciones</th><th scope="col" class="der">Votó</th><th scope="col" class="der">A favor · en contra · abst.</th><th scope="col" class="der">Como su bloque</th></tr></thead>
     <tbody>
     <?php foreach ($sa as $m): ?>
       <tr>
-        <td class="num" data-etiqueta="Mandato"><?= e($m['mandato'] ?: 'Sin dato') ?></td>
-        <td class="nowrap" data-etiqueta="Período"><?= e(fecha_es($m['desde'])) ?> a <?= e(fecha_es($m['hasta'])) ?></td>
+        <td class="num nowrap" data-etiqueta="Mandato"><?= e($m['mandato'] ?: 'Sin dato') ?></td>
+        <td data-etiqueta="Período"><?= e(fecha_es($m['desde'])) ?> a <?= e(fecha_es($m['hasta'])) ?></td>
         <td class="der num" data-etiqueta="Votaciones"><?= (int)$m['votaciones'] ?></td>
         <td class="der num" data-etiqueta="Votó"><?= (int)$m['emitio'] ?><?= $m['voto_pct'] !== null ? ' (' . e(number_format((float)$m['voto_pct'], 0, ',', '')) . '%)' : '' ?></td>
-        <td class="der num" data-etiqueta="No votó"><?= (int)$m['ausente'] ?></td>
-        <td class="der num" data-etiqueta="A favor"><?= (int)$m['afirmativos'] ?></td>
-        <td class="der num" data-etiqueta="En contra"><?= (int)$m['negativos'] ?></td>
-        <td class="der num" data-etiqueta="Abstenciones"><?= (int)$m['abstenciones'] ?></td>
+        <td class="der num nowrap" data-etiqueta="A favor · en contra · abst."><?= (int)$m['afirmativos'] ?> · <?= (int)$m['negativos'] ?> · <?= (int)$m['abstenciones'] ?></td>
         <td class="der num" data-etiqueta="Como su bloque"><?= $m['coincidencia_bloque_pct'] !== null ? e(number_format((float)$m['coincidencia_bloque_pct'], 1, ',', '')) . '%' : '—' ?></td>
       </tr>
     <?php endforeach; ?>
@@ -177,7 +174,7 @@ if ($pyR) { $resFrases[] = 'Figura como autor/a de ' . number_format((int)$pyR['
         <td class="der num" data-etiqueta="Deudas"><?= e(monto_ars((string)$d['deudas_final'])) ?></td>
         <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
         <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
-        <td data-etiqueta="Tipo"><?= e($d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
+        <td data-etiqueta="Tipo"><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>

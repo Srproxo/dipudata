@@ -1,0 +1,525 @@
+{
+ "fuente": "https://www.datacp.ar/api/congreso/export/leyes-clave/resultados (DataCP, CC BY 4.0; bajado el 2026-11-01)",
+ "resumen": {
+  "D_sin_equivalente": 326,
+  "S_comparadas": 294,
+  "S_sin_equivalente": 9,
+  "D_comparadas": 146,
+  "S_difieren": 19,
+  "D_difieren": 5
+ },
+ "diputados_2020_2025_sin_votaciones_en_el_sitio_por_anio": {
+  "2020": 13,
+  "2021": 4,
+  "2022": 18,
+  "2023": 5,
+  "2024": 67,
+  "2025": 14
+ },
+ "difieren": [
+  {
+   "camara": "Senado",
+   "acta": "2613",
+   "ley": "Presupuesto",
+   "fecha_sitio": "2025-12-26",
+   "fecha_datacp": "2025-12-26",
+   "sitio": [
+    46,
+    25,
+    1,
+    0
+   ],
+   "datacp": [
+    45,
+    26,
+    1,
+    0
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 72
+  },
+  {
+   "camara": "Senado",
+   "acta": "990",
+   "ley": "Presupuesto",
+   "fecha_sitio": "2011-12-21",
+   "fecha_datacp": "2011-12-21",
+   "sitio": [
+    43,
+    27,
+    0,
+    2
+   ],
+   "datacp": [
+    42,
+    27,
+    0,
+    2
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "989",
+   "ley": "Presupuesto",
+   "fecha_sitio": "2011-12-21",
+   "fecha_datacp": "2011-12-21",
+   "sitio": [
+    43,
+    27,
+    0,
+    2
+   ],
+   "datacp": [
+    42,
+    27,
+    0,
+    2
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "1641",
+   "ley": "Impuesto a las Ganancias",
+   "fecha_sitio": "2009-11-11",
+   "fecha_datacp": "2019-12-31",
+   "sitio": [
+    41,
+    26,
+    0,
+    5
+   ],
+   "datacp": [
+    41,
+    26,
+    0,
+    5
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 72
+  },
+  {
+   "camara": "Senado",
+   "acta": "1642",
+   "ley": "Impuesto a las Ganancias",
+   "fecha_sitio": "2009-11-11",
+   "fecha_datacp": "2019-12-31",
+   "sitio": [
+    40,
+    26,
+    1,
+    5
+   ],
+   "datacp": [
+    40,
+    26,
+    1,
+    5
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 72
+  },
+  {
+   "camara": "Senado",
+   "acta": "997",
+   "ley": "Impuesto a las Ganancias",
+   "fecha_sitio": "2011-12-21",
+   "fecha_datacp": "2011-12-21",
+   "sitio": [
+    42,
+    27,
+    0,
+    3
+   ],
+   "datacp": [
+    41,
+    27,
+    0,
+    3
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "996",
+   "ley": "Impuesto a las Ganancias",
+   "fecha_sitio": "2011-12-21",
+   "fecha_datacp": "2011-12-21",
+   "sitio": [
+    50,
+    19,
+    0,
+    3
+   ],
+   "datacp": [
+    49,
+    19,
+    0,
+    3
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "768",
+   "ley": "Expropiación de YPF",
+   "fecha_sitio": "2012-04-25",
+   "fecha_datacp": "2012-04-25",
+   "sitio": [
+    47,
+    19,
+    0,
+    6
+   ],
+   "datacp": [
+    46,
+    19,
+    0,
+    6
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "765",
+   "ley": "Expropiación de YPF",
+   "fecha_sitio": "2012-04-25",
+   "fecha_datacp": "2012-04-25",
+   "sitio": [
+    63,
+    3,
+    4,
+    2
+   ],
+   "datacp": [
+    62,
+    3,
+    4,
+    2
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "766",
+   "ley": "Expropiación de YPF",
+   "fecha_sitio": "2012-04-25",
+   "fecha_datacp": "2012-04-25",
+   "sitio": [
+    63,
+    3,
+    0,
+    6
+   ],
+   "datacp": [
+    62,
+    3,
+    0,
+    6
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "767",
+   "ley": "Expropiación de YPF",
+   "fecha_sitio": "2012-04-25",
+   "fecha_datacp": "2012-04-25",
+   "sitio": [
+    47,
+    19,
+    0,
+    6
+   ],
+   "datacp": [
+    46,
+    19,
+    0,
+    6
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "769",
+   "ley": "Expropiación de YPF",
+   "fecha_sitio": "2012-04-25",
+   "fecha_datacp": "2012-04-25",
+   "sitio": [
+    43,
+    23,
+    0,
+    6
+   ],
+   "datacp": [
+    42,
+    23,
+    0,
+    6
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "2797",
+   "ley": "Inviolabilidad de la Propiedad Privada",
+   "fecha_sitio": "2026-08-06",
+   "fecha_datacp": "2026-08-06",
+   "sitio": [
+    37,
+    33,
+    0,
+    2
+   ],
+   "datacp": [
+    38,
+    32,
+    0,
+    2
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 72
+  },
+  {
+   "camara": "Senado",
+   "acta": "779",
+   "ley": "Identidad de Género",
+   "fecha_sitio": "2012-05-09",
+   "fecha_datacp": "2012-05-09",
+   "sitio": [
+    56,
+    0,
+    0,
+    16
+   ],
+   "datacp": [
+    55,
+    0,
+    0,
+    16
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Diputados",
+   "acta": "393",
+   "ley": "Identidad de Género",
+   "fecha_sitio": "2011-11-30",
+   "fecha_datacp": "2011-11-30",
+   "sitio": [
+    168,
+    17,
+    6,
+    65
+   ],
+   "datacp": [
+    168,
+    17,
+    6,
+    61
+   ],
+   "suma_sitio": 256,
+   "suma_datacp": 252
+  },
+  {
+   "camara": "Diputados",
+   "acta": "394",
+   "ley": "Identidad de Género",
+   "fecha_sitio": "2011-11-30",
+   "fecha_datacp": "2011-11-30",
+   "sitio": [
+    117,
+    51,
+    9,
+    79
+   ],
+   "datacp": [
+    117,
+    51,
+    9,
+    75
+   ],
+   "suma_sitio": 256,
+   "suma_datacp": 252
+  },
+  {
+   "camara": "Diputados",
+   "acta": "395",
+   "ley": "Identidad de Género",
+   "fecha_sitio": "2011-11-30",
+   "fecha_datacp": "2011-11-30",
+   "sitio": [
+    121,
+    40,
+    8,
+    87
+   ],
+   "datacp": [
+    121,
+    40,
+    8,
+    83
+   ],
+   "suma_sitio": 256,
+   "suma_datacp": 252
+  },
+  {
+   "camara": "Senado",
+   "acta": "771",
+   "ley": "Muerte Digna",
+   "fecha_sitio": "2012-05-09",
+   "fecha_datacp": "2012-05-09",
+   "sitio": [
+    56,
+    0,
+    0,
+    16
+   ],
+   "datacp": [
+    55,
+    0,
+    0,
+    16
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Diputados",
+   "acta": "397",
+   "ley": "Muerte Digna",
+   "fecha_sitio": "2011-11-30",
+   "fecha_datacp": "2011-11-30",
+   "sitio": [
+    142,
+    6,
+    4,
+    104
+   ],
+   "datacp": [
+    142,
+    6,
+    4,
+    100
+   ],
+   "suma_sitio": 256,
+   "suma_datacp": 252
+  },
+  {
+   "camara": "Senado",
+   "acta": "971",
+   "ley": "Papel Prensa",
+   "fecha_sitio": "2011-12-22",
+   "fecha_datacp": "2011-12-22",
+   "sitio": [
+    41,
+    26,
+    1,
+    4
+   ],
+   "datacp": [
+    40,
+    26,
+    1,
+    4
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "804",
+   "ley": "Voto a los 16",
+   "fecha_sitio": "2012-10-17",
+   "fecha_datacp": "2012-10-17",
+   "sitio": [
+    52,
+    3,
+    2,
+    15
+   ],
+   "datacp": [
+    52,
+    3,
+    2,
+    14
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "2714",
+   "ley": "Consejo de la Magistratura (2013)",
+   "fecha_sitio": "2013-05-08",
+   "fecha_datacp": "2013-05-08",
+   "sitio": [
+    38,
+    30,
+    0,
+    4
+   ],
+   "datacp": [
+    37,
+    30,
+    0,
+    4
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Senado",
+   "acta": "628",
+   "ley": "Fertilización Asistida",
+   "fecha_sitio": "2013-04-24",
+   "fecha_datacp": "2013-04-24",
+   "sitio": [
+    60,
+    2,
+    0,
+    10
+   ],
+   "datacp": [
+    59,
+    2,
+    0,
+    10
+   ],
+   "suma_sitio": 72,
+   "suma_datacp": 71
+  },
+  {
+   "camara": "Diputados",
+   "acta": "3115",
+   "ley": "Cannabis Medicinal (2017)",
+   "fecha_sitio": "2016-11-23",
+   "fecha_datacp": "2016-11-23",
+   "sitio": [
+    220,
+    0,
+    1,
+    35
+   ],
+   "datacp": [
+    220,
+    0,
+    1,
+    34
+   ],
+   "suma_sitio": 256,
+   "suma_datacp": 255
+  }
+ ]
+}

@@ -123,10 +123,38 @@ $rem = Datos::remuneraciones();
 ok(!empty($rem['remuneraciones'][0]['importe']) && $rem['remuneraciones'][0]['importe'] > 1000000, 'la dieta publicada es un importe razonable');
 
 $sv = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S');
-$malSv = 0;
-foreach ($sv as $v) { $d = Datos::votacion($v['id']); if (count($d['votos'] ?? []) !== 72) { $malSv++; } }
-ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado tienen los 72 votos de los senadores (' . count($sv) . ')');
-ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'] ?? 0) === 183 && empty($meta['excluidas']), 'las 141 votaciones de Diputados y las 183 del Senado son válidas y ninguna quedó excluida');
+$malSv = 0; $slugsSen = array_column($sen, 'slug'); $malSlug = 0; $sinVoto = 0;
+foreach ($sv as $v) {
+    $d = Datos::votacion($v['id']); $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'X' => 0];
+    foreach ($d['votos'] ?? [] as $x) {
+        $c[$x[3]] = ($c[$x[3]] ?? 0) + 1;
+        if (isset($x[4]) && !in_array(substr($x[4], 2), $slugsSen, true)) { $malSlug++; }
+    }
+    // Los totales de la cabecera tienen que ser exactamente el recuento voto por voto (una celda en blanco no es un voto)
+    if ([$c['A'], $c['N'], $c['B'], $c['U']] !== [$v['a'], $v['n'], $v['b'], $v['u']] || array_sum($c) > 72 || array_sum($c) < 70) { $malSv++; }
+    if ($v['f'] < '2005-01-01' || $v['f'] > date('Y-m-d')) { $malSv++; }
+    $sinVoto += $c['X'];
+}
+ok(count($sv) > 2700 && $malSv === 0, 'las ' . count($sv) . ' votaciones del Senado desde 2005 coinciden voto por voto con su cabecera y tienen entre 70 y 72 filas');
+ok($malSlug === 0, 'todo voto del Senado atribuido a un senador actual apunta a un senador en ejercicio');
+ok(count(array_unique(array_column($sv, 'id'))) === count($sv), 'no hay números de acta del Senado repetidos');
+ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'] ?? 0) === 183 && empty($meta['excluidas']), 'las 141 votaciones de Diputados y las 183 del Senado del mandato actual son válidas y ninguna quedó excluida');
+
+$sm = Datos::senadoAnterioresMeta();
+ok(($sm['excluidas'] ?? 1) === 0 && ($sm['validas'] ?? 0) > 2500 && ($sm['desde'] ?? '') < '2005-12-31' && ($sm['hasta'] ?? '9') <= '2025-12-09', 'las votaciones anteriores del Senado (' . ($sm['validas'] ?? 0) . ') son válidas, de 2005 al 9/12/2025');
+ok(($sm['control_id']['con_id'] ?? 0) > 10000 && ($sm['control_id']['coincide'] ?? -1) === ($sm['control_id']['con_id'] ?? 0), 'el cruce de senadores por nombre y mandato coincide con el ID oficial en todas las filas que lo traen (' . ($sm['control_id']['coincide'] ?? 0) . ')');
+$saMal = 0; $saN = 0;
+foreach ($sen as $l) {
+    foreach (Datos::senadoAnteriores($l['slug']) as $m) {
+        $saN++;
+        if ($m['emitio'] + $m['ausente'] !== $m['votaciones'] || $m['afirmativos'] + $m['negativos'] + $m['abstenciones'] !== $m['emitio'] || $m['desde'] > $m['hasta'] || $m['hasta'] > '2025-12-09' || $m['desde'] < '2005-01-01' || $m['voto_pct'] < 0 || $m['voto_pct'] > 100) { $saMal++; }
+    }
+}
+ok($saMal === 0 && $saN > 40, 'las estadísticas por mandato anterior de los senadores actuales son coherentes (' . $saN . ' mandatos)');
+$ct = json_decode((string)file_get_contents(__DIR__ . '/../storage/verificado/contraste_datacp.json'), true) ?: [];
+$cr = $ct['resumen'] ?? [];
+$cmp = ($cr['S_comparadas'] ?? 0) + ($cr['D_comparadas'] ?? 0); $dif = ($cr['S_difieren'] ?? 0) + ($cr['D_difieren'] ?? 0);
+ok($cmp > 400 && $dif / max(1, $cmp) < 0.10, 'el contraste de totales con DataCP (' . $cmp . ' votaciones) difiere en menos de 10% (' . $dif . ' casos, todos explicados en /metodologia)');
 
 // Proyectos parlamentarios: cada proyecto tiene un solo autor, el resumen cuadra con la lista y solo hay diputados actuales
 $pm = Datos::proyectosMeta();

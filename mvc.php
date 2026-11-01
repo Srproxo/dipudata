@@ -350,7 +350,7 @@ switch (true) {
         $filtrado = $anio || $res || $cam || $q !== '' || $pagina > 1;
         render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas', 'cam'), pagina_meta(
             'Votaciones nominales del Congreso argentino',
-            'Votaciones nominales de Diputados (2011 a 2020 y desde diciembre de 2025) y del Senado (desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
+            'Votaciones nominales del Senado (desde 2005) y de Diputados (2011 a 2020 y desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
             '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
         ));
         break;

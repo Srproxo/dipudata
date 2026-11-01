@@ -50,7 +50,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 </section>
 
 <section class="seccion" aria-labelledby="por-diputado">
-  <h2 id="por-diputado" class="seccion-titulo">Cómo votó cada diputado</h2>
+  <h2 id="por-diputado" class="seccion-titulo">Cómo votó cada <?= $esSen ? 'senador' : 'diputado' ?></h2>
   <p class="conteo">
     Ver:
     <a href="/votaciones/<?= e($cab['id']) ?>"<?= $filtro === '' ? ' aria-current="true"' : '' ?>>todos</a> ·
@@ -59,7 +59,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     <?php endforeach; ?>
   </p>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Diputado</th><th scope="col">Bloque</th><th scope="col">Distrito</th><th scope="col">Voto</th></tr></thead>
+    <thead><tr><th scope="col"><?= $esSen ? 'Senador' : 'Diputado' ?></th><th scope="col">Bloque</th><th scope="col">Distrito</th><th scope="col">Voto</th></tr></thead>
     <tbody>
     <?php foreach ($votos as $v): ?>
       <tr>
@@ -72,4 +72,4 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     </tbody>
   </table></div>
 </section>
-<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? ($esSen ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar).' : 'votaciones nominales publicadas por la Cámara de Diputados, a través de ArgentinaDatos; los totales de las 141 votaciones coinciden con los de datacp.ar.') . ' El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>
+<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? ($esSen ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar).' : 'votaciones nominales publicadas por la Cámara de Diputados, a través de ArgentinaDatos; los totales de las 141 votaciones coinciden con los de datacp.ar.') . (!empty($det['bloque_en_acta']) ? ' El bloque es el que figura en el acta oficial de esa votación.' : ' El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.') : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>

@@ -258,9 +258,12 @@ def procesar_senado_anterior(legs, salida, indice):
     sin_cruzar = collections.Counter()
     tam = collections.Counter()
     datos = senado_primario(anteriores=True)
-    validas = excluidas = 0
+    validas = excluidas = vacias = 0
     for a in datos:
         fecha = a["fecha_local"]
+        if not a["votos"] and not (a["afirmativos"] or a["negativos"] or a["abstenciones"] or a["ausentes"]):
+            vacias += 1  # el Senado publica el acta sin ningún voto ni total: no hay votación nominal para mostrar
+            continue
         filas, por_bloque, codigos, ids = [], collections.defaultdict(collections.Counter), collections.Counter(), []
         for v in a["votos"]:
             nombre = v["nombre"]
@@ -290,11 +293,14 @@ def procesar_senado_anterior(legs, salida, indice):
             ids.append(sid)
             por_bloque[v["bloque"] or "Sin bloque"][cod] += 1
         h = (a["afirmativos"], a["negativos"], a["abstenciones"], a["ausentes"])
-        cuadra = (codigos["A"], codigos["N"], codigos["B"], codigos["U"]) == h and sum(h) == len(filas)
+        # Una fila con la celda de voto en blanco (código X) no es un voto: la cabecera tampoco la cuenta.
+        cuadra = (codigos["A"], codigos["N"], codigos["B"], codigos["U"]) == h and sum(h) == len(filas) - codigos["X"]
         titulo_ = (a["titulo"] or "").strip() or (a.get("descripcion") or "").strip()
         if a.get("descripcion") and a["descripcion"].strip().lower() not in titulo_.lower():
             titulo_ = f'{titulo_} ({a["descripcion"].strip().capitalize()})'
         nota = a.get("nota_origen") if cuadra else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno."
+        if cuadra and codigos["X"]:
+            nota = f'En el registro oficial de esta votación, {codigos["X"]} fila(s) figuran sin voto anotado; los totales de la cabecera no las cuentan y tampoco se cuentan en las estadísticas.'
         aid = f"S{a['actaId']}"
         res = "AFIRMATIVO" if str(a["resultado"]).lower().startswith("afirm") else "NEGATIVO"
         indice.append({"id": aid, "c": "S", "p": 0, "f": fecha, "h": a["hora"], "s": "nominal", "r": 0, "t": titulo_, "res": res,
@@ -346,7 +352,7 @@ def procesar_senado_anterior(legs, salida, indice):
                           "coincidencia_bloque_n": st["cb_n"]})
         resumen[k] = lista
     anios = collections.Counter(a["fecha_local"][:4] for a in datos)
-    resumen["_meta"] = {"validas": validas, "excluidas": excluidas, "desde": min((a["fecha_local"] for a in datos), default=""),
+    resumen["_meta"] = {"validas": validas, "excluidas": excluidas, "actas_vacias": vacias, "desde": min((a["fecha_local"] for a in datos), default=""),
                         "hasta": max((a["fecha_local"] for a in datos), default=""), "por_anio": dict(sorted(anios.items())),
                         "control_id": dict(control), "votos_sin_cruzar": sin_cruzar["sin_id"]}
     print(f"Senado anterior: {validas} válidas, {excluidas} excluidas; control de cruce por nombre contra ID oficial: {control['coincide']}/{control['con_id']}; "
