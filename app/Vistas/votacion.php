@@ -16,6 +16,20 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>
 </dl>
 
+<?php if (!empty($det['expedientes'])): ?>
+<section class="seccion" aria-labelledby="exps">
+  <h2 id="exps" class="seccion-titulo">Expedientes que se trataron</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Expediente</th><th scope="col">Título</th><th scope="col">Orden del día</th></tr></thead>
+    <tbody>
+    <?php foreach ($det['expedientes'] as [$ex, $tt, $od]): ?>
+      <tr><td class="num nowrap" data-etiqueta="Expediente"><?= e($ex) ?></td><td><?= e($tt) ?></td><td class="num" data-etiqueta="Orden del día"><?= e($od ?: '—') ?></td></tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+</section>
+<?php endif; ?>
+
 <section class="seccion" aria-labelledby="por-bloque">
   <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque</h2>
   <div class="tabla-caja"><table class="tabla">

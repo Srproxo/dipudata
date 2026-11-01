@@ -2,7 +2,7 @@
 """
 Construye las votaciones nominales de Diputados a partir de los archivos oficiales de la HCDN
 (datos.hcdn.gob.ar, "Votaciones nominales"). Lee todos los pares  actas_cabecera_*.csv.gz  y
-actas_detalle_*.csv.gz  de storage/oficial/hcdn/votaciones/, de modo que agregar un período nuevo
+actas_detalle_*.csv.gz  (y los expedientes_*.csv.gz) de storage/oficial/hcdn/votaciones/, de modo que agregar un período nuevo
 es copiar sus dos archivos y volver a correr el script.
 
 Salidas (storage/verificado/):
@@ -44,7 +44,7 @@ def partir(nombre: str):
 
 def leer(patron):
     for f in sorted(glob.glob(str(ENT / patron))):
-        with gzip.open(f, "rt", encoding="utf-8", newline="") as fh:
+        with gzip.open(f, "rt", encoding="utf-8-sig", newline="") as fh:
             yield from csv.DictReader(fh)
 
 
@@ -56,6 +56,15 @@ def main() -> int:
     for r in leer("actas_detalle_*.csv.gz"):
         if r["acta_id"] in cab and not r["diputado_nombre"].strip().startswith("."):
             votos[r["acta_id"]].append(r)
+
+    # Expedientes tratados en cada votación (el archivo del período 137 está contenido en el general)
+    exps = collections.defaultdict(list)
+    vistos = set()
+    for r in leer("expedientes_*.csv.gz"):
+        k = (r["acta_id"], r["expediente"])
+        if r["acta_id"] in cab and k not in vistos:
+            vistos.add(k)
+            exps[r["acta_id"]].append([r["expediente"].strip(), r["titulo"].strip(), r["od"].strip()])
 
     # Diputados actuales: (apellido, primer nombre, distrito) -> slug, solo si es único
     legs = [l for l in json.loads((SAL / "legisladores.json").read_text(encoding="utf-8")) if l["camara"] == "Diputados"]
@@ -121,7 +130,7 @@ def main() -> int:
             s["_desde"] = min(s["_desde"] or 99999999, int(c["fecha"].replace("-", "")))
             s["_hasta"] = max(s["_hasta"], int(c["fecha"].replace("-", "")))
         (salida / "actas" / f"{aid}.json").write_text(
-            json.dumps({"bloques": {b: dict(cn) for b, cn in sorted(por_bloque.items())}, "votos": compactas},
+            json.dumps({"bloques": {b: dict(cn) for b, cn in sorted(por_bloque.items())}, "votos": compactas, "expedientes": exps.get(aid, [])},
                        ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         indice.append({
             "id": aid, "p": int(c["nroperiodo"]), "f": c["fecha"], "h": c["hora"], "s": c["tipo_sesion"],
@@ -129,6 +138,7 @@ def main() -> int:
             "m": f'{c["base_mayoria"]} · {c["tipo_mayoria"]}',
             "a": int(c["votos_afirmativos"]), "n": int(c["votos_negativos"]), "b": int(c["abstenciones"]), "u": int(c["ausentes"]),
             "pres": c["presidente_nombre"].strip(), "tiene_detalle": bool(filas),
+            "e": [x[0] for x in exps.get(aid, [])],
         })
     indice.sort(key=lambda x: (x["f"], x["h"]), reverse=True)
     (salida / "indice.json").write_text(json.dumps(indice, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -147,7 +157,7 @@ def main() -> int:
         }
     (SAL / "votaciones_diputados.json").write_text(json.dumps(resumen, ensure_ascii=False, indent=1), encoding="utf-8")
     sin = [a for a in cab if a not in votos]
-    print(f"{len(indice)} votaciones ({len(sin)} sin detalle), {sum(len(v) for v in votos.values())} votos, {len(resumen)} diputados actuales con historial")
+    print(f"{sum(1 for v in indice if v['e'])} con expedientes vinculados;", f"{len(indice)} votaciones ({len(sin)} sin detalle), {sum(len(v) for v in votos.values())} votos, {len(resumen)} diputados actuales con historial")
     return 0
 
 

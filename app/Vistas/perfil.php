@@ -72,6 +72,23 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </section>
 <?php endif; ?>
 
+<?php $sub = !$esSen ? Datos::subsidiosDiputado($l['slug']) : []; ?>
+<?php if ($sub): ?>
+<section class="seccion" aria-labelledby="subs">
+  <h2 id="subs" class="seccion-titulo">Subsidios asociados en el registro de la Cámara</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Año</th><th scope="col" class="der">Subsidios</th><th scope="col" class="der">Total</th><th scope="col"></th></tr></thead>
+    <tbody>
+    <?php foreach ($sub as $anio => $r): ?>
+      <tr><td class="num"><?= e($anio) ?></td><td class="der num" data-etiqueta="Subsidios"><?= (int)$r['n'] ?></td><td class="der num" data-etiqueta="Total"><?= e(monto_ars((string)$r['total'])) ?></td>
+          <td><a href="/subsidios?anio=<?= e($anio) ?>&amp;diputado=<?= e($l['slug']) ?>">Ver detalle</a></td></tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Es lo que figura en el registro oficial de subsidios de la Cámara (2021 a 2023), asociado a este diputado. No indica cómo se decidió cada subsidio. <a href="/subsidios">Más sobre los subsidios</a>.</p>
+</section>
+<?php endif; ?>
+
 <?php if (!empty($l['trayectoria'])): ?>
 <section class="seccion" aria-labelledby="trayectoria">
   <h2 id="trayectoria" class="seccion-titulo">Trayectoria en la Cámara</h2>
