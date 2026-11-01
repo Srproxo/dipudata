@@ -1,0 +1,332 @@
+[
+ {
+  "inicio": "2026-5-6",
+  "fin": "2026-5-9",
+  "motivo": "ASISTIR A LAS SESIONES ORDINARIAS DEL PARLAMENTO LATINOAMERICANO Y CARIBEÑO",
+  "invita": "PARLAMENTO LATINOAMERICANO Y CARIBEÑO",
+  "lugar": "PANAMA, PANAMA",
+  "participa": "DIP. CARLOS RAMIRO GUTIERREZ",
+  "slug": "",
+  "bloque": "UXP"
+ },
+ {
+  "inicio": "2026-4-3",
+  "fin": "2026-4-12",
+  "motivo": "“III SEMINARIO DE INNOVACION EN SISTEMAS DE SALUD”",
+  "invita": "PRESIDENTE DE CONSENSO SALUD, LIC. CRISTIAN MAZZA Y LA PRESIDENTE RECTORA DE LA UNIVERSIDAD QUETZALCÓATL EN IRAPUATO Y MOROLEÓN, BRENDA TERESA PÉREZ GONZÁLEZ",
+  "lugar": "LONDRES Y OXFORD, REINO UNIDO",
+  "participa": "DIP. YEDLIN PABLO RAUL",
+  "slug": "pablo-raul-yedlin",
+  "bloque": "UXP"
+ },
+ {
+  "inicio": "2026-4-26",
+  "fin": "2026-5-4",
+  "motivo": "CREACION DE LA RED SOCIALISTA INTERNACIONAL SOVINTERN",
+  "invita": "SOVINTERN",
+  "lugar": "MOSCU, RUSIA",
+  "participa": "DIP. ITAI HAGMAN",
+  "slug": "itai-hagman",
+  "bloque": "UXP"
+ },
+ {
+  "inicio": "2026-4-26",
+  "fin": "2026-4-27",
+  "motivo": "PARTICIPAR DE LA SESIÓN ORDINARIA DEL PARLAMENTO DEL MERCOSUR",
+  "invita": "VICEPRESIDENTE DEL PARLAMENTO DEL MERCOSUR",
+  "lugar": "MONTEVIDEO, URUGUAY",
+  "participa": "DIP. EDUARDO FELIX VALDES",
+  "slug": "eduardo-felix-valdes",
+  "bloque": "UXP"
+ },
+ {
+  "inicio": "2026-4-11",
+  "fin": "2026-4-18",
+  "motivo": "INTERCAMBIAR CONOCIMIENTOS Y PRACTICAS EN MATERIA DE POLITICAS PUBLICA",
+  "invita": "HON. SVEN CLEMENT, DIPUTADO, LUXEMBURGO PRESIDENTE DE LA RED PARLAMENTARIA",
+  "lugar": "WASHINGTON D.C., ESTADOS UNIDOS",
+  "participa": "DIP. SABRINA AJMECHET",
+  "slug": "sabrina-ajmechet",
+  "bloque": "LLA"
+ },
+ {
+  "inicio": "2026-3-9",
+  "fin": "2026-3-16",
+  "motivo": "FORTALECIMIENTO DE LA COOPERACION PARLAMENTARIA INTERNACIONAL Y EL INTERCAMBIO DE EXPERIENCIAS EN MATERIA DE POLITICAS PUBLICAS",
+  "invita": "GLOBAL PARLIAMENTARY NETWORK",
+  "lugar": "PARIS, FRANCIA.",
+  "participa": "DIP. LAUMANN ANDRES ARIEL",
+  "slug": "andres-ariel-laumann",
+  "bloque": "LLA"
+ },
+ {
+  "inicio": "2026-01-23",
+  "fin": "2026-01-27",
+  "motivo": "ENCUENTRO INTERNACIONAL: NUESTRA AMERICA",
+  "invita": "SENADORA LOPEZ OBREGON CLARA",
+  "lugar": "BOGOTA, COLOMBIA",
+  "participa": "DIP. TAIANA JORGE",
+  "slug": "jorge-taiana",
+  "bloque": "UXP"
+ },
+ {
+  "inicio": "2026-01-04",
+  "fin": "2026-01-14",
+  "motivo": "IMPULSAR EL INTERCAMBIO PARLAMENTARIO, FORTALECIENDO LA COOPERACION ENTRE CHINA Y ARGENTINA",
+  "invita": "EMBAJADA DE LA REPUBLICA POPULAR CHINA EN LA REPUBLICA ARGENTINA",
+  "lugar": "BEIJING Y SHENZHEN, CHINA",
+  "participa": "DELEGACION ENCABEZADA POR LA DIPUTADA NACIONAL JULIANA SANTILLAN",
+  "slug": "",
+  "bloque": "La Libertad Avanza - PRO"
+ },
+ {
+  "inicio": "2025-11-20",
+  "fin": "2025-11-25",
+  "motivo": "FORTALECER LAZOS DE LA DIPLOMACIA PARLAMENTARIA Y ASISTIR A LA CUARTA CUMBRE PARLAMENTARIA DE LA PLATAFORMA INTERNACIONAL DE CRIMEA",
+  "invita": "RUSLAN STEFANCUK, PRESIDENTE DE LA VERKHOVNA RADA DE UCRANIA Y ANDREAS NORLEN, PRESIDENTE DE RIKSDAD DEL REINO DE SUECIA",
+  "lugar": "ESTOCOLMO, SUECIA",
+  "participa": "DIP. IGLESIAS FERNANDO ADOLFO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-11-15",
+  "fin": "2025-11-23",
+  "motivo": "FORMAR PARTE DEL PLANTEL DOCENTE EN CARACTER DE DISERTANTE, QUE DICTARA EL 9° SEMINARIO DE \"ETICA EN EL GERENCIAMIENTO DE LA SALUD\"",
+  "invita": "DIRECTOR GENERAL DE LA COMISION DE SALUD DE LA CONFERENCIA EPISCOPAL ARGENTINA",
+  "lugar": "ROMA, ITALIA",
+  "participa": "DIP. YEDLIN, PABLO RAUL",
+  "slug": "pablo-raul-yedlin",
+  "bloque": "Union por la Patria"
+ },
+ {
+  "inicio": "2025-11-11",
+  "fin": "2025-11-16",
+  "motivo": "ABORDAJE DE DISTINTAS PROBLEMATICAS A TRAVES DE DISERTACIONES CON ESPECIALISTAS PARA COMBATIR EL TERRORISMO Y FINANCIACION ILICITA, LA DELINCUENCIA ORGANIZADA TRANSNACIONAL, EL COMERCIO ILICITO Y EL TRAFICO DE DROGAS, CUESTIONES RELACIONADAS A LA IN TELIGENCIA ARTIFICIAL, ETC.",
+  "invita": "SR. ERNESTO CASTRO, PRESIDENTE DE LA ASAMBLEA LEGISLATIVA DE EL SALVADOR",
+  "lugar": "SAN SALVADOR, EL SALVADOR",
+  "participa": "DIP. MILMAN GERARDO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-11-02",
+  "fin": "2025-11-10",
+  "motivo": "SE PRESENTA LA OPORTUNIDAD PARA DISCUTIR CUESTIONES CLAVES SOBRE LAS RESPECTIVAS AGENDAS Y ASUNTOS DE INTERES COMUN",
+  "invita": "PRESIDENTE DEL GRUPO DE AMISTAD PARLAMENTARIA ISRAEL - ARGENTINA, EREZ MALUL. EMBAJADA DE ISRAEL EN ARGENTINA",
+  "lugar": "ESTADO DE ISRAEL",
+  "participa": "DIP. AJMECHET, SABRINA CARLOTA",
+  "slug": "sabrina-ajmechet",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-11-02",
+  "fin": "2025-11-10",
+  "motivo": "SE PRESENTA LA OPORTUNIDAD PARA DISCUTIR CUESTIONES CLAVES SOBRE LAS RESPECTIVAS AGENDAS Y ASUNTOS DE INTERES COMUN",
+  "invita": "PRESIDENTE DEL GRUPO DE AMISTAD PARLAMENTARIA ISRAEL - ARGENTINA, EREZ MALUL. EMBAJADA DE ISRAEL EN ARGENTINA",
+  "lugar": "ESTADO DE ISRAEL",
+  "participa": "DIP. LOPEZ JUAN MANUEL",
+  "slug": "",
+  "bloque": "Coalicion Civica"
+ },
+ {
+  "inicio": "2025-11-02",
+  "fin": "2025-11-10",
+  "motivo": "SE PRESENTA LA OPORTUNIDAD PARA DISCUTIR CUESTIONES CLAVES SOBRE LAS RESPECTIVAS AGENDAS Y ASUNTOS DE INTERES COMUN",
+  "invita": "PRESIDENTE DEL GRUPO DE AMISTAD PARLAMENTARIA ISRAEL - ARGENTINA, EREZ MALUL. EMBAJADA DE ISRAEL EN ARGENTINA",
+  "lugar": "ESTADO DE ISRAEL",
+  "participa": "DIP. ARABIA, DAMIAN",
+  "slug": "damian-arabia",
+  "bloque": "La Libertad Avanza"
+ },
+ {
+  "inicio": "2025-10-27",
+  "fin": "2025-11-06",
+  "motivo": "INVITACION DE LA FUNDACION UNIVERSITARIA DEL RIO DE LA PLATA (FURP). LA FURP ES UNA INSTITUCION PRIVADA DE BIEN PUBLICO, CUYO OBJETIVO PRINCIPAL ES CONTRIBUIR A LA FORMACION DE LIDERES POLITICOS DE TODAS LAS PROVINCIAS DEL PAIS, BRINDANDOLES OPORTUNIDADES PARA CONOCER EXPERIENCIAS UTILES, A FIN DE CONTRIBUIR A SU MEJOR DESEMPENO EN LOS AMBITOS EN QUE PARTICIPEN.",
+  "invita": "FURP",
+  "lugar": "ROMA, ITALIA// EREVAN, ARMENIA.",
+  "participa": "DIP. VERONICA KARINA BANFI.",
+  "slug": "karina-banfi",
+  "bloque": "UCR"
+ },
+ {
+  "inicio": "2025-10-10",
+  "fin": "2025-10-23",
+  "motivo": "INVITACION A LA ACTIVIDAD DEL FORUM 2000 EN PRAGA. REUNIONES EN BRUSELAS SOBRE EL ACUERDO MERCOSUR-UNION EUROPEA. PARTICIPACION EN LA UIP",
+  "invita": "COORDINADOR DE PROYECTO \"FORUM 2000 FOUNDATION\" Marek Preseek",
+  "lugar": "PRAGA, REPUBLICA CHECA // BRUSELAS, BELGICA // GINEBRA, SUIZA.",
+  "participa": "DIP. IGLESIAS FERNANDO ADOLFO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-10-05",
+  "fin": "2025-10-06",
+  "motivo": "PARTICIPACION DE LA I SESION EXTRAORDINARIA Y LA CIII SESION ORDINARIA DEL PARLAMENTO DEL MERCOSUR, EN SU CALIDAD DE PRESIDENTE DE LA COMISION DEL MERCOSUR DE ESTA H. CAMARA",
+  "invita": "PARLAMENTO DEL MERCOSUR",
+  "lugar": "MONTEVIDEO, URUGUAY.",
+  "participa": "DIP. VALDES EDUARDO FELIX",
+  "slug": "eduardo-felix-valdes",
+  "bloque": "Union por la Patria"
+ },
+ {
+  "inicio": "2025-08-29",
+  "fin": "2025-09-11",
+  "motivo": "ENCUENTRO CON EL DIRECTOR DEL IILA, PARTICIPACION AL SEMINARIO INTERNACIONAL DE VENTOTENE, VIAJE OFICIAL A BRUSELAS POR EL ACUERDO MERCOSUR-UE.",
+  "invita": "Delegacion de la Union Europea",
+  "lugar": "ROMA, ITALIA Y BRUSELAS, BELGICA",
+  "participa": "IGLESIAS, FERNANDO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-08-21",
+  "fin": "2025-08-31",
+  "motivo": "PARTICIPAR EN EL SEGUNDO DESAYUNO DE ORACION NACIONAL DE UCRANIA",
+  "invita": "SR. PRESIDENTE DE LA VERKHOVNA RADA (PARLAMENTO) DE UCRANIA",
+  "lugar": "CIUDAD DE KYIV, REP. DE UCRANIA",
+  "participa": "MILMAN, GERARDO FABIAN",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-08-07",
+  "fin": "2025-08-13",
+  "motivo": "PARTICIPAR EN UNA DELEGACION PARA PROMOVER EL INTERCAMBIO INSTITUCIONAL, POLITICO Y TECNOLOGICO CON ISRAEL",
+  "invita": "EMBAJADA DE ISRAEL Y MINISTERIO DE RELACIONES EXTERIORES DE ISRAEL.",
+  "lugar": "TEL AVIV, ISRAEL",
+  "participa": "YEZA, MARTIN",
+  "slug": "martin-yeza",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-07-31",
+  "fin": "2025-08-04",
+  "motivo": "PARTICIPAR DEL SEGUNDO CONGRESO PANAMERICANO CDMX 2025",
+  "invita": "CONGRESO PANAMERICANO CDMX",
+  "lugar": "CIUDAD DE MEXICO, MEXICO",
+  "participa": "HAGMAN ITAI",
+  "slug": "itai-hagman",
+  "bloque": "Union por la Patria"
+ },
+ {
+  "inicio": "2025-07-30",
+  "fin": "2025-08-06",
+  "motivo": "PARTICIPAR COMO DISERTANTE EN EL SEGUNDO CONGRESO PANAMERICANO",
+  "invita": "CONGRESO PANAMERICANO CDMX",
+  "lugar": "CIUDAD DE MEXICO, MEXICO",
+  "participa": "CHAHER, LEILA SUSANA",
+  "slug": "",
+  "bloque": "Union por la Patria"
+ },
+ {
+  "inicio": "2025-06-20",
+  "fin": "2025-07-07",
+  "motivo": "PROFUNDIZAR CONOCIMIENTO SOBRE GOBERNANZA E INTERNET Y ESTRATEGIAS DIGITALES",
+  "invita": "SECRETARÍA DEL FORO DE GOBERNANZA DE INTERNET",
+  "lugar": "LILLESTROM, NORUEGA",
+  "participa": "CALLETTI, PAMELA",
+  "slug": "",
+  "bloque": "Innovación Federal"
+ },
+ {
+  "inicio": "2025-06-10",
+  "fin": "2025-06-15",
+  "motivo": "DEBATIR LA COOPERACIÓN PARLAMENTARIA UE-ARGENTINA, EL IMPACTO GEOPOLÍTICO DEL ACUERDO DE ASOCIACIÓN UE.MERCOSUR",
+  "invita": "PARLAMENTO EUROPEO (AFET)",
+  "lugar": "BRUSELAS, BÉLGICA",
+  "participa": "IGLESIAS, FERNANDO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-05-27",
+  "fin": "2025-05-29",
+  "motivo": "PARTICIPACIÓN EN LA ASAMBLEA PLENARIA PARLAMERICA",
+  "invita": "PARLAMENTO DE LA REPÚBLICA ORIENTAL DEL URUGUAY Y DE PARLAMERICAS",
+  "lugar": "REP. ORIENTAL DEL URUGUAY",
+  "participa": "CAMPAGNOLI MARIA MARCELA",
+  "slug": "",
+  "bloque": "Coalición Cívica"
+ },
+ {
+  "inicio": "2025-05-12",
+  "fin": "2025-05-13",
+  "motivo": "PARTICIPACION EN EL PARLAMENTO DE LA REPÚBLICA ORIENTAL DEL URUGUAY PARA DEBATIR ACERCA DEL ROL DE LOS PARLAMENTOS EN A INTEGRACION Y DESAFIOS QUE ENCUENTRA EL BLOQUE MERCOSUR",
+  "invita": "PARLAMENTO DE URUGUAY SR.SENADOR CAGGIANI DANIEL",
+  "lugar": "REP. ORIENTAL DEL URUGUAY",
+  "participa": "IGLESIAS FERNANDO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-05-01",
+  "fin": "2025-05-11",
+  "motivo": "PARTICIPACIÓN AL TALLER DE ESTUDIOS LATINOAMERICANOS",
+  "invita": "UNIVERSIDAD DE PRINCETON",
+  "lugar": "NUEVA YORK, ESTADOS UNIDOS DE AMÉRICA",
+  "participa": "HAGMAN, ITAI",
+  "slug": "itai-hagman",
+  "bloque": "Unión por la Patria"
+ },
+ {
+  "inicio": "2025-04-19",
+  "fin": "2025-04-27",
+  "motivo": "PARTICIPAR COMO DISERTANTE DEL “II SEMINARIO DE INNOVACIÓN EN SISTEMAS DE SALUD\"",
+  "invita": "CONSENSO SALUD DE LA REPÚBLICA ARGENTINA Y UNIVERSIDAD QUETZALCÓATL EN IRAPUATO Y MOROLEÓN (UQI)",
+  "lugar": "LONDRES Y OXFORD, REINO UNIDO",
+  "participa": "YEDLIN, PABLO RAUL",
+  "slug": "pablo-raul-yedlin",
+  "bloque": "Unión por la Patria"
+ },
+ {
+  "inicio": "2025-04-16",
+  "fin": "2025-04-24",
+  "motivo": "INVITACIÓN AL FORO PARLAMENTARIO GLOBAL",
+  "invita": "FMI - EL BANCO MUNDIAL",
+  "lugar": "NUEVA YORK Y WASHINGTON D.C., ESTADOS UNIDOS DE AMÉRICA",
+  "participa": "AJMECHET, SABRINA",
+  "slug": "sabrina-ajmechet",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-04-06",
+  "fin": "2025-04-12",
+  "motivo": "12° SESIÓN PLENARIA DEL PARLAMENTO INTERNACIONAL POR LA TOLERANCIA Y LA PAZ",
+  "invita": "PARLAMENTO DE LA REPÚBLICA DE POLONIA",
+  "lugar": "VARSOVIA, REPÚBLICA DE POLONIA",
+  "participa": "MILMAN, GERARDO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-03-01",
+  "fin": "2025-03-05",
+  "motivo": "12° SESIÓN PLENARIA DEL PARLAMENTO INTERNACIONAL POR LA TOLERANCIA Y LA PAZ",
+  "invita": "CONSEJO GLOBAL PARA LA TOLERANCIA Y LA PAZ",
+  "lugar": "GINEBRA, CONFEDERACIÓN SUIZA",
+  "participa": "ALLENDE, WALBERTO ENRIQUE",
+  "slug": "",
+  "bloque": "Unión por la Patria"
+ },
+ {
+  "inicio": "2025-02-18",
+  "fin": "2025-02-25",
+  "motivo": "DEBATIR LA COOPERACIÓN PARLAMENTARIA UE-ARGENTINA, EL IMPACTO GEOPOLÍTICO DEL ACUERDO DE ASOCIACIÓN UE.MERCOSUR",
+  "invita": "PARLAMENTO EUROPEO (AFET)",
+  "lugar": "BRUSELAS, REINO DE BÉLGICA",
+  "participa": "IGLESIAS, FERNADO ADOLFO",
+  "slug": "",
+  "bloque": "PRO"
+ },
+ {
+  "inicio": "2025-02-06",
+  "fin": "2025-02-11",
+  "motivo": "PARTICIPACIÓN EN EL PROGRAMA DE OBSERVACIÓN ELECTORAL 2025",
+  "invita": "CONSEJO NACIONAL ELECTORAL DE LA REPÚBLICA DEL ECUADOR",
+  "lugar": "QUITO, REPÚBLICA DEL ECUADOR",
+  "participa": "POKOIK GARCÍA LORENA IRIS",
+  "slug": "lorena-pokoik",
+  "bloque": "Unión por la Patria"
+ }
+]

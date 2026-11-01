@@ -246,6 +246,56 @@ switch (true) {
     case (bool)preg_match('#^/ley/(\d+)$#', $path, $m):
         ir('/leyes/' . $m[1]);
 
+    case $path === '/comisiones':
+        render('comisiones', [], pagina_meta(
+            'Comisiones del Congreso argentino',
+            'Las comisiones permanentes de Diputados con sus integrantes y autoridades, y las comisiones del Senado.',
+            '/comisiones', 'comisiones'
+        ));
+        break;
+
+    case (bool)preg_match("#^/comisiones/({$S})$#", $path, $m):
+        $c = Datos::comision($m[1]);
+        if (!$c) { render_404(); break; }
+        render('comision', ['c' => $c], pagina_meta(
+            'Comisión ' . $c['nombre'] . ' de Diputados',
+            'Integrantes de la comisión ' . $c['nombre'] . ' de la Cámara de Diputados: ' . count($c['integrantes']) . ' diputados, con su cargo, bloque y provincia.',
+            '/comisiones/' . $c['slug'], 'comisiones'
+        ));
+        break;
+
+    case $path === '/viajes':
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $provincias = Datos::provincias();
+        $provSel = is_string($_GET['provincia'] ?? null) && Datos::provincia($_GET['provincia']) ? $_GET['provincia'] : '';
+        $nombreProv = $provSel ? Datos::provincia($provSel)['nombre'] : '';
+        $actual = Datos::viajes()['actual'] ?? [];
+        $filas = [];
+        foreach (Datos::legisladores('Diputados') as $l) {
+            if (!isset($actual[$l['slug']])) continue;
+            if ($nombreProv && $l['provincia'] !== $nombreProv) continue;
+            if ($nq !== '') {
+                $hay = ' ' . Datos::normalizar($l['nombre']) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) continue 2; }
+            }
+            $filas[] = [$l, $actual[$l['slug']]];
+        }
+        render('viajes', compact('filas', 'q', 'provSel', 'provincias'), pagina_meta(
+            'Pasajes y misiones oficiales de los diputados',
+            'Pasajes aéreos y terrestres emitidos por la Cámara de Diputados a pedido de cada diputado desde diciembre de 2025, y misiones oficiales al exterior.',
+            '/viajes', 'viajes', ['robots' => ($q !== '' || $provSel) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case $path === '/remuneraciones':
+        render('remuneraciones', [], pagina_meta(
+            'Cuánto cobra un legislador nacional',
+            'Dieta, gastos de representación, desarraigo, movilidad y descuentos que liquida la Cámara de Diputados a los legisladores nacionales.',
+            '/remuneraciones', 'remuneraciones'
+        ));
+        break;
+
     case $path === '/votaciones':
         $todas = Datos::votaciones();
         $anios = array_values(array_unique(array_map(static fn($v) => substr($v['f'], 0, 4), $todas)));
@@ -278,6 +328,7 @@ switch (true) {
 
     case (bool)preg_match('#^/votaciones/(S?\d{1,6})$#', $path, $m):
         $cab = null;
+        foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
         foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
         foreach (Datos::votaciones() as $v) { if ($v['id'] === $m[1]) { $cab = $v; break; } }
         $det = $cab ? Datos::votacion($m[1]) : null;
@@ -308,7 +359,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }

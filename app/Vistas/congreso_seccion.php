@@ -30,6 +30,7 @@ use App\Datos;
         </tbody></table>
       <?php endif; ?>
     <?php endforeach; ?>
+    <?php if ($slug === 'comisiones'): ?><p><a class="boton" href="/comisiones">Ver las comisiones de Diputados con sus integrantes</a></p><?php endif; ?>
     <?php if (!empty($s['fuentes'])): ?>
       <p class="fuente-pie">Fuente: <?php foreach ($s['fuentes'] as $i => [$t, $u]): ?><?= $i ? ' · ' : '' ?><a href="<?= e($u) ?>" rel="noopener"><?= e($t) ?></a><?php endforeach; ?></p>
     <?php endif; ?>
