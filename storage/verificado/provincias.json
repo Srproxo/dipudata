@@ -1,0 +1,146 @@
+[
+ {
+  "nombre": "Buenos Aires",
+  "slug": "buenos-aires",
+  "diputados": 70,
+  "senadores": 3
+ },
+ {
+  "nombre": "Catamarca",
+  "slug": "catamarca",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Chaco",
+  "slug": "chaco",
+  "diputados": 7,
+  "senadores": 3
+ },
+ {
+  "nombre": "Chubut",
+  "slug": "chubut",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Ciudad Autónoma de Buenos Aires",
+  "slug": "ciudad-autonoma-de-buenos-aires",
+  "diputados": 25,
+  "senadores": 2
+ },
+ {
+  "nombre": "Córdoba",
+  "slug": "cordoba",
+  "diputados": 18,
+  "senadores": 3
+ },
+ {
+  "nombre": "Corrientes",
+  "slug": "corrientes",
+  "diputados": 7,
+  "senadores": 3
+ },
+ {
+  "nombre": "Entre Ríos",
+  "slug": "entre-rios",
+  "diputados": 9,
+  "senadores": 3
+ },
+ {
+  "nombre": "Formosa",
+  "slug": "formosa",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Jujuy",
+  "slug": "jujuy",
+  "diputados": 6,
+  "senadores": 3
+ },
+ {
+  "nombre": "La Pampa",
+  "slug": "la-pampa",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "La Rioja",
+  "slug": "la-rioja",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Mendoza",
+  "slug": "mendoza",
+  "diputados": 10,
+  "senadores": 3
+ },
+ {
+  "nombre": "Misiones",
+  "slug": "misiones",
+  "diputados": 7,
+  "senadores": 3
+ },
+ {
+  "nombre": "Neuquén",
+  "slug": "neuquen",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Río Negro",
+  "slug": "rio-negro",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Salta",
+  "slug": "salta",
+  "diputados": 7,
+  "senadores": 3
+ },
+ {
+  "nombre": "San Juan",
+  "slug": "san-juan",
+  "diputados": 6,
+  "senadores": 3
+ },
+ {
+  "nombre": "San Luis",
+  "slug": "san-luis",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Santa Cruz",
+  "slug": "santa-cruz",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Santa Fe",
+  "slug": "santa-fe",
+  "diputados": 19,
+  "senadores": 3
+ },
+ {
+  "nombre": "Santiago del Estero",
+  "slug": "santiago-del-estero",
+  "diputados": 7,
+  "senadores": 3
+ },
+ {
+  "nombre": "Tierra del Fuego",
+  "slug": "tierra-del-fuego",
+  "diputados": 5,
+  "senadores": 3
+ },
+ {
+  "nombre": "Tucumán",
+  "slug": "tucuman",
+  "diputados": 9,
+  "senadores": 3
+ }
+]

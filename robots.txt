@@ -1,12 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /perfil/
-Allow: /match
-Allow: /api/og
-Disallow: /cron/
-Disallow: /database/
-Disallow: /.agent/
+Disallow: /api/
+Disallow: /storage/
 Disallow: /tests/
-Disallow: /src/
 
 Sitemap: https://dipudata.com/sitemap.xml

@@ -1,50 +1,29 @@
-# ==============================================================================
-# LEGISDATA (dipudata.com) — Configuración de Producción Grado Bancario & SEO
-# Compatible con Apache 2.4 y LiteSpeed Enterprise (Hostinger)
-# ==============================================================================
-
+# DipuData — Apache 2.4 / LiteSpeed (Hostinger)
 Options -Indexes -MultiViews
 ServerSignature Off
 DefaultLanguage es-AR
 AddDefaultCharset UTF-8
+DirectoryIndex mvc.php
 
-# ------------------------------------------------------------------------------
-# 1. CABECERAS DE SEGURIDAD GRADO BANCARIO (OWASP ASVS L2/L3)
-# ------------------------------------------------------------------------------
 <IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "DENY"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
-    Header always set X-Permitted-Cross-Domain-Policies "none"
-    Header unset X-Powered-By
     Header always unset X-Powered-By
-
-    # Caché inmutable para bundles compilados de Vite (JS/CSS con hash)
-    <FilesMatch "\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|webp|ico)$">
+    # Los activos llevan ?v=<mtime>: pueden cachearse un año
+    <FilesMatch "\.(css|svg|png|jpg|jpeg|webp|ico|woff2)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
-
-    # HTML y PHP sin caché para cargar instantáneamente el último bundle tras cada deploy
-    <FilesMatch "\.(html|htm|php)$">
-        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-        Header set Pragma "no-cache"
-        Header set Expires "0"
-    </FilesMatch>
 </IfModule>
 
-# ------------------------------------------------------------------------------
-# 2. COMPRESIÓN GZIP / DEFLATE PARA CORE WEB VITALS
-# ------------------------------------------------------------------------------
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript application/json image/svg+xml
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/xml application/json image/svg+xml
 </IfModule>
 
-# ------------------------------------------------------------------------------
-# 3. BLOQUEO ESTRICTO DE ARCHIVOS SENSIBLES Y DIRECTORIOS INTERNOS (403)
-# ------------------------------------------------------------------------------
-<FilesMatch "(^\.|\.(sql|env|log|md|sh|bak|swp|lock)$|^package(-lock)?\.json$|^tsconfig(\.tsbuildinfo)?\.json$|^vite\.config\.ts$|^postcss\.config\.js$|^tailwind\.config\.js$)">
+# Nunca servir archivos internos
+<FilesMatch "(^\.|\.(sql|env|log|md|sh|bak|swp|lock|py|json|csv)$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -58,43 +37,17 @@ AddDefaultCharset UTF-8
     RewriteEngine On
     RewriteBase /
 
-    # Bloquear acceso HTTP directo a directorios internos de backend, base de datos, cron y código fuente
-    RewriteRule ^(cron|database|app|storage|\.agent|\.git|node_modules|src|tests)(/|$) - [F,L,NC]
+    # Directorios internos: solo los lee PHP, nunca el navegador
+    RewriteRule ^(app|storage|scripts|database|tests|\.git|\.agent)(/|$) - [F,L,NC]
 
-    # Bloquear acceso directo a librerías internas de /api (excepto api/index.php)
-    RewriteRule ^api/(config|Security|Algorithms|db_env|credentials\.local)\.php$ - [F,L,NC]
+    # API de solo lectura
+    RewriteRule ^api(/.*)?$ api/index.php [L,QSA]
 
-    # --------------------------------------------------------------------------
-    # 4. REGLAS DE ENRUTAMIENTO LIMPIO (SITEMAP, API REST Y SSR SPA ROUTER)
-    # --------------------------------------------------------------------------
-
-    # Sitemap XML dinámico
-    RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
-
-    # MVC Match Electoral 360 + SEO Hub & Spoke
-    RewriteRule ^api/match360/?$ mvc.php [L,QSA]
-    RewriteRule ^api/legisladores-master/?$ mvc.php [L,QSA]
-    RewriteRule ^api/n8n/(.*)$ mvc.php [L,QSA]
-    RewriteRule ^api/auditoria(.*)$ mvc.php [L,QSA]
-    RewriteRule ^(diputado|senador)/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
-    RewriteRule ^eje/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
-    RewriteRule ^ley/[a-z0-9-]+/?$ mvc.php [L,QSA,NC]
-    RewriteRule ^leyes/?$ mvc.php [L,QSA]
-    RewriteRule ^perfil/(.*)$ mvc.php [L,QSA,NC]
-    RewriteRule ^match/?$ /match-360 [R=301,L]
-    RewriteRule ^match-360/?$ mvc.php [L,QSA]
-    RewriteRule ^blog(/.*)?$ mvc.php [L,QSA]
-
-    # Endpoints de la API RESTful (/api/* -> api/index.php)
-    RewriteRule ^api/(.*)$ api/index.php [L,QSA]
-    RewriteRule ^api$ api/index.php [L,QSA]
-
-    # Si el archivo estático existe en /assets/*, /dist/assets/*, robots.txt o favicon.svg, servirlo directamente
-    RewriteCond %{REQUEST_URI} ^/(assets|dist/assets)/ [OR]
-    RewriteCond %{REQUEST_URI} ^/(robots\.txt|favicon\.svg|favicon\.ico)$
+    # Archivos estáticos que existen
+    RewriteCond %{REQUEST_URI} ^/(assets/|favicon\.svg|robots\.txt)
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # Redirigir cualquier ruta de la SPA (/, /perfil/*, /match, etc.) al motor SSR index.php
-    RewriteRule ^ index.php [L,QSA]
+    # Todo lo demás lo resuelve el front controller
+    RewriteRule ^ mvc.php [L,QSA]
 </IfModule>
