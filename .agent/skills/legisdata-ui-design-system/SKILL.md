@@ -1,33 +1,64 @@
 ---
 name: legisdata-ui-design-system
-description: Sistema de Diseño e Interfaz (UI/UX) de LegisData (Neutralidad Visual, Data-First, Mobile-First, tipografía tabular y componentes de visualización).
+description: Sistema de diseño de DipuData y revisión de UX obligatoria. Usar antes de agregar o cambiar cualquier vista, componente, gráfico o estilo; nada nuevo se publica sin pasar esta revisión.
 ---
 
-# LegisData — Sistema de Diseño UI/UX
+# DipuData — Sistema de diseño y revisión de UX
 
-## 1. Principios Rectores
-1. **Neutralidad Visual**: Estructura en escala de grises pizarra (`bg-slate-50`, tarjetas `bg-white shadow-sm border border-slate-200/80`, texto principal `text-slate-900`, secundario `text-slate-500`). Sin sesgos partidarios en la interfaz general.
-2. **Claridad de Datos (Data-First)**: El color solo comunica significado semántico o eje temático.
-3. **Mobile-First**: Diseño optimizado para consulta móvil en vivo (debates, sesiones legislativas). Tablas con scroll horizontal fluido y gráficos responsivos.
+Regla de oro: **no se rompe el diseño.** Todo lo que se agrega a una pantalla pasa primero por la revisión de la sección 5.
+Si la revisión no se aprueba, no se publica, aunque el dato sea correcto.
 
-## 2. Tipografía y Escala
-- **Fuente Principal**: `Inter` (Google Fonts). Títulos H1/H2 en `font-bold` (700) o `font-extrabold` (800) con `tracking-[-0.02em]`. Cuerpo `font-normal` (400) a `16px`.
-- **Datos Numéricos**: `JetBrains Mono` con `tabular-nums` para montos en USD/ARS, porcentajes, fechas, CUIT y expedientes.
+## 1. Principios
+1. **Sobrio y neutral.** Papel blanco, tinta pizarra, un solo acento azul (`--acento`). El color de un bloque político solo
+   aparece como punto chico (`.punto`, `.bloque i`), nunca como fondo de una sección.
+2. **El dato primero, con su fuente al lado.** Cada cifra lleva debajo un texto `.tenue.pequeno` que dice de dónde sale,
+   qué período cubre y qué NO significa. Sin esa nota, la cifra no va.
+3. **Sin adjetivos ni veredictos.** Nada de "alerta roja", "panqueque", "se enriqueció", "ineficiente". Se describen hechos
+   ("votó distinto que la mayoría de su bloque en 12 de 140 votaciones").
+4. **Sin JavaScript y sin recursos externos.** Una sola hoja `assets/css/dipudata.css`; la CSP de `app/Web.php` no permite
+   scripts. Prohibido: Tailwind, Chart.js, Alpine, React, Google Fonts, CDN, iconos externos.
+5. **Móvil primero.** Todo se prueba a 375 px de ancho: tablas con `data-etiqueta`, toques de 44 px como mínimo.
 
-## 3. Paleta Semántica y Categórica (Tailwind CSS)
-- **Votaciones y Evolución Patrimonial**:
-  - Afirmativo / Crecimiento: `text-emerald-700 bg-emerald-100`
-  - Negativo / Caída: `text-rose-700 bg-rose-100`
-  - Abstención / Ausencia: `text-slate-600 bg-slate-200`
-- **Ejes Temáticos**:
-  - Educación / Ciencia: `blue-500` (`#3b82f6`)
-  - Salud Pública: `teal-500` (`#14b8a6`)
-  - Economía / Libre Mercado: `amber-500` (`#f59e0b`)
-  - Industria / Proteccionismo: `indigo-500` (`#6366f1`)
-  - Laboral: `violet-500` (`#8b5cf6`)
+## 2. Tokens (definidos en `:root`)
+- Texto: `--tinta` #0f172a, `--tinta-2` #334155, `--tenue` #64748b. Fondos: `--papel` #fff, `--fondo` #f8fafc.
+- Líneas: `--linea` #e2e8f0, `--linea-fuerte` #cbd5e1. Acento: `--acento` #1e3a8a, `--acento-claro` #eff6ff.
+- Aviso: `--aviso-fondo` #fffbeb con borde `--aviso-borde` #f59e0b (solo para advertencias de método, no para acusar).
+- Votos: `.voto-A` verde, `.voto-N` rojo, `.voto-B` amarillo, `.voto-U/.voto-P` gris. Esos tres colores se reservan a votos.
+- Tipografía: `--serif` del sistema para títulos y cifras grandes; `--sans` del sistema para el cuerpo; `.num` (tabular-nums)
+  para toda cifra, fecha y expediente. No se suman fuentes.
+- Ancho máximo `--ancho` 68rem. Bordes rectos (radio 0), sin sombras.
 
-## 4. Vistas Obligatorias
-- **Vista 1 (`/`)**: Hero *"Conocé a tus representantes"*, buscador grande con autocompletado, toggles rápidos (*Todos*, *Diputados*, *Senadores*) y filtro por Provincia y Bloque.
-- **Vista 2 (`/perfil/:id`)**: Header Bio + KPIs (Asistencia Histórica, Lealtad Partidaria), Módulo Financiero (Gráfico de línea suavizada `tension: 0.4` en USD MEP + tooltip con ARS nominales, ARS constantes y USD MEP + flecha de crecimiento real), Módulo Ideológico (Gráfico de Radar `fillOpacity={0.4}`, `stroke="#e2e8f0"` + barras `h-2.5` + tabla de votaciones paginada a máximo 10 leyes por página).
-- **Vista 3 (`/match`)**: Wizard tipo Typeform (8 preguntas, barra superior de progreso fina, botones de bloque con selección `ring-2 ring-blue-500 bg-blue-50`).
-- **Vista 4 (Resultados en `/match`)**: Split Screen (*Tu perfil como Votante* vs *Tus mejores coincidencias Top 3* + *Menos afines Bottom 3*), botón *"Ver radiografía completa"* y botón de compartir con imagen OpenGraph dinámica.
+## 3. Componentes aprobados (reusar antes de inventar)
+| Necesidad | Componente |
+| --- | --- |
+| Migas de pan | `nav.migas` |
+| Cifras clave | `dl.participacion` (3 a 6 cifras) |
+| Resumen arriba del perfil | `section.resumen` con frases armadas solo con datos verificados |
+| Ficha clave/valor | `dl.ficha` |
+| Tabla | `.tabla-caja > table.tabla`, celdas con `data-etiqueta` para móvil |
+| Pestañas | `nav.pestanas` con enlaces reales (`?tab=` o rutas) y `aria-current="page"`; cada pestaña es una URL indexable |
+| Desplegable sin JS | `<details>` (como `.mas`) |
+| Barra proporcional | `.barra > span` con `style="width:…%"` y leyenda `.leyenda` |
+| Lista de nombres | `ul.lista-chips` |
+| Advertencia de método | `p.aviso` |
+| Paginación | `.paginas` |
+
+## 4. Gráficos
+- Se dibujan como **SVG en línea generado en PHP**, sin bibliotecas. Colores con los tokens; texto con `--sans`.
+- Cada gráfico lleva `role="img"`, un `<title>` con la conclusión en palabras y, debajo, la tabla con los mismos números
+  (o un `<details>` "Ver los datos").
+- Líneas: eje Y desde 0 para montos; años en el eje X; sin suavizado (la línea no inventa valores entre años).
+- Radar: solo si hay un eje con fuente o clasificación publicada en `/metodologia`; si no, barras horizontales.
+- Nunca se compara un año con otro en pesos sin ajustar sin decirlo en el pie.
+
+## 5. Revisión de UX (checklist que aprueba o frena)
+Responder sí a todo. Un "no" frena la publicación.
+1. ¿Reusa un componente de la sección 3, o el nuevo usa solo tokens de la sección 2?
+2. ¿Funciona sin JavaScript y sin pedir nada fuera de dipudata.com?
+3. ¿Cada cifra tiene su nota de fuente, período y límites?
+4. ¿El texto describe hechos, sin adjetivos ni veredictos sobre la persona?
+5. ¿Se probó en escritorio (1280 px) y móvil (375 px) con `php -S` y un router que deje pasar `/assets`?
+6. ¿Se mantiene el contraste AA y los toques de 44 px?
+7. ¿Si falta el dato, la sección no se muestra (en vez de mostrar ceros o "sin datos")?
+8. ¿`php tests/verificar.php` termina en "Todo en orden"?
+Dejar el resultado de la revisión en el mensaje del commit o del PR ("Revisión de UX: 8/8").

@@ -1,91 +1,88 @@
 {
-  "project": "LegisData (dipudata.com)",
-  "version": "1.0.0",
-  "architecture": "Stage-Gate Multi-Agent Pipeline",
+  "project": "DipuData (dipudata.com)",
+  "version": "2.0.0",
+  "reglas": [
+    "Solo se publica lo que tiene fuente oficial y se pudo verificar (ver CLAUDE.md).",
+    "No se rompe el diseño: todo lo nuevo pasa por la revisión de UX antes de publicarse.",
+    "Sin base de datos, sin JavaScript y sin recursos externos.",
+    "Ningún agente publica (push, PR, merge) sin el OK de Marcelo."
+  ],
+  "hoja_de_ruta": ".agent/skills/legisdata-documento-maestro/SKILL.md",
   "stages": [
     {
       "stage": 1,
-      "id": "arquitecto-legisdata",
-      "name": "Arquitecto Principal de Datos & Seguridad",
-      "role": "Diseño del modelo relacional MySQL 8+, normalización 3NF, índices compuestos de alto rendimiento, tablas de seguridad grado bancario y dataset semilla realista del Congreso de la Nación Argentina.",
+      "id": "datos-fuentes",
+      "name": "Datos y fuentes oficiales",
+      "role": "Descarga fuentes oficiales a storage/oficial/ y genera storage/verificado/ con scripts Python de biblioteca estándar.",
       "skills": [
         "legisdata-architecture",
-        "legisdata-bank-security"
+        "legisdata-documento-maestro"
       ],
       "deliverables": [
-        ".agent/agents.json",
-        "database/schema.sql",
-        "database/seed.sql"
+        "scripts/construir_*.py",
+        "storage/verificado/*.json"
       ],
       "quality_gates": [
-        "Cumplimiento estricto de las 5 tablas troncales (legisladores, indicadores_economicos, patrimonio_ddjj, leyes, votos) con tipos de datos exactos e integridad referencial ON DELETE CASCADE.",
-        "Tablas de seguridad grado bancario operativas (audit_logs inmutable solo INSERT y rate_limits con ventana deslizante por IP SHA-256).",
-        "Dataset semilla equilibrado con al menos 16 legisladores de todos los bloques y provincias, serie IPC/MEP 2019-2025, DDJJ 2020-2025, 15+ leyes en los 5 ejes temáticos y matriz completa de votos."
+        "Cada archivo trae _meta con fuente, período y descartados.",
+        "Los detalles cuadran con sus totales oficiales.",
+        "Sin CUIT, familiares ni datos de personal."
       ]
     },
     {
       "stage": 2,
-      "id": "backend-php-worker",
-      "name": "Ingeniero Backend PHP 8.x & Motores Algorítmicos",
-      "role": "Construcción de la API RESTful nativa en PHP 8.x con PDO estricto, implementación de los 3 motores matemáticos (Deflactación Patrimonial USD MEP/IPC, Perfilamiento Temático Ponderado, Match Electoral por Similitud de Coseno) y scripts ETL Cron.",
+      "id": "backend-php",
+      "name": "Lectura y cálculo en PHP",
+      "role": "Métodos en app/Datos.php, rutas en mvc.php y cálculos (coincidencia con el bloque, coseno del Match) en el servidor.",
       "skills": [
         "legisdata-architecture",
         "legisdata-bank-security"
       ],
       "deliverables": [
-        "api/config/db.php",
-        "api/security/SecurityMiddleware.php",
-        "api/engine/LegisEngine.php",
+        "app/Datos.php",
+        "mvc.php",
         "api/index.php",
-        "cron/sync_wikipedia.php",
-        "cron/sync_datacp.php",
-        "cron/sync_anticorrupcion.php"
+        "tests/verificar.php"
       ],
       "quality_gates": [
-        "PDO con ATTR_EMULATE_PREPARES = false y cero concatenación SQL.",
-        "Exactitud matemática verificada en deflactación IPC/USD MEP, exclusión de ausencias en huella ideológica y Similitud del Coseno en [0, 100].",
-        "Protección CLI / HMAC en scripts Cron y rate limiting activo por IP anonimizada."
+        "php tests/verificar.php termina en \"Todo en orden\".",
+        "Entradas validadas por lista blanca; API solo GET."
       ]
     },
     {
       "stage": 3,
-      "id": "frontend-ux-worker",
-      "name": "Especialista Frontend React + Tailwind CSS (Data-First UI)",
-      "role": "Desarrollo de la SPA Mobile-First con estética inspirada en The Economist y Bloomberg, tipografía tabular para cifras monetarias y porcentuales, y las 4 vistas interactivas (Home, Radiografía del Legislador, Wizard Match Electoral, Resultados Split-Screen).",
+      "id": "revisor-ux",
+      "name": "Revisión de UX (aprueba o frena)",
+      "role": "Diseña y revisa cada vista nueva con los componentes y tokens del sistema; nada se publica sin su aprobación.",
       "skills": [
-        "legisdata-ui-design-system",
-        "legisdata-architecture"
+        "legisdata-ui-design-system"
       ],
       "deliverables": [
-        "index.php",
-        "assets/app.js",
-        "assets/styles.css"
+        "app/Vistas/*.php",
+        "assets/css/dipudata.css"
       ],
       "quality_gates": [
-        "Renderizado fluido de las 4 vistas sin recarga de página y soporte de rutas limpias / query params.",
-        "Gráficos interactivos de evolución patrimonial (Nominal vs. IPC Constante vs. USD MEP) y Radar / Barras de los 5 ejes temáticos.",
-        "Contraste WCAG AA+, diseño responsivo Mobile-First y uso estricto de font-variant-numeric: tabular-nums."
+        "Checklist de la sección 5 del skill de UX en 8/8.",
+        "Probado en 1280 px y 375 px.",
+        "Gráficos en SVG generado en PHP, con tabla de datos."
       ]
     },
     {
       "stage": 4,
-      "id": "sec-seo-qa-auditor",
-      "name": "Auditor de Seguridad Grado Bancario, SEO Top-Ranking & DevOps",
-      "role": "Endurecimiento de servidor Apache/Hostinger (.htaccess con HSTS, CSP, bloqueo de rutas sensibles), inyección SSR de metadatos dinámicos, Schema.org JSON-LD (GovernmentOrganization, Person, Dataset), sitemap.xml, robots.txt y despliegue en producción.",
+      "id": "seo-seguridad",
+      "name": "SEO, seguridad y publicación",
+      "role": "Metadatos, JSON-LD, sitemap, cabeceras y CSP; prepara el PR a main para que Marcelo lo apruebe.",
       "skills": [
-        "legisdata-bank-security",
-        "legisdata-seo-dominance"
+        "legisdata-seo-dominance",
+        "legisdata-bank-security"
       ],
       "deliverables": [
-        ".htaccess",
-        "robots.txt",
-        "sitemap.php",
-        "tests/verify_stage4.php"
+        "mvc.php (pagina_meta, sitemap)",
+        "app/Web.php",
+        "PR a main"
       ],
       "quality_gates": [
-        "Cabeceras HTTP de grado bancario verificadas (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Permissions-Policy).",
-        "Bloqueo HTTP 403/404 comprobado sobre /database/*, /cron/*, .env y archivos .sql.",
-        "Validación de JSON-LD estructurado, OpenGraph dinámico por legislador y prueba integral E2E en producción."
+        "CSP sin scripts ni orígenes nuevos sin revisión.",
+        "Cada ruta nueva indexable está en el sitemap y tiene canonical."
       ]
     }
   ]
