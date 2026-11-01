@@ -127,12 +127,24 @@ final class Datos
     /** @return array{bloques:array,votos:list<array>}|null */
     public static function votacion(string $id): ?array
     {
-        if (!preg_match('/^\d{1,6}$/', $id)) {
+        if (!preg_match('/^S?\d{1,6}$/', $id)) {
             return null;
         }
         $ruta = RAIZ . "/storage/verificado/votaciones/actas/{$id}.json";
         $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
         return is_array($d) ? $d : null;
+    }
+
+    /** Estadísticas de votación desde el 10/12/2025 de un legislador actual (clave: slug; senadores 's:slug'). */
+    public static function mandatoActual(string $camara, string $slug): ?array
+    {
+        $r = self::leer('votaciones_mandato_actual')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? null;
+        return $r && ($r['votaciones'] ?? 0) > 0 ? $r : null;
+    }
+
+    public static function mandatoActualMeta(): array
+    {
+        return self::leer('votaciones_mandato_actual')['_meta'] ?? [];
     }
 
     /** Resumen de participación en votaciones nominales de un diputado actual (o null). */

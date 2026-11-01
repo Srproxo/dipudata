@@ -251,9 +251,11 @@ switch (true) {
         $anios = array_values(array_unique(array_map(static fn($v) => substr($v['f'], 0, 4), $todas)));
         $anio = is_string($_GET['anio'] ?? null) && in_array($_GET['anio'], $anios, true) ? $_GET['anio'] : '';
         $res = in_array($_GET['resultado'] ?? '', ['AFIRMATIVO', 'NEGATIVO'], true) ? (string)$_GET['resultado'] : '';
+        $cam = in_array($_GET['camara'] ?? '', ['D', 'S'], true) ? (string)$_GET['camara'] : '';
         $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
         $nq = Datos::normalizar($q);
-        $lista = array_values(array_filter($todas, static function (array $v) use ($anio, $res, $nq): bool {
+        $lista = array_values(array_filter($todas, static function (array $v) use ($anio, $res, $nq, $cam): bool {
+            if ($cam && ($v['c'] ?? 'D') !== $cam) return false;
             if ($anio && substr($v['f'], 0, 4) !== $anio) return false;
             if ($res && $v['res'] !== $res) return false;
             if ($nq !== '') {
@@ -266,15 +268,15 @@ switch (true) {
         $paginas = max(1, (int)ceil($total / 50));
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
         $lista = array_slice($lista, ($pagina - 1) * 50, 50);
-        $filtrado = $anio || $res || $q !== '' || $pagina > 1;
-        render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
-            'Votaciones nominales de la Cámara de Diputados',
-            'Cada votación nominal de Diputados entre 2011 y 2020, con su resultado y cómo votó cada diputado. Fuente: datos abiertos de la HCDN.',
+        $filtrado = $anio || $res || $cam || $q !== '' || $pagina > 1;
+        render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas', 'cam'), pagina_meta(
+            'Votaciones nominales del Congreso argentino',
+            'Votaciones nominales de Diputados (2011 a 2020 y desde diciembre de 2025) y del Senado (desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
             '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
         ));
         break;
 
-    case (bool)preg_match('#^/votaciones/(\d{1,6})$#', $path, $m):
+    case (bool)preg_match('#^/votaciones/(S?\d{1,6})$#', $path, $m):
         $cab = null;
         foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
         foreach (Datos::votaciones() as $v) { if ($v['id'] === $m[1]) { $cab = $v; break; } }

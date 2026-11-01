@@ -1,11 +1,12 @@
 <?php use App\Datos;
 /** @var array $cab @var array $det @var string $filtro */
-$orden = ['A' => 0, 'N' => 1, 'B' => 2, 'U' => 3, 'P' => 4];
+$esSen = ($cab['c'] ?? 'D') === 'S';
+$orden = ['A' => 0, 'N' => 1, 'B' => 2, 'U' => 3, 'P' => 4, 'E' => 5, 'X' => 6];
 $votos = array_values(array_filter($det['votos'], static fn($v) => $filtro === '' || $v[3] === $filtro));
 usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1], $orden[$y[3]] ?? 9, $y[0]]);
 ?>
 <nav class="migas" aria-label="Ubicación"><a href="/votaciones">Votaciones</a> <span aria-hidden="true">/</span> <span><?= e(fecha_es($cab['f'])) ?></span></nav>
-<p class="antetitulo">Período <?= (int)$cab['p'] ?> · reunión <?= (int)$cab['r'] ?> · sesión <?= e(strtolower($cab['s'])) ?></p>
+<p class="antetitulo"><?= $esSen ? 'Senado de la Nación' : 'Cámara de Diputados' ?><?= !empty($cab['p']) ? ' · período ' . (int)$cab['p'] : '' ?><?= !empty($cab['r']) ? ' · reunión ' . (int)$cab['r'] : '' ?><?= !empty($cab['s']) && !$esSen ? ' · sesión ' . e(strtolower($cab['s'])) : '' ?></p>
 <h1 class="titulo" style="max-width:34ch;font-size:clamp(1.5rem,3.5vw,2.25rem)"><?= e($cab['t']) ?></h1>
 
 <dl class="ficha" style="max-width:40rem;margin-top:1.5rem">
@@ -30,8 +31,10 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 </section>
 <?php endif; ?>
 
+<?php if (!empty($det['nota'])): ?><p class="aviso"><?= e($det['nota']) ?></p><?php endif; ?>
+
 <section class="seccion" aria-labelledby="por-bloque">
-  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque</h2>
+  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque<?= !empty($det['camara']) ? ' <span class="tenue pequeno">(según el bloque actual de cada legislador)</span>' : '' ?></h2>
   <div class="tabla-caja"><table class="tabla">
     <thead><tr><th scope="col">Bloque</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">Ausentes</th></tr></thead>
     <tbody>
@@ -60,7 +63,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     <tbody>
     <?php foreach ($votos as $v): ?>
       <tr>
-        <td><?= isset($v[4]) ? '<a href="/diputado/' . e($v[4]) . '">' . e(nombre_acta($v[0])) . '</a>' : e(nombre_acta($v[0])) ?></td>
+        <td><?= isset($v[4]) ? '<a href="' . ($esSen ? '/senador/' . e(substr($v[4], 2)) : '/diputado/' . e($v[4])) . '">' . e(nombre_acta($v[0])) . '</a>' : e(nombre_acta($v[0])) ?></td>
         <td class="tenue" data-etiqueta="Bloque"><?= e($v[1]) ?></td>
         <td class="tenue" data-etiqueta="Distrito"><?= e($v[2]) ?></td>
         <td data-etiqueta="Voto"><span class="voto voto-<?= e($v[3]) ?>"><?= e(etiqueta_voto($v[3])) ?></span></td>
@@ -69,4 +72,4 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     </tbody>
   </table></div>
 </section>
-<p class="fuente-pie">Fuente: Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.</p>
+<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? 'votaciones publicadas por ' . ($esSen ? 'el Senado' : 'la Cámara de Diputados') . ' (vía ArgentinaDatos). El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>
