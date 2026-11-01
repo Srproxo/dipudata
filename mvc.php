@@ -66,10 +66,13 @@ switch (true) {
         $l = Datos::legislador($camara, $m[2]);
         if (!$l) { render_404(); break; }
         $cargo = $camara === 'Senadores' ? 'Senador/a nacional' : 'Diputado/a nacional';
-        render('perfil', ['l' => $l], pagina_meta(
-            $l['nombre'] . ', ' . strtolower($cargo) . ' por ' . $l['provincia'],
-            $l['nombre'] . ': ' . strtolower($cargo) . ' por ' . $l['provincia'] . ', bloque ' . $l['bloque'] . '. Datos del padrón oficial con su fuente.',
-            Datos::urlLegislador($l), 'legisladores', [
+        $pest = pestanas_perfil($l);
+        $tab = is_string($_GET['tab'] ?? null) ? $_GET['tab'] : 'resumen';
+        if (!isset($pest[$tab])) { if (isset($_GET['tab'])) { ir(Datos::urlLegislador($l)); } $tab = 'resumen'; }
+        render('perfil', ['l' => $l, 'tab' => $tab], pagina_meta(
+            $l['nombre'] . ', ' . strtolower($cargo) . ' por ' . $l['provincia'] . ($tab === 'resumen' ? '' : ': ' . mb_strtolower($pest[$tab])),
+            $l['nombre'] . ': ' . strtolower($cargo) . ' por ' . $l['provincia'] . ', bloque ' . $l['bloque'] . '. ' . ($tab === 'resumen' ? 'Datos del padrón oficial con su fuente.' : $pest[$tab] . ' según registros oficiales, con su fuente.'),
+            Datos::urlLegislador($l) . ($tab === 'resumen' ? '' : '?tab=' . $tab), 'legisladores', [
                 'jsonld' => ['@context' => 'https://schema.org', '@type' => 'Person', 'name' => $l['nombre'], 'jobTitle' => $cargo,
                     'url' => SITE_URL . Datos::urlLegislador($l), 'affiliation' => ['@type' => 'Organization', 'name' => $l['bloque']]],
             ]

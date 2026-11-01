@@ -171,3 +171,73 @@ function resultado_votacion(string $r): string
     };
     return '<b class="res-' . $clase . '">' . $t . '</b>';
 }
+
+/** Monto abreviado para ejes de gráficos: "$ 207,3 M". */
+function monto_corto(float $n): string
+{
+    $a = abs($n);
+    [$div, $suf] = $a >= 1e9 ? [1e9, ' mil M'] : ($a >= 1e6 ? [1e6, ' M'] : ($a >= 1e3 ? [1e3, ' mil'] : [1, '']));
+    return ($n < 0 ? '−' : '') . '$ ' . number_format($a / $div, $a / $div >= 100 || $div === 1 ? 0 : 1, ',', '.') . $suf;
+}
+
+/**
+ * Gráfico de línea en SVG, sin JavaScript. $puntos: [etiqueta_x => valor]. El eje Y empieza en 0 (o en el mínimo si hay negativos)
+ * y no se suaviza la línea. $titulo describe el gráfico en palabras (lectores de pantalla).
+ */
+function svg_linea(array $puntos, string $titulo): string
+{
+    if (count($puntos) < 2) {
+        return '';
+    }
+    $w = 640; $h = 260; $izq = 84; $der = 16; $arr = 14; $aba = 30;
+    $vals = array_map('floatval', array_values($puntos));
+    $min = min(0.0, min($vals)); $max = max($vals);
+    if ($max <= $min) { $max = $min + 1; }
+    $n = count($vals);
+    $x = static fn(int $i): float => $izq + ($w - $izq - $der) * ($n === 1 ? 0.5 : $i / ($n - 1));
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - ($v - $min) / ($max - $min));
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="g-' . md5($titulo) . '">'
+       . '<title id="g-' . md5($titulo) . '">' . e($titulo) . '</title>';
+    for ($k = 0; $k <= 4; $k++) {
+        $v = $min + ($max - $min) * $k / 4; $yy = round($y($v), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 8) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(monto_corto($v)) . '</text>';
+    }
+    $camino = [];
+    $i = 0;
+    $paso = max(1, (int)ceil($n / 8));
+    $etiquetas = '';
+    foreach ($puntos as $et => $v) {
+        $px = round($x($i), 1); $py = round($y((float)$v), 1);
+        $camino[] = ($i ? 'L' : 'M') . $px . ' ' . $py;
+        $etiquetas .= '<circle class="g-punto" cx="' . $px . '" cy="' . $py . '" r="3.5"/>';
+        if ($i % $paso === 0 || $i === $n - 1) {
+            $etiquetas .= '<text class="g-eje" x="' . $px . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$et) . '</text>';
+        }
+        $i++;
+    }
+    return $s . '<path class="g-linea" d="' . implode(' ', $camino) . '"/>' . $etiquetas . '</svg>';
+}
+
+/** Pestañas del perfil que tienen datos para este legislador: clave => título. "resumen" siempre está. */
+function pestanas_perfil(array $l): array
+{
+    $esSen = $l['camara'] === 'Senadores';
+    $ej = \App\Datos::ejes($l['camara'], $l['slug']);
+    $vj = $esSen ? [] : \App\Datos::viajes();
+    $p = ['resumen' => 'Resumen'];
+    if (\App\Datos::mandatoActual($l['camara'], $l['slug']) || ($esSen ? \App\Datos::senadoAnteriores($l['slug']) : \App\Datos::participacion($l['slug']))) {
+        $p['votaciones'] = 'Votaciones';
+    }
+    if (\App\Datos::proyectos($l['slug'], $l['camara']) || ($ej['con_eje'] ?? 0) > 0) {
+        $p['proyectos'] = 'Proyectos y temas';
+    }
+    if (\App\Datos::ddjj($l['camara'], $l['slug'])) {
+        $p['patrimonio'] = 'Declaración jurada';
+    }
+    if (!$esSen && (\App\Datos::comisionesDe($l['slug']) || isset($vj['actual'][$l['slug']]) || !empty($vj['por_diputado'][$l['slug']])
+            || \App\Datos::subsidiosDiputado($l['slug']) || !empty($l['trayectoria']))) {
+        $p['mas'] = 'Más datos';
+    }
+    return $p;
+}
