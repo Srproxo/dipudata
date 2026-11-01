@@ -213,5 +213,13 @@ ok(($em['proyectos_con_eje'] ?? 0) <= ($em['proyectos_con_giro'] ?? -1), 'ningú
 $ipc = Datos::ipc()['mensual'] ?? [];
 ok(($ipc['2016-12'] ?? 0) == 100 && count($ipc) >= 100 && !array_filter($ipc, fn($v) => $v <= 0), 'IPC del INDEC con base diciembre 2016 = 100 y valores positivos');
 
+$coMal = 0; $coN = 0;
+foreach ($sen as $l) {
+    $c = Datos::coautorias($l['slug']); if (!$c) { continue; } $coN++;
+    if ($c['con_otros_bloques'] > $c['con_otros'] || $c['con_otros'] > $c['proyectos']) { $coMal++; }
+    foreach ($c['socios'] as [$o, $n]) { $r = Datos::coautorias($o); $par = $r ? array_values(array_filter($r['socios'], fn($x) => $x[0] === $l['slug'])) : []; if (!$par || $par[0][1] !== $n) { $coMal++; } }
+}
+ok($coN >= 60 && $coMal === 0, 'coautorías del Senado: ' . $coN . ' senadores, cuentas simétricas entre cada par');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

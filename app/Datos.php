@@ -218,6 +218,18 @@ final class Datos
         return self::leer('ipc');
     }
 
+    /** Coautorías de un senador en ejercicio con otros senadores en ejercicio desde el 10/12/2025, o null. */
+    public static function coautorias(string $slug): ?array
+    {
+        $r = self::leer('coautorias_senado')['s:' . $slug] ?? null;
+        return is_array($r) ? $r : null;
+    }
+
+    public static function coautoriasMeta(): array
+    {
+        return self::leer('coautorias_senado')['_meta'] ?? [];
+    }
+
     public static function ejesMeta(): array
     {
         return self::leer('ejes')['_meta'] ?? [];

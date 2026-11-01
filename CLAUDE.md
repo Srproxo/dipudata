@@ -19,7 +19,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `assets/css/dipudata.css` único estilo (sin CDN ni fuentes externas; CSP sin scripts).
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
-  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `contrastar_datacp.py`.
+  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `contrastar_datacp.py`.
   Descargas: `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".

@@ -18,7 +18,7 @@ manda la regla hasta que Marcelo la cambie por escrito.
 | 11 ejes temáticos con barras | Hecho por comisión de primer giro (proyectos; votos solo Diputados 2011-2020) | Más votos con expediente |
 | Lealtad partidaria | Hecho como "votó como la mayoría de su bloque" | Mostrarlo como barra |
 | Defensa provincial | Sin fuente | No existe un "voto esperado regional" oficial |
-| Alianzas entre bloques | Se puede en el Senado | Cruce de expedientes entre senadores en ejercicio; Diputados no publica cofirmantes |
+| Alianzas entre bloques | Hecho en el Senado (lista, no grafo; desde 10/12/2025) | Diputados no publica cofirmantes |
 | Últimos 5 proyectos | Hecho | — |
 | Evolución patrimonial (gráfico) | Hecho, en pesos de hoy con IPC del INDEC (desde 2016) | MEP no es oficial |
 | Costo por proyecto | Sin fuente | Nadie publica el gasto en asesores por despacho |

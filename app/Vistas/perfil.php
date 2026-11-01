@@ -163,6 +163,30 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
   <p class="tenue pequeno"><?= number_format((int)$ej['con_eje'], 0, ',', '.') ?> de sus <?= number_format((int)$ej['proyectos'], 0, ',', '.') ?> proyectos tienen tema. El tema de un proyecto es el de la comisión a la que se giró en primer lugar, según el registro oficial de giros de <?= $esSen ? 'senado.gob.ar' : 'la Cámara de Diputados' ?>; un proyecto puede contar en dos temas. Los proyectos de comisiones que no corresponden a ninguno de los 11 temas (por ejemplo Relaciones Exteriores o Presupuesto) no se cuentan. Muestra en qué temas presenta proyectos, no si los apoya o los rechaza. <a href="/metodologia#ejes">Cómo se clasifican</a>.</p>
 </section>
 <?php endif; ?>
+<?php $co = $esSen ? Datos::coautorias($l['slug']) : null; ?>
+<?php if ($co && $co['con_otros'] > 0):
+  $porSlug = []; foreach (Datos::legisladores('Senadores') as $x) { $porSlug[$x['slug']] = $x; }
+  $otros = array_values(array_filter($co['socios'], static fn($x) => !$x[2] && isset($porSlug[$x[0]])));
+  $mismo = array_values(array_filter($co['socios'], static fn($x) => $x[2] && isset($porSlug[$x[0]]))); ?>
+<section class="seccion" aria-labelledby="coautorias">
+  <h2 id="coautorias" class="seccion-titulo">Con quién firma proyectos</h2>
+  <p>Desde el 10 de diciembre de 2025 figura en <?= (int)$co['proyectos'] ?> proyectos. En <?= (int)$co['con_otros'] ?> también figuran otros senadores en ejercicio<?= $co['con_otros_bloques'] ? ', y en ' . (int)$co['con_otros_bloques'] . ' al menos uno es de otro bloque' : '' ?>.</p>
+  <div class="dos-col">
+    <?php foreach ([['De otros bloques', $otros], ['De su bloque', $mismo]] as [$tit, $lista]): if (!$lista) { continue; } ?>
+    <div>
+      <h3 class="sub-titulo"><?= e($tit) ?></h3>
+      <ul class="lista-chips lista-chips-angosta">
+        <?php foreach (array_slice($lista, 0, 8) as [$s2, $n]): $x = $porSlug[$s2]; ?>
+          <li><a href="<?= e(Datos::urlLegislador($x)) ?>"><?= e($x['nombre']) ?></a><span class="tenue"><?= e($x['bloque']) ?> · <?= (int)$n ?> <?= $n === 1 ? 'proyecto' : 'proyectos' ?> en común</span></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <p class="tenue pequeno">Dos senadores comparten un proyecto cuando el mismo expediente figura en la lista de proyectos que el Senado publica para cada uno. Solo se ven senadores en ejercicio y proyectos desde el 10/12/2025, con el bloque actual de cada uno. Firmar juntos un proyecto no implica coincidir en otros temas. En Diputados no se puede calcular: el registro oficial trae un solo autor por proyecto.</p>
+</section>
+<?php endif; ?>
+
 <?php $pry = Datos::proyectos($l['slug'], $l['camara']); ?>
 <?php if ($pry): $rs = $pry['resumen']; ?>
 <section class="seccion" aria-labelledby="proyectos">
