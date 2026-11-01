@@ -28,7 +28,7 @@ description: Arquitectura real de DipuData (PHP 8 sin framework ni base de datos
   Requiere ejes temáticos con clasificación publicada (decisión pendiente de Marcelo).
 - **Apoyo por eje:** primero normalizar. Votos: % de afirmativos sobre votos emitidos en las votaciones del eje.
   Proyectos: cantidad del eje sobre el total de proyectos del legislador (0 a 1). Recién ahí `0,70·votos + 0,30·proyectos`.
-- **Pesos constantes (DDJJ):** `monto_t · IPC_final / IPC_t` con la serie oficial del INDEC. Hoy la regla es no ajustar:
-  hace falta que Marcelo la cambie. El dólar MEP no es oficial; la referencia oficial es la Comunicación A 3500 del BCRA.
+- **Pesos constantes (DDJJ):** `monto_t · IPC_final / IPC_dic_t` con la serie oficial del INDEC (`factores_ipc()` en `app/Web.php`),
+  aprobado por Marcelo el 1/11/2026. El dólar MEP no es oficial y no se usa.
 - **Coincidencia con el bloque:** ya existe (`coincidencia_bloque_pct`). Es la versión con fuente del "índice de lealtad".
 - **Coautorías entre bloques:** solo Senado, cruzando el mismo expediente entre las listas de los senadores en ejercicio.

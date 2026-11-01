@@ -196,8 +196,15 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php if ($dj): ?>
 <section class="seccion" aria-labelledby="ddjj">
   <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
+  <?php [$mesBase, $fac] = factores_ipc(); $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
+  <?php if (count($serie) >= 2): ?>
+  <figure class="grafico-caja">
+    <?= svg_linea($serie, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($serie) . ' a ' . array_key_last($serie) . ', en pesos de ' . mes_es($mesBase)) ?>
+    <figcaption class="tenue pequeno">Patrimonio neto declarado al cierre de cada año fiscal, expresado en pesos de <?= e(mes_es($mesBase)) ?> con el índice de precios al consumidor (IPC) del INDEC. Un cambio puede deberse a cómo se valúan los bienes en la declaración (por ejemplo, inmuebles a valor fiscal), no solo a compras, ventas o ahorro. Los años anteriores a 2016 no se ajustan porque la serie oficial del IPC empieza en diciembre de 2016.</figcaption>
+  </figure>
+  <?php endif; ?>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
+    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Neto en pesos de <?= e(mes_es($mesBase)) ?></th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
     <tbody>
     <?php foreach ($dj as $d): ?>
       <tr>
@@ -205,13 +212,14 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
         <td class="der num" data-etiqueta="Bienes"><?= e(monto_ars((string)$d['bienes_final'])) ?></td>
         <td class="der num" data-etiqueta="Deudas"><?= e(monto_ars((string)$d['deudas_final'])) ?></td>
         <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
+        <td class="der num" data-etiqueta="En pesos de <?= e(mes_es($mesBase)) ?>"><?= isset($fac[(int)$d['anio']]) ? e(monto_ars((string)round((float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']], 2))) : '<span class="tenue">—</span>' ?></td>
         <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
         <td data-etiqueta="Tipo"><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
   </table></div>
-  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Son pesos de cada año, sin ajustar por inflación: no sirven para comparar un año con otro. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
+  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
 </section>
 <?php endif; ?>
 

@@ -210,5 +210,8 @@ foreach ($todos as $l) {
 ok(count($em['ejes'] ?? []) === 11 && $ejesMal === 0 && $ejesN >= 200, 'ejes temáticos: 11 ejes, ' . $ejesN . ' legisladores, cuentas por eje dentro de sus totales');
 ok(($em['proyectos_con_eje'] ?? 0) <= ($em['proyectos_con_giro'] ?? -1), 'ningún proyecto tiene eje sin tener giro a comisión');
 
+$ipc = Datos::ipc()['mensual'] ?? [];
+ok(($ipc['2016-12'] ?? 0) == 100 && count($ipc) >= 100 && !array_filter($ipc, fn($v) => $v <= 0), 'IPC del INDEC con base diciembre 2016 = 100 y valores positivos');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

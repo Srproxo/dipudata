@@ -14,13 +14,13 @@ manda la regla hasta que Marcelo la cambie por escrito.
 | --- | --- | --- |
 | Cabecera (foto, nombre, cargo, provincia, bloque) | Hecho | — |
 | Biografía de Wikipedia | Frenado | No es fuente oficial |
-| Pestañas (Resumen, Votos, Proyectos, Patrimonio, Más datos) | Se puede ya | Sin JS, con `nav.pestanas`; esperar la etapa 5 del perfil |
-| 11 ejes temáticos con barras | Espera decisión | Clasificación propia de votaciones y proyectos, publicada en `/metodologia` |
+| Pestañas (Resumen, Votaciones, Proyectos y temas, Declaración jurada, Más datos) | Hecho | — |
+| 11 ejes temáticos con barras | Hecho por comisión de primer giro (proyectos; votos solo Diputados 2011-2020) | Más votos con expediente |
 | Lealtad partidaria | Hecho como "votó como la mayoría de su bloque" | Mostrarlo como barra |
 | Defensa provincial | Sin fuente | No existe un "voto esperado regional" oficial |
 | Alianzas entre bloques | Se puede en el Senado | Cruce de expedientes entre senadores en ejercicio; Diputados no publica cofirmantes |
 | Últimos 5 proyectos | Hecho | — |
-| Evolución patrimonial (gráfico) | Se puede ya en pesos de cada año | Pesos constantes con IPC espera decisión; MEP no es oficial |
+| Evolución patrimonial (gráfico) | Hecho, en pesos de hoy con IPC del INDEC (desde 2016) | MEP no es oficial |
 | Costo por proyecto | Sin fuente | Nadie publica el gasto en asesores por despacho |
 | Nepotismo por apellidos | Prohibido | Regla de familiares y personal |
 | Conflicto de interés por aportes | Sin fuente por legislador | Aportes de campaña por agrupación, no por legislador |

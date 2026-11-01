@@ -212,6 +212,12 @@ final class Datos
         return is_array($r) ? $r : null;
     }
 
+    /** IPC Nivel General Nacional del INDEC (base dic 2016 = 100): ["_meta" => ..., "mensual" => ["AAAA-MM" => índice]]. */
+    public static function ipc(): array
+    {
+        return self::leer('ipc');
+    }
+
     public static function ejesMeta(): array
     {
         return self::leer('ejes')['_meta'] ?? [];

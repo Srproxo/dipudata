@@ -241,3 +241,24 @@ function pestanas_perfil(array $l): array
     }
     return $p;
 }
+
+/** "agosto de 2026" a partir de "2026-08". */
+function mes_es(string $am): string
+{
+    $m = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    return ($m[(int)substr($am, 5, 2) - 1] ?? '') . ' de ' . substr($am, 0, 4);
+}
+
+/**
+ * Montos de la declaración jurada en pesos de un mismo mes, con el IPC del INDEC: monto * IPC(último mes) / IPC(diciembre del año).
+ * Devuelve [mes_base, [anio => factor]]; los años sin IPC de diciembre (anteriores a 2016) no figuran.
+ */
+function factores_ipc(): array
+{
+    $m = \App\Datos::ipc()['mensual'] ?? [];
+    if (!$m) { return ['', []]; }
+    $ult = array_key_last($m);
+    $f = [];
+    foreach ($m as $am => $v) { if (substr($am, 5, 2) === '12' && $v > 0) { $f[(int)substr($am, 0, 4)] = $m[$ult] / $v; } }
+    return [$ult, $f];
+}
