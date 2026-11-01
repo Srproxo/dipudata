@@ -21,7 +21,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
   Descargas: `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
-  `filtrar_aportes.py <aportes.csv>` (aportes de la CNE exportados desde el navegador; quita nombre, CUIL/CUIT y banco),
+  `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
@@ -44,8 +44,8 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Red del entorno: los dominios permitidos necesitan comodín (`*.senado.gob.ar`, `*.hcdn.gob.ar`, `*.datacp.ar`, ...). Para probar páginas con `php -S` hace falta un router que deje pasar `/assets` (mvc.php no lo hace).
 - Ejes temáticos (decisión de Marcelo, 1/11/2026): el eje de un proyecto es el de su comisión de primer giro, según `scripts/ejes_por_comision.csv`
   (editable). Las actas del Senado y las recientes de Diputados no traen expediente: los votos por eje salen solo de Diputados 2011-2020.
-- Aportes a partidos (CNE): aportantes.electoral.gob.ar rechaza pedidos automáticos ("Request Rejected"); no esquivarlo, el CSV lo exporta una persona. Se publican solo totales por agrupación,
-  nunca quién aportó. Agrupación electoral ≠ bloque: no se atribuyen aportes a legisladores.
+- Aportes a partidos (CNE): aportantes.electoral.gob.ar rechaza pedidos automáticos ("Request Rejected"); no esquivarlo, el CSV lo exporta una persona. Se publican totales y los 10 mayores aportantes por agrupación:
+  empresas con razón social y rubro (Registro Nacional de Sociedades), personas humanas sin nombre. No afirmar beneficio a cambio de un aporte. Agrupación electoral ≠ bloque: no se atribuyen aportes a legisladores.
 - Declaraciones juradas: el último archivo de la Oficina Anticorrupción es el del año fiscal 2024; el de 2025 todavía no está.
 
 ## Flujo de trabajo

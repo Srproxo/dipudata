@@ -1,6 +1,6 @@
 <?php
 use App\Datos;
-/** @var list<array> $destinos @var array $dest destino elegido @var list<string> $distritos @var string $distSel */
+/** @var list<array> $destinos @var array $dest destino elegido @var list<string> $distritos @var string $distSel @var ?array $agSel agrupación elegida */
 $am = Datos::aportes()['_meta'] ?? [];
 $nombreDestino = static function (string $n): string {
     $n = mb_convert_case(mb_strtolower($n, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
@@ -9,11 +9,12 @@ $nombreDestino = static function (string $n): string {
 $agrup = $distSel ? array_values(array_filter($dest['agrupaciones'], static fn($a) => $a['distrito'] === $distSel)) : $dest['agrupaciones'];
 $tot = array_sum(array_column($agrup, 'total'));
 $jur = array_sum(array_column($agrup, 'juridicas'));
+$limpiar = static fn(string $n): string => (string)preg_replace(['/^\(\d+\)\s*/', '/^\d{4} - [^-]+ - /'], '', $n);
 $grupos = ['campaña' => 'Campañas', 'institucional' => 'Funcionamiento de los partidos (desenvolvimiento institucional)'];
 ?>
 <nav class="migas" aria-label="Ubicación"><a href="/congreso">Cómo funciona el Congreso</a> <span aria-hidden="true">/</span> <span>Aportes a partidos</span></nav>
 <h1 class="titulo">Aportes privados a los partidos.</h1>
-<p class="bajada">Cada aporte privado a un partido o alianza se declara ante la Cámara Nacional Electoral, que publica quién aportó, cuánto y a qué agrupación. Acá están los totales por agrupación. No mostramos quién aportó: solo cuánto, cuántos aportes y cuántos aportantes distintos.</p>
+<p class="bajada">Cada aporte privado a un partido o alianza se declara ante la Cámara Nacional Electoral, que publica quién aportó, cuánto y a qué agrupación. Acá están los totales por agrupación. Tocá una agrupación para ver sus 10 mayores aportantes: las empresas con su nombre, las personas sin nombre.</p>
 <p class="aviso"><strong>Cómo leerlo.</strong> Una agrupación electoral no es lo mismo que un bloque del Congreso: las alianzas se arman para cada elección y en cada provincia, y un bloque puede reunir legisladores de varias. Los montos están en pesos de cada fecha, sin ajustar por inflación. Incluyen aportes en especie, valuados por la agrupación.</p>
 
 <form class="filtros" method="get" action="/aportes" style="margin-top:1.5rem">
@@ -37,6 +38,27 @@ $grupos = ['campaña' => 'Campañas', 'institucional' => 'Funcionamiento de los 
   <?php if (isset($_GET['destino']) || $distSel): ?><a class="enlace-limpiar" href="/aportes">Quitar filtros</a><?php endif; ?>
 </form>
 
+<?php if ($agSel): ?>
+<section class="seccion" id="mayores" aria-labelledby="ap-m">
+  <h2 id="ap-m" class="seccion-titulo"><?= e($limpiar($agSel['nombre'])) ?> <span class="tenue">· <?= e($agSel['distrito']) ?></span></h2>
+  <p>Los <?= count($agSel['mayores']) ?> mayores aportantes de esta agrupación en <?= e($nombreDestino($dest['nombre'])) ?>, de un total de <?= number_format($agSel['aportantes'], 0, ',', '.') ?> aportantes y $ <?= number_format($agSel['total'], 0, ',', '.') ?>.</p>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Aportante</th><th scope="col" class="der">Monto</th><th scope="col" class="der">Aportes</th><th scope="col" class="der">Del total</th></tr></thead>
+    <tbody>
+    <?php foreach ($agSel['mayores'] as [$nom, $rubro, $monto, $n]): ?>
+      <tr>
+        <td><span><?= $nom !== null ? e($nom) . ($rubro ? '<br><span class="tenue pequeno">' . e($rubro) . '</span>' : '') : '<span class="tenue">Persona humana</span>' ?></span></td>
+        <td class="der num" data-etiqueta="Monto"><b style="white-space:nowrap">$ <?= number_format($monto, 0, ',', '.') ?></b></td>
+        <td class="der num" data-etiqueta="Aportes"><?= (int)$n ?></td>
+        <td class="der num" data-etiqueta="Del total"><?= $agSel['total'] > 0 ? number_format($monto / $agSel['total'] * 100, 1, ',', '') . '%' : '—' ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Las empresas, cooperativas y asociaciones figuran con la razón social que declararon ante la Cámara Nacional Electoral y su actividad principal según el Registro Nacional de Sociedades (Ministerio de Justicia), que la toma de lo declarado ante ARCA. Las personas humanas no se nombran: DipuData no publica datos personales de quien no ejerce un cargo público. Un aportante con varios aportes a esta agrupación se suma en una sola fila. <a href="<?= e(url_con(['agrupacion' => ''])) ?>">Volver a todas las agrupaciones</a>.</p>
+</section>
+<?php endif; ?>
+
 <section class="seccion" aria-labelledby="ap-t">
   <h2 id="ap-t" class="seccion-titulo"><?= e($nombreDestino($dest['nombre'])) ?><?= $distSel ? ' · ' . e($distSel) : '' ?></h2>
   <dl class="participacion">
@@ -52,7 +74,7 @@ $grupos = ['campaña' => 'Campañas', 'institucional' => 'Funcionamiento de los 
     <tbody>
     <?php $todas = isset($_GET['todas']) || count($agrup) <= 40; foreach ($todas ? $agrup : array_slice($agrup, 0, 30) as $a): ?>
       <tr>
-        <td><span><?= e(preg_replace(['/^\(\d+\)\s*/', '/^\d{4} - [^-]+ - /'], '', $a['nombre'])) ?></span></td>
+        <td><span><a href="<?= e(url_con(['agrupacion' => $a['slug'], 'destino' => $dest['cod']])) ?>#mayores"><?= e($limpiar($a['nombre'])) ?></a></span></td>
         <td class="tenue" data-etiqueta="Distrito"><?= e($a['distrito']) ?></td>
         <td class="der num" data-etiqueta="Total"><b style="white-space:nowrap">$ <?= number_format($a['total'], 0, ',', '.') ?></b></td>
         <td class="der num" data-etiqueta="Aportes"><?= number_format($a['aportes'], 0, ',', '.') ?></td>

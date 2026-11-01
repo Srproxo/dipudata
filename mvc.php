@@ -395,10 +395,12 @@ switch (true) {
         if (!$dest) { foreach ($destinos as $d) { if ($d['tipo'] === 'campaña') { $dest = $d; break; } } }
         $distritos = array_values(array_unique(array_column($dest['agrupaciones'], 'distrito'))); sort($distritos);
         $distSel = in_array($_GET['distrito'] ?? '', $distritos, true) ? (string)$_GET['distrito'] : '';
-        render('aportes', compact('destinos', 'dest', 'distritos', 'distSel'), pagina_meta(
+        $agSel = null;
+        foreach ($dest['agrupaciones'] as $a) { if ($a['slug'] === ($_GET['agrupacion'] ?? null)) { $agSel = $a; break; } }
+        render('aportes', compact('destinos', 'dest', 'distritos', 'distSel', 'agSel'), pagina_meta(
             'Aportes privados a los partidos políticos',
             'Cuánto recibió cada partido y alianza en aportes privados declarados ante la Cámara Nacional Electoral, por campaña y por año.',
-            '/aportes', 'aportes', ['robots' => (isset($_GET['destino']) || $distSel || isset($_GET['todas'])) ? 'noindex, follow' : 'index, follow']
+            '/aportes', 'aportes', ['robots' => (isset($_GET['destino']) || $distSel || isset($_GET['todas']) || $agSel) ? 'noindex, follow' : 'index, follow']
         ));
         break;
 

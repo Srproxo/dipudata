@@ -9,12 +9,18 @@ Criterios:
 - Los montos negativos (devoluciones registradas) se suman tal como figuran y se informan aparte.
 - Filas idénticas (misma fecha, aportante, agrupación, destino, modalidad y monto) se cuentan: la CNE marca como "Anulado"
   los duplicados que detecta y el resto puede ser más de un pago en el día. Se informan en _meta.
-- No se publica quién aportó: solo totales, cantidad de aportes y de aportantes distintos.
+- Los 10 mayores aportantes de cada agrupación: las personas jurídicas con su razón social; las personas humanas sin
+  nombre (decisión de Marcelo, 1/11/2026), con el número correlativo que reemplaza su CUIL.
 
 Uso:  python3 -I scripts/construir_aportes.py
 """
-import collections, csv, gzip, json, re
+import collections, csv, gzip, json, re, unicodedata
 from pathlib import Path
+
+def slug(s: str) -> str:
+    s = unicodedata.normalize("NFKD", s.lower()).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
 
 RAIZ = Path(__file__).resolve().parent.parent
 ORIGEN = RAIZ / "storage" / "oficial" / "cne" / "aportes.csv.gz"
@@ -24,6 +30,8 @@ SALIDA = RAIZ / "storage" / "verificado" / "aportes.json"
 def main() -> int:
     filas = list(csv.DictReader(gzip.open(ORIGEN, "rt", encoding="utf-8")))
     validas = [r for r in filas if r["anulado"] == "False"]
+    for r in validas:  # la fuente escribe a veces "X-Y" y a veces "X - Y" para la misma agrupación
+        r["agrupacion"] = re.sub(r"\s*-\s*", " - ", r["agrupacion"])
     claves = collections.Counter((r["fecha"], r["aportante"], r["agrupacion"], r["destino"], r["modalidad"], r["monto"]) for r in validas)
     dest = {}
     for r in validas:
@@ -36,7 +44,10 @@ def main() -> int:
         d["aportes"] += 1; d["total"] += m; d["aportantes"].add(r["aportante"])
         d["desde"] = min(d["desde"], r["fecha"]); d["hasta"] = max(d["hasta"], r["fecha"])
         if m < 0: d["negativos"] += 1
-        a = d["ag"].setdefault((r["agrupacion"], r["distrito"]), {"aportes": 0, "total": 0.0, "aportantes": set(), "juridicas": 0.0, "especie": 0.0})
+        a = d["ag"].setdefault((r["agrupacion"], r["distrito"]), {"aportes": 0, "total": 0.0, "aportantes": set(), "juridicas": 0.0, "especie": 0.0,
+                                                                   "por": collections.defaultdict(lambda: [0.0, 0, "", "", ""])})
+        p = a["por"][r["aportante"]]
+        p[0] += m; p[1] += 1; p[2] = r["razon_social"]; p[3] = r["tipo"]; p[4] = r["actividad"]
         a["aportes"] += 1; a["total"] += m; a["aportantes"].add(r["aportante"])
         if r["tipo"] == "Jurídica":
             a["juridicas"] += m; d["juridicas"] += m
@@ -45,9 +56,15 @@ def main() -> int:
     destinos = []
     for d in dest.values():
         anios = re.findall(r"\d{4}", d["nombre"])
-        ags = [{"nombre": n, "distrito": dis, "total": round(a["total"], 2), "aportes": a["aportes"], "aportantes": len(a["aportantes"]),
-                "juridicas": round(a["juridicas"], 2), "especie": round(a["especie"], 2)}
-               for (n, dis), a in d["ag"].items()]
+        ags = []
+        for (n, dis), a in d["ag"].items():
+            top = sorted(a["por"].items(), key=lambda kv: (-kv[1][0], int(kv[0])))[:10]
+            ags.append({"nombre": n, "distrito": dis, "slug": slug(n + " " + dis),
+                        "total": round(a["total"], 2), "aportes": a["aportes"], "aportantes": len(a["aportantes"]),
+                        "juridicas": round(a["juridicas"], 2), "especie": round(a["especie"], 2),
+                        "mayores": [[v[2] if v[3] == "Jurídica" else None, v[4] or None, round(v[0], 2), v[1]] for k, v in top]})
+        if len({x["slug"] for x in ags}) != len(ags):
+            raise SystemExit(f"slugs repetidos en {d['nombre']}")
         ags.sort(key=lambda x: (-x["total"], x["nombre"], x["distrito"]))
         destinos.append({"cod": d["cod"], "nombre": d["nombre"], "anio": int(anios[-1]) if anios else 0,
                          "tipo": "institucional" if d["nombre"].startswith("DESENVOLVIMIENTO") else "campaña",
