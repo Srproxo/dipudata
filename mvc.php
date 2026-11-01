@@ -386,6 +386,22 @@ switch (true) {
     case (bool)preg_match('#^/blog(/|$)#', $path):
         ir('/congreso');
 
+    case $path === '/aportes':
+        $destinos = Datos::aportes()['destinos'] ?? [];
+        if (!$destinos) { render_404(); break; }
+        $cod = is_string($_GET['destino'] ?? null) && ctype_digit($_GET['destino']) ? (int)$_GET['destino'] : 0;
+        $dest = null;
+        foreach ($destinos as $d) { if ($d['cod'] === $cod) { $dest = $d; break; } }
+        if (!$dest) { foreach ($destinos as $d) { if ($d['tipo'] === 'campaña') { $dest = $d; break; } } }
+        $distritos = array_values(array_unique(array_column($dest['agrupaciones'], 'distrito'))); sort($distritos);
+        $distSel = in_array($_GET['distrito'] ?? '', $distritos, true) ? (string)$_GET['distrito'] : '';
+        render('aportes', compact('destinos', 'dest', 'distritos', 'distSel'), pagina_meta(
+            'Aportes privados a los partidos políticos',
+            'Cuánto recibió cada partido y alianza en aportes privados declarados ante la Cámara Nacional Electoral, por campaña y por año.',
+            '/aportes', 'aportes', ['robots' => (isset($_GET['destino']) || $distSel || isset($_GET['todas'])) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/match':
         $pesos = []; $consulta = false;
         foreach (temas_match() as $clave => $tema) {
@@ -410,7 +426,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }

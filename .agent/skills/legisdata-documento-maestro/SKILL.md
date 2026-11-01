@@ -33,4 +33,4 @@ manda la regla hasta que Marcelo la cambie por escrito.
   (`match_temas()` en `app/Web.php`), solo con 10 o más proyectos con tema. Resultados con `noindex`.
 - Compara prioridades, no posiciones. Pendiente: coincidencia por votos (Marcelo lo pidió: "% de coincidencia con lo que se vota"),
   que necesita votaciones con tema; hoy solo Diputados 2011-2020 tiene expediente en las actas.
-- Aportes de campaña por partido (CNE): Marcelo lo pidió; electoral.gov.ar estaba bloqueado desde el entorno.
+- HECHO: `/aportes`, aportes privados por agrupación (CNE), solo totales; el CSV lo exporta Marcelo desde el navegador (`filtrar_aportes.py`).

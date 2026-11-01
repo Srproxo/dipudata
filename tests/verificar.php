@@ -228,5 +228,14 @@ $solo = match_temas(['Salud' => 3]); $l0 = $solo[0]['l'] ?? null; $e0 = $l0 ? Da
 ok($mt && !$mtMal && count(temas_match()) === 11 && array_values(temas_match()) === ($em['ejes'] ?? []) && match_temas([]) === [], 'match por temas: coincidencias entre 0 y 1, solo legisladores con 10 proyectos con tema o más (' . count($mt) . ')');
 ok($e0 && ($e0['ejes']['Salud']['proyectos'] ?? 0) > 0, 'match por temas: con solo "Salud" marcado, el primero tiene proyectos de salud');
 
+$ap = Datos::aportes(); $apMal = 0;
+foreach ($ap['destinos'] ?? [] as $d) {
+    if (abs(array_sum(array_column($d['agrupaciones'], 'total')) - $d['total']) > 1 || array_sum(array_column($d['agrupaciones'], 'aportes')) !== $d['aportes']) { $apMal++; }
+    foreach ($d['agrupaciones'] as $a) { if ($a['aportantes'] > $a['aportes'] || $a['aportantes'] < 1) { $apMal++; } }
+}
+ok(count($ap['destinos'] ?? []) >= 20 && $apMal === 0, 'aportes a partidos: los totales por agrupación suman el total de cada destino');
+$crudo = is_file(RAIZ . '/storage/oficial/cne/aportes.csv.gz') ? (string)gzdecode((string)file_get_contents(RAIZ . '/storage/oficial/cne/aportes.csv.gz')) : '';
+ok($crudo !== '' && !preg_match('/\b\d{11}\b/', $crudo) && str_starts_with($crudo, 'fecha,cod_destino,destino,tipo,aportante,'), 'aportes a partidos: el archivo guardado no tiene CUIL/CUIT ni nombres');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
