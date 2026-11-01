@@ -1,0 +1,6232 @@
+[
+ {
+  "nombre": "Maximiliano Abad",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Buenos Aires",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/546.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maximiliano-abad"
+ },
+ {
+  "nombre": "Bartolomé Abdala",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Luis",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/564.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "bartolome-abdala"
+ },
+ {
+  "nombre": "Guillermo César Agüero",
+  "apellido": "Agüero",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3166.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "guillermo-cesar-aguero"
+ },
+ {
+  "nombre": "Hilda Aguirre",
+  "apellido": "Aguirre",
+  "camara": "Diputados",
+  "provincia": "La Rioja",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0972.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "hilda-aguirre"
+ },
+ {
+  "nombre": "Sabrina Ajmechet",
+  "apellido": "Ajmechet",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2916.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sabrina-ajmechet"
+ },
+ {
+  "nombre": "Ernesto Pipi Alí",
+  "apellido": "Alí",
+  "camara": "Diputados",
+  "provincia": "San Luis",
+  "bloque": "Primero San Luis",
+  "bloque_oficial": "PRIMERO SAN LUIS",
+  "mandato": "2023-2027",
+  "jura": "2024-01-31",
+  "inicio": "2024-01-31",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3140.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ernesto-pipi-ali"
+ },
+ {
+  "nombre": "Carlos Alberto Almena",
+  "apellido": "Almena",
+  "camara": "Diputados",
+  "provincia": "San Luis",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3171.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-alberto-almena"
+ },
+ {
+  "nombre": "Lisandro Almirón",
+  "apellido": "Almirón",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3029.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lisandro-almiron"
+ },
+ {
+  "nombre": "Claudio Álvarez",
+  "apellido": "Álvarez",
+  "camara": "Diputados",
+  "provincia": "San Luis",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3178.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "claudio-alvarez"
+ },
+ {
+  "nombre": "Cristian Andino",
+  "apellido": "Andino",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3185.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "cristian-andino"
+ },
+ {
+  "nombre": "Guillermo Andrada",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Catamarca",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/519.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "guillermo-andrada"
+ },
+ {
+  "nombre": "Javier Andrade",
+  "apellido": "Andrade",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3226.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "javier-andrade"
+ },
+ {
+  "nombre": "Barbara Andreussi",
+  "apellido": "Andreussi",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3157.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "barbara-andreussi"
+ },
+ {
+  "nombre": "Alfredo De Angeli",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/438.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alfredo-de-angeli"
+ },
+ {
+  "nombre": "Pablo Ansaloni",
+  "apellido": "Ansaloni",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2354.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-ansaloni"
+ },
+ {
+  "nombre": "Damián Arabia",
+  "apellido": "Arabia",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3032.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "damian-arabia"
+ },
+ {
+  "nombre": "Jorge Neri Araujo Hernández",
+  "apellido": "Araujo Hernández",
+  "camara": "Diputados",
+  "provincia": "Tierra del Fuego",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3047.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-neri-araujo-hernandez"
+ },
+ {
+  "nombre": "Carlos Omar Arce",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Misiones",
+  "bloque": "Innovación Federal",
+  "bloque_oficial": "INNOVACIÓN FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/558.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-omar-arce"
+ },
+ {
+  "nombre": "Martín Ardohain",
+  "apellido": "Ardohain",
+  "camara": "Diputados",
+  "provincia": "La Pampa",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3049.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-ardohain"
+ },
+ {
+  "nombre": "Ivana Arrascaeta",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Luis",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ivana-arrascaeta"
+ },
+ {
+  "nombre": "Lourdes Micaela Arrieta",
+  "apellido": "Arrieta",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3059.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lourdes-micaela-arrieta"
+ },
+ {
+  "nombre": "Alberto Arrúa",
+  "apellido": "Arrúa",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3030.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alberto-arrua"
+ },
+ {
+  "nombre": "Ezequiel Atauche",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Jujuy",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/552.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ezequiel-atauche"
+ },
+ {
+  "nombre": "Martín Aveiro",
+  "apellido": "Aveiro",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3028.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-aveiro"
+ },
+ {
+  "nombre": "Belén Avico",
+  "apellido": "Avico",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3058.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "belen-avico"
+ },
+ {
+  "nombre": "Beatriz Luisa Ávila",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tucumán",
+  "bloque": "Por la Justicia Social",
+  "bloque_oficial": "POR LA JUSTICIA SOCIAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/541.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "beatriz-luisa-avila"
+ },
+ {
+  "nombre": "Fernanda Avila",
+  "apellido": "Avila",
+  "camara": "Diputados",
+  "provincia": "Catamarca",
+  "bloque": "Elijo Catamarca",
+  "bloque_oficial": "ELIJO CATAMARCA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3052.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernanda-avila"
+ },
+ {
+  "nombre": "Jorge Antonio Avila",
+  "apellido": "Avila",
+  "camara": "Diputados",
+  "provincia": "Chubut",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3094.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-antonio-avila"
+ },
+ {
+  "nombre": "Karina Banfi",
+  "apellido": "Banfi",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Adelante Buenos Aires",
+  "bloque_oficial": "ADELANTE BUENOS AIRES",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1447.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "karina-banfi"
+ },
+ {
+  "nombre": "Marcelo Barbur",
+  "apellido": "Barbur",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3223.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marcelo-barbur"
+ },
+ {
+  "nombre": "Luis Eugenio Basterra",
+  "apellido": "Basterra",
+  "camara": "Diputados",
+  "provincia": "Formosa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1240.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luis-eugenio-basterra"
+ },
+ {
+  "nombre": "Atilio Basualdo",
+  "apellido": "Basualdo",
+  "camara": "Diputados",
+  "provincia": "Formosa",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-17",
+  "inicio": "2025-12-17",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3268.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "atilio-basualdo"
+ },
+ {
+  "nombre": "Carolina Basualdo",
+  "apellido": "Basualdo",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3209.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carolina-basualdo"
+ },
+ {
+  "nombre": "Mónica Becerra",
+  "apellido": "Becerra",
+  "camara": "Diputados",
+  "provincia": "San Luis",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3201.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "monica-becerra"
+ },
+ {
+  "nombre": "Vilma Bedia",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Jujuy",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/553.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "vilma-bedia"
+ },
+ {
+  "nombre": "Beltrán Benedit",
+  "apellido": "Benedit",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3111.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "beltran-benedit"
+ },
+ {
+  "nombre": "Bertie Benegas Lynch",
+  "apellido": "Benegas Lynch",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3064.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "bertie-benegas-lynch"
+ },
+ {
+  "nombre": "Daniel Pablo Bensusán",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Pampa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/532.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "daniel-pablo-bensusan"
+ },
+ {
+  "nombre": "Emmanuel Bianchetti",
+  "apellido": "Bianchetti",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3079.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "emmanuel-bianchetti"
+ },
+ {
+  "nombre": "Bernardo Biella",
+  "apellido": "Biella",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3240.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "bernardo-biella"
+ },
+ {
+  "nombre": "Pablo Daniel Blanco",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tierra del Fuego",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/511.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-daniel-blanco"
+ },
+ {
+  "nombre": "Rocío Bonacci",
+  "apellido": "Bonacci",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3088.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "rocio-bonacci"
+ },
+ {
+  "nombre": "Alejandro Bongiovanni",
+  "apellido": "Bongiovanni",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3048.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandro-bongiovanni"
+ },
+ {
+  "nombre": "Gustavo Bordet",
+  "apellido": "Bordet",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3035.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gustavo-bordet"
+ },
+ {
+  "nombre": "Alejandrina Borgatta",
+  "apellido": "Borgatta",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3183.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandrina-borgatta"
+ },
+ {
+  "nombre": "Gabriel Bornoroni",
+  "apellido": "Bornoroni",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3042.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gabriel-bornoroni"
+ },
+ {
+  "nombre": "Myriam Bregman",
+  "apellido": "Bregman",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "PTS-Frente de Izquierda y de Trabajadores Unidad",
+  "bloque_oficial": "PTS-FRENTE DE IZQUIERDA Y DE TRABAJADORES UNIDAD",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1435.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "myriam-teresa-bregman"
+ },
+ {
+  "nombre": "Adrián Brizuela",
+  "apellido": "Brizuela",
+  "camara": "Diputados",
+  "provincia": "Catamarca",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3202.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "adrian-brizuela"
+ },
+ {
+  "nombre": "Juan Fernando Brügge",
+  "apellido": "Brügge",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1577.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-fernando-brugge"
+ },
+ {
+  "nombre": "Eliana Bruno",
+  "apellido": "Bruno",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3190.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eliana-bruno"
+ },
+ {
+  "nombre": "Patricia Bullrich",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/580.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "patricia-bullrich"
+ },
+ {
+  "nombre": "Santiago Cafiero",
+  "apellido": "Cafiero",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2831.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "santiago-cafiero"
+ },
+ {
+  "nombre": "Mariano Campero",
+  "apellido": "Campero",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3044.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mariano-campero"
+ },
+ {
+  "nombre": "Celia Campitelli",
+  "apellido": "Campitelli",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3093.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "celia-campitelli"
+ },
+ {
+  "nombre": "Julieta Marisol Campo",
+  "apellido": "Campo",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3198.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "julieta-marisol-campo"
+ },
+ {
+  "nombre": "Lucía Cámpora",
+  "apellido": "Cámpora",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3174.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lucia-campora"
+ },
+ {
+  "nombre": "Sergio Eduardo Capozzi",
+  "apellido": "Capozzi",
+  "camara": "Diputados",
+  "provincia": "Río Negro",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3080.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-eduardo-capozzi"
+ },
+ {
+  "nombre": "José María Carambia",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Cruz",
+  "bloque": "Por Santa Cruz",
+  "bloque_oficial": "POR SANTA CRUZ",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/567.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-maria-carambia"
+ },
+ {
+  "nombre": "Florencia Carignano",
+  "apellido": "Carignano",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3090.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "florencia-carignano"
+ },
+ {
+  "nombre": "Alejandro Carrancio",
+  "apellido": "Carrancio",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3164.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandro-carrancio"
+ },
+ {
+  "nombre": "Sergio Guillermo Casas",
+  "apellido": "Casas",
+  "camara": "Diputados",
+  "provincia": "La Rioja",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2780.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-guillermo-casas"
+ },
+ {
+  "nombre": "Carlos Daniel Castagneto",
+  "apellido": "Castagneto",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1454.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-daniel-castagneto"
+ },
+ {
+  "nombre": "Giselle Castelnuovo",
+  "apellido": "Castelnuovo",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3225.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "giselle-castelnuovo"
+ },
+ {
+  "nombre": "Jorge Chica",
+  "apellido": "Chica",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3085.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-chica"
+ },
+ {
+  "nombre": "Abel Chiconi",
+  "apellido": "Chiconi",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3254.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "abel-chiconi"
+ },
+ {
+  "nombre": "Gerardo Cipolini",
+  "apellido": "Cipolini",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2803.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gerardo-cipolini"
+ },
+ {
+  "nombre": "Carlos Cisneros",
+  "apellido": "Cisneros",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2765.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-cisneros"
+ },
+ {
+  "nombre": "Mariela Coletta",
+  "apellido": "Coletta",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3034.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mariela-coletta"
+ },
+ {
+  "nombre": "Lucía Corpacci",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Catamarca",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/398.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lucia-corpacci"
+ },
+ {
+  "nombre": "Facundo Correa Llano",
+  "apellido": "Correa Llano",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3072.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "facundo-correa-llano"
+ },
+ {
+  "nombre": "Carmen Lucila Crexell",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Neuquén",
+  "bloque": "Comunidad Neuquén",
+  "bloque_oficial": "COMUNIDAD NEUQUÉN",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/440.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carmen-lucila-crexell"
+ },
+ {
+  "nombre": "Andrea Cristina",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chubut",
+  "bloque": "Cambio Federal",
+  "bloque_oficial": "CAMBIO FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/570.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "andrea-cristina"
+ },
+ {
+  "nombre": "Ricardo Daives",
+  "apellido": "Daives",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2822.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ricardo-daives"
+ },
+ {
+  "nombre": "Fernando de Andreis",
+  "apellido": "de Andreis",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3253.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernando-de-andreis"
+ },
+ {
+  "nombre": "María Graciela de la Rosa",
+  "apellido": "de la Rosa",
+  "camara": "Diputados",
+  "provincia": "Formosa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0732.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-graciela-de-la-rosa"
+ },
+ {
+  "nombre": "Natalia de la Sota",
+  "apellido": "de la Sota",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Defendamos Córdoba",
+  "bloque_oficial": "DEFENDAMOS CÓRDOBA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2928.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "natalia-de-la-sota"
+ },
+ {
+  "nombre": "María Florencia De Sensi",
+  "apellido": "De Sensi",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3101.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-florencia-de-sensi"
+ },
+ {
+  "nombre": "Sonia Rojas Decut",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Misiones",
+  "bloque": "Innovación Federal",
+  "bloque_oficial": "INNOVACIÓN FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/559.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sonia-rojas-decut"
+ },
+ {
+  "nombre": "Nicolás del Caño",
+  "apellido": "del Caño",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PTS-Frente de Izquierda y de Trabajadores Unidad",
+  "bloque_oficial": "PTS-FRENTE DE IZQUIERDA Y DE TRABAJADORES UNIDAD",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1383.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nicolas-del-cano"
+ },
+ {
+  "nombre": "Romina Del Plá",
+  "apellido": "Del Plá",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Partido Obrero en el Frente de Izquierda y de Trabajadores-Unidad",
+  "bloque_oficial": "PARTIDO OBRERO EN EL FRENTE DE IZQUIERDA Y DE TRABAJADORES-UNIDAD",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2373.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "romina-del-pla"
+ },
+ {
+  "nombre": "Fernanda Díaz",
+  "apellido": "Díaz",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3194.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernanda-diaz"
+ },
+ {
+  "nombre": "Romina Diez",
+  "apellido": "Diez",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3041.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "romina-diez"
+ },
+ {
+  "nombre": "Sergio Dolce",
+  "apellido": "Dolce",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3193.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-dolce"
+ },
+ {
+  "nombre": "Martín Doñate",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/505.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-donate"
+ },
+ {
+  "nombre": "María Eugenia Duré",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tierra del Fuego",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/512.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-eugenia-dure"
+ },
+ {
+  "nombre": "Nicolás Emma",
+  "apellido": "Emma",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3024.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nicolas-emma"
+ },
+ {
+  "nombre": "Carlos Mauricio Espínola",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Corrientes",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/461.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-mauricio-espinola"
+ },
+ {
+  "nombre": "Gabriela Beatriz Estévez",
+  "apellido": "Estévez",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1514.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gabriela-estevez"
+ },
+ {
+  "nombre": "Eduardo Falcone",
+  "apellido": "Falcone",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "MID - Movimiento de Integración y Desarrollo",
+  "bloque_oficial": "MID - MOVIMIENTO DE INTEGRACIÓN Y DESARROLLO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3089.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eduardo-falcone"
+ },
+ {
+  "nombre": "Flavio Fama",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Catamarca",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/520.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "flavio-fama"
+ },
+ {
+  "nombre": "Alejandro Fargosi",
+  "apellido": "Fargosi",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3252.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandro-fargosi"
+ },
+ {
+  "nombre": "Pablo Farías",
+  "apellido": "Farías",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3219.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-farias"
+ },
+ {
+  "nombre": "Emir Félix",
+  "apellido": "Félix",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3212.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "emir-felix"
+ },
+ {
+  "nombre": "Elia Marina Fernández",
+  "apellido": "Fernández",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "Independencia",
+  "bloque_oficial": "INDEPENDENCIA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3020.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "elia-marina-fernandez"
+ },
+ {
+  "nombre": "Jorge Fernández",
+  "apellido": "Fernández",
+  "camara": "Diputados",
+  "provincia": "San Luis",
+  "bloque": "Primero San Luis",
+  "bloque_oficial": "PRIMERO SAN LUIS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3208.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-fernandez"
+ },
+ {
+  "nombre": "Daiana Fernández Molero",
+  "apellido": "Fernández Molero",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3057.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "daiana-fernandez-molero"
+ },
+ {
+  "nombre": "Abelardo Ferrán",
+  "apellido": "Ferrán",
+  "camara": "Diputados",
+  "provincia": "La Pampa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3176.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "abelardo-ferran"
+ },
+ {
+  "nombre": "Maximiliano Ferraro",
+  "apellido": "Ferraro",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Coalicion Civica",
+  "bloque_oficial": "COALICION CIVICA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2787.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maximiliano-ferraro"
+ },
+ {
+  "nombre": "Alida Ferreyra",
+  "apellido": "Ferreyra",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2024-01-31",
+  "inicio": "2024-01-31",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3139.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alida-ferreyra"
+ },
+ {
+  "nombre": "Sergio Figliuolo",
+  "apellido": "Figliuolo",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3230.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-figliuolo"
+ },
+ {
+  "nombre": "Alejandro Finocchiaro",
+  "apellido": "Finocchiaro",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2955.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandro-finocchiaro"
+ },
+ {
+  "nombre": "Maria Gabriela Flores",
+  "apellido": "Flores",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3188.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-gabriela-flores"
+ },
+ {
+  "nombre": "Mónica Frade",
+  "apellido": "Frade",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Coalicion Civica",
+  "bloque_oficial": "COALICION CIVICA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2810.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "monica-frade"
+ },
+ {
+  "nombre": "Alicia Fregonese",
+  "apellido": "Fregonese",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2379.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alicia-fregonese"
+ },
+ {
+  "nombre": "Andrea Freites",
+  "apellido": "Freites",
+  "camara": "Diputados",
+  "provincia": "Tierra del Fuego",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3087.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "andrea-freites"
+ },
+ {
+  "nombre": "Maira Frias",
+  "apellido": "Frias",
+  "camara": "Diputados",
+  "provincia": "Chubut",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3215.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maira-frias"
+ },
+ {
+  "nombre": "Natalia Gadano",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Cruz",
+  "bloque": "Por Santa Cruz",
+  "bloque_oficial": "POR SANTA CRUZ",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/568.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "natalia-gadano"
+ },
+ {
+  "nombre": "Eduardo Horacio Galaretto",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Fe",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/573.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eduardo-horacio-galaretto"
+ },
+ {
+  "nombre": "María Virginia Gallardo",
+  "apellido": "Gallardo",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3217.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-virginia-gallardo"
+ },
+ {
+  "nombre": "Sebastián Galmarini",
+  "apellido": "Galmarini",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3199.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sebastian-galmarini"
+ },
+ {
+  "nombre": "Álvaro García",
+  "apellido": "García",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3248.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alvaro-garcia"
+ },
+ {
+  "nombre": "Carlos García",
+  "apellido": "García",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3106.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-garcia"
+ },
+ {
+  "nombre": "María Teresa García",
+  "apellido": "García",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0885.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-teresa-garcia"
+ },
+ {
+  "nombre": "Ignacio García Aresca",
+  "apellido": "García Aresca",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2910.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ignacio-antonio-garcia-aresca"
+ },
+ {
+  "nombre": "José Luis Garrido",
+  "apellido": "Garrido",
+  "camara": "Diputados",
+  "provincia": "Santa Cruz",
+  "bloque": "Por Santa Cruz",
+  "bloque_oficial": "POR SANTA CRUZ",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3099.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-luis-garrido"
+ },
+ {
+  "nombre": "Antonela Giampieri",
+  "apellido": "Giampieri",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3169.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "antonela-giampieri"
+ },
+ {
+  "nombre": "Nora del Valle Giménez",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/507.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nora-del-valle-gimenez"
+ },
+ {
+  "nombre": "Juan Carlos Giordano",
+  "apellido": "Giordano",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Izquierda Socialista - Frente de Izquierda Unidad",
+  "bloque_oficial": "IZQUIERDA SOCIALISTA - FRENTE DE IZQUIERDA UNIDAD",
+  "mandato": "2023-2027",
+  "jura": "2026-08-26",
+  "inicio": "2026-08-26",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2278.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-carlos-giordano"
+ },
+ {
+  "nombre": "Silvana Giudici",
+  "apellido": "Giudici",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3043.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "silvana-giudici"
+ },
+ {
+  "nombre": "Diego A. Giuliano",
+  "apellido": "Giuliano",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3074.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "diego-a-giuliano"
+ },
+ {
+  "nombre": "José Glinski",
+  "apellido": "Glinski",
+  "camara": "Diputados",
+  "provincia": "Chubut",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3053.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-glinski"
+ },
+ {
+  "nombre": "Rosario Goitia",
+  "apellido": "Goitia",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3211.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "rosario-goitia"
+ },
+ {
+  "nombre": "José Gomez",
+  "apellido": "Gomez",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3062.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-gomez"
+ },
+ {
+  "nombre": "Alfredo Gonzales",
+  "apellido": "Gonzales",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3200.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alfredo-gonzales"
+ },
+ {
+  "nombre": "Álvaro González",
+  "apellido": "González",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1466.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alvaro-gonzalez"
+ },
+ {
+  "nombre": "Diógenes Ignacio González",
+  "apellido": "González",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3186.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "diogenes-ignacio-gonzalez"
+ },
+ {
+  "nombre": "Gerardo Gustavo González",
+  "apellido": "González",
+  "camara": "Diputados",
+  "provincia": "Formosa",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3055.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gerardo-gustavo-gonzalez"
+ },
+ {
+  "nombre": "María Teresa Margarita González",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Formosa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/477.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-teresa-margarita-gonzalez"
+ },
+ {
+  "nombre": "María Luisa González Estevarena",
+  "apellido": "González Estevarena",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3170.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-luisa-gonzalez-estevarena"
+ },
+ {
+  "nombre": "Juan Grabois",
+  "apellido": "Grabois",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3192.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-grabois"
+ },
+ {
+  "nombre": "Maura Gruber",
+  "apellido": "Gruber",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3207.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maura-gruber"
+ },
+ {
+  "nombre": "Carlos Gutiérrez",
+  "apellido": "Gutiérrez",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2768.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-mario-gutierrez"
+ },
+ {
+  "nombre": "Ramiro Gutiérrez",
+  "apellido": "Gutiérrez",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2775.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ramiro-gutierrez"
+ },
+ {
+  "nombre": "Jairo Guzmán",
+  "apellido": "Guzmán",
+  "camara": "Diputados",
+  "provincia": "Santa Cruz",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3247.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jairo-guzman"
+ },
+ {
+  "nombre": "Raúl Hadad",
+  "apellido": "Hadad",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3237.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "raul-hadad"
+ },
+ {
+  "nombre": "Itai Hagman",
+  "apellido": "Hagman",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2804.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "itai-hagman"
+ },
+ {
+  "nombre": "Diego Hartfield",
+  "apellido": "Hartfield",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3210.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "diego-hartfield"
+ },
+ {
+  "nombre": "Oscar A. Herrera Ahuad",
+  "apellido": "Herrera Ahuad",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3204.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "oscar-a-herrera-ahuad"
+ },
+ {
+  "nombre": "Patricia Holzman",
+  "apellido": "Holzman",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3232.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "patricia-holzman"
+ },
+ {
+  "nombre": "María Victoria Huala",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Pampa",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/531.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-victoria-huala"
+ },
+ {
+  "nombre": "Gerardo Huesen",
+  "apellido": "Huesen",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3098.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gerardo-huesen"
+ },
+ {
+  "nombre": "Gladys Humenuk",
+  "apellido": "Humenuk",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3165.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gladys-humenuk"
+ },
+ {
+  "nombre": "Ana María Ianni",
+  "apellido": "Ianni",
+  "camara": "Diputados",
+  "provincia": "Santa Cruz",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1272.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ana-maria-ianni"
+ },
+ {
+  "nombre": "María Cecilia Ibañez",
+  "apellido": "Ibañez",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3092.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-cecilia-ibanez"
+ },
+ {
+  "nombre": "Carlos Gustavo Jaime Quiroga",
+  "apellido": "Jaime Quiroga",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "Produccion y Trabajo",
+  "bloque_oficial": "PRODUCCION Y TRABAJO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3243.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-gustavo-jaime-quiroga"
+ },
+ {
+  "nombre": "Luis Alfredo Juez",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Córdoba",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/400.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luis-alfredo-juez"
+ },
+ {
+  "nombre": "Pablo Juliano",
+  "apellido": "Juliano",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3068.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-juliano"
+ },
+ {
+  "nombre": "Mariana Juri",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Mendoza",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/534.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mariana-juri"
+ },
+ {
+  "nombre": "Alicia Kirchner",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Cruz",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/366.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alicia-kirchner"
+ },
+ {
+  "nombre": "Máximo Carlos Kirchner",
+  "apellido": "Kirchner",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1489.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maximo-carlos-kirchner"
+ },
+ {
+  "nombre": "Daniel Kroneberger",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Pampa",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/530.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "daniel-kroneberger"
+ },
+ {
+  "nombre": "Edgardo Darío Kueider",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/502.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "edgardo-dario-kueider"
+ },
+ {
+  "nombre": "Moira Lanesan Sancho",
+  "apellido": "Lanesan Sancho",
+  "camara": "Diputados",
+  "provincia": "Santa Cruz",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3205.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "moira-lanesan-sancho"
+ },
+ {
+  "nombre": "Martín Goerling Lara",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Misiones",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/560.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-goerling-lara"
+ },
+ {
+  "nombre": "Silvina García Larraburu",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/441.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "silvina-garcia-larraburu"
+ },
+ {
+  "nombre": "Andrés Ariel Laumann",
+  "apellido": "Laumann",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3231.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "andres-ariel-laumann"
+ },
+ {
+  "nombre": "Sergio Leavy",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/508.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-leavy"
+ },
+ {
+  "nombre": "Aldo Leiva",
+  "apellido": "Leiva",
+  "camara": "Diputados",
+  "provincia": "Chaco",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2799.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "aldo-leiva"
+ },
+ {
+  "nombre": "Lilia Lemoine",
+  "apellido": "Lemoine",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3084.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lilia-lemoine"
+ },
+ {
+  "nombre": "Andrés Leone",
+  "apellido": "Leone",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3189.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "andres-leone"
+ },
+ {
+  "nombre": "Marcelo Lewandowski",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/538.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marcelo-lewandowski"
+ },
+ {
+  "nombre": "Carlos Alberto Linares",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chubut",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/529.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-alberto-linares"
+ },
+ {
+  "nombre": "Mercedes Llano",
+  "apellido": "Llano",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3070.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mercedes-llano"
+ },
+ {
+  "nombre": "Enrique Lluch",
+  "apellido": "Lluch",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3172.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "enrique-lluch"
+ },
+ {
+  "nombre": "Johanna Sabrina Longo",
+  "apellido": "Longo",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3161.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "johanna-sabrina-longo"
+ },
+ {
+  "nombre": "Cándida Cristina López",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tierra del Fuego",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/574.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "candida-cristina-lopez"
+ },
+ {
+  "nombre": "Jimena López",
+  "apellido": "López",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2851.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jimena-lopez"
+ },
+ {
+  "nombre": "María Florencia López",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Rioja",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/555.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-florencia-lopez"
+ },
+ {
+  "nombre": "Cecilia López Pasquali",
+  "apellido": "López Pasquali",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3168.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "cecilia-lopez-pasquali"
+ },
+ {
+  "nombre": "Carolina Losada",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santa Fe",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/536.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carolina-losada"
+ },
+ {
+  "nombre": "Martín Lousteau",
+  "apellido": "Lousteau",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": null,
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)"
+  },
+  "slug": "martin-lousteau"
+ },
+ {
+  "nombre": "Bruno Olivera Lucero",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Juan",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/563.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "bruno-olivera-lucero"
+ },
+ {
+  "nombre": "Juan Pablo Luque",
+  "apellido": "Luque",
+  "camara": "Diputados",
+  "provincia": "Chubut",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3221.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-pablo-luque"
+ },
+ {
+  "nombre": "Lorena Macyszyn",
+  "apellido": "Macyszyn",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3075.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lorena-macyszyn"
+ },
+ {
+  "nombre": "Marcelo Mango",
+  "apellido": "Mango",
+  "camara": "Diputados",
+  "provincia": "Río Negro",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3206.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marcelo-mango"
+ },
+ {
+  "nombre": "Mario Manrique",
+  "apellido": "Manrique",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3081.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mario-manrique"
+ },
+ {
+  "nombre": "Juan Luis Manzur",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tucumán",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/576.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-luis-manzur"
+ },
+ {
+  "nombre": "Marianela Marclay",
+  "apellido": "Marclay",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3224.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marianela-marclay"
+ },
+ {
+  "nombre": "Varinia Lis Marín",
+  "apellido": "Marín",
+  "camara": "Diputados",
+  "provincia": "La Pampa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2944.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "varinia-lis-marin"
+ },
+ {
+  "nombre": "Juan Marino",
+  "apellido": "Marino",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3007.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-marino"
+ },
+ {
+  "nombre": "Álvaro Martínez",
+  "apellido": "Martínez",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2938.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alvaro-martinez"
+ },
+ {
+  "nombre": "Germán Pedro Martínez",
+  "apellido": "Martínez",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2789.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "german-pedro-martinez"
+ },
+ {
+  "nombre": "Nicolás Massot",
+  "apellido": "Massot",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Encuentro Federal",
+  "bloque_oficial": "ENCUENTRO FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1512.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nicolas-massot"
+ },
+ {
+  "nombre": "Martín Matzkin",
+  "apellido": "Matzkin",
+  "camara": "Diputados",
+  "provincia": "La Pampa",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2026-06-24",
+  "inicio": "2026-06-24",
+  "sexo": "M",
+  "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/User_icon_2.svg/400px-User_icon_2.svg.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-matzkin"
+ },
+ {
+  "nombre": "Karina Maureira",
+  "apellido": "Maureira",
+  "camara": "Diputados",
+  "provincia": "Neuquén",
+  "bloque": "La Neuquinidad",
+  "bloque_oficial": "LA NEUQUINIDAD",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3196.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "karina-maureira"
+ },
+ {
+  "nombre": "José Miguel Ángel Mayans",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Formosa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/294.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-miguel-angel-mayans"
+ },
+ {
+  "nombre": "Nicolás Mayoraz",
+  "apellido": "Mayoraz",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3071.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nicolas-mayoraz"
+ },
+ {
+  "nombre": "Gladys Medina",
+  "apellido": "Medina",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "Independencia",
+  "bloque_oficial": "INDEPENDENCIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2392.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gladys-medina"
+ },
+ {
+  "nombre": "Sandra Mendoza",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Tucumán",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/540.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sandra-mendoza"
+ },
+ {
+  "nombre": "Martín Menem",
+  "apellido": "Menem",
+  "camara": "Diputados",
+  "provincia": "La Rioja",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3107.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-alexis-menem"
+ },
+ {
+  "nombre": "Julieta Metral Asensio",
+  "apellido": "Metral Asensio",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3246.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "julieta-metral-asensio"
+ },
+ {
+  "nombre": "Guillermo Michel",
+  "apellido": "Michel",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3218.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "guillermo-michel"
+ },
+ {
+  "nombre": "Fernanda Miño",
+  "apellido": "Miño",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3220.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernanda-mino"
+ },
+ {
+  "nombre": "Carolina Moisés",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Jujuy",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/554.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carolina-moises"
+ },
+ {
+  "nombre": "Juan Carlos Molina",
+  "apellido": "Molina",
+  "camara": "Diputados",
+  "provincia": "Santa Cruz",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3244.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-carlos-molina"
+ },
+ {
+  "nombre": "Soledad Molinuevo",
+  "apellido": "Molinuevo",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3162.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "soledad-molinuevo"
+ },
+ {
+  "nombre": "Matías Molle",
+  "apellido": "Molle",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3056.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "matias-molle"
+ },
+ {
+  "nombre": "Soledad Mondaca",
+  "apellido": "Mondaca",
+  "camara": "Diputados",
+  "provincia": "Neuquén",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3245.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "soledad-mondaca"
+ },
+ {
+  "nombre": "Fernando Monguillot",
+  "apellido": "Monguillot",
+  "camara": "Diputados",
+  "provincia": "Catamarca",
+  "bloque": "Elijo Catamarca",
+  "bloque_oficial": "ELIJO CATAMARCA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3236.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernando-monguillot"
+ },
+ {
+  "nombre": "Gerardo Montenegro",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santiago del Estero",
+  "bloque": "Frente Cívico por Santiago",
+  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/446.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gerardo-montenegro"
+ },
+ {
+  "nombre": "Guillermo Montenegro",
+  "apellido": "Montenegro",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3095.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "guillermo-montenegro"
+ },
+ {
+  "nombre": "Juan Pablo Montenegro",
+  "apellido": "Montenegro",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3187.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-pablo-montenegro"
+ },
+ {
+  "nombre": "Roxana Monzón",
+  "apellido": "Monzón",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3045.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "roxana-monzon"
+ },
+ {
+  "nombre": "Francisco Morchio",
+  "apellido": "Morchio",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3046.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "francisco-morchio"
+ },
+ {
+  "nombre": "Cecilia Moreau",
+  "apellido": "Moreau",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1463.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "cecilia-moreau"
+ },
+ {
+  "nombre": "Julio Moreno Ovalle",
+  "apellido": "Moreno Ovalle",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3103.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "julio-moreno-ovalle"
+ },
+ {
+  "nombre": "Hugo Antonio Moyano",
+  "apellido": "Moyano",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3241.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "hugo-antonio-moyano"
+ },
+ {
+  "nombre": "Jorge Mukdise",
+  "apellido": "Mukdise",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3191.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-mukdise"
+ },
+ {
+  "nombre": "Gabriela Luciana Muñoz",
+  "apellido": "Muñoz",
+  "camara": "Diputados",
+  "provincia": "Neuquén",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3251.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gabriela-luciana-munoz"
+ },
+ {
+  "nombre": "María Celeste Giménez Navarro",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Juan",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/562.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-celeste-gimenez-navarro"
+ },
+ {
+  "nombre": "Estela Mary Neder",
+  "apellido": "Neder",
+  "camara": "Diputados",
+  "provincia": "Santiago del Estero",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2340.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "estela-mary-neder"
+ },
+ {
+  "nombre": "José Emilio Neder",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santiago del Estero",
+  "bloque": "Frente Cívico por Santiago",
+  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/510.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-emilio-neder"
+ },
+ {
+  "nombre": "Lisandro Nieri",
+  "apellido": "Nieri",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2983.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lisandro-nieri"
+ },
+ {
+  "nombre": "Miriam Niveyro",
+  "apellido": "Niveyro",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3177.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "miriam-niveyro"
+ },
+ {
+  "nombre": "Sebastián Nóblega",
+  "apellido": "Nóblega",
+  "camara": "Diputados",
+  "provincia": "Catamarca",
+  "bloque": "Elijo Catamarca",
+  "bloque_oficial": "ELIJO CATAMARCA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3076.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sebastian-noblega"
+ },
+ {
+  "nombre": "Javier Noguera",
+  "apellido": "Noguera",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "Independencia",
+  "bloque_oficial": "INDEPENDENCIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3197.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "javier-noguera"
+ },
+ {
+  "nombre": "José Nuñez",
+  "apellido": "Nuñez",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1500.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-nunez"
+ },
+ {
+  "nombre": "Joaquín Ojeda",
+  "apellido": "Ojeda",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3203.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "joaquin-ojeda"
+ },
+ {
+  "nombre": "Stella Maris Olalla",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Entre Ríos",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/503.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "stella-maris-olalla"
+ },
+ {
+  "nombre": "Kelly Olmos",
+  "apellido": "Olmos",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3012.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "kelly-olmos"
+ },
+ {
+  "nombre": "Blanca Inés Osuna",
+  "apellido": "Osuna",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0633.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "blanca-ines-osuna"
+ },
+ {
+  "nombre": "Pablo Outes",
+  "apellido": "Outes",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3100.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-outes"
+ },
+ {
+  "nombre": "Marcela Marina Pagano",
+  "apellido": "Pagano",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Coherencia",
+  "bloque_oficial": "COHERENCIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3061.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marcela-marina-pagano"
+ },
+ {
+  "nombre": "Juan Carlos Pagotto",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Rioja",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/557.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-carlos-pagotto"
+ },
+ {
+  "nombre": "Sergio Omar Palazzo",
+  "apellido": "Palazzo",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2904.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-omar-palazzo"
+ },
+ {
+  "nombre": "Claudia María Palladino",
+  "apellido": "Palladino",
+  "camara": "Diputados",
+  "provincia": "Catamarca",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3158.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "claudia-maria-palladino"
+ },
+ {
+  "nombre": "Francisco Paoltroni",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Formosa",
+  "bloque": "Libertad, Trabajo y Progreso",
+  "bloque_oficial": "LIBERTAD, TRABAJO Y PROGRESO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/551.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "francisco-paoltroni"
+ },
+ {
+  "nombre": "Sebastián Pareja",
+  "apellido": "Pareja",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3181.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sebastian-pareja"
+ },
+ {
+  "nombre": "María Graciela Parola",
+  "apellido": "Parola",
+  "camara": "Diputados",
+  "provincia": "Formosa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2784.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-graciela-parola"
+ },
+ {
+  "nombre": "Oscar Parrilli",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Neuquén",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/504.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "oscar-parrilli"
+ },
+ {
+  "nombre": "Marcos Patiño Brizuela",
+  "apellido": "Patiño Brizuela",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3250.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marcos-patino-brizuela"
+ },
+ {
+  "nombre": "Santiago Pauli",
+  "apellido": "Pauli",
+  "camara": "Diputados",
+  "provincia": "Tierra del Fuego",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3105.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "santiago-pauli"
+ },
+ {
+  "nombre": "Esteban Paulón",
+  "apellido": "Paulón",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3108.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "esteban-paulon"
+ },
+ {
+  "nombre": "Gabriela Pedrali",
+  "apellido": "Pedrali",
+  "camara": "Diputados",
+  "provincia": "La Rioja",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2902.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gabriela-pedrali"
+ },
+ {
+  "nombre": "Eduardo de Pedro",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/46.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eduardo-de-pedro"
+ },
+ {
+  "nombre": "Agustín Pellegrini",
+  "apellido": "Pellegrini",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3160.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "agustin-pellegrini"
+ },
+ {
+  "nombre": "Federico Agustín Pelli",
+  "apellido": "Pelli",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3249.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "federico-agustin-pelli"
+ },
+ {
+  "nombre": "José Peluc",
+  "apellido": "Peluc",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3040.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-peluc"
+ },
+ {
+  "nombre": "Paula Andrea Penacca",
+  "apellido": "Penacca",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2821.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "paula-andrea-penacca"
+ },
+ {
+  "nombre": "Luis Petri",
+  "apellido": "Petri",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1385.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luis-petri"
+ },
+ {
+  "nombre": "María Lorena Petrovich",
+  "apellido": "Petrovich",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3228.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-lorena-petrovich"
+ },
+ {
+  "nombre": "Luis Albino Picat",
+  "apellido": "Picat",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3051.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luis-albino-picat"
+ },
+ {
+  "nombre": "Miguel Ángel Pichetto",
+  "apellido": "Pichetto",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Encuentro Federal",
+  "bloque_oficial": "ENCUENTRO FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0022.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "miguel-angel-pichetto"
+ },
+ {
+  "nombre": "Nancy Viviana Picón Martínez",
+  "apellido": "Picón Martínez",
+  "camara": "Diputados",
+  "provincia": "San Juan",
+  "bloque": "Produccion y Trabajo",
+  "bloque_oficial": "PRODUCCION Y TRABAJO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3050.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nancy-picon-martinez"
+ },
+ {
+  "nombre": "Horacio Pietragalla Corti",
+  "apellido": "Pietragalla Corti",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1290.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "horacio-pietragalla-corti"
+ },
+ {
+  "nombre": "Lorena Pokoik",
+  "apellido": "Pokoik",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3082.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lorena-pokoik"
+ },
+ {
+  "nombre": "María Celeste Ponce",
+  "apellido": "Ponce",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3069.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-celeste-ponce"
+ },
+ {
+  "nombre": "Luciana Potenza",
+  "apellido": "Potenza",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3078.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luciana-potenza"
+ },
+ {
+  "nombre": "Agustina Lucrecia Propato",
+  "apellido": "Propato",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2905.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "agustina-lucrecia-propato"
+ },
+ {
+  "nombre": "Manuel Quintar",
+  "apellido": "Quintar",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3097.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "manuel-quintar"
+ },
+ {
+  "nombre": "Ariel Rauschenberger",
+  "apellido": "Rauschenberger",
+  "camara": "Diputados",
+  "provincia": "La Pampa",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2408.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ariel-rauschenberger"
+ },
+ {
+  "nombre": "Valentina Ravera",
+  "apellido": "Ravera",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3159.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "valentina-ravera"
+ },
+ {
+  "nombre": "Verónica Razzini",
+  "apellido": "Razzini",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3110.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "veronica-razzini"
+ },
+ {
+  "nombre": "Mariano Recalde",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/498.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "mariano-recalde"
+ },
+ {
+  "nombre": "Karen Reichardt",
+  "apellido": "Reichardt",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3175.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "karen-reichardt"
+ },
+ {
+  "nombre": "Fernando Rejal",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "La Rioja",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/556.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernando-rejal"
+ },
+ {
+  "nombre": "Gastón Riesco",
+  "apellido": "Riesco",
+  "camara": "Diputados",
+  "provincia": "Neuquén",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3229.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gaston-riesco"
+ },
+ {
+  "nombre": "Cristian A. Ritondo",
+  "apellido": "Ritondo",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": null,
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)"
+  },
+  "slug": "cristian-a-ritondo"
+ },
+ {
+  "nombre": "Carmen Álvarez Rivero",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Córdoba",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/522.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carmen-alvarez-rivero"
+ },
+ {
+  "nombre": "Jorge Rizzotti",
+  "apellido": "Rizzotti",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2754.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-rizzotti"
+ },
+ {
+  "nombre": "Santiago Luis Roberto",
+  "apellido": "Roberto",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3167.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "santiago-luis-roberto"
+ },
+ {
+  "nombre": "Gonzalo Roca",
+  "apellido": "Roca",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3235.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gonzalo-roca"
+ },
+ {
+  "nombre": "Antonio Rodas",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/500.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "antonio-rodas"
+ },
+ {
+  "nombre": "Miguel Rodríguez",
+  "apellido": "Rodríguez",
+  "camara": "Diputados",
+  "provincia": "Tierra del Fuego",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3233.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "miguel-rodriguez"
+ },
+ {
+  "nombre": "Laura Elena Rodríguez Machado",
+  "apellido": "Rodríguez Machado",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1548.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "laura-rodriguez-machado"
+ },
+ {
+  "nombre": "Juan Carlos Romero",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Salta",
+  "bloque": "Cambio Federal",
+  "bloque_oficial": "CAMBIO FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/35.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-carlos-romero"
+ },
+ {
+  "nombre": "Agustín Oscar Rossi",
+  "apellido": "Rossi",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0912.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "agustin-oscar-rossi"
+ },
+ {
+  "nombre": "Yamila Ruíz",
+  "apellido": "Ruíz",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3036.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "yamila-ruiz"
+ },
+ {
+  "nombre": "Anabel Fernández Sagasti",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Mendoza",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/468.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "anabel-fernandez-sagasti"
+ },
+ {
+  "nombre": "Fernando Salino",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Luis",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/566.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "fernando-salino"
+ },
+ {
+  "nombre": "Marina Dorotea Salzmann",
+  "apellido": "Salzmann",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3238.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "marina-dorotea-salzmann"
+ },
+ {
+  "nombre": "Javier Sánchez Wrba",
+  "apellido": "Sánchez Wrba",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3148.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "javier-sanchez-wrba"
+ },
+ {
+  "nombre": "Nancy Sand",
+  "apellido": "Sand",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2817.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nancy-sand"
+ },
+ {
+  "nombre": "Juliana Santillán Juárez Brahim",
+  "apellido": "Santillán Juárez Brahim",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3039.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juliana-santillan-juarez-brahim"
+ },
+ {
+  "nombre": "Santiago Santurio",
+  "apellido": "Santurio",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3065.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "santiago-santurio"
+ },
+ {
+  "nombre": "Silvia Sapag",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Neuquén",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/251.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "silvia-sapag"
+ },
+ {
+  "nombre": "Gisela Scaglia",
+  "apellido": "Scaglia",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1404.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gisela-scaglia"
+ },
+ {
+  "nombre": "Juan Schiaretti",
+  "apellido": "Schiaretti",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2026-02-12",
+  "inicio": "2026-02-12",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0646.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juan-schiaretti"
+ },
+ {
+  "nombre": "Darío Schneider",
+  "apellido": "Schneider",
+  "camara": "Diputados",
+  "provincia": "Entre Ríos",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3195.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "dario-schneider"
+ },
+ {
+  "nombre": "Sabrina Selva",
+  "apellido": "Selva",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3054.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sabrina-selva"
+ },
+ {
+  "nombre": "Adriana Cristina Serquis",
+  "apellido": "Serquis",
+  "camara": "Diputados",
+  "provincia": "Río Negro",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3216.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "adriana-cristina-serquis"
+ },
+ {
+  "nombre": "Vanesa Raquel Siley",
+  "apellido": "Siley",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2421.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "vanesa-raquel-siley"
+ },
+ {
+  "nombre": "Mónica Silva",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Río Negro",
+  "bloque": "Juntos Somos Río Negro",
+  "bloque_oficial": "JUNTOS SOMOS RÍO NEGRO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/572.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "monica-silva"
+ },
+ {
+  "nombre": "Guillermo Snopek",
+  "apellido": "Snopek",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1524.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "guillermo-snopek"
+ },
+ {
+  "nombre": "Laura Soldano",
+  "apellido": "Soldano",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3163.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "laura-soldano"
+ },
+ {
+  "nombre": "Julia Strada",
+  "apellido": "Strada",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3033.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "julia-strada"
+ },
+ {
+  "nombre": "Rodolfo Alejandro Suárez",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Mendoza",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/571.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "rodolfo-alejandro-suarez"
+ },
+ {
+  "nombre": "Jorge Taiana",
+  "apellido": "Taiana",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN0841.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jorge-taiana"
+ },
+ {
+  "nombre": "Rodolfo Tailhade",
+  "apellido": "Tailhade",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1455.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "rodolfo-tailhade"
+ },
+ {
+  "nombre": "Caren Tepp",
+  "apellido": "Tepp",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3222.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "caren-tepp"
+ },
+ {
+  "nombre": "Edith Elizabeth Terenzi",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chubut",
+  "bloque": "Cambio Federal",
+  "bloque_oficial": "CAMBIO FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/528.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "edith-elizabeth-terenzi"
+ },
+ {
+  "nombre": "Paulo Agustín Tita",
+  "apellido": "Tita",
+  "camara": "Diputados",
+  "provincia": "Tierra del Fuego",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3227.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "paulo-agustin-tita"
+ },
+ {
+  "nombre": "Pablo Todero",
+  "apellido": "Todero",
+  "camara": "Diputados",
+  "provincia": "Neuquén",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3083.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-todero"
+ },
+ {
+  "nombre": "Victoria Tolosa Paz",
+  "apellido": "Tolosa Paz",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2896.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "victoria-tolosa-paz"
+ },
+ {
+  "nombre": "Yamile Tomassoni",
+  "apellido": "Tomassoni",
+  "camara": "Diputados",
+  "provincia": "Santa Fe",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3213.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "yamile-tomassoni"
+ },
+ {
+  "nombre": "Alejandra Torres",
+  "apellido": "Torres",
+  "camara": "Diputados",
+  "provincia": "Córdoba",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3109.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "alejandra-torres"
+ },
+ {
+  "nombre": "Rubén Darío Torres",
+  "apellido": "Torres",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3184.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "ruben-dario-torres"
+ },
+ {
+  "nombre": "Aníbal Tortoriello",
+  "apellido": "Tortoriello",
+  "camara": "Diputados",
+  "provincia": "Río Negro",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2924.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "anibal-tortoriello"
+ },
+ {
+  "nombre": "José Federico Tournier",
+  "apellido": "Tournier",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2024-08-14",
+  "inicio": "2024-08-14",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3142.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "jose-federico-tournier"
+ },
+ {
+  "nombre": "César Treffinger",
+  "apellido": "Treffinger",
+  "camara": "Diputados",
+  "provincia": "Chubut",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3102.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "cesar-treffinger"
+ },
+ {
+  "nombre": "Nicolás Alfredo Trotta",
+  "apellido": "Trotta",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3180.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "nicolas-alfredo-trotta"
+ },
+ {
+  "nombre": "Juliana Di Tullio",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/517.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "juliana-di-tullio"
+ },
+ {
+  "nombre": "Sergio Uñac",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "San Juan",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/561.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "sergio-unac"
+ },
+ {
+  "nombre": "Hernán Urien",
+  "apellido": "Urien",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3239.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "hernan-urien"
+ },
+ {
+  "nombre": "Eduardo Félix Valdés",
+  "apellido": "Valdés",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2825.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eduardo-felix-valdes"
+ },
+ {
+  "nombre": "Gabriela Valenzuela",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Corrientes",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/525.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gabriela-valenzuela"
+ },
+ {
+  "nombre": "Daniel Vancsik",
+  "apellido": "Vancsik",
+  "camara": "Diputados",
+  "provincia": "Misiones",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3031.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "daniel-vancsik"
+ },
+ {
+  "nombre": "Patricia Vásquez",
+  "apellido": "Vásquez",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3037.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "patricia-vasquez"
+ },
+ {
+  "nombre": "Yolanda Vega",
+  "apellido": "Vega",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "Argentina Federal",
+  "bloque_oficial": "ARGENTINA FEDERAL",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3038.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "yolanda-vega"
+ },
+ {
+  "nombre": "M. Elena Velázquez",
+  "apellido": "Velázquez",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3173.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "m-elena-velazquez"
+ },
+ {
+  "nombre": "Andrea Fernanda Vera",
+  "apellido": "Vera",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3179.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "andrea-fernanda-vera"
+ },
+ {
+  "nombre": "Pamela Fernanda Verasay",
+  "apellido": "Verasay",
+  "camara": "Diputados",
+  "provincia": "Mendoza",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1555.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pamela-fernanda-verasay"
+ },
+ {
+  "nombre": "María Inés Pilatti Vergara",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/435.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-ines-pilatti-vergara"
+ },
+ {
+  "nombre": "María Alejandra Vigo",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Córdoba",
+  "bloque": "Encuentro Federal",
+  "bloque_oficial": "ENCUENTRO FEDERAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Alejandra_Vigo_2022.jpg/400px-Alejandra_Vigo_2022.jpg",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-alejandra-vigo"
+ },
+ {
+  "nombre": "Lorena Villaverde",
+  "apellido": "Villaverde",
+  "camara": "Diputados",
+  "provincia": "Río Negro",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3091.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "lorena-villaverde"
+ },
+ {
+  "nombre": "Eduardo Vischi",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Corrientes",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/524.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "eduardo-vischi"
+ },
+ {
+  "nombre": "Gino Visconti",
+  "apellido": "Visconti",
+  "camara": "Diputados",
+  "provincia": "La Rioja",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3214.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "gino-visconti"
+ },
+ {
+  "nombre": "Luana Volnovich",
+  "apellido": "Volnovich",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN1456.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "luana-volnovich"
+ },
+ {
+  "nombre": "Hugo Yasky",
+  "apellido": "Yasky",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2429.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "hugo-yasky"
+ },
+ {
+  "nombre": "Pablo Raúl Yedlin",
+  "apellido": "Yedlin",
+  "camara": "Diputados",
+  "provincia": "Tucumán",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2431.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "pablo-raul-yedlin"
+ },
+ {
+  "nombre": "Martín Yeza",
+  "apellido": "Yeza",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "PRO",
+  "bloque_oficial": "PRO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3086.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "martin-yeza"
+ },
+ {
+  "nombre": "Oscar Zago",
+  "apellido": "Zago",
+  "camara": "Diputados",
+  "provincia": "Ciudad Autónoma de Buenos Aires",
+  "bloque": "MID - Movimiento de Integración y Desarrollo",
+  "bloque_oficial": "MID - MOVIMIENTO DE INTEGRACIÓN Y DESARROLLO",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3073.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "oscar-zago"
+ },
+ {
+  "nombre": "Claudia Ledesma Abdala de Zamora",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Santiago del Estero",
+  "bloque": "Frente Cívico por Santiago",
+  "bloque_oficial": "FRENTE CÍVICO POR SANTIAGO",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/509.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "claudia-ledesma-abdala-de-zamora"
+ },
+ {
+  "nombre": "Carlos Raúl Zapata",
+  "apellido": "Zapata",
+  "camara": "Diputados",
+  "provincia": "Salta",
+  "bloque": "La Libertad Avanza",
+  "bloque_oficial": "LA LIBERTAD AVANZA",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2900.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "carlos-raul-zapata"
+ },
+ {
+  "nombre": "Natalia Zaracho",
+  "apellido": "Zaracho",
+  "camara": "Diputados",
+  "provincia": "Buenos Aires",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN2976.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "natalia-zaracho"
+ },
+ {
+  "nombre": "María Inés Zigarán",
+  "apellido": "Zigarán",
+  "camara": "Diputados",
+  "provincia": "Jujuy",
+  "bloque": "Provincias Unidas",
+  "bloque_oficial": "PROVINCIAS UNIDAS",
+  "mandato": "2025-2029",
+  "jura": "2025-12-03",
+  "inicio": "2025-12-10",
+  "sexo": "F",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3182.png",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "maria-ines-zigaran"
+ },
+ {
+  "nombre": "Víctor Zimmermann",
+  "apellido": null,
+  "camara": "Senadores",
+  "provincia": "Chaco",
+  "bloque": "UCR - Unión Cívica Radical",
+  "bloque_oficial": "UCR - UNIÓN CÍVICA RADICAL",
+  "mandato": null,
+  "jura": null,
+  "inicio": null,
+  "sexo": null,
+  "foto": "https://api.argentinadatos.com/static/senado/senadores/501.gif",
+  "verificado": false,
+  "fuentes": {
+   "nombre, provincia, bloque": "Carga previa del proyecto, pendiente de contrastar con senado.gob.ar",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "victor-zimmermann"
+ },
+ {
+  "nombre": "Christian Alejandro Zulli",
+  "apellido": "Zulli",
+  "camara": "Diputados",
+  "provincia": "Corrientes",
+  "bloque": "Unión por la Patria",
+  "bloque_oficial": "UNIÓN POR LA PATRIA",
+  "mandato": "2023-2027",
+  "jura": "2023-12-07",
+  "inicio": "2023-12-10",
+  "sexo": "M",
+  "foto": "https://api.argentinadatos.com/static/diputados/diputados/HCDN3077.jpg",
+  "verificado": true,
+  "fuentes": {
+   "nombre, provincia, bloque, mandato, jura": "Padrón oficial de diputados en ejercicio, HCDN (datos.hcdn.gob.ar)",
+   "foto": "ArgentinaDatos"
+  },
+  "slug": "christian-alejandro-zulli"
+ }
+]
