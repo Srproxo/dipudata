@@ -36,7 +36,9 @@ class Security
 
         if (str_contains(strtolower($contentType), 'text/html')) {
             header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://upload.wikimedia.org https://ui-avatars.com https://dipudata.com data:; connect-src 'self' https://dipudata.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
-            header('Cache-Control: public, max-age=60, stale-while-revalidate=300');
+            header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
+            header('Pragma: no-cache');
+            header('Expires: 0');
         } else {
             header("Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; frame-ancestors 'none'");
             header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
