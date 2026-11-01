@@ -130,8 +130,13 @@ def procesar_recientes(legs, salida, indice):
             es_dip = camara == "Diputados"
             aid = str(a["id"]) if es_dip else f"S{a['actaId']}"
             filas, por_bloque, codigos = [], collections.defaultdict(collections.Counter), collections.Counter()
+            en_blanco = 0
             for v in a["votos"]:
                 nombre = v["diputado"] if es_dip else v["nombre"]
+                if not re.sub(r"[\s,]", "", nombre or ""):
+                    # Fila sin nombre en el registro oficial (una banca vacía): no es un legislador y no se cuenta.
+                    en_blanco += 1
+                    continue
                 ap, _, no = nombre.partition(",")
                 leg = por_sid.get(v.get("sid")) if not es_dip else None
                 leg = leg or por_camara[camara].get((frozenset(norm(ap).split()), (norm(no).split() or [""])[0]))
@@ -153,8 +158,8 @@ def procesar_recientes(legs, salida, indice):
             titulo_ = (a["titulo"] or "").strip() or (a.get("descripcion") or "").strip()
             if not es_dip and a.get("descripcion") and a["descripcion"].strip().lower() not in titulo_.lower():
                 titulo_ = f'{titulo_} ({a["descripcion"].strip().capitalize()})'
-            nota = a.get("nota_origen") if cuadra else ("En esta votación hay un diputado presente que no emitió voto y el detalle lo registra como ausente; "
-                                       "no se sabe cuál, por eso no se cuenta en las estadísticas de cada uno." if es_dip and codigos["U"] - h["u"] == 1
+            nota = (a.get("nota_origen") or ("El registro oficial de esta votación incluye una fila sin nombre (marcada como ausente), que no corresponde a ningún legislador y no se cuenta." if en_blanco else None)) if cuadra else ("En esta votación hay un diputado presente que no emitió voto y el detalle lo registra como ausente; "
+                                       "no se sabe cuál, por eso no se cuenta en las estadísticas de cada uno." if False
                                        else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno.")
             indice.append({
                 "id": aid, "c": "D" if es_dip else "S", "p": int(a["periodo"]) if es_dip else 0, "f": fecha, "h": hora, "s": tipo,
