@@ -189,6 +189,17 @@ final class Datos
         return $r && ($r['votaciones'] ?? 0) > 0 ? $r : null;
     }
 
+    /** Votaciones del Senado (2005 al 9/12/2025) de un senador actual, por mandato. */
+    public static function senadoAnteriores(string $slug): array
+    {
+        return self::leer('votaciones_senado_anteriores')['s:' . $slug] ?? [];
+    }
+
+    public static function senadoAnterioresMeta(): array
+    {
+        return self::leer('votaciones_senado_anteriores')['_meta'] ?? [];
+    }
+
     public static function mandatoActualMeta(): array
     {
         return self::leer('votaciones_mandato_actual')['_meta'] ?? [];
@@ -198,6 +209,29 @@ final class Datos
     public static function participacion(string $slug): ?array
     {
         return self::leer('votaciones_diputados')[$slug] ?? null;
+    }
+
+    /** Totales de proyectos de un legislador actual (o null). */
+    public static function proyectosResumen(string $camara, string $slug): ?array
+    {
+        return self::leer('proyectos/indice')[$camara === 'Senadores' ? 'senado' : 'diputados'][$slug] ?? null;
+    }
+
+    public static function proyectosMeta(): array
+    {
+        return self::leer('proyectos/indice')['_meta'] ?? [];
+    }
+
+    /**
+     * Proyectos de un legislador actual, del más reciente al más antiguo.
+     * Diputados: [expediente, fecha, tipo, título, resultado, fecha del resultado]. Senado: [expediente, tipo, extracto, ruta].
+     */
+    public static function proyectos(string $camara, string $slug): array
+    {
+        if (!preg_match('/^[a-z0-9-]{1,100}$/', $slug)) {
+            return [];
+        }
+        return self::leer('proyectos/' . ($camara === 'Senadores' ? 'senado' : 'diputados') . '/' . $slug);
     }
 
     /** @return list<array> */

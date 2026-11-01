@@ -2,7 +2,7 @@
 <p class="antetitulo">Congreso de la Nación</p>
 <h1 class="titulo">Votaciones nominales.</h1>
 <p class="bajada">Cada vez que una cámara vota con registro nominal, queda anotado cómo votó cada legislador. Acá están las de Diputados y las del Senado, para buscar por tema y abrir una por una.</p>
-<p class="aviso"><strong>Qué períodos hay.</strong> Diputados: de marzo de 2011 a enero de 2020 (datos abiertos de la Cámara) y desde el 10 de diciembre de 2025. Senado: desde el 10 de diciembre de 2025. Entre 2020 y 2025 la Cámara no publica sus votaciones como datos abiertos, y esas no están acá.</p>
+<p class="aviso"><strong>Qué períodos hay.</strong> Diputados: de marzo de 2011 a enero de 2020 (datos abiertos de la Cámara) y desde el 10 de diciembre de 2025. Senado: desde <?= e(fecha_es(\App\Datos::senadoAnterioresMeta()['desde'] ?? '2025-12-10')) ?> hasta hoy, tomadas una por una de senado.gob.ar. Entre 2020 y 2025 la Cámara de Diputados no publica sus votaciones como datos abiertos, y esas no están acá: es un hueco, no una cobertura completa.</p>
 
 <form class="filtros" method="get" action="/votaciones" style="margin-top:1.5rem">
   <label>Buscar en el título
@@ -42,7 +42,7 @@
       <td data-etiqueta="Cámara"><?= ($v['c'] ?? 'D') === 'S' ? 'Senado' : 'Diputados' ?></td>
       <td><a href="/votaciones/<?= e($v['id']) ?>"><?= e(mb_strlen($v['t']) > 170 ? mb_substr($v['t'], 0, 170) . '…' : $v['t']) ?></a>
           <span class="tenue pequeno block"><?= !empty($v['p']) ? 'Período ' . (int)$v['p'] . ' · ' : '' ?><?= !empty($v['s']) ? 'sesión ' . e(strtolower($v['s'])) . ' · ' : '' ?><?= e($v['m']) ?></span></td>
-      <td data-etiqueta="Resultado"><b class="res-<?= $v['res'] === 'AFIRMATIVO' ? 'si' : 'no' ?>"><?= $v['res'] === 'AFIRMATIVO' ? 'Afirmativo' : 'Negativo' ?></b></td>
+      <td data-etiqueta="Resultado"><?= resultado_votacion((string)$v['res']) ?></td>
       <td class="der num" data-etiqueta="A favor"><?= (int)$v['a'] ?></td>
       <td class="der num" data-etiqueta="En contra"><?= (int)$v['n'] ?></td>
       <td class="der num" data-etiqueta="Abstenciones"><?= (int)$v['b'] ?></td>
@@ -58,4 +58,4 @@
   <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>" rel="next">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; endif; ?>
-<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las de Diputados a través de ArgentinaDatos y las del Senado directamente de senado.gob.ar. Cada votación se verifica voto por voto contra sus totales.</p>
+<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las de Diputados a través de ArgentinaDatos. Las del Senado, de todos los años, directamente de senado.gob.ar. Cada votación se verifica voto por voto contra sus totales.</p>

@@ -1,0 +1,823 @@
+{
+ "s:jorge-milton-capitanich": [
+  {
+   "mandato_desde": "2001-12-10",
+   "mandato_hasta": "2007-12-09",
+   "votaciones": 597,
+   "emitio": 572,
+   "ausente": 25,
+   "afirmativos": 571,
+   "negativos": 1,
+   "abstenciones": 0,
+   "voto_pct": 95.8
+  }
+ ],
+ "s:jose-miguel-angel-mayans": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 155,
+   "ausente": 6,
+   "afirmativos": 108,
+   "negativos": 45,
+   "abstenciones": 2,
+   "voto_pct": 96.3
+  },
+  {
+   "mandato_desde": "2017-12-10",
+   "mandato_hasta": "2023-12-09",
+   "votaciones": 379,
+   "emitio": 347,
+   "ausente": 32,
+   "afirmativos": 335,
+   "negativos": 12,
+   "abstenciones": 0,
+   "voto_pct": 91.6
+  },
+  {
+   "mandato_desde": "2011-12-10",
+   "mandato_hasta": "2017-12-09",
+   "votaciones": 764,
+   "emitio": 735,
+   "ausente": 29,
+   "afirmativos": 698,
+   "negativos": 35,
+   "abstenciones": 2,
+   "voto_pct": 96.2
+  },
+  {
+   "mandato_desde": "2005-12-10",
+   "mandato_hasta": "2011-12-09",
+   "votaciones": 1047,
+   "emitio": 854,
+   "ausente": 193,
+   "afirmativos": 820,
+   "negativos": 34,
+   "abstenciones": 0,
+   "voto_pct": 81.6
+  },
+  {
+   "mandato_desde": "2001-12-10",
+   "mandato_hasta": "2005-12-09",
+   "votaciones": 235,
+   "emitio": 148,
+   "ausente": 87,
+   "afirmativos": 145,
+   "negativos": 3,
+   "abstenciones": 0,
+   "voto_pct": 63.0
+  }
+ ],
+ "s:alicia-margarita-antonia-kirchner": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 158,
+   "ausente": 3,
+   "afirmativos": 108,
+   "negativos": 46,
+   "abstenciones": 4,
+   "voto_pct": 98.1
+  },
+  {
+   "mandato_desde": "2005-12-10",
+   "mandato_hasta": "2007-12-03",
+   "votaciones": 359,
+   "emitio": 109,
+   "ausente": 250,
+   "afirmativos": 109,
+   "negativos": 0,
+   "abstenciones": 0,
+   "voto_pct": 30.4
+  }
+ ],
+ "s:luis-alfredo-juez": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 176,
+   "ausente": 49,
+   "afirmativos": 136,
+   "negativos": 40,
+   "abstenciones": 0,
+   "voto_pct": 78.2
+  },
+  {
+   "mandato_desde": "2009-12-10",
+   "mandato_hasta": "2015-12-09",
+   "votaciones": 696,
+   "emitio": 356,
+   "ausente": 340,
+   "afirmativos": 255,
+   "negativos": 94,
+   "abstenciones": 7,
+   "voto_pct": 51.1
+  }
+ ],
+ "s:lucia-benigna-corpacci": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 203,
+   "ausente": 22,
+   "afirmativos": 159,
+   "negativos": 41,
+   "abstenciones": 3,
+   "voto_pct": 90.2
+  },
+  {
+   "mandato_desde": "2009-12-10",
+   "mandato_hasta": "2011-12-09",
+   "votaciones": 209,
+   "emitio": 185,
+   "ausente": 24,
+   "afirmativos": 160,
+   "negativos": 25,
+   "abstenciones": 0,
+   "voto_pct": 88.5
+  }
+ ],
+ "s:gerardo-zamora": [
+  {
+   "mandato_desde": "2013-12-10",
+   "mandato_hasta": "2017-12-09",
+   "votaciones": 473,
+   "emitio": 349,
+   "ausente": 124,
+   "afirmativos": 341,
+   "negativos": 6,
+   "abstenciones": 2,
+   "voto_pct": 73.8
+  }
+ ],
+ "s:carlos-mauricio-espinola": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 214,
+   "ausente": 11,
+   "afirmativos": 183,
+   "negativos": 31,
+   "abstenciones": 0,
+   "voto_pct": 95.1
+  },
+  {
+   "mandato_desde": "2015-12-10",
+   "mandato_hasta": "2021-12-09",
+   "votaciones": 592,
+   "emitio": 476,
+   "ausente": 116,
+   "afirmativos": 443,
+   "negativos": 30,
+   "abstenciones": 3,
+   "voto_pct": 80.4
+  }
+ ],
+ "s:anabel-fernandez-sagasti": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 210,
+   "ausente": 15,
+   "afirmativos": 164,
+   "negativos": 44,
+   "abstenciones": 2,
+   "voto_pct": 93.3
+  },
+  {
+   "mandato_desde": "2015-12-10",
+   "mandato_hasta": "2021-12-09",
+   "votaciones": 592,
+   "emitio": 523,
+   "ausente": 69,
+   "afirmativos": 369,
+   "negativos": 138,
+   "abstenciones": 16,
+   "voto_pct": 88.3
+  }
+ ],
+ "s:maria-teresa-margarita-gonzalez": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 160,
+   "ausente": 1,
+   "afirmativos": 113,
+   "negativos": 45,
+   "abstenciones": 2,
+   "voto_pct": 99.4
+  },
+  {
+   "mandato_desde": "2017-12-10",
+   "mandato_hasta": "2023-12-09",
+   "votaciones": 379,
+   "emitio": 361,
+   "ausente": 18,
+   "afirmativos": 352,
+   "negativos": 9,
+   "abstenciones": 0,
+   "voto_pct": 95.3
+  },
+  {
+   "mandato_desde": "2017-04-25",
+   "mandato_hasta": "2017-12-09",
+   "votaciones": 66,
+   "emitio": 66,
+   "ausente": 0,
+   "afirmativos": 63,
+   "negativos": 2,
+   "abstenciones": 1,
+   "voto_pct": 100.0
+  }
+ ],
+ "s:jose-emilio-neder": [
+  {
+   "mandato_desde": "2019-12-10",
+   "mandato_hasta": "2025-12-09",
+   "votaciones": 403,
+   "emitio": 374,
+   "ausente": 29,
+   "afirmativos": 329,
+   "negativos": 44,
+   "abstenciones": 1,
+   "voto_pct": 92.8
+  }
+ ],
+ "s:mariano-recalde": [
+  {
+   "mandato_desde": "2019-12-10",
+   "mandato_hasta": "2025-12-09",
+   "votaciones": 403,
+   "emitio": 390,
+   "ausente": 13,
+   "afirmativos": 342,
+   "negativos": 47,
+   "abstenciones": 1,
+   "voto_pct": 96.8
+  }
+ ],
+ "s:juliana-di-tullio": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 160,
+   "ausente": 1,
+   "afirmativos": 111,
+   "negativos": 45,
+   "abstenciones": 4,
+   "voto_pct": 99.4
+  },
+  {
+   "mandato_desde": "2021-08-19",
+   "mandato_hasta": "2023-12-09",
+   "votaciones": 96,
+   "emitio": 96,
+   "ausente": 0,
+   "afirmativos": 95,
+   "negativos": 1,
+   "abstenciones": 0,
+   "voto_pct": 100.0
+  }
+ ],
+ "s:sandra-mariela-mendoza": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 206,
+   "ausente": 19,
+   "afirmativos": 165,
+   "negativos": 41,
+   "abstenciones": 0,
+   "voto_pct": 91.6
+  }
+ ],
+ "s:guillermo-eduardo-andrada": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 220,
+   "ausente": 5,
+   "afirmativos": 178,
+   "negativos": 41,
+   "abstenciones": 1,
+   "voto_pct": 97.8
+  }
+ ],
+ "s:edith-elizabeth-terenzi": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 189,
+   "ausente": 36,
+   "afirmativos": 156,
+   "negativos": 32,
+   "abstenciones": 1,
+   "voto_pct": 84.0
+  }
+ ],
+ "s:maria-victoria-huala": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 209,
+   "ausente": 16,
+   "afirmativos": 157,
+   "negativos": 37,
+   "abstenciones": 15,
+   "voto_pct": 92.9
+  }
+ ],
+ "s:beatriz-luisa-avila": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 182,
+   "ausente": 43,
+   "afirmativos": 146,
+   "negativos": 35,
+   "abstenciones": 1,
+   "voto_pct": 80.9
+  }
+ ],
+ "s:marcelo-nestor-lewandowski": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 219,
+   "ausente": 6,
+   "afirmativos": 172,
+   "negativos": 44,
+   "abstenciones": 3,
+   "voto_pct": 97.3
+  }
+ ],
+ "s:daniel-pablo-bensusan": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 206,
+   "ausente": 19,
+   "afirmativos": 161,
+   "negativos": 43,
+   "abstenciones": 2,
+   "voto_pct": 91.6
+  }
+ ],
+ "s:carlos-alberto-linares": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 208,
+   "ausente": 17,
+   "afirmativos": 162,
+   "negativos": 45,
+   "abstenciones": 1,
+   "voto_pct": 92.4
+  }
+ ],
+ "s:carmen-alvarez-rivero": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 198,
+   "ausente": 27,
+   "afirmativos": 120,
+   "negativos": 77,
+   "abstenciones": 1,
+   "voto_pct": 88.0
+  }
+ ],
+ "s:maria-alejandra-vigo": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 185,
+   "ausente": 40,
+   "afirmativos": 152,
+   "negativos": 31,
+   "abstenciones": 2,
+   "voto_pct": 82.2
+  }
+ ],
+ "s:carolina-losada": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 186,
+   "ausente": 39,
+   "afirmativos": 153,
+   "negativos": 30,
+   "abstenciones": 3,
+   "voto_pct": 82.7
+  }
+ ],
+ "s:eduardo-alejandro-vischi": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 214,
+   "ausente": 11,
+   "afirmativos": 175,
+   "negativos": 38,
+   "abstenciones": 1,
+   "voto_pct": 95.1
+  }
+ ],
+ "s:mercedes-gabriela-valenzuela": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 217,
+   "ausente": 8,
+   "afirmativos": 180,
+   "negativos": 36,
+   "abstenciones": 1,
+   "voto_pct": 96.4
+  }
+ ],
+ "s:daniel-ricardo-kroneberger": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 209,
+   "ausente": 16,
+   "afirmativos": 175,
+   "negativos": 33,
+   "abstenciones": 1,
+   "voto_pct": 92.9
+  }
+ ],
+ "s:flavio-sergio-fama": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 195,
+   "ausente": 30,
+   "afirmativos": 160,
+   "negativos": 33,
+   "abstenciones": 2,
+   "voto_pct": 86.7
+  }
+ ],
+ "s:mariana-juri": [
+  {
+   "mandato_desde": "2021-12-10",
+   "mandato_hasta": "",
+   "votaciones": 225,
+   "emitio": 189,
+   "ausente": 36,
+   "afirmativos": 156,
+   "negativos": 31,
+   "abstenciones": 2,
+   "voto_pct": 84.0
+  }
+ ],
+ "s:maria-carolina-moises": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 148,
+   "ausente": 13,
+   "afirmativos": 109,
+   "negativos": 39,
+   "abstenciones": 0,
+   "voto_pct": 91.9
+  }
+ ],
+ "s:enrique-martin-goerling-lara": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 146,
+   "ausente": 15,
+   "afirmativos": 108,
+   "negativos": 34,
+   "abstenciones": 4,
+   "voto_pct": 90.7
+  }
+ ],
+ "s:andrea-marcela-cristina": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 157,
+   "ausente": 4,
+   "afirmativos": 123,
+   "negativos": 30,
+   "abstenciones": 4,
+   "voto_pct": 97.5
+  }
+ ],
+ "s:fernando-aldo-salino": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 160,
+   "ausente": 1,
+   "afirmativos": 113,
+   "negativos": 44,
+   "abstenciones": 3,
+   "voto_pct": 99.4
+  }
+ ],
+ "s:juan-luis-manzur": [
+  {
+   "mandato_desde": "2023-12-09",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 154,
+   "ausente": 7,
+   "afirmativos": 111,
+   "negativos": 43,
+   "abstenciones": 0,
+   "voto_pct": 95.7
+  }
+ ],
+ "s:sergio-mauricio-unac": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 143,
+   "ausente": 18,
+   "afirmativos": 100,
+   "negativos": 43,
+   "abstenciones": 0,
+   "voto_pct": 88.8
+  }
+ ],
+ "s:maria-celeste-gimenez-navarro": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 158,
+   "ausente": 3,
+   "afirmativos": 110,
+   "negativos": 45,
+   "abstenciones": 3,
+   "voto_pct": 98.1
+  }
+ ],
+ "s:maria-florencia-lopez": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 157,
+   "ausente": 4,
+   "afirmativos": 110,
+   "negativos": 43,
+   "abstenciones": 4,
+   "voto_pct": 97.5
+  }
+ ],
+ "s:jesus-fernando-rejal": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 152,
+   "ausente": 9,
+   "afirmativos": 106,
+   "negativos": 44,
+   "abstenciones": 2,
+   "voto_pct": 94.4
+  }
+ ],
+ "s:eduardo-enrique-de-pedro": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 150,
+   "ausente": 11,
+   "afirmativos": 104,
+   "negativos": 45,
+   "abstenciones": 1,
+   "voto_pct": 93.2
+  }
+ ],
+ "s:ezequiel-atauche": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 151,
+   "ausente": 10,
+   "afirmativos": 97,
+   "negativos": 49,
+   "abstenciones": 5,
+   "voto_pct": 93.8
+  }
+ ],
+ "s:vilma-facunda-bedia": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 148,
+   "ausente": 13,
+   "afirmativos": 98,
+   "negativos": 47,
+   "abstenciones": 3,
+   "voto_pct": 91.9
+  }
+ ],
+ "s:francisco-manuel-paoltroni": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 149,
+   "ausente": 12,
+   "afirmativos": 97,
+   "negativos": 50,
+   "abstenciones": 2,
+   "voto_pct": 92.5
+  }
+ ],
+ "s:bruno-antonio-olivera-lucero": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 149,
+   "ausente": 12,
+   "afirmativos": 98,
+   "negativos": 49,
+   "abstenciones": 2,
+   "voto_pct": 92.5
+  }
+ ],
+ "s:bartolome-esteban-abdala": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 144,
+   "ausente": 17,
+   "afirmativos": 95,
+   "negativos": 46,
+   "abstenciones": 3,
+   "voto_pct": 89.4
+  }
+ ],
+ "s:ivanna-marcela-arrascaeta": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 147,
+   "ausente": 14,
+   "afirmativos": 97,
+   "negativos": 49,
+   "abstenciones": 1,
+   "voto_pct": 91.3
+  }
+ ],
+ "s:jose-maria-carambia": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 137,
+   "ausente": 24,
+   "afirmativos": 110,
+   "negativos": 25,
+   "abstenciones": 2,
+   "voto_pct": 85.1
+  }
+ ],
+ "s:natalia-elena-gadano": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 139,
+   "ausente": 22,
+   "afirmativos": 112,
+   "negativos": 25,
+   "abstenciones": 2,
+   "voto_pct": 86.3
+  }
+ ],
+ "s:carlos-omar-arce": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 152,
+   "ausente": 9,
+   "afirmativos": 130,
+   "negativos": 15,
+   "abstenciones": 7,
+   "voto_pct": 94.4
+  }
+ ],
+ "s:sonia-elizabeth-rojas-decut": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 152,
+   "ausente": 9,
+   "afirmativos": 130,
+   "negativos": 15,
+   "abstenciones": 7,
+   "voto_pct": 94.4
+  }
+ ],
+ "s:candida-cristina-lopez": [
+  {
+   "mandato_desde": "2023-12-07",
+   "mandato_hasta": "2025-12-09",
+   "votaciones": 161,
+   "emitio": 158,
+   "ausente": 3,
+   "afirmativos": 109,
+   "negativos": 47,
+   "abstenciones": 2,
+   "voto_pct": 98.1
+  }
+ ],
+ "s:eduardo-horacio-galaretto": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 156,
+   "ausente": 5,
+   "afirmativos": 133,
+   "negativos": 22,
+   "abstenciones": 1,
+   "voto_pct": 96.9
+  }
+ ],
+ "s:maximiliano-abad": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 135,
+   "ausente": 26,
+   "afirmativos": 106,
+   "negativos": 26,
+   "abstenciones": 3,
+   "voto_pct": 83.9
+  }
+ ],
+ "s:rodolfo-alejandro-suarez": [
+  {
+   "mandato_desde": "2023-12-10",
+   "mandato_hasta": "",
+   "votaciones": 161,
+   "emitio": 114,
+   "ausente": 47,
+   "afirmativos": 95,
+   "negativos": 18,
+   "abstenciones": 1,
+   "voto_pct": 70.8
+  }
+ ],
+ "_meta": {
+  "votaciones": 2615,
+  "validas": 2586,
+  "no_cuadran": 4,
+  "sin_detalle": 7,
+  "anuladas": 18,
+  "con_72": 2263,
+  "filas": 186968,
+  "sin_cruzar": 0,
+  "id_contradictorio": 0,
+  "desde": "2005-02-03",
+  "hasta": "2025-11-28"
+ }
+}

@@ -11,9 +11,9 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 
 <dl class="ficha" style="max-width:40rem;margin-top:1.5rem">
   <div><dt>Fecha y hora</dt><dd><?= e(fecha_es($cab['f'])) ?>, <?= e($cab['h']) ?></dd></div>
-  <div><dt>Resultado</dt><dd><b class="res-<?= $cab['res'] === 'AFIRMATIVO' ? 'si' : 'no' ?>"><?= $cab['res'] === 'AFIRMATIVO' ? 'Afirmativo' : 'Negativo' ?></b></dd></div>
+  <div><dt>Resultado</dt><dd><?= resultado_votacion((string)$cab['res']) ?></dd></div>
   <div><dt>Mayoría requerida</dt><dd><?= e($cab['m']) ?></dd></div>
-  <div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div>
+  <?php if (trim((string)$cab['pres']) !== ''): ?><div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div><?php endif; ?>
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>
 </dl>
 
@@ -34,7 +34,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 <?php if (!empty($det['nota'])): ?><p class="aviso"><?= e($det['nota']) ?></p><?php endif; ?>
 
 <section class="seccion" aria-labelledby="por-bloque">
-  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque<?= !empty($det['camara']) ? ' <span class="tenue pequeno">(según el bloque actual de cada legislador)</span>' : '' ?></h2>
+  <h2 id="por-bloque" class="seccion-titulo">Cómo votó cada bloque<?= !empty($det['camara']) && empty($det['historico']) ? ' <span class="tenue pequeno">(según el bloque actual de cada legislador)</span>' : '' ?></h2>
   <div class="tabla-caja"><table class="tabla">
     <thead><tr><th scope="col">Bloque</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">Ausentes</th></tr></thead>
     <tbody>
@@ -50,7 +50,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 </section>
 
 <section class="seccion" aria-labelledby="por-diputado">
-  <h2 id="por-diputado" class="seccion-titulo">Cómo votó cada diputado</h2>
+  <h2 id="por-diputado" class="seccion-titulo">Cómo votó cada <?= $esSen ? 'senador' : 'diputado' ?></h2>
   <p class="conteo">
     Ver:
     <a href="/votaciones/<?= e($cab['id']) ?>"<?= $filtro === '' ? ' aria-current="true"' : '' ?>>todos</a> ·
@@ -59,7 +59,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     <?php endforeach; ?>
   </p>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Diputado</th><th scope="col">Bloque</th><th scope="col">Distrito</th><th scope="col">Voto</th></tr></thead>
+    <thead><tr><th scope="col"><?= $esSen ? 'Senador' : 'Diputado' ?></th><th scope="col">Bloque</th><th scope="col"><?= $esSen ? 'Provincia' : 'Distrito' ?></th><th scope="col">Voto</th></tr></thead>
     <tbody>
     <?php foreach ($votos as $v): ?>
       <tr>
@@ -72,4 +72,4 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
     </tbody>
   </table></div>
 </section>
-<p class="fuente-pie">Fuente: <?= !empty($det['camara']) ? ($esSen ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar).' : 'votaciones nominales publicadas por la Cámara de Diputados, a través de ArgentinaDatos; los totales de las 141 votaciones coinciden con los de datacp.ar.') . ' El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.' ?></p>
+<p class="fuente-pie">Fuente: <?= !empty($det['historico']) ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar/votaciones/detalleActa/' . e(substr($cab['id'], 1)) . '). El bloque es el que figura en el acta. Los senadores en ejercicio se identifican por su ID oficial y el listado histórico del Senado.' : (!empty($det['camara']) ? ($esSen ? 'votaciones nominales publicadas por el Senado de la Nación (senado.gob.ar).' : 'votaciones nominales publicadas por la Cámara de Diputados, a través de ArgentinaDatos; los totales de las 141 votaciones coinciden con los de datacp.ar.') . ' El bloque es el actual de cada legislador; quien ya no ejerce figura sin bloque.' : 'Votaciones nominales, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). El bloque es el que tenía cada diputado al momento de la votación.') ?></p>

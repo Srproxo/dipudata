@@ -18,8 +18,11 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `assets/css/dipudata.css` único estilo (sin CDN ni fuentes externas; CSP sin scripts).
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
-  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py`.
-  Descargas: `bajar_votaciones_senado.py` (senado.gob.ar), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` →
+  `construir_proyectos.py`. Control: `contrastar_senado_datacp.py` (totales del Senado contra datacp.ar).
+  Descargas: `bajar_votaciones_senado.py` (senado.gob.ar; `--historico` baja 2005-2025, reanudable, se puede partir en
+  dos tramos), `bajar_proyectos_senado.py` (buscador oficial del Senado por ID de senador, reanudable),
+  `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
@@ -31,6 +34,13 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Un detalle de votación debe cuadrar con su cabecera. El presidente de la sesión figura como ausente en el detalle: se marca "Preside".
   Algunas filas vienen sin nombre (una coma): no son legisladores. Algunas páginas del Senado duplican la tabla.
 - Los montos de las declaraciones juradas vienen en dos formatos (`155817519-23` y con punto decimal).
+- Los números de acta de senado.gob.ar no siguen el orden de las fechas (1 = 2016, 1000 = 2011). Las páginas viejas casi no
+  traen el ID del senador: se cruza con el listado histórico del Senado (mismo ID, con fechas de cada mandato) por apellido,
+  nombres, provincia y mandato vigente. Si una página trae el ID, manda, y se controla que no contradiga el cruce.
+- "Proyectos parlamentarios" (HCDN) trae un solo autor (primer firmante), por nombre: se cruza con el histórico de diputados
+  (ID HCDN) exigiendo mandato vigente a la fecha. Los cofirmantes no son dato abierto. Los títulos traen entidades HTML.
+- El buscador de proyectos del Senado filtra por ID de senador (autor o coautor) pero no informa el resultado.
+- votaciones.hcdn.gob.ar no responde desde la nube (sí desde Argentina): bajarlo con Control remoto.
 - Las columnas de promulgación y veto del archivo de leyes traen el mismo valor en todas las filas: no usarlas.
 
 ## Flujo de trabajo

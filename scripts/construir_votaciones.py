@@ -109,6 +109,127 @@ def senado_primario():
     return out
 
 
+def nombres_compatibles(a, b):
+    """'MARIA EUGENIA' con 'MARÍA E.': primer nombre igual; los demás, iguales o abreviados."""
+    a, b = a.split(), b.split()
+    if not a or not b or a[0] != b[0]:
+        return False
+    return all(x.startswith(y) or y.startswith(x) for x, y in zip(a[1:], b[1:]))
+
+
+def senado_historico(legs, salida, indice):
+    """
+    Votaciones del Senado entre 2005 y el 9/12/2025 (senado.gob.ar). Cada fila se asigna al ID oficial del senador
+    usando el listado histórico del Senado (mismo ID que la página): apellido igual, nombres compatibles, misma provincia
+    y un mandato vigente el día de la votación; solo si queda una única persona. Devuelve las estadísticas de los
+    senadores actuales agrupadas por mandato.
+    """
+    ruta = next(iter(sorted(glob.glob(str(RAIZ / "storage" / "oficial" / "senado" / "votaciones_2005_a_*.json.gz")))), None)
+    if not ruta:
+        return {}, {}
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _carga import filas as filas_senado
+    mandatos = collections.defaultdict(list)   # id -> [(desde, hasta)]
+    por_apellido = collections.defaultdict(list)  # (apellido, provincia) -> [(id, nombres)]
+    for r in filas_senado("senadores_no_activos"):
+        if not str(r.get("ID", "")).isdigit():
+            continue
+        sid = int(r["ID"])
+        ap, _, no = r["SENADOR"].partition(",")
+        d = (r.get("INICIO PERIODO REAL") or "")[:10]
+        h = (r.get("CESE PERIODO REAL") or "")[:10]
+        h = h if re.match(r"\d{4}-\d{2}-\d{2}", h) else "9999-12-31"
+        if not re.match(r"\d{4}-\d{2}-\d{2}", d):
+            continue
+        mandatos[sid].append((d, h))
+        k = (norm(ap), distrito(r["PROVINCIA"]))
+        if (sid, norm(no)) not in por_apellido[k]:
+            por_apellido[k].append((sid, norm(no)))
+    actuales = {l["id_senado"]: l for l in legs if l["camara"] == "Senadores" and l.get("id_senado")}
+    tam_bloque = collections.Counter()
+    with gzip.open(ruta, "rt", encoding="utf-8") as f:
+        datos = json.load(f)
+    meta = collections.Counter()
+    stats = collections.defaultdict(collections.Counter)  # (sid, desde, hasta) -> contadores
+    for v in datos:
+        aid = f"S{v['id']}"
+        filas, cod, por_bloque, sin, cruzados = [], collections.Counter(), collections.defaultdict(collections.Counter), 0, []
+        for sid_pag, nombre, bloque, prov, voto in v["votos"]:
+            if not re.sub(r"[\s,]", "", nombre):
+                continue
+            ap, _, no = nombre.partition(",")
+            cands = {i for i, n in por_apellido.get((norm(ap), distrito(prov)), []) if nombres_compatibles(norm(no), n)}
+            cands = {i for i in cands if any(a <= v["fecha"] <= b for a, b in mandatos[i])}
+            if sid_pag and any(a <= v["fecha"] <= b for a, b in mandatos.get(sid_pag, [])):
+                # La página trae el ID oficial: manda sobre el nombre, y se controla que no se contradigan.
+                meta["id_contradictorio"] += int(len(cands) == 1 and sid_pag not in cands)
+                sid = sid_pag
+            else:
+                sid = next(iter(cands)) if len(cands) == 1 else None
+            if sid is None:
+                sin += 1
+            cod[voto] += 1
+            fila = [nombre_directo(nombre), bloque, prov.title() if prov.isupper() else prov, voto]
+            if sid in actuales:
+                fila.append("s:" + actuales[sid]["slug"])
+                cruzados.append((sid, voto))
+            filas.append(fila)
+            por_bloque[bloque or "Sin dato"][voto] += 1
+        a, n, b, u = v["afirmativos"], v["negativos"], v["abstenciones"], v["ausentes"]
+        rec = (cod["A"], cod["N"], cod["B"], cod["U"])
+        nota = None
+        if (a, n, b, u) != rec and (a, n, b, u) == tuple(2 * x for x in rec):
+            a, n, b, u = rec
+            nota = "La página del Senado muestra esta votación con los totales duplicados; se usa el recuento voto por voto."
+        cuadra = (a, n, b, u) == rec and len(filas) > 0 and cod["X"] == 0 and not v.get("anulada")
+        if v.get("anulada"):
+            nota = "El Senado registra esta votación como anulada o cancelada; se muestra tal como figura y no se cuenta en las estadísticas de nadie."
+            meta["anuladas"] += 1
+        elif not cuadra:
+            nota = ("La página del Senado no publica el detalle voto por voto de esta votación." if not filas
+                    else "El detalle de esta votación no coincide con sus totales; no se cuenta en las estadísticas de cada uno.")
+            meta["no_cuadran" if filas else "sin_detalle"] += 1
+        else:
+            meta["validas"] += 1
+            meta["con_72"] += int(len(filas) == 72)
+            for sid, voto in cruzados:
+                per = next(p for p in mandatos[sid] if p[0] <= v["fecha"] <= p[1])
+                st = stats[(sid,) + per]
+                if voto in "ANB":
+                    st["emitio"] += 1
+                    st[voto] += 1
+                elif voto == "U":
+                    st["ausente"] += 1
+        meta["filas"] += len(filas)
+        meta["sin_cruzar"] += sin
+        titulo_ = v["titulo"].strip()
+        if v.get("tipo") and v["tipo"].strip().lower() not in titulo_.lower():
+            titulo_ = f'{titulo_} ({v["tipo"].strip().capitalize()})'
+        indice.append({"id": aid, "c": "S", "p": 0, "f": v["fecha"], "h": v["hora"], "s": "nominal", "r": 0, "t": titulo_,
+                       "res": v["resultado"] or "", "m": v.get("mayoria", ""), "a": a, "n": n, "b": b, "u": u, "pres": "",
+                       "tiene_detalle": bool(filas), "e": []})
+        (salida / "actas" / f"{aid}.json").write_text(json.dumps(
+            {"bloques": {k: dict(c) for k, c in sorted(por_bloque.items())}, "votos": filas, "expedientes": [], "nota": nota,
+             "camara": "Senadores", "historico": True}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    resumen = collections.defaultdict(list)
+    for (sid, d, h), st in stats.items():
+        total = st["emitio"] + st["ausente"]
+        if total <= 0:
+            continue
+        resumen["s:" + actuales[sid]["slug"]].append({
+            "mandato_desde": d, "mandato_hasta": h if h != "9999-12-31" else "", "votaciones": total, "emitio": st["emitio"],
+            "ausente": st["ausente"], "afirmativos": st["A"], "negativos": st["N"], "abstenciones": st["B"],
+            "voto_pct": round(st["emitio"] / total * 100, 1)})
+    for k in resumen:
+        resumen[k].sort(key=lambda x: x["mandato_desde"], reverse=True)
+    fechas = [v["fecha"] for v in datos]
+    meta_out = {"votaciones": len(datos), "validas": meta["validas"], "no_cuadran": meta["no_cuadran"], "sin_detalle": meta["sin_detalle"], "anuladas": meta["anuladas"], "con_72": meta["con_72"],
+                "filas": meta["filas"], "sin_cruzar": meta["sin_cruzar"], "id_contradictorio": meta["id_contradictorio"],
+                "desde": min(fechas) if fechas else "", "hasta": max(fechas) if fechas else ""}
+    print(f"Senado 2005-2025: {meta_out}; {len(resumen)} senadores actuales con votaciones anteriores")
+    return dict(resumen), meta_out
+
+
 def procesar_recientes(legs, salida, indice):
     """Votaciones del mandato actual. Devuelve las estadísticas por legislador."""
     por_camara = {}
@@ -301,6 +422,8 @@ def main() -> int:
             "e": [x[0] for x in exps.get(aid, [])], "c": "D",
         })
     actual = procesar_recientes(legs_todos, salida, indice)
+    anteriores, meta_hist = senado_historico(legs_todos, salida, indice)
+    (SAL / "votaciones_senado_anteriores.json").write_text(json.dumps({**anteriores, "_meta": meta_hist}, ensure_ascii=False, indent=1), encoding="utf-8")
     (SAL / "votaciones_mandato_actual.json").write_text(json.dumps(actual, ensure_ascii=False, indent=1), encoding="utf-8")
     indice.sort(key=lambda x: (x["f"], x["h"]), reverse=True)
     (salida / "indice.json").write_text(json.dumps(indice, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

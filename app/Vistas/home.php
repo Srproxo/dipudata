@@ -7,8 +7,42 @@ $nSen = count(Datos::legisladores('Senadores'));
 $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== '';
 ?>
 <p class="antetitulo">Congreso de la Nación Argentina</p>
-<h1 class="titulo">Quién ocupa cada banca.</h1>
-<p class="bajada">Los <?= $nDip ?> diputados y <?= $nSen ?> senadores en ejercicio, con su bloque, su provincia y sus fechas de mandato. Todo sale de registros oficiales y cada dato indica su fuente.</p>
+<h1 class="titulo">Quién ocupa cada banca y qué hace con ella.</h1>
+<p class="bajada">Los <?= $nDip ?> diputados y <?= $nSen ?> senadores en ejercicio: cómo votan, qué proyectos presentan y qué declaran. Todo sale de registros oficiales y cada dato indica su fuente.</p>
+
+<form class="buscador-portada" method="get" action="/#directorio" role="search">
+  <label for="q-portada">Buscá a un legislador por su nombre</label>
+  <div><input id="q-portada" type="search" name="q" value="<?= e($q) ?>" maxlength="80" placeholder="Apellido o nombre" autocomplete="off"><button class="boton" type="submit">Buscar</button></div>
+</form>
+
+<?php if (!$filtrado):
+  $ultimas = array_slice(Datos::votaciones(), 0, 4);
+  $atajos = [
+    ['/votaciones', 'Cómo votó cada uno', 'Las votaciones nominales de ambas cámaras, una por una, con el voto de cada legislador.'],
+    ['/congreso/provincias', 'Los de tu provincia', 'Diputados y senadores de cada provincia y de la Ciudad de Buenos Aires.'],
+    ['/remuneraciones', 'Cuánto cobra un legislador', 'Dieta, gastos de representación y descuentos que liquida la Cámara.'],
+    ['/leyes', 'Leyes sancionadas', 'Más de mil leyes con su sumario y sus fechas.'],
+    ['/congreso/bloques', 'Bloques', 'Cuántas bancas tiene cada bloque en cada cámara.'],
+    ['/congreso', 'Cómo funciona el Congreso', 'Qué hace cada cámara y cómo se hace una ley, explicado simple.'],
+  ];
+?>
+<nav class="atajos" aria-label="Lo más buscado">
+  <?php foreach ($atajos as [$href, $t, $d]): ?>
+    <a href="<?= e($href) ?>"><b><?= e($t) ?></b><span><?= e($d) ?></span></a>
+  <?php endforeach; ?>
+</nav>
+
+<?php if ($ultimas): ?>
+<section class="seccion" aria-labelledby="ultimas">
+  <h2 id="ultimas" class="seccion-titulo">Últimas votaciones</h2>
+  <ul class="lista-proyectos">
+    <?php foreach ($ultimas as $v): ?>
+      <li><span class="tenue pequeno"><?= ($v['c'] ?? 'D') === 'S' ? 'Senado' : 'Diputados' ?> · <?= e(fecha_es($v['f'])) ?> · </span><?= resultado_votacion((string)$v['res']) ?> <span class="tenue pequeno num">(<?= (int)$v['a'] ?> a <?= (int)$v['n'] ?>)</span><br><a href="/votaciones/<?= e($v['id']) ?>"><?= e(mb_strimwidth($v['t'], 0, 180, '…')) ?></a></li>
+    <?php endforeach; ?>
+  </ul>
+  <p><a href="/votaciones">Ver todas las votaciones</a></p>
+</section>
+<?php endif; endif; ?>
 
 <div class="dos-col composicion">
 <?php foreach ($comp as $camara => $bloques): $total = array_sum(array_column($bloques, 'cantidad')); ?>

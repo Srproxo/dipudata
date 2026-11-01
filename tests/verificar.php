@@ -122,10 +122,65 @@ ok($malVj === 0, 'en los pasajes, aéreos + terrestres = total');
 $rem = Datos::remuneraciones();
 ok(!empty($rem['remuneraciones'][0]['importe']) && $rem['remuneraciones'][0]['importe'] > 1000000, 'la dieta publicada es un importe razonable');
 
-$sv = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S');
+$sv = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S' && $v['f'] >= '2025-12-10');
 $malSv = 0;
 foreach ($sv as $v) { $d = Datos::votacion($v['id']); if (count($d['votos'] ?? []) !== 72) { $malSv++; } }
-ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado tienen los 72 votos de los senadores (' . count($sv) . ')');
+ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado del mandato actual tienen los 72 votos de los senadores (' . count($sv) . ')');
+
+// Senado 2005 - 9/12/2025 (senado.gob.ar)
+$sh = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S' && $v['f'] < '2025-12-10');
+$hm = Datos::senadoAnterioresMeta();
+ok(count($sh) === ($hm['votaciones'] ?? -1) && count($sh) > 300, 'las votaciones anteriores del Senado están todas en el índice (' . count($sh) . ')');
+ok(($hm['desde'] ?? '9') >= '2005-01-01' && ($hm['hasta'] ?? '9') < '2025-12-10', 'las votaciones anteriores del Senado van de 2005 al 9/12/2025');
+$malSh = 0; $mas72 = 0; $sinNota = 0;
+foreach ($sh as $v) {
+    $d = Datos::votacion($v['id']);
+    if (count($d['votos'] ?? []) > 72) { $mas72++; }
+    if (empty($d['nota']) || str_starts_with((string)$d['nota'], 'La página del Senado muestra')) {
+        $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0];
+        foreach ($d['votos'] as $x) { $c[$x[3]] = ($c[$x[3]] ?? 0) + 1; }
+        if ([$c['A'], $c['N'], $c['B'], $c['U']] !== [$v['a'], $v['n'], $v['b'], $v['u']] || !$d['votos']) { $malSh++; }
+    }
+}
+ok($mas72 === 0, 'ninguna votación del Senado tiene más de 72 senadores (las páginas que duplican la tabla se depuran)');
+ok($malSh === 0, 'cada votación anterior del Senado que se cuenta coincide voto por voto con su cabecera');
+ok(($hm['id_contradictorio'] ?? 1) === 0, 'el ID que trae la página del Senado nunca contradice el cruce por nombre, provincia y mandato');
+$malAnt = 0; $nAnt = 0;
+foreach ($sen as $l) {
+    foreach (Datos::senadoAnteriores($l['slug']) as $m) {
+        $nAnt++;
+        if ($m['emitio'] + $m['ausente'] !== $m['votaciones'] || $m['afirmativos'] + $m['negativos'] + $m['abstenciones'] !== $m['emitio']
+            || $m['voto_pct'] < 0 || $m['voto_pct'] > 100 || $m['mandato_desde'] > ($m['mandato_hasta'] ?: '9999')) { $malAnt++; }
+    }
+}
+ok($nAnt > 0 && $malAnt === 0, 'las estadísticas por mandato anterior de los senadores son coherentes (' . $nAnt . ' mandatos)');
+$ct = json_decode((string)@file_get_contents(__DIR__ . '/../storage/verificado/contraste_senado_datacp.json'), true);
+ok(is_array($ct) && $ct['comparadas'] > 300 && count($ct['distintas']) <= $ct['comparadas'] * 0.01, 'los totales del Senado coinciden con datacp.ar en al menos el 99% de las votaciones comparadas');
+
+// Proyectos
+$pm = Datos::proyectosMeta();
+$cr = $pm['cruce_diputados'] ?? [];
+ok(($cr['proyectos'] ?? 0) > 100000 && ($cr['cruzados'] ?? 0) / max(1, $cr['proyectos']) > 0.9, 'más del 90% de los proyectos de Diputados se asignan a un diputado por su ID');
+ok(empty($cr['nombre_ambiguo']), 'ningún proyecto se asigna cuando el nombre corresponde a más de un diputado');
+$conPr = 0; $malPr = 0; $fueraMandato = 0;
+foreach ($dip as $l) {
+    $r = Datos::proyectosResumen('Diputados', $l['slug']);
+    if (!$r) { continue; }
+    $conPr++;
+    $ps = Datos::proyectos('Diputados', $l['slug']);
+    if (count($ps) !== $r['total'] || array_sum($r['resultados']) > $r['total']) { $malPr++; }
+    $tray = $l['trayectoria'] ?? [];
+    foreach ($ps as $p) {
+        $ok = false;
+        foreach ($tray as $t) { if ($p[1] >= $t['inicio'] && $p[1] <= ($t['cese'] ?: $t['fin'])) { $ok = true; break; } }
+        if (!$ok) { $fueraMandato++; }
+        if (preg_match('/&[a-z]+;|&#\d+;/', $p[3])) { $malPr++; }
+    }
+}
+ok($conPr > 200 && $malPr === 0, 'los proyectos de cada diputado cuadran con su resumen y no traen entidades HTML (' . $conPr . ' diputados)');
+$senPr = array_filter($sen, fn($l) => Datos::proyectosResumen('Senadores', $l['slug']) !== null);
+ok($fueraMandato === 0, 'todo proyecto asignado a un diputado se publicó mientras ejercía su mandato (' . $fueraMandato . ' fuera)');
+ok(count($senPr) >= 60, 'hay proyectos del buscador oficial para los senadores (' . count($senPr) . ')');
 ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'] ?? 0) === 183 && empty($meta['excluidas']), 'las 141 votaciones de Diputados y las 183 del Senado son válidas y ninguna quedó excluida');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";

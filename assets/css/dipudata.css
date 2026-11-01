@@ -199,3 +199,32 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .pestanas { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--tinta); margin-top: 1.5rem; }
 .pestanas a { padding: .65rem 1rem; font-size: .9375rem; color: var(--tinta-2); text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -1px; min-height: 44px; display: inline-flex; align-items: center; }
 .pestanas a[aria-current="page"] { color: var(--tinta); font-weight: 700; border-bottom-color: var(--acento); }
+
+/* Proyectos en el perfil */
+.seccion-sub { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+.lista-proyectos { list-style: none; margin: 0 0 1rem; padding: 0; }
+.lista-proyectos li { padding: .7rem 0; border-bottom: 1px solid var(--linea); line-height: 1.45; }
+
+/* Resumen al inicio del perfil */
+.resumen { margin: 1.5rem 0 2rem; padding: 1.1rem 1.25rem; background: var(--acento-claro); border-left: 3px solid var(--acento); }
+.resumen-titulo { font-family: var(--serif); font-size: 1.15rem; margin: 0 0 .6rem; }
+.resumen ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .55rem; line-height: 1.5; }
+.saltos { display: flex; flex-wrap: wrap; gap: .4rem .5rem; margin-top: 1rem; }
+.saltos a { font-size: .875rem; padding: .35rem .7rem; background: var(--papel); border: 1px solid var(--linea-fuerte); text-decoration: none; color: var(--tinta); min-height: 32px; display: inline-flex; align-items: center; }
+.saltos a:hover { border-color: var(--acento); color: var(--acento); }
+
+/* Portada */
+.buscador-portada { margin: 1.5rem 0 1.75rem; max-width: 40rem; }
+.buscador-portada label { display: block; font-weight: 600; font-size: .9375rem; margin-bottom: .4rem; }
+.buscador-portada div { display: flex; gap: .5rem; }
+.buscador-portada input { flex: 1; min-width: 0; min-height: 48px; padding: .5rem .8rem; border: 1px solid var(--linea-fuerte); font-size: 1rem; }
+.atajos { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); margin: 0 0 2rem; }
+.atajos a { display: grid; gap: .25rem; padding: .9rem 1rem; border: 1px solid var(--linea); background: var(--fondo); text-decoration: none; color: var(--tinta); }
+.atajos a:hover { border-color: var(--acento); }
+.atajos b { color: var(--acento); }
+.atajos span { font-size: .875rem; color: var(--tinta-2); line-height: 1.4; }
+@media (max-width: 30rem) {
+  .atajos { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .atajos a { padding: .7rem .75rem; }
+  .atajos span { display: none; }
+}

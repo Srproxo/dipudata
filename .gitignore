@@ -9,3 +9,5 @@ api/credentials.local.php
 __pycache__/
 *.pyc
 informes_privados/
+storage/oficial/senado/*.parcial*.jsonl
+storage/oficial/senado/proyectos_senado.parcial.jsonl

@@ -76,6 +76,27 @@ switch (true) {
         ));
         break;
 
+    case (bool)preg_match("#^/(diputado|senador)/({$S})/proyectos$#", $path, $m):
+        $camara = $m[1] === 'senador' ? 'Senadores' : 'Diputados';
+        $l = Datos::legislador($camara, $m[2]);
+        $resumen = $l ? Datos::proyectosResumen($camara, $l['slug']) : null;
+        if (!$l || !$resumen) { render_404(); break; }
+        $items = Datos::proyectos($camara, $l['slug']);
+        $res = in_array($_GET['resultado'] ?? '', ['SANCIONADO', 'MEDIA SANCION', 'APROBADO', 'RECHAZADO', 'RETIRADO', 'ninguno'], true) && $camara === 'Diputados' ? (string)$_GET['resultado'] : '';
+        if ($res) {
+            $items = array_values(array_filter($items, static fn($p) => $p[4] === ($res === 'ninguno' ? '' : $res)));
+        }
+        $total = count($items);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $items = array_slice($items, ($pagina - 1) * 50, 50);
+        render('proyectos', compact('l', 'items', 'total', 'pagina', 'paginas', 'res', 'resumen'), pagina_meta(
+            'Proyectos de ' . $l['nombre'],
+            'Proyectos parlamentarios presentados por ' . $l['nombre'] . ' y qué pasó con cada uno, según los registros oficiales.',
+            Datos::urlLegislador($l) . '/proyectos', 'legisladores', ['robots' => ($res || $pagina > 1) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case (bool)preg_match('#^/perfil/([^/]+)$#', $path, $m):
         foreach (Datos::legisladores() as $l) {
             if ($l['slug'] === strtolower(trim($m[1]))) { ir(Datos::urlLegislador($l)); }
@@ -321,22 +342,20 @@ switch (true) {
         $filtrado = $anio || $res || $cam || $q !== '' || $pagina > 1;
         render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas', 'cam'), pagina_meta(
             'Votaciones nominales del Congreso argentino',
-            'Votaciones nominales de Diputados (2011 a 2020 y desde diciembre de 2025) y del Senado (desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
+            'Votaciones nominales de Diputados (2011 a 2020 y desde diciembre de 2025) y del Senado (desde 2005), con su resultado y cómo votó cada legislador.',
             '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
         ));
         break;
 
     case (bool)preg_match('#^/votaciones/(S?\d{1,6})$#', $path, $m):
         $cab = null;
-        foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
-        foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
         foreach (Datos::votaciones() as $v) { if ($v['id'] === $m[1]) { $cab = $v; break; } }
         $det = $cab ? Datos::votacion($m[1]) : null;
         if (!$cab || !$det) { render_404(); break; }
         $filtro = in_array($_GET['voto'] ?? '', ['A', 'N', 'B', 'U'], true) ? (string)$_GET['voto'] : '';
         render('votacion', compact('cab', 'det', 'filtro'), pagina_meta(
             'Votación del ' . fecha_es($cab['f']) . ': ' . mb_substr($cab['t'], 0, 80),
-            $cab['t'] . ' Resultado: ' . strtolower($cab['res']) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada diputado.',
+            $cab['t'] . ' Resultado: ' . strtolower(strip_tags(resultado_votacion((string)$cab['res']))) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada ' . (($cab['c'] ?? 'D') === 'S' ? 'senador' : 'diputado') . '.',
             '/votaciones/' . $m[1], 'votaciones', ['robots' => $filtro ? 'noindex, follow' : 'index, follow']
         ));
         break;
@@ -365,7 +384,12 @@ switch (true) {
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
-        foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }
+        foreach (Datos::legisladores() as $l) {
+            $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7'];
+            if (Datos::proyectosResumen($l['camara'], $l['slug'])) { $urls[] = [Datos::urlLegislador($l) . '/proyectos', 'weekly', '0.5']; }
+        }
+        foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
+        foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
         $hoy = (string)(Datos::informe()['generado'] ?? date('Y-m-d'));
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
         foreach ($urls as [$u, $f, $pr]) {

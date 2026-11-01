@@ -154,3 +154,21 @@ function etiqueta_voto(string $c): string
 {
     return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside', 'E' => 'No emite voto', 'X' => 'Sin dato'][$c] ?? $c;
 }
+
+function etiqueta_resultado(string $r): string
+{
+    return ['SANCIONADO' => 'Sancionado', 'MEDIA SANCION' => 'Media sanción', 'APROBADO' => 'Aprobado', 'RECHAZADO' => 'Rechazado',
+        'RETIRADO' => 'Retirado', '' => 'Sin resultado registrado'][$r] ?? $r;
+}
+
+/** Resultado de una votación: etiqueta y clase de color. */
+function resultado_votacion(string $r): string
+{
+    [$clase, $t] = match ($r) {
+        'AFIRMATIVO' => ['si', 'Afirmativo'],
+        'NEGATIVO' => ['no', 'Negativo'],
+        'EMPATE' => ['neutro', 'Empate'],
+        default => ['neutro', 'Sin resultado publicado'],
+    };
+    return '<b class="res-' . $clase . '">' . $t . '</b>';
+}

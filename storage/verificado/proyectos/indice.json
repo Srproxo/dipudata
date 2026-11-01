@@ -1,0 +1,2240 @@
+{
+ "diputados": {
+  "agustin-oscar-rossi": {
+   "total": 104,
+   "leyes": 33,
+   "resultados": {
+    "APROBADO": 13,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2010-02-19",
+   "hasta": "2026-10-06"
+  },
+  "moira-lanesan-sancho": {
+   "total": 29,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-03-20",
+   "hasta": "2026-10-06"
+  },
+  "horacio-pietragalla-corti": {
+   "total": 107,
+   "leyes": 39,
+   "resultados": {
+    "APROBADO": 13,
+    "MEDIA SANCION": 8,
+    "RETIRADO": 1
+   },
+   "desde": "2012-05-03",
+   "hasta": "2026-10-06"
+  },
+  "martin-aveiro": {
+   "total": 109,
+   "leyes": 45,
+   "resultados": {
+    "APROBADO": 8
+   },
+   "desde": "2024-03-14",
+   "hasta": "2026-10-06"
+  },
+  "blanca-ines-osuna": {
+   "total": 225,
+   "leyes": 74,
+   "resultados": {
+    "APROBADO": 17,
+    "MEDIA SANCION": 3
+   },
+   "desde": "2020-04-15",
+   "hasta": "2026-10-06"
+  },
+  "fernanda-diaz": {
+   "total": 58,
+   "leyes": 4,
+   "resultados": {
+    "APROBADO": 10
+   },
+   "desde": "2026-03-11",
+   "hasta": "2026-10-06"
+  },
+  "juan-pablo-luque": {
+   "total": 24,
+   "leyes": 6,
+   "resultados": {},
+   "desde": "2026-01-16",
+   "hasta": "2026-10-06"
+  },
+  "marcelo-mango": {
+   "total": 49,
+   "leyes": 16,
+   "resultados": {},
+   "desde": "2025-12-26",
+   "hasta": "2026-10-06"
+  },
+  "julia-strada": {
+   "total": 60,
+   "leyes": 22,
+   "resultados": {},
+   "desde": "2024-03-21",
+   "hasta": "2026-10-06"
+  },
+  "ariel-rauschenberger": {
+   "total": 162,
+   "leyes": 58,
+   "resultados": {
+    "APROBADO": 12,
+    "MEDIA SANCION": 4
+   },
+   "desde": "2018-04-04",
+   "hasta": "2026-10-06"
+  },
+  "santiago-luis-roberto": {
+   "total": 29,
+   "leyes": 5,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2026-03-02",
+   "hasta": "2026-10-06"
+  },
+  "yamila-ruiz": {
+   "total": 379,
+   "leyes": 28,
+   "resultados": {
+    "APROBADO": 85
+   },
+   "desde": "2024-03-19",
+   "hasta": "2026-10-06"
+  },
+  "carlos-daniel-castagneto": {
+   "total": 189,
+   "leyes": 106,
+   "resultados": {
+    "APROBADO": 9,
+    "MEDIA SANCION": 2
+   },
+   "desde": "2016-03-31",
+   "hasta": "2026-10-06"
+  },
+  "nicolas-alfredo-trotta": {
+   "total": 40,
+   "leyes": 9,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2025-12-15",
+   "hasta": "2026-10-05"
+  },
+  "maria-virginia-gallardo": {
+   "total": 7,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-01-02",
+   "hasta": "2026-10-05"
+  },
+  "paulo-agustin-tita": {
+   "total": 21,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-01-26",
+   "hasta": "2026-10-05"
+  },
+  "maximiliano-ferraro": {
+   "total": 251,
+   "leyes": 146,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2020-01-03",
+   "hasta": "2026-10-05"
+  },
+  "bernardo-biella": {
+   "total": 30,
+   "leyes": 11,
+   "resultados": {},
+   "desde": "2026-01-26",
+   "hasta": "2026-10-05"
+  },
+  "esteban-paulon": {
+   "total": 530,
+   "leyes": 124,
+   "resultados": {
+    "APROBADO": 15
+   },
+   "desde": "2023-12-19",
+   "hasta": "2026-10-05"
+  },
+  "mercedes-llano": {
+   "total": 27,
+   "leyes": 16,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-03-14",
+   "hasta": "2026-10-05"
+  },
+  "florencia-carignano": {
+   "total": 69,
+   "leyes": 13,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-01-17",
+   "hasta": "2026-10-05"
+  },
+  "cristian-andino": {
+   "total": 91,
+   "leyes": 39,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2025-12-23",
+   "hasta": "2026-10-02"
+  },
+  "guillermo-cesar-aguero": {
+   "total": 52,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2026-02-05",
+   "hasta": "2026-10-02"
+  },
+  "juan-carlos-molina": {
+   "total": 44,
+   "leyes": 17,
+   "resultados": {},
+   "desde": "2025-12-16",
+   "hasta": "2026-10-02"
+  },
+  "myriam-teresa-bregman": {
+   "total": 170,
+   "leyes": 59,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2015-07-06",
+   "hasta": "2026-10-02"
+  },
+  "daniel-vancsik": {
+   "total": 55,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 11
+   },
+   "desde": "2023-12-11",
+   "hasta": "2026-10-02"
+  },
+  "alicia-fregonese": {
+   "total": 63,
+   "leyes": 20,
+   "resultados": {
+    "APROBADO": 13
+   },
+   "desde": "2018-04-18",
+   "hasta": "2026-10-02"
+  },
+  "alberto-arrua": {
+   "total": 19,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2024-04-17",
+   "hasta": "2026-10-02"
+  },
+  "yolanda-vega": {
+   "total": 98,
+   "leyes": 41,
+   "resultados": {
+    "APROBADO": 3,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2024-06-13",
+   "hasta": "2026-10-02"
+  },
+  "silvana-giudici": {
+   "total": 123,
+   "leyes": 49,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2023-12-11",
+   "hasta": "2026-10-02"
+  },
+  "pablo-farias": {
+   "total": 34,
+   "leyes": 10,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2025-12-30",
+   "hasta": "2026-10-02"
+  },
+  "alejandra-torres": {
+   "total": 24,
+   "leyes": 12,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-03-11",
+   "hasta": "2026-10-02"
+  },
+  "hugo-antonio-moyano": {
+   "total": 6,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2026-02-18",
+   "hasta": "2026-10-02"
+  },
+  "pablo-juliano": {
+   "total": 184,
+   "leyes": 37,
+   "resultados": {
+    "APROBADO": 13
+   },
+   "desde": "2024-01-08",
+   "hasta": "2026-10-01"
+  },
+  "oscar-a-herrera-ahuad": {
+   "total": 9,
+   "leyes": 5,
+   "resultados": {
+    "MEDIA SANCION": 1
+   },
+   "desde": "2026-05-12",
+   "hasta": "2026-10-01"
+  },
+  "adriana-cristina-serquis": {
+   "total": 26,
+   "leyes": 5,
+   "resultados": {},
+   "desde": "2026-01-26",
+   "hasta": "2026-10-01"
+  },
+  "eduardo-felix-valdes": {
+   "total": 247,
+   "leyes": 69,
+   "resultados": {
+    "APROBADO": 19
+   },
+   "desde": "2020-03-16",
+   "hasta": "2026-10-01"
+  },
+  "juan-carlos-giordano": {
+   "total": 53,
+   "leyes": 19,
+   "resultados": {},
+   "desde": "2016-12-15",
+   "hasta": "2026-10-01"
+  },
+  "luciana-potenza": {
+   "total": 14,
+   "leyes": 10,
+   "resultados": {
+    "MEDIA SANCION": 1
+   },
+   "desde": "2024-05-30",
+   "hasta": "2026-10-01"
+  },
+  "sergio-eduardo-capozzi": {
+   "total": 76,
+   "leyes": 26,
+   "resultados": {
+    "APROBADO": 7
+   },
+   "desde": "2023-12-14",
+   "hasta": "2026-10-01"
+  },
+  "marcela-marina-pagano": {
+   "total": 260,
+   "leyes": 187,
+   "resultados": {},
+   "desde": "2023-12-12",
+   "hasta": "2026-10-01"
+  },
+  "victoria-tolosa-paz": {
+   "total": 126,
+   "leyes": 51,
+   "resultados": {
+    "APROBADO": 9,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2022-03-22",
+   "hasta": "2026-10-01"
+  },
+  "guillermo-michel": {
+   "total": 30,
+   "leyes": 18,
+   "resultados": {},
+   "desde": "2026-01-16",
+   "hasta": "2026-10-01"
+  },
+  "gerardo-cipolini": {
+   "total": 82,
+   "leyes": 35,
+   "resultados": {
+    "APROBADO": 8
+   },
+   "desde": "2020-03-05",
+   "hasta": "2026-10-01"
+  },
+  "sergio-dolce": {
+   "total": 26,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2026-04-21",
+   "hasta": "2026-09-30"
+  },
+  "maria-ines-zigaran": {
+   "total": 57,
+   "leyes": 10,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2026-01-16",
+   "hasta": "2026-09-30"
+  },
+  "sebastian-noblega": {
+   "total": 84,
+   "leyes": 27,
+   "resultados": {
+    "APROBADO": 10
+   },
+   "desde": "2024-03-11",
+   "hasta": "2026-09-30"
+  },
+  "lourdes-micaela-arrieta": {
+   "total": 73,
+   "leyes": 8,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2024-03-19",
+   "hasta": "2026-09-30"
+  },
+  "karina-banfi": {
+   "total": 434,
+   "leyes": 176,
+   "resultados": {
+    "APROBADO": 15,
+    "MEDIA SANCION": 2,
+    "RETIRADO": 1
+   },
+   "desde": "2016-02-16",
+   "hasta": "2026-09-30"
+  },
+  "jose-federico-tournier": {
+   "total": 4,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-11-08",
+   "hasta": "2026-09-30"
+  },
+  "carlos-gustavo-jaime-quiroga": {
+   "total": 8,
+   "leyes": 7,
+   "resultados": {},
+   "desde": "2026-04-23",
+   "hasta": "2026-09-30"
+  },
+  "roxana-monzon": {
+   "total": 211,
+   "leyes": 31,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2024-02-05",
+   "hasta": "2026-09-30"
+  },
+  "nancy-picon-martinez": {
+   "total": 114,
+   "leyes": 92,
+   "resultados": {
+    "MEDIA SANCION": 1,
+    "APROBADO": 7
+   },
+   "desde": "2024-05-13",
+   "hasta": "2026-09-30"
+  },
+  "javier-noguera": {
+   "total": 8,
+   "leyes": 3,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-02-04",
+   "hasta": "2026-09-30"
+  },
+  "sebastian-galmarini": {
+   "total": 19,
+   "leyes": 12,
+   "resultados": {},
+   "desde": "2026-02-04",
+   "hasta": "2026-09-30"
+  },
+  "ernesto-pipi-ali": {
+   "total": 22,
+   "leyes": 6,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2024-05-20",
+   "hasta": "2026-09-30"
+  },
+  "jorge-fernandez": {
+   "total": 18,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2026-06-08",
+   "hasta": "2026-09-30"
+  },
+  "jorge-neri-araujo-hernandez": {
+   "total": 103,
+   "leyes": 20,
+   "resultados": {
+    "APROBADO": 8
+   },
+   "desde": "2023-12-20",
+   "hasta": "2026-09-30"
+  },
+  "carolina-basualdo": {
+   "total": 50,
+   "leyes": 20,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-03-10",
+   "hasta": "2026-09-30"
+  },
+  "gabriela-estevez": {
+   "total": 477,
+   "leyes": 166,
+   "resultados": {
+    "APROBADO": 22,
+    "MEDIA SANCION": 2
+   },
+   "desde": "2016-04-01",
+   "hasta": "2026-09-30"
+  },
+  "javier-sanchez-wrba": {
+   "total": 22,
+   "leyes": 10,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2025-03-19",
+   "hasta": "2026-09-30"
+  },
+  "celia-campitelli": {
+   "total": 33,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 13
+   },
+   "desde": "2024-02-14",
+   "hasta": "2026-09-30"
+  },
+  "gisela-scaglia": {
+   "total": 411,
+   "leyes": 104,
+   "resultados": {
+    "APROBADO": 43,
+    "RETIRADO": 1
+   },
+   "desde": "2013-12-27",
+   "hasta": "2026-09-30"
+  },
+  "cecilia-lopez-pasquali": {
+   "total": 11,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2026-05-07",
+   "hasta": "2026-09-29"
+  },
+  "maria-teresa-garcia": {
+   "total": 79,
+   "leyes": 31,
+   "resultados": {
+    "MEDIA SANCION": 3,
+    "APROBADO": 1
+   },
+   "desde": "2010-08-27",
+   "hasta": "2026-09-29"
+  },
+  "juan-fernando-brugge": {
+   "total": 234,
+   "leyes": 140,
+   "resultados": {
+    "APROBADO": 21,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2016-04-01",
+   "hasta": "2026-09-29"
+  },
+  "gabriela-pedrali": {
+   "total": 64,
+   "leyes": 7,
+   "resultados": {
+    "APROBADO": 16
+   },
+   "desde": "2022-06-06",
+   "hasta": "2026-09-29"
+  },
+  "lorena-pokoik": {
+   "total": 66,
+   "leyes": 8,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2024-03-04",
+   "hasta": "2026-09-29"
+  },
+  "jorge-chica": {
+   "total": 104,
+   "leyes": 29,
+   "resultados": {
+    "APROBADO": 27
+   },
+   "desde": "2024-04-19",
+   "hasta": "2026-09-29"
+  },
+  "caren-tepp": {
+   "total": 33,
+   "leyes": 8,
+   "resultados": {},
+   "desde": "2026-01-26",
+   "hasta": "2026-09-29"
+  },
+  "sergio-omar-palazzo": {
+   "total": 72,
+   "leyes": 60,
+   "resultados": {},
+   "desde": "2022-03-07",
+   "hasta": "2026-09-28"
+  },
+  "damian-arabia": {
+   "total": 77,
+   "leyes": 26,
+   "resultados": {
+    "APROBADO": 7
+   },
+   "desde": "2023-12-15",
+   "hasta": "2026-09-28"
+  },
+  "nancy-sand": {
+   "total": 73,
+   "leyes": 9,
+   "resultados": {
+    "APROBADO": 6
+   },
+   "desde": "2020-06-18",
+   "hasta": "2026-09-28"
+  },
+  "marina-dorotea-salzmann": {
+   "total": 18,
+   "leyes": 6,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-02-06",
+   "hasta": "2026-09-28"
+  },
+  "julieta-marisol-campo": {
+   "total": 58,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 18
+   },
+   "desde": "2026-01-26",
+   "hasta": "2026-09-28"
+  },
+  "guillermo-montenegro": {
+   "total": 36,
+   "leyes": 8,
+   "resultados": {
+    "APROBADO": 9
+   },
+   "desde": "2025-03-28",
+   "hasta": "2026-09-25"
+  },
+  "romina-del-pla": {
+   "total": 453,
+   "leyes": 200,
+   "resultados": {
+    "APROBADO": 4,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2017-12-14",
+   "hasta": "2026-09-25"
+  },
+  "kelly-olmos": {
+   "total": 40,
+   "leyes": 20,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2025-12-26",
+   "hasta": "2026-09-25"
+  },
+  "pablo-raul-yedlin": {
+   "total": 96,
+   "leyes": 31,
+   "resultados": {
+    "APROBADO": 8,
+    "MEDIA SANCION": 5
+   },
+   "desde": "2018-03-15",
+   "hasta": "2026-09-25"
+  },
+  "joaquin-ojeda": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-09-25",
+   "hasta": "2026-09-25"
+  },
+  "paula-andrea-penacca": {
+   "total": 66,
+   "leyes": 24,
+   "resultados": {
+    "APROBADO": 1,
+    "MEDIA SANCION": 2
+   },
+   "desde": "2020-06-18",
+   "hasta": "2026-09-25"
+  },
+  "eliana-bruno": {
+   "total": 3,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-02-19",
+   "hasta": "2026-09-25"
+  },
+  "miguel-rodriguez": {
+   "total": 7,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-03-02",
+   "hasta": "2026-09-24"
+  },
+  "monica-frade": {
+   "total": 230,
+   "leyes": 92,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2020-02-28",
+   "hasta": "2026-09-24"
+  },
+  "jorge-taiana": {
+   "total": 18,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2026-02-25",
+   "hasta": "2026-09-24"
+  },
+  "vanesa-raquel-siley": {
+   "total": 147,
+   "leyes": 92,
+   "resultados": {
+    "APROBADO": 3,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2018-02-06",
+   "hasta": "2026-09-24"
+  },
+  "dario-schneider": {
+   "total": 6,
+   "leyes": 3,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-06-08",
+   "hasta": "2026-09-24"
+  },
+  "maura-gruber": {
+   "total": 5,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-08-18",
+   "hasta": "2026-09-24"
+  },
+  "martin-yeza": {
+   "total": 26,
+   "leyes": 23,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-03-06",
+   "hasta": "2026-09-23"
+  },
+  "elia-marina-fernandez": {
+   "total": 17,
+   "leyes": 3,
+   "resultados": {
+    "MEDIA SANCION": 1
+   },
+   "desde": "2024-09-04",
+   "hasta": "2026-09-23"
+  },
+  "mariela-coletta": {
+   "total": 18,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2024-03-11",
+   "hasta": "2026-09-23"
+  },
+  "sabrina-selva": {
+   "total": 101,
+   "leyes": 21,
+   "resultados": {
+    "APROBADO": 8
+   },
+   "desde": "2024-01-15",
+   "hasta": "2026-09-23"
+  },
+  "karina-maureira": {
+   "total": 12,
+   "leyes": 7,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2025-12-30",
+   "hasta": "2026-09-23"
+  },
+  "andrea-freites": {
+   "total": 82,
+   "leyes": 10,
+   "resultados": {
+    "APROBADO": 9
+   },
+   "desde": "2024-02-09",
+   "hasta": "2026-09-23"
+  },
+  "juliana-santillan-juarez-brahim": {
+   "total": 15,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2023-12-13",
+   "hasta": "2026-09-23"
+  },
+  "maximo-carlos-kirchner": {
+   "total": 39,
+   "leyes": 33,
+   "resultados": {
+    "MEDIA SANCION": 3
+   },
+   "desde": "2016-10-27",
+   "hasta": "2026-09-22"
+  },
+  "fernando-monguillot": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-06-01",
+   "hasta": "2026-09-22"
+  },
+  "santiago-pauli": {
+   "total": 11,
+   "leyes": 4,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-04-04",
+   "hasta": "2026-09-21"
+  },
+  "adrian-brizuela": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-04-15",
+   "hasta": "2026-09-21"
+  },
+  "diego-a-giuliano": {
+   "total": 59,
+   "leyes": 24,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2024-03-14",
+   "hasta": "2026-09-21"
+  },
+  "hugo-yasky": {
+   "total": 205,
+   "leyes": 110,
+   "resultados": {
+    "APROBADO": 11,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2018-03-22",
+   "hasta": "2026-09-21"
+  },
+  "juan-schiaretti": {
+   "total": 35,
+   "leyes": 21,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2014-03-13",
+   "hasta": "2026-09-18"
+  },
+  "raul-hadad": {
+   "total": 3,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-04-08",
+   "hasta": "2026-09-18"
+  },
+  "carlos-alberto-almena": {
+   "total": 7,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-03-18",
+   "hasta": "2026-09-18"
+  },
+  "alida-ferreyra": {
+   "total": 6,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2024-06-14",
+   "hasta": "2026-09-18"
+  },
+  "jimena-lopez": {
+   "total": 65,
+   "leyes": 31,
+   "resultados": {
+    "APROBADO": 9
+   },
+   "desde": "2020-05-14",
+   "hasta": "2026-09-17"
+  },
+  "hilda-aguirre": {
+   "total": 89,
+   "leyes": 26,
+   "resultados": {
+    "APROBADO": 19
+   },
+   "desde": "2020-03-02",
+   "hasta": "2026-09-17"
+  },
+  "antonela-giampieri": {
+   "total": 7,
+   "leyes": 4,
+   "resultados": {
+    "MEDIA SANCION": 1,
+    "APROBADO": 1
+   },
+   "desde": "2026-06-23",
+   "hasta": "2026-09-16"
+  },
+  "diogenes-ignacio-gonzalez": {
+   "total": 18,
+   "leyes": 7,
+   "resultados": {
+    "APROBADO": 3,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2026-01-02",
+   "hasta": "2026-09-16"
+  },
+  "sabrina-ajmechet": {
+   "total": 132,
+   "leyes": 29,
+   "resultados": {
+    "APROBADO": 6
+   },
+   "desde": "2022-01-03",
+   "hasta": "2026-09-16"
+  },
+  "agustina-lucrecia-propato": {
+   "total": 418,
+   "leyes": 115,
+   "resultados": {
+    "APROBADO": 10
+   },
+   "desde": "2022-02-07",
+   "hasta": "2026-09-16"
+  },
+  "ana-maria-ianni": {
+   "total": 333,
+   "leyes": 45,
+   "resultados": {
+    "APROBADO": 107,
+    "MEDIA SANCION": 6
+   },
+   "desde": "2012-03-28",
+   "hasta": "2026-09-16"
+  },
+  "julieta-metral-asensio": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-09-16",
+   "hasta": "2026-09-16"
+  },
+  "martin-ardohain": {
+   "total": 38,
+   "leyes": 8,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-01-04",
+   "hasta": "2026-09-15"
+  },
+  "ramiro-gutierrez": {
+   "total": 112,
+   "leyes": 91,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2020-03-02",
+   "hasta": "2026-09-14"
+  },
+  "aldo-leiva": {
+   "total": 78,
+   "leyes": 42,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2020-04-01",
+   "hasta": "2026-09-14"
+  },
+  "ruben-dario-torres": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-09-14",
+   "hasta": "2026-09-14"
+  },
+  "varinia-lis-marin": {
+   "total": 104,
+   "leyes": 76,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2022-02-21",
+   "hasta": "2026-09-14"
+  },
+  "javier-andrade": {
+   "total": 15,
+   "leyes": 10,
+   "resultados": {},
+   "desde": "2026-02-12",
+   "hasta": "2026-09-11"
+  },
+  "luis-eugenio-basterra": {
+   "total": 188,
+   "leyes": 44,
+   "resultados": {
+    "APROBADO": 72,
+    "MEDIA SANCION": 11,
+    "SANCIONADO": 1,
+    "RETIRADO": 2
+   },
+   "desde": "2012-03-30",
+   "hasta": "2026-09-11"
+  },
+  "guillermo-snopek": {
+   "total": 77,
+   "leyes": 30,
+   "resultados": {
+    "APROBADO": 12,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2015-12-15",
+   "hasta": "2026-09-10"
+  },
+  "lisandro-nieri": {
+   "total": 12,
+   "leyes": 8,
+   "resultados": {},
+   "desde": "2022-03-17",
+   "hasta": "2026-09-10"
+  },
+  "pablo-outes": {
+   "total": 44,
+   "leyes": 18,
+   "resultados": {},
+   "desde": "2024-02-15",
+   "hasta": "2026-09-10"
+  },
+  "alejandrina-borgatta": {
+   "total": 16,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-01-26",
+   "hasta": "2026-09-10"
+  },
+  "natalia-zaracho": {
+   "total": 42,
+   "leyes": 22,
+   "resultados": {},
+   "desde": "2022-02-07",
+   "hasta": "2026-09-09"
+  },
+  "maria-cecilia-ibanez": {
+   "total": 31,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 6
+   },
+   "desde": "2024-07-31",
+   "hasta": "2026-09-09"
+  },
+  "gustavo-bordet": {
+   "total": 17,
+   "leyes": 10,
+   "resultados": {},
+   "desde": "2024-08-19",
+   "hasta": "2026-09-09"
+  },
+  "beltran-benedit": {
+   "total": 15,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2024-05-14",
+   "hasta": "2026-09-09"
+  },
+  "lorena-macyszyn": {
+   "total": 8,
+   "leyes": 4,
+   "resultados": {},
+   "desde": "2024-05-13",
+   "hasta": "2026-09-09"
+  },
+  "mario-manrique": {
+   "total": 7,
+   "leyes": 5,
+   "resultados": {},
+   "desde": "2024-05-28",
+   "hasta": "2026-09-09"
+  },
+  "nicolas-massot": {
+   "total": 19,
+   "leyes": 10,
+   "resultados": {
+    "APROBADO": 3,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2016-06-15",
+   "hasta": "2026-09-09"
+  },
+  "marianela-marclay": {
+   "total": 9,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-04-24",
+   "hasta": "2026-09-08"
+  },
+  "maria-luisa-gonzalez-estevarena": {
+   "total": 8,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2026-05-27",
+   "hasta": "2026-09-08"
+  },
+  "german-pedro-martinez": {
+   "total": 64,
+   "leyes": 22,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2019-12-11",
+   "hasta": "2026-09-07"
+  },
+  "francisco-morchio": {
+   "total": 55,
+   "leyes": 14,
+   "resultados": {
+    "APROBADO": 6
+   },
+   "desde": "2024-03-11",
+   "hasta": "2026-09-07"
+  },
+  "juan-marino": {
+   "total": 72,
+   "leyes": 23,
+   "resultados": {},
+   "desde": "2022-09-26",
+   "hasta": "2026-09-07"
+  },
+  "alejandro-carrancio": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2025-12-11",
+   "hasta": "2026-09-04"
+  },
+  "rodolfo-tailhade": {
+   "total": 17,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2016-05-13",
+   "hasta": "2026-09-04"
+  },
+  "luana-volnovich": {
+   "total": 131,
+   "leyes": 63,
+   "resultados": {
+    "APROBADO": 6,
+    "RETIRADO": 1
+   },
+   "desde": "2016-04-04",
+   "hasta": "2026-09-04"
+  },
+  "jose-luis-garrido": {
+   "total": 25,
+   "leyes": 11,
+   "resultados": {
+    "APROBADO": 3,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2024-06-03",
+   "hasta": "2026-09-04"
+  },
+  "daiana-fernandez-molero": {
+   "total": 8,
+   "leyes": 5,
+   "resultados": {},
+   "desde": "2024-07-03",
+   "hasta": "2026-09-03"
+  },
+  "alejandro-finocchiaro": {
+   "total": 40,
+   "leyes": 9,
+   "resultados": {
+    "APROBADO": 2,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2022-01-10",
+   "hasta": "2026-09-03"
+  },
+  "pablo-todero": {
+   "total": 64,
+   "leyes": 23,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2023-12-15",
+   "hasta": "2026-09-03"
+  },
+  "natalia-de-la-sota": {
+   "total": 36,
+   "leyes": 12,
+   "resultados": {
+    "APROBADO": 2,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2021-12-30",
+   "hasta": "2026-09-01"
+  },
+  "fernando-de-andreis": {
+   "total": 8,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-03-11",
+   "hasta": "2026-09-01"
+  },
+  "cecilia-moreau": {
+   "total": 245,
+   "leyes": 72,
+   "resultados": {
+    "APROBADO": 11
+   },
+   "desde": "2016-03-07",
+   "hasta": "2026-09-01"
+  },
+  "jose-glinski": {
+   "total": 19,
+   "leyes": 7,
+   "resultados": {},
+   "desde": "2024-03-12",
+   "hasta": "2026-09-01"
+  },
+  "barbara-andreussi": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-08-19",
+   "hasta": "2026-08-31"
+  },
+  "laura-rodriguez-machado": {
+   "total": 33,
+   "leyes": 11,
+   "resultados": {
+    "APROBADO": 3
+   },
+   "desde": "2021-12-29",
+   "hasta": "2026-08-31"
+  },
+  "karen-reichardt": {
+   "total": 5,
+   "leyes": 3,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-03-25",
+   "hasta": "2026-08-27"
+  },
+  "miguel-angel-pichetto": {
+   "total": 28,
+   "leyes": 22,
+   "resultados": {},
+   "desde": "2024-03-08",
+   "hasta": "2026-08-26"
+  },
+  "gladys-medina": {
+   "total": 70,
+   "leyes": 49,
+   "resultados": {
+    "APROBADO": 6
+   },
+   "desde": "2018-05-11",
+   "hasta": "2026-08-26"
+  },
+  "monica-becerra": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-08-25",
+   "hasta": "2026-08-25"
+  },
+  "m-elena-velazquez": {
+   "total": 16,
+   "leyes": 7,
+   "resultados": {},
+   "desde": "2026-03-02",
+   "hasta": "2026-08-24"
+  },
+  "claudia-maria-palladino": {
+   "total": 12,
+   "leyes": 4,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-03-02",
+   "hasta": "2026-08-24"
+  },
+  "pamela-fernanda-verasay": {
+   "total": 27,
+   "leyes": 14,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2022-03-07",
+   "hasta": "2026-08-21"
+  },
+  "belen-avico": {
+   "total": 7,
+   "leyes": 5,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2024-07-02",
+   "hasta": "2026-08-20"
+  },
+  "nicolas-del-cano": {
+   "total": 331,
+   "leyes": 114,
+   "resultados": {
+    "APROBADO": 5
+   },
+   "desde": "2013-12-27",
+   "hasta": "2026-08-20"
+  },
+  "gerardo-gustavo-gonzalez": {
+   "total": 6,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-05-19",
+   "hasta": "2026-08-20"
+  },
+  "nicolas-mayoraz": {
+   "total": 10,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-03-13",
+   "hasta": "2026-08-20"
+  },
+  "jairo-guzman": {
+   "total": 2,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-03-27",
+   "hasta": "2026-08-19"
+  },
+  "emir-felix": {
+   "total": 5,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2026-04-01",
+   "hasta": "2026-08-12"
+  },
+  "cristian-a-ritondo": {
+   "total": 163,
+   "leyes": 88,
+   "resultados": {},
+   "desde": "2020-03-04",
+   "hasta": "2026-08-12"
+  },
+  "jorge-mukdise": {
+   "total": 4,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-03-26",
+   "hasta": "2026-08-12"
+  },
+  "maria-graciela-parola": {
+   "total": 13,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2021-03-16",
+   "hasta": "2026-08-11"
+  },
+  "federico-agustin-pelli": {
+   "total": 3,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-05-07",
+   "hasta": "2026-08-11"
+  },
+  "gaston-riesco": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-04-28",
+   "hasta": "2026-08-11"
+  },
+  "juan-grabois": {
+   "total": 4,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2026-03-18",
+   "hasta": "2026-08-06"
+  },
+  "sebastian-pareja": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-08-06",
+   "hasta": "2026-08-06"
+  },
+  "eduardo-falcone": {
+   "total": 11,
+   "leyes": 2,
+   "resultados": {
+    "MEDIA SANCION": 1,
+    "APROBADO": 2
+   },
+   "desde": "2024-06-11",
+   "hasta": "2026-08-05"
+  },
+  "itai-hagman": {
+   "total": 34,
+   "leyes": 16,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2020-05-06",
+   "hasta": "2026-08-05"
+  },
+  "emmanuel-bianchetti": {
+   "total": 39,
+   "leyes": 12,
+   "resultados": {},
+   "desde": "2024-01-26",
+   "hasta": "2026-08-04"
+  },
+  "claudio-alvarez": {
+   "total": 3,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-05-20",
+   "hasta": "2026-08-03"
+  },
+  "gabriela-luciana-munoz": {
+   "total": 3,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2026-04-17",
+   "hasta": "2026-07-27"
+  },
+  "lucia-campora": {
+   "total": 2,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-04-10",
+   "hasta": "2026-07-24"
+  },
+  "jorge-antonio-avila": {
+   "total": 19,
+   "leyes": 12,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-02-23",
+   "hasta": "2026-07-20"
+  },
+  "carlos-raul-zapata": {
+   "total": 157,
+   "leyes": 41,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2022-02-07",
+   "hasta": "2026-07-20"
+  },
+  "fernanda-mino": {
+   "total": 7,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2026-02-10",
+   "hasta": "2026-07-20"
+  },
+  "carlos-mario-gutierrez": {
+   "total": 42,
+   "leyes": 20,
+   "resultados": {
+    "APROBADO": 2,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2020-03-12",
+   "hasta": "2026-07-16"
+  },
+  "patricia-holzman": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-07-15",
+   "hasta": "2026-07-15"
+  },
+  "johanna-sabrina-longo": {
+   "total": 2,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2026-05-12",
+   "hasta": "2026-07-14"
+  },
+  "martin-matzkin": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-07-13",
+   "hasta": "2026-07-13"
+  },
+  "jorge-rizzotti": {
+   "total": 55,
+   "leyes": 38,
+   "resultados": {
+    "MEDIA SANCION": 1
+   },
+   "desde": "2020-04-17",
+   "hasta": "2026-06-24"
+  },
+  "estela-mary-neder": {
+   "total": 115,
+   "leyes": 27,
+   "resultados": {
+    "APROBADO": 30
+   },
+   "desde": "2017-11-30",
+   "hasta": "2026-06-23"
+  },
+  "christian-alejandro-zulli": {
+   "total": 26,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2024-03-19",
+   "hasta": "2026-06-11"
+  },
+  "alvaro-martinez": {
+   "total": 45,
+   "leyes": 26,
+   "resultados": {},
+   "desde": "2022-01-10",
+   "hasta": "2026-06-04"
+  },
+  "sergio-figliuolo": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-03-13",
+   "hasta": "2026-06-04"
+  },
+  "lorena-villaverde": {
+   "total": 21,
+   "leyes": 6,
+   "resultados": {},
+   "desde": "2023-12-18",
+   "hasta": "2026-06-03"
+  },
+  "ricardo-daives": {
+   "total": 58,
+   "leyes": 19,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2020-01-03",
+   "hasta": "2026-05-28"
+  },
+  "soledad-molinuevo": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2026-03-04",
+   "hasta": "2026-05-21"
+  },
+  "marcelo-barbur": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2026-05-19",
+   "hasta": "2026-05-19"
+  },
+  "sergio-guillermo-casas": {
+   "total": 18,
+   "leyes": 4,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2020-02-28",
+   "hasta": "2026-05-19"
+  },
+  "carlos-cisneros": {
+   "total": 47,
+   "leyes": 26,
+   "resultados": {},
+   "desde": "2020-02-28",
+   "hasta": "2026-05-19"
+  },
+  "julio-moreno-ovalle": {
+   "total": 22,
+   "leyes": 18,
+   "resultados": {},
+   "desde": "2023-12-26",
+   "hasta": "2026-05-12"
+  },
+  "lilia-lemoine": {
+   "total": 5,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-04-15",
+   "hasta": "2026-05-11"
+  },
+  "matias-molle": {
+   "total": 14,
+   "leyes": 12,
+   "resultados": {},
+   "desde": "2024-03-25",
+   "hasta": "2026-05-06"
+  },
+  "luis-petri": {
+   "total": 221,
+   "leyes": 177,
+   "resultados": {
+    "MEDIA SANCION": 1,
+    "APROBADO": 3
+   },
+   "desde": "2014-03-07",
+   "hasta": "2026-05-04"
+  },
+  "soledad-mondaca": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-04-24",
+   "hasta": "2026-04-24"
+  },
+  "miriam-niveyro": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-04-22",
+   "hasta": "2026-04-22"
+  },
+  "maria-graciela-de-la-rosa": {
+   "total": 32,
+   "leyes": 11,
+   "resultados": {
+    "APROBADO": 12,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2008-03-06",
+   "hasta": "2026-04-21"
+  },
+  "maria-florencia-de-sensi": {
+   "total": 11,
+   "leyes": 10,
+   "resultados": {},
+   "desde": "2024-03-15",
+   "hasta": "2026-04-10"
+  },
+  "santiago-santurio": {
+   "total": 5,
+   "leyes": 4,
+   "resultados": {},
+   "desde": "2024-07-29",
+   "hasta": "2026-04-06"
+  },
+  "patricia-vasquez": {
+   "total": 21,
+   "leyes": 20,
+   "resultados": {},
+   "desde": "2023-12-13",
+   "hasta": "2026-03-31"
+  },
+  "manuel-quintar": {
+   "total": 4,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-08-20",
+   "hasta": "2026-03-26"
+  },
+  "santiago-cafiero": {
+   "total": 15,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2024-01-19",
+   "hasta": "2026-03-18"
+  },
+  "gabriel-bornoroni": {
+   "total": 14,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2024-02-20",
+   "hasta": "2026-03-12"
+  },
+  "gonzalo-roca": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-03-10",
+   "hasta": "2026-03-10"
+  },
+  "andres-ariel-laumann": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-03-09",
+   "hasta": "2026-03-09"
+  },
+  "maria-lorena-petrovich": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-03-09",
+   "hasta": "2026-03-09"
+  },
+  "atilio-basualdo": {
+   "total": 1,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2026-03-05",
+   "hasta": "2026-03-05"
+  },
+  "jose-nunez": {
+   "total": 65,
+   "leyes": 12,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2016-08-18",
+   "hasta": "2025-11-27"
+  },
+  "veronica-razzini": {
+   "total": 9,
+   "leyes": 6,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-01-23",
+   "hasta": "2025-11-25"
+  },
+  "jose-gomez": {
+   "total": 7,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2024-01-31",
+   "hasta": "2025-11-25"
+  },
+  "mariano-campero": {
+   "total": 8,
+   "leyes": 3,
+   "resultados": {},
+   "desde": "2024-02-15",
+   "hasta": "2025-11-19"
+  },
+  "fernanda-avila": {
+   "total": 13,
+   "leyes": 8,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2024-01-19",
+   "hasta": "2025-10-13"
+  },
+  "gerardo-huesen": {
+   "total": 10,
+   "leyes": 6,
+   "resultados": {},
+   "desde": "2024-03-27",
+   "hasta": "2025-10-07"
+  },
+  "maria-celeste-ponce": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2024-04-10",
+   "hasta": "2025-08-11"
+  },
+  "alejandro-bongiovanni": {
+   "total": 10,
+   "leyes": 9,
+   "resultados": {},
+   "desde": "2024-03-21",
+   "hasta": "2025-05-22"
+  },
+  "martin-alexis-menem": {
+   "total": 1,
+   "leyes": 1,
+   "resultados": {},
+   "desde": "2025-05-19",
+   "hasta": "2025-05-19"
+  },
+  "anibal-tortoriello": {
+   "total": 15,
+   "leyes": 4,
+   "resultados": {},
+   "desde": "2022-02-21",
+   "hasta": "2025-04-28"
+  },
+  "rocio-bonacci": {
+   "total": 9,
+   "leyes": 4,
+   "resultados": {},
+   "desde": "2023-12-26",
+   "hasta": "2025-04-23"
+  },
+  "alvaro-gonzalez": {
+   "total": 68,
+   "leyes": 13,
+   "resultados": {
+    "APROBADO": 14
+   },
+   "desde": "2016-05-26",
+   "hasta": "2025-04-09"
+  },
+  "oscar-zago": {
+   "total": 5,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2024-01-18",
+   "hasta": "2025-03-07"
+  },
+  "romina-diez": {
+   "total": 3,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2024-06-11",
+   "hasta": "2024-12-05"
+  },
+  "luis-albino-picat": {
+   "total": 5,
+   "leyes": 2,
+   "resultados": {},
+   "desde": "2023-12-29",
+   "hasta": "2024-10-17"
+  },
+  "facundo-correa-llano": {
+   "total": 5,
+   "leyes": 4,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-04-05",
+   "hasta": "2024-09-06"
+  },
+  "cesar-treffinger": {
+   "total": 8,
+   "leyes": 1,
+   "resultados": {
+    "APROBADO": 1
+   },
+   "desde": "2024-07-26",
+   "hasta": "2024-08-16"
+  },
+  "ignacio-antonio-garcia-aresca": {
+   "total": 8,
+   "leyes": 2,
+   "resultados": {
+    "APROBADO": 4
+   },
+   "desde": "2022-04-28",
+   "hasta": "2024-08-02"
+  },
+  "lisandro-almiron": {
+   "total": 2,
+   "leyes": 0,
+   "resultados": {},
+   "desde": "2024-01-04",
+   "hasta": "2024-01-12"
+  },
+  "pablo-ansaloni": {
+   "total": 80,
+   "leyes": 17,
+   "resultados": {
+    "APROBADO": 14,
+    "MEDIA SANCION": 1
+   },
+   "desde": "2018-05-10",
+   "hasta": "2021-04-28"
+  },
+  "martin-lousteau": {
+   "total": 31,
+   "leyes": 23,
+   "resultados": {
+    "APROBADO": 2
+   },
+   "desde": "2014-04-29",
+   "hasta": "2019-11-08"
+  }
+ },
+ "senado": {
+  "jorge-milton-capitanich": {
+   "total": 998,
+   "leyes": 522
+  },
+  "jose-miguel-angel-mayans": {
+   "total": 559,
+   "leyes": 164
+  },
+  "alicia-margarita-antonia-kirchner": {
+   "total": 501,
+   "leyes": 119
+  },
+  "lucia-benigna-corpacci": {
+   "total": 302,
+   "leyes": 133
+  },
+  "luis-alfredo-juez": {
+   "total": 458,
+   "leyes": 164
+  },
+  "gerardo-zamora": {
+   "total": 90,
+   "leyes": 41
+  },
+  "carlos-mauricio-espinola": {
+   "total": 195,
+   "leyes": 92
+  },
+  "anabel-fernandez-sagasti": {
+   "total": 1023,
+   "leyes": 478
+  },
+  "maria-teresa-margarita-gonzalez": {
+   "total": 846,
+   "leyes": 335
+  },
+  "mariano-recalde": {
+   "total": 287,
+   "leyes": 89
+  },
+  "jose-emilio-neder": {
+   "total": 186,
+   "leyes": 70
+  },
+  "juliana-di-tullio": {
+   "total": 176,
+   "leyes": 63
+  },
+  "guillermo-eduardo-andrada": {
+   "total": 210,
+   "leyes": 101
+  },
+  "flavio-sergio-fama": {
+   "total": 347,
+   "leyes": 153
+  },
+  "carmen-alvarez-rivero": {
+   "total": 144,
+   "leyes": 39
+  },
+  "maria-alejandra-vigo": {
+   "total": 99,
+   "leyes": 30
+  },
+  "eduardo-alejandro-vischi": {
+   "total": 347,
+   "leyes": 125
+  },
+  "mercedes-gabriela-valenzuela": {
+   "total": 462,
+   "leyes": 190
+  },
+  "edith-elizabeth-terenzi": {
+   "total": 444,
+   "leyes": 197
+  },
+  "carlos-alberto-linares": {
+   "total": 512,
+   "leyes": 183
+  },
+  "daniel-ricardo-kroneberger": {
+   "total": 299,
+   "leyes": 144
+  },
+  "maria-victoria-huala": {
+   "total": 315,
+   "leyes": 107
+  },
+  "daniel-pablo-bensusan": {
+   "total": 257,
+   "leyes": 138
+  },
+  "mariana-juri": {
+   "total": 211,
+   "leyes": 92
+  },
+  "carolina-losada": {
+   "total": 332,
+   "leyes": 145
+  },
+  "marcelo-nestor-lewandowski": {
+   "total": 287,
+   "leyes": 89
+  },
+  "sandra-mariela-mendoza": {
+   "total": 393,
+   "leyes": 157
+  },
+  "beatriz-luisa-avila": {
+   "total": 657,
+   "leyes": 292
+  },
+  "eduardo-enrique-de-pedro": {
+   "total": 160,
+   "leyes": 57
+  },
+  "maximiliano-abad": {
+   "total": 111,
+   "leyes": 54
+  },
+  "francisco-manuel-paoltroni": {
+   "total": 43,
+   "leyes": 11
+  },
+  "ezequiel-atauche": {
+   "total": 103,
+   "leyes": 39
+  },
+  "vilma-facunda-bedia": {
+   "total": 82,
+   "leyes": 12
+  },
+  "maria-carolina-moises": {
+   "total": 330,
+   "leyes": 94
+  },
+  "maria-florencia-lopez": {
+   "total": 159,
+   "leyes": 51
+  },
+  "jesus-fernando-rejal": {
+   "total": 247,
+   "leyes": 85
+  },
+  "carlos-omar-arce": {
+   "total": 120,
+   "leyes": 21
+  },
+  "sonia-elizabeth-rojas-decut": {
+   "total": 148,
+   "leyes": 31
+  },
+  "enrique-martin-goerling-lara": {
+   "total": 61,
+   "leyes": 16
+  },
+  "sergio-mauricio-unac": {
+   "total": 107,
+   "leyes": 73
+  },
+  "maria-celeste-gimenez-navarro": {
+   "total": 271,
+   "leyes": 76
+  },
+  "bruno-antonio-olivera-lucero": {
+   "total": 87,
+   "leyes": 30
+  },
+  "bartolome-esteban-abdala": {
+   "total": 212,
+   "leyes": 29
+  },
+  "ivanna-marcela-arrascaeta": {
+   "total": 45,
+   "leyes": 8
+  },
+  "fernando-aldo-salino": {
+   "total": 210,
+   "leyes": 48
+  },
+  "jose-maria-carambia": {
+   "total": 96,
+   "leyes": 55
+  },
+  "natalia-elena-gadano": {
+   "total": 133,
+   "leyes": 75
+  },
+  "andrea-marcela-cristina": {
+   "total": 117,
+   "leyes": 29
+  },
+  "rodolfo-alejandro-suarez": {
+   "total": 34,
+   "leyes": 26
+  },
+  "eduardo-horacio-galaretto": {
+   "total": 150,
+   "leyes": 82
+  },
+  "candida-cristina-lopez": {
+   "total": 333,
+   "leyes": 93
+  },
+  "juan-luis-manzur": {
+   "total": 53,
+   "leyes": 23
+  },
+  "juan-cruz-godoy": {
+   "total": 14,
+   "leyes": 4
+  },
+  "silvana-lorena-schneider": {
+   "total": 152,
+   "leyes": 12
+  },
+  "patricia-bullrich": {
+   "total": 28,
+   "leyes": 3
+  },
+  "agustin-anibal-monteverde": {
+   "total": 23,
+   "leyes": 2
+  },
+  "joaquin-alberto-benegas-lynch": {
+   "total": 4,
+   "leyes": 2
+  },
+  "romina-maria-almeida": {
+   "total": 21,
+   "leyes": 4
+  },
+  "adan-humberto-bahl": {
+   "total": 109,
+   "leyes": 74
+  },
+  "nadia-judith-marquez": {
+   "total": 2,
+   "leyes": 0
+  },
+  "mario-pablo-cervi": {
+   "total": 12,
+   "leyes": 2
+  },
+  "julieta-corroza": {
+   "total": 54,
+   "leyes": 6
+  },
+  "martin-ignacio-soria": {
+   "total": 85,
+   "leyes": 45
+  },
+  "ana-ines-marks": {
+   "total": 84,
+   "leyes": 43
+  },
+  "enzo-paolo-fullone": {
+   "total": 24,
+   "leyes": 3
+  },
+  "maria-emilia-orozco": {
+   "total": 28,
+   "leyes": 10
+  },
+  "gonzalo-guzman-coraita": {
+   "total": 28,
+   "leyes": 11
+  },
+  "flavia-gabriela-royon": {
+   "total": 113,
+   "leyes": 29
+  },
+  "elia-esther-del-carmen-moreno": {
+   "total": 29,
+   "leyes": 11
+  },
+  "agustin-pedro-coto": {
+   "total": 28,
+   "leyes": 5
+  },
+  "maria-belen-monte-de-oca": {
+   "total": 15,
+   "leyes": 3
+  }
+ },
+ "_meta": {
+  "cruce_diputados": {
+   "proyectos": 112840,
+   "cruzados": 105896,
+   "fuera_de_mandato": 1719,
+   "sin_cruce": 5225
+  },
+  "resultados_del_archivo_2019": 2915,
+  "hasta": "2026-10-06"
+ }
+}
