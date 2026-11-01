@@ -28,7 +28,9 @@ manda la regla hasta que Marcelo la cambie por escrito.
 | Promesas vs. realidad | Sin fuente | Plataformas por partido, en texto libre |
 
 ## Módulo 2: Match Electoral 360
-- Cuestionario de 12 preguntas como formulario de varios pasos sin JS (cada paso es un envío GET).
-- Motor: similitud del coseno en PHP (ver `legisdata-architecture`), 0 = neutro.
-- Resultado: mejor coincidencia, radar SVG de los ejes, aviso de disonancia en texto.
-- Todo depende de la clasificación por ejes. Hasta entonces `/match` sigue en 503.
+- HECHO (1/11/2026, Marcelo eligió "Temas que te importan vs. su agenda"): `/match` sin JS, un formulario GET con los 11 temas
+  (Nada/Poco/Bastante/Mucho = 0..3) y filtro de cámara. Coseno contra la proporción de proyectos por tema de cada legislador
+  (`match_temas()` en `app/Web.php`), solo con 10 o más proyectos con tema. Resultados con `noindex`.
+- Compara prioridades, no posiciones. Pendiente: coincidencia por votos (Marcelo lo pidió: "% de coincidencia con lo que se vota"),
+  que necesita votaciones con tema; hoy solo Diputados 2011-2020 tiene expediente en las actas.
+- Aportes de campaña por partido (CNE): Marcelo lo pidió; electoral.gov.ar estaba bloqueado desde el entorno.

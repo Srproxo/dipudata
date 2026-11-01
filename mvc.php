@@ -386,14 +386,31 @@ switch (true) {
     case (bool)preg_match('#^/blog(/|$)#', $path):
         ir('/congreso');
 
-    case (bool)preg_match('#^/(eje|ley|match|match-360)(/|$)#', $path):
+    case $path === '/match':
+        $pesos = []; $consulta = false;
+        foreach (temas_match() as $clave => $tema) {
+            $v = $_GET[$clave] ?? '0';
+            $pesos[$tema] = is_string($v) && preg_match('/^[0-3]$/', $v) ? (int)$v : 0;
+            if (isset($_GET[$clave])) { $consulta = true; }
+        }
+        $camara = ['diputados' => 'Diputados', 'senado' => 'Senadores'][$_GET['camara'] ?? ''] ?? '';
+        if (isset($_GET['camara'])) { $consulta = true; }
+        $filas = array_sum($pesos) > 0 ? match_temas($pesos, $camara) : [];
+        render('match', compact('pesos', 'camara', 'filas'), pagina_meta(
+            'Match por temas: quién trabaja los temas que te importan',
+            'Marcá qué temas te importan y mirá qué diputados y senadores concentran sus proyectos en esos temas. Con datos oficiales de giros a comisiones.',
+            '/match', 'match', ['robots' => $consulta ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/(eje|ley|match-360)(/|$)#', $path):
         header('Retry-After: 86400');
         render('en_revision', [], pagina_meta('Sección en revisión', 'Estamos verificando estos datos contra las fuentes oficiales.', '/', '', ['robots' => 'noindex, follow']), 503);
         break;
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }

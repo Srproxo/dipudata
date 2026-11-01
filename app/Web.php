@@ -262,3 +262,34 @@ function factores_ipc(): array
     foreach ($m as $am => $v) { if (substr($am, 5, 2) === '12' && $v > 0) { $f[(int)substr($am, 0, 4)] = $m[$ult] / $v; } }
     return [$ult, $f];
 }
+
+/** Claves de URL de los 11 temas del Match: clave => nombre del eje en ejes.json. */
+function temas_match(): array
+{
+    return ['salud' => 'Salud', 'educacion' => 'Educación', 'industria' => 'Industria', 'comercio' => 'Comercio',
+        'prevision' => 'Previsión Social', 'ambiente' => 'Medio Ambiente', 'seguridad' => 'Seguridad', 'genero' => 'Género',
+        'federalismo' => 'Federalismo', 'transparencia' => 'Transparencia', 'tecnologia' => 'Tecnología'];
+}
+
+/**
+ * Match por temas: similitud del coseno entre lo que le importa al usuario (0 a 3 por tema) y la proporción de proyectos
+ * de cada legislador en cada tema. Solo legisladores con 10 proyectos o más con tema. Devuelve filas ordenadas de mayor a menor.
+ */
+function match_temas(array $usuario, string $camara = ''): array
+{
+    $temas = array_values(temas_match());
+    $nu = sqrt(array_sum(array_map(static fn($v) => $v * $v, $usuario)));
+    if ($nu == 0) { return []; }
+    $filas = [];
+    foreach (\App\Datos::legisladores($camara ?: null) as $l) {
+        $e = \App\Datos::ejes($l['camara'], $l['slug']);
+        if (!$e || $e['con_eje'] < 10) { continue; }
+        $vec = []; foreach ($temas as $t) { $vec[$t] = ($e['ejes'][$t]['proyectos'] ?? 0) / $e['con_eje']; }
+        $nl = sqrt(array_sum(array_map(static fn($v) => $v * $v, $vec)));
+        if ($nl == 0) { continue; }
+        $dot = 0.0; foreach ($temas as $t) { $dot += ($usuario[$t] ?? 0) * $vec[$t]; }
+        $filas[] = ['l' => $l, 'afinidad' => $dot / ($nu * $nl), 'vec' => $vec, 'con_eje' => $e['con_eje']];
+    }
+    usort($filas, static fn($a, $b) => $b['afinidad'] <=> $a['afinidad'] ?: strcmp($a['l']['nombre'], $b['l']['nombre']));
+    return $filas;
+}

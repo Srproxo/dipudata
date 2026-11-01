@@ -221,5 +221,12 @@ foreach ($sen as $l) {
 }
 ok($coN >= 60 && $coMal === 0, 'coautorías del Senado: ' . $coN . ' senadores, cuentas simétricas entre cada par');
 
+if (!function_exists('match_temas')) { require_once __DIR__ . '/../app/Web.php'; }
+$mt = match_temas(['Salud' => 3, 'Educación' => 1]);
+$mtMal = array_filter($mt, fn($f) => $f['afinidad'] < -1e-9 || $f['afinidad'] > 1 + 1e-9 || $f['con_eje'] < 10);
+$solo = match_temas(['Salud' => 3]); $l0 = $solo[0]['l'] ?? null; $e0 = $l0 ? Datos::ejes($l0['camara'], $l0['slug']) : null;
+ok($mt && !$mtMal && count(temas_match()) === 11 && array_values(temas_match()) === ($em['ejes'] ?? []) && match_temas([]) === [], 'match por temas: coincidencias entre 0 y 1, solo legisladores con 10 proyectos con tema o más (' . count($mt) . ')');
+ok($e0 && ($e0['ejes']['Salud']['proyectos'] ?? 0) > 0, 'match por temas: con solo "Salud" marcado, el primero tiene proyectos de salud');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
