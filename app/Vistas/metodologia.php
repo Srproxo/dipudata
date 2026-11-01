@@ -12,6 +12,8 @@
     <li><strong>Registros del Senado:</strong> versiones taquigráficas, asuntos entrados, boletines, decretos, resoluciones, disposiciones, normativa y licitaciones, tal como los publica el Senado. Los textos no se modifican.</li>
     <li><strong>Fotos:</strong> ArgentinaDatos. Si una foto falta, se muestran las iniciales.</li>
     <li><strong>Votaciones, leyes y subsidios de Diputados:</strong> datos abiertos de la Cámara de Diputados. Las votaciones (2011 a 2020) se validan voto por voto contra el total de cada una. De las leyes se publican el número, el sumario y las fechas de sanción y de publicación; no se publican los campos de promulgación y veto del archivo, porque traen el mismo valor en todas las filas. De los subsidios no se publican los CUIT.</li>
+    <li><strong>Comisiones, pasajes, misiones y remuneraciones de Diputados:</strong> datos abiertos de la Cámara de Diputados. Los pasajes son los emitidos a pedido de cada diputado; la Cámara aclara que no implican viajes efectivamente realizados, y por eso se muestran en orden alfabético y sin ranking.</li>
+    <li><strong>Votaciones desde diciembre de 2025 (Diputados y Senado):</strong> las publicadas por cada cámara, a través de ArgentinaDatos. Cada votación se compara con sus totales; las que no cuadran se muestran con aviso y no se cuentan en las estadísticas por persona.</li>
     <li><strong>Textos sobre el Congreso:</strong> redactados a partir de la Constitución Nacional.</li>
   </ul>
   <h2 id="ddjj">Declaraciones juradas</h2>
@@ -21,6 +23,7 @@
   <h2>Qué viene</h2>
   <ul>
     <li>Votaciones, leyes y subsidios posteriores a 2020 y 2023, cuando la Cámara los publique.</li>
+    <li>Personal asignado a cada despacho: ni la Cámara de Diputados ni el Senado publican qué asesores trabajan para cada legislador (la nómina de Diputados solo indica "agente afectado a bloque político"). Hasta que lo publiquen, este sitio no hace afirmaciones sobre el personal de ningún legislador.</li>
     <li>Asistencia y votaciones del Senado.</li>
     <li>Integrantes de las comisiones de ambas cámaras.</li>
     <li>Registros equivalentes de la Cámara de Diputados.</li>

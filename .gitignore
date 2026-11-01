@@ -8,3 +8,4 @@ api/credentials.local.php
 *.zip
 __pycache__/
 *.pyc
+informes_privados/
