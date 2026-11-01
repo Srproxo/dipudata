@@ -11,7 +11,7 @@ usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1]
 
 <dl class="ficha" style="max-width:40rem;margin-top:1.5rem">
   <div><dt>Fecha y hora</dt><dd><?= e(fecha_es($cab['f'])) ?>, <?= e($cab['h']) ?></dd></div>
-  <div><dt>Resultado</dt><dd><b class="res-<?= $cab['res'] === 'AFIRMATIVO' ? 'si' : 'no' ?>"><?= $cab['res'] === 'AFIRMATIVO' ? 'Afirmativo' : 'Negativo' ?></b></dd></div>
+  <div><dt>Resultado</dt><dd><?= resultado_votacion((string)$cab['res']) ?></dd></div>
   <div><dt>Mayoría requerida</dt><dd><?= e($cab['m']) ?></dd></div>
   <?php if (!empty($cab['pres'])): ?><div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div><?php endif; ?>
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>

@@ -367,7 +367,7 @@ switch (true) {
         $filtro = in_array($_GET['voto'] ?? '', ['A', 'N', 'B', 'U'], true) ? (string)$_GET['voto'] : '';
         render('votacion', compact('cab', 'det', 'filtro'), pagina_meta(
             'Votación del ' . fecha_es($cab['f']) . ': ' . mb_substr($cab['t'], 0, 80),
-            $cab['t'] . ' Resultado: ' . strtolower($cab['res']) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada diputado.',
+            $cab['t'] . ' Resultado: ' . strtolower(strip_tags(resultado_votacion((string)$cab['res']))) . ' (' . $cab['a'] . ' afirmativos, ' . $cab['n'] . ' negativos). Cómo votó cada diputado.',
             '/votaciones/' . $m[1], 'votaciones', ['robots' => $filtro ? 'noindex, follow' : 'index, follow']
         ));
         break;
