@@ -72,6 +72,13 @@ const EJES_TEMATICOS = [
   { id: 'Laboral', label: 'Leyes Laborales y Sindicales' },
 ];
 
+const normalizarTexto = (str: string): string =>
+  (str || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
 export const HomeView: React.FC = () => {
   const [legisladores, setLegisladores] = useState<LegisladorResumen[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -154,22 +161,21 @@ export const HomeView: React.FC = () => {
   }, [filtroLey]);
 
   const sugerenciasAutocompletado = useMemo(() => {
-    const q = busqueda.trim().toLowerCase();
+    const q = normalizarTexto(busqueda);
     if (!q) return [];
     return legisladores
-      .filter(
-        (l) =>
-          l.nombre_completo.toLowerCase().includes(q) ||
-          l.bloque_actual.toLowerCase().includes(q) ||
-          l.provincia.toLowerCase().includes(q) ||
-          l.cuit.includes(q)
-      )
+      .filter((l) => {
+        const haystack = normalizarTexto(
+          `${l.nombre_completo} ${l.bloque_actual} ${l.provincia} ${l.cuit} ${l.slug || ''}`
+        );
+        return haystack.includes(q);
+      })
       .slice(0, 6);
   }, [legisladores, busqueda]);
 
   // FILTRADO Y ORDENAMIENTO EN MEMORIA
   const legisladoresFiltrados = useMemo(() => {
-    const q = busqueda.trim().toLowerCase();
+    const q = normalizarTexto(busqueda);
 
     const filtrados = legisladores.filter((leg) => {
       // 1. Cámara
@@ -261,14 +267,12 @@ export const HomeView: React.FC = () => {
         return false;
       }
 
-      // 11. Búsqueda por texto
+      // 11. Búsqueda por texto (insensible a tildes, mayúsculas y slugs)
       if (q) {
-        const matchText =
-          leg.nombre_completo.toLowerCase().includes(q) ||
-          leg.bloque_actual.toLowerCase().includes(q) ||
-          leg.provincia.toLowerCase().includes(q) ||
-          leg.cuit.toLowerCase().includes(q);
-        if (!matchText) return false;
+        const haystack = normalizarTexto(
+          `${leg.nombre_completo} ${leg.bloque_actual} ${leg.provincia} ${leg.cuit} ${leg.slug || ''}`
+        );
+        if (!haystack.includes(q)) return false;
       }
 
       return true;

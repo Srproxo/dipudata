@@ -58,6 +58,22 @@ function respondJson(array $payload, int $statusCode = 200): never
 }
 
 /**
+ * Normaliza cadenas de búsqueda eliminando tildes y diacríticos
+ */
+function normalizarTextoBusqueda(string $str): string
+{
+    $str = mb_strtolower($str, 'UTF-8');
+    $map = [
+        'á'=>'a', 'é'=>'e', 'í'=>'i', 'ó'=>'o', 'ú'=>'u', 'ü'=>'u',
+        'à'=>'a', 'è'=>'e', 'ì'=>'i', 'ò'=>'o', 'ù'=>'u',
+        'â'=>'a', 'ê'=>'e', 'î'=>'i', 'ô'=>'o', 'û'=>'u',
+        'ä'=>'a', 'ë'=>'e', 'ï'=>'i', 'ö'=>'o',
+        'ã'=>'a', 'õ'=>'o',
+    ];
+    return strtr($str, $map);
+}
+
+/**
  * Obtiene todos los legisladores desde MySQL o desde el almacén en memoria resiliente
  */
 function fetchAllLegisladores(?PDO $pdo): array
@@ -322,11 +338,10 @@ if ($method === 'GET' && ($route === '/legisladores' || $route === '/')) {
             return false;
         }
         if ($q !== '') {
-            $haystack = mb_strtolower(
-                $leg['nombre_completo'] . ' ' . $leg['bloque_actual'] . ' ' . $leg['provincia'] . ' ' . $leg['id_congreso'],
-                'UTF-8'
+            $haystack = normalizarTextoBusqueda(
+                $leg['nombre_completo'] . ' ' . $leg['bloque_actual'] . ' ' . $leg['provincia'] . ' ' . $leg['id_congreso'] . ' ' . ($leg['slug'] ?? '')
             );
-            $needle = mb_strtolower($q, 'UTF-8');
+            $needle = normalizarTextoBusqueda($q);
             if (!str_contains($haystack, $needle)) {
                 return false;
             }
