@@ -126,7 +126,7 @@ $sv = array_filter($vot, fn($v) => ($v['c'] ?? 'D') === 'S');
 $malSv = 0;
 foreach ($sv as $v) { $d = Datos::votacion($v['id']); if (count($d['votos'] ?? []) !== 72) { $malSv++; } }
 ok(count($sv) === 183 && $malSv === 0, 'las 183 votaciones del Senado tienen los 72 votos de los senadores (' . count($sv) . ')');
-ok(($meta['excluidas']['Senadores'] ?? 0) === 0, 'ninguna votación del Senado quedó excluida de las estadísticas');
+ok(($meta['validas']['Diputados'] ?? 0) === 141 && ($meta['validas']['Senadores'] ?? 0) === 183 && empty($meta['excluidas']), 'las 141 votaciones de Diputados y las 183 del Senado son válidas y ninguna quedó excluida');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
