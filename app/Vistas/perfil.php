@@ -72,6 +72,29 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </section>
 <?php endif; ?>
 
+<?php $dj = Datos::ddjj($l['camara'], $l['slug']); ?>
+<?php if ($dj): ?>
+<section class="seccion" aria-labelledby="ddjj">
+  <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
+    <tbody>
+    <?php foreach ($dj as $d): ?>
+      <tr>
+        <td class="num" data-etiqueta="Año fiscal"><?= (int)$d['anio'] ?></td>
+        <td class="der num" data-etiqueta="Bienes"><?= e(monto_ars((string)$d['bienes_final'])) ?></td>
+        <td class="der num" data-etiqueta="Deudas"><?= e(monto_ars((string)$d['deudas_final'])) ?></td>
+        <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
+        <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
+        <td data-etiqueta="Tipo"><?= e($d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Son pesos de cada año, sin ajustar por inflación: no sirven para comparar un año con otro. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
+</section>
+<?php endif; ?>
+
 <?php $sub = !$esSen ? Datos::subsidiosDiputado($l['slug']) : []; ?>
 <?php if ($sub): ?>
 <section class="seccion" aria-labelledby="subs">
