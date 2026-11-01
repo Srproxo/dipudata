@@ -23,6 +23,39 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 45977379.0,
    "ingresos_netos": 39721883.77
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 10219677.0,
+   "deudas_inicio": 2400000.0,
+   "bienes_final": 8897764.81,
+   "deudas_final": 1005519.0,
+   "patrimonio_neto_final": 7892245.81,
+   "ingresos_netos": 6903074.83
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4743700.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 10219677.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 10219677.0,
+   "ingresos_netos": 1710744.3
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3015000.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3420000.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3420000.0,
+   "ingresos_netos": 1704092.3
   }
  ],
  "sabrina-ajmechet": [
@@ -36,6 +69,52 @@
    "deudas_final": 8461698.36,
    "patrimonio_neto_final": 141762971.13,
    "ingresos_netos": 88741868.53
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22094136.95,
+   "deudas_inicio": 0.0,
+   "bienes_final": 78432747.35,
+   "deudas_final": 3567420.23,
+   "patrimonio_neto_final": 74865327.12,
+   "ingresos_netos": 30971135.0
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11403828.45,
+   "deudas_inicio": 0.0,
+   "bienes_final": 22094136.95,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 22094136.95,
+   "ingresos_netos": 8964483.78
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3568993.86,
+   "deudas_inicio": 0.0,
+   "bienes_final": 11403828.45,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 11403828.45,
+   "ingresos_netos": 211659.61
+  }
+ ],
+ "s:guillermo-eduardo-andrada": [
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4862629.77,
+   "deudas_inicio": 0.0,
+   "bienes_final": 14267772.35,
+   "deudas_final": 267414.08,
+   "patrimonio_neto_final": 14000358.27,
+   "ingresos_netos": 4610710.44
   }
  ],
  "damian-arabia": [
@@ -49,6 +128,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 206455482.86,
    "ingresos_netos": 41583831.52
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 103480229.07,
+   "deudas_inicio": 754000.0,
+   "bienes_final": 140577300.0,
+   "deudas_final": 252000.0,
+   "patrimonio_neto_final": 140325300.0,
+   "ingresos_netos": 8250200.0
   }
  ],
  "alberto-arrua": [
@@ -62,6 +152,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 3251745.0,
    "ingresos_netos": 44051118.59
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 323128.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1571939.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1571939.0,
+   "ingresos_netos": 1501752.58
   }
  ],
  "fernanda-avila": [
@@ -75,6 +176,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 64588200.24,
    "ingresos_netos": 39672286.08
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11955799.09,
+   "deudas_inicio": 0.0,
+   "bienes_final": 30085320.58,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 30085320.58,
+   "ingresos_netos": 20619535.64
   }
  ],
  "karina-banfi": [
@@ -88,6 +200,105 @@
    "deudas_final": 8000000.0,
    "patrimonio_neto_final": 17886616.0,
    "ingresos_netos": 38534916.6
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4132342.76,
+   "deudas_inicio": 0.0,
+   "bienes_final": 28553593.25,
+   "deudas_final": 9000000.0,
+   "patrimonio_neto_final": 19553593.25,
+   "ingresos_netos": 13850901.85
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3007021.83,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4132342.76,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4132342.76,
+   "ingresos_netos": 3341229.85
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2240880.81,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3007021.83,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3007021.83,
+   "ingresos_netos": 1670707.29
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1752422.5,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2240880.81,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2240880.81,
+   "ingresos_netos": 1436241.45
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1638959.94,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1752422.5,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1752422.5,
+   "ingresos_netos": 1488999.07
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1879643.6,
+   "deudas_inicio": 385489.93,
+   "bienes_final": 1638959.94,
+   "deudas_final": 417012.59,
+   "patrimonio_neto_final": 1221947.35,
+   "ingresos_netos": 1736826.89
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1598540.91,
+   "deudas_inicio": 294956.54,
+   "bienes_final": 1879643.6,
+   "deudas_final": 385489.93,
+   "patrimonio_neto_final": 1494153.67,
+   "ingresos_netos": 1518935.73
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 591967.82,
+   "deudas_inicio": 2959.84,
+   "bienes_final": 1513970.06,
+   "deudas_final": 294956.54,
+   "patrimonio_neto_final": 1219013.52,
+   "ingresos_netos": 1126748.79
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 419747.22,
+   "deudas_inicio": 2956.79,
+   "bienes_final": 591967.82,
+   "deudas_final": 2959.84,
+   "patrimonio_neto_final": 589007.98,
+   "ingresos_netos": 203805.03
   }
  ],
  "luis-eugenio-basterra": [
@@ -101,6 +312,72 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 80861718.35,
    "ingresos_netos": 41006023.36
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11374252.04,
+   "deudas_inicio": 0.0,
+   "bienes_final": 41338636.4,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 41338636.4,
+   "ingresos_netos": 23267570.83
+  },
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 1730679.14,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2593385.56,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2593385.56,
+   "ingresos_netos": 2265586.46
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 969128.82,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1730679.15,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1730679.15,
+   "ingresos_netos": 1700025.96
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 825191.31,
+   "deudas_inicio": 0.0,
+   "bienes_final": 969128.82,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 969128.82,
+   "ingresos_netos": 1394944.29
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 2,
+   "bienes_inicio": 437208.34,
+   "deudas_inicio": 115365.37,
+   "bienes_final": 659543.21,
+   "deudas_final": 51505.97,
+   "patrimonio_neto_final": 608037.24,
+   "ingresos_netos": 739940.83
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 240553.81,
+   "deudas_inicio": 52347.68,
+   "bienes_final": 437208.34,
+   "deudas_final": 115365.37,
+   "patrimonio_neto_final": 321842.97,
+   "ingresos_netos": 596150.94
   }
  ],
  "beltran-benedit": [
@@ -114,6 +391,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 43095152.0,
    "ingresos_netos": 16516929.36
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 32609375.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 32609375.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 32609375.0,
+   "ingresos_netos": 5638629.22
   }
  ],
  "rocio-bonacci": [
@@ -140,6 +428,52 @@
    "deudas_final": 222387.78,
    "patrimonio_neto_final": 395586946.26,
    "ingresos_netos": 45519347.12
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 58017973.89,
+   "deudas_inicio": 241326.09,
+   "bienes_final": 202780443.21,
+   "deudas_final": 1035984.64,
+   "patrimonio_neto_final": 201744458.57,
+   "ingresos_netos": 17526287.89
+  }
+ ],
+ "myriam-teresa-bregman": [
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 311806.52,
+   "deudas_inicio": 0.0,
+   "bienes_final": 321733.39,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 321733.39,
+   "ingresos_netos": 84415.34
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 201285.44,
+   "deudas_inicio": 0.0,
+   "bienes_final": 311779.08,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 311779.08,
+   "ingresos_netos": 522093.78
+  },
+  {
+   "anio": 2014,
+   "tipo": "Inicial",
+   "rectificativa": 0,
+   "bienes_inicio": 0.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 176777.44,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 176777.44,
+   "ingresos_netos": 279444.63
   }
  ],
  "juan-fernando-brugge": [
@@ -153,6 +487,83 @@
    "deudas_final": 23724561.0,
    "patrimonio_neto_final": 80306285.68,
    "ingresos_netos": 61692074.72
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 23435492.05,
+   "deudas_inicio": 7901765.97,
+   "bienes_final": 56802358.11,
+   "deudas_final": 17009574.76,
+   "patrimonio_neto_final": 39792783.35,
+   "ingresos_netos": 11538335.27
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12983241.49,
+   "deudas_inicio": 4663656.68,
+   "bienes_final": 23435492.05,
+   "deudas_final": 7901765.97,
+   "patrimonio_neto_final": 15533726.08,
+   "ingresos_netos": 6609840.52
+  },
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 7251433.95,
+   "deudas_inicio": 1090133.81,
+   "bienes_final": 7751439.8,
+   "deudas_final": 77281.0,
+   "patrimonio_neto_final": 7674158.8,
+   "ingresos_netos": 3378480.81
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4652259.41,
+   "deudas_inicio": 61229.55,
+   "bienes_final": 7251433.95,
+   "deudas_final": 1090133.81,
+   "patrimonio_neto_final": 6161300.14,
+   "ingresos_netos": 2288794.88
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4439930.61,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4652259.41,
+   "deudas_final": 61229.55,
+   "patrimonio_neto_final": 4591029.86,
+   "ingresos_netos": 1821300.21
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3465033.06,
+   "deudas_inicio": 1477973.43,
+   "bienes_final": 4439930.61,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4439930.61,
+   "ingresos_netos": 3473408.54
+  },
+  {
+   "anio": 2015,
+   "tipo": "Inicial",
+   "rectificativa": 0,
+   "bienes_inicio": 0.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3465033.06,
+   "deudas_final": 1477973.43,
+   "patrimonio_neto_final": 1987059.63,
+   "ingresos_netos": 1940530.1
   }
  ],
  "santiago-cafiero": [
@@ -192,6 +603,61 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 447882984.88,
    "ingresos_netos": 90515212.8
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 74482908.92,
+   "deudas_inicio": 0.0,
+   "bienes_final": 298695593.04,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 298695593.04,
+   "ingresos_netos": 108265207.55
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 2,
+   "bienes_inicio": 8489537.15,
+   "deudas_inicio": 0.0,
+   "bienes_final": 13670714.22,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 13670714.22,
+   "ingresos_netos": 2252781.28
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 4606399.15,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7438956.28,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7438956.28,
+   "ingresos_netos": 1755211.42
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 4333975.7,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4606399.15,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4606399.15,
+   "ingresos_netos": 1443033.74
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3410493.5,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4333975.7,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4333975.7,
+   "ingresos_netos": 1152711.59
   }
  ],
  "jorge-chica": [
@@ -218,6 +684,61 @@
    "deudas_final": 537968.0,
    "patrimonio_neto_final": 465173756.16,
    "ingresos_netos": 100106672.22
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 125937964.25,
+   "deudas_inicio": 20021000.0,
+   "bienes_final": 176331397.48,
+   "deudas_final": 80000.0,
+   "patrimonio_neto_final": 176251397.48,
+   "ingresos_netos": 36495116.07
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 40615489.07,
+   "deudas_inicio": 3612000.0,
+   "bienes_final": 125937964.25,
+   "deudas_final": 20021000.0,
+   "patrimonio_neto_final": 105916964.25,
+   "ingresos_netos": 13553067.22
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 16177619.8,
+   "deudas_inicio": 3616000.0,
+   "bienes_final": 40615489.07,
+   "deudas_final": 3612000.0,
+   "patrimonio_neto_final": 37003489.07,
+   "ingresos_netos": 7313865.92
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8306249.94,
+   "deudas_inicio": 4800000.0,
+   "bienes_final": 16177619.8,
+   "deudas_final": 3616000.0,
+   "patrimonio_neto_final": 12561619.8,
+   "ingresos_netos": 5422018.58
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2266226.63,
+   "deudas_inicio": 45000.0,
+   "bienes_final": 8306249.94,
+   "deudas_final": 4800000.0,
+   "patrimonio_neto_final": 3506249.94,
+   "ingresos_netos": 2025962.86
   }
  ],
  "facundo-correa-llano": [
@@ -231,6 +752,28 @@
    "deudas_final": 5628503.3,
    "patrimonio_neto_final": 160952274.38,
    "ingresos_netos": 49075232.04
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7412277.33,
+   "deudas_inicio": 1854928.78,
+   "bienes_final": 12959378.41,
+   "deudas_final": 14191545.26,
+   "patrimonio_neto_final": -1232166.85,
+   "ingresos_netos": 2885335.17
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5913359.18,
+   "deudas_inicio": 244135.0,
+   "bienes_final": 7412277.39,
+   "deudas_final": 1854928.78,
+   "patrimonio_neto_final": 5557348.61,
+   "ingresos_netos": 3927509.48
   }
  ],
  "ricardo-daives": [
@@ -244,6 +787,50 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 113925603.47,
    "ingresos_netos": 46733622.86
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12896392.56,
+   "deudas_inicio": 0.0,
+   "bienes_final": 46081387.5,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 46081387.5,
+   "ingresos_netos": 13493338.64
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4354838.32,
+   "deudas_inicio": 0.0,
+   "bienes_final": 12896392.56,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 12896392.56,
+   "ingresos_netos": 5425167.62
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3074441.7,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4354838.32,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4354838.32,
+   "ingresos_netos": 3289492.62
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1828574.2,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3074441.7,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3074441.7,
+   "ingresos_netos": 2461424.6
   }
  ],
  "s:eduardo-enrique-de-pedro": [
@@ -259,6 +846,43 @@
    "ingresos_netos": 231945877.3
   }
  ],
+ "nicolas-del-cano": [
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 158057.5,
+   "deudas_inicio": 0.0,
+   "bienes_final": 199208.55,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 199208.55,
+   "ingresos_netos": 396389.46
+  }
+ ],
+ "s:juliana-di-tullio": [
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 31001121.77,
+   "deudas_inicio": 698274.33,
+   "bienes_final": 49822537.65,
+   "deudas_final": 1032792.64,
+   "patrimonio_neto_final": 48789745.01,
+   "ingresos_netos": 3775479.06
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22161858.35,
+   "deudas_inicio": 543656.25,
+   "bienes_final": 31001121.77,
+   "deudas_final": 698274.33,
+   "patrimonio_neto_final": 30302847.44,
+   "ingresos_netos": 11356936.94
+  }
+ ],
  "nicolas-emma": [
   {
    "anio": 2024,
@@ -270,6 +894,107 @@
    "deudas_final": 24500000.0,
    "patrimonio_neto_final": 11833890.74,
    "ingresos_netos": 15896188.61
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 898207.02,
+   "deudas_inicio": 1263465.43,
+   "bienes_final": 4884281.82,
+   "deudas_final": 2018329.44,
+   "patrimonio_neto_final": 2865952.38,
+   "ingresos_netos": 852680.51
+  }
+ ],
+ "s:carlos-mauricio-espinola": [
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 19235380.2,
+   "deudas_inicio": 0.0,
+   "bienes_final": 32560065.5,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 32560065.5,
+   "ingresos_netos": 5869620.84
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7699439.58,
+   "deudas_inicio": 0.0,
+   "bienes_final": 19235380.2,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 19235380.2,
+   "ingresos_netos": 3405375.47
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 11351962.99,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7699439.58,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7699439.58,
+   "ingresos_netos": 2763337.65
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3828290.97,
+   "deudas_inicio": 0.0,
+   "bienes_final": 11351962.99,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 11351962.99,
+   "ingresos_netos": 2377053.35
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 2433594.45,
+   "deudas_inicio": 1010000.0,
+   "bienes_final": 3828290.97,
+   "deudas_final": 582750.0,
+   "patrimonio_neto_final": 3245540.97,
+   "ingresos_netos": 1810301.03
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2277364.5,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3105755.95,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3105755.95,
+   "ingresos_netos": 1766307.03
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1422575.17,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2277364.5,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2277364.5,
+   "ingresos_netos": 1126156.32
+  },
+  {
+   "anio": 2015,
+   "tipo": "NULL",
+   "rectificativa": 1,
+   "bienes_inicio": 637310.19,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1422575.17,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1422575.17,
+   "ingresos_netos": 1234106.09
   }
  ],
  "gabriela-estevez": [
@@ -283,6 +1008,105 @@
    "deudas_final": 18476349.42,
    "patrimonio_neto_final": 21365960.58,
    "ingresos_netos": 13882895.25
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4207867.65,
+   "deudas_inicio": 502000.0,
+   "bienes_final": 31426230.0,
+   "deudas_final": 294000.0,
+   "patrimonio_neto_final": 31132230.0,
+   "ingresos_netos": 11136251.2
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2773402.75,
+   "deudas_inicio": 1632500.0,
+   "bienes_final": 4207867.65,
+   "deudas_final": 502000.0,
+   "patrimonio_neto_final": 3705867.65,
+   "ingresos_netos": 3497371.94
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2728358.5,
+   "deudas_inicio": 1011404.46,
+   "bienes_final": 2773402.75,
+   "deudas_final": 1119500.0,
+   "patrimonio_neto_final": 1653902.75,
+   "ingresos_netos": 1809082.54
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1741959.81,
+   "deudas_inicio": 386000.0,
+   "bienes_final": 2728358.5,
+   "deudas_final": 1011404.46,
+   "patrimonio_neto_final": 1716954.04,
+   "ingresos_netos": 1493149.29
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1813408.5,
+   "deudas_inicio": 643000.0,
+   "bienes_final": 1741959.81,
+   "deudas_final": 585000.0,
+   "patrimonio_neto_final": 1156959.81,
+   "ingresos_netos": 1702095.05
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 1202059.4,
+   "deudas_inicio": 752000.0,
+   "bienes_final": 1813408.5,
+   "deudas_final": 643000.0,
+   "patrimonio_neto_final": 1170408.5,
+   "ingresos_netos": 2012268.74
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1118248.44,
+   "deudas_inicio": 1279327.05,
+   "bienes_final": 1202059.4,
+   "deudas_final": 1063478.12,
+   "patrimonio_neto_final": 138581.28,
+   "ingresos_netos": 1355893.07
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 747410.84,
+   "deudas_inicio": 567678.0,
+   "bienes_final": 1118248.44,
+   "deudas_final": 1279327.05,
+   "patrimonio_neto_final": -161078.61,
+   "ingresos_netos": 1062729.14
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 185251.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 747410.84,
+   "deudas_final": 567678.0,
+   "patrimonio_neto_final": 179732.84,
+   "ingresos_netos": 594911.64
   }
  ],
  "s:flavio-sergio-fama": [
@@ -296,6 +1120,39 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 133822007.4,
    "ingresos_netos": 75111487.19
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 25816381.61,
+   "deudas_inicio": 0.0,
+   "bienes_final": 112704459.69,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 112704459.69,
+   "ingresos_netos": 13955266.91
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 15259157.61,
+   "deudas_inicio": 0.0,
+   "bienes_final": 25816381.61,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 25816381.61,
+   "ingresos_netos": 5830297.96
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9545532.95,
+   "deudas_inicio": 308031.34,
+   "bienes_final": 15259157.61,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 15259157.61,
+   "ingresos_netos": 3542687.96
   }
  ],
  "s:anabel-fernandez-sagasti": [
@@ -309,6 +1166,140 @@
    "deudas_final": 12439767.89,
    "patrimonio_neto_final": 92246666.36,
    "ingresos_netos": 65734565.67
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 23765349.42,
+   "deudas_inicio": 2517393.05,
+   "bienes_final": 52207460.67,
+   "deudas_final": 1929660.51,
+   "patrimonio_neto_final": 50277800.16,
+   "ingresos_netos": 13483583.52
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 16887392.3,
+   "deudas_inicio": 3132110.69,
+   "bienes_final": 23765349.42,
+   "deudas_final": 2517393.05,
+   "patrimonio_neto_final": 21247956.37,
+   "ingresos_netos": 5246733.13
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12658192.68,
+   "deudas_inicio": 2832237.96,
+   "bienes_final": 16887392.3,
+   "deudas_final": 3132110.69,
+   "patrimonio_neto_final": 13755281.61,
+   "ingresos_netos": 3217697.07
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9485245.77,
+   "deudas_inicio": 2921655.4,
+   "bienes_final": 12658192.68,
+   "deudas_final": 2832237.96,
+   "patrimonio_neto_final": 9825954.72,
+   "ingresos_netos": 2619480.79
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5184767.62,
+   "deudas_inicio": 3039975.02,
+   "bienes_final": 9485245.77,
+   "deudas_final": 2921655.4,
+   "patrimonio_neto_final": 6563590.37,
+   "ingresos_netos": 2262680.85
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1197734.15,
+   "deudas_inicio": 190062.22,
+   "bienes_final": 5184767.62,
+   "deudas_final": 3039975.02,
+   "patrimonio_neto_final": 2144792.6,
+   "ingresos_netos": 1723383.12
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 629659.15,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1197734.15,
+   "deudas_final": 190062.22,
+   "patrimonio_neto_final": 1007671.93,
+   "ingresos_netos": 1490650.03
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 418340.36,
+   "deudas_inicio": 0.0,
+   "bienes_final": 629659.15,
+   "deudas_final": 0.01,
+   "patrimonio_neto_final": 629659.14,
+   "ingresos_netos": 1083838.32
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 288757.41,
+   "deudas_inicio": 111022.81,
+   "bienes_final": 418340.36,
+   "deudas_final": 0.01,
+   "patrimonio_neto_final": 418340.35,
+   "ingresos_netos": 763447.01
+  }
+ ],
+ "maximiliano-ferraro": [
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1953721.31,
+   "deudas_inicio": 54551.19,
+   "bienes_final": 2596945.78,
+   "deudas_final": 232317.07,
+   "patrimonio_neto_final": 2364628.71,
+   "ingresos_netos": 3542545.0
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1495062.68,
+   "deudas_inicio": 301094.49,
+   "bienes_final": 1950668.21,
+   "deudas_final": 54602.96,
+   "patrimonio_neto_final": 1896065.25,
+   "ingresos_netos": -2874948.95
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1043993.7,
+   "deudas_inicio": 44264.27,
+   "bienes_final": 1495062.68,
+   "deudas_final": 236574.52,
+   "patrimonio_neto_final": 1258488.16,
+   "ingresos_netos": -2950323.84
   }
  ],
  "alejandro-finocchiaro": [
@@ -322,6 +1313,39 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 277791960.4,
    "ingresos_netos": 63073650.98
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 86880872.18,
+   "deudas_inicio": 340750.0,
+   "bienes_final": 138076741.04,
+   "deudas_final": 197807.0,
+   "patrimonio_neto_final": 137878934.04,
+   "ingresos_netos": 26721398.89
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 49309480.49,
+   "deudas_inicio": 464132.62,
+   "bienes_final": 86880872.18,
+   "deudas_final": 340750.0,
+   "patrimonio_neto_final": 86540122.18,
+   "ingresos_netos": 11122454.86
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 19693834.61,
+   "deudas_inicio": 146551.78,
+   "bienes_final": 49309480.49,
+   "deudas_final": 464132.62,
+   "patrimonio_neto_final": 48845347.87,
+   "ingresos_netos": 3630772.17
   }
  ],
  "monica-frade": [
@@ -335,6 +1359,87 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 87585548.96,
    "ingresos_netos": 40579024.19
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 10033115.72,
+   "deudas_inicio": 0.0,
+   "bienes_final": 55556746.7,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 55556746.7,
+   "ingresos_netos": 13897961.69
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4666137.35,
+   "deudas_inicio": 0.0,
+   "bienes_final": 10033115.72,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 10033115.72,
+   "ingresos_netos": 5713648.98
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3595381.56,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4666137.35,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4666137.35,
+   "ingresos_netos": 3049493.57
+  }
+ ],
+ "alicia-fregonese": [
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1192387.41,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2227521.2,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2227521.2,
+   "ingresos_netos": 1523242.87
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 352090.88,
+   "deudas_inicio": 0.0,
+   "bienes_final": 811375.14,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 811375.14,
+   "ingresos_netos": 1068572.18
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 359638.67,
+   "deudas_inicio": 0.0,
+   "bienes_final": 352090.88,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 352090.88,
+   "ingresos_netos": 0.0
+  }
+ ],
+ "andrea-freites": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4659124.46,
+   "deudas_inicio": 0.0,
+   "bienes_final": 30781370.36,
+   "deudas_final": 8233089.19,
+   "patrimonio_neto_final": 22548281.17,
+   "ingresos_netos": 18610232.56
   }
  ],
  "s:eduardo-horacio-galaretto": [
@@ -348,6 +1453,63 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 342772463.85,
    "ingresos_netos": 50714512.73
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 57888137.63,
+   "deudas_inicio": 0.0,
+   "bienes_final": 128555282.95,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 128555282.95,
+   "ingresos_netos": -25152217.54
+  }
+ ],
+ "maria-teresa-garcia": [
+  {
+   "anio": 2017,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 3238899.88,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3502049.96,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3502049.96,
+   "ingresos_netos": 0.0
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3237783.58,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3238899.89,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3238899.89,
+   "ingresos_netos": 1158362.76
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 4805623.1,
+   "deudas_inicio": 210158.38,
+   "bienes_final": 2783350.0,
+   "deudas_final": 170158.38,
+   "patrimonio_neto_final": 2613191.62,
+   "ingresos_netos": 688683.48
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2621506.92,
+   "deudas_inicio": 159085.91,
+   "bienes_final": 4805623.1,
+   "deudas_final": 210158.38,
+   "patrimonio_neto_final": 4595464.72,
+   "ingresos_netos": 627527.31
   }
  ],
  "jose-luis-garrido": [
@@ -387,6 +1549,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 723409875.76,
    "ingresos_netos": 65732760.15
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 83490733.4,
+   "deudas_inicio": 0.0,
+   "bienes_final": 403149423.67,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 403149423.67,
+   "ingresos_netos": 33578919.94
   }
  ],
  "jose-glinski": [
@@ -400,6 +1573,17 @@
    "deudas_final": 24364226.43,
    "patrimonio_neto_final": 8585013.54,
    "ingresos_netos": 43753469.05
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7687164.3,
+   "deudas_inicio": 2576272.27,
+   "bienes_final": 15016937.61,
+   "deudas_final": 2402060.03,
+   "patrimonio_neto_final": 12614877.58,
+   "ingresos_netos": 20775831.1
   }
  ],
  "s:enrique-martin-goerling-lara": [
@@ -426,6 +1610,129 @@
    "deudas_final": 116908416.6,
    "patrimonio_neto_final": 1069938827.38,
    "ingresos_netos": 47368161.41
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 208828156.98,
+   "deudas_inicio": 27627926.8,
+   "bienes_final": 617478884.21,
+   "deudas_final": 49061546.83,
+   "patrimonio_neto_final": 568417337.38,
+   "ingresos_netos": 23523043.57
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 113508474.87,
+   "deudas_inicio": 20226135.51,
+   "bienes_final": 208828156.98,
+   "deudas_final": 27627926.8,
+   "patrimonio_neto_final": 181200230.18,
+   "ingresos_netos": 6624661.31
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 61831770.51,
+   "deudas_inicio": 10129653.05,
+   "bienes_final": 113508474.87,
+   "deudas_final": 20226135.51,
+   "patrimonio_neto_final": 93282339.36,
+   "ingresos_netos": 3829073.64
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 45346622.88,
+   "deudas_inicio": 6382142.35,
+   "bienes_final": 61831770.51,
+   "deudas_final": 10129653.05,
+   "patrimonio_neto_final": 51702117.46,
+   "ingresos_netos": 3166165.88
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 24174245.66,
+   "deudas_inicio": 3806480.13,
+   "bienes_final": 45346622.88,
+   "deudas_final": 6382142.35,
+   "patrimonio_neto_final": 38964480.53,
+   "ingresos_netos": 3135811.25
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 14101541.66,
+   "deudas_inicio": 2692981.0,
+   "bienes_final": 24174245.66,
+   "deudas_final": 3806480.13,
+   "patrimonio_neto_final": 20367765.53,
+   "ingresos_netos": 2566141.18
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9711346.47,
+   "deudas_inicio": 3192981.0,
+   "bienes_final": 14101541.66,
+   "deudas_final": 2692981.0,
+   "patrimonio_neto_final": 11408560.66,
+   "ingresos_netos": 2060235.72
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12196249.63,
+   "deudas_inicio": 2021015.24,
+   "bienes_final": 9755892.46,
+   "deudas_final": 3192981.0,
+   "patrimonio_neto_final": 6562911.46,
+   "ingresos_netos": 1244003.62
+  }
+ ],
+ "gerardo-gustavo-gonzalez": [
+  {
+   "anio": 2021,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 4125739.05,
+   "deudas_inicio": 20253.13,
+   "bienes_final": 4125739.05,
+   "deudas_final": 20253.13,
+   "patrimonio_neto_final": 4105485.92,
+   "ingresos_netos": 0.0
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3078987.08,
+   "deudas_inicio": 20253.13,
+   "bienes_final": 4125739.05,
+   "deudas_final": 20253.13,
+   "patrimonio_neto_final": 4105485.92,
+   "ingresos_netos": 2369718.53
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2673034.85,
+   "deudas_inicio": 19185.07,
+   "bienes_final": 3078987.08,
+   "deudas_final": 20253.13,
+   "patrimonio_neto_final": 3058733.95,
+   "ingresos_netos": 677968.27
   }
  ],
  "carlos-mario-gutierrez": [
@@ -439,6 +1746,61 @@
    "deudas_final": 8898809.1,
    "patrimonio_neto_final": 275197651.99,
    "ingresos_netos": 41514706.48
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 39303710.49,
+   "deudas_inicio": 0.0,
+   "bienes_final": 133506952.09,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 133506952.09,
+   "ingresos_netos": 16214890.45
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22813633.78,
+   "deudas_inicio": 0.0,
+   "bienes_final": 39303710.49,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 39303710.49,
+   "ingresos_netos": 5803936.14
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 14474712.98,
+   "deudas_inicio": 0.0,
+   "bienes_final": 22813633.78,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 22813633.78,
+   "ingresos_netos": 3195362.21
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11651998.74,
+   "deudas_inicio": 0.0,
+   "bienes_final": 14474712.98,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 14474712.98,
+   "ingresos_netos": 2213815.64
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7165600.65,
+   "deudas_inicio": 28746.14,
+   "bienes_final": 11651998.74,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 11651998.74,
+   "ingresos_netos": 2290943.76
   }
  ],
  "itai-hagman": [
@@ -452,6 +1814,28 @@
    "deudas_final": 63000000.0,
    "patrimonio_neto_final": 86068010.95,
    "ingresos_netos": 39147076.62
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13792261.84,
+   "deudas_inicio": 0.0,
+   "bienes_final": 42647865.48,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 42647865.48,
+   "ingresos_netos": 14434511.55
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6686469.92,
+   "deudas_inicio": 0.0,
+   "bienes_final": 13792261.84,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 13792261.84,
+   "ingresos_netos": 5527591.65
   }
  ],
  "s:maria-victoria-huala": [
@@ -465,6 +1849,28 @@
    "deudas_final": 14552092.39,
    "patrimonio_neto_final": 14475296.67,
    "ingresos_netos": 45772776.42
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 682714.0,
+   "deudas_inicio": 1768518.84,
+   "bienes_final": 11780447.54,
+   "deudas_final": 20819807.86,
+   "patrimonio_neto_final": -9039360.32,
+   "ingresos_netos": 10760051.18
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 782.38,
+   "deudas_inicio": 13993.29,
+   "bienes_final": 682714.0,
+   "deudas_final": 1768518.84,
+   "patrimonio_neto_final": -1085804.84,
+   "ingresos_netos": 3779361.7
   }
  ],
  "gerardo-huesen": [
@@ -478,6 +1884,17 @@
    "deudas_final": 9666421.9,
    "patrimonio_neto_final": 1415333.6,
    "ingresos_netos": 47793607.01
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2754921.41,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3513471.93,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3513471.93,
+   "ingresos_netos": 7405597.01
   }
  ],
  "ana-maria-ianni": [
@@ -491,6 +1908,39 @@
    "deudas_final": 13046933.33,
    "patrimonio_neto_final": 146257740.32,
    "ingresos_netos": 41802863.97
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 26898946.42,
+   "deudas_inicio": 1220055.84,
+   "bienes_final": 73007455.14,
+   "deudas_final": 1743565.05,
+   "patrimonio_neto_final": 71263890.09,
+   "ingresos_netos": 13317435.58
+  },
+  {
+   "anio": 2015,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 1351320.0,
+   "deudas_inicio": 63333.33,
+   "bienes_final": 1662811.54,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1662811.54,
+   "ingresos_netos": 752735.15
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 995044.72,
+   "deudas_inicio": 103333.33,
+   "bienes_final": 1351320.0,
+   "deudas_final": 63333.33,
+   "patrimonio_neto_final": 1287986.67,
+   "ingresos_netos": 605349.74
   }
  ],
  "maria-cecilia-ibanez": [
@@ -504,6 +1954,85 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 33557044.0,
    "ingresos_netos": 38489895.0
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13474474.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 15506600.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 15506600.0,
+   "ingresos_netos": 5563233.0
+  }
+ ],
+ "s:luis-alfredo-juez": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 30744067.5,
+   "deudas_inicio": 0.0,
+   "bienes_final": 49146831.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 49146831.0,
+   "ingresos_netos": 12471532.46
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13293764.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 30744067.5,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 30744067.5,
+   "ingresos_netos": 5137198.16
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 14044304.24,
+   "deudas_inicio": 0.0,
+   "bienes_final": 13293764.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 13293764.0,
+   "ingresos_netos": 2941828.46
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1630976.55,
+   "deudas_inicio": 35100.0,
+   "bienes_final": 1953743.0,
+   "deudas_final": 14600.0,
+   "patrimonio_neto_final": 1939143.0,
+   "ingresos_netos": 609405.58
+  },
+  {
+   "anio": 2013,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1323135.45,
+   "deudas_inicio": 57400.0,
+   "bienes_final": 1630976.55,
+   "deudas_final": 35100.0,
+   "patrimonio_neto_final": 1595876.55,
+   "ingresos_netos": 504119.04
+  },
+  {
+   "anio": 2012,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1342510.68,
+   "deudas_inicio": 57400.0,
+   "bienes_final": 1323135.45,
+   "deudas_final": 35100.0,
+   "patrimonio_neto_final": 1288035.45,
+   "ingresos_netos": 408503.4
   }
  ],
  "s:mariana-juri": [
@@ -517,6 +2046,52 @@
    "deudas_final": 1266666.0,
    "patrimonio_neto_final": 27345133.74,
    "ingresos_netos": 71665929.23
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6399451.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 21202260.0,
+   "deudas_final": 2266666.69,
+   "patrimonio_neto_final": 18935593.31,
+   "ingresos_netos": 17998169.16
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5870451.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7880451.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7880451.0,
+   "ingresos_netos": 7393605.27
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5755451.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 5870451.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 5870451.0,
+   "ingresos_netos": 3564745.65
+  }
+ ],
+ "s:alicia-margarita-antonia-kirchner": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7194532.79,
+   "deudas_inicio": 0.0,
+   "bienes_final": 43626664.46,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 43626664.46,
+   "ingresos_netos": 0.0
   }
  ],
  "maximo-carlos-kirchner": [
@@ -530,6 +2105,83 @@
    "deudas_final": 86963957.66,
    "patrimonio_neto_final": 8224603053.57,
    "ingresos_netos": 67018272.22
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1099930211.99,
+   "deudas_inicio": 20122538.3,
+   "bienes_final": 4719066772.97,
+   "deudas_final": 56260297.44,
+   "patrimonio_neto_final": 4662806475.53,
+   "ingresos_netos": 22865017.15
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 523382019.69,
+   "deudas_inicio": 8861563.48,
+   "bienes_final": 1099930211.99,
+   "deudas_final": 20122538.3,
+   "patrimonio_neto_final": 1079807673.69,
+   "ingresos_netos": 10354132.54
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 400841818.69,
+   "deudas_inicio": 9041127.36,
+   "bienes_final": 523382019.69,
+   "deudas_final": 8861563.48,
+   "patrimonio_neto_final": 514520456.21,
+   "ingresos_netos": 4579713.43
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 291739213.02,
+   "deudas_inicio": 7711097.88,
+   "bienes_final": 400841818.69,
+   "deudas_final": 8936745.35,
+   "patrimonio_neto_final": 391905073.34,
+   "ingresos_netos": 3176521.81
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 42373223.4,
+   "deudas_inicio": 2567015.47,
+   "bienes_final": 85053033.38,
+   "deudas_final": 5340579.35,
+   "patrimonio_neto_final": 79712454.03,
+   "ingresos_netos": 6105189.15
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 35919289.68,
+   "deudas_inicio": 2557555.71,
+   "bienes_final": 42373223.4,
+   "deudas_final": 2567015.47,
+   "patrimonio_neto_final": 39806207.93,
+   "ingresos_netos": 2686569.04
+  },
+  {
+   "anio": 2014,
+   "tipo": "Inicial",
+   "rectificativa": 1,
+   "bienes_inicio": 0.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 35919289.68,
+   "deudas_final": 2557555.71,
+   "patrimonio_neto_final": 33361733.97,
+   "ingresos_netos": 2607599.8
   }
  ],
  "s:marcelo-nestor-lewandowski": [
@@ -543,6 +2195,39 @@
    "deudas_final": 9106000.0,
    "patrimonio_neto_final": 106186096.84,
    "ingresos_netos": 67619484.1
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 15791724.23,
+   "deudas_inicio": 385000.0,
+   "bienes_final": 42041772.89,
+   "deudas_final": 844000.0,
+   "patrimonio_neto_final": 41197772.89,
+   "ingresos_netos": 12017236.93
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8250374.39,
+   "deudas_inicio": 414000.0,
+   "bienes_final": 15791724.23,
+   "deudas_final": 385000.0,
+   "patrimonio_neto_final": 15406724.23,
+   "ingresos_netos": 5888707.06
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6380037.9,
+   "deudas_inicio": 622320.0,
+   "bienes_final": 8250374.39,
+   "deudas_final": 414000.0,
+   "patrimonio_neto_final": 7836374.39,
+   "ingresos_netos": 4036359.09
   }
  ],
  "mercedes-llano": [
@@ -556,6 +2241,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 39529007.41,
    "ingresos_netos": 48884865.12
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7810853.98,
+   "deudas_inicio": 2800000.0,
+   "bienes_final": 25239995.6,
+   "deudas_final": 4305022.0,
+   "patrimonio_neto_final": 20934973.6,
+   "ingresos_netos": 9505099.36
   }
  ],
  "s:candida-cristina-lopez": [
@@ -569,6 +2265,63 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 190404209.74,
    "ingresos_netos": 62697265.5
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 48990262.65,
+   "deudas_inicio": 0.0,
+   "bienes_final": 99575299.65,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 99575299.65,
+   "ingresos_netos": 11800184.7
+  }
+ ],
+ "martin-lousteau": [
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 15063993.05,
+   "deudas_inicio": 218603.53,
+   "bienes_final": 54927994.65,
+   "deudas_final": 40689.0,
+   "patrimonio_neto_final": 54887305.65,
+   "ingresos_netos": 2218369.9
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11515454.16,
+   "deudas_inicio": 82329.0,
+   "bienes_final": 15063993.05,
+   "deudas_final": 218603.53,
+   "patrimonio_neto_final": 14845389.52,
+   "ingresos_netos": 738143.48
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7044983.21,
+   "deudas_inicio": 207370.1,
+   "bienes_final": 8297203.59,
+   "deudas_final": 31303.58,
+   "patrimonio_neto_final": 8265900.01,
+   "ingresos_netos": 2127305.8
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5488330.07,
+   "deudas_inicio": 315000.0,
+   "bienes_final": 7044983.21,
+   "deudas_final": 207370.1,
+   "patrimonio_neto_final": 6837613.11,
+   "ingresos_netos": 1597460.72
   }
  ],
  "lorena-macyszyn": [
@@ -582,6 +2335,17 @@
    "deudas_final": 1977022.72,
    "patrimonio_neto_final": 122302436.91,
    "ingresos_netos": 44102959.18
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 16705576.02,
+   "deudas_inicio": 0.0,
+   "bienes_final": 78192630.29,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 78192630.29,
+   "ingresos_netos": 4852374.0
   }
  ],
  "juan-marino": [
@@ -595,6 +2359,28 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 6306905.52,
    "ingresos_netos": 32881599.32
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3994640.51,
+   "deudas_inicio": 0.0,
+   "bienes_final": 11526526.42,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 11526526.42,
+   "ingresos_netos": 12173985.97
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3875507.95,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4400041.95,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4400041.95,
+   "ingresos_netos": 4276680.34
   }
  ],
  "alvaro-martinez": [
@@ -608,6 +2394,39 @@
    "deudas_final": 4734000.0,
    "patrimonio_neto_final": 83303911.6,
    "ingresos_netos": 45186741.01
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8242000.39,
+   "deudas_inicio": 1435000.0,
+   "bienes_final": 23236259.85,
+   "deudas_final": 2580000.0,
+   "patrimonio_neto_final": 20656259.85,
+   "ingresos_netos": 13990525.19
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4284010.8,
+   "deudas_inicio": 0.0,
+   "bienes_final": 5733775.11,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 5733775.11,
+   "ingresos_netos": 5193408.27
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3511559.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4284010.8,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4284010.8,
+   "ingresos_netos": 2340779.53
   }
  ],
  "german-pedro-martinez": [
@@ -621,6 +2440,50 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 45719036.54,
    "ingresos_netos": 45366866.67
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4780851.82,
+   "deudas_inicio": 0.0,
+   "bienes_final": 9456144.51,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 9456144.51,
+   "ingresos_netos": 5396418.85
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2994334.21,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4780851.82,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4780851.82,
+   "ingresos_netos": 3024527.91
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1658878.87,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2994334.21,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2994334.21,
+   "ingresos_netos": 2422675.22
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1325553.87,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1658878.87,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1658878.87,
+   "ingresos_netos": 488153.41
   }
  ],
  "nicolas-massot": [
@@ -634,6 +2497,186 @@
    "deudas_final": 259863080.29,
    "patrimonio_neto_final": 1629261682.13,
    "ingresos_netos": 196912877.09
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 200480715.78,
+   "deudas_inicio": 31184373.23,
+   "bienes_final": 692029678.4,
+   "deudas_final": 82245712.64,
+   "patrimonio_neto_final": 609783965.76,
+   "ingresos_netos": 79204897.37
+  },
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 10726645.09,
+   "deudas_inicio": 0.0,
+   "bienes_final": 26458344.76,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 26458344.76,
+   "ingresos_netos": 3009180.56
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 5719074.59,
+   "deudas_inicio": 321.37,
+   "bienes_final": 10726645.09,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 10726645.09,
+   "ingresos_netos": 1740656.58
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3015714.91,
+   "deudas_inicio": 0.0,
+   "bienes_final": 5719074.59,
+   "deudas_final": 321.37,
+   "patrimonio_neto_final": 5718753.22,
+   "ingresos_netos": 1456858.3
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 1881341.84,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3015714.91,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3015714.91,
+   "ingresos_netos": 1091836.0
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1374888.3,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1881341.84,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1881341.84,
+   "ingresos_netos": 630088.61
+  }
+ ],
+ "s:jose-miguel-angel-mayans": [
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 20344177.65,
+   "deudas_inicio": 0.0,
+   "bienes_final": 38082415.1,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 38082415.1,
+   "ingresos_netos": 5401039.69
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13338722.57,
+   "deudas_inicio": 0.0,
+   "bienes_final": 20344177.65,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 20344177.65,
+   "ingresos_netos": 3298716.71
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 12970556.05,
+   "deudas_inicio": 0.0,
+   "bienes_final": 13338722.57,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 13338722.57,
+   "ingresos_netos": 2521917.05
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9133278.18,
+   "deudas_inicio": 600000.0,
+   "bienes_final": 12970556.05,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 12970556.05,
+   "ingresos_netos": 2328131.32
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4208566.7,
+   "deudas_inicio": 0.0,
+   "bienes_final": 9133278.18,
+   "deudas_final": 600000.0,
+   "patrimonio_neto_final": 8533278.18,
+   "ingresos_netos": 1769302.43
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3266375.15,
+   "deudas_inicio": 70000.0,
+   "bienes_final": 5015973.01,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 5015973.01,
+   "ingresos_netos": 1481152.81
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2760392.17,
+   "deudas_inicio": 141750.0,
+   "bienes_final": 3266375.15,
+   "deudas_final": 70000.0,
+   "patrimonio_neto_final": 3196375.15,
+   "ingresos_netos": 1123551.44
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 2252199.07,
+   "deudas_inicio": 213824.82,
+   "bienes_final": 2760392.17,
+   "deudas_final": 141750.0,
+   "patrimonio_neto_final": 2618642.17,
+   "ingresos_netos": 748851.51
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 1126375.05,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2252199.07,
+   "deudas_final": 213824.82,
+   "patrimonio_neto_final": 2038374.25,
+   "ingresos_netos": 613011.54
+  }
+ ],
+ "nicolas-mayoraz": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 24459504.51,
+   "deudas_inicio": 0.0,
+   "bienes_final": 92839410.7,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 92839410.7,
+   "ingresos_netos": 59941249.09
   }
  ],
  "gladys-medina": [
@@ -647,6 +2690,65 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 54748623.7,
    "ingresos_netos": 46205263.48
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 10970424.7,
+   "deudas_inicio": 0.0,
+   "bienes_final": 24154334.36,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 24154334.36,
+   "ingresos_netos": 6332299.03
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6678834.02,
+   "deudas_inicio": 3388000.0,
+   "bienes_final": 7336031.68,
+   "deudas_final": 1079000.0,
+   "patrimonio_neto_final": 6257031.68,
+   "ingresos_netos": 2558322.43
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2584090.74,
+   "deudas_inicio": 1947500.0,
+   "bienes_final": 6678834.02,
+   "deudas_final": 3388000.0,
+   "patrimonio_neto_final": 3290834.02,
+   "ingresos_netos": 2512940.87
+  }
+ ],
+ "martin-alexis-menem": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 295650916.27,
+   "deudas_inicio": 12907917.26,
+   "bienes_final": 605015973.68,
+   "deudas_final": 34079632.28,
+   "patrimonio_neto_final": 570936341.4,
+   "ingresos_netos": 24875641.35
+  }
+ ],
+ "roxana-monzon": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3730000.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3730000.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3730000.0,
+   "ingresos_netos": 6379407.39
   }
  ],
  "francisco-morchio": [
@@ -660,6 +2762,17 @@
    "deudas_final": 2417331.84,
    "patrimonio_neto_final": 435874558.93,
    "ingresos_netos": 69431201.98
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 52927149.58,
+   "deudas_inicio": 1002716.39,
+   "bienes_final": 212876974.42,
+   "deudas_final": 1300745.71,
+   "patrimonio_neto_final": 211576228.71,
+   "ingresos_netos": 37554778.64
   }
  ],
  "cecilia-moreau": [
@@ -673,6 +2786,173 @@
    "deudas_final": 96830000.0,
    "patrimonio_neto_final": 25192480.96,
    "ingresos_netos": 32712199.43
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12640406.34,
+   "deudas_inicio": 16280320.0,
+   "bienes_final": 30717719.38,
+   "deudas_final": 72519000.0,
+   "patrimonio_neto_final": -41801280.62,
+   "ingresos_netos": 13380573.65
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2558462.22,
+   "deudas_inicio": 0.0,
+   "bienes_final": 12640406.34,
+   "deudas_final": 16280320.0,
+   "patrimonio_neto_final": -3639913.66,
+   "ingresos_netos": 4779353.61
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1726882.38,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2558462.22,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2558462.22,
+   "ingresos_netos": 1670707.29
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1774266.12,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1726882.38,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1726882.38,
+   "ingresos_netos": 1468022.75
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1584192.55,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1774266.12,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1774266.12,
+   "ingresos_netos": 1590102.57
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1629349.45,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1584192.55,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1584192.55,
+   "ingresos_netos": 1635594.39
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1829712.65,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1762119.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1762119.0,
+   "ingresos_netos": 1064403.07
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1672733.35,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1829712.65,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1829712.65,
+   "ingresos_netos": 1136748.8
+  }
+ ],
+ "estela-mary-neder": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12897678.74,
+   "deudas_inicio": 0.0,
+   "bienes_final": 33738853.75,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 33738853.75,
+   "ingresos_netos": 15641298.36
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8627566.46,
+   "deudas_inicio": 0.0,
+   "bienes_final": 12897678.74,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 12897678.74,
+   "ingresos_netos": 5492164.15
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5110637.76,
+   "deudas_inicio": 0.0,
+   "bienes_final": 8627566.46,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 8627566.46,
+   "ingresos_netos": 3167206.31
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3320336.26,
+   "deudas_inicio": 0.0,
+   "bienes_final": 5110637.76,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 5110637.76,
+   "ingresos_netos": 2565228.42
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2076732.87,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3320336.26,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 3320336.26,
+   "ingresos_netos": 2403304.57
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1010200.63,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2076732.87,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2076732.87,
+   "ingresos_netos": 1825425.33
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 596288.34,
+   "deudas_inicio": 0.0,
+   "bienes_final": 908625.36,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 908625.36,
+   "ingresos_netos": 1036173.97
   }
  ],
  "s:jose-emilio-neder": [
@@ -686,6 +2966,61 @@
    "deudas_final": 291529.0,
    "patrimonio_neto_final": 69767835.04,
    "ingresos_netos": 66793097.44
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12467811.07,
+   "deudas_inicio": 131172.17,
+   "bienes_final": 30108517.28,
+   "deudas_final": 215945.03,
+   "patrimonio_neto_final": 29892572.25,
+   "ingresos_netos": 13367030.51
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9102939.62,
+   "deudas_inicio": 61938.82,
+   "bienes_final": 12467811.07,
+   "deudas_final": 131172.17,
+   "patrimonio_neto_final": 12336638.9,
+   "ingresos_netos": 5232225.97
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5214572.53,
+   "deudas_inicio": 87550.07,
+   "bienes_final": 9102939.62,
+   "deudas_final": 61938.82,
+   "patrimonio_neto_final": 9041000.8,
+   "ingresos_netos": 3274509.19
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3743877.32,
+   "deudas_inicio": 107707.36,
+   "bienes_final": 5214572.53,
+   "deudas_final": 87550.07,
+   "patrimonio_neto_final": 5127022.46,
+   "ingresos_netos": 2682244.37
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2332121.68,
+   "deudas_inicio": 52350.93,
+   "bienes_final": 3743877.32,
+   "deudas_final": 107707.36,
+   "patrimonio_neto_final": 3636169.96,
+   "ingresos_netos": 1058722.9
   }
  ],
  "jose-nunez": [
@@ -699,6 +3034,83 @@
    "deudas_final": 8132227.72,
    "patrimonio_neto_final": 102341418.72,
    "ingresos_netos": 44975698.56
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 15233377.53,
+   "deudas_inicio": 152132.7,
+   "bienes_final": 51909955.9,
+   "deudas_final": 28560000.0,
+   "patrimonio_neto_final": 23349955.9,
+   "ingresos_netos": 5416176.85
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9927830.48,
+   "deudas_inicio": 70059.46,
+   "bienes_final": 15233377.53,
+   "deudas_final": 152132.7,
+   "patrimonio_neto_final": 15081244.83,
+   "ingresos_netos": 3124055.85
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8480027.03,
+   "deudas_inicio": 112813.7,
+   "bienes_final": 9927830.48,
+   "deudas_final": 70059.46,
+   "patrimonio_neto_final": 9857771.02,
+   "ingresos_netos": 2319298.89
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5131974.17,
+   "deudas_inicio": 241410.03,
+   "bienes_final": 8480027.03,
+   "deudas_final": 112813.7,
+   "patrimonio_neto_final": 8367213.33,
+   "ingresos_netos": 2197768.96
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3430524.51,
+   "deudas_inicio": 224754.96,
+   "bienes_final": 5131974.17,
+   "deudas_final": 241410.03,
+   "patrimonio_neto_final": 4890564.14,
+   "ingresos_netos": 1670582.06
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3174238.17,
+   "deudas_inicio": 502917.83,
+   "bienes_final": 3480153.29,
+   "deudas_final": 224754.96,
+   "patrimonio_neto_final": 3255398.33,
+   "ingresos_netos": 1600658.91
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2954456.17,
+   "deudas_inicio": 866360.33,
+   "bienes_final": 3174238.17,
+   "deudas_final": 502917.83,
+   "patrimonio_neto_final": 2671320.34,
+   "ingresos_netos": 1043823.17
   }
  ],
  "blanca-ines-osuna": [
@@ -725,6 +3137,28 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 130932342.31,
    "ingresos_netos": 32835703.19
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 16761671.93,
+   "deudas_inicio": 771813.86,
+   "bienes_final": 47867105.88,
+   "deudas_final": 316447.88,
+   "patrimonio_neto_final": 47550658.0,
+   "ingresos_netos": 12679509.91
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 10746424.73,
+   "deudas_inicio": 1705016.35,
+   "bienes_final": 16761671.93,
+   "deudas_final": 771813.86,
+   "patrimonio_neto_final": 15989858.07,
+   "ingresos_netos": 4747609.41
   }
  ],
  "maria-graciela-parola": [
@@ -751,6 +3185,164 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 22475211.28,
    "ingresos_netos": 26505872.17
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5460371.98,
+   "deudas_inicio": 0.0,
+   "bienes_final": 14811121.98,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 14811121.98,
+   "ingresos_netos": 9670362.0
+  }
+ ],
+ "paula-andrea-penacca": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8030244.37,
+   "deudas_inicio": 490800.0,
+   "bienes_final": 22043239.63,
+   "deudas_final": 490800.0,
+   "patrimonio_neto_final": 21552439.63,
+   "ingresos_netos": 8899845.43
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3879050.12,
+   "deudas_inicio": 562375.0,
+   "bienes_final": 8030244.37,
+   "deudas_final": 490800.0,
+   "patrimonio_neto_final": 7539444.37,
+   "ingresos_netos": 5137760.98
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3269025.72,
+   "deudas_inicio": 562375.0,
+   "bienes_final": 3879050.12,
+   "deudas_final": 562375.0,
+   "patrimonio_neto_final": 3316675.12,
+   "ingresos_netos": 3011749.1
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2989668.31,
+   "deudas_inicio": 562375.0,
+   "bienes_final": 3269025.72,
+   "deudas_final": 562375.0,
+   "patrimonio_neto_final": 2706650.72,
+   "ingresos_netos": 1927147.31
+  }
+ ],
+ "luis-petri": [
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7856485.37,
+   "deudas_inicio": 35061.79,
+   "bienes_final": 14045771.35,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 14045771.35,
+   "ingresos_netos": 1230595.88
+  },
+  {
+   "anio": 2021,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 5092583.08,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7519781.81,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7519781.81,
+   "ingresos_netos": 0.0
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5132021.55,
+   "deudas_inicio": 158482.13,
+   "bienes_final": 6419256.08,
+   "deudas_final": 28252.22,
+   "patrimonio_neto_final": 6391003.86,
+   "ingresos_netos": 2282799.3
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3290110.34,
+   "deudas_inicio": 430166.0,
+   "bienes_final": 5132021.55,
+   "deudas_final": 158482.13,
+   "patrimonio_neto_final": 4973539.42,
+   "ingresos_netos": 2100236.16
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1060444.96,
+   "deudas_inicio": 0.0,
+   "bienes_final": 3290110.34,
+   "deudas_final": 430166.0,
+   "patrimonio_neto_final": 2859944.34,
+   "ingresos_netos": 1665357.67
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 794431.74,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1060444.96,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1060444.96,
+   "ingresos_netos": 1127548.7
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 529681.85,
+   "deudas_inicio": 0.0,
+   "bienes_final": 794431.74,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 794431.74,
+   "ingresos_netos": 1137815.69
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 203736.34,
+   "deudas_inicio": 0.0,
+   "bienes_final": 529681.85,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 529681.85,
+   "ingresos_netos": 763115.02
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 133205.97,
+   "deudas_inicio": 0.0,
+   "bienes_final": 203736.34,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 203736.34,
+   "ingresos_netos": 469848.02
   }
  ],
  "luis-albino-picat": [
@@ -764,6 +3356,17 @@
    "deudas_final": 19518306.24,
    "patrimonio_neto_final": 591650425.38,
    "ingresos_netos": 71264643.75
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 80857403.12,
+   "deudas_inicio": 0.0,
+   "bienes_final": 367479478.04,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 367479478.04,
+   "ingresos_netos": 16732224.95
   }
  ],
  "miguel-angel-pichetto": [
@@ -777,6 +3380,74 @@
    "deudas_final": 2447920.15,
    "patrimonio_neto_final": 363999451.12,
    "ingresos_netos": 41309347.44
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 57018364.2,
+   "deudas_inicio": 2875531.57,
+   "bienes_final": 183671395.22,
+   "deudas_final": 1793486.2,
+   "patrimonio_neto_final": 181877909.02,
+   "ingresos_netos": 14986548.51
+  }
+ ],
+ "horacio-pietragalla-corti": [
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 4445871.62,
+   "deudas_inicio": 3387000.0,
+   "bienes_final": 10219862.22,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 10219862.22,
+   "ingresos_netos": 2254408.91
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 425701.14,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4445871.62,
+   "deudas_final": 3387000.0,
+   "patrimonio_neto_final": 1058871.62,
+   "ingresos_netos": 1680705.32
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 544215.47,
+   "deudas_inicio": 0.0,
+   "bienes_final": 461306.64,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 461306.64,
+   "ingresos_netos": 253242.78
+  },
+  {
+   "anio": 2015,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 912172.25,
+   "deudas_inicio": 34250.71,
+   "bienes_final": 1099211.61,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1099211.61,
+   "ingresos_netos": 758082.0
+  },
+  {
+   "anio": 2014,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 924743.77,
+   "deudas_inicio": 0.0,
+   "bienes_final": 924982.2,
+   "deudas_final": 34250.71,
+   "patrimonio_neto_final": 890731.49,
+   "ingresos_netos": 577622.66
   }
  ],
  "lorena-pokoik": [
@@ -790,6 +3461,17 @@
    "deudas_final": 2255853.56,
    "patrimonio_neto_final": 78720808.92,
    "ingresos_netos": 36947741.65
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 12114179.37,
+   "deudas_inicio": 195652.98,
+   "bienes_final": 34700806.42,
+   "deudas_final": 531962.96,
+   "patrimonio_neto_final": 34168843.46,
+   "ingresos_netos": 7500961.01
   }
  ],
  "luciana-potenza": [
@@ -803,6 +3485,41 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 29709842.01,
    "ingresos_netos": 41513581.54
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 3288398.44,
+   "deudas_inicio": 0.0,
+   "bienes_final": 14165489.46,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 14165489.46,
+   "ingresos_netos": 11507590.74
+  }
+ ],
+ "agustina-lucrecia-propato": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 26367572.22,
+   "deudas_inicio": 0.0,
+   "bienes_final": 86196311.13,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 86196311.13,
+   "ingresos_netos": 12525396.44
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 20981688.57,
+   "deudas_inicio": 653825.0,
+   "bienes_final": 26367572.22,
+   "deudas_final": 645233.0,
+   "patrimonio_neto_final": 25722339.22,
+   "ingresos_netos": 2681664.0
   }
  ],
  "manuel-quintar": [
@@ -816,6 +3533,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 231635753.22,
    "ingresos_netos": 72905777.9
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 250174916.62,
+   "deudas_inicio": 0.0,
+   "bienes_final": 252255203.64,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 252255203.64,
+   "ingresos_netos": 48383025.16
   }
  ],
  "ariel-rauschenberger": [
@@ -829,6 +3557,129 @@
    "deudas_final": 454509.06,
    "patrimonio_neto_final": 252536114.86,
    "ingresos_netos": 18857861.45
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 44459237.21,
+   "deudas_inicio": 78954.13,
+   "bienes_final": 127433783.01,
+   "deudas_final": 230061.86,
+   "patrimonio_neto_final": 127203721.15,
+   "ingresos_netos": -12331917.34
+  },
+  {
+   "anio": 2021,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 12487245.65,
+   "deudas_inicio": 40259.03,
+   "bienes_final": 16835917.18,
+   "deudas_final": 26301.9,
+   "patrimonio_neto_final": 16809615.28,
+   "ingresos_netos": 1166870.89
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8058749.3,
+   "deudas_inicio": 33052.51,
+   "bienes_final": 12487245.66,
+   "deudas_final": 40259.03,
+   "patrimonio_neto_final": 12446986.63,
+   "ingresos_netos": 2546928.96
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4527065.82,
+   "deudas_inicio": 21743.92,
+   "bienes_final": 5991791.6,
+   "deudas_final": 33052.51,
+   "patrimonio_neto_final": 5958739.09,
+   "ingresos_netos": 2646818.03
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 3396594.07,
+   "deudas_inicio": 15619.9,
+   "bienes_final": 4527065.82,
+   "deudas_final": 21743.92,
+   "patrimonio_neto_final": 4505321.9,
+   "ingresos_netos": 1586598.5
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2388116.81,
+   "deudas_inicio": 10360.88,
+   "bienes_final": 3396594.07,
+   "deudas_final": 15619.9,
+   "patrimonio_neto_final": 3380974.17,
+   "ingresos_netos": 654599.57
+  }
+ ],
+ "s:mariano-recalde": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 102021811.5,
+   "deudas_inicio": 276000.0,
+   "bienes_final": 390145810.6,
+   "deudas_final": 7356795.09,
+   "patrimonio_neto_final": 382789015.51,
+   "ingresos_netos": 146846887.08
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 55195577.13,
+   "deudas_inicio": 276000.0,
+   "bienes_final": 102021811.5,
+   "deudas_final": 276000.0,
+   "patrimonio_neto_final": 101745811.5,
+   "ingresos_netos": 16193044.24
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22093754.23,
+   "deudas_inicio": 276000.0,
+   "bienes_final": 55195577.13,
+   "deudas_final": 276000.0,
+   "patrimonio_neto_final": 54919577.13,
+   "ingresos_netos": 5369384.47
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13803293.37,
+   "deudas_inicio": 276000.0,
+   "bienes_final": 22093754.23,
+   "deudas_final": 276000.0,
+   "patrimonio_neto_final": 21817754.23,
+   "ingresos_netos": 3146946.79
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 11615850.99,
+   "deudas_inicio": 298001.11,
+   "bienes_final": 13803293.37,
+   "deudas_final": 276000.0,
+   "patrimonio_neto_final": 13527293.37,
+   "ingresos_netos": 3062415.92
   }
  ],
  "s:jesus-fernando-rejal": [
@@ -842,6 +3693,52 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 61982788.05,
    "ingresos_netos": 4993632.0
+  }
+ ],
+ "cristian-a-ritondo": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 85166872.46,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1542093839.66,
+   "deudas_final": 708744.6,
+   "patrimonio_neto_final": 1541385095.06,
+   "ingresos_netos": 16714102.83
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 183839666.52,
+   "deudas_inicio": 1142.0,
+   "bienes_final": 85166872.46,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 85166872.46,
+   "ingresos_netos": 6665163.26
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 126197012.84,
+   "deudas_inicio": 0.0,
+   "bienes_final": 183839666.52,
+   "deudas_final": 1142.0,
+   "patrimonio_neto_final": 183838524.52,
+   "ingresos_netos": 3688684.01
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 120742818.97,
+   "deudas_inicio": 1900158.75,
+   "bienes_final": 126197012.84,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 126197012.84,
+   "ingresos_netos": 9996251.64
   }
  ],
  "jorge-rizzotti": [
@@ -868,6 +3765,52 @@
    "deudas_final": 6860663.56,
    "patrimonio_neto_final": 66442344.3,
    "ingresos_netos": 80488954.24
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 16823589.43,
+   "deudas_inicio": 642616.65,
+   "bienes_final": 29421580.53,
+   "deudas_final": 2011492.64,
+   "patrimonio_neto_final": 27410087.89,
+   "ingresos_netos": 17555875.06
+  }
+ ],
+ "agustin-oscar-rossi": [
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 3494973.58,
+   "deudas_inicio": 400000.0,
+   "bienes_final": 4671615.33,
+   "deudas_final": 400000.0,
+   "patrimonio_neto_final": 4271615.33,
+   "ingresos_netos": 1978801.35
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1286137.18,
+   "deudas_inicio": 400000.0,
+   "bienes_final": 3494973.58,
+   "deudas_final": 400000.0,
+   "patrimonio_neto_final": 3094973.58,
+   "ingresos_netos": 1761787.78
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1488735.17,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1272637.18,
+   "deudas_final": 400000.0,
+   "patrimonio_neto_final": 872637.18,
+   "ingresos_netos": 0.0
   }
  ],
  "yamila-ruiz": [
@@ -894,6 +3837,17 @@
    "deudas_final": 3263791.16,
    "patrimonio_neto_final": 13577181.92,
    "ingresos_netos": 14959126.02
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6178072.28,
+   "deudas_inicio": 0.0,
+   "bienes_final": 9361410.07,
+   "deudas_final": 877794.36,
+   "patrimonio_neto_final": 8483615.71,
+   "ingresos_netos": 6177626.98
   }
  ],
  "vanesa-raquel-siley": [
@@ -907,6 +3861,83 @@
    "deudas_final": 3249706.57,
    "patrimonio_neto_final": 21261530.66,
    "ingresos_netos": 37744405.59
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8911902.31,
+   "deudas_inicio": 629689.11,
+   "bienes_final": 13388542.56,
+   "deudas_final": 873585.66,
+   "patrimonio_neto_final": 12514956.9,
+   "ingresos_netos": 13547275.72
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6655968.86,
+   "deudas_inicio": 846933.52,
+   "bienes_final": 8911902.31,
+   "deudas_final": 332919.7,
+   "patrimonio_neto_final": 8578982.61,
+   "ingresos_netos": 5044873.26
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 4319813.47,
+   "deudas_inicio": 2532893.11,
+   "bienes_final": 6655968.86,
+   "deudas_final": 1470507.09,
+   "patrimonio_neto_final": 5185461.77,
+   "ingresos_netos": 3804947.2
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1580063.82,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4319813.47,
+   "deudas_final": 970429.6,
+   "patrimonio_neto_final": 3349383.87,
+   "ingresos_netos": 2412250.92
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 912613.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1220432.42,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1220432.42,
+   "ingresos_netos": 1707297.26
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 403870.84,
+   "deudas_inicio": 0.0,
+   "bienes_final": 912613.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 912613.0,
+   "ingresos_netos": 1309041.64
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 344188.62,
+   "deudas_inicio": 67562.54,
+   "bienes_final": 100.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 100.0,
+   "ingresos_netos": 337.34
   }
  ],
  "guillermo-snopek": [
@@ -920,6 +3951,39 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 81509268.0,
    "ingresos_netos": 40780887.09
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 13334942.15,
+   "deudas_inicio": 0.0,
+   "bienes_final": 48933118.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 48933118.0,
+   "ingresos_netos": 12502241.07
+  },
+  {
+   "anio": 2017,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 656910.42,
+   "deudas_inicio": 549848.65,
+   "bienes_final": 1146822.92,
+   "deudas_final": 440881.52,
+   "patrimonio_neto_final": 705941.4,
+   "ingresos_netos": 1479529.83
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 552006.39,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1046910.42,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1046910.42,
+   "ingresos_netos": 1243127.36
   }
  ],
  "julia-strada": [
@@ -946,6 +4010,83 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 34487450.02,
    "ingresos_netos": 39205614.48
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 5914690.1,
+   "deudas_inicio": 138354.41,
+   "bienes_final": 20374123.08,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 20374123.08,
+   "ingresos_netos": 14440963.51
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2673028.33,
+   "deudas_inicio": 0.0,
+   "bienes_final": 5914690.1,
+   "deudas_final": 138354.41,
+   "patrimonio_neto_final": 5776335.69,
+   "ingresos_netos": 5411418.85
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2057884.17,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2673028.33,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2673028.33,
+   "ingresos_netos": 3024527.91
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1560238.3,
+   "deudas_inicio": 16656.4,
+   "bienes_final": 2057884.17,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2057884.17,
+   "ingresos_netos": 2435497.25
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1103373.84,
+   "deudas_inicio": 38226.49,
+   "bienes_final": 1560238.3,
+   "deudas_final": 16656.4,
+   "patrimonio_neto_final": 1543581.9,
+   "ingresos_netos": 2324986.94
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1244818.03,
+   "deudas_inicio": 40261.2,
+   "bienes_final": 1103373.84,
+   "deudas_final": 38226.49,
+   "patrimonio_neto_final": 1065147.35,
+   "ingresos_netos": 1758507.42
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1199758.77,
+   "deudas_inicio": 6922.52,
+   "bienes_final": 1244818.03,
+   "deudas_final": 40261.2,
+   "patrimonio_neto_final": 1204556.83,
+   "ingresos_netos": 1308418.41
   }
  ],
  "s:edith-elizabeth-terenzi": [
@@ -959,6 +4100,28 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 65779477.58,
    "ingresos_netos": 67619484.1
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 8575908.07,
+   "deudas_inicio": 0.0,
+   "bienes_final": 30531801.25,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 30531801.25,
+   "ingresos_netos": 10482518.86
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7175581.36,
+   "deudas_inicio": 0.0,
+   "bienes_final": 13128206.65,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 13128206.65,
+   "ingresos_netos": 5376876.76
   }
  ],
  "pablo-todero": [
@@ -972,6 +4135,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 214429303.69,
    "ingresos_netos": 41877025.26
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22541079.52,
+   "deudas_inicio": 0.0,
+   "bienes_final": 99286396.55,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 99286396.55,
+   "ingresos_netos": 22441716.6
   }
  ],
  "victoria-tolosa-paz": [
@@ -985,6 +4159,17 @@
    "deudas_final": 19865.08,
    "patrimonio_neto_final": 370972684.84,
    "ingresos_netos": 36578188.31
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 46515536.99,
+   "deudas_inicio": 63096.84,
+   "bienes_final": 158961404.55,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 158961404.55,
+   "ingresos_netos": 27914623.87
   }
  ],
  "anibal-tortoriello": [
@@ -998,6 +4183,39 @@
    "deudas_final": 2049866.87,
    "patrimonio_neto_final": 876560194.25,
    "ingresos_netos": 257042216.84
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 131635526.99,
+   "deudas_inicio": 55254511.22,
+   "bienes_final": 406521759.36,
+   "deudas_final": 94340143.13,
+   "patrimonio_neto_final": 312181616.23,
+   "ingresos_netos": 122458321.85
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 78148268.7,
+   "deudas_inicio": 0.0,
+   "bienes_final": 131635526.99,
+   "deudas_final": 55254511.22,
+   "patrimonio_neto_final": 76381015.77,
+   "ingresos_netos": 28873724.07
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 67092052.24,
+   "deudas_inicio": 9332679.65,
+   "bienes_final": 78148268.7,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 78148268.7,
+   "ingresos_netos": 13585272.54
   }
  ],
  "cesar-treffinger": [
@@ -1011,6 +4229,17 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 195014633.23,
    "ingresos_netos": 76298455.77
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 45250876.43,
+   "deudas_inicio": 0.0,
+   "bienes_final": 114008123.05,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 114008123.05,
+   "ingresos_netos": 35437691.07
   }
  ],
  "s:sergio-mauricio-unac": [
@@ -1024,6 +4253,17 @@
    "deudas_final": 1120346.0,
    "patrimonio_neto_final": 593390766.45,
    "ingresos_netos": 67163762.97
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 122092736.68,
+   "deudas_inicio": 65855.44,
+   "bienes_final": 498603040.18,
+   "deudas_final": 2264551.46,
+   "patrimonio_neto_final": 496338488.72,
+   "ingresos_netos": 15967843.86
   }
  ],
  "eduardo-felix-valdes": [
@@ -1037,6 +4277,61 @@
    "deudas_final": 6790000.0,
    "patrimonio_neto_final": 229156274.31,
    "ingresos_netos": 43008593.65
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 44795487.6,
+   "deudas_inicio": 0.0,
+   "bienes_final": 153235424.83,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 153235424.83,
+   "ingresos_netos": 14452747.26
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 22862841.27,
+   "deudas_inicio": 0.0,
+   "bienes_final": 44795487.6,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 44795487.6,
+   "ingresos_netos": 5694768.43
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 7623137.3,
+   "deudas_inicio": 0.0,
+   "bienes_final": 22862841.27,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 22862841.27,
+   "ingresos_netos": 2843404.66
+  },
+  {
+   "anio": 2020,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 4048284.08,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7623137.3,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7623137.3,
+   "ingresos_netos": 4282029.94
+  },
+  {
+   "anio": 2019,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2031280.95,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4048284.08,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 4048284.08,
+   "ingresos_netos": 2544339.73
   }
  ],
  "s:mercedes-gabriela-valenzuela": [
@@ -1050,6 +4345,39 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 49977736.0,
    "ingresos_netos": 58236338.51
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 34373185.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 40731000.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 40731000.0,
+   "ingresos_netos": 12858604.25
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 33980185.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 44726285.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 44726285.0,
+   "ingresos_netos": 5100879.49
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 33976882.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 33980185.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 33980185.0,
+   "ingresos_netos": 352513.9
   }
  ],
  "daniel-vancsik": [
@@ -1063,6 +4391,17 @@
    "deudas_final": 6002000.0,
    "patrimonio_neto_final": 12624908.0,
    "ingresos_netos": 46827513.71
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1964500.0,
+   "deudas_inicio": 1041000.0,
+   "bienes_final": 4979450.0,
+   "deudas_final": 5068000.0,
+   "patrimonio_neto_final": -88550.0,
+   "ingresos_netos": 6276272.71
   }
  ],
  "yolanda-vega": [
@@ -1089,6 +4428,39 @@
    "deudas_final": 96169190.22,
    "patrimonio_neto_final": -12876929.78,
    "ingresos_netos": 37299956.34
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 15807236.16,
+   "deudas_inicio": 16421836.21,
+   "bienes_final": 44990673.91,
+   "deudas_final": 38766148.1,
+   "patrimonio_neto_final": 6224525.81,
+   "ingresos_netos": 13244940.86
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 10030752.19,
+   "deudas_inicio": 6880069.5,
+   "bienes_final": 15807236.16,
+   "deudas_final": 16421836.21,
+   "patrimonio_neto_final": -614600.05,
+   "ingresos_netos": 5025159.54
+  },
+  {
+   "anio": 2021,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 9541529.7,
+   "deudas_inicio": 6257693.64,
+   "bienes_final": 10030752.19,
+   "deudas_final": 6880069.5,
+   "patrimonio_neto_final": 3150682.69,
+   "ingresos_netos": 3288536.48
   }
  ],
  "lorena-villaverde": [
@@ -1102,6 +4474,41 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 225288313.07,
    "ingresos_netos": 43822329.73
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 30193313.27,
+   "deudas_inicio": 2217175.44,
+   "bienes_final": 112634481.87,
+   "deudas_final": 3232529.31,
+   "patrimonio_neto_final": 109401952.56,
+   "ingresos_netos": 8398226.66
+  }
+ ],
+ "s:eduardo-alejandro-vischi": [
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 18364685.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 8840550.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 8840550.0,
+   "ingresos_netos": 11597033.64
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 1,
+   "bienes_inicio": 6476800.0,
+   "deudas_inicio": 0.0,
+   "bienes_final": 7696800.0,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 7696800.0,
+   "ingresos_netos": 4606893.5
   }
  ],
  "luana-volnovich": [
@@ -1115,6 +4522,96 @@
    "deudas_final": 3538523.57,
    "patrimonio_neto_final": 82199185.68,
    "ingresos_netos": 14816435.6
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 23072273.77,
+   "deudas_inicio": 4348939.62,
+   "bienes_final": 48018075.09,
+   "deudas_final": 3993860.84,
+   "patrimonio_neto_final": 44024214.25,
+   "ingresos_netos": 29761387.08
+  },
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 1264198.12,
+   "deudas_inicio": 367869.74,
+   "bienes_final": 1250615.29,
+   "deudas_final": 364212.52,
+   "patrimonio_neto_final": 886402.77,
+   "ingresos_netos": 1728011.98
+  },
+  {
+   "anio": 2018,
+   "tipo": "Anual",
+   "rectificativa": 2,
+   "bienes_inicio": 1121211.54,
+   "deudas_inicio": 546151.75,
+   "bienes_final": 1251233.13,
+   "deudas_final": 438826.56,
+   "patrimonio_neto_final": 812406.57,
+   "ingresos_netos": 1726316.67
+  },
+  {
+   "anio": 2017,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1215850.65,
+   "deudas_inicio": 376327.0,
+   "bienes_final": 1121211.54,
+   "deudas_final": 402017.21,
+   "patrimonio_neto_final": 719194.33,
+   "ingresos_netos": 1468856.3
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 982342.3,
+   "deudas_inicio": 388539.0,
+   "bienes_final": 1215850.65,
+   "deudas_final": 523245.49,
+   "patrimonio_neto_final": 692605.16,
+   "ingresos_netos": 1057121.6
+  }
+ ],
+ "s:gerardo-zamora": [
+  {
+   "anio": 2017,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 645136.61,
+   "deudas_inicio": 0.0,
+   "bienes_final": 820063.36,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 820063.36,
+   "ingresos_netos": 1513689.34
+  },
+  {
+   "anio": 2016,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 882848.82,
+   "deudas_inicio": 0.0,
+   "bienes_final": 645136.61,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 645136.61,
+   "ingresos_netos": 1167990.36
+  },
+  {
+   "anio": 2015,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "bienes_inicio": 977471.81,
+   "deudas_inicio": 0.0,
+   "bienes_final": 882848.82,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 882848.82,
+   "ingresos_netos": 778839.44
   }
  ],
  "carlos-raul-zapata": [
@@ -1128,6 +4625,28 @@
    "deudas_final": 1956311.88,
    "patrimonio_neto_final": 22323994.29,
    "ingresos_netos": 0.0
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 6077008.64,
+   "deudas_inicio": 191078.67,
+   "bienes_final": 11337041.65,
+   "deudas_final": 913144.66,
+   "patrimonio_neto_final": 10423896.99,
+   "ingresos_netos": 13385520.13
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2773041.46,
+   "deudas_inicio": 0.0,
+   "bienes_final": 6427373.6,
+   "deudas_final": 191078.67,
+   "patrimonio_neto_final": 6236294.93,
+   "ingresos_netos": 5074110.7
   }
  ],
  "natalia-zaracho": [
@@ -1141,6 +4660,28 @@
    "deudas_final": 1149771.69,
    "patrimonio_neto_final": 7216436.31,
    "ingresos_netos": 11391656.01
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 1680733.57,
+   "deudas_inicio": 0.0,
+   "bienes_final": 4803968.0,
+   "deudas_final": 589959.6,
+   "patrimonio_neto_final": 4214008.4,
+   "ingresos_netos": 10103344.92
+  },
+  {
+   "anio": 2022,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 81735.99,
+   "deudas_inicio": 0.0,
+   "bienes_final": 1680733.57,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 1680733.57,
+   "ingresos_netos": 3553143.85
   }
  ],
  "christian-alejandro-zulli": [
@@ -1154,6 +4695,17 @@
    "deudas_final": 28674380.0,
    "patrimonio_neto_final": 181411.0,
    "ingresos_netos": 50012350.37
+  },
+  {
+   "anio": 2023,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "bienes_inicio": 2207120.0,
+   "deudas_inicio": 332000.0,
+   "bienes_final": 9388740.0,
+   "deudas_final": 566000.0,
+   "patrimonio_neto_final": 8822740.0,
+   "ingresos_netos": 19293512.11
   }
  ]
 }

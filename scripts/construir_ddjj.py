@@ -8,7 +8,7 @@ Entrada: storage/oficial/ddjj/declaraciones_juradas_AAAA.csv.gz  (el archivo pri
 Salida:  storage/verificado/ddjj.json   slug -> lista de años, solo con totales.
 
 NO se publica: CUIT, grupo familiar, ni la descripción de cada bien. Los montos están en pesos de cada año.
-Los montos vienen escritos "155817519-23" (155.817.519,23) y los negativos "-3000000-00".
+Los montos vienen escritos de dos formas: "155817519-23" (155.817.519,23; negativos "-3000000-00") y con punto decimal normal.
 
 Uso:  python3 -I scripts/construir_ddjj.py   (después de construir_datos.py)
 """
@@ -24,6 +24,7 @@ SAL = RAIZ / "storage" / "verificado"
 ORGANISMOS = {"HONORABLE CAMARA DE DIPUTADOS DE LA NACION": "Diputados", "HONORABLE SENADO DE LA NACION": "Senadores"}
 TIPOS = {"Anual": 0, "Inicial": 1, "Baja": 2}
 MONTO = re.compile(r"^(-?)(\d*)-(\d{2})$")
+PLANO = re.compile(r"^-?\d+(\.\d+)?$")
 
 
 def monto(s):
@@ -31,10 +32,12 @@ def monto(s):
     if not s:
         return None
     m = MONTO.match(s)
-    if not m:
-        return None
-    v = float(f"{m[2] or 0}.{m[3]}")
-    return -v if m[1] else v
+    if m:  # formato "155817519-23" y "-3000000-00"
+        v = float(f"{m[2] or 0}.{m[3]}")
+        return -v if m[1] else v
+    if PLANO.match(s):  # formato con punto decimal, usado en los años 2012 a 2019 y en algunas filas posteriores
+        return float(s)
+    return None
 
 
 def tokens(s):
@@ -59,7 +62,7 @@ def main() -> int:
                 r["_anio"], r["_camara"] = anio, camara
                 filas.append(r)
 
-    salida, usadas, ambiguos = {}, set(), []
+    salida, usadas, ambiguos, saltadas, vacias = {}, set(), [], collections.Counter(), collections.Counter()
     for l in legs:
         ap = set(tokens(l["apellido"] or l["nombre"].split()[-1]))
         resto = tokens(l["nombre"].replace(l["apellido"] or "", "", 1))
@@ -83,6 +86,11 @@ def main() -> int:
             bf, df = monto(r["total_bienes_final"]), monto(r["total_deudas_final"])
             bi, di = monto(r["total_bienes_inicio"]), monto(r["deudas_inicio"])
             if bf is None:
+                saltadas[anio] += 1
+                continue
+            if bf == 0:
+                # Bienes en cero al cierre: más probable una declaración vacía o incompleta que un patrimonio nulo.
+                vacias[anio] += 1
                 continue
             anios.append({
                 "anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"], "rectificativa": int(r["rectificativa"] or 0),
@@ -93,6 +101,12 @@ def main() -> int:
         if anios:
             salida[l["slug"] if l["camara"] == "Diputados" else "s:" + l["slug"]] = anios
 
+    if vacias:
+        print("Declaraciones con bienes en cero (no se publican), por año:", dict(sorted(vacias.items())))
+    if saltadas:
+        print("Declaraciones sin monto interpretable, por año:", dict(sorted(saltadas.items())))
+    por_anio_n = collections.Counter(a["anio"] for v in salida.values() for a in v)
+    print("Legisladores actuales con declaración, por año fiscal:", dict(sorted(por_anio_n.items())))
     (SAL / "ddjj.json").write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(filas)} declaraciones de legisladores nacionales; {len(salida)} legisladores actuales cruzados; "
           f"{len({tuple(sorted(tokens(filas[i]['funcionario_apellido_nombre']))) for i in range(len(filas)) if i not in usadas})} personas del archivo ya no están en el cargo; {len(ambiguos)} ambiguos")
