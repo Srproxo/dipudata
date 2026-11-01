@@ -2,7 +2,7 @@
 <p class="antetitulo">Congreso de la Nación</p>
 <h1 class="titulo">Votaciones nominales.</h1>
 <p class="bajada">Cada vez que una cámara vota con registro nominal, queda anotado cómo votó cada legislador. Acá están las de Diputados y las del Senado, para buscar por tema y abrir una por una.</p>
-<p class="aviso"><strong>Qué períodos hay.</strong> Diputados: de marzo de 2011 a enero de 2020 (datos abiertos de la Cámara) y desde el 10 de diciembre de 2025. Senado: desde el 10 de diciembre de 2025. Entre 2020 y 2025 la Cámara no publica sus votaciones como datos abiertos, y esas no están acá.</p>
+<p class="aviso"><strong>Qué períodos hay.</strong> <b>Senado:</b> las votaciones nominales que publica el Senado desde 2005 hasta hoy. <b>Diputados:</b> de marzo de 2011 a enero de 2020 (datos abiertos de la Cámara) y desde el 10 de diciembre de 2025. <b>Entre 2020 y 2025 no hay votaciones de Diputados acá</b>: la Cámara no las publica como datos abiertos y todavía no pudimos verificarlas con una fuente oficial; que falten no quiere decir que no hayan existido. En el Senado, "Sin voto registrado" indica una fila que el acta oficial deja sin voto anotado.</p>
 
 <form class="filtros" method="get" action="/votaciones" style="margin-top:1.5rem">
   <label>Buscar en el título
@@ -58,4 +58,4 @@
   <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>" rel="next">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; endif; ?>
-<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las de Diputados a través de ArgentinaDatos y las del Senado directamente de senado.gob.ar. Cada votación se verifica voto por voto contra sus totales.</p>
+<p class="fuente-pie">Fuentes: votaciones nominales de la Cámara de Diputados (datos.hcdn.gob.ar) hasta 2020; desde diciembre de 2025, las de Diputados a través de ArgentinaDatos. Las del Senado, directamente de senado.gob.ar. Cada votación se verifica voto por voto contra sus totales.</p>

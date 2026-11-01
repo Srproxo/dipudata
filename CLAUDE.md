@@ -18,8 +18,8 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `assets/css/dipudata.css` único estilo (sin CDN ni fuentes externas; CSP sin scripts).
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
-  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py`.
-  Descargas: `bajar_votaciones_senado.py` (senado.gob.ar), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `contrastar_datacp.py`.
+  Descargas: `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
@@ -32,6 +32,15 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   Algunas filas vienen sin nombre (una coma): no son legisladores. Algunas páginas del Senado duplican la tabla.
 - Los montos de las declaraciones juradas vienen en dos formatos (`155817519-23` y con punto decimal).
 - Las columnas de promulgación y veto del archivo de leyes traen el mismo valor en todas las filas: no usarlas.
+
+- Senado, votaciones: los números de `detalleActa/{id}` NO siguen el orden de las fechas y los inexistentes devuelven 200 con una página vacía. Las actas viejas casi no traen el ID del
+  senador: se cruza por nombre completo y mandato vigente (coincide 16.026/16.026 con el ID donde existe). Hay filas con la celda de voto en blanco (no son voto: "Sin voto registrado") y 6 actas sin votos ni totales.
+- Proyectos: el CSV de Diputados trae UN autor por proyecto, como texto y sin ID, y sin cofirmantes; se cruza por nombre completo contra el histórico oficial y se valida el mandato en la fecha.
+  "Resultado de proyectos" solo trae lo resuelto: ausencia no es rechazo. El Senado no publica proyectos abiertos: se lee la página de cada senador (ID en la URL); los códigos CO y CC del expediente no son proyectos.
+- Segunda fuente: DataCP (datacp.ar, UBA, CC BY 4.0) `/api/congreso/export/leyes-clave/resultados` trae solo totales de leyes clave: sirve para contrastar, no para publicar votos. Sus rankings de intervenciones no se publican.
+- Diputados 2020-2025: datos.hcdn.gob.ar sigue en el período 137; `votaciones.hcdn.gob.ar` abre en navegador pero desde el entorno de trabajo corta el TLS: sin fuente primaria no se publica ese período.
+- Red del entorno: los dominios permitidos necesitan comodín (`*.senado.gob.ar`, `*.hcdn.gob.ar`, `*.datacp.ar`, ...). Para probar páginas con `php -S` hace falta un router que deje pasar `/assets` (mvc.php no lo hace).
+- Declaraciones juradas: el último archivo de la Oficina Anticorrupción es el del año fiscal 2024; el de 2025 todavía no está.
 
 ## Flujo de trabajo
 Desarrollar en la rama indicada por la sesión, correr los scripts y `php tests/verificar.php`, probar las rutas con

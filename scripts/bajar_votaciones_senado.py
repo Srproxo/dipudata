@@ -1,33 +1,39 @@
 #!/usr/bin/env python3
 """
 Descarga las votaciones nominales del Senado directamente de senado.gob.ar (fuente primaria) y las guarda,
-ya interpretadas, en storage/oficial/senado/votaciones_desde_AAAA-MM-DD.json.gz.
+ya interpretadas, en storage/oficial/senado/votaciones_senado.json.gz.
 
-Cada votación trae el ID oficial de cada senador, así que el cruce con el padrón no depende de nombres.
-Cada una se valida: los totales de la cabecera deben coincidir con el recuento de votos individuales.
+Los números de acta (detalleActa/{id}) no siguen el orden de las fechas y las inexistentes devuelven una página vacía,
+así que se recorre todo el rango. Se conservan las votaciones desde DESDE (1/1/2005).
+Cada fila trae, cuando la página lo tiene, el ID oficial del senador; en las actas viejas casi ninguna lo trae y el cruce
+se hace después con el padrón (ver construir_votaciones.py).
+Cada votación se valida más adelante: los totales de la cabecera deben coincidir con el recuento voto por voto.
 
-Se recorre un rango de números de acta y se descartan los anteriores a DESDE. El rango se corta cuando hay
-varias actas seguidas inexistentes.
+Es reanudable: el archivo guarda qué números ya se consultaron y se reescribe cada tanto. Hay una pausa de cortesía entre pedidos.
+Los números mayores al último con datos se vuelven a consultar siempre (así entran las votaciones nuevas).
 
 Uso:  python3 -I scripts/bajar_votaciones_senado.py [desde_id] [hasta_id]
 """
-import gzip, html, json, re, sys, time, urllib.request
+import concurrent.futures, gzip, html, json, re, sys, time, urllib.request
 from pathlib import Path
 
-DESDE = "2025-12-10"
-DEST = Path(__file__).resolve().parent.parent / "storage" / "oficial" / "senado"
+DESDE = "2005-01-01"
+PAUSA = 0.5
+HILOS = 3
+ARCHIVO = Path(__file__).resolve().parent.parent / "storage" / "oficial" / "senado" / "votaciones_senado.json.gz"
 VOTOS = {"AFIRMATIVO": "A", "NEGATIVO": "N", "ABSTENCION": "B", "ABSTENCIÓN": "B", "AUSENTE": "U"}
 
 
 def pedir(n: int):
-    req = urllib.request.Request(f"https://www.senado.gob.ar/votaciones/detalleActa/{n}", headers={"User-Agent": "Mozilla/5.0"})
-    for intento in range(3):
+    """Devuelve el HTML, o None si no se pudo (error de red): en ese caso el número no se da por consultado."""
+    req = urllib.request.Request(f"https://www.senado.gob.ar/votaciones/detalleActa/{n}", headers={"User-Agent": "Mozilla/5.0 (DipuData; datos abiertos)"})
+    for intento in range(4):
         try:
             with urllib.request.urlopen(req, timeout=45) as r:
                 return r.read().decode("utf-8", errors="replace")
         except Exception:
-            time.sleep(2 * (intento + 1))
-    return ""
+            time.sleep(3 * (intento + 1))
+    return None
 
 
 def limpiar(t: str) -> str:
@@ -49,17 +55,16 @@ def interpretar(n: int, t: str):
     votos = []
     for fila in re.findall(r"<tr[^>]*>(.*?)</tr>", t, flags=re.S):
         sid = re.search(r"/senadores/senador/(\d+)", fila)
+        # Columnas: foto, senador, bloque, provincia, voto. El bloque puede venir vacío: se lee por posición.
         celdas = [limpiar(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", fila, flags=re.S)]
-        celdas = [c for c in celdas if c]
-        if len(celdas) < 4 or VOTOS.get(celdas[-1].upper()) is None and not sid:
+        if len(celdas) != 5 or not celdas[1]:
             continue
-        voto = VOTOS.get(celdas[-1].upper())
-        # Algún senador no tiene enlace con ID en la página: en ese caso el ID queda en 0 y se cruza por nombre.
-        votos.append([int(sid.group(1)) if sid else 0, celdas[0], celdas[1], celdas[2], voto or "X"])
+        voto = VOTOS.get(celdas[4].upper())
+        votos.append([int(sid.group(1)) if sid else 0, celdas[1], celdas[2], celdas[3], voto or "X"])
     # Alguna página repite la tabla de votos: se conserva una sola fila por senador.
     vistos, unicos = set(), []
     for v in votos:
-        k = v[0] or v[1]
+        k = (v[1], v[3])
         if k not in vistos:
             vistos.add(k)
             unicos.append(v)
@@ -69,25 +74,63 @@ def interpretar(n: int, t: str):
             "ausentes": int(m[11]), "votos": votos}
 
 
+def guardar(est):
+    ARCHIVO.parent.mkdir(parents=True, exist_ok=True)
+    est["consultados"] = sorted(set(est["consultados"]))
+    tmp = ARCHIVO.with_suffix(".tmp")
+    with gzip.open(tmp, "wt", encoding="utf-8") as f:
+        json.dump(est, f, ensure_ascii=False, separators=(",", ":"))
+    tmp.replace(ARCHIVO)
+
+
+def traer(n: int):
+    t = pedir(n)
+    time.sleep(PAUSA)
+    return n, t
+
+
 def main() -> int:
-    desde = int(sys.argv[1]) if len(sys.argv) > 1 else 2595
-    hasta = int(sys.argv[2]) if len(sys.argv) > 2 else 3200
-    out, vacias = [], 0
-    for n in range(desde, hasta + 1):
-        v = interpretar(n, pedir(n))
-        if v is None:
-            vacias += 1
-            if vacias >= 15 and n > desde + 50:
+    desde = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    hasta = int(sys.argv[2]) if len(sys.argv) > 2 else 3400
+    est = {"fuente": "https://www.senado.gob.ar/votaciones/detalleActa/{id}", "desde_fecha": DESDE, "consultados": [], "votaciones": []}
+    if ARCHIVO.exists():
+        with gzip.open(ARCHIVO, "rt", encoding="utf-8") as f:
+            est = json.load(f)
+    por_id = {v["id"]: v for v in est["votaciones"]}
+    hecho = set(est["consultados"])
+    ultimo = max(por_id) if por_id else 0
+    sin_datos_seguidos = 0
+    pendientes = [n for n in range(desde, hasta + 1) if not (n in hecho and n <= ultimo)]
+    # Pocos hilos (cada uno con su pausa): unos 3 pedidos por segundo como máximo.
+    with concurrent.futures.ThreadPoolExecutor(HILOS) as pool:
+        for i in range(0, len(pendientes), 30):
+            fin = False
+            for n, t in pool.map(traer, pendientes[i:i + 30]):
+                if t is None:
+                    print(f"acta {n}: sin respuesta, se reintenta en la próxima corrida", file=sys.stderr)
+                    continue
+                v = interpretar(n, t)
+                hecho.add(n)
+                if v is None:
+                    sin_datos_seguidos += 1
+                    # Pasado el último número con datos, 150 vacíos seguidos marcan el final.
+                    if n > ultimo and sin_datos_seguidos >= 150:
+                        fin = True
+                else:
+                    sin_datos_seguidos = 0
+                    ultimo = max(ultimo, n)
+                    if v["fecha"] >= DESDE:
+                        por_id[n] = v
+            est["consultados"], est["votaciones"] = list(hecho), sorted(por_id.values(), key=lambda x: x["id"])
+            if (i // 30) % 5 == 4:
+                guardar(est)
+                print(f"  hasta el acta {pendientes[min(i + 29, len(pendientes) - 1)]}: {len(por_id)} votaciones", flush=True)
+            if fin:
                 break
-            continue
-        vacias = 0
-        if v["fecha"] >= DESDE:
-            out.append(v)
-        time.sleep(0.2)
-    DEST.mkdir(parents=True, exist_ok=True)
-    with gzip.open(DEST / f"votaciones_desde_{DESDE}.json.gz", "wt", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"{len(out)} votaciones del Senado desde {DESDE} (actas {out[0]['id']} a {out[-1]['id']})" if out else "sin datos")
+    est["consultados"], est["votaciones"] = list(hecho), sorted(por_id.values(), key=lambda x: x["id"])
+    guardar(est)
+    v = est["votaciones"]
+    print(f"{len(v)} votaciones del Senado desde {DESDE} (fechas {min(x['fecha'] for x in v)} a {max(x['fecha'] for x in v)})" if v else "sin datos")
     return 0
 
 

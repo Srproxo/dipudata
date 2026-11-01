@@ -194,6 +194,36 @@ final class Datos
         return self::leer('votaciones_mandato_actual')['_meta'] ?? [];
     }
 
+    /** @return array{resumen:array,proyectos:list<array>}|null proyectos de un legislador actual (donde figura como autor o firmante) */
+    public static function proyectos(string $slug, string $camara = 'Diputados'): ?array
+    {
+        if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)) {
+            return null;
+        }
+        $ruta = RAIZ . '/storage/verificado/proyectos/' . ($camara === 'Senadores' ? 's-' : '') . "{$slug}.json";
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : null;
+    }
+
+    public static function proyectosMeta(): array
+    {
+        $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? $d : [];
+    }
+
+    /** @return list<array> estadísticas de un senador actual en mandatos anteriores al 10/12/2025 (una fila por mandato) */
+    public static function senadoAnteriores(string $slug): array
+    {
+        $r = self::leer('votaciones_senado_anteriores')['s:' . $slug] ?? [];
+        return array_values(array_filter($r, static fn($x) => ($x['votaciones'] ?? 0) > 0));
+    }
+
+    public static function senadoAnterioresMeta(): array
+    {
+        return self::leer('votaciones_senado_anteriores')['_meta'] ?? [];
+    }
+
     /** Resumen de participación en votaciones nominales de un diputado actual (o null). */
     public static function participacion(string $slug): ?array
     {

@@ -23,6 +23,30 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </header>
 
 
+<?php
+// Resumen: solo frases armadas con datos ya verificados más abajo en la página.
+$resFrases = [];
+$resFrases[] = $cargo . ' por ' . $l['provincia'] . ', del bloque ' . $l['bloque'] . ($l['mandato'] ? ', con mandato ' . $l['mandato'] : '') . '.';
+$maR = Datos::mandatoActual($l['camara'], $l['slug']);
+if ($maR) { $resFrases[] = 'Desde el 10 de diciembre de 2025 hubo ' . (int)$maR['votaciones'] . ' votaciones nominales en su cámara: votó en ' . (int)$maR['emitio'] . ($maR['voto_pct'] !== null ? ' (' . number_format((float)$maR['voto_pct'], 0, ',', '') . '%)' : '') . '.'; }
+$saR = $esSen ? Datos::senadoAnteriores($l['slug']) : [];
+if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')) . ' votaciones nominales anteriores en el Senado, de ' . count($saR) . ' ' . (count($saR) === 1 ? 'mandato' : 'mandatos') . '.'; }
+$pyR = Datos::proyectos($l['slug'], $l['camara']);
+if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura como autor/a de ') . number_format((int)$pyR['resumen']['total'], 0, ',', '.') . ' proyectos' . ($esSen ? ' en el Senado.' : ' en Diputados.'); }
+?>
+<section class="resumen" aria-labelledby="resumen-t">
+  <h2 id="resumen-t" class="resumen-t">En pocas palabras</h2>
+  <ul>
+    <?php foreach ($resFrases as $f): ?><li><?= e($f) ?></li><?php endforeach; ?>
+  </ul>
+  <p class="resumen-atajos">
+    <?php if ($maR): ?><a href="#mandato-actual">Votaciones</a><?php endif; ?>
+    <?php if ($saR): ?><a href="#senado-anterior">Votaciones anteriores</a><?php endif; ?>
+    <?php if ($pyR): ?><a href="#proyectos">Proyectos</a><?php endif; ?>
+    <a href="#ficha">Ficha y fuentes</a>
+  </p>
+</section>
+
 <div class="dos-col perfil-grilla">
   <section aria-labelledby="ficha">
     <h2 id="ficha" class="seccion-titulo">Ficha</h2>
@@ -72,6 +96,29 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 </section>
 <?php endif; ?>
 
+<?php $sa = $esSen ? Datos::senadoAnteriores($l['slug']) : []; $sm = Datos::senadoAnterioresMeta(); ?>
+<?php if ($sa): ?>
+<section class="seccion" aria-labelledby="senado-anterior">
+  <h2 id="senado-anterior" class="seccion-titulo">Votaciones nominales en el Senado, <?= e(substr($sm['desde'], 0, 4)) ?> a 2025</h2>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Mandato</th><th scope="col">Período con votaciones</th><th scope="col" class="der">Votaciones</th><th scope="col" class="der">Votó</th><th scope="col" class="der">A favor · en contra · abst.</th><th scope="col" class="der">Como su bloque</th></tr></thead>
+    <tbody>
+    <?php foreach ($sa as $m): ?>
+      <tr>
+        <td class="num nowrap" data-etiqueta="Mandato"><?= e($m['mandato'] ?: 'Sin dato') ?></td>
+        <td data-etiqueta="Período"><?= e(fecha_es($m['desde'])) ?> a <?= e(fecha_es($m['hasta'])) ?></td>
+        <td class="der num" data-etiqueta="Votaciones"><?= (int)$m['votaciones'] ?></td>
+        <td class="der num" data-etiqueta="Votó"><?= (int)$m['emitio'] ?><?= $m['voto_pct'] !== null ? ' (' . e(number_format((float)$m['voto_pct'], 0, ',', '')) . '%)' : '' ?></td>
+        <td class="der num nowrap" data-etiqueta="A favor · en contra · abst."><?= (int)$m['afirmativos'] ?> · <?= (int)$m['negativos'] ?> · <?= (int)$m['abstenciones'] ?></td>
+        <td class="der num" data-etiqueta="Como su bloque"><?= $m['coincidencia_bloque_pct'] !== null ? e(number_format((float)$m['coincidencia_bloque_pct'], 1, ',', '')) . '%' : '—' ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Votaciones nominales del Senado entre el <?= e(fecha_es($sm['desde'])) ?> y el 9 de diciembre de 2025, tomadas de senado.gob.ar y agrupadas por mandato; el período indicado va de la primera a la última votación registrada en cada mandato. No es el historial completo: solo están las votaciones nominales publicadas por el Senado y se cuentan las que se pudieron verificar contra sus totales. "No votó" incluye toda vez que no figura un voto, sin importar el motivo. "Como su bloque" usa el bloque que figura en cada votación y solo se calcula con 20 votaciones o más. <a href="/votaciones?camara=S">Ver las votaciones del Senado</a>.</p>
+</section>
+<?php endif; ?>
+
 <?php $par = !$esSen ? Datos::participacion($l['slug']) : null; ?>
 <?php if ($par): ?>
 <section class="seccion" aria-labelledby="participacion">
@@ -84,6 +131,32 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
     <?php if ($par['coincidencia_bloque_pct'] !== null): ?><div><dt>Votó como la mayoría de su bloque</dt><dd><?= e(number_format((float)$par['coincidencia_bloque_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
   </dl>
   <p class="tenue pequeno">Entre el <?= e(fecha_es($par['desde'])) ?> y el <?= e(fecha_es($par['hasta'])) ?>: <?= (int)$par['afirmativos'] ?> votos afirmativos, <?= (int)$par['negativos'] ?> negativos y <?= (int)$par['abstenciones'] ?> abstenciones. Cubre solo el tiempo en que ejerció en esos años, según los datos abiertos de la Cámara; no incluye su mandato actual. "Ausente" significa que no emitió voto en esa votación, sin importar el motivo. <a href="/votaciones">Ver todas las votaciones</a>.</p>
+</section>
+<?php endif; ?>
+
+<?php $pry = Datos::proyectos($l['slug'], $l['camara']); ?>
+<?php if ($pry): $rs = $pry['resumen']; ?>
+<section class="seccion" aria-labelledby="proyectos">
+  <h2 id="proyectos" class="seccion-titulo">Proyectos presentados</h2>
+  <dl class="participacion">
+    <div><dt><?= $esSen ? 'Proyectos que firmó' : 'Proyectos como autor/a' ?></dt><dd><?= number_format((int)$rs['total'], 0, ',', '.') ?></dd></div>
+    <?php foreach (array_slice($rs['por_tipo'], 0, 3, true) as $t => $n): ?><div><dt><?= e($t === 'Ley' ? 'Proyectos de ley' : ($t === 'Resolucion' ? 'De resolución' : ($t === 'Declaracion' ? 'De declaración' : ($t === 'Comunicacion' ? 'De comunicación' : $t)))) ?></dt><dd><?= (int)$n ?></dd></div><?php endforeach; ?>
+    <?php if (!$esSen): $res = (int)$rs['total'] - (int)($rs['por_resultado']['Sin resolución registrada'] ?? 0); ?>
+    <div><dt>Con resolución registrada</dt><dd><?= $res ?></dd></div><?php endif; ?>
+  </dl>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Fecha</th><th scope="col">Proyecto</th><?php if (!$esSen): ?><th scope="col">Qué pasó</th><?php endif; ?></tr></thead>
+    <tbody>
+    <?php foreach (array_slice($pry['proyectos'], 0, 5) as $x): ?>
+      <tr>
+        <td class="num nowrap" data-etiqueta="Fecha"><?= e(date('d/m/Y', strtotime($x[1]))) ?></td>
+        <td><?= e(mb_strlen($x[4]) > 160 ? mb_substr($x[4], 0, 160) . '…' : $x[4]) ?><span class="tenue pequeno block"><?= e(etiqueta_tipo($x[2])) ?> · <?= e($x[3] ?: 'sin número') ?></span></td>
+        <?php if (!$esSen): ?><td data-etiqueta="Qué pasó"><?= $x[5] ? e(ucfirst(mb_strtolower($x[5]))) : '<span class="tenue">Sin resolución registrada</span>' ?></td><?php endif; ?>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Entre el <?= e(fecha_es($rs['desde'])) ?> y el <?= e(fecha_es($rs['hasta'])) ?>. <?= $esSen ? 'Es la lista que publica el Senado en la página del senador: incluye los proyectos que firmó con otros y no informa qué pasó con cada uno.' : 'El archivo oficial registra un solo autor por proyecto, sin cofirmantes. "Sin resolución registrada" no significa rechazado: el proyecto no figura entre los que la Cámara resolvió.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>/proyectos">Ver los <?= number_format((int)$rs['total'], 0, ',', '.') ?> proyectos</a>.</p>
 </section>
 <?php endif; ?>
 
@@ -101,7 +174,7 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
         <td class="der num" data-etiqueta="Deudas"><?= e(monto_ars((string)$d['deudas_final'])) ?></td>
         <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
         <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
-        <td data-etiqueta="Tipo"><?= e($d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
+        <td data-etiqueta="Tipo"><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>

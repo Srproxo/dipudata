@@ -76,6 +76,37 @@ switch (true) {
         ));
         break;
 
+    case (bool)preg_match("#^/(diputado|senador)/({$S})/proyectos$#", $path, $m):
+        $camaraP = $m[1] === 'senador' ? 'Senadores' : 'Diputados';
+        $m = [$m[0], $m[2], $m[1]];
+        $l = Datos::legislador($camaraP, $m[1]);
+        $pr = $l ? Datos::proyectos($m[1], $camaraP) : null;
+        if (!$l || !$pr) { render_404(); break; }
+        $tipo = is_string($_GET['tipo'] ?? null) && isset($pr['resumen']['por_tipo'][$_GET['tipo']]) ? (string)$_GET['tipo'] : '';
+        $resSel = is_string($_GET['resultado'] ?? null) && isset($pr['resumen']['por_resultado'][$_GET['resultado']]) ? (string)$_GET['resultado'] : '';
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $lista = array_values(array_filter($pr['proyectos'], static function (array $x) use ($tipo, $resSel, $nq): bool {
+            if ($tipo && $x[2] !== $tipo) return false;
+            if ($resSel && ($x[5] ?: 'Sin resolución registrada') !== $resSel) return false;
+            if ($nq !== '') {
+                $hay = ' ' . Datos::normalizar($x[4] . ' ' . $x[3]) . ' ';
+                foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
+            }
+            return true;
+        }));
+        $total = count($lista);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $lista = array_slice($lista, ($pagina - 1) * 50, 50);
+        $filtrado = $tipo || $resSel || $q !== '' || $pagina > 1;
+        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+            'Proyectos de ' . $l['nombre'],
+            'Proyectos parlamentarios en los que figura ' . $l['nombre'] . ' como autor/a o firmante (' . $pr['resumen']['total'] . ') y qué pasó con ellos, según los registros oficiales del Congreso.',
+            Datos::urlLegislador($l) . '/proyectos', 'legisladores', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case (bool)preg_match('#^/perfil/([^/]+)$#', $path, $m):
         foreach (Datos::legisladores() as $l) {
             if ($l['slug'] === strtolower(trim($m[1]))) { ir(Datos::urlLegislador($l)); }
@@ -321,7 +352,7 @@ switch (true) {
         $filtrado = $anio || $res || $cam || $q !== '' || $pagina > 1;
         render('votaciones', compact('lista', 'anios', 'anio', 'res', 'q', 'total', 'pagina', 'paginas', 'cam'), pagina_meta(
             'Votaciones nominales del Congreso argentino',
-            'Votaciones nominales de Diputados (2011 a 2020 y desde diciembre de 2025) y del Senado (desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
+            'Votaciones nominales del Senado (desde 2005) y de Diputados (2011 a 2020 y desde diciembre de 2025), con su resultado y cómo votó cada legislador.',
             '/votaciones', 'votaciones', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
         ));
         break;

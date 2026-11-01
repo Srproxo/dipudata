@@ -1,0 +1,20 @@
+{
+ "total": 114869,
+ "origen_senado": 2029,
+ "cruzados": 105955,
+ "cruzados_por_primer_nombre": 1476,
+ "autor_sin_padron": 5419,
+ "fuera_de_mandato": 1466,
+ "nombre_ambiguo": 0,
+ "de_diputados_actuales": 14077,
+ "senado_total": 15202,
+ "senado_proyectos": 14045,
+ "senado_no_es_proyecto": 1156,
+ "senado_expediente_invalido": 0,
+ "senado_fecha_inconsistente": 1,
+ "senadores_con_proyectos": 70,
+ "diputados_con_proyectos": 231,
+ "con_resultado": 355,
+ "desde": "2008-03-06",
+ "hasta": "2026-10-06"
+}
