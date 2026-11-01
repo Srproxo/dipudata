@@ -26,7 +26,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 ENT = RAIZ / "storage" / "oficial" / "hcdn" / "votaciones"
 SAL = RAIZ / "storage" / "verificado"
-CODIGO = {"AFIRMATIVO": "A", "NEGATIVO": "N", "ABSTENCION": "B", "AUSENTE": "U"}
+# PRESIDENTE y SIN VOTAR vienen en los períodos 138+ (votaciones.hcdn.gob.ar); el archivo de datos.hcdn.gob.ar no los usa.
+CODIGO = {"AFIRMATIVO": "A", "NEGATIVO": "N", "ABSTENCION": "B", "AUSENTE": "U", "PRESIDENTE": "P", "SIN VOTAR": "S"}
 
 
 def norm(s: str) -> str:
