@@ -212,6 +212,11 @@ ok(($em['proyectos_con_eje'] ?? 0) <= ($em['proyectos_con_giro'] ?? -1), 'ningú
 
 $ipc = Datos::ipc()['mensual'] ?? [];
 ok(($ipc['2016-12'] ?? 0) == 100 && count($ipc) >= 100 && !array_filter($ipc, fn($v) => $v <= 0), 'IPC del INDEC con base diciembre 2016 = 100 y valores positivos');
+$usd = Datos::dolar()['cierre_anual'] ?? [];
+$usdMal = array_filter($usd, fn($c, $a) => ($c['valor'] ?? 0) <= 0 || substr((string)$c['fecha'], 0, 7) !== $a . '-12', ARRAY_FILTER_USE_BOTH);
+ok(count($usd) >= 20 && !$usdMal && isset($usd['2024']), 'dólar oficial del BCRA al cierre de cada año desde 2003, con valores positivos y fecha de diciembre (' . count($usd) . ' años)');
+$djSinUsd = 0; foreach (Datos::legisladores() as $l) { foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) { if ((int)$d['anio'] >= 2003 && !isset($usd[(string)(int)$d['anio']])) { $djSinUsd++; } } }
+ok($djSinUsd === 0, 'toda declaración jurada desde 2003 tiene tipo de cambio de cierre para pasarla a dólares');
 
 $coMal = 0; $coN = 0;
 foreach ($sen as $l) {

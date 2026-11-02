@@ -218,6 +218,12 @@ final class Datos
         return self::leer('ipc');
     }
 
+    /** Dólar oficial del BCRA al cierre de cada año: ["_meta" => ..., "cierre_anual" => ["AAAA" => ["fecha" => ..., "valor" => pesos por dólar]]]. */
+    public static function dolar(): array
+    {
+        return self::leer('dolar');
+    }
+
     /** Coautorías de un senador en ejercicio con otros senadores en ejercicio desde el 10/12/2025, o null. */
     public static function coautorias(string $slug): ?array
     {
