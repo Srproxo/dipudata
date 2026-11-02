@@ -111,6 +111,7 @@ foreach ($todos as $l) {
     $m = $l['camara'] === 'Diputados' ? ($mandD[(string)($l['hcdn_id'] ?? '')] ?? null) : ($mandS[(string)($l['id_senado'] ?? '')] ?? null);
     $m ??= [[$l['inicio'] ?? '1900-01-01', '2099-12-31']];
     foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {
+        if (($d['camara'] ?? null) !== $l['camara']) { continue; } // otro cargo u otra cámara: se identifican por persona, no por mandato
         $y = (int)$d['anio']; $bien = false;
         foreach ($m as [$i, $f]) {
             if (($i <= ($y + 1) . '-12-31' && $f >= $y . '-01-01') || ($d['tipo'] === 'Baja' && $f >= ($y - 1) . '-01-01' && $i <= $y . '-12-31')) { $bien = true; }
@@ -118,7 +119,10 @@ foreach ($todos as $l) {
         if (!$bien) { $djFuera[] = $l['slug'] . ' ' . $y; }
     }
 }
-ok($djFuera === [], 'cada año de declaración jurada cae en un mandato oficial del legislador' . ($djFuera ? ': ' . implode(', ', array_slice($djFuera, 0, 5)) : ''));
+$djSinCargo = 0; foreach ($todos as $l) { foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) { if (trim((string)($d['cargo'] ?? '')) === '') { $djSinCargo++; } } }
+ok($djSinCargo === 0, 'cada año de declaración jurada dice por qué cargo se presentó');
+ok(!str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), '"persona"'), 'el número interno de persona de las declaraciones no se publica');
+ok($djFuera === [], 'cada año de declaración jurada como legislador de esta cámara cae en un mandato oficial' . ($djFuera ? ': ' . implode(', ', array_slice($djFuera, 0, 5)) : ''));
 ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
 ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
 
