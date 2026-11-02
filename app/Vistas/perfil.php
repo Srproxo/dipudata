@@ -227,6 +227,24 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
     <figcaption class="tenue pequeno">Patrimonio neto declarado al cierre de cada año fiscal, expresado en pesos de <?= e(mes_es($mesBase)) ?> con el índice de precios al consumidor (IPC) del INDEC. Un cambio puede deberse a cómo se valúan los bienes en la declaración (por ejemplo, inmuebles a valor fiscal), no solo a compras, ventas o ahorro. Los años anteriores a 2016 no se ajustan porque la serie oficial del IPC empieza en diciembre de 2016.</figcaption>
   </figure>
   <?php endif; ?>
+  <?php $usd = dolar_cierre(); $serieUsd = []; foreach ($dj as $d) { if (isset($usd[(int)$d['anio']])) { $serieUsd[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] / $usd[(int)$d['anio']]; } } ksort($serieUsd); ?>
+  <?php if (count($serieUsd) >= 2): ?>
+  <figure class="grafico-caja">
+    <?= svg_linea($serieUsd, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($serieUsd) . ' a ' . array_key_last($serieUsd) . ', en dólares al tipo de cambio oficial del cierre de cada año', 'US$') ?>
+    <figcaption class="tenue pequeno">El mismo patrimonio neto, pasado a dólares con el tipo de cambio oficial del Banco Central (Comunicación "A" 3500) del último día hábil de cada año. Es el tipo de cambio con el que la declaración jurada valúa los dólares. No se usa el dólar MEP porque no tiene una serie oficial. Si el patrimonio está en pesos, el resultado en dólares también cambia por la variación del tipo de cambio, no solo por compras, ventas o ahorro.</figcaption>
+    <details class="ver-datos">
+      <summary>Ver los datos en dólares</summary>
+      <div class="tabla-caja"><table class="tabla" style="max-width:36rem">
+        <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Pesos por dólar</th><th scope="col" class="der">En dólares</th></tr></thead>
+        <tbody>
+        <?php foreach (array_reverse($serieUsd, true) as $an => $vu): ?>
+          <tr><td class="num" data-etiqueta="Año fiscal"><?= e((string)$an) ?></td><td class="der num" data-etiqueta="Patrimonio neto"><?= e(monto_ars((string)round($vu * $usd[(int)$an], 2))) ?></td><td class="der num" data-etiqueta="Pesos por dólar"><?= e(number_format($usd[(int)$an], 4, ',', '.')) ?></td><td class="der num" data-etiqueta="En dólares"><b><?= e(monto_usd($vu)) ?></b></td></tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table></div>
+    </details>
+  </figure>
+  <?php endif; ?>
   <div class="tabla-caja"><table class="tabla">
     <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Neto en pesos de <?= e(mes_es($mesBase)) ?></th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
     <tbody>

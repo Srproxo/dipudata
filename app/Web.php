@@ -173,18 +173,18 @@ function resultado_votacion(string $r): string
 }
 
 /** Monto abreviado para ejes de gráficos: "$ 207,3 M". */
-function monto_corto(float $n): string
+function monto_corto(float $n, string $moneda = '$'): string
 {
     $a = abs($n);
     [$div, $suf] = $a >= 1e9 ? [1e9, ' mil M'] : ($a >= 1e6 ? [1e6, ' M'] : ($a >= 1e3 ? [1e3, ' mil'] : [1, '']));
-    return ($n < 0 ? '−' : '') . '$ ' . number_format($a / $div, $a / $div >= 100 || $div === 1 ? 0 : 1, ',', '.') . $suf;
+    return ($n < 0 ? '−' : '') . $moneda . ' ' . number_format($a / $div, $a / $div >= 100 || $div === 1 ? 0 : 1, ',', '.') . $suf;
 }
 
 /**
  * Gráfico de línea en SVG, sin JavaScript. $puntos: [etiqueta_x => valor]. El eje Y empieza en 0 (o en el mínimo si hay negativos)
  * y no se suaviza la línea. $titulo describe el gráfico en palabras (lectores de pantalla).
  */
-function svg_linea(array $puntos, string $titulo): string
+function svg_linea(array $puntos, string $titulo, string $moneda = '$'): string
 {
     if (count($puntos) < 2) {
         return '';
@@ -201,7 +201,7 @@ function svg_linea(array $puntos, string $titulo): string
     for ($k = 0; $k <= 4; $k++) {
         $v = $min + ($max - $min) * $k / 4; $yy = round($y($v), 1);
         $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
-            . '<text class="g-eje" x="' . ($izq - 8) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(monto_corto($v)) . '</text>';
+            . '<text class="g-eje" x="' . ($izq - 8) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(monto_corto($v, $moneda)) . '</text>';
     }
     $camino = [];
     $i = 0;
@@ -261,6 +261,20 @@ function factores_ipc(): array
     $f = [];
     foreach ($m as $am => $v) { if (substr($am, 5, 2) === '12' && $v > 0) { $f[(int)substr($am, 0, 4)] = $m[$ult] / $v; } }
     return [$ult, $f];
+}
+
+/** Pesos por dólar oficial (BCRA) al cierre de cada año: [anio => valor]. */
+function dolar_cierre(): array
+{
+    $f = [];
+    foreach (\App\Datos::dolar()['cierre_anual'] ?? [] as $a => $c) { if (($c['valor'] ?? 0) > 0) { $f[(int)$a] = (float)$c['valor']; } }
+    return $f;
+}
+
+/** Monto en dólares con dos decimales: "US$ 1.234,56". */
+function monto_usd(float $n): string
+{
+    return 'US$ ' . number_format($n, 2, ',', '.');
 }
 
 /** Claves de URL de los 11 temas del Match: clave => nombre del eje en ejes.json. */

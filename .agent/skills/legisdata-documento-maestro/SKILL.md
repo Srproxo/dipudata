@@ -20,7 +20,7 @@ manda la regla hasta que Marcelo la cambie por escrito.
 | Defensa provincial | Sin fuente | No existe un "voto esperado regional" oficial |
 | Alianzas entre bloques | Hecho en el Senado (lista, no grafo; desde 10/12/2025) | Diputados no publica cofirmantes |
 | Últimos 5 proyectos | Hecho | — |
-| Evolución patrimonial (gráfico) | Hecho, en pesos de hoy con IPC del INDEC (desde 2016) | MEP no es oficial |
+| Evolución patrimonial (gráfico) | Hecho, en pesos de hoy con IPC del INDEC (desde 2016) y en dólares oficiales del BCRA al 31/12 (desde 2003) | MEP no es oficial |
 | Costo por proyecto | Sin fuente | Nadie publica el gasto en asesores por despacho |
 | Nepotismo por apellidos | Prohibido | Regla de familiares y personal |
 | Conflicto de interés por aportes | Sin fuente por legislador | Aportes de campaña por agrupación, no por legislador |
