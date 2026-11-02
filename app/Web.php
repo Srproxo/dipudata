@@ -152,7 +152,7 @@ function nombre_acta(string $n): string
 
 function etiqueta_voto(string $c): string
 {
-    return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside', 'E' => 'No emite voto', 'X' => 'Sin voto registrado'][$c] ?? $c;
+    return ['A' => 'Afirmativo', 'N' => 'Negativo', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Preside', 'E' => 'No emite voto', 'S' => 'Sin votar', 'X' => 'Sin voto registrado'][$c] ?? $c;
 }
 
 function etiqueta_tipo(string $t): string

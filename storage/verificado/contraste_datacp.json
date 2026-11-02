@@ -1,20 +1,13 @@
 {
  "fuente": "https://www.datacp.ar/api/congreso/export/leyes-clave/resultados (DataCP, CC BY 4.0; bajado el 2026-11-01)",
  "resumen": {
-  "D_sin_equivalente": 326,
+  "D_comparadas": 267,
   "S_comparadas": 303,
-  "D_comparadas": 146,
   "S_difieren": 19,
+  "D_sin_equivalente": 205,
   "D_difieren": 5
  },
- "diputados_2020_2025_sin_votaciones_en_el_sitio_por_anio": {
-  "2020": 13,
-  "2021": 4,
-  "2022": 18,
-  "2023": 5,
-  "2024": 67,
-  "2025": 14
- },
+ "diputados_2020_2025_sin_votaciones_en_el_sitio_por_anio": {},
  "difieren": [
   {
    "camara": "Senado",

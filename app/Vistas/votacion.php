@@ -1,7 +1,7 @@
 <?php use App\Datos;
 /** @var array $cab @var array $det @var string $filtro */
 $esSen = ($cab['c'] ?? 'D') === 'S';
-$orden = ['A' => 0, 'N' => 1, 'B' => 2, 'U' => 3, 'P' => 4, 'E' => 5, 'X' => 6];
+$orden = ['A' => 0, 'N' => 1, 'B' => 2, 'U' => 3, 'P' => 4, 'E' => 5, 'S' => 6, 'X' => 7];
 $votos = array_values(array_filter($det['votos'], static fn($v) => $filtro === '' || $v[3] === $filtro));
 usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1], $orden[$y[3]] ?? 9, $y[0]]);
 ?>
