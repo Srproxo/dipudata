@@ -8,11 +8,13 @@ $nav = [
     'senado'       => ['/senado', 'Senado'],
 ];
 $mas = [
+    'match'       => ['/match', 'Match por temas'],
     'comisiones'  => ['/comisiones', 'Comisiones'],
     'provincias'  => ['/congreso/provincias', 'Provincias'],
     'viajes'      => ['/viajes', 'Pasajes y misiones'],
     'remuneraciones' => ['/remuneraciones', 'Cuánto cobran'],
     'subsidios'   => ['/subsidios', 'Subsidios'],
+    'aportes'     => ['/aportes', 'Aportes a partidos'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
     'metodologia' => ['/metodologia', 'Metodología'],
 ];

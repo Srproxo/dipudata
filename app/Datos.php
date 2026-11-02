@@ -205,6 +205,49 @@ final class Datos
         return is_array($d) ? $d : null;
     }
 
+    /** Ejes temáticos de un legislador actual (clave: slug, o "s:slug" para senadores): proyectos y votos por eje, o null. */
+    public static function ejes(string $camara, string $slug): ?array
+    {
+        $r = self::leer('ejes')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? null;
+        return is_array($r) ? $r : null;
+    }
+
+    /** IPC Nivel General Nacional del INDEC (base dic 2016 = 100): ["_meta" => ..., "mensual" => ["AAAA-MM" => índice]]. */
+    public static function ipc(): array
+    {
+        return self::leer('ipc');
+    }
+
+    /** Coautorías de un senador en ejercicio con otros senadores en ejercicio desde el 10/12/2025, o null. */
+    public static function coautorias(string $slug): ?array
+    {
+        $r = self::leer('coautorias_senado')['s:' . $slug] ?? null;
+        return is_array($r) ? $r : null;
+    }
+
+    public static function coautoriasMeta(): array
+    {
+        return self::leer('coautorias_senado')['_meta'] ?? [];
+    }
+
+    /** Aportes privados a agrupaciones políticas (CNE), por destino: ["_meta" => ..., "destinos" => [...]]. Sin datos de aportantes. */
+    public static function aportes(): array
+    {
+        return self::leer('aportes');
+    }
+
+    /** Persona jurídica aportante por slug (de aportes.json). */
+    public static function empresaAportante(string $slug): ?array
+    {
+        foreach (self::aportes()['empresas'] ?? [] as $e) { if ($e['slug'] === $slug) { return $e; } }
+        return null;
+    }
+
+    public static function ejesMeta(): array
+    {
+        return self::leer('ejes')['_meta'] ?? [];
+    }
+
     public static function proyectosMeta(): array
     {
         $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';

@@ -8,7 +8,8 @@ renderizan en el servidor a partir de archivos JSON en `storage/verificado/`. Gi
 métricas de relleno y acusaciones inventadas: eso nunca debe volver a pasar. Cada dato muestra su fuente. Si un archivo trae
 valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/metodologia`.
 - No se publican CUIT, datos de familiares ni descripción de bienes (declaraciones juradas).
-- Sin rankings ni "crecimiento patrimonial": los montos son pesos de cada año, sin ajustar por inflación.
+- Sin rankings ni "crecimiento patrimonial": los montos se muestran como se declararon. Desde el 1/11/2026 (decisión de Marcelo) el patrimonio neto
+  se expresa también en pesos de hoy con el IPC del INDEC (`bajar_ipc.py`, serie desde dic. 2016); sin dólar MEP (no es oficial) y sin calificar la evolución.
 - Los pasajes de la Cámara "no implican viajes efectivamente realizados": decir "pasajes emitidos", no "viajó".
 - No afirmar nada sobre el personal de un legislador: ni Diputados ni el Senado publican qué asesor trabaja para quién
   (la nómina dice solo "afectado a bloque político"). Informes sensibles van a `informes_privados/` (ignorado por git).
@@ -18,8 +19,9 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `assets/css/dipudata.css` único estilo (sin CDN ni fuentes externas; CSP sin scripts).
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
-  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `contrastar_datacp.py`.
-  Descargas: `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
+  Descargas: `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
@@ -40,6 +42,10 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Segunda fuente: DataCP (datacp.ar, UBA, CC BY 4.0) `/api/congreso/export/leyes-clave/resultados` trae solo totales de leyes clave: sirve para contrastar, no para publicar votos. Sus rankings de intervenciones no se publican.
 - Diputados 2020-2025: datos.hcdn.gob.ar sigue en el período 137; `votaciones.hcdn.gob.ar` abre en navegador pero desde el entorno de trabajo corta el TLS: sin fuente primaria no se publica ese período.
 - Red del entorno: los dominios permitidos necesitan comodín (`*.senado.gob.ar`, `*.hcdn.gob.ar`, `*.datacp.ar`, ...). Para probar páginas con `php -S` hace falta un router que deje pasar `/assets` (mvc.php no lo hace).
+- Ejes temáticos (decisión de Marcelo, 1/11/2026): el eje de un proyecto es el de su comisión de primer giro, según `scripts/ejes_por_comision.csv`
+  (editable). Las actas del Senado y las recientes de Diputados no traen expediente: los votos por eje salen solo de Diputados 2011-2020.
+- Aportes a partidos (CNE): aportantes.electoral.gob.ar rechaza pedidos automáticos ("Request Rejected"); no esquivarlo, el CSV lo exporta una persona. Se publican totales y los 10 mayores aportantes por agrupación:
+  empresas con razón social y rubro (Registro Nacional de Sociedades), personas humanas sin nombre. No afirmar beneficio a cambio de un aporte. Agrupación electoral ≠ bloque: no se atribuyen aportes a legisladores.
 - Declaraciones juradas: el último archivo de la Oficina Anticorrupción es el del año fiscal 2024; el de 2025 todavía no está.
 
 ## Flujo de trabajo

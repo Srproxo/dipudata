@@ -1,0 +1,3 @@
+Cámara Nacional Electoral, registro de aportantes: https://aportantes.electoral.gob.ar/
+Archivo exportado desde el navegador y recortado el 2026-11-01: 87103 aportes, 17961 aportantes distintos. Sin CUIL/CUIT ni banco; sin nombre de personas humanas (solo razón social de personas jurídicas).
+Actividad principal de personas jurídicas: Registro Nacional de Sociedades (datos.jus.gob.ar), registro-nacional-sociedades-2026.zip.

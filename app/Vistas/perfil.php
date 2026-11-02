@@ -1,6 +1,6 @@
 <?php
 use App\Datos;
-/** @var array $l legislador */
+/** @var array $l legislador  @var string $tab pestaña pedida (validada en mvc.php) */
 $esSen = $l['camara'] === 'Senadores';
 $bloque = null;
 foreach (Datos::bloques($l['camara']) as $b) { if ($b['nombre_oficial'] === $l['bloque_oficial']) { $bloque = $b; break; } }
@@ -22,7 +22,15 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
   </div>
 </header>
 
+<?php $pestanas = pestanas_perfil($l); if (!isset($pestanas[$tab])) { $tab = 'resumen'; } $base = Datos::urlLegislador($l); ?>
+<nav class="pestanas pestanas-perfil" aria-label="Secciones del perfil">
+  <?php foreach ($pestanas as $clave => $titulo): ?>
+    <a href="<?= e($base . ($clave === 'resumen' ? '' : '?tab=' . $clave)) ?>"<?= $clave === $tab ? ' aria-current="page"' : '' ?>><?= e($titulo) ?></a>
+  <?php endforeach; ?>
+</nav>
 
+
+<?php if ($tab === 'resumen'): ?>
 <?php
 // Resumen: solo frases armadas con datos ya verificados más abajo en la página.
 $resFrases = [];
@@ -40,9 +48,7 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
     <?php foreach ($resFrases as $f): ?><li><?= e($f) ?></li><?php endforeach; ?>
   </ul>
   <p class="resumen-atajos">
-    <?php if ($maR): ?><a href="#mandato-actual">Votaciones</a><?php endif; ?>
-    <?php if ($saR): ?><a href="#senado-anterior">Votaciones anteriores</a><?php endif; ?>
-    <?php if ($pyR): ?><a href="#proyectos">Proyectos</a><?php endif; ?>
+    <?php foreach ($pestanas as $clave => $titulo): if ($clave === 'resumen') { continue; } ?><a href="<?= e($base . '?tab=' . $clave) ?>"><?= e($titulo) ?></a><?php endforeach; ?>
     <a href="#ficha">Ficha y fuentes</a>
   </p>
 </section>
@@ -77,10 +83,13 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
         <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span class="num"><?= e($l['telefono']) ?></span></li><?php endif; ?>
       </ul>
     <?php endif; ?>
-    <p class="tenue pequeno" style="margin-top:1.25rem">Los datos de votación del mandato actual y los de años anteriores se explican más abajo. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
+    <p class="tenue pequeno" style="margin-top:1.25rem">Cada pestaña explica de dónde sale cada dato. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>
   </section>
 </div>
 
+<?php endif; ?>
+
+<?php if ($tab === 'votaciones'): ?>
 <?php $ma = Datos::mandatoActual($l['camara'], $l['slug']); $mm = Datos::mandatoActualMeta(); ?>
 <?php if ($ma): ?>
 <section class="seccion" aria-labelledby="mandato-actual">
@@ -134,6 +143,50 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 </section>
 <?php endif; ?>
 
+<?php endif; ?>
+
+<?php if ($tab === 'proyectos'): ?>
+<?php $ej = Datos::ejes($l['camara'], $l['slug']); ?>
+<?php if ($ej && $ej['con_eje'] >= 5): $filas = $ej['ejes']; uasort($filas, static fn($a, $b) => $b['proyectos'] <=> $a['proyectos']); ?>
+<section class="seccion" aria-labelledby="temas">
+  <h2 id="temas" class="seccion-titulo">Temas de sus proyectos</h2>
+  <ul class="ejes">
+    <?php foreach ($filas as $nombre => $x): if ($x['proyectos'] < 1) { continue; } $pct = 100 * $x['proyectos'] / $ej['con_eje']; ?>
+      <li>
+        <span class="ejes-nombre"><?= e($nombre) ?></span>
+        <span class="barra ejes-barra" aria-hidden="true"><span style="width:<?= e(number_format($pct, 1, '.', '')) ?>%"></span></span>
+        <span class="ejes-num num"><?= (int)$x['proyectos'] ?> <span class="tenue">(<?= e(number_format($pct, 0, ',', '')) ?>%)</span></span>
+        <?php if (($x['votos'] ?? 0) >= 10): ?><span class="ejes-votos tenue pequeno">En el recinto, entre 2011 y 2020: votó a favor en <?= (int)$x['afirmativos'] ?> de las <?= (int)$x['votos'] ?> votaciones de este tema en las que emitió voto.</span><?php endif; ?>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+  <p class="tenue pequeno"><?= number_format((int)$ej['con_eje'], 0, ',', '.') ?> de sus <?= number_format((int)$ej['proyectos'], 0, ',', '.') ?> proyectos tienen tema. El tema de un proyecto es el de la comisión a la que se giró en primer lugar, según el registro oficial de giros de <?= $esSen ? 'senado.gob.ar' : 'la Cámara de Diputados' ?>; un proyecto puede contar en dos temas. Los proyectos de comisiones que no corresponden a ninguno de los 11 temas (por ejemplo Relaciones Exteriores o Presupuesto) no se cuentan. Muestra en qué temas presenta proyectos, no si los apoya o los rechaza. <a href="/metodologia#ejes">Cómo se clasifican</a>.</p>
+</section>
+<?php endif; ?>
+<?php $co = $esSen ? Datos::coautorias($l['slug']) : null; ?>
+<?php if ($co && $co['con_otros'] > 0):
+  $porSlug = []; foreach (Datos::legisladores('Senadores') as $x) { $porSlug[$x['slug']] = $x; }
+  $otros = array_values(array_filter($co['socios'], static fn($x) => !$x[2] && isset($porSlug[$x[0]])));
+  $mismo = array_values(array_filter($co['socios'], static fn($x) => $x[2] && isset($porSlug[$x[0]]))); ?>
+<section class="seccion" aria-labelledby="coautorias">
+  <h2 id="coautorias" class="seccion-titulo">Con quién firma proyectos</h2>
+  <p>Desde el 10 de diciembre de 2025 figura en <?= (int)$co['proyectos'] ?> proyectos. En <?= (int)$co['con_otros'] ?> también figuran otros senadores en ejercicio<?= $co['con_otros_bloques'] ? ', y en ' . (int)$co['con_otros_bloques'] . ' al menos uno es de otro bloque' : '' ?>.</p>
+  <div class="dos-col">
+    <?php foreach ([['De otros bloques', $otros], ['De su bloque', $mismo]] as [$tit, $lista]): if (!$lista) { continue; } ?>
+    <div>
+      <h3 class="sub-titulo"><?= e($tit) ?></h3>
+      <ul class="lista-chips lista-chips-angosta">
+        <?php foreach (array_slice($lista, 0, 8) as [$s2, $n]): $x = $porSlug[$s2]; ?>
+          <li><a href="<?= e(Datos::urlLegislador($x)) ?>"><?= e($x['nombre']) ?></a><span class="tenue"><?= e($x['bloque']) ?> · <?= (int)$n ?> <?= $n === 1 ? 'proyecto' : 'proyectos' ?> en común</span></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <p class="tenue pequeno">Dos senadores comparten un proyecto cuando el mismo expediente figura en la lista de proyectos que el Senado publica para cada uno. Solo se ven senadores en ejercicio y proyectos desde el 10/12/2025, con el bloque actual de cada uno. Firmar juntos un proyecto no implica coincidir en otros temas. En Diputados no se puede calcular: el registro oficial trae un solo autor por proyecto.</p>
+</section>
+<?php endif; ?>
+
 <?php $pry = Datos::proyectos($l['slug'], $l['camara']); ?>
 <?php if ($pry): $rs = $pry['resumen']; ?>
 <section class="seccion" aria-labelledby="proyectos">
@@ -160,12 +213,22 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 </section>
 <?php endif; ?>
 
+<?php endif; ?>
+
+<?php if ($tab === 'patrimonio'): ?>
 <?php $dj = Datos::ddjj($l['camara'], $l['slug']); ?>
 <?php if ($dj): ?>
 <section class="seccion" aria-labelledby="ddjj">
   <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
+  <?php [$mesBase, $fac] = factores_ipc(); $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
+  <?php if (count($serie) >= 2): ?>
+  <figure class="grafico-caja">
+    <?= svg_linea($serie, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($serie) . ' a ' . array_key_last($serie) . ', en pesos de ' . mes_es($mesBase)) ?>
+    <figcaption class="tenue pequeno">Patrimonio neto declarado al cierre de cada año fiscal, expresado en pesos de <?= e(mes_es($mesBase)) ?> con el índice de precios al consumidor (IPC) del INDEC. Un cambio puede deberse a cómo se valúan los bienes en la declaración (por ejemplo, inmuebles a valor fiscal), no solo a compras, ventas o ahorro. Los años anteriores a 2016 no se ajustan porque la serie oficial del IPC empieza en diciembre de 2016.</figcaption>
+  </figure>
+  <?php endif; ?>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
+    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Neto en pesos de <?= e(mes_es($mesBase)) ?></th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
     <tbody>
     <?php foreach ($dj as $d): ?>
       <tr>
@@ -173,16 +236,20 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
         <td class="der num" data-etiqueta="Bienes"><?= e(monto_ars((string)$d['bienes_final'])) ?></td>
         <td class="der num" data-etiqueta="Deudas"><?= e(monto_ars((string)$d['deudas_final'])) ?></td>
         <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
+        <td class="der num" data-etiqueta="En pesos de <?= e(mes_es($mesBase)) ?>"><?= isset($fac[(int)$d['anio']]) ? e(monto_ars((string)round((float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']], 2))) : '<span class="tenue">—</span>' ?></td>
         <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
         <td data-etiqueta="Tipo"><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
   </table></div>
-  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Son pesos de cada año, sin ajustar por inflación: no sirven para comparar un año con otro. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
+  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
 </section>
 <?php endif; ?>
 
+<?php endif; ?>
+
+<?php if ($tab === 'mas'): ?>
 <?php if (!$esSen): $com = Datos::comisionesDe($l['slug']); $vj = Datos::viajes(); $vjA = $vj['actual'][$l['slug']] ?? null; $vjS = $vj['por_diputado'][$l['slug']] ?? []; ?>
 <?php if ($com): ?>
 <section class="seccion" aria-labelledby="comisiones">
@@ -250,6 +317,9 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 </section>
 <?php endif; ?>
 
+<?php endif; ?>
+
+<?php if ($tab === 'resumen'): ?>
 <?php if ($mismaProv): ?>
 <section class="seccion" aria-labelledby="misma-prov">
   <h2 id="misma-prov" class="seccion-titulo">Otros <?= $esSen ? 'senadores' : 'diputados' ?> por <?= e($l['provincia']) ?></h2>
@@ -260,4 +330,5 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
   </ul>
   <?php if (count($mismaProv) > 30): ?><p><a href="/congreso/provincias/<?= e($provSlug) ?>">Ver los <?= count($mismaProv) + 1 ?> de la provincia</a></p><?php endif; ?>
 </section>
+<?php endif; ?>
 <?php endif; ?>

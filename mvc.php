@@ -66,10 +66,13 @@ switch (true) {
         $l = Datos::legislador($camara, $m[2]);
         if (!$l) { render_404(); break; }
         $cargo = $camara === 'Senadores' ? 'Senador/a nacional' : 'Diputado/a nacional';
-        render('perfil', ['l' => $l], pagina_meta(
-            $l['nombre'] . ', ' . strtolower($cargo) . ' por ' . $l['provincia'],
-            $l['nombre'] . ': ' . strtolower($cargo) . ' por ' . $l['provincia'] . ', bloque ' . $l['bloque'] . '. Datos del padrón oficial con su fuente.',
-            Datos::urlLegislador($l), 'legisladores', [
+        $pest = pestanas_perfil($l);
+        $tab = is_string($_GET['tab'] ?? null) ? $_GET['tab'] : 'resumen';
+        if (!isset($pest[$tab])) { if (isset($_GET['tab'])) { ir(Datos::urlLegislador($l)); } $tab = 'resumen'; }
+        render('perfil', ['l' => $l, 'tab' => $tab], pagina_meta(
+            $l['nombre'] . ', ' . strtolower($cargo) . ' por ' . $l['provincia'] . ($tab === 'resumen' ? '' : ': ' . mb_strtolower($pest[$tab])),
+            $l['nombre'] . ': ' . strtolower($cargo) . ' por ' . $l['provincia'] . ', bloque ' . $l['bloque'] . '. ' . ($tab === 'resumen' ? 'Datos del padrón oficial con su fuente.' : $pest[$tab] . ' según registros oficiales, con su fuente.'),
+            Datos::urlLegislador($l) . ($tab === 'resumen' ? '' : '?tab=' . $tab), 'legisladores', [
                 'jsonld' => ['@context' => 'https://schema.org', '@type' => 'Person', 'name' => $l['nombre'], 'jobTitle' => $cargo,
                     'url' => SITE_URL . Datos::urlLegislador($l), 'affiliation' => ['@type' => 'Organization', 'name' => $l['bloque']]],
             ]
@@ -383,20 +386,77 @@ switch (true) {
     case (bool)preg_match('#^/blog(/|$)#', $path):
         ir('/congreso');
 
-    case (bool)preg_match('#^/(eje|ley|match|match-360)(/|$)#', $path):
+    case $path === '/aportes/empresas':
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $empresas = array_values(array_filter(Datos::aportes()['empresas'] ?? [], static fn($e) => $nq === '' || str_contains(Datos::normalizar($e['nombre'] . ' ' . ($e['actividad'] ?? '')), $nq)));
+        render('aportes_empresas', compact('empresas', 'q'), pagina_meta(
+            'Empresas que aportan a los partidos políticos',
+            'Qué empresas y entidades hicieron aportes declarados ante la Cámara Nacional Electoral, a cuántas agrupaciones y por cuánto, con su actividad principal.',
+            '/aportes/empresas', 'aportes', ['robots' => ($q !== '' || isset($_GET['todas'])) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match("#^/aportes/empresas/({$S})$#", $path, $m):
+        $emp = Datos::empresaAportante($m[1]);
+        if (!$emp) { render_404(); break; }
+        render('aportes_empresa', ['emp' => $emp], pagina_meta(
+            $emp['nombre'] . ': aportes a partidos políticos',
+            $emp['nombre'] . ' declaró ' . $emp['aportes'] . ' aportes a ' . $emp['agrupaciones'] . ' agrupaciones políticas ante la Cámara Nacional Electoral.',
+            '/aportes/empresas/' . $emp['slug'], 'aportes'
+        ));
+        break;
+
+    case $path === '/aportes':
+        $destinos = Datos::aportes()['destinos'] ?? [];
+        if (!$destinos) { render_404(); break; }
+        $cod = is_string($_GET['destino'] ?? null) && ctype_digit($_GET['destino']) ? (int)$_GET['destino'] : 0;
+        $dest = null;
+        foreach ($destinos as $d) { if ($d['cod'] === $cod) { $dest = $d; break; } }
+        if (!$dest) { foreach ($destinos as $d) { if ($d['tipo'] === 'campaña') { $dest = $d; break; } } }
+        $distritos = array_values(array_unique(array_column($dest['agrupaciones'], 'distrito'))); sort($distritos);
+        $distSel = in_array($_GET['distrito'] ?? '', $distritos, true) ? (string)$_GET['distrito'] : '';
+        $agSel = null;
+        foreach ($dest['agrupaciones'] as $a) { if ($a['slug'] === ($_GET['agrupacion'] ?? null)) { $agSel = $a; break; } }
+        render('aportes', compact('destinos', 'dest', 'distritos', 'distSel', 'agSel'), pagina_meta(
+            'Aportes privados a los partidos políticos',
+            'Cuánto recibió cada partido y alianza en aportes privados declarados ante la Cámara Nacional Electoral, por campaña y por año.',
+            '/aportes', 'aportes', ['robots' => (isset($_GET['destino']) || $distSel || isset($_GET['todas']) || $agSel) ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case $path === '/match':
+        $pesos = []; $consulta = false;
+        foreach (temas_match() as $clave => $tema) {
+            $v = $_GET[$clave] ?? '0';
+            $pesos[$tema] = is_string($v) && preg_match('/^[0-3]$/', $v) ? (int)$v : 0;
+            if (isset($_GET[$clave])) { $consulta = true; }
+        }
+        $camara = ['diputados' => 'Diputados', 'senado' => 'Senadores'][$_GET['camara'] ?? ''] ?? '';
+        if (isset($_GET['camara'])) { $consulta = true; }
+        $filas = array_sum($pesos) > 0 ? match_temas($pesos, $camara) : [];
+        render('match', compact('pesos', 'camara', 'filas'), pagina_meta(
+            'Match por temas: quién trabaja los temas que te importan',
+            'Marcá qué temas te importan y mirá qué diputados y senadores concentran sus proyectos en esos temas. Con datos oficiales de giros a comisiones.',
+            '/match', 'match', ['robots' => $consulta ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case (bool)preg_match('#^/(eje|ley|match-360)(/|$)#', $path):
         header('Retry-After: 86400');
         render('en_revision', [], pagina_meta('Sección en revisión', 'Estamos verificando estos datos contra las fuentes oficiales.', '/', '', ['robots' => 'noindex, follow']), 503);
         break;
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
         foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }
+        foreach (Datos::aportes()['empresas'] ?? [] as $em) { $urls[] = ['/aportes/empresas/' . $em['slug'], 'monthly', '0.3']; }
         $hoy = (string)(Datos::informe()['generado'] ?? date('Y-m-d'));
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
         foreach ($urls as [$u, $f, $pr]) {

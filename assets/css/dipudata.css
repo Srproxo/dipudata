@@ -215,3 +215,24 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .resumen ul { margin: 0; padding-left: 1.1rem; }
 .resumen li { padding: .15rem 0; line-height: 1.5; }
 .resumen-atajos { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; margin: .75rem 0 0; font-size: .9rem; }
+
+/* Perfil en pestañas, temas y gráficos (revisión de UX: componentes .pestanas, .barra y tokens) */
+.pestanas-perfil { margin-top: 1.75rem; }
+.pestanas-perfil a { font-weight: 500; }
+.ejes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--tinta); }
+.ejes li { display: grid; grid-template-columns: 10rem 1fr 6.5rem; align-items: center; gap: .35rem 1rem; padding: .6rem 0; border-bottom: 1px solid var(--linea); }
+.ejes-nombre { font-weight: 500; }
+.ejes-barra { height: .75rem; }
+.ejes-barra span { background: var(--acento); }
+.ejes-num { text-align: right; }
+.ejes-votos { grid-column: 1 / -1; }
+@media (max-width: 40rem) { .ejes li { grid-template-columns: 1fr auto; } .ejes-barra { grid-column: 1 / -1; grid-row: 2; } }
+.grafico-caja { margin: 0 0 1.5rem; max-width: 44rem; }
+.grafico { display: block; width: 100%; height: auto; }
+.g-guia { stroke: var(--linea); stroke-width: 1; }
+.g-eje { fill: var(--tenue); font: 400 12px var(--sans); font-variant-numeric: tabular-nums; }
+.g-linea { fill: none; stroke: var(--acento); stroke-width: 2; }
+.g-punto { fill: var(--papel); stroke: var(--acento); stroke-width: 2; }
+.grafico-caja figcaption { margin-top: .4rem; }
+.sub-titulo { margin: 0 0 .5rem; font: 700 1rem/1.3 var(--sans); }
+.lista-chips-angosta { grid-template-columns: 1fr; }

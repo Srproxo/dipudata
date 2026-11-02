@@ -195,5 +195,56 @@ foreach ($sen as $l) {
 ok($spMal === 0 && $spN >= 65 && $spTot === ($pm['senado_proyectos'] ?? -1), 'los proyectos de ' . $spN . ' senadores son proyectos con expediente válido, sin repetidos y sin resultado (' . $spTot . ')');
 ok(($pm['senado_expediente_invalido'] ?? 1) === 0 && ($pm['senado_no_es_proyecto'] ?? 0) > 0, 'las comunicaciones y notas del Senado (códigos CO y CC) no se publican como proyectos');
 
+$em = Datos::ejesMeta();
+$ejesMal = 0; $ejesN = 0;
+foreach ($todos as $l) {
+    $e = Datos::ejes($l['camara'], $l['slug']);
+    if (!$e) { continue; }
+    $ejesN++;
+    if ($e['con_eje'] > $e['con_giro'] || $e['con_giro'] > $e['proyectos']) { $ejesMal++; }
+    foreach ($e['ejes'] as $nombre => $x) {
+        if (!in_array($nombre, $em['ejes'] ?? [], true) || $x['proyectos'] > $e['con_eje']) { $ejesMal++; }
+        if (isset($x['votos']) && ($x['afirmativos'] > $x['votos'] || $x['votos'] < 1)) { $ejesMal++; }
+    }
+}
+ok(count($em['ejes'] ?? []) === 11 && $ejesMal === 0 && $ejesN >= 200, 'ejes temáticos: 11 ejes, ' . $ejesN . ' legisladores, cuentas por eje dentro de sus totales');
+ok(($em['proyectos_con_eje'] ?? 0) <= ($em['proyectos_con_giro'] ?? -1), 'ningún proyecto tiene eje sin tener giro a comisión');
+
+$ipc = Datos::ipc()['mensual'] ?? [];
+ok(($ipc['2016-12'] ?? 0) == 100 && count($ipc) >= 100 && !array_filter($ipc, fn($v) => $v <= 0), 'IPC del INDEC con base diciembre 2016 = 100 y valores positivos');
+
+$coMal = 0; $coN = 0;
+foreach ($sen as $l) {
+    $c = Datos::coautorias($l['slug']); if (!$c) { continue; } $coN++;
+    if ($c['con_otros_bloques'] > $c['con_otros'] || $c['con_otros'] > $c['proyectos']) { $coMal++; }
+    foreach ($c['socios'] as [$o, $n]) { $r = Datos::coautorias($o); $par = $r ? array_values(array_filter($r['socios'], fn($x) => $x[0] === $l['slug'])) : []; if (!$par || $par[0][1] !== $n) { $coMal++; } }
+}
+ok($coN >= 60 && $coMal === 0, 'coautorías del Senado: ' . $coN . ' senadores, cuentas simétricas entre cada par');
+
+if (!function_exists('match_temas')) { require_once __DIR__ . '/../app/Web.php'; }
+$mt = match_temas(['Salud' => 3, 'Educación' => 1]);
+$mtMal = array_filter($mt, fn($f) => $f['afinidad'] < -1e-9 || $f['afinidad'] > 1 + 1e-9 || $f['con_eje'] < 10);
+$solo = match_temas(['Salud' => 3]); $l0 = $solo[0]['l'] ?? null; $e0 = $l0 ? Datos::ejes($l0['camara'], $l0['slug']) : null;
+ok($mt && !$mtMal && count(temas_match()) === 11 && array_values(temas_match()) === ($em['ejes'] ?? []) && match_temas([]) === [], 'match por temas: coincidencias entre 0 y 1, solo legisladores con 10 proyectos con tema o más (' . count($mt) . ')');
+ok($e0 && ($e0['ejes']['Salud']['proyectos'] ?? 0) > 0, 'match por temas: con solo "Salud" marcado, el primero tiene proyectos de salud');
+
+$ap = Datos::aportes(); $apMal = 0;
+foreach ($ap['destinos'] ?? [] as $d) {
+    if (abs(array_sum(array_column($d['agrupaciones'], 'total')) - $d['total']) > 1 || array_sum(array_column($d['agrupaciones'], 'aportes')) !== $d['aportes']) { $apMal++; }
+    foreach ($d['agrupaciones'] as $a) { if ($a['aportantes'] > $a['aportes'] || $a['aportantes'] < 1) { $apMal++; } }
+}
+ok(count($ap['destinos'] ?? []) >= 20 && $apMal === 0, 'aportes a partidos: los totales por agrupación suman el total de cada destino');
+$crudo = is_file(RAIZ . '/storage/oficial/cne/aportes.csv.gz') ? (string)gzdecode((string)file_get_contents(RAIZ . '/storage/oficial/cne/aportes.csv.gz')) : '';
+$emMal = 0; $slugs = [];
+foreach ($ap['empresas'] ?? [] as $em) {
+    $slugs[$em['slug']] = 1;
+    if (abs(array_sum(array_column($em['detalle'], 3)) - $em['total']) > 1 || array_sum(array_column($em['detalle'], 4)) !== $em['aportes'] || count(array_unique(array_column($em['detalle'], 0))) !== $em['agrupaciones']) { $emMal++; }
+}
+foreach ($ap['destinos'] ?? [] as $d) { foreach ($d['agrupaciones'] as $a) { foreach ($a['mayores'] as $x) { if (($x[0] === null) !== ($x[4] === null) || ($x[4] !== null && !isset($slugs[$x[4]]))) { $emMal++; } } } }
+ok(count($slugs) === count($ap['empresas'] ?? []) && count($slugs) >= 400 && $emMal === 0, 'aportes: ' . count($slugs) . ' personas jurídicas con totales coherentes; el top 10 solo nombra personas jurídicas y enlaza a su página');
+$humanasConNombre = 0; foreach (array_slice(explode("\n", $crudo), 1) as $lin) { $c = str_getcsv($lin); if (count($c) > 5 && $c[3] === 'Humana' && ($c[5] !== '' || $c[6] !== '')) { $humanasConNombre++; } }
+ok($humanasConNombre === 0, 'aportes a partidos: ninguna persona humana tiene nombre ni rubro guardado');
+ok($crudo !== '' && !preg_match('/\b\d{11}\b/', $crudo) && str_starts_with($crudo, 'fecha,cod_destino,destino,tipo,aportante,'), 'aportes a partidos: el archivo guardado no tiene CUIL/CUIT');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

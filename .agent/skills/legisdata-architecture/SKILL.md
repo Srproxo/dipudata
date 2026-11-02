@@ -1,28 +1,34 @@
 ---
 name: legisdata-architecture
-description: Arquitectura en etapas, esquema MySQL 8+ y algoritmos matemáticos/financieros (Deflactación USD MEP/IPC, Perfilamiento Temático y Similitud de Coseno) para LegisData (dipudata.com).
+description: Arquitectura real de DipuData (PHP 8 sin framework ni base de datos, JSON verificados, scripts Python) y cómo sumar una métrica nueva sin romperla.
 ---
 
-# LegisData — Arquitectura y Algoritmos Core
+# DipuData — Arquitectura
 
-## 1. Ejecución Controlada por Etapas (Stage-Gate)
-- **Etapa 1 — Arquitectura y Modelo de Datos**: Diseño de tablas normalizadas (`legisladores`, `indicadores_economicos`, `patrimonio_ddjj`, `leyes`, `votos`, `audit_logs`, `rate_limits`), índices compuestos y dataset semilla realista del Congreso de la Nación Argentina.
-- **Etapa 2 — Backend PHP 8.x & Motores Algorítmicos**: API RESTful pura sin dependencias pesadas, PDO estricto, motores matemáticos y scripts Cron (`sync_wikipedia.php`, `sync_datacp.php`, `sync_anticorrupcion.php`).
-- **Etapa 3 — Frontend React + Tailwind CSS (UI/UX Data-First)**: SPA Mobile-First con las 4 vistas (`Home`, `Radiografía del Legislador`, `Wizard Match Electoral`, `Resultados Split-Screen`), gráficos interactivos y tipografía tabular.
-- **Etapa 4 — Seguridad Grado Bancario & SEO Top-Ranking**: Endurecimiento HTTP/CSP/HSTS, SSR dinámico de metadatos y JSON-LD en el entrypoint para bots, OpenGraph dinámico y despliegue en GitHub + Hostinger (`dipudata.com`).
+## 1. Cómo está armado
+- `mvc.php` es el router (un `switch` de rutas); `app/Vistas/*.php` son las vistas; `app/Vistas/_plantilla.php` el marco común.
+- `app/Datos.php` lee `storage/verificado/*.json`. **No hay base de datos.** Los `.sql` de `database/` son históricos y no se usan.
+- `api/index.php` es una API de solo lectura sobre los mismos JSON. No hay endpoints de escritura ni ETL externo (n8n u otro):
+  los datos se generan con `scripts/*.py` (solo biblioteca estándar) a partir de `storage/oficial/` y se versionan en git.
+- `tests/verificar.php` controla la integridad; debe terminar en "Todo en orden".
+- Despliegue: GitHub `main` → Hostinger.
 
-## 2. Especificación Exacta de los Algoritmos
-1. **Algoritmo A — Evolución Patrimonial Real (`calcularEvolucionPatrimonial`)**:
-   - Cruza `patrimonio_ddjj` con `indicadores_economicos` por `anio_fiscal = anio`.
-   - Calcula `patrimonio_usd = round($monto_pesos_nominal / $dolar_mep_cierre, 2)`.
-   - Calcula `patrimonio_pesos_constantes` ajustado por el índice acumulado de `ipc_interanual` hasta el último año disponible.
-   - Calcula `crecimiento_real_usd_pct` entre el primer y último período declarado durante el mandato.
-2. **Algoritmo B — Perfilamiento Temático (`calcularPerfilTematico`)**:
-   - Para cada eje (`Salud`, `Educacion`, `MercadoLibre`, `Proteccionismo`, `Laboral`):
-   - Excluye `Ausente` para no distorsionar la huella ideológica.
-   - Pondera cada voto por `leyes.peso_ideologico` (Afirmativo = `1.0 * peso`, Abstención = `0.25 * peso`, Negativo = `0.0`).
-   - Retorna el vector normalizado de `0` a `100` en cada dimensión más KPIs de `asistencia_historica` y `lealtad_partidaria`.
-3. **Algoritmo C — Motor de Match Electoral (`calcularMatchElectoral`)**:
-   - Aplica Similitud del Coseno entre `$vector_usuario` y `$vector_legislador` sobre las 4 dimensiones principales (`Salud`, `Educacion`, `MercadoLibre`, `Proteccionismo`):
-     $$\text{similitud} = \frac{\sum_{d} U_d \cdot L_d}{\sqrt{\sum_{d} U_d^2} \cdot \sqrt{\sum_{d} L_d^2}} \times 100$$
-   - Ordena descendente para retornar el **Top 3 más afines** y ascendente para el **Bottom 3 menos afines**.
+## 2. Cómo se suma una métrica (del documento maestro o nueva)
+1. **Fuente:** ¿hay una fuente oficial descargable? Si no, se frena y se anota en `/metodologia` → "Qué viene".
+2. **Script:** `scripts/construir_<algo>.py` que lee `storage/oficial/` o `storage/verificado/` y escribe `storage/verificado/<algo>.json`
+   con un `_meta` (fuente, fecha, desde, hasta, descartados y por qué).
+3. **Lectura:** un método en `app/Datos.php` que valide el slug y devuelva `null`/`[]` si no hay dato.
+4. **Control:** un `ok(...)` en `tests/verificar.php` que verifique que los números cuadran (totales, rangos, sin duplicados).
+5. **Vista:** pasa por la revisión de UX (`legisdata-ui-design-system`, sección 5) y lleva su nota de fuente.
+6. **Metodología:** explicar en `app/Vistas/metodologia.php` cómo se calcula y qué no significa.
+
+## 3. Cálculos del documento maestro: cómo se pueden hacer acá
+- **Similitud del coseno (Match):** `sim = Σ(u·l) / (√Σu² · √Σl²)`, con respuestas en [-1, 1] y 0 = neutro; un eje que el usuario
+  dejó en 0 no suma. Se calcula en PHP en el servidor al enviar un formulario GET/POST, sin JavaScript.
+  Requiere ejes temáticos con clasificación publicada (decisión pendiente de Marcelo).
+- **Apoyo por eje:** primero normalizar. Votos: % de afirmativos sobre votos emitidos en las votaciones del eje.
+  Proyectos: cantidad del eje sobre el total de proyectos del legislador (0 a 1). Recién ahí `0,70·votos + 0,30·proyectos`.
+- **Pesos constantes (DDJJ):** `monto_t · IPC_final / IPC_dic_t` con la serie oficial del INDEC (`factores_ipc()` en `app/Web.php`),
+  aprobado por Marcelo el 1/11/2026. El dólar MEP no es oficial y no se usa.
+- **Coincidencia con el bloque:** ya existe (`coincidencia_bloque_pct`). Es la versión con fuente del "índice de lealtad".
+- **Coautorías entre bloques:** solo Senado, cruzando el mismo expediente entre las listas de los senadores en ejercicio.
