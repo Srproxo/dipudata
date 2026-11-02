@@ -246,8 +246,8 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
       </table></div>
     </details>
   <?php endif; ?>
-  <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Año fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio neto</th><th scope="col" class="der">Neto en pesos de <?= e(mes_es($mesBase)) ?></th><th scope="col" class="der">Ingresos netos</th><th scope="col">Tipo</th></tr></thead>
+  <div class="tabla-caja"><table class="tabla tabla-cifras">
+    <thead><tr><th scope="col">Año<br>fiscal</th><th scope="col" class="der">Bienes</th><th scope="col" class="der">Deudas</th><th scope="col" class="der">Patrimonio<br>neto</th><th scope="col" class="der">Neto en pesos<br>de <?= e(mes_es($mesBase)) ?></th><th scope="col" class="der">Ingresos<br>netos</th><th scope="col">Tipo y cargo</th></tr></thead>
     <tbody>
     <?php foreach ($dj as $d): ?>
       <tr>
@@ -257,12 +257,12 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
         <td class="der num" data-etiqueta="Patrimonio neto"><b><?= e(monto_ars((string)$d['patrimonio_neto_final'])) ?></b></td>
         <td class="der num" data-etiqueta="En pesos de <?= e(mes_es($mesBase)) ?>"><?= isset($fac[(int)$d['anio']]) ? e(monto_ars((string)round((float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']], 2))) : '<span class="tenue">—</span>' ?></td>
         <td class="der num" data-etiqueta="Ingresos netos"><?= $d['ingresos_netos'] !== null ? e(monto_ars((string)$d['ingresos_netos'])) : '—' ?></td>
-        <td data-etiqueta="Tipo"><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?></td>
+        <td class="celda-cargo" data-etiqueta="Tipo y cargo"><span><?= e(in_array(strtoupper((string)$d['tipo']), ['', 'NULL'], true) ? '—' : $d['tipo']) ?><?= $d['rectificativa'] > 0 ? ' <span class="tenue pequeno">(rectificada ' . (int)$d['rectificativa'] . ' ' . ($d['rectificativa'] === 1 ? 'vez' : 'veces') . ')</span>' : '' ?><?php if (!empty($d['cargo'])): ?><span class="tenue pequeno block"><?= e($d['cargo']) ?></span><?php endif; ?></span></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
   </table></div>
-  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857). Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
+  <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857), por el cargo que figura en cada año: como legislador o por otra función pública o candidatura. Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
 </section>
 <?php endif; ?>
 
