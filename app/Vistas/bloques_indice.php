@@ -8,20 +8,31 @@
     $bl = Datos::bloques($camara); $tot = array_sum(array_column($bl, 'cantidad')); ?>
 <section class="seccion" id="<?= e($ancla) ?>" aria-labelledby="t-<?= e($ancla) ?>">
   <div class="fila-titulo"><h2 id="t-<?= e($ancla) ?>" class="seccion-titulo"><?= $camara === 'Senadores' ? 'Senado' : 'Cámara de Diputados' ?></h2><p class="num"><?= (int)$tot ?> bancas · <?= count($bl) ?> bloques</p></div>
-  <?= barra_composicion($bl) ?>
+  <figure class="camara-hemiciclo" id="hc-<?= e($ancla) ?>">
+    <?= hemiciclo($bl, 'h-' . $ancla) ?>
+    <figcaption class="tenue">Cada círculo es una banca: la foto del legislador con un anillo del color de su bloque. Los bloques van de mayor a menor, de izquierda a derecha; ese orden no indica posición política ni el lugar en el recinto. Cada foto lleva a su perfil.</figcaption>
+  </figure>
+  <ul class="leyenda-bloques">
+  <?php foreach ($bl as $bi => $b): ?>
+    <li><a href="<?= e(Datos::urlBloque($b)) ?>"><i class="punto" style="background:<?= e(color_bloque($b['nombre_oficial'])) ?>"></i><span class="leyenda-nombre"><?= e($b['nombre']) ?></span><b class="num"><?= (int)$b['cantidad'] ?></b><span class="leyenda-pct num"><?= e(number_format($b['cantidad'] / max(1, $tot) * 100, 1, ',', '.')) ?>%</span></a></li>
+  <?php endforeach; ?>
+  </ul>
+  <style><?php foreach ($bl as $bi => $b): ?>#hc-<?= e($ancla) ?>:has(~ .leyenda-bloques li:nth-child(<?= $bi + 1 ?>):hover) a:not(.b<?= $bi ?>){opacity:.15}<?php endforeach; ?></style>
+  <details class="detalle-tabla"><summary>Ver como tabla, con provincias</summary>
   <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Bloque</th><th scope="col" class="der">Bancas</th><th scope="col" class="der">Proporción</th><th scope="col">Provincias</th></tr></thead>
-    <tbody>
-    <?php foreach ($bl as $b): ?>
-      <tr>
-        <td><i class="punto" style="background:<?= e(color_bloque($b['nombre_oficial'])) ?>"></i><a href="<?= e(Datos::urlBloque($b)) ?>"><?= e($b['nombre']) ?></a></td>
-        <td class="der num" data-etiqueta="Bancas"><?= (int)$b['cantidad'] ?></td>
-        <td class="der num" data-etiqueta="Proporción"><?= e(number_format($b['cantidad'] / max(1, $tot) * 100, 1, ',', '.')) ?>%</td>
-        <td class="tenue" data-etiqueta="Provincias"><?= count($b['provincias']) ?> <?= count($b['provincias']) === 1 ? 'provincia' : 'provincias' ?></td>
-      </tr>
-    <?php endforeach; ?>
-    </tbody>
-  </table></div>
+      <thead><tr><th scope="col">Bloque</th><th scope="col" class="der">Bancas</th><th scope="col" class="der">Proporción</th><th scope="col">Provincias</th></tr></thead>
+      <tbody>
+      <?php foreach ($bl as $b): ?>
+        <tr>
+          <td><i class="punto" style="background:<?= e(color_bloque($b['nombre_oficial'])) ?>"></i><a href="<?= e(Datos::urlBloque($b)) ?>"><?= e($b['nombre']) ?></a></td>
+          <td class="der num" data-etiqueta="Bancas"><?= (int)$b['cantidad'] ?></td>
+          <td class="der num" data-etiqueta="Proporción"><?= e(number_format($b['cantidad'] / max(1, $tot) * 100, 1, ',', '.')) ?>%</td>
+          <td class="tenue" data-etiqueta="Provincias"><?= count($b['provincias']) ?> <?= count($b['provincias']) === 1 ? 'provincia' : 'provincias' ?></td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table></div>
+  </details>
 </section>
 <?php endforeach; ?>
 
