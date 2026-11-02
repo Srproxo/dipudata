@@ -67,6 +67,106 @@ function barra_composicion(array $bloques): string
     return $h . '</div>';
 }
 
+/**
+ * Posiciones de las bancas de un hemiciclo de $n bancas, en filas concéntricas.
+ * Devuelve [lista de [x, y, ángulo], radio de cada banca]; coordenadas con radio exterior 1 y centro (0, 0).
+ */
+function hemiciclo_posiciones(int $n): array
+{
+    $interior = 0.4;
+    for ($filas = 2; $filas < 30; $filas++) {
+        $paso = (1 - $interior) / ($filas - 1);
+        $radios = [];
+        $cap = 0;
+        for ($i = 0; $i < $filas; $i++) {
+            $radios[$i] = $interior + $i * $paso;
+            $cap += (int)floor(M_PI * $radios[$i] / $paso) + 1;
+        }
+        if ($cap >= $n) {
+            break;
+        }
+    }
+    // Reparto proporcional al radio (resto mayor), sin pasar la capacidad de cada fila.
+    $suma = array_sum($radios);
+    $cant = [];
+    $restos = [];
+    foreach ($radios as $i => $r) {
+        $q = $n * $r / $suma;
+        $cant[$i] = (int)floor($q);
+        $restos[$i] = $q - $cant[$i];
+    }
+    arsort($restos);
+    $faltan = $n - array_sum($cant);
+    foreach (array_keys($restos) as $i) {
+        if ($faltan-- <= 0) {
+            break;
+        }
+        $cant[$i]++;
+    }
+    $pos = [];
+    foreach ($radios as $i => $r) {
+        $k = $cant[$i];
+        for ($j = 0; $j < $k; $j++) {
+            $a = $k === 1 ? M_PI / 2 : M_PI - $j * M_PI / ($k - 1);
+            $pos[] = [$r * cos($a), -$r * sin($a), $a, $r];
+        }
+    }
+    // De izquierda a derecha; a igual ángulo, de adentro hacia afuera. Así cada bloque queda en una porción.
+    usort($pos, static fn($p, $q) => abs($p[2] - $q[2]) > 1e-9 ? $q[2] <=> $p[2] : $p[3] <=> $q[3]);
+    return [$pos, $paso * 0.44];
+}
+
+/**
+ * Hemiciclo en SVG: una banca por legislador, con su foto y un anillo del color del bloque.
+ * Los bloques van en el orden recibido (de mayor a menor), de izquierda a derecha.
+ * El orden no representa una ubicación ideológica ni la disposición real del recinto.
+ */
+function hemiciclo(array $bloques, string $id): string
+{
+    $sillas = [];
+    foreach ($bloques as $bi => $b) {
+        $m = Datos::miembros($b);
+        usort($m, static fn($x, $y) => strcmp(Datos::normalizar($x['apellido'] ?? $x['nombre']), Datos::normalizar($y['apellido'] ?? $y['nombre'])));
+        foreach ($m as $l) {
+            $sillas[] = [$l, $b, $bi];
+        }
+    }
+    $n = count($sillas);
+    if ($n === 0) {
+        return '';
+    }
+    [$pos, $rs] = hemiciclo_posiciones($n);
+    $R = 500.0;
+    $r = $rs * $R;
+    $margen = $r + 4;
+    $ancho = 2 * ($R + $margen);
+    $alto = $R + 2 * $margen;
+    $cx = $ancho / 2;
+    $cy = $R + $margen;
+    $f = static fn(float $v) => rtrim(rtrim(number_format($v, 1, '.', ''), '0'), '.');
+    $camara = $bloques[0]['camara'] === 'Senadores' ? 'senadores' : 'diputados';
+    $h = '<svg class="hemiciclo" id="' . e($id) . '" viewBox="0 0 ' . $f($ancho) . ' ' . $f($alto) . '" role="group" aria-label="Hemiciclo: ' . $n . ' ' . $camara . ', agrupados por bloque">';
+    $h .= '<defs><clipPath id="' . e($id) . '-c" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".5"/></clipPath></defs>';
+    foreach ($sillas as $i => [$l, $b, $bi]) {
+        $x = $cx + $pos[$i][0] * $R;
+        $y = $cy + $pos[$i][1] * $R;
+        $color = color_bloque($b['nombre_oficial']);
+        $nombre = $l['nombre'] . ' · ' . $b['nombre'] . ' · ' . $l['provincia'];
+        $h .= '<a href="' . e(Datos::urlLegislador($l)) . '" class="b' . $bi . '" aria-label="' . e($nombre) . '"><title>' . e($nombre) . '</title>';
+        $h .= '<circle cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r) . '" fill="#e2e8f0"/>';
+        if (!empty($l['foto'])) {
+            $ri = $r - 2.5;
+            $h .= '<image href="' . e($l['foto']) . '" x="' . $f($x - $ri) . '" y="' . $f($y - $ri) . '" width="' . $f(2 * $ri) . '" height="' . $f(2 * $ri) . '" preserveAspectRatio="xMidYMin slice" clip-path="url(#' . e($id) . '-c)"/>';
+        } else {
+            $h .= '<text x="' . $f($x) . '" y="' . $f($y) . '" dy=".35em" text-anchor="middle" font-size="' . $f($r * 0.7) . '" fill="#334155">' . e(iniciales($l['nombre'])) . '</text>';
+        }
+        $h .= '<circle class="anillo" cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r - 1.5) . '" fill="none" stroke="' . e($color) . '" stroke-width="' . $f(max(2.5, $r * 0.16)) . '"/></a>';
+    }
+    $h .= '<text x="' . $f($cx) . '" y="' . $f($cy - $R * 0.12) . '" text-anchor="middle" class="hemiciclo-total">' . $n . '</text>';
+    $h .= '<text x="' . $f($cx) . '" y="' . $f($cy - $R * 0.03) . '" text-anchor="middle" class="hemiciclo-sub">bancas · quórum ' . (intdiv($n, 2) + 1) . '</text>';
+    return $h . '</svg>';
+}
+
 function encabezados_seguridad(string $tipo = 'text/html; charset=utf-8', int $maxAge = 300): void
 {
     header('Content-Type: ' . $tipo);
