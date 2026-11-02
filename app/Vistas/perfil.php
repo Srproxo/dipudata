@@ -360,9 +360,9 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php if ($mismaProv): ?>
 <section class="seccion" aria-labelledby="misma-prov">
   <h2 id="misma-prov" class="seccion-titulo">Otros <?= $esSen ? 'senadores' : 'diputados' ?> por <?= e($l['provincia']) ?></h2>
-  <ul class="lista-chips">
+  <ul class="lista-chips lista-chips-foto">
     <?php foreach (array_slice($mismaProv, 0, 30) as $x): ?>
-      <li><a href="<?= e(Datos::urlLegislador($x)) ?>"><?= e($x['nombre']) ?></a><span class="tenue"><?= e($x['bloque']) ?></span></li>
+      <li><?= avatar($x, 40) ?><span class="chip-texto"><a href="<?= e(Datos::urlLegislador($x)) ?>"><?= e($x['nombre']) ?></a><span class="tenue"><?= e($x['bloque']) ?></span></span></li>
     <?php endforeach; ?>
   </ul>
   <?php if (count($mismaProv) > 30): ?><p><a href="/congreso/provincias/<?= e($provSlug) ?>">Ver los <?= count($mismaProv) + 1 ?> de la provincia</a></p><?php endif; ?>

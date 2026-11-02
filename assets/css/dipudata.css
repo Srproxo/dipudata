@@ -115,6 +115,9 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .lista-chips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0 2rem; }
 .lista-chips li { display: flex; flex-direction: column; padding: .55rem 0; border-bottom: 1px solid var(--linea); }
 .lista-chips .tenue { font-size: .8125rem; }
+.lista-chips-foto li { flex-direction: row; align-items: center; gap: .75rem; }
+.lista-chips-foto .avatar { width: 40px; height: 40px; }
+.chip-texto { display: flex; flex-direction: column; min-width: 0; }
 
 /* Artículo */
 .articulo-grilla { display: grid; gap: 3rem; }
