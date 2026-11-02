@@ -273,6 +273,22 @@
  ],
  "damian-arabia": [
   {
+   "anio": 2025,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "cargo": "Diputado nacional",
+   "camara": "Diputados",
+   "bienes_inicio": 206455302.86,
+   "deudas_inicio": 252000.0,
+   "bienes_final": 285999017.81,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 285999017.81,
+   "ingresos_netos": 58649149.0,
+   "fuente": "HCDN",
+   "presentada": "20/05/2026",
+   "url": "https://www3.hcdn.gob.ar/diputados/darabia/pdfs/DDJJ2025.pdf"
+  },
+  {
    "anio": 2024,
    "tipo": "Anual",
    "rectificativa": 0,
@@ -4194,6 +4210,22 @@
   }
  ],
  "maximiliano-ferraro": [
+  {
+   "anio": 2025,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "cargo": "Diputado nacional",
+   "camara": "Diputados",
+   "bienes_inicio": 12538985.92,
+   "deudas_inicio": 2264584.62,
+   "bienes_final": 17196832.92,
+   "deudas_final": 6819431.68,
+   "patrimonio_neto_final": 10377401.24,
+   "ingresos_netos": 69938816.07,
+   "fuente": "HCDN",
+   "presentada": "",
+   "url": "https://www3.hcdn.gob.ar/diputados/mferraro/pdfs/2025-MF-DeclaracionJuradaFerraro.pdf"
+  },
   {
    "anio": 2024,
    "tipo": "Anual",
@@ -9880,6 +9912,22 @@
   }
  ],
  "esteban-paulon": [
+  {
+   "anio": 2025,
+   "tipo": "Anual",
+   "rectificativa": 0,
+   "cargo": "Diputado nacional",
+   "camara": "Diputados",
+   "bienes_inicio": 22475211.28,
+   "deudas_inicio": 4908193.64,
+   "bienes_final": 29068181.31,
+   "deudas_final": 5713827.3,
+   "patrimonio_neto_final": 23354354.01,
+   "ingresos_netos": 39821359.61,
+   "fuente": "HCDN",
+   "presentada": "07/06/2026",
+   "url": "https://www3.hcdn.gob.ar/diputados/epaulon/pdfs/2025.pdf"
+  },
   {
    "anio": 2024,
    "tipo": "Anual",

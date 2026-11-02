@@ -125,6 +125,11 @@ ok(!str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddj
 ok($djFuera === [], 'cada año de declaración jurada como legislador de esta cámara cae en un mandato oficial' . ($djFuera ? ': ' . implode(', ', array_slice($djFuera, 0, 5)) : ''));
 ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
 ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
+$djHcdnMal = 0; $djHcdn = 0; foreach ($todos as $l) { foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) { if (($d['fuente'] ?? '') === 'HCDN') { $djHcdn++; if ($l['camara'] !== 'Diputados' || !preg_match('#^https://www3\.hcdn\.gob\.ar/diputados/[a-z0-9]+/pdfs/[^"<>\s]+\.pdf$#', (string)($d['url'] ?? ''))) { $djHcdnMal++; } } } }
+ok($djHcdnMal === 0, "las {$djHcdn} declaraciones tomadas de las fichas de Diputados son de diputados y enlazan su PDF en hcdn.gob.ar");
+$hcdnCsv = glob(__DIR__ . '/../storage/oficial/ddjj/hcdn_ddjj_*.csv.gz') ?: [];
+$hcdnCuit = 0; foreach ($hcdnCsv as $f) { if (preg_match('/\b\d{2}-?\d{8}-?\d\b|cuit|cbu/i', (string)gzdecode((string)file_get_contents($f)))) { $hcdnCuit++; } }
+ok($hcdnCuit === 0, 'lo extraído de los PDF de Diputados no guarda CUIT, CBU ni números de documento');
 
 $meta = Datos::mandatoActualMeta();
 ok(($meta['validas']['Diputados'] ?? 0) >= 100 && ($meta['validas']['Senadores'] ?? 0) >= 150, 'hay votaciones válidas del mandato actual en ambas cámaras');

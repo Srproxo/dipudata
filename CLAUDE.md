@@ -22,7 +22,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_rutas_pasajes.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
   Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_dolar.py` (dólar oficial del BCRA al cierre de cada año, datos.gob.ar), `bajar_dolar_mep.py` (MEP de ArgentinaDatos, no oficial; después de bajar_dolar.py), `bajar_georef.py` (límites provinciales y localidades de Georef para el mapa de pasajes), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
-  `filtrar_ddjj.py` (recorta los archivos anuales de la Oficina Anticorrupción a legisladores y sus otros cargos, y quita el CUIT).
+  `bajar_ddjj_hcdn.py [AAAA]` (DDJJ que cada diputado sube a su ficha en hcdn.gob.ar; solo totales, PDF en `storage/cache/`; antes de construir_ddjj.py), `filtrar_ddjj.py` (recorta los archivos anuales de la Oficina Anticorrupción a legisladores y sus otros cargos, y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
 ## Qué se aprendió de las fuentes
@@ -61,7 +61,11 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Pasajes, mapa de rutas: el CSV de la Cámara trae ORIGEN y DESTINO como nombre de aeropuerto o terminal (sin coordenadas, a veces con
   caracteres dañados). `scripts/lugares_pasajes.csv` los lleva a una localidad (provincia `*` = la del diputado) y Georef las ubica.
   datos.transporte.gob.ar e ide.transporte.gob.ar (aeródromos de la ANAC) están bloqueados desde la nube; Georef sí responde.
-- Declaraciones juradas: el último archivo de la Oficina Anticorrupción es el del año fiscal 2024; el de 2025 todavía no está.
+- Declaraciones juradas: el último archivo de datos abiertos de la OA es el del año fiscal 2024. Las 2025 están en el buscador de la OA
+  (responde en `www2.jus.gob.ar/consultaddjj/`; `www2.jus.gov.ar` está bloqueado), que pide los datos del consultante y un captcha por PDF:
+  no esquivarlo. La página `hcdn.gob.ar/diputados/{usuario}/declaracion-jurada.html` enlaza los PDF que sube cada diputado (rótulo
+  "DDJJ 2025"; el nombre del archivo cambia); al 2/11/2026 solo 4 de 257 tenían la 2025. Esos PDF traen CBU, domicilio y familia: nunca
+  se versionan. El Senado (`exportarDeclaraciones/json`) dice solo quién presentó, sin montos.
 
 ## Flujo de trabajo
 Desarrollar en la rama indicada por la sesión, correr los scripts y `php tests/verificar.php`, probar las rutas con

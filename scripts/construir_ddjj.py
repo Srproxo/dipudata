@@ -16,6 +16,11 @@ filtrar_ddjj.py unió por CUIT con un número de "persona" (el CUIT no se guarda
 NO se publica: CUIT, grupo familiar, ni la descripción de cada bien. Los montos están en pesos de cada año.
 Los montos vienen escritos de dos formas: "155817519-23" (155.817.519,23; negativos "-3000000-00") y con punto decimal normal.
 
+Diputados, años que la OA todavía no subió (desde el fiscal 2025): storage/oficial/ddjj/hcdn_ddjj_AAAA.csv.gz, que
+bajar_ddjj_hcdn.py extrae de los PDF que la Cámara de Diputados publica en la ficha de cada diputado (mismo formulario
+F. 1245). Se une al diputado por el usuario de su ficha, controlando apellido, nombres y provincia contra el listado
+oficial, y el año se controla contra los mandatos igual que los de la OA. Si la OA ya tiene ese año, se usa el de la OA.
+
 Uso:  python3 -I scripts/construir_ddjj.py   (después de construir_datos.py)
 """
 import collections, csv, glob, gzip, io, json, re, sys
@@ -268,6 +273,61 @@ def main() -> int:
             })
         if anios:
             salida[l["slug"] if cam == "Diputados" else "s:" + l["slug"]] = anios
+
+    # Diputados: declaraciones de los años que la OA todavía no publicó, tomadas de los PDF de la ficha de cada diputado.
+    hcdn_n, hcdn_sin, hcdn_fuera, hcdn_contraste = collections.Counter(), [], [], []
+    for ruta in sorted(glob.glob(str(ENT / "hcdn_ddjj_*.csv.gz"))):
+        with gzip.open(ruta, "rt", encoding="utf-8", newline="") as fh:
+            hrows = list(csv.DictReader(fh))
+        for r in hrows:
+            ap_l, _, no_l = r["listado_apellido_nombre"].partition(",")
+            try:
+                pv = provincia(r["listado_distrito"])
+            except ValueError:
+                pv = ""
+            cand = [(l, ap, resto) for l, ap, resto in datos_leg if l["camara"] == "Diputados" and set(ap) == set(tokens(ap_l))
+                    and provincia(l["provincia"]) == pv and compatibles(resto, tokens(no_l))]
+            if len(cand) != 1:
+                hcdn_sin.append(r["listado_apellido_nombre"])
+                continue
+            l, ap, resto = cand[0]
+            anio, tipo = int(r["periodo"]), r["tipo_declaracion_jurada_descripcion"]
+            h = hist["Diputados"].get(str(l.get("hcdn_id")))
+            mand = h[3] if h else [(l.get("inicio") or "1900-01-01", "2099-12-31")]
+            cargo_pdf = re.sub(r"\s+", " ", r["cargo"] or "").strip(" :.-")
+            leg = bool(CARGO_LEG.match(cargo_pdf)) and r["organismo"] in ("", "HONORABLE CAMARA DE DIPUTADOS DE LA NACION")
+            if leg and not en_mandato(anio, tipo, mand):
+                hcdn_fuera.append(f"{l['nombre']} {anio}")
+                continue
+            lista = salida.setdefault(l["slug"], [])
+            if any(a["anio"] == anio for a in lista):
+                continue  # la OA ya lo tiene
+            bi, di, bf, df = (monto(r[c]) for c in ("total_bienes_inicio", "deudas_inicio", "total_bienes_final", "total_deudas_final"))
+            if not bf:
+                vacias[str(anio)] += 1
+                continue
+            previo = next((a for a in lista if a["anio"] == anio - 1), None)
+            if previo and previo["bienes_final"] and bi is not None and abs(bi - previo["bienes_final"]) > 0.01 * previo["bienes_final"]:
+                hcdn_contraste.append(f"{l['nombre']} ({previo['bienes_final']:,.0f} → {bi:,.0f})")
+            lista.append({
+                "anio": anio, "tipo": tipo, "rectificativa": int(r["rectificativa"] or 0),
+                "cargo": cargo_legible({"cargo": cargo_pdf, "organismo": r["organismo"], "funcionario_apellido_nombre": r["funcionario_apellido_nombre"],
+                                        "sector": "x"}, leg),
+                "camara": "Diputados" if leg else None,
+                "bienes_inicio": bi, "deudas_inicio": di, "bienes_final": bf, "deudas_final": df or 0.0,
+                "patrimonio_neto_final": round(bf - (df or 0.0), 2), "ingresos_netos": monto(r["ingresos_neto_gastos"]),
+                "fuente": "HCDN", "presentada": r["fecha_presentacion"], "url": r["url"],
+            })
+            lista.sort(key=lambda a: -a["anio"])
+            hcdn_n[anio] += 1
+    if hcdn_n:
+        print("Declaraciones tomadas de las fichas de Diputados, por año:", dict(sorted(hcdn_n.items())))
+    if hcdn_sin:
+        print(f"Fichas de Diputados sin un diputado único del listado (no se usan): {len(hcdn_sin)}:", "; ".join(hcdn_sin))
+    if hcdn_fuera:
+        print("Fichas de Diputados fuera de mandato (no se publican):", "; ".join(hcdn_fuera))
+    if hcdn_contraste:
+        print(f"Bienes al inicio que no coinciden (más de 1%) con los del cierre anterior de la OA: {len(hcdn_contraste)}:", "; ".join(hcdn_contraste))
 
     if vacias:
         print("Declaraciones con bienes en cero (no se publican), por año:", dict(sorted(vacias.items())))
