@@ -9,7 +9,7 @@ métricas de relleno y acusaciones inventadas: eso nunca debe volver a pasar. Ca
 valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/metodologia`.
 - No se publican CUIT, datos de familiares ni descripción de bienes (declaraciones juradas).
 - Sin rankings ni "crecimiento patrimonial": los montos se muestran como se declararon. Desde el 1/11/2026 (decisión de Marcelo) el patrimonio neto
-  se expresa también en pesos de hoy con el IPC del INDEC (`bajar_ipc.py`, serie desde dic. 2016) y en dólares al tipo de cambio oficial del BCRA del cierre de cada año (`bajar_dolar.py`); sin dólar MEP (no es oficial) y sin calificar la evolución.
+  se expresa también en pesos de hoy con el IPC del INDEC (`bajar_ipc.py`, serie desde dic. 2016) y en dólares al tipo de cambio oficial del BCRA del cierre de cada año (`bajar_dolar.py`) y, al lado, en dólar MEP de ArgentinaDatos, no oficial, por decisión de Marcelo del 2/11/2026 (`bajar_dolar_mep.py`, que descarta cierres con el valor repetido); sin calificar la evolución.
 - Los pasajes de la Cámara "no implican viajes efectivamente realizados": decir "pasajes emitidos", no "viajó".
 - No afirmar nada sobre el personal de un legislador: ni Diputados ni el Senado publican qué asesor trabaja para quién
   (la nómina dice solo "afectado a bloque político"). Informes sensibles van a `informes_privados/` (ignorado por git).
@@ -20,7 +20,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
-  Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_dolar.py` (dólar oficial del BCRA al cierre de cada año, datos.gob.ar; el MEP no tiene serie oficial), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_dolar.py` (dólar oficial del BCRA al cierre de cada año, datos.gob.ar), `bajar_dolar_mep.py` (MEP de ArgentinaDatos, no oficial; después de bajar_dolar.py), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".

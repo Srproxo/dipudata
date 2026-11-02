@@ -183,15 +183,17 @@ function monto_corto(float $n, string $moneda = '$'): string
 /**
  * Gráfico de línea en SVG, sin JavaScript. $puntos: [etiqueta_x => valor]. El eje Y empieza en 0 (o en el mínimo si hay negativos)
  * y no se suaviza la línea. $titulo describe el gráfico en palabras (lectores de pantalla).
+ * $segunda (opcional): otra serie con las mismas etiquetas (puede cubrir solo algunas), dibujada con línea punteada.
  */
-function svg_linea(array $puntos, string $titulo, string $moneda = '$'): string
+function svg_linea(array $puntos, string $titulo, string $moneda = '$', array $segunda = []): string
 {
     if (count($puntos) < 2) {
         return '';
     }
     $w = 640; $h = 260; $izq = 84; $der = 16; $arr = 14; $aba = 30;
     $vals = array_map('floatval', array_values($puntos));
-    $min = min(0.0, min($vals)); $max = max($vals);
+    $todos = array_merge($vals, array_map('floatval', array_values($segunda)));
+    $min = min(0.0, min($todos)); $max = max($todos);
     if ($max <= $min) { $max = $min + 1; }
     $n = count($vals);
     $x = static fn(int $i): float => $izq + ($w - $izq - $der) * ($n === 1 ? 0.5 : $i / ($n - 1));
@@ -216,7 +218,23 @@ function svg_linea(array $puntos, string $titulo, string $moneda = '$'): string
         }
         $i++;
     }
-    return $s . '<path class="g-linea" d="' . implode(' ', $camino) . '"/>' . $etiquetas . '</svg>';
+    $s .= '<path class="g-linea" d="' . implode(' ', $camino) . '"/>';
+    if ($segunda) {
+        $camino2 = []; $puntos2 = ''; $i = 0; $seguido = false;
+        foreach (array_keys($puntos) as $et) {
+            if (isset($segunda[$et])) {
+                $px = round($x($i), 1); $py = round($y((float)$segunda[$et]), 1);
+                $camino2[] = ($seguido ? 'L' : 'M') . $px . ' ' . $py;
+                $puntos2 .= '<rect class="g-punto-2" x="' . ($px - 3) . '" y="' . ($py - 3) . '" width="6" height="6"/>';
+                $seguido = true;
+            } else {
+                $seguido = false;
+            }
+            $i++;
+        }
+        $s .= '<path class="g-linea-2" d="' . implode(' ', $camino2) . '"/>' . $puntos2;
+    }
+    return $s . $etiquetas . '</svg>';
 }
 
 /** Pestañas del perfil que tienen datos para este legislador: clave => título. "resumen" siempre está. */
@@ -268,6 +286,14 @@ function dolar_cierre(): array
 {
     $f = [];
     foreach (\App\Datos::dolar()['cierre_anual'] ?? [] as $a => $c) { if (($c['valor'] ?? 0) > 0) { $f[(int)$a] = (float)$c['valor']; } }
+    return $f;
+}
+
+/** Pesos por dólar MEP (ArgentinaDatos, no oficial) al cierre de cada año: [anio => valor]. */
+function dolar_mep_cierre(): array
+{
+    $f = [];
+    foreach (\App\Datos::dolarMep()['cierre_anual'] ?? [] as $a => $c) { if (($c['valor'] ?? 0) > 0) { $f[(int)$a] = (float)$c['valor']; } }
     return $f;
 }
 

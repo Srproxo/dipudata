@@ -224,6 +224,12 @@ final class Datos
         return self::leer('dolar');
     }
 
+    /** Dólar MEP de ArgentinaDatos (no oficial) al cierre de cada año, mismo formato que dolar(). */
+    public static function dolarMep(): array
+    {
+        return self::leer('dolar_mep');
+    }
+
     /** Coautorías de un senador en ejercicio con otros senadores en ejercicio desde el 10/12/2025, o null. */
     public static function coautorias(string $slug): ?array
     {
