@@ -246,6 +246,9 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .ver-datos summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: .9rem; color: var(--acento); text-decoration: underline; }
 .ver-datos .tabla-caja { margin-top: .25rem; }
 .tabla-cifras td.num { white-space: nowrap; }
+.tabla-cifras td.num::before { white-space: normal; }
+.tabla td.celda-cargo { min-width: 9.5rem; }
+@media (max-width: 40rem) { .tabla td.celda-cargo { min-width: 0; } .tabla td.celda-cargo > span { text-align: right; max-width: 70%; } }
 
 /* Hemiciclo de bloques */
 .camara-hemiciclo { margin: 0 0 1.25rem; }
