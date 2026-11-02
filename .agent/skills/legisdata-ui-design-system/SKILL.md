@@ -42,6 +42,9 @@ Si la revisión no se aprueba, no se publica, aunque el dato sea correcto.
 | Lista de nombres | `ul.lista-chips` |
 | Advertencia de método | `p.aviso` |
 | Paginación | `.paginas` |
+| Cifra grande con fuente (tarjeta) | `ul.tarjetas > li.tarjeta` (`.tarjeta-t`, `.tarjeta-cifra`, `.tarjeta-nota`), con `medidor()` para porcentajes |
+| Reparto de votos | `reparto_votos()` (colores de voto) y `svg_barras_votos()` para mes a mes |
+| Barras simples por año | `svg_barras()` |
 
 ## 4. Gráficos
 - Se dibujan como **SVG en línea generado en PHP**, sin bibliotecas. Colores con los tokens; texto con `--sans`.
