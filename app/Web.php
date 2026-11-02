@@ -337,6 +337,72 @@ function svg_linea(array $puntos, string $titulo, string $moneda = '$', array $s
     return $s . $etiquetas . '</svg>';
 }
 
+/** Nombre corto de un lugar del mapa de pasajes. */
+function lugar_corto(array $lugar): string
+{
+    static $cortos = ['San Fernando del Valle de Catamarca' => 'Catamarca', 'San Miguel de Tucumán' => 'Tucumán', 'San Salvador de Jujuy' => 'Jujuy',
+        'San Carlos de Bariloche' => 'Bariloche', 'San Ramón de la Nueva Orán' => 'Orán'];
+    return $lugar['provincia'] === 'Ciudad Autónoma de Buenos Aires' ? 'CABA' : ($cortos[$lugar['nombre']] ?? $lugar['nombre']);
+}
+
+/**
+ * Mapa de la Argentina con las rutas de los pasajes de un diputado (SVG en línea, sin scripts).
+ * Cada ruta es una curva entre los centros de las dos localidades; el grosor crece con la cantidad de tramos.
+ * Aéreos: línea llena del acento, curvada hacia un lado; terrestres: línea discontinua, curvada hacia el otro.
+ */
+function svg_rutas(array $r, string $titulo): string
+{
+    $w = (int)$r['meta']['ancho']; $h = (int)$r['meta']['alto'];
+    $id = 'm-' . md5($titulo);
+    $s = '<svg class="mapa" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    foreach ($r['provincias'] as $p) {
+        $s .= '<path class="m-prov" d="' . e($p['d']) . '"/>';
+    }
+    $max = max(array_map(static fn(array $x): int => $x['ida'] + $x['vuelta'], $r['rutas']));
+    $usados = [];
+    $lineas = '';
+    // Las más frecuentes se dibujan al final, por encima.
+    foreach (array_reverse($r['rutas']) as $x) {
+        $a = $r['lugares'][$x['a']]; $b = $r['lugares'][$x['b']];
+        $usados[$x['a']] = $a; $usados[$x['b']] = $b;
+        [$x1, $y1] = $a['xy']; [$x2, $y2] = $b['xy'];
+        $k = $x['tipo'] === 'aereo' ? 0.15 : -0.15;  // punto de control corrido en perpendicular al tramo
+        $cx = round(($x1 + $x2) / 2 - ($y2 - $y1) * $k, 1);
+        $cy = round(($y1 + $y2) / 2 + ($x2 - $x1) * $k, 1);
+        $n = $x['ida'] + $x['vuelta'];
+        $grosor = round(1.25 + 3.5 * sqrt($n / $max), 2);
+        $lineas .= '<path class="m-ruta' . ($x['tipo'] === 'aereo' ? '' : ' m-ruta-t') . '" style="stroke-width:' . $grosor . '" d="M' . $x1 . ' ' . $y1 . 'Q' . $cx . ' ' . $cy . ' ' . $x2 . ' ' . $y2 . '">'
+            . '<title>' . e(lugar_corto($a) . ' – ' . lugar_corto($b) . ($x['tipo'] === 'aereo' ? ', aéreo: ' : ', terrestre: ') . $n . ($n === 1 ? ' tramo' : ' tramos')) . '</title></path>';
+    }
+    $s .= $lineas;
+    // Puntos y nombres; un nombre que se superpone con otro ya escrito se omite (figura en la tabla).
+    $cajas = [];
+    $puntos = ''; $nombres = '';
+    foreach ($usados as $lugar) {
+        [$px, $py] = $lugar['xy'];
+        $puntos .= '<circle class="m-punto" cx="' . $px . '" cy="' . $py . '" r="3"><title>' . e($lugar['nombre'] . ', ' . $lugar['provincia']) . '</title></circle>';
+    }
+    uasort($usados, static fn(array $p, array $q): int => $p['xy'][1] <=> $q['xy'][1]);
+    foreach ($usados as $lugar) {
+        [$px, $py] = $lugar['xy'];
+        $txt = lugar_corto($lugar);
+        $ancho = mb_strlen($txt) * 6.4;
+        $izq = $px + 6 + $ancho > $w - 2;
+        $bx = $izq ? $px - 6 - $ancho : $px + 6;
+        $caja = [$bx, $py - 9, $bx + $ancho, $py + 4];
+        $choca = false;
+        foreach ($cajas as $c) {
+            if ($caja[0] < $c[2] && $caja[2] > $c[0] && $caja[1] < $c[3] && $caja[3] > $c[1]) { $choca = true; break; }
+        }
+        if ($choca || $caja[0] < 1) {
+            continue;
+        }
+        $cajas[] = $caja;
+        $nombres .= '<text class="m-etq" x="' . round($izq ? $px - 6 : $px + 6, 1) . '" y="' . round($py + 4, 1) . '"' . ($izq ? ' text-anchor="end"' : '') . '>' . e($txt) . '</text>';
+    }
+    return $s . $puntos . $nombres . '</svg>';
+}
+
 /** Pestañas del perfil que tienen datos para este legislador: clave => título. "resumen" siempre está. */
 function pestanas_perfil(array $l): array
 {

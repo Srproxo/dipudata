@@ -152,6 +152,20 @@ final class Datos
         return self::leer('viajes');
     }
 
+    /**
+     * Rutas de los pasajes de un diputado desde el 10/12/2025, ya ubicadas en el mapa (rutas_pasajes.json).
+     * @return array{rutas:list<array>,total:int,sin_ubicar:int,misma_localidad:int,lugares:array,provincias:list<array>,meta:array}|null
+     */
+    public static function rutasPasajes(string $slug): ?array
+    {
+        $d = self::leer('rutas_pasajes');
+        $r = $d['por_diputado'][$slug] ?? null;
+        if (!$r || !$r['rutas']) {
+            return null;
+        }
+        return $r + ['lugares' => $d['lugares'], 'provincias' => $d['provincias'], 'meta' => $d['_meta']];
+    }
+
     /** @return list<array> */
     public static function misiones(): array
     {

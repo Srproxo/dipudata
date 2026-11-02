@@ -291,6 +291,24 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
     <?php endforeach; ?>
     </tbody>
   </table></div>
+  <?php $rp = Datos::rutasPasajes($l['slug']); if ($rp): $rp1 = $rp['rutas'][0]; $nr = count($rp['rutas']); ?>
+  <h3 class="sub-titulo mapa-sub">Rutas de esos pasajes desde el 10/12/2025</h3>
+  <div class="mapa-grilla">
+    <figure class="mapa-caja">
+      <?= svg_rutas($rp, 'Mapa de la Argentina con ' . ($nr === 1 ? 'la ruta' : 'las ' . $nr . ' rutas') . ' de los pasajes emitidos a pedido de ' . $l['nombre'] . ' desde el 10/12/2025. ' . ($nr === 1 ? 'Ruta: ' : 'La de más tramos: ') . lugar_corto($rp['lugares'][$rp1['a']]) . ' – ' . lugar_corto($rp['lugares'][$rp1['b']]) . ', con ' . ($rp1['ida'] + $rp1['vuelta']) . ' tramos.') ?>
+      <figcaption><ul class="leyenda" aria-hidden="true"><li><i class="ley-linea"></i>Aéreo</li><li><i class="ley-linea ley-linea-2"></i>Terrestre</li><li class="tenue">Más grosor, más tramos</li></ul></figcaption>
+    </figure>
+    <div class="tabla-caja"><table class="tabla tabla-cifras tabla-rutas">
+      <thead><tr><th scope="col">Ruta</th><th scope="col" class="der">Tramos</th></tr></thead>
+      <tbody>
+      <?php foreach ($rp['rutas'] as $x): $la = $rp['lugares'][$x['a']]; $lb = $rp['lugares'][$x['b']]; ?>
+        <tr><td><?= e(lugar_corto($la)) ?> – <?= e(lugar_corto($lb)) ?><span class="tenue pequeno block"><?= $x['tipo'] === 'aereo' ? 'Aéreo' : 'Terrestre' ?> · <?php if ($x['ida'] && $x['vuelta']): ?><?= (int)$x['ida'] ?> de ida y <?= (int)$x['vuelta'] ?> de vuelta<?php elseif ($x['ida']): ?>solo desde <?= e(lugar_corto($la)) ?><?php else: ?>solo desde <?= e(lugar_corto($lb)) ?><?php endif; ?></span></td><td class="der num" data-etiqueta="Tramos"><?= (int)($x['ida'] + $x['vuelta']) ?></td></tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table></div>
+  </div>
+  <p class="tenue pequeno">La Cámara publica cada tramo con el nombre del aeropuerto o la terminal de origen y de destino. Cada uno se ubicó en el centro de su localidad según Georef (IGN e INDEC, apis.datos.gob.ar); el mapa no muestra recorridos reales sino la unión entre esos dos puntos.<?php if ($rp['sin_ubicar']): ?> <?= (int)$rp['sin_ubicar'] ?> <?= $rp['sin_ubicar'] === 1 ? 'tramo no se dibuja porque su origen o destino' : 'tramos no se dibujan porque su origen o destino' ?> no se pudo ubicar con certeza (un nombre que existe en varias provincias, por ejemplo).<?php endif; ?> Datos hasta <?= e(mes_es($rp['meta']['hasta'])) ?>.</p>
+  <?php endif; ?>
   <p class="tenue pequeno">Cada tramo es un pasaje que la Cámara emitió a pedido del diputado. La Cámara aclara que los tramos "no implican viajes efectivamente realizados", y no publica su costo. Quien vive lejos de la Capital necesita más pasajes para ir y volver al recinto. <a href="/viajes">Más sobre pasajes y misiones oficiales</a>.</p>
 </section>
 <?php endif; ?>

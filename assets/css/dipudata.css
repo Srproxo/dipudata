@@ -250,6 +250,24 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .tabla td.celda-cargo { min-width: 9.5rem; }
 @media (max-width: 40rem) { .tabla td.celda-cargo { min-width: 0; } .tabla td.celda-cargo > span { text-align: right; max-width: 70%; } }
 
+/* Mapa de rutas de pasajes (SVG en línea, sin scripts) */
+.mapa-sub { margin-top: 1.75rem; }
+.mapa-grilla { display: grid; gap: 1.25rem 2rem; align-items: start; margin-bottom: 1rem; }
+@media (min-width: 46rem) { .mapa-grilla { grid-template-columns: minmax(14rem, 19rem) minmax(0, 1fr); } }
+.mapa-caja { margin: 0; max-width: 19rem; width: 100%; justify-self: center; }
+.mapa { display: block; width: 100%; height: auto; }
+.m-prov { fill: var(--fondo); stroke: var(--linea-fuerte); stroke-width: .6; stroke-linejoin: round; }
+.m-ruta { fill: none; stroke: var(--acento); stroke-linecap: round; opacity: .85; }
+.m-ruta-t { stroke: var(--tinta-2); stroke-dasharray: 5 3; stroke-linecap: butt; }
+.m-punto { fill: var(--papel); stroke: var(--tinta); stroke-width: 1.5; }
+.m-etq { fill: var(--tinta); font: 600 11px var(--sans); paint-order: stroke; stroke: var(--papel); stroke-width: 3px; stroke-linejoin: round; }
+.mapa-caja .leyenda { margin-top: .5rem; }
+@media (max-width: 40rem) {
+  .tabla-rutas thead { position: static; }
+  .tabla-rutas tr { display: table-row; padding: 0; }
+  .tabla-rutas td { display: table-cell; border-bottom: 1px solid var(--linea); padding: .5rem .25rem; }
+  .tabla-rutas td[data-etiqueta]::before { content: none; }
+}
 /* Hemiciclo de bloques */
 .camara-hemiciclo { margin: 0 0 1.25rem; }
 .hemiciclo { display: block; width: 100%; height: auto; max-width: 56rem; margin-inline: auto; }
