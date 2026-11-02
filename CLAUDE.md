@@ -33,6 +33,9 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Un detalle de votación debe cuadrar con su cabecera. El presidente de la sesión figura como ausente en el detalle: se marca "Preside".
   Algunas filas vienen sin nombre (una coma): no son legisladores. Algunas páginas del Senado duplican la tabla.
 - Los montos de las declaraciones juradas vienen en dos formatos (`155817519-23` y con punto decimal).
+- Declaraciones juradas (OA): muchas filas de legisladores traen el organismo vacío o el de la actividad anterior de la persona;
+  se filtra por cargo ("diputado/senador nacional", con variantes y errores como "dipurado"). Cada año se controla contra los
+  mandatos de los listados históricos de cada cámara: los que no cuadran (homónimos, otro cargo) no se publican.
 - Las columnas de promulgación y veto del archivo de leyes traen el mismo valor en todas las filas: no usarlas.
 
 - Senado, votaciones: los números de `detalleActa/{id}` NO siguen el orden de las fechas y los inexistentes devuelven 200 con una página vacía. Las actas viejas casi no traen el ID del

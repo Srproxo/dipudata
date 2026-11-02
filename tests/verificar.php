@@ -95,7 +95,30 @@ foreach ($todos as $l) {
         if (isset($d['cuit'])) { $djCuit++; }
     }
 }
-ok($conDj >= 80, 'hay declaraciones juradas de legisladores en ejercicio (' . $conDj . ')');
+ok($conDj >= 200, 'hay declaraciones juradas de legisladores en ejercicio (' . $conDj . '; incluye filas con el organismo vacío)');
+// Cada año publicado tiene que tocar un mandato oficial de la persona (año anterior a asumir y baja hasta un año después).
+$of = __DIR__ . '/../storage/oficial/';
+$mandD = []; foreach (json_decode(gzdecode(file_get_contents($of . 'hcdn/diputados_historico.json.gz')), true) as $x) {
+    $mandD[(string)$x['ID']][] = [min(substr($x['INICIO'], 0, 10), substr($x['JURAMENTO'] ?? $x['INICIO'], 0, 10)), max(substr($x['FIN'], 0, 10), substr($x['CESE'] ?? $x['FIN'], 0, 10))];
+}
+$mandS = []; foreach (['senadores_no_activos' => ['INICIO PERIODO REAL', 'CESE PERIODO REAL'], 'senadores_activos' => ['D_REAL', 'C_LEGAL']] as $f => [$di, $ci]) {
+    foreach (json_decode(gzdecode(file_get_contents($of . "senado/$f.json.gz")), true)['table']['rows'] as $x) {
+        $c = (string)$x[$ci]; $mandS[(string)$x['ID']][] = [substr((string)$x[$di], 0, 10), in_array(substr($c, 0, 2), ['19', '20'], true) ? substr($c, 0, 10) : '2099-12-31'];
+    }
+}
+$djFuera = [];
+foreach ($todos as $l) {
+    $m = $l['camara'] === 'Diputados' ? ($mandD[(string)($l['hcdn_id'] ?? '')] ?? null) : ($mandS[(string)($l['id_senado'] ?? '')] ?? null);
+    $m ??= [[$l['inicio'] ?? '1900-01-01', '2099-12-31']];
+    foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {
+        $y = (int)$d['anio']; $bien = false;
+        foreach ($m as [$i, $f]) {
+            if (($i <= ($y + 1) . '-12-31' && $f >= $y . '-01-01') || ($d['tipo'] === 'Baja' && $f >= ($y - 1) . '-01-01' && $i <= $y . '-12-31')) { $bien = true; }
+        }
+        if (!$bien) { $djFuera[] = $l['slug'] . ' ' . $y; }
+    }
+}
+ok($djFuera === [], 'cada año de declaración jurada cae en un mandato oficial del legislador' . ($djFuera ? ': ' . implode(', ', array_slice($djFuera, 0, 5)) : ''));
 ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
 ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
 
