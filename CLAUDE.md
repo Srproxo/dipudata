@@ -20,7 +20,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - `storage/oficial/` fuentes comprimidas (lo que se descargó); `storage/verificado/` lo que lee el sitio (se genera).
 - `scripts/` Python (solo biblioteca estándar). Orden: `construir_datos.py` → `construir_senado.py` →
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
-  Descargas: `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
+  Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
   `filtrar_ddjj.py` (recorta el archivo anual de la Oficina Anticorrupción a legisladores y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
@@ -40,7 +40,14 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Proyectos: el CSV de Diputados trae UN autor por proyecto, como texto y sin ID, y sin cofirmantes; se cruza por nombre completo contra el histórico oficial y se valida el mandato en la fecha.
   "Resultado de proyectos" solo trae lo resuelto: ausencia no es rechazo. El Senado no publica proyectos abiertos: se lee la página de cada senador (ID en la URL); los códigos CO y CC del expediente no son proyectos.
 - Segunda fuente: DataCP (datacp.ar, UBA, CC BY 4.0) `/api/congreso/export/leyes-clave/resultados` trae solo totales de leyes clave: sirve para contrastar, no para publicar votos. Sus rankings de intervenciones no se publican.
-- Diputados 2020-2025: datos.hcdn.gob.ar sigue en el período 137; `votaciones.hcdn.gob.ar` abre en navegador pero desde el entorno de trabajo corta el TLS: sin fuente primaria no se publica ese período.
+- Diputados 2020-2025: datos.hcdn.gob.ar sigue en el período 137. `votaciones.hcdn.gob.ar` corta el TLS desde el entorno en la nube,
+  pero responde desde una máquina local: `bajar_votaciones_hcdn.py` (reanudable, caché en `storage/cache/`, ignorado) →
+  `validar_votaciones_hcdn.py` → `convertir_votaciones_hcdn.py` genera `actas_cabecera/detalle_138..143` con el formato oficial
+  (hasta el 9/12/2025; lo posterior sigue viniendo de ArgentinaDatos, que coincide 141/141 voto por voto). Los números de acta son los mismos
+  de datos.hcdn.gob.ar (la muestra del 137 coincide 20/20). La página trae etiquetas extra: PRESIDENTE, SIN VOTAR y "PENDIENTE DE
+  INCORPORACIÓN" (banca vacante, no es legislador). "Sin votar" en la cabecera a veces suma a quien preside y a las vacantes.
+  Faltan 3 votaciones del 138 que figuran en el índice sin página de detalle (404: actas 3975, 3996, 3999) y 4 números de acta sin votación
+  en el índice (138 R9 acta 3; 139 R11 acta 2; 139 R12 actas 1 y 3).
 - Red del entorno: los dominios permitidos necesitan comodín (`*.senado.gob.ar`, `*.hcdn.gob.ar`, `*.datacp.ar`, ...). Para probar páginas con `php -S` hace falta un router que deje pasar `/assets` (mvc.php no lo hace).
 - Ejes temáticos (decisión de Marcelo, 1/11/2026): el eje de un proyecto es el de su comisión de primer giro, según `scripts/ejes_por_comision.csv`
   (editable). Las actas del Senado y las recientes de Diputados no traen expediente: los votos por eje salen solo de Diputados 2011-2020.

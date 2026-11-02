@@ -9,3 +9,4 @@ api/credentials.local.php
 __pycache__/
 *.pyc
 informes_privados/
+storage/cache/
