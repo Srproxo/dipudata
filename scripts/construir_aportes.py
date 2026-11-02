@@ -62,7 +62,7 @@ def main() -> int:
             ags.append({"nombre": n, "distrito": dis, "slug": slug(n + " " + dis),
                         "total": round(a["total"], 2), "aportes": a["aportes"], "aportantes": len(a["aportantes"]),
                         "juridicas": round(a["juridicas"], 2), "especie": round(a["especie"], 2),
-                        "mayores": [[v[2] if v[3] == "Jurídica" else None, v[4] or None, round(v[0], 2), v[1]] for k, v in top]})
+                        "mayores": [[v[2] if v[3] == "Jurídica" else None, v[4] or None, round(v[0], 2), v[1], k if v[3] == "Jurídica" else None] for k, v in top]})
         if len({x["slug"] for x in ags}) != len(ags):
             raise SystemExit(f"slugs repetidos en {d['nombre']}")
         ags.sort(key=lambda x: (-x["total"], x["nombre"], x["distrito"]))
@@ -72,16 +72,40 @@ def main() -> int:
                          "aportantes": len(d["aportantes"]), "juridicas": round(d["juridicas"], 2), "negativos": d["negativos"],
                          "agrupaciones": ags})
     destinos.sort(key=lambda x: (-x["anio"], x["tipo"] != "campaña", -x["cod"]))
+
+    # Personas jurídicas: a qué agrupaciones aportaron (todas, no solo el top 10), por destino.
+    emp = {}
+    for r in validas:
+        if r["tipo"] != "Jurídica":
+            continue
+        e = emp.setdefault(r["aportante"], {"nombre": r["razon_social"], "actividad": r["actividad"], "total": 0.0, "aportes": 0, "ag": {}})
+        m = float(r["monto"])
+        e["total"] += m; e["aportes"] += 1
+        g = e["ag"].setdefault((r["agrupacion"], r["distrito"], r["destino"]), [0.0, 0, r["fecha"]])
+        g[0] += m; g[1] += 1; g[2] = max(g[2], r["fecha"])
+    empresas, usados, id_slug = [], set(), {}
+    for k, e in sorted(emp.items(), key=lambda kv: (-len({a[0] for a in kv[1]["ag"]}), -kv[1]["total"], kv[1]["nombre"])):
+        base = slug(e["nombre"]) or "empresa"
+        sl = base if base not in usados else f"{base}-{k}"
+        usados.add(sl)
+        filas_ag = sorted(([n, dis, dest, round(v[0], 2), v[1], v[2]] for (n, dis, dest), v in e["ag"].items()), key=lambda x: (x[5], x[0]), reverse=True)
+        id_slug[k] = sl
+        empresas.append({"slug": sl, "nombre": e["nombre"], "actividad": e["actividad"] or None, "total": round(e["total"], 2),
+                         "aportes": e["aportes"], "agrupaciones": len({a[0] for a in filas_ag}), "detalle": filas_ag})
+    for d in destinos:  # el número correlativo de una persona jurídica se reemplaza por el enlace a su página
+        for a in d["agrupaciones"]:
+            for x in a["mayores"]:
+                x[4] = id_slug.get(x[4]) if x[4] else None
     salida = {"_meta": {"fuente": "Cámara Nacional Electoral, registro de aportantes (aportantes.electoral.gob.ar)",
                         "aportes": len(filas), "anulados": len(filas) - len(validas),
                         "rectificados": sum(1 for r in validas if r["rectificado"] == "True"),
                         "negativos": sum(1 for r in validas if float(r["monto"]) < 0),
                         "repetidos": sum(v - 1 for v in claves.values() if v > 1),
                         "desde": min(r["fecha"] for r in validas), "hasta": max(r["fecha"] for r in validas)},
-              "destinos": destinos}
+              "destinos": destinos, "empresas": empresas}
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     m = salida["_meta"]
-    print(f"{m['aportes']} aportes ({m['anulados']} anulados, {m['repetidos']} filas repetidas); {len(destinos)} destinos")
+    print(f"{m['aportes']} aportes ({m['anulados']} anulados, {m['repetidos']} filas repetidas); {len(destinos)} destinos; {len(empresas)} personas jurídicas")
     return 0
 
 

@@ -235,6 +235,13 @@ foreach ($ap['destinos'] ?? [] as $d) {
 }
 ok(count($ap['destinos'] ?? []) >= 20 && $apMal === 0, 'aportes a partidos: los totales por agrupación suman el total de cada destino');
 $crudo = is_file(RAIZ . '/storage/oficial/cne/aportes.csv.gz') ? (string)gzdecode((string)file_get_contents(RAIZ . '/storage/oficial/cne/aportes.csv.gz')) : '';
+$emMal = 0; $slugs = [];
+foreach ($ap['empresas'] ?? [] as $em) {
+    $slugs[$em['slug']] = 1;
+    if (abs(array_sum(array_column($em['detalle'], 3)) - $em['total']) > 1 || array_sum(array_column($em['detalle'], 4)) !== $em['aportes'] || count(array_unique(array_column($em['detalle'], 0))) !== $em['agrupaciones']) { $emMal++; }
+}
+foreach ($ap['destinos'] ?? [] as $d) { foreach ($d['agrupaciones'] as $a) { foreach ($a['mayores'] as $x) { if (($x[0] === null) !== ($x[4] === null) || ($x[4] !== null && !isset($slugs[$x[4]]))) { $emMal++; } } } }
+ok(count($slugs) === count($ap['empresas'] ?? []) && count($slugs) >= 400 && $emMal === 0, 'aportes: ' . count($slugs) . ' personas jurídicas con totales coherentes; el top 10 solo nombra personas jurídicas y enlaza a su página');
 $humanasConNombre = 0; foreach (array_slice(explode("\n", $crudo), 1) as $lin) { $c = str_getcsv($lin); if (count($c) > 5 && $c[3] === 'Humana' && ($c[5] !== '' || $c[6] !== '')) { $humanasConNombre++; } }
 ok($humanasConNombre === 0, 'aportes a partidos: ninguna persona humana tiene nombre ni rubro guardado');
 ok($crudo !== '' && !preg_match('/\b\d{11}\b/', $crudo) && str_starts_with($crudo, 'fecha,cod_destino,destino,tipo,aportante,'), 'aportes a partidos: el archivo guardado no tiene CUIL/CUIT');

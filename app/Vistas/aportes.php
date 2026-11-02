@@ -14,7 +14,7 @@ $grupos = ['campaña' => 'Campañas', 'institucional' => 'Funcionamiento de los 
 ?>
 <nav class="migas" aria-label="Ubicación"><a href="/congreso">Cómo funciona el Congreso</a> <span aria-hidden="true">/</span> <span>Aportes a partidos</span></nav>
 <h1 class="titulo">Aportes privados a los partidos.</h1>
-<p class="bajada">Cada aporte privado a un partido o alianza se declara ante la Cámara Nacional Electoral, que publica quién aportó, cuánto y a qué agrupación. Acá están los totales por agrupación. Tocá una agrupación para ver sus 10 mayores aportantes: las empresas con su nombre, las personas sin nombre.</p>
+<p class="bajada">Cada aporte privado a un partido o alianza se declara ante la Cámara Nacional Electoral, que publica quién aportó, cuánto y a qué agrupación. Acá están los totales por agrupación. Tocá una agrupación para ver sus 10 mayores aportantes: las empresas con su nombre, las personas sin nombre. También podés ver <a href="/aportes/empresas">qué empresas aportan y a cuántas agrupaciones</a>.</p>
 <p class="aviso"><strong>Cómo leerlo.</strong> Una agrupación electoral no es lo mismo que un bloque del Congreso: las alianzas se arman para cada elección y en cada provincia, y un bloque puede reunir legisladores de varias. Los montos están en pesos de cada fecha, sin ajustar por inflación. Incluyen aportes en especie, valuados por la agrupación.</p>
 
 <form class="filtros" method="get" action="/aportes" style="margin-top:1.5rem">
@@ -45,9 +45,9 @@ $grupos = ['campaña' => 'Campañas', 'institucional' => 'Funcionamiento de los 
   <div class="tabla-caja"><table class="tabla">
     <thead><tr><th scope="col">Aportante</th><th scope="col" class="der">Monto</th><th scope="col" class="der">Aportes</th><th scope="col" class="der">Del total</th></tr></thead>
     <tbody>
-    <?php foreach ($agSel['mayores'] as [$nom, $rubro, $monto, $n]): ?>
+    <?php foreach ($agSel['mayores'] as [$nom, $rubro, $monto, $n, $emSlug]): ?>
       <tr>
-        <td><span><?= $nom !== null ? e($nom) . ($rubro ? '<br><span class="tenue pequeno">' . e($rubro) . '</span>' : '') : '<span class="tenue">Persona humana</span>' ?></span></td>
+        <td><span><?= $nom !== null ? ($emSlug ? '<a href="/aportes/empresas/' . e($emSlug) . '">' . e($nom) . '</a>' : e($nom)) . ($rubro ? '<br><span class="tenue pequeno">' . e($rubro) . '</span>' : '') : '<span class="tenue">Persona humana</span>' ?></span></td>
         <td class="der num" data-etiqueta="Monto"><b style="white-space:nowrap">$ <?= number_format($monto, 0, ',', '.') ?></b></td>
         <td class="der num" data-etiqueta="Aportes"><?= (int)$n ?></td>
         <td class="der num" data-etiqueta="Del total"><?= $agSel['total'] > 0 ? number_format($monto / $agSel['total'] * 100, 1, ',', '') . '%' : '—' ?></td>

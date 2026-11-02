@@ -236,6 +236,13 @@ final class Datos
         return self::leer('aportes');
     }
 
+    /** Persona jurídica aportante por slug (de aportes.json). */
+    public static function empresaAportante(string $slug): ?array
+    {
+        foreach (self::aportes()['empresas'] ?? [] as $e) { if ($e['slug'] === $slug) { return $e; } }
+        return null;
+    }
+
     public static function ejesMeta(): array
     {
         return self::leer('ejes')['_meta'] ?? [];
