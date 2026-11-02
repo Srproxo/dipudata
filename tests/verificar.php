@@ -217,6 +217,9 @@ $usdMal = array_filter($usd, fn($c, $a) => ($c['valor'] ?? 0) <= 0 || substr((st
 ok(count($usd) >= 20 && !$usdMal && isset($usd['2024']), 'dólar oficial del BCRA al cierre de cada año desde 2003, con valores positivos y fecha de diciembre (' . count($usd) . ' años)');
 $djSinUsd = 0; foreach (Datos::legisladores() as $l) { foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) { if ((int)$d['anio'] >= 2003 && !isset($usd[(string)(int)$d['anio']])) { $djSinUsd++; } } }
 ok($djSinUsd === 0, 'toda declaración jurada desde 2003 tiene tipo de cambio de cierre para pasarla a dólares');
+$mepD = Datos::dolarMep(); $mepC = $mepD['cierre_anual'] ?? [];
+$mepMal = array_filter($mepC, fn($c, $a) => ($c['valor'] ?? 0) <= 0 || substr((string)$c['fecha'], 0, 7) !== $a . '-12' || !isset($usd[$a]) || $c['valor'] / $usd[$a]['valor'] < 0.9 || $c['valor'] / $usd[$a]['valor'] > 3.5, ARRAY_FILTER_USE_BOTH);
+ok(count($mepC) >= 5 && !$mepMal && str_contains((string)($mepD['_meta']['fuente'] ?? ''), 'no es una fuente oficial'), 'dólar MEP al cierre de cada año: valores de diciembre, entre 0,9 y 3,5 veces el oficial, y marcado como fuente no oficial (' . count($mepC) . ' años)');
 
 $coMal = 0; $coN = 0;
 foreach ($sen as $l) {
