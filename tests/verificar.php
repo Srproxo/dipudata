@@ -50,7 +50,7 @@ $malV = 0;
 foreach ($vot as $v) {
     $d = Datos::votacion($v['id']);
     if (!empty($d['nota'])) { continue; } // las que no cuadran se muestran con aviso y no entran en las estadísticas
-    $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'P' => 0, 'E' => 0, 'X' => 0];
+    $c = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0, 'P' => 0, 'E' => 0, 'S' => 0, 'X' => 0];
     foreach ($d['votos'] ?? [] as $x) { $c[$x[3]]++; }
     if ([$c['A'], $c['N'], $c['B'], $c['U']] !== [$v['a'], $v['n'], $v['b'], $v['u']]) { $malV++; }
 }
