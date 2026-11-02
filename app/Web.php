@@ -333,3 +333,161 @@ function match_temas(array $usuario, string $camara = ''): array
     usort($filas, static fn($a, $b) => $b['afinidad'] <=> $a['afinidad'] ?: strcmp($a['l']['nombre'], $b['l']['nombre']));
     return $filas;
 }
+
+/** Número con separador de miles y decimales con coma: 1.234 o 98,6. */
+function num_es(float $n, int $dec = 0): string
+{
+    return number_format($n, $dec, ',', '.');
+}
+
+/**
+ * Avance del mandato a partir del inicio oficial y del año de fin del padrón ("2023-2027": termina el 9/12/2027).
+ * Devuelve [inicio ISO, fin ISO, % transcurrido, "faltan ..."] o null si no hay datos para calcularlo.
+ */
+function mandato_avance(array $l, ?string $hoy = null): ?array
+{
+    if (empty($l['mandato']) || !preg_match('/^(\d{4})-(\d{4})$/', (string)$l['mandato'], $m)) {
+        return null;
+    }
+    $ini = $l['inicio'] ?: $m[1] . '-12-10';
+    $fin = $m[2] . '-12-09';
+    $t0 = strtotime($ini); $t1 = strtotime($fin); $th = strtotime($hoy ?? date('Y-m-d'));
+    if (!$t0 || !$t1 || $t1 <= $t0 || $th < $t0) {
+        return null;
+    }
+    $pct = min(100, ($th - $t0) / ($t1 - $t0) * 100);
+    $d = (new DateTimeImmutable(date('Y-m-d', $th)))->diff(new DateTimeImmutable($fin));
+    $resta = $th >= $t1 ? 'Mandato cumplido' : 'Faltan ' . implode(' y ', array_filter([
+        $d->y ? $d->y . ($d->y === 1 ? ' año' : ' años') : '',
+        $d->m ? $d->m . ($d->m === 1 ? ' mes' : ' meses') : '',
+        !$d->y && !$d->m ? $d->d . ($d->d === 1 ? ' día' : ' días') : '',
+    ]));
+    return [$ini, $fin, $pct, $resta];
+}
+
+/** Porcentaje con un decimal, sin ",0" sobrante: 98,6 o 100. */
+function pct_es(float $p): string
+{
+    $t = number_format($p, 1, ',', '.');
+    return str_ends_with($t, ',0') ? substr($t, 0, -2) : $t;
+}
+
+/** Barra de medidor (0 a 100) para una tarjeta de cifra. Decorativa: el número va escrito al lado. */
+function medidor(?float $pct): string
+{
+    if ($pct === null) {
+        return '';
+    }
+    return '<span class="medidor" aria-hidden="true"><span style="width:' . e(number_format(max(0, min(100, $pct)), 1, '.', '')) . '%"></span></span>';
+}
+
+/**
+ * Cómo votó: cuatro cifras grandes con los colores de voto y una barra al 100 %.
+ * $c: ['A' => afirmativos, 'N' => negativos, 'B' => abstenciones, 'U' => no votó]; $etU: nombre de la cuarta categoría.
+ */
+function reparto_votos(array $c, string $etU = 'No votó'): string
+{
+    $total = max(1, array_sum($c));
+    $et = ['A' => 'A favor', 'N' => 'En contra', 'B' => 'Abstenciones', 'U' => $etU];
+    $h = '<div class="reparto"><ul class="reparto-cifras">';
+    foreach ($et as $k => $t) {
+        $h .= '<li class="reparto-' . $k . '"><b class="num">' . e(num_es((float)($c[$k] ?? 0))) . '</b><span>' . e($t) . '</span></li>';
+    }
+    $h .= '</ul><div class="reparto-barra" aria-hidden="true">';
+    foreach ($et as $k => $t) {
+        if (($c[$k] ?? 0) > 0) {
+            $h .= '<span class="rb-' . $k . '" style="width:' . e(number_format($c[$k] / $total * 100, 2, '.', '')) . '%"></span>';
+        }
+    }
+    return $h . '</div></div>';
+}
+
+/**
+ * Barras apiladas verticales en SVG (sin JavaScript): $serie = [etiqueta => ['A' => n, 'N' => n, 'B' => n, 'U' => n]].
+ * Mismos colores que los votos. $titulo describe el gráfico en palabras.
+ */
+function svg_barras_votos(array $serie, string $titulo): string
+{
+    if (count($serie) < 2) {
+        return '';
+    }
+    $w = 640; $h = 256; $izq = 40; $der = 8; $arr = 12; $aba = 50;
+    $max = max(1, max(array_map('array_sum', $serie)));
+    $paso = $max <= 10 ? 2 : ($max <= 25 ? 5 : ($max <= 60 ? 10 : ($max <= 150 ? 25 : 50)));
+    $tope = (int)(ceil($max / $paso) * $paso);
+    $n = count($serie);
+    $ancho = ($w - $izq - $der) / $n;
+    $barra = min(56, $ancho * 0.62);
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - $v / $tope);
+    $id = 'gb-' . md5($titulo);
+    $s = '<svg class="grafico grafico-barras" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($v = 0; $v <= $tope; $v += $paso) {
+        $yy = round($y($v), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 6) . '" y="' . ($yy + 4) . '" text-anchor="end">' . $v . '</text>';
+    }
+    $i = 0;
+    foreach ($serie as $et => $c) {
+        $x = round($izq + $ancho * $i + ($ancho - $barra) / 2, 1);
+        $acum = 0;
+        foreach (['A', 'N', 'B', 'U'] as $k) {
+            $v = (int)($c[$k] ?? 0);
+            if ($v <= 0) { continue; }
+            $y1 = $y($acum + $v); $y0 = $y($acum);
+            $s .= '<rect class="gb-' . $k . '" x="' . $x . '" y="' . round($y1, 1) . '" width="' . round($barra, 1) . '" height="' . round($y0 - $y1, 1) . '"/>';
+            $acum += $v;
+        }
+        // Etiqueta en una o dos líneas ("mes|año").
+        $lin = explode('|', (string)$et);
+        $s .= '<text class="g-eje" x="' . round($x + $barra / 2, 1) . '" y="' . ($h - 26) . '" text-anchor="middle">' . e($lin[0]) . '</text>';
+        if (isset($lin[1])) {
+            $s .= '<text class="g-eje" x="' . round($x + $barra / 2, 1) . '" y="' . ($h - 5) . '" text-anchor="middle">' . e($lin[1]) . '</text>';
+        }
+        $i++;
+    }
+    return $s . '</svg>';
+}
+
+/** Barras verticales simples en SVG: [etiqueta => valor] (por ejemplo, proyectos por año). */
+function svg_barras(array $serie, string $titulo): string
+{
+    if (count($serie) < 2) {
+        return '';
+    }
+    $max = max(1, max(array_map('intval', $serie)));
+    $w = 640; $h = 226; $izq = 40; $der = 8; $arr = 24; $aba = 30;
+    $paso = $max <= 10 ? 2 : ($max <= 25 ? 5 : ($max <= 60 ? 10 : ($max <= 150 ? 25 : ($max <= 400 ? 50 : 100))));
+    $tope = (int)(ceil($max / $paso) * $paso);
+    $n = count($serie); $ancho = ($w - $izq - $der) / $n; $barra = min(48, $ancho * 0.62);
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - $v / $tope);
+    $id = 'gs-' . md5($titulo);
+    $s = '<svg class="grafico grafico-barras" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($v = 0; $v <= $tope; $v += $paso) {
+        $yy = round($y($v), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 6) . '" y="' . ($yy + 4) . '" text-anchor="end">' . $v . '</text>';
+    }
+    $i = 0;
+    $cada = max(1, (int)ceil($n / 12));
+    foreach ($serie as $et => $v) {
+        $x = round($izq + $ancho * $i + ($ancho - $barra) / 2, 1); $yy = round($y((float)$v), 1);
+        if ($v > 0) {
+            $s .= '<rect class="gs-barra" x="' . $x . '" y="' . $yy . '" width="' . round($barra, 1) . '" height="' . round($y(0) - $yy, 1) . '"/>';
+        }
+        if ($n <= 14) {
+            $s .= '<text class="g-valor" x="' . round($x + $barra / 2, 1) . '" y="' . ($yy - 5) . '" text-anchor="middle">' . (int)$v . '</text>';
+        }
+        if ($i % $cada === 0 || $i === $n - 1) {
+            $s .= '<text class="g-eje" x="' . round($x + $barra / 2, 1) . '" y="' . ($h - 10) . '" text-anchor="middle">' . e((string)$et) . '</text>';
+        }
+        $i++;
+    }
+    return $s . '</svg>';
+}
+
+/** "dic. 2025" a partir de "2025-12"; sin el año si $conAnio es false. */
+function mes_corto(string $am, bool $conAnio = true): string
+{
+    $m = ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sept.', 'oct.', 'nov.', 'dic.'];
+    return ($m[(int)substr($am, 5, 2) - 1] ?? '') . ($conAnio ? ' ' . substr($am, 0, 4) : '');
+}

@@ -246,3 +246,64 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .ver-datos summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: .9rem; color: var(--acento); text-decoration: underline; }
 .ver-datos .tabla-caja { margin-top: .25rem; }
 .tabla-cifras td.num { white-space: nowrap; }
+
+/* Perfil visual: tarjetas con cifras grandes, medidores y reparto de votos (revisión de UX: tokens y colores de voto) */
+:root { --v-a: #15803d; --v-n: #b91c1c; --v-b: #ca8a04; --v-u: #94a3b8; }
+.visualmente-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.seccion-corta { margin-top: 2rem; }
+.perfil-cabeza > div { flex: 1 1 18rem; }
+.mandato { margin-top: 1rem; max-width: 34rem; }
+.mandato-fila { display: flex; justify-content: space-between; gap: 1rem; margin: 0; font-size: .9375rem; }
+.mandato .medidor { margin: .35rem 0 .25rem; }
+.medidor { display: block; height: .5rem; background: var(--linea); overflow: hidden; }
+.medidor span { display: block; height: 100%; background: var(--acento); }
+.tarjetas { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
+.tarjetas-2 { margin-top: 1rem; grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr)); }
+.tarjeta { display: grid; align-content: start; gap: .45rem; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--linea); border-top: 3px solid var(--acento); background: var(--papel); }
+.tarjeta-enlace { display: grid; gap: .45rem; color: inherit; text-decoration: none; }
+.tarjeta-enlace:hover .tarjeta-t { color: var(--acento); text-decoration: underline; }
+.tarjeta-t { font-size: .875rem; font-weight: 600; color: var(--tinta-2); }
+.tarjeta-cifra { font: 700 2.25rem/1 var(--serif); letter-spacing: -.02em; color: var(--tinta); }
+.tarjeta-cifra-chica { font-size: 1.5rem; }
+.tarjeta-nota { font-size: .8125rem; line-height: 1.45; color: var(--tenue); }
+.seccion .tarjetas + .grafico-caja, .tarjetas + .grafico-caja { margin-top: 1.75rem; }
+.reparto-cifras { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; grid-template-columns: repeat(4, 1fr); }
+.reparto-cifras li { display: grid; gap: .2rem; padding: .85rem 1rem; border: 1px solid var(--linea); border-left-width: 4px; }
+.reparto-cifras b { font: 700 2rem/1 var(--serif); }
+.reparto-cifras span { font-size: .875rem; color: var(--tinta-2); }
+.reparto-A { border-left-color: var(--v-a) !important; background: #f0fdf4; } .reparto-A b { color: #166534; }
+.reparto-N { border-left-color: var(--v-n) !important; background: #fef2f2; } .reparto-N b { color: #991b1b; }
+.reparto-B { border-left-color: var(--v-b) !important; background: #fefce8; } .reparto-B b { color: #854d0e; }
+.reparto-U { border-left-color: var(--v-u) !important; background: var(--fondo); } .reparto-U b { color: var(--tinta-2); }
+.reparto-barra { display: flex; height: .75rem; margin-top: .75rem; background: var(--linea); gap: 2px; }
+.reparto-barra span { display: block; min-width: 3px; }
+.rb-A, .gb-A { background: var(--v-a); fill: var(--v-a); } .rb-N, .gb-N { background: var(--v-n); fill: var(--v-n); }
+.rb-B, .gb-B { background: var(--v-b); fill: var(--v-b); } .rb-U, .gb-U { background: var(--v-u); fill: var(--v-u); }
+.leyenda i.rb-A, .leyenda i.rb-N, .leyenda i.rb-B, .leyenda i.rb-U { border-radius: 0; }
+.reparto + .participacion { margin-top: 1.25rem; }
+.gs-barra { fill: var(--acento); }
+.g-valor { fill: var(--tinta-2); font: 600 12px var(--sans); font-variant-numeric: tabular-nums; }
+.seccion-corta .grafico-caja { margin-top: 2rem; }
+.ultimos-votos { list-style: none; margin: 0 0 1.25rem; padding: 0; border-top: 1px solid var(--tinta); max-width: 52rem; }
+.ultimos-votos li { display: grid; grid-template-columns: 6.5rem 1fr; gap: .15rem 1rem; padding: .7rem 0; border-bottom: 1px solid var(--linea); align-items: start; }
+.ultimos-votos .voto { justify-self: start; text-align: center; min-width: 6rem; }
+.ultimos-votos .tenue { grid-column: 2; }
+@media (max-width: 40rem) {
+  .reparto-cifras { grid-template-columns: repeat(2, 1fr); }
+  .tarjeta-cifra { font-size: 2rem; }
+  .ultimos-votos li { grid-template-columns: 1fr; }
+  .ultimos-votos .tenue { grid-column: 1; }
+  .perfil-cabeza .avatar { width: 88px; height: 88px; }
+}
+.tarjetas + .tabla-caja { margin-top: 1.5rem; }
+.tarjeta .medidor { margin-top: .1rem; }
+@media (max-width: 40rem) { .grafico-barras .g-eje, .grafico-barras .g-valor { font-size: 22px; } }
+@media (max-width: 40rem) {
+  .tarjetas, .tarjetas-2 { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .tarjeta { padding: .75rem .8rem .85rem; gap: .35rem; }
+  .tarjeta-enlace { gap: .35rem; }
+  .tarjeta-t { font-size: .8125rem; }
+  .tarjeta-cifra { font-size: 1.6rem; }
+  .tarjeta-cifra-chica { font-size: 1.1rem; }
+  .tarjeta-nota { font-size: .75rem; }
+}

@@ -132,6 +132,16 @@ foreach ($todos as $l) {
     if ($r['emitio'] + $r['ausente'] !== $r['votaciones'] || $r['afirmativos'] + $r['negativos'] + $r['abstenciones'] !== $r['emitio'] || $r['voto_pct'] < 0 || $r['voto_pct'] > 100) { $maMal++; }
 }
 ok($maMal === 0 && $maN > 250, 'las estadísticas del mandato actual son coherentes (' . $maN . ' legisladores)');
+$pmMal = 0; $votIds = array_flip(array_column($vot, 'id'));
+foreach ($todos as $l) {
+    $r = Datos::mandatoActual($l['camara'], $l['slug']);
+    if (!$r) { continue; }
+    $s4 = [0, 0, 0, 0]; foreach ($r['por_mes'] ?? [] as $m => $c) { if (!preg_match('/^20\d\d-\d\d$/', $m) || $m < '2025-12') { $pmMal++; } for ($k = 0; $k < 4; $k++) { $s4[$k] += $c[$k]; } }
+    if ($s4 !== [$r['afirmativos'], $r['negativos'], $r['abstenciones'], $r['ausente']]) { $pmMal++; }
+    foreach ($r['ultimas'] ?? [] as $u) { if (!isset($votIds[$u[0]]) || !in_array($u[4], ['A', 'N', 'B', 'U'], true)) { $pmMal++; } }
+    if (count($r['ultimas'] ?? []) !== min(5, $r['votaciones'])) { $pmMal++; }
+}
+ok($pmMal === 0, 'perfil: los votos mes a mes suman lo mismo que el total y las últimas votaciones existen');
 
 $cd = Datos::comisionesDiputados();
 ok(count($cd) >= 40 && array_sum(array_map(fn($c) => count($c['integrantes']), $cd)) > 1200, 'hay comisiones de Diputados con sus integrantes (' . count($cd) . ')');
