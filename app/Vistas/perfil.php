@@ -19,6 +19,13 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
     <p class="perfil-bloque"><?= etiqueta_bloque($l) ?>
       <?php if ($bloque): ?><span class="tenue">· <a href="<?= e(Datos::urlBloque($bloque)) ?>">ver los <?= (int)$bloque['cantidad'] ?> integrantes del bloque</a></span><?php endif; ?>
     </p>
+    <?php $av = mandato_avance($l); if ($av): [$avIni, $avFin, $avPct, $avResta] = $av; ?>
+    <div class="mandato">
+      <p class="mandato-fila"><span>Mandato <span class="num"><?= e($l['mandato']) ?></span></span><span class="tenue"><?= e($avResta) ?></span></p>
+      <?= medidor($avPct) ?>
+      <p class="mandato-fila tenue pequeno num"><span><?= e(date('d/m/Y', strtotime($avIni))) ?></span><span><?= e(date('d/m/Y', strtotime($avFin))) ?></span></p>
+    </div>
+    <?php endif; ?>
   </div>
 </header>
 
@@ -32,20 +39,69 @@ $cargo = $esSen ? 'Senador/a nacional' : 'Diputado/a nacional';
 
 <?php if ($tab === 'resumen'): ?>
 <?php
-// Resumen: solo frases armadas con datos ya verificados más abajo en la página.
-$resFrases = [];
-$resFrases[] = $cargo . ' por ' . $l['provincia'] . ', del bloque ' . $l['bloque'] . ($l['mandato'] ? ', con mandato ' . $l['mandato'] : '') . '.';
-$maR = Datos::mandatoActual($l['camara'], $l['slug']);
-if ($maR) { $resFrases[] = 'Desde el 10 de diciembre de 2025 hubo ' . (int)$maR['votaciones'] . ' votaciones nominales en su cámara: votó en ' . (int)$maR['emitio'] . ($maR['voto_pct'] !== null ? ' (' . number_format((float)$maR['voto_pct'], 0, ',', '') . '%)' : '') . '.'; }
+// Resumen en tarjetas: cada cifra sale de un dato verificado que se detalla en su pestaña, con la fuente debajo.
+$maR = Datos::mandatoActual($l['camara'], $l['slug']); $mmR = Datos::mandatoActualMeta();
 $saR = $esSen ? Datos::senadoAnteriores($l['slug']) : [];
-if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')) . ' votaciones nominales anteriores en el Senado, de ' . count($saR) . ' ' . (count($saR) === 1 ? 'mandato' : 'mandatos') . '.'; }
 $pyR = Datos::proyectos($l['slug'], $l['camara']);
-if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura como autor/a de ') . number_format((int)$pyR['resumen']['total'], 0, ',', '.') . ' proyectos' . ($esSen ? ' en el Senado.' : ' en Diputados.'); }
+$djR = Datos::ddjj($l['camara'], $l['slug']);
+$comR = !$esSen ? Datos::comisionesDe($l['slug']) : [];
+$vjR = !$esSen ? (Datos::viajes()['actual'][$l['slug']] ?? null) : null;
+$url = static fn(string $t): string => $base . '?tab=' . $t;
 ?>
-<section class="resumen" aria-labelledby="resumen-t">
-  <h2 id="resumen-t" class="resumen-t">En pocas palabras</h2>
-  <ul>
-    <?php foreach ($resFrases as $f): ?><li><?= e($f) ?></li><?php endforeach; ?>
+<section class="seccion-corta" aria-labelledby="resumen-t">
+  <h2 id="resumen-t" class="visualmente-oculto">Resumen en cifras</h2>
+  <ul class="tarjetas">
+    <?php if ($maR && $maR['voto_pct'] !== null): ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('votaciones')) ?>"><span class="tarjeta-t">Votó en</span>
+      <b class="tarjeta-cifra num"><?= e(pct_es((float)$maR['voto_pct'])) ?>%</b></a>
+      <?= medidor((float)$maR['voto_pct']) ?>
+      <span class="tarjeta-nota"><?= (int)$maR['emitio'] ?> de <?= (int)$maR['votaciones'] ?> votaciones nominales desde el 10/12/2025. <?= $esSen ? 'Senado' : 'Cámara de Diputados' ?>.</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($maR && $maR['coincidencia_bloque_pct'] !== null): ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('votaciones')) ?>"><span class="tarjeta-t">Votó como su bloque</span>
+      <b class="tarjeta-cifra num"><?= e(pct_es((float)$maR['coincidencia_bloque_pct'])) ?>%</b></a>
+      <?= medidor((float)$maR['coincidencia_bloque_pct']) ?>
+      <span class="tarjeta-nota">Igual que la mayoría de su bloque en <?= (int)$maR['coincidencia_bloque_n'] ?> votaciones en las que votó, desde el 10/12/2025.</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($saR): ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('votaciones')) ?>"><span class="tarjeta-t">Votaciones en mandatos anteriores</span>
+      <b class="tarjeta-cifra num"><?= e(num_es((float)array_sum(array_column($saR, 'votaciones')))) ?></b></a>
+      <span class="tarjeta-nota">Votaciones nominales del Senado en <?= count($saR) ?> <?= count($saR) === 1 ? 'mandato' : 'mandatos' ?> anteriores (senado.gob.ar).</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($pyR): ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('proyectos')) ?>"><span class="tarjeta-t"><?= $esSen ? 'Proyectos que firmó' : 'Proyectos como autor/a' ?></span>
+      <b class="tarjeta-cifra num"><?= e(num_es((float)$pyR['resumen']['total'])) ?></b></a>
+      <span class="tarjeta-nota">Desde <?= e(substr((string)$pyR['resumen']['desde'], 0, 4)) ?>, según <?= $esSen ? 'la página del senador en senado.gob.ar' : 'el registro oficial de proyectos de la Cámara' ?>.</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($comR): $presideR = count(array_filter($comR, static fn($c) => stripos((string)$c['cargo'], 'president') === 0)); ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('mas')) ?>#comisiones"><span class="tarjeta-t">Comisiones que integra</span>
+      <b class="tarjeta-cifra num"><?= count($comR) ?></b></a>
+      <span class="tarjeta-nota"><?= $presideR ? 'Preside ' . $presideR . '. ' : '' ?>Integración publicada por la Cámara en junio de 2026.</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($djR): $ultR = $djR[0]; foreach ($djR as $d) { if ((int)$d['anio'] > (int)$ultR['anio']) { $ultR = $d; } } ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('patrimonio')) ?>"><span class="tarjeta-t">Patrimonio neto declarado</span>
+      <b class="tarjeta-cifra num"><?= e(monto_corto((float)$ultR['patrimonio_neto_final'])) ?></b></a>
+      <span class="tarjeta-nota">Al cierre de <?= (int)$ultR['anio'] ?>, en pesos de ese año, como lo declaró ante la Oficina Anticorrupción.</span>
+    </li>
+    <?php endif; ?>
+    <?php if ($vjR): ?>
+    <li class="tarjeta">
+      <a class="tarjeta-enlace" href="<?= e($url('mas')) ?>#pasajes"><span class="tarjeta-t">Pasajes emitidos a su pedido</span>
+      <b class="tarjeta-cifra num"><?= (int)$vjR['total'] ?></b></a>
+      <span class="tarjeta-nota">Tramos desde el 10/12/2025 (<?= (int)$vjR['aereo'] ?> aéreos, <?= (int)$vjR['terrestre'] ?> terrestres). No implican viajes realizados.</span>
+    </li>
+    <?php endif; ?>
   </ul>
   <p class="resumen-atajos">
     <?php foreach ($pestanas as $clave => $titulo): if ($clave === 'resumen') { continue; } ?><a href="<?= e($base . '?tab=' . $clave) ?>"><?= e($titulo) ?></a><?php endforeach; ?>
@@ -92,16 +148,48 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php if ($tab === 'votaciones'): ?>
 <?php $ma = Datos::mandatoActual($l['camara'], $l['slug']); $mm = Datos::mandatoActualMeta(); ?>
 <?php if ($ma): ?>
-<section class="seccion" aria-labelledby="mandato-actual">
-  <h2 id="mandato-actual" class="seccion-titulo">Votaciones nominales desde el 10 de diciembre de 2025</h2>
-  <dl class="participacion">
-    <div><dt>Votaciones consideradas</dt><dd><?= (int)$ma['votaciones'] ?></dd></div>
-    <div><dt>Emitió su voto</dt><dd><?= (int)$ma['emitio'] ?></dd></div>
-    <div><dt>No votó</dt><dd><?= (int)$ma['ausente'] ?></dd></div>
-    <?php if ($ma['voto_pct'] !== null): ?><div><dt>Votó en el</dt><dd><?= e(number_format((float)$ma['voto_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
-    <?php if ($ma['coincidencia_bloque_pct'] !== null): ?><div><dt>Votó como la mayoría de su bloque</dt><dd><?= e(number_format((float)$ma['coincidencia_bloque_pct'], 1, ',', '')) ?>%</dd></div><?php endif; ?>
-  </dl>
-  <p class="tenue pequeno">De las votaciones consideradas, <?= (int)$ma['afirmativos'] ?> fueron votos afirmativos, <?= (int)$ma['negativos'] ?> negativos y <?= (int)$ma['abstenciones'] ?> abstenciones, hasta el <?= e(fecha_es($mm['hasta'] ?? null)) ?>. "No votó" incluye todas las veces que no figura un voto, sin importar el motivo (licencia, ausencia u otro). La coincidencia con el bloque usa el bloque actual y solo se calcula con 20 votaciones o más y bloques de 3 o más integrantes. No se cuentan las votaciones en las que el legislador presidía la sesión ni las que no se pueden verificar. <a href="/votaciones">Ver todas las votaciones</a>.</p>
+<section class="seccion-corta" aria-labelledby="mandato-actual">
+  <h2 id="mandato-actual" class="seccion-titulo">Cómo votó desde el 10 de diciembre de 2025</h2>
+  <?= reparto_votos(['A' => (int)$ma['afirmativos'], 'N' => (int)$ma['negativos'], 'B' => (int)$ma['abstenciones'], 'U' => (int)$ma['ausente']]) ?>
+  <ul class="tarjetas tarjetas-2">
+    <li class="tarjeta"><span class="tarjeta-t">Votó en</span>
+      <b class="tarjeta-cifra num"><?= $ma['voto_pct'] !== null ? e(pct_es((float)$ma['voto_pct'])) . '%' : '—' ?></b>
+      <?= medidor($ma['voto_pct'] !== null ? (float)$ma['voto_pct'] : null) ?>
+      <span class="tarjeta-nota"><?= (int)$ma['emitio'] ?> de las <?= (int)$ma['votaciones'] ?> votaciones consideradas.</span></li>
+    <?php if ($ma['coincidencia_bloque_pct'] !== null): ?>
+    <li class="tarjeta"><span class="tarjeta-t">Votó como la mayoría de su bloque</span>
+      <b class="tarjeta-cifra num"><?= e(pct_es((float)$ma['coincidencia_bloque_pct'])) ?>%</b>
+      <?= medidor((float)$ma['coincidencia_bloque_pct']) ?>
+      <span class="tarjeta-nota">En <?= (int)$ma['coincidencia_bloque_n'] ?> votaciones, con su bloque actual.</span></li>
+    <?php endif; ?>
+  </ul>
+  <?php $pm = $ma['por_mes'] ?? []; if (count($pm) >= 2): $serieM = []; $anioPrev = '';
+    foreach ($pm as $am => [$a, $n, $b, $u]) { $an = substr($am, 0, 4); $serieM[mes_corto($am, false) . ($an !== $anioPrev ? '|' . $an : '')] = ['A' => $a, 'N' => $n, 'B' => $b, 'U' => $u]; $anioPrev = $an; } ?>
+  <figure class="grafico-caja">
+    <h3 class="sub-titulo">Mes a mes</h3>
+    <?= svg_barras_votos($serieM, 'Votos por mes desde diciembre de 2025: a favor, en contra, abstenciones y veces que no votó, en cada mes con votaciones nominales') ?>
+    <ul class="leyenda"><li><i class="rb-A"></i>A favor</li><li><i class="rb-N"></i>En contra</li><li><i class="rb-B"></i>Abstención</li><li><i class="rb-U"></i>No votó</li></ul>
+    <figcaption class="tenue pequeno">Solo aparecen los meses con votaciones nominales en su cámara.</figcaption>
+  </figure>
+  <details class="ver-datos">
+    <summary>Ver los datos mes a mes</summary>
+    <div class="tabla-caja"><table class="tabla tabla-cifras" style="max-width:36rem">
+      <thead><tr><th scope="col">Mes</th><th scope="col" class="der">A favor</th><th scope="col" class="der">En contra</th><th scope="col" class="der">Abst.</th><th scope="col" class="der">No votó</th></tr></thead>
+      <tbody><?php foreach ($pm as $am => [$a, $n, $b, $u]): ?><tr><td data-etiqueta="Mes"><?= e(mes_es($am)) ?></td><td class="der num" data-etiqueta="A favor"><?= (int)$a ?></td><td class="der num" data-etiqueta="En contra"><?= (int)$n ?></td><td class="der num" data-etiqueta="Abst."><?= (int)$b ?></td><td class="der num" data-etiqueta="No votó"><?= (int)$u ?></td></tr><?php endforeach; ?></tbody>
+    </table></div>
+  </details>
+  <?php endif; ?>
+  <?php if (!empty($ma['ultimas'])): ?>
+  <h3 class="sub-titulo">Sus últimas votaciones</h3>
+  <ul class="ultimos-votos">
+    <?php foreach ($ma['ultimas'] as [$vid, $vf, $vt, $vres, $vc]): ?>
+      <li><span class="voto voto-<?= e($vc) ?>"><?= e(['A' => 'A favor', 'N' => 'En contra', 'B' => 'Abstención', 'U' => 'No votó'][$vc] ?? etiqueta_voto($vc)) ?></span>
+        <a href="/votaciones/<?= e($vid) ?>"><?= e(mb_strlen($vt) > 140 ? mb_substr($vt, 0, 140) . '…' : $vt) ?></a>
+        <span class="tenue pequeno num"><?= e(date('d/m/Y', strtotime($vf))) ?> · Resultado: <?= resultado_votacion($vres) ?></span></li>
+    <?php endforeach; ?>
+  </ul>
+  <?php endif; ?>
+  <p class="tenue pequeno">Votaciones nominales de <?= $esSen ? 'senado.gob.ar' : 'la Cámara de Diputados, replicadas por ArgentinaDatos' ?> hasta el <?= e(fecha_es($mm['hasta'] ?? null)) ?>. "No votó" incluye todas las veces que no figura un voto, sin importar el motivo (licencia, ausencia u otro). La coincidencia con el bloque usa el bloque actual y solo se calcula con 20 votaciones o más y bloques de 3 o más integrantes. No se cuentan las votaciones en las que el legislador presidía la sesión ni las que no se pueden verificar. <a href="/votaciones">Ver todas las votaciones</a>.</p>
 </section>
 <?php endif; ?>
 
@@ -132,6 +220,7 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php if ($par): ?>
 <section class="seccion" aria-labelledby="participacion">
   <h2 id="participacion" class="seccion-titulo">Votaciones nominales entre <?= e(substr($par['desde'], 0, 4)) ?> y <?= e(substr($par['hasta'], 0, 4)) ?></h2>
+  <?= reparto_votos(['A' => (int)$par['afirmativos'], 'N' => (int)$par['negativos'], 'B' => (int)$par['abstenciones'], 'U' => (int)$par['ausente']], 'Ausente') ?>
   <dl class="participacion">
     <div><dt>Votaciones registradas</dt><dd><?= number_format((int)$par['actas'], 0, ',', '.') ?></dd></div>
     <div><dt>Presente</dt><dd><?= number_format((int)$par['presente'], 0, ',', '.') ?></dd></div>
@@ -146,6 +235,41 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php endif; ?>
 
 <?php if ($tab === 'proyectos'): ?>
+<?php $pry = Datos::proyectos($l['slug'], $l['camara']); ?>
+<?php if ($pry): $rs = $pry['resumen']; ?>
+<section class="seccion" aria-labelledby="proyectos">
+  <h2 id="proyectos" class="seccion-titulo">Proyectos presentados</h2>
+  <ul class="tarjetas">
+    <li class="tarjeta"><span class="tarjeta-t"><?= $esSen ? 'Proyectos que firmó' : 'Proyectos como autor/a' ?></span><b class="tarjeta-cifra num"><?= e(num_es((float)$rs['total'])) ?></b></li>
+    <?php foreach (array_slice($rs['por_tipo'], 0, 3, true) as $t => $n): ?><li class="tarjeta"><span class="tarjeta-t"><?= e($t === 'Ley' ? 'Proyectos de ley' : ($t === 'Resolucion' ? 'De resolución' : ($t === 'Declaracion' ? 'De declaración' : ($t === 'Comunicacion' ? 'De comunicación' : $t)))) ?></span><b class="tarjeta-cifra num"><?= e(num_es((float)$n)) ?></b><?= medidor($rs['total'] ? 100 * $n / $rs['total'] : null) ?></li><?php endforeach; ?>
+    <?php if (!$esSen): $res = (int)$rs['total'] - (int)($rs['por_resultado']['Sin resolución registrada'] ?? 0); ?>
+    <li class="tarjeta"><span class="tarjeta-t">Con resolución registrada</span><b class="tarjeta-cifra num"><?= e(num_es((float)$res)) ?></b><?= medidor($rs['total'] ? 100 * $res / $rs['total'] : null) ?></li><?php endif; ?>
+  </ul>
+  <?php $porAnio = []; foreach ($pry['proyectos'] as $x) { $an = substr((string)$x[1], 0, 4); $porAnio[$an] = ($porAnio[$an] ?? 0) + 1; } ksort($porAnio);
+    if ($porAnio) { for ($an = (int)array_key_first($porAnio); $an <= (int)array_key_last($porAnio); $an++) { $porAnio[(string)$an] ??= 0; } ksort($porAnio); } ?>
+  <?php if (count($porAnio) >= 2): ?>
+  <figure class="grafico-caja">
+    <h3 class="sub-titulo">Proyectos por año</h3>
+    <?= svg_barras($porAnio, 'Proyectos presentados por año, de ' . array_key_first($porAnio) . ' a ' . array_key_last($porAnio)) ?>
+    <figcaption class="tenue pequeno">Por año de presentación. <?= (string)array_key_last($porAnio) === date('Y') ? 'El año en curso está incompleto.' : '' ?></figcaption>
+  </figure>
+  <?php endif; ?>
+  <h3 class="sub-titulo">Los más recientes</h3>
+  <div class="tabla-caja"><table class="tabla">
+    <thead><tr><th scope="col">Fecha</th><th scope="col">Proyecto</th><?php if (!$esSen): ?><th scope="col">Qué pasó</th><?php endif; ?></tr></thead>
+    <tbody>
+    <?php foreach (array_slice($pry['proyectos'], 0, 5) as $x): ?>
+      <tr>
+        <td class="num nowrap" data-etiqueta="Fecha"><?= e(date('d/m/Y', strtotime($x[1]))) ?></td>
+        <td><?= e(mb_strlen($x[4]) > 160 ? mb_substr($x[4], 0, 160) . '…' : $x[4]) ?><span class="tenue pequeno block"><?= e(etiqueta_tipo($x[2])) ?> · <?= e($x[3] ?: 'sin número') ?></span></td>
+        <?php if (!$esSen): ?><td data-etiqueta="Qué pasó"><?= $x[5] ? e(ucfirst(mb_strtolower($x[5]))) : '<span class="tenue">Sin resolución registrada</span>' ?></td><?php endif; ?>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table></div>
+  <p class="tenue pequeno">Entre el <?= e(fecha_es($rs['desde'])) ?> y el <?= e(fecha_es($rs['hasta'])) ?>. <?= $esSen ? 'Es la lista que publica el Senado en la página del senador: incluye los proyectos que firmó con otros y no informa qué pasó con cada uno.' : 'El archivo oficial registra un solo autor por proyecto, sin cofirmantes. "Sin resolución registrada" no significa rechazado: el proyecto no figura entre los que la Cámara resolvió.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>/proyectos">Ver los <?= number_format((int)$rs['total'], 0, ',', '.') ?> proyectos</a>.</p>
+</section>
+<?php endif; ?>
 <?php $ej = Datos::ejes($l['camara'], $l['slug']); ?>
 <?php if ($ej && $ej['con_eje'] >= 5): $filas = $ej['ejes']; uasort($filas, static fn($a, $b) => $b['proyectos'] <=> $a['proyectos']); ?>
 <section class="seccion" aria-labelledby="temas">
@@ -187,31 +311,6 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 </section>
 <?php endif; ?>
 
-<?php $pry = Datos::proyectos($l['slug'], $l['camara']); ?>
-<?php if ($pry): $rs = $pry['resumen']; ?>
-<section class="seccion" aria-labelledby="proyectos">
-  <h2 id="proyectos" class="seccion-titulo">Proyectos presentados</h2>
-  <dl class="participacion">
-    <div><dt><?= $esSen ? 'Proyectos que firmó' : 'Proyectos como autor/a' ?></dt><dd><?= number_format((int)$rs['total'], 0, ',', '.') ?></dd></div>
-    <?php foreach (array_slice($rs['por_tipo'], 0, 3, true) as $t => $n): ?><div><dt><?= e($t === 'Ley' ? 'Proyectos de ley' : ($t === 'Resolucion' ? 'De resolución' : ($t === 'Declaracion' ? 'De declaración' : ($t === 'Comunicacion' ? 'De comunicación' : $t)))) ?></dt><dd><?= (int)$n ?></dd></div><?php endforeach; ?>
-    <?php if (!$esSen): $res = (int)$rs['total'] - (int)($rs['por_resultado']['Sin resolución registrada'] ?? 0); ?>
-    <div><dt>Con resolución registrada</dt><dd><?= $res ?></dd></div><?php endif; ?>
-  </dl>
-  <div class="tabla-caja"><table class="tabla">
-    <thead><tr><th scope="col">Fecha</th><th scope="col">Proyecto</th><?php if (!$esSen): ?><th scope="col">Qué pasó</th><?php endif; ?></tr></thead>
-    <tbody>
-    <?php foreach (array_slice($pry['proyectos'], 0, 5) as $x): ?>
-      <tr>
-        <td class="num nowrap" data-etiqueta="Fecha"><?= e(date('d/m/Y', strtotime($x[1]))) ?></td>
-        <td><?= e(mb_strlen($x[4]) > 160 ? mb_substr($x[4], 0, 160) . '…' : $x[4]) ?><span class="tenue pequeno block"><?= e(etiqueta_tipo($x[2])) ?> · <?= e($x[3] ?: 'sin número') ?></span></td>
-        <?php if (!$esSen): ?><td data-etiqueta="Qué pasó"><?= $x[5] ? e(ucfirst(mb_strtolower($x[5]))) : '<span class="tenue">Sin resolución registrada</span>' ?></td><?php endif; ?>
-      </tr>
-    <?php endforeach; ?>
-    </tbody>
-  </table></div>
-  <p class="tenue pequeno">Entre el <?= e(fecha_es($rs['desde'])) ?> y el <?= e(fecha_es($rs['hasta'])) ?>. <?= $esSen ? 'Es la lista que publica el Senado en la página del senador: incluye los proyectos que firmó con otros y no informa qué pasó con cada uno.' : 'El archivo oficial registra un solo autor por proyecto, sin cofirmantes. "Sin resolución registrada" no significa rechazado: el proyecto no figura entre los que la Cámara resolvió.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>/proyectos">Ver los <?= number_format((int)$rs['total'], 0, ',', '.') ?> proyectos</a>.</p>
-</section>
-<?php endif; ?>
 
 <?php endif; ?>
 
@@ -220,7 +319,26 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <?php if ($dj): ?>
 <section class="seccion" aria-labelledby="ddjj">
   <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
-  <?php [$mesBase, $fac] = factores_ipc(); $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
+  <?php [$mesBase, $fac] = factores_ipc(); $ult = $dj[0]; foreach ($dj as $d) { if ((int)$d['anio'] > (int)$ult['anio']) { $ult = $d; } } $usdU = dolar_cierre()[(int)$ult['anio']] ?? null; ?>
+  <ul class="tarjetas">
+    <li class="tarjeta"><span class="tarjeta-t">Patrimonio neto <?= (int)$ult['anio'] ?></span>
+      <b class="tarjeta-cifra num"><?= e(monto_corto((float)$ult['patrimonio_neto_final'])) ?></b>
+      <span class="tarjeta-nota"><?= e(monto_ars((string)$ult['patrimonio_neto_final'])) ?>, en pesos de ese año.</span></li>
+    <?php if (isset($fac[(int)$ult['anio']])): ?>
+    <li class="tarjeta"><span class="tarjeta-t">En pesos de <?= e(mes_es($mesBase)) ?></span>
+      <b class="tarjeta-cifra num"><?= e(monto_corto((float)$ult['patrimonio_neto_final'] * $fac[(int)$ult['anio']])) ?></b>
+      <span class="tarjeta-nota">Ajustado por el IPC del INDEC.</span></li>
+    <?php endif; ?>
+    <?php if ($usdU): ?>
+    <li class="tarjeta"><span class="tarjeta-t">En dólares oficiales</span>
+      <b class="tarjeta-cifra num"><?= e(monto_corto((float)$ult['patrimonio_neto_final'] / $usdU, 'US$')) ?></b>
+      <span class="tarjeta-nota">Al tipo de cambio del BCRA del último día hábil de <?= (int)$ult['anio'] ?>.</span></li>
+    <?php endif; ?>
+    <li class="tarjeta"><span class="tarjeta-t">Bienes · deudas</span>
+      <b class="tarjeta-cifra tarjeta-cifra-chica num"><?= e(monto_corto((float)$ult['bienes_final'])) ?> · <?= e(monto_corto((float)$ult['deudas_final'])) ?></b>
+      <span class="tarjeta-nota">Al cierre de <?= (int)$ult['anio'] ?>, como se declararon.</span></li>
+  </ul>
+  <?php $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
   <?php if (count($serie) >= 2): ?>
   <figure class="grafico-caja">
     <?= svg_linea($serie, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($serie) . ' a ' . array_key_last($serie) . ', en pesos de ' . mes_es($mesBase)) ?>
@@ -343,11 +461,11 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 <section class="seccion" aria-labelledby="misma-prov">
   <h2 id="misma-prov" class="seccion-titulo">Otros <?= $esSen ? 'senadores' : 'diputados' ?> por <?= e($l['provincia']) ?></h2>
   <ul class="lista-chips">
-    <?php foreach (array_slice($mismaProv, 0, 30) as $x): ?>
+    <?php foreach (array_slice($mismaProv, 0, 12) as $x): ?>
       <li><a href="<?= e(Datos::urlLegislador($x)) ?>"><?= e($x['nombre']) ?></a><span class="tenue"><?= e($x['bloque']) ?></span></li>
     <?php endforeach; ?>
   </ul>
-  <?php if (count($mismaProv) > 30): ?><p><a href="/congreso/provincias/<?= e($provSlug) ?>">Ver los <?= count($mismaProv) + 1 ?> de la provincia</a></p><?php endif; ?>
+  <?php if (count($mismaProv) > 12): ?><p><a href="/congreso/provincias/<?= e($provSlug) ?>">Ver los <?= count($mismaProv) + 1 ?> de la provincia</a></p><?php endif; ?>
 </section>
 <?php endif; ?>
 <?php endif; ?>

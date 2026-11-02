@@ -158,6 +158,8 @@ def procesar_recientes(legs, salida, indice):
         por_camara[camara] = {k: v[0] for k, v in c.items() if len(v) == 1}
     tam_bloque = collections.Counter((l["camara"], l["bloque_oficial"]) for l in legs)
     stats = collections.defaultdict(collections.Counter)
+    meses = collections.defaultdict(lambda: collections.defaultdict(collections.Counter))
+    recientes = collections.defaultdict(list)
     meta = {"desde": "2025-12-10", "hasta": "", "validas": collections.Counter(), "excluidas": collections.Counter(), "sin_cruzar": collections.Counter()}
 
     por_sid = {l["id_senado"]: l for l in legs if l["camara"] == "Senadores" and l.get("id_senado")}
@@ -220,6 +222,10 @@ def procesar_recientes(legs, salida, indice):
                 if len(f) < 5:
                     continue
                 st, cod = stats[f[4]], f[3]
+                if cod in "ANBU":
+                    # Para el perfil: votos por mes y las últimas votaciones (solo actas que cuadran con sus totales).
+                    meses[f[4]][fecha[:7]][cod] += 1
+                    recientes[f[4]].append((fecha, hora, aid, titulo_[:160], res, cod))
                 if cod in "ANB":
                     st["emitio"] += 1
                     st[cod] += 1
@@ -237,7 +243,10 @@ def procesar_recientes(legs, salida, indice):
                       "afirmativos": st["A"], "negativos": st["N"], "abstenciones": st["B"],
                       "voto_pct": round(st["emitio"] / total * 100, 1) if total else None,
                       "coincidencia_bloque_pct": round(st["cb"] / st["cb_n"] * 100, 1) if st["cb_n"] >= 20 else None,
-                      "coincidencia_bloque_n": st["cb_n"]}
+                      "coincidencia_bloque_n": st["cb_n"],
+                      # [A, N, B, U] por mes ("AAAA-MM") y las 5 votaciones más recientes: [id, fecha, título, resultado, voto]
+                      "por_mes": {m: [c["A"], c["N"], c["B"], c["U"]] for m, c in sorted(meses[k].items())},
+                      "ultimas": [[x[2], x[0], x[3], x[4], x[5]] for x in sorted(recientes[k], reverse=True)[:5]]}
     resumen["_meta"] = {"desde": meta["desde"], "hasta": meta["hasta"], "validas": dict(meta["validas"]), "excluidas": dict(meta["excluidas"])}
     print(f"mandato actual: {dict(meta['validas'])} votaciones válidas, {dict(meta['excluidas'])} excluidas, "
           f"{dict(meta['sin_cruzar'])} votos sin cruzar con un legislador actual; {len(resumen) - 1} legisladores con estadísticas")
