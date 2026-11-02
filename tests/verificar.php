@@ -146,6 +146,17 @@ $vj = Datos::viajes();
 ok(count($vj['actual'] ?? []) > 180, 'hay pasajes emitidos desde el 10/12/2025 para más de 180 diputados (' . count($vj['actual'] ?? []) . ')');
 $malVj = 0; foreach (($vj['actual'] ?? []) as $a) { if ($a['aereo'] + $a['terrestre'] !== $a['total']) { $malVj++; } }
 ok($malVj === 0, 'en los pasajes, aéreos + terrestres = total');
+$rpj = json_decode((string)file_get_contents(RAIZ . '/storage/verificado/rutas_pasajes.json'), true);
+$malRp = []; $fueraRp = 0; $sinLugar = 0;
+foreach ($rpj['por_diputado'] as $s => $r) {
+    $n = $r['sin_ubicar'] + $r['misma_localidad'];
+    foreach ($r['rutas'] as $x) { $n += $x['ida'] + $x['vuelta']; if (!isset($rpj['lugares'][$x['a']], $rpj['lugares'][$x['b']])) { $sinLugar++; } }
+    if ($n !== $r['total'] || $r['total'] !== ($vj['actual'][$s]['total'] ?? -1)) { $malRp[] = $s; }
+}
+foreach ($rpj['lugares'] as $lu) { [$x, $y] = $lu['xy']; if ($x < 0 || $y < 0 || $x > $rpj['_meta']['ancho'] || $y > $rpj['_meta']['alto']) { $fueraRp++; } }
+ok(!$malRp && count($rpj['por_diputado']) === count($vj['actual']), 'rutas de pasajes: los tramos de cada diputado cuadran con el total desde el 10/12/2025');
+ok($sinLugar === 0 && $fueraRp === 0, 'rutas de pasajes: todo lugar está ubicado y dentro del mapa');
+ok(count($rpj['provincias']) === 24, 'el mapa de pasajes dibuja las 24 jurisdicciones');
 $rem = Datos::remuneraciones();
 ok(!empty($rem['remuneraciones'][0]['importe']) && $rem['remuneraciones'][0]['importe'] > 1000000, 'la dieta publicada es un importe razonable');
 
