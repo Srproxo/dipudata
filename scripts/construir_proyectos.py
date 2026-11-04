@@ -25,9 +25,18 @@ PC, PR y DE del expediente); las comunicaciones y notas (CO, CC) no son proyecto
 mesa de entradas (o el anterior en enero a marzo: la numeración sigue el período parlamentario). La página del Senado no informa qué pasó con cada proyecto.
 Las salidas del Senado se guardan como s-<slug>.json.
 
+Cada proyecto lleva al final dos datos más, para el gráfico de proyectos por año: ROL y RECONOCIMIENTO.
+  - Rol, Senado: el extracto empieza con los firmantes ("SORIA Y OTROS:", "MARKS Y SORIA:"). Si el primero es el propio senador, el proyecto es
+    "p" (propio: primer firmante); si es otro, "f" (firmó junto con otros); si el extracto no trae firmantes, "n" (sin dato).
+  - Rol, Diputados: el archivo oficial registra un solo autor por proyecto y no trae cofirmantes: todo es "p" y no se puede distinguir a los firmantes.
+  - Reconocimiento (1/0): proyectos de declaración, resolución o comunicación cuyo título pide o expresa reconocimiento, beneplácito, homenaje,
+    felicitación, conmemoración, distinción o adhesión, o declara de interés algo. Es una regla de texto (ver RECONOCIMIENTO): se muestra en pantalla.
+Además se calcula el promedio de proyectos por legislador de cada cámara y año (_promedios.json): proyectos de los legisladores actuales de esa cámara en
+ese año dividido por los años completos de funciones que sumaron ese año (un legislador que asumió el 10/12 cuenta 21/365; según los mandatos oficiales).
+
 Uso:  python3 -I scripts/construir_proyectos.py   (después de construir_datos.py)
 """
-import collections, csv, gzip, html, json, re, shutil, sys, unicodedata
+import collections, csv, gzip, html, json, re, shutil, statistics, sys, unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -51,6 +60,38 @@ def recortar(t: str, n: int = 400) -> str:
     return t if len(t) <= n else t[:n].rsplit(" ", 1)[0] + "…"
 
 
+# Palabras del título (sin tildes, en minúsculas) que marcan un pedido o una expresión de reconocimiento.
+RECONOCIMIENTO = re.compile(r"reconocimiento|beneplacito|homenaje|felicit|conmemor|distincion|adhesion|declar\w* de interes|de interes (de la|del|parlamentario|cultural|educativo|social|sanitario|legislativo|turistico|nacional|provincial|municipal|deportivo)")
+TIPOS_RECONOCIMIENTO = {"Declaracion", "Resolucion", "Comunicacion"}
+
+
+def es_reconocimiento(tipo: str, titulo: str) -> int:
+    return int(tipo in TIPOS_RECONOCIMIENTO and bool(RECONOCIMIENTO.search(norm(titulo))))
+
+
+def rol_senado(extracto: str, apellido: str, nombre: str) -> str:
+    """"p" si el primer firmante del extracto es el senador, "f" si firmó con otros, "n" si el extracto no trae firmantes.
+    El primer firmante puede venir como "SORIA", "SORIA Y OTROS", "LOPEZ C." (inicial) o "LOPEZ, FLORENCIA" (nombre de pila)."""
+    m = re.match(r"^(.*?)\s*(?::|\.\s+PROYECTO)", extracto)
+    if not m:
+        return "n"
+    seg = re.split(r"\s+y\s+", m.group(1), flags=re.I)[0]
+    sur, _, giv = seg.partition(",")
+    tok_sur, tok_giv = norm(sur).split(), norm(giv).split()
+    ap, nombres = norm(apellido).split(), norm(nombre).split()
+    if not tok_sur or not ap:
+        return "n"
+    if tok_sur[:len(ap)] != ap:
+        return "f"
+    iniciales = {n[:1] for n in nombres}
+    # "LOPEZ C." distingue a dos senadores con el mismo apellido por la inicial; "LOPEZ, FLORENCIA", por el nombre de pila.
+    if any(not (len(t) == 1 and t in iniciales) for t in tok_sur[len(ap):]):
+        return "f"
+    if any(not any(n == t or (len(t) >= 3 and n.startswith(t)) for n in nombres) for t in tok_giv):
+        return "f"
+    return "p"
+
+
 TIPOS_SEN = {"PL": "Ley", "PD": "Declaracion", "PC": "Comunicacion", "PR": "Resolucion", "DE": "Decreto"}
 
 
@@ -60,6 +101,7 @@ def senado(legs_todos, cuenta):
     if not ruta.exists():
         return {}
     por_id = {l["id_senado"]: l["slug"] for l in legs_todos if l["camara"] == "Senadores" and l.get("id_senado")}
+    nombres = {l["slug"]: (l["apellido"] or l["nombre"].split()[-1], l["nombre"].replace(l["apellido"] or "", "", 1).strip() or l["nombre"]) for l in legs_todos if l["camara"] == "Senadores"}
     datos = json.loads(gzip.open(ruta, "rt", encoding="utf-8").read())["senadores"]
     out = {}
     for sid, lista in datos.items():
@@ -81,7 +123,86 @@ def senado(legs_todos, cuenta):
                 cuenta["senado_fecha_inconsistente"] += 1
                 continue
             cuenta["senado_proyectos"] += 1
-            out.setdefault(slug, []).append([ref, fecha, TIPOS_SEN[m[3]], exp, recortar(extracto), "", ""])
+            tipo = TIPOS_SEN[m[3]]
+            out.setdefault(slug, []).append([ref, fecha, tipo, exp, recortar(extracto), "", "", rol_senado(extracto, *nombres[slug]), es_reconocimiento(tipo, extracto)])
+    return out
+
+
+def mandatos_senadores(legs_todos):
+    """slug -> [(inicio, fin)] de cada senador actual, con los mandatos reales del padrón oficial (activos y no activos, por ID)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _carga import filas
+    por_id = {str(l["id_senado"]): l["slug"] for l in legs_todos if l["camara"] == "Senadores" and l.get("id_senado")}
+    m = collections.defaultdict(list)
+    for r in filas("senadores_no_activos"):
+        if r.get("SENADOR") and str(r["ID"]) in por_id and re.match(r"\d{4}-", r.get("INICIO PERIODO REAL") or ""):
+            fin = r["CESE PERIODO REAL"][:10] if re.match(r"\d{4}-", r.get("CESE PERIODO REAL") or "") else "9999-12-31"
+            m[por_id[str(r["ID"])]].append((r["INICIO PERIODO REAL"][:10], fin))
+    for r in filas("senadores_activos"):
+        if str(r["ID"]) in por_id and re.match(r"\d{4}-", r.get("D_REAL") or ""):
+            m[por_id[str(r["ID"])]].append((r["D_REAL"][:10], "9999-12-31"))
+    return m
+
+
+MIN_EQUIVALENTES = 3  # legisladores-año mínimos para mostrar un promedio o una mediana
+
+
+def fraccion_en_funciones(mandatos, anio):
+    """Fracción del año (0 a 1) en que alguno de los mandatos estuvo vigente: quien asumió el 10/12 cuenta 21/365 de ese año, no uno entero."""
+    import datetime
+    ini, fin = datetime.date(int(anio), 1, 1), datetime.date(int(anio), 12, 31)
+    tramos = []
+    for i, f in mandatos:
+        try:
+            a = max(ini, datetime.date.fromisoformat(i)); b = min(fin, datetime.date.fromisoformat(f if f < "9999" else "9999-12-31"))
+        except ValueError:
+            continue
+        if a <= b:
+            tramos.append((a, b))
+    tramos.sort()
+    dias, corte = 0, None
+    for a, b in tramos:
+        if corte is None or a > corte:
+            dias += (b - a).days + 1
+            corte = b
+        elif b > corte:
+            dias += (b - corte).days
+            corte = b
+    return dias / ((fin - ini).days + 1)
+
+
+def calcular_promedios(por_dip, por_sen, legs_todos, hist):
+    """Por cámara y año: proyectos de los legisladores actuales de esa cámara, cuántos de ellos estaban en funciones y el promedio por legislador."""
+    por_hcdn = collections.defaultdict(list)
+    for h in hist:
+        por_hcdn[h["ID"]].append((min(h["INICIO"][:10], (h.get("JURAMENTO") or h["INICIO"])[:10]), max(h["FIN"][:10], (h.get("CESE") or h["FIN"])[:10])))
+    mand = {"Diputados": {l["slug"]: por_hcdn.get(l.get("hcdn_id"), []) for l in legs_todos if l["camara"] == "Diputados"},
+            "Senadores": mandatos_senadores(legs_todos)}
+    datos = {"Diputados": por_dip, "Senadores": por_sen}
+    out = {}
+    for cam in ("Diputados", "Senadores"):
+        anios = collections.defaultdict(lambda: {"propios": 0, "firmante": 0, "reconocimientos": 0, "sin_dato": 0})
+        por_leg = collections.defaultdict(collections.Counter)   # año -> slug -> proyectos
+        for slug, lista in datos[cam].items():
+            for x in lista:
+                a = anios[x[1][:4]]
+                a["reconocimientos" if x[8] else {"p": "propios", "f": "firmante", "n": "sin_dato"}[x[7]]] += 1
+                por_leg[x[1][:4]][slug] += 1
+        res = {}
+        for anio in sorted(anios):
+            pesos = {slug: fraccion_en_funciones(ms, anio) for slug, ms in mand[cam].items() if slug in datos[cam] or cam == "Diputados"}
+            pesos = {k: v for k, v in pesos.items() if v > 0}
+            a = anios[anio]
+            total = a["propios"] + a["firmante"] + a["reconocimientos"] + a["sin_dato"]
+            equivalentes = sum(pesos.values())
+            # Promedio por legislador-año: proyectos / años completos de funciones. La mediana es de los que estuvieron al menos medio año
+            # (incluye a los que no presentaron ningún proyecto, que cuentan 0).
+            medio = [por_leg[anio][s_] for s_, w in pesos.items() if w >= 0.5]
+            # Con menos de 3 legisladores-año el promedio no significa nada (por ejemplo, dos senadores actuales apenas en funciones en 2001): no se calcula.
+            res[anio] = {"proyectos": total, "legisladores": len(pesos), "equivalentes": round(equivalentes, 3),
+                         "promedio": round(total / equivalentes, 2) if equivalentes >= MIN_EQUIVALENTES else None,
+                         "mediana": statistics.median(medio) if len(medio) >= MIN_EQUIVALENTES else None, "mediana_n": len(medio), **a}
+        out[cam] = {"firmantes_disponibles": cam == "Senadores", "anios": res}
     return out
 
 
@@ -138,8 +259,9 @@ def main() -> int:
             continue
         cuenta["de_diputados_actuales"] += 1
         r = res.get(p["PROYECTO_ID"])
-        por_dip[actual[hid]].append([p["PROYECTO_ID"], fecha, p["TIPO"].capitalize(), p["EXP_DIPUTADOS"].strip(),
-                                     recortar(html.unescape(p["TITULO"])), r[1] if r else "", r[0] if r else ""])
+        titulo, tipo = recortar(html.unescape(p["TITULO"])), p["TIPO"].capitalize()
+        por_dip[actual[hid]].append([p["PROYECTO_ID"], fecha, tipo, p["EXP_DIPUTADOS"].strip(), titulo,
+                                     r[1] if r else "", r[0] if r else "", "p", es_reconocimiento(tipo, titulo)])
 
     por_sen = senado(legs_todos, cuenta)
     salida = SAL / "proyectos"
@@ -159,6 +281,8 @@ def main() -> int:
         resumen = {"camara": "Senadores", "total": len(lista), "por_tipo": dict(tipos.most_common()), "por_resultado": {"Sin resolución registrada": len(lista)},
                    "desde": lista[-1][1], "hasta": lista[0][1]}
         (salida / f"s-{slug}.json").write_text(json.dumps({"resumen": resumen, "proyectos": lista}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    promedios = calcular_promedios(por_dip, por_sen, legs_todos, hist)
+    (salida / "_promedios.json").write_text(json.dumps(promedios, ensure_ascii=False, indent=1), encoding="utf-8")
     meta = {k: cuenta[k] for k in ("total", "origen_senado", "cruzados", "cruzados_por_primer_nombre", "autor_sin_padron", "fuera_de_mandato", "nombre_ambiguo", "de_diputados_actuales", "senado_total", "senado_proyectos", "senado_no_es_proyecto", "senado_expediente_invalido", "senado_fecha_inconsistente")}
     meta["senadores_con_proyectos"] = len(por_sen)
     meta["diputados_con_proyectos"] = len(por_dip)

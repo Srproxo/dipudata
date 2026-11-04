@@ -718,3 +718,110 @@ function interno_legible(string $t): string
 {
     return trim((string)preg_replace('/\s*\/\s*/', ' / ', $t));
 }
+
+/** Categorías del gráfico de proyectos por año: clave => [etiqueta, descripción corta]. */
+function categorias_proyectos(): array
+{
+    return ['propio' => ['Propios', 'el legislador es el autor o el primer firmante'], 'firmante' => ['Como firmante', 'firmó un proyecto cuyo primer firmante es otro senador'],
+            'recon' => ['Reconocimientos y homenajes', 'declaraciones y resoluciones que expresan reconocimiento, beneplácito, homenaje, felicitación, conmemoración o declaran de interés'],
+            'sin' => ['Sin dato del firmante', 'el extracto oficial no trae firmantes']];
+}
+
+/** Categoría de un proyecto de la lista de un legislador: reconocimiento, propio, firmante o sin dato. */
+function categoria_proyecto(array $x): string
+{
+    if (!empty($x[8])) { return 'recon'; }
+    return ['p' => 'propio', 'f' => 'firmante', 'n' => 'sin'][$x[7] ?? 'p'] ?? 'propio';
+}
+
+/**
+ * Barras apiladas por año con una línea de referencia (el promedio de la cámara), en SVG, sin scripts.
+ * $anios: [año => [categoria => cantidad]]; $promedio: [año => promedio por legislador]. Cada categoría tiene su color y se describe en la leyenda y en la tabla.
+ */
+function svg_proyectos_anuales(array $anios, array $promedio, string $titulo, string $etiquetaPromedio, string $notaParcial = ''): string
+{
+    $n = count($anios);
+    if ($n < 2) { return ''; }
+    $w = 640; $h = 270; $izq = 40; $der = 12; $arr = 16; $aba = 30;
+    $tot = array_map(static fn($c) => array_sum($c), $anios);
+    $max = max(1.0, (float)max($tot), (float)max($promedio ?: [0]));
+    $max = (float)ceil($max / 4) * 4;
+    $ancho = ($w - $izq - $der) / $n;
+    $barra = max(5.0, min(44.0, $ancho * 0.62));
+    $id = 'pa-' . md5($titulo);
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($k = 0; $k <= 4; $k++) {
+        $yy = round($arr + ($h - $arr - $aba) * (1 - $k / 4), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/><text class="g-eje" x="' . ($izq - 6) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(number_format($max * $k / 4, 0, ',', '.')) . '</text>';
+    }
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - $v / $max);
+    $cats = categorias_proyectos();
+    $paso = max(1, (int)ceil($n / 10));
+    $i = 0; $camino = []; $marc = '';
+    foreach ($anios as $anio => $c) {
+        $cx = $izq + $ancho * ($i + 0.5); $base = $h - $aba;
+        foreach (array_keys($cats) as $cat) {
+            $v = (int)($c[$cat] ?? 0);
+            if ($v <= 0) { continue; }
+            $alto = ($h - $arr - $aba) * ($v / $max);
+            $base -= $alto;
+            $s .= '<rect class="g-s g-s-' . $cat . '" x="' . round($cx - $barra / 2, 1) . '" y="' . round($base, 1) . '" width="' . round($barra, 1) . '" height="' . round($alto, 1) . '"><title>' . e($anio . ' · ' . $cats[$cat][0] . ': ' . $v) . '</title></rect>';
+        }
+        if (isset($promedio[$anio])) {
+            $px = round($cx, 1); $py = round($y((float)$promedio[$anio]), 1);
+            $camino[] = (count($camino) ? 'L' : 'M') . $px . ' ' . $py;
+            $marc .= '<path class="g-prom-m" d="M' . $px . ' ' . ($py - 5) . ' L' . ($px + 5) . ' ' . $py . ' L' . $px . ' ' . ($py + 5) . ' L' . ($px - 5) . ' ' . $py . ' Z"><title>' . e($anio . ' · ' . $etiquetaPromedio . ': ' . number_format((float)$promedio[$anio], 1, ',', '.')) . '</title></path>';
+        }
+        if ($i % $paso === 0 || $i === $n - 1) {
+            $s .= '<text class="g-eje" x="' . round($cx, 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$anio . ($notaParcial !== '' && (string)$anio === $notaParcial ? '*' : '')) . '</text>';
+        }
+        $i++;
+    }
+    return $s . ($camino ? '<path class="g-prom" d="' . implode(' ', $camino) . '"/>' : '') . $marc . '</svg>';
+}
+
+/**
+ * Figura completa de "proyectos por año" de un legislador: barras por categoría, línea con el promedio de su cámara, leyenda y tabla.
+ * Devuelve '' si no hay datos suficientes.
+ */
+function grafico_proyectos(array $l, ?array $pr, bool $conTitulo = true): string
+{
+    if (!$pr || count($pr['proyectos']) < 2) { return ''; }
+    $esSen = $l['camara'] === 'Senadores';
+    $prom = \App\Datos::proyectosPromedios($l['camara']);
+    $porAnio = [];
+    foreach ($pr['proyectos'] as $x) { $a = substr($x[1], 0, 4); $c = categoria_proyecto($x); $porAnio[$a][$c] = ($porAnio[$a][$c] ?? 0) + 1; }
+    ksort($porAnio);
+    // El eje llega hasta el año en curso y arranca en el inicio del mandato actual: un año sin proyectos se tiene que ver como cero, no desaparecer.
+    $desde = min((int)array_key_first($porAnio), !empty($l['inicio']) ? (int)substr($l['inicio'], 0, 4) : 9999);
+    $hasta = max((int)array_key_last($porAnio), (int)date('Y'));
+    $anios = [];
+    for ($a = $desde; $a <= $hasta; $a++) { $anios[(string)$a] = $porAnio[(string)$a] ?? []; }
+    $promedio = [];
+    foreach (array_keys($anios) as $a) { if (isset($prom['anios'][$a]['promedio'])) { $promedio[$a] = (float)$prom['anios'][$a]['promedio']; } }
+    $cats = categorias_proyectos();
+    $usadas = array_filter(array_keys($cats), static fn($c) => array_sum(array_column($anios, $c)) > 0);
+    $enCurso = ($pr['resumen']['hasta'] ?? '') !== '' && $hasta === (int)date('Y') ? date('Y') : '';
+    $etProm = 'promedio por ' . ($esSen ? 'senador' : 'diputado');
+    $svg = svg_proyectos_anuales($anios, $promedio, 'Proyectos por año de ' . $l['nombre'] . ' (' . implode(', ', array_map(static fn($c) => mb_strtolower($cats[$c][0]), $usadas)) . ') de ' . $desde . ' a ' . $hasta . ', con el ' . $etProm . ' de la cámara', $etProm . ' de la cámara', $enCurso);
+    $h = '<figure class="grafico-caja grafico-ancho">' . ($conTitulo ? '<p class="sub-titulo">Proyectos por año</p>' : '') . $svg . '<ul class="leyenda leyenda-proyectos">';
+    foreach ($usadas as $c) { $h .= '<li><i class="ley-s ley-s-' . $c . '"></i>' . e($cats[$c][0]) . '</li>'; }
+    if ($promedio) { $h .= '<li><i class="ley-prom"></i>Promedio por ' . ($esSen ? 'senador' : 'diputado') . ' de la cámara</li>'; }
+    $h .= '</ul><figcaption class="tenue pequeno">';
+    $h .= $esSen ? '<strong>Propios</strong>: es el autor o primer firmante del proyecto. <strong>Como firmante</strong>: firmó un proyecto cuyo primer firmante es otro. ' : 'El archivo oficial de la Cámara registra un solo autor por proyecto y no trae cofirmantes: todo lo que figura es propio y no se puede distinguir a los firmantes. ';
+    $h .= '<strong>Reconocimientos y homenajes</strong>: declaraciones, resoluciones y comunicaciones cuyo título expresa o pide reconocimiento, beneplácito, homenaje, felicitación, conmemoración o declara de interés algo; se cuentan aparte, sea cual sea la autoría. ';
+    $h .= 'La línea es el promedio de proyectos por ' . ($esSen ? 'senador' : 'diputado') . ' que estaba en funciones ese año, calculado con los ' . ($esSen ? 'senadores' : 'diputados') . ' actuales (<a href="/metodologia#proyectos">cómo se calcula</a>). Unos pocos legisladores muy prolíficos suben el promedio: en la tabla está también la mediana (entre quienes estuvieron al menos medio año) y los legisladores-año que entran en cada cálculo: quien asumió el 10 de diciembre cuenta una fracción de ese año, y en los años viejos son pocos porque solo se cuentan los legisladores actuales. Más proyectos no quiere decir más trabajo ni mejores leyes: mide cuánto se presentó.';
+    if ($enCurso !== '') { $h .= ' * Año en curso: datos hasta el ' . fecha_es($pr['resumen']['hasta']) . '.'; }
+    $h .= '</figcaption></figure>';
+    $h .= '<details class="ver-datos"><summary>Ver los números por año</summary><div class="tabla-caja"><table class="tabla tabla-cifras"><thead><tr><th scope="col">Año</th>';
+    foreach ($usadas as $c) { $h .= '<th scope="col" class="der">' . e($cats[$c][0]) . '</th>'; }
+    $h .= '<th scope="col" class="der">Total</th><th scope="col" class="der">Promedio de la cámara</th><th scope="col" class="der">Mediana de la cámara</th><th scope="col" class="der">Legisladores-año en el cálculo</th></tr></thead><tbody>';
+    foreach (array_reverse($anios, true) as $a => $c) {
+        $h .= '<tr><td class="num" data-etiqueta="Año">' . e((string)$a . ((string)$a === $enCurso ? '*' : '')) . '</td>';
+        foreach ($usadas as $k) { $h .= '<td class="der num" data-etiqueta="' . e($cats[$k][0]) . '">' . (int)($c[$k] ?? 0) . '</td>'; }
+        $h .= '<td class="der num" data-etiqueta="Total"><b>' . array_sum($c) . '</b></td><td class="der num" data-etiqueta="Promedio de la cámara">' . (isset($promedio[$a]) ? e(number_format($promedio[$a], 1, ',', '.')) : '—') . '</td>'
+            . '<td class="der num" data-etiqueta="Mediana de la cámara">' . (isset($prom['anios'][$a]['mediana']) ? e(number_format((float)$prom['anios'][$a]['mediana'], 1, ',', '.')) : '—') . '</td>'
+            . '<td class="der num" data-etiqueta="Legisladores-año en el cálculo">' . e(number_format((float)($prom['anios'][$a]['equivalentes'] ?? 0), 1, ',', '.')) . '</td></tr>';
+    }
+    return $h . '</tbody></table></div></details>';
+}

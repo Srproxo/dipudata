@@ -383,5 +383,42 @@ foreach (['Diputados', 'Senadores'] as $cam) {
 $internos = array_filter($sen, fn($l) => !empty($l['telefono']));
 ok(count($internos) >= 60 && !array_filter($internos, fn($l) => !preg_match('/^\d{3,5}( \/ \d{3,5})*$/', interno_legible($l['telefono']))), 'los internos de los senadores tienen un formato válido (' . count($internos) . ')');
 
+// Proyectos por año: cada proyecto tiene su rol y su marca de reconocimiento, y los promedios de la cámara cierran con los proyectos de cada legislador
+$rolMal = 0; $porCamAnio = ['Diputados' => [], 'Senadores' => []]; $rolSen = ['p' => 0, 'f' => 0, 'n' => 0]; $reconN = 0; $totRol = 0;
+foreach ($todos as $lg) {
+    $pr = Datos::proyectos($lg['slug'], $lg['camara']);
+    if (!$pr) { continue; }
+    foreach ($pr['proyectos'] as $x) {
+        $totRol++;
+        if (count($x) !== 9 || !in_array($x[7], ['p', 'f', 'n'], true) || !in_array($x[8], [0, 1], true)) { $rolMal++; continue; }
+        if ($lg['camara'] === 'Diputados' && $x[7] !== 'p') { $rolMal++; }
+        if ($x[8] === 1 && !in_array($x[2], ['Declaracion', 'Resolucion', 'Comunicacion'], true)) { $rolMal++; }
+        if ($lg['camara'] === 'Senadores') { $rolSen[$x[7]]++; }
+        $reconN += $x[8];
+        $porCamAnio[$lg['camara']][substr($x[1], 0, 4)] = ($porCamAnio[$lg['camara']][substr($x[1], 0, 4)] ?? 0) + 1;
+    }
+}
+ok($rolMal === 0 && $totRol > 25000, 'cada proyecto trae su rol (propio, firmante o sin dato) y su marca de reconocimiento; en Diputados todo es propio porque el archivo no trae cofirmantes (' . $totRol . ')');
+$sh = $rolSen['p'] / max(1, array_sum($rolSen));
+ok($sh > 0.1 && $sh < 0.5 && $rolSen['n'] < 50 && $reconN / max(1, $totRol) > 0.1 && $reconN / max(1, $totRol) < 0.5, 'proporciones razonables: propios del Senado ' . round($sh * 100) . ' %, sin dato ' . $rolSen['n'] . ', reconocimientos ' . round($reconN * 100 / $totRol) . ' %');
+$prMal = 0; $prN = 0;
+foreach (['Diputados', 'Senadores'] as $cam) {
+    $pm2 = Datos::proyectosPromedios($cam);
+    if (empty($pm2['anios'])) { $prMal++; continue; }
+    foreach ($pm2['anios'] as $anio => $v) {
+        $prN++;
+        $sumaCat = $v['propios'] + $v['firmante'] + $v['reconocimientos'] + $v['sin_dato'];
+        if ($sumaCat !== $v['proyectos'] || $v['proyectos'] !== ($porCamAnio[$cam][$anio] ?? 0)) { $prMal++; }
+        if ($v['equivalentes'] <= 0 || $v['equivalentes'] > $v['legisladores'] + 0.001) { $prMal++; }
+        if ($v['promedio'] === null ? $v['equivalentes'] >= 3 : ($v['equivalentes'] < 3 || abs($v['promedio'] - $v['proyectos'] / $v['equivalentes']) > 0.01)) { $prMal++; }
+        if ($v['mediana'] !== null && ($v['mediana'] < 0 || $v['mediana_n'] < 3)) { $prMal++; }
+    }
+}
+ok($prMal === 0 && $prN > 30, 'promedios de la cámara por año: las categorías suman el total, el total coincide con los proyectos de cada legislador y promedio = proyectos / legisladores-año (' . $prN . ' años)');
+$gp = grafico_proyectos(Datos::legislador('Senadores', 'carlos-mauricio-espinola'), Datos::proyectos('carlos-mauricio-espinola', 'Senadores'));
+ok(str_contains($gp, 'class="g-prom"') && str_contains($gp, 'g-s-propio') && str_contains($gp, 'g-s-firmante') && str_contains($gp, 'Promedio por senador') && !str_contains($gp, '<script'), 'el gráfico de proyectos por año muestra propios, firmantes y la línea del promedio de la cámara');
+$gd = grafico_proyectos(Datos::legislador('Diputados', 'pablo-ansaloni'), Datos::proyectos('pablo-ansaloni', 'Diputados'));
+ok(!str_contains($gd, 'g-s-firmante') && str_contains($gd, 'no se puede distinguir a los firmantes'), 'en Diputados el gráfico aclara que el archivo oficial no permite distinguir a los firmantes');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

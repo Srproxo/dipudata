@@ -75,13 +75,7 @@ if ($djG) { [$mesG, $facG] = factores_ipc(); foreach ($djG as $d) { if (isset($f
 if (count($grProy) >= 2 || count($grPat) >= 2): ?>
 <section class="graficos-resumen" aria-labelledby="graficos-t">
   <h2 id="graficos-t" class="seccion-titulo">En gráficos</h2>
-  <?php if (count($grProy) >= 2): ?>
-  <figure class="grafico-caja">
-    <p class="sub-titulo">Proyectos por año</p>
-    <?= svg_barras($grProy, 'Cantidad de proyectos por año en los que figura ' . $l['nombre'] . ', de ' . array_key_first($grProy) . ' a ' . array_key_last($grProy)) ?>
-    <figcaption class="tenue pequeno">Cantidad de proyectos por año de presentación. <?= $esSen ? 'Incluye los que firmó junto con otros senadores.' : 'Cuenta los proyectos donde figura como autor/a en el archivo oficial, que no registra cofirmantes.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>?tab=proyectos">Ver los proyectos</a>.</figcaption>
-  </figure>
-  <?php endif; ?>
+  <?= grafico_proyectos($l, $pyR) ?>
   <?php if (count($grPat) >= 2): ?>
   <figure class="grafico-caja">
     <p class="sub-titulo">Patrimonio neto declarado</p>
@@ -186,7 +180,8 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
 <?php endif; ?>
 
 <?php if ($tab === 'proyectos'): ?>
-<?php $ej = Datos::ejes($l['camara'], $l['slug']); ?>
+<?php $ej = Datos::ejes($l['camara'], $l['slug']); $gpTab = grafico_proyectos($l, Datos::proyectos($l['slug'], $l['camara']), false); ?>
+<?php if ($gpTab !== ''): ?><section class="seccion" aria-labelledby="pry-anio"><h2 id="pry-anio" class="seccion-titulo">Proyectos por año</h2><?= $gpTab ?></section><?php endif; ?>
 <?php if ($ej && $ej['con_eje'] >= 5): $filas = $ej['ejes']; uasort($filas, static fn($a, $b) => $b['proyectos'] <=> $a['proyectos']); ?>
 <section class="seccion" aria-labelledby="temas">
   <h2 id="temas" class="seccion-titulo">Temas de sus proyectos</h2>
