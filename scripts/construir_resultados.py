@@ -17,8 +17,11 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "storage" / "verificado" / "resultados_elecciones.json"
-ALIAS = {"tierra del fuego, antartida e islas del atlantico sur": "tierra del fuego"}
+ALIAS = {"tierra del fuego, antartida e islas del atlantico sur": "tierra del fuego",
+         "ciudad autonoma bs.as.": "ciudad autonoma de buenos aires"}  # 2017 abrevia el nombre
 ORDEN_OTROS = ["EN BLANCO", "NULO", "IMPUGNADO", "RECURRIDO", "COMANDO"]
+# 2021 escribe los tipos de voto en plural; cualquier otro nombre desconocido hace fallar la construcción (no se pierde en silencio).
+TIPOS_OTROS = {"BLANCOS": "EN BLANCO", "NULOS": "NULO", "IMPUGNADOS": "IMPUGNADO", "RECURRIDOS": "RECURRIDO"}
 
 
 def norm(s: str) -> str:
@@ -46,12 +49,19 @@ def una(d: dict, sitio: dict, errores: list):
             if len(ids) != len(set(ids)) or any(a["votos"] < 0 for a in cg["agrupaciones"]) or not ids:
                 errores.append(f"{pref}{p['nombre']}: agrupaciones repetidas, vacías o con votos negativos en cargo {c}")
             positivos = sum(a["votos"] for a in cg["agrupaciones"])
-            total = positivos + sum(cg["otros"].values())
+            otros = {t: 0 for t in ORDEN_OTROS}
+            for t, v in cg["otros"].items():
+                t2 = TIPOS_OTROS.get(t, t)
+                if t2 not in otros:
+                    errores.append(f"{pref}{p['nombre']}: tipo de voto desconocido {t!r}")
+                    continue
+                otros[t2] += v
+            total = positivos + sum(otros.values())
             if total > p["electores"] or total <= 0:
                 errores.append(f"{pref}{p['nombre']}: los votos del cargo {c} ({total}) no caben en los electores ({p['electores']})")
             cargos["diputados" if c == "3" else "senadores"] = {
                 "positivos": positivos, "votantes": total,
-                "otros": {t: cg["otros"].get(t, 0) for t in ORDEN_OTROS},
+                "otros": otros,
                 "agrupaciones": [{"nombre": a["nombre"], "votos": a["votos"]} for a in cg["agrupaciones"]],
             }
         prov[slug] = {"nombre": p["nombre"], "mesas": p["mesas"], "electores": p["electores"], **cargos}

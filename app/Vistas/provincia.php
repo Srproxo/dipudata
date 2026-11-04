@@ -47,7 +47,7 @@ $pct = static fn(int $n, int $d): string => $d > 0 ? number_format(100 * $n / $d
 
   <?php foreach ($resultados as $r): $m = $r['meta']; $res = $r['datos']; $abierta = $m['tipo'] === 'GENERAL' && $primeraGeneral; if ($m['tipo'] === 'GENERAL') { $primeraGeneral = false; } ?>
   <details class="ver-datos eleccion" id="e-<?= e($m['clave']) ?>"<?= $abierta ? ' open' : '' ?>>
-    <summary><strong><?= e($m['eleccion']) ?></strong></summary>
+    <summary><strong>Detalle: <?= e(lcfirst($m['eleccion'])) ?></strong> <span class="tenue pequeno">(agrupaciones y votos)</span></summary>
     <p class="fuente-pie" style="margin-top:.5rem;padding-top:0;border-top:0">Mesas del archivo: <?= $ent($res['mesas']) ?>; electores de esas mesas: <?= $ent($res['electores']) ?>.</p>
     <?php foreach (['diputados' => 'Diputados nacionales', 'senadores' => 'Senadores nacionales'] as $k => $titulo): if (empty($res[$k])) { continue; } $rr = $res[$k]; ?>
     <h4 class="sub-titulo"><?= e($titulo) ?></h4>
