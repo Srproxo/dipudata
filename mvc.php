@@ -440,6 +440,66 @@ switch (true) {
         ));
         break;
 
+    case $path === '/patrimonio':
+        $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
+        $nq = Datos::normalizar($q);
+        $camaraSel = in_array($_GET['camara'] ?? '', ['Diputados', 'Senadores'], true) ? (string)$_GET['camara'] : '';
+        $provSel = is_string($_GET['provincia'] ?? null) && Datos::provincia($_GET['provincia']) ? $_GET['provincia'] : '';
+        $nombreProv = $provSel ? Datos::provincia($provSel)['nombre'] : '';
+        $bloqueSel = is_string($_GET['bloque'] ?? null) && preg_match("#^{$S}$#", $_GET['bloque']) ? $_GET['bloque'] : '';
+        $ordenes = ['nombre', 'anio', 'corriente', 'hoy', 'usd', 'var_hoy', 'var_usd'];
+        $orden = in_array($_GET['orden'] ?? '', $ordenes, true) ? (string)$_GET['orden'] : 'hoy';
+        $dir = ($_GET['dir'] ?? '') === 'asc' ? 'asc' : 'desc';
+        $todosLeg = Datos::legisladores(); $conDatos = 0; $filas = [];
+        foreach ($todosLeg as $lg) {
+            $sp = serie_patrimonio($lg);
+            if (!$sp) { continue; }
+            $conDatos++;
+            if ($camaraSel && $lg['camara'] !== $camaraSel) { continue; }
+            if ($nombreProv && $lg['provincia'] !== $nombreProv) { continue; }
+            if ($bloqueSel && trim((string)preg_replace('/[^a-z0-9]+/', '-', Datos::normalizar($lg['bloque'])), '-') !== $bloqueSel) { continue; }
+            if ($nq !== '' && !str_contains(' ' . Datos::normalizar($lg['nombre']) . ' ', $nq) && !str_contains(Datos::normalizar($lg['nombre']), $nq)) { continue; }
+            $filas[] = ['l' => $lg, 's' => $sp];
+        }
+        $valor = static fn(array $f) => match ($orden) {
+            'nombre' => Datos::normalizar($f['l']['apellido'] ?? $f['l']['nombre']) . ' ' . Datos::normalizar($f['l']['nombre']),
+            'anio' => $f['s']['ultimo_anio'], 'corriente' => $f['s']['ultimo'], 'hoy' => $f['s']['ultimo_hoy'], 'usd' => $f['s']['ultimo_usd'],
+            'var_hoy' => $f['s']['var_hoy']['pct'] ?? null, 'var_usd' => $f['s']['var_usd']['pct'] ?? null,
+        };
+        // Los que no tienen el dato (sin conversión disponible) van siempre al final.
+        usort($filas, static function (array $x, array $y) use ($valor, $dir): int {
+            $vx = $valor($x); $vy = $valor($y);
+            if ($vx === null || $vy === null) { return $vx === $vy ? 0 : ($vx === null ? 1 : -1); }
+            $c = $vx <=> $vy;
+            return $dir === 'asc' ? $c : -$c;
+        });
+        $total = count($filas);
+        $paginas = max(1, (int)ceil($total / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $filas = array_slice($filas, ($pagina - 1) * 50, 50);
+        $filtrado = $q !== '' || $camaraSel || $provSel || $bloqueSel || $pagina > 1 || isset($_GET['orden']);
+        render('patrimonio', compact('filas', 'total', 'conDatos', 'q', 'camaraSel', 'provSel', 'bloqueSel', 'orden', 'dir', 'pagina', 'paginas'), pagina_meta(
+            'Patrimonio declarado de los legisladores: evolución y comparación',
+            'Patrimonio neto declarado por diputados y senadores ante la Oficina Anticorrupción, en pesos de hoy y en dólares, con su evolución año a año y filtros por cámara, provincia y bloque.',
+            '/patrimonio', 'patrimonio', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
+    case $path === '/comparar':
+        $sel = [];
+        foreach (['a', 'b', 'c', 'd'] as $p) {
+            $lg = is_string($_GET[$p] ?? null) ? legislador_por_clave($_GET[$p]) : null;
+            if ($lg && !in_array(clave_legislador($lg), array_map('clave_legislador', $sel), true)) { $sel[$p] = $lg; }
+        }
+        $todosLeg = Datos::legisladores();
+        usort($todosLeg, static fn($x, $y) => strcmp(Datos::normalizar($x['apellido'] ?? $x['nombre']) . Datos::normalizar($x['nombre']), Datos::normalizar($y['apellido'] ?? $y['nombre']) . Datos::normalizar($y['nombre'])));
+        render('comparar', compact('sel', 'todosLeg'), pagina_meta(
+            'Comparar legisladores: patrimonio, votaciones y proyectos',
+            'Elegí hasta cuatro diputados o senadores y compará su patrimonio declarado, cómo votaron desde el 10 de diciembre de 2025 y sus proyectos, con datos oficiales.',
+            '/comparar', 'comparar', ['robots' => $sel ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case (bool)preg_match('#^/(eje|ley|match-360)(/|$)#', $path):
         header('Retry-After: 86400');
         render('en_revision', [], pagina_meta('Sección en revisión', 'Estamos verificando estos datos contra las fuentes oficiales.', '/', '', ['robots' => 'noindex, follow']), 503);
@@ -447,7 +507,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
