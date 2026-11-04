@@ -712,3 +712,9 @@ function coincidencias_votos(array $claves): array
     }
     return $res;
 }
+
+/** Internos telefónicos con separador uniforme: "1354/1380" y "1325 /1327" pasan a "1354 / 1380". */
+function interno_legible(string $t): string
+{
+    return trim((string)preg_replace('/\s*\/\s*/', ' / ', $t));
+}

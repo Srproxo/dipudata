@@ -304,6 +304,12 @@ final class Datos
         return self::leer('votaciones_diputados')[$slug] ?? null;
     }
 
+    /** Teléfono, dirección y fuente del conmutador de cada cámara (el interno de cada legislador va aparte). */
+    public static function contactoCamara(string $camara): array
+    {
+        return self::leer('contacto_camaras')[$camara] ?? [];
+    }
+
     /** @return list<array> */
     public static function interbloques(): array
     {
