@@ -336,11 +336,22 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 
 /* Proyectos por año: categorías y promedio de la cámara */
 .g-s { stroke: var(--papel); stroke-width: .75; }
-.g-s-propio { fill: var(--acento); } .g-s-firmante { fill: #0f766e; } .g-s-recon { fill: #b45309; } .g-s-sin { fill: #94a3b8; }
+.g-s-propio { fill: var(--acento); } .g-s-firmante { fill: #0f766e; } .g-s-recon { fill: #b45309; } .g-s-sin { fill: #64748b; }
 .g-s:hover { opacity: .85; }
 .g-prom { fill: none; stroke: var(--tinta); stroke-width: 2; stroke-dasharray: 6 4; }
 .g-prom-m { fill: var(--papel); stroke: var(--tinta); stroke-width: 2; }
 .leyenda-proyectos i { display: inline-block; width: .8rem; height: .8rem; margin-right: .4rem; vertical-align: middle; border-radius: 0; }
-.ley-s-propio { background: var(--acento); } .ley-s-firmante { background: #0f766e; } .ley-s-recon { background: #b45309; } .ley-s-sin { background: #94a3b8; }
+.ley-s-propio { background: var(--acento); } .ley-s-firmante { background: #0f766e; } .ley-s-recon { background: #b45309; } .ley-s-sin { background: #64748b; }
 .leyenda-proyectos .ley-prom { width: 1.4rem; height: 0; border-top: 2px dashed var(--tinta); background: none; }
 .etq-rol { display: inline-block; padding: 0 .4rem; margin-left: .35rem; font-size: .75rem; border: 1px solid var(--linea-fuerte); color: var(--tinta-2); }
+
+/* Glosario */
+.glosario-indice { margin-top: 2rem; }
+.glosario-indice ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .5rem; }
+.glosario-indice a { display: inline-block; padding: .3rem .65rem; border: 1px solid var(--linea); font-size: .9rem; text-decoration: none; color: var(--tinta-2); }
+.glosario-indice a:hover { border-color: var(--acento); color: var(--acento); }
+.glosario { margin: 2rem 0 0; max-width: 46rem; }
+.glosario-item { padding: 1rem 0; border-bottom: 1px solid var(--linea); scroll-margin-top: 5rem; }
+.glosario dt { font: 700 1.2rem/1.3 var(--serif); }
+.glosario dd { margin: .35rem 0 0; font-size: 1.0625rem; line-height: 1.65; color: var(--tinta-2); }
+.articulo p, .articulo li, .glosario dd, .aviso, .bajada { overflow-wrap: anywhere; }

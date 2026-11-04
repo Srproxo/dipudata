@@ -420,5 +420,12 @@ ok(str_contains($gp, 'class="g-prom"') && str_contains($gp, 'g-s-propio') && str
 $gd = grafico_proyectos(Datos::legislador('Diputados', 'pablo-ansaloni'), Datos::proyectos('pablo-ansaloni', 'Diputados'));
 ok(!str_contains($gd, 'g-s-firmante') && str_contains($gd, 'no se puede distinguir a los firmantes'), 'en Diputados el gráfico aclara que el archivo oficial no permite distinguir a los firmantes');
 
+// Glosario: cada término tiene una definición corta y clara, enlaces a secciones que existen y anclas únicas
+$gl = terminos_glosario(); $glMal = 0; $rutasOk = ['/', '/votaciones', '/congreso', '/congreso/bloques', '/congreso/provincias', '/comisiones', '/patrimonio', '/leyes', '/metodologia'];
+foreach ($gl as $k => [$t, $d, $u]) {
+    if (!preg_match('/^[a-z0-9-]+$/', $k) || trim($t) === '' || mb_strlen($d) < 40 || mb_strlen($d) > 520 || !in_array($u, $rutasOk, true)) { $glMal++; }
+}
+ok($glMal === 0 && count($gl) >= 20, 'glosario: ' . count($gl) . ' términos con definición breve, ancla válida y enlace a una sección que existe');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

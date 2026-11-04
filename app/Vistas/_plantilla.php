@@ -18,6 +18,7 @@ $mas = [
     'subsidios'   => ['/subsidios', 'Subsidios'],
     'aportes'     => ['/aportes', 'Aportes a partidos'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
+    'glosario'    => ['/glosario', 'Glosario'],
     'metodologia' => ['/metodologia', 'Metodología'],
 ];
 $masActivo = isset($mas[$meta['seccion']]);
@@ -81,6 +82,7 @@ $inf = \App\Datos::informe();
       <ul>
         <li><a href="/">Legisladores</a></li>
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
+        <li><a href="/glosario">Glosario</a></li>
         <li><a href="/congreso/bloques">Bloques</a></li>
         <li><a href="/congreso/provincias">Provincias</a></li>
         <li><a href="/votaciones">Votaciones nominales</a></li>
