@@ -326,16 +326,22 @@ final class Datos
         return null;
     }
 
-    /** Resultados de las generales 2023 (DINE) por provincia: ["_meta" => ..., "provincias" => [slug => ...]]. */
-    public static function resultados2023(): array
+    /** @return list<array{_meta:array,provincias:array}> elecciones nacionales (DINE, escrutinio provisorio), de la más reciente a la más antigua */
+    public static function resultadosElecciones(): array
     {
-        return self::leer('resultados_2023');
+        return self::leer('resultados_elecciones')['elecciones'] ?? [];
     }
 
-    /** Resultado de la provincia en las generales 2023 (diputados y, donde hubo, senadores nacionales), o null. */
-    public static function resultadosProvincia(string $slug): ?array
+    /** @return list<array{meta:array,datos:array}> resultado de la provincia en cada elección (diputados y, donde hubo, senadores nacionales) */
+    public static function resultadosProvincia(string $slug): array
     {
-        return self::resultados2023()['provincias'][$slug] ?? null;
+        $out = [];
+        foreach (self::resultadosElecciones() as $e) {
+            if (isset($e['provincias'][$slug])) {
+                $out[] = ['meta' => $e['_meta'], 'datos' => $e['provincias'][$slug]];
+            }
+        }
+        return $out;
     }
 
     public static function informe(): array

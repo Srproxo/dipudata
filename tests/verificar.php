@@ -339,23 +339,41 @@ $sv2 = svg_lineas(['A' => [2020 => 1.0, 2021 => 2.0], 'B' => [2020 => 2.0, 2021 
 ok(substr_count($sv2, 'class="g-l g-l') === 2 && str_contains($sv2, '<title') && !str_contains($sv2, '<script'), 'el gráfico de varias líneas dibuja una línea por legislador, con título accesible y sin scripts');
 
 // Resultados electorales 2023 (fuente oficial: Dirección Nacional Electoral)
-$re = Datos::resultados2023(); $reMal = [];
-ok(count($re['provincias'] ?? []) === 24 && count(array_filter(Datos::provincias(), fn($p) => Datos::resultadosProvincia($p['slug']) === null)) === 0, 'resultados 2023: las 24 provincias del sitio tienen resultados');
-ok(str_starts_with((string)($re['_meta']['url_archivo'] ?? ''), 'https://www.argentina.gob.ar/') && preg_match('/^[0-9a-f]{64}$/', (string)($re['_meta']['sha256_zip'] ?? '')) === 1 && ($re['_meta']['escrutinio'] ?? '') === 'provisorio', 'resultados 2023: cita la fuente oficial, la huella del archivo y aclara que es provisorio');
-foreach ($re['provincias'] ?? [] as $slug => $r) {
-    foreach (['diputados', 'senadores'] as $k) {
-        if (empty($r[$k])) { continue; }
-        $ag = $r[$k]['agrupaciones']; $nombres = array_column($ag, 'nombre');
-        if (array_sum(array_column($ag, 'votos')) !== $r[$k]['positivos'] || count($nombres) !== count(array_unique($nombres)) || $r[$k]['positivos'] + array_sum($r[$k]['otros']) !== $r[$k]['votantes'] || $r[$k]['votantes'] > $r['electores']) { $reMal[] = "$slug/$k"; }
-        $v = array_column($ag, 'votos'); $o = $v; rsort($o);
-        if ($v !== $o) { $reMal[] = "$slug/$k orden"; }
+// Resultados electorales (DINE, escrutinio provisorio): cada elección cita su fuente oficial y sus números cierran
+$elec = Datos::resultadosElecciones(); $reMal = []; $claves = [];
+$senSet = [
+    2023 => ['buenos-aires', 'formosa', 'jujuy', 'la-rioja', 'misiones', 'san-juan', 'san-luis', 'santa-cruz'],
+    2021 => ['catamarca', 'chubut', 'cordoba', 'corrientes', 'la-pampa', 'mendoza', 'santa-fe', 'tucuman'],
+    2019 => ['ciudad-autonoma-de-buenos-aires', 'chaco', 'entre-rios', 'neuquen', 'rio-negro', 'salta', 'santiago-del-estero', 'tierra-del-fuego'],
+];
+$senSet[2017] = $senSet[2023];
+$electoresAnio = [];
+foreach ($elec as $e) {
+    $m = $e['_meta']; $c = $m['clave']; $claves[] = $c;
+    if (count($e['provincias']) !== 24 || count(array_filter(Datos::provincias(), fn($p) => !isset($e['provincias'][$p['slug']]))) !== 0) { $reMal[] = "$c: no tiene las 24 provincias"; }
+    if (!str_starts_with((string)$m['url_archivo'], 'https://www.argentina.gob.ar/') || !preg_match('/^[0-9a-f]{64}$/', (string)$m['sha256_zip']) || $m['escrutinio'] !== 'provisorio' || !str_starts_with((string)$m['pagina'], 'https://www.argentina.gob.ar/dine/')) { $reMal[] = "$c: fuente"; }
+    $con = [];
+    foreach ($e['provincias'] as $slug => $r) {
+        foreach (['diputados', 'senadores'] as $k) {
+            if (empty($r[$k])) { continue; }
+            if ($k === 'senadores') { $con[] = $slug; }
+            $ag = $r[$k]['agrupaciones']; $nombres = array_column($ag, 'nombre');
+            if (array_sum(array_column($ag, 'votos')) !== $r[$k]['positivos'] || count($nombres) !== count(array_unique($nombres)) || $r[$k]['positivos'] + array_sum($r[$k]['otros']) !== $r[$k]['votantes'] || $r[$k]['votantes'] > $r['electores']) { $reMal[] = "$c/$slug/$k"; }
+            $v = array_column($ag, 'votos'); $o = $v; rsort($o);
+            if ($v !== $o) { $reMal[] = "$c/$slug/$k orden"; }
+        }
+        if (empty($r['diputados'])) { $reMal[] = "$c/$slug sin diputados"; }
     }
-    if (empty($r['diputados'])) { $reMal[] = "$slug sin diputados"; }
+    sort($con); $esp = $senSet[$m['anio']] ?? null; sort($esp);
+    if ($con !== $esp) { $reMal[] = "$c: Senado en provincias inesperadas"; }
+    $tot = array_sum(array_column($e['provincias'], 'electores'));
+    if ($tot < 29000000 || $tot > 36500000) { $reMal[] = "$c: electores $tot"; }
+    $electoresAnio[$m['anio']][] = $tot;
 }
-ok(!$reMal, 'resultados 2023: los votos suman, no hay agrupaciones repetidas y nadie supera a los electores' . ($reMal ? ' (' . implode(', ', $reMal) . ')' : ''));
-ok(($re['_meta']['provincias_con_senadores'] ?? []) === ['buenos-aires', 'formosa', 'jujuy', 'la-rioja', 'misiones', 'san-juan', 'san-luis', 'santa-cruz'], 'resultados 2023: el Senado solo figura en las 8 provincias que lo renovaron');
-$totE = array_sum(array_column($re['provincias'] ?? [], 'electores'));
-ok($totE > 35000000 && $totE < 36500000, 'resultados 2023: el total de electores de las mesas ronda los 35 millones (' . $totE . ')');
+foreach ($electoresAnio as $an => $ts) { if (count($ts) === 2 && abs($ts[0] - $ts[1]) / max($ts) > 0.03) { $reMal[] = "$an: PASO y generales difieren más de 3% en electores"; } }
+sort($claves);
+ok(!$reMal, 'resultados electorales: ' . count($elec) . ' elecciones con fuente oficial y huella, 24 provincias, votos que suman, sin agrupaciones repetidas, Senado solo donde se renovó y electores coherentes' . ($reMal ? ' (' . implode('; ', array_slice($reMal, 0, 4)) . ')' : ''));
+ok($claves === ['generales_2017', 'generales_2019', 'generales_2021', 'generales_2023', 'paso_2017', 'paso_2019', 'paso_2021'], 'resultados electorales: están las generales 2017 a 2023 y las PASO 2017 a 2021 (la DINE no publica las PASO 2023)');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
