@@ -445,5 +445,11 @@ ok($dMal === 0 && $dSen === 0 && $dN > 1500 && ($pm3['con_dictamen'] ?? 0) > 100
 ok(($pm3['aprobados_con_dictamen_pct'] ?? 0) > 85, 'dictámenes: coherencia con los resultados, casi todo proyecto sancionado o con media sanción tiene dictamen (' . ($pm3['aprobados_con_dictamen_pct'] ?? 0) . ' %)');
 ok(dictamen_texto(['Cultura', 'od', '0109', '2026-06-05', '']) === 'Dictamen de la comisión de Cultura, Orden del Día 0109 (5 de junio de 2026)' && dictamen_texto(['', 'st', '', '', '']) === 'Pedido de tratamiento sobre tablas', 'el texto de cada dictamen se escribe en lenguaje simple, también cuando falta la comisión o la fecha');
 
+// Documentación y código no se desfasan: todo script que CLAUDE.md nombra existe (un PR armado sobre una base vieja ya borró uno en silencio)
+$doc = (string)file_get_contents(__DIR__ . '/../CLAUDE.md'); $faltan = [];
+preg_match_all('/`([a-z_]+\.py)`/', $doc, $mm);
+foreach (array_unique($mm[1]) as $py) { if (!is_file(__DIR__ . '/../scripts/' . $py) && !in_array($py, ['json.py'], true)) { $faltan[] = $py; } }
+ok(!$faltan && count(array_unique($mm[1])) > 25, 'todo script que nombra CLAUDE.md existe en scripts/ (' . count(array_unique($mm[1])) . ' nombrados)' . ($faltan ? ': faltan ' . implode(', ', $faltan) : ''));
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
