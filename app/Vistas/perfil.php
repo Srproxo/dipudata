@@ -115,11 +115,12 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
         <li><span class="fuente-campo"><?= e(ucfirst($campo)) ?></span><span class="fuente-origen"><?= e($fuente) ?></span></li>
       <?php endforeach; ?>
     </ul>
-    <?php if (!empty($l['email']) || !empty($l['telefono'])): ?>
+    <?php if (!empty($l['email']) || !empty($l['telefono']) || !empty(Datos::contactoCamara($l['camara']))): ?>
       <h3 class="seccion-titulo" style="font-size:1.05rem;margin-top:1.5rem">Contacto institucional</h3>
       <ul class="contacto">
         <?php if (!empty($l['email'])): ?><li><span class="tenue">Correo</span><a href="mailto:<?= e($l['email']) ?>"><?= e($l['email']) ?></a></li><?php endif; ?>
-        <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span class="num"><?= e($l['telefono']) ?></span></li><?php endif; ?>
+        <?php $cc = Datos::contactoCamara($l['camara']); if (!empty($cc['tel'])): ?><li><span class="tenue">Teléfono</span><span><a class="num" href="tel:<?= e($cc['tel']) ?>"><?= e($cc['telefono']) ?></a><span class="tenue pequeno block">Conmutador <?= $esSen ? 'del Senado' : 'de la Cámara' ?></span></span></li><?php endif; ?>
+        <?php if (!empty($l['telefono'])): ?><li><span class="tenue">Interno</span><span><span class="num"><?= e(interno_legible($l["telefono"])) ?></span><span class="tenue pequeno block">Marcalo al atender el conmutador</span></span></li><?php endif; ?>
       </ul>
     <?php endif; ?>
     <p class="tenue pequeno" style="margin-top:1.25rem">Cada pestaña explica de dónde sale cada dato. <a href="/metodologia">Más sobre cómo trabajamos</a>.</p>

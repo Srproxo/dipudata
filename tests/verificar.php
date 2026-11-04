@@ -375,5 +375,13 @@ sort($claves);
 ok(!$reMal, 'resultados electorales: ' . count($elec) . ' elecciones con fuente oficial y huella, 24 provincias, votos que suman, sin agrupaciones repetidas, Senado solo donde se renovó y electores coherentes' . ($reMal ? ' (' . implode('; ', array_slice($reMal, 0, 4)) . ')' : ''));
 ok($claves === ['generales_2017', 'generales_2019', 'generales_2021', 'generales_2023', 'paso_2017', 'paso_2019', 'paso_2021'], 'resultados electorales: están las generales 2017 a 2023 y las PASO 2017 a 2021 (la DINE no publica las PASO 2023)');
 
+// Contacto: el teléfono de cada cámara se puede marcar (tel:) y cada interno publicado se muestra con su teléfono
+foreach (['Diputados', 'Senadores'] as $cam) {
+    $cc = Datos::contactoCamara($cam);
+    ok(preg_match('/^\+54\d{10}$/', (string)($cc['tel'] ?? '')) === 1 && !empty($cc['telefono']) && str_starts_with((string)($cc['url'] ?? ''), 'https://'), 'contacto de ' . $cam . ': teléfono con formato internacional, para marcar, con su fuente');
+}
+$internos = array_filter($sen, fn($l) => !empty($l['telefono']));
+ok(count($internos) >= 60 && !array_filter($internos, fn($l) => !preg_match('/^\d{3,5}( \/ \d{3,5})*$/', interno_legible($l['telefono']))), 'los internos de los senadores tienen un formato válido (' . count($internos) . ')');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
