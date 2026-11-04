@@ -109,6 +109,12 @@ final class Datos
         return self::leer('ddjj')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? [];
     }
 
+    /** @return array{sin_totales?:list<array{anio:int,tipo:string}>,ambiguo?:bool} casos en que la declaración figura pero no se publican sus totales, o el nombre es ambiguo */
+    public static function ddjjEstado(string $camara, string $slug): array
+    {
+        return self::leer('ddjj_estado')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? [];
+    }
+
     /** @return array<string,array{n:int,total:float}> subsidios por año de un diputado actual */
     public static function subsidiosDiputado(string $slug): array
     {

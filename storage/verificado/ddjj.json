@@ -1986,6 +1986,19 @@
    "ingresos_netos": 54029296.34
   },
   {
+   "anio": 2023,
+   "tipo": "Baja",
+   "rectificativa": 1,
+   "cargo": "Directora nacional de migraciones · Dirección Nacional de Migraciones",
+   "camara": null,
+   "bienes_inicio": 43358484.82,
+   "deudas_inicio": 0.0,
+   "bienes_final": 42725040.3,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 42725040.3,
+   "ingresos_netos": 37010818.21
+  },
+  {
    "anio": 2022,
    "tipo": "Anual",
    "rectificativa": 1,
@@ -4833,6 +4846,19 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 5719208.87,
    "ingresos_netos": 1968458.89
+  },
+  {
+   "anio": 2019,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "cargo": "Senadora de la provincia de buenos aires · Honorable Cámara de Senadores Pcia Bs As",
+   "camara": null,
+   "bienes_inicio": 9203899.15,
+   "deudas_inicio": 0.0,
+   "bienes_final": 2919667.6,
+   "deudas_final": 0.0,
+   "patrimonio_neto_final": 2919667.6,
+   "ingresos_netos": 2699249.94
   },
   {
    "anio": 2018,
@@ -12261,6 +12287,19 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 50115664.05,
    "ingresos_netos": 42388892.13
+  },
+  {
+   "anio": 2023,
+   "tipo": "Baja",
+   "rectificativa": 0,
+   "cargo": "Directora · Banco de la Nación Argentina",
+   "camara": null,
+   "bienes_inicio": 11151502.02,
+   "deudas_inicio": 499798.21,
+   "bienes_final": 29259233.54,
+   "deudas_final": 457175.95,
+   "patrimonio_neto_final": 28802057.59,
+   "ingresos_netos": 21622246.94
   },
   {
    "anio": 2022,

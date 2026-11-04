@@ -416,9 +416,8 @@ function pestanas_perfil(array $l): array
     if (\App\Datos::proyectos($l['slug'], $l['camara']) || ($ej['con_eje'] ?? 0) > 0) {
         $p['proyectos'] = 'Proyectos y temas';
     }
-    if (\App\Datos::ddjj($l['camara'], $l['slug'])) {
-        $p['patrimonio'] = 'Declaración jurada';
-    }
+    // La pestaña está siempre: si no hay declaración publicada, explica por qué.
+    $p['patrimonio'] = 'Declaración jurada';
     if (!$esSen && (\App\Datos::comisionesDe($l['slug']) || isset($vj['actual'][$l['slug']]) || !empty($vj['por_diputado'][$l['slug']])
             || \App\Datos::subsidiosDiputado($l['slug']) || !empty($l['trayectoria']))) {
         $p['mas'] = 'Más datos';
@@ -498,4 +497,24 @@ function match_temas(array $usuario, string $camara = ''): array
     }
     usort($filas, static fn($a, $b) => $b['afinidad'] <=> $a['afinidad'] ?: strcmp($a['l']['nombre'], $b['l']['nombre']));
     return $filas;
+}
+
+/**
+ * Qué decir de las declaraciones juradas de un legislador: cuántas figuran, de qué años, cuáles faltan en el medio y,
+ * si no hay ninguna, el motivo más probable según cuándo asumió. Solo habla de lo que figura en el archivo publicado.
+ */
+function estado_ddjj(array $l, array $dj): array
+{
+    $es = \App\Datos::ddjjEstado($l['camara'], $l['slug']);
+    $sinTot = $es['sin_totales'] ?? [];
+    if (!$dj) {
+        return ['hay' => false, 'asumio_2025' => !empty($l['inicio']) && $l['inicio'] >= '2025-12-10', 'sin_totales' => $sinTot, 'ambiguo' => !empty($es['ambiguo'])];
+    }
+    $anios = array_values(array_unique(array_map(static fn($d) => (int)$d['anio'], $dj)));
+    sort($anios);
+    $faltan = [];
+    for ($a = $anios[0]; $a <= end($anios); $a++) { if (!in_array($a, $anios, true)) { $faltan[] = $a; } }
+    // Los años que figuran sin totales utilizables no cuentan como "faltantes": se dicen aparte.
+    $sinAnios = array_map(static fn($x) => (int)$x['anio'], $sinTot);
+    return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot];
 }

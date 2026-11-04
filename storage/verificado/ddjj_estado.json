@@ -1,0 +1,462 @@
+{
+ "alejandro-bongiovanni": {
+  "sin_totales": [
+   {
+    "anio": 2014,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "blanca-ines-osuna": {
+  "sin_totales": [
+   {
+    "anio": 2019,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "carlos-garcia": {
+  "ambiguo": true
+ },
+ "carlos-mario-gutierrez": {
+  "ambiguo": true
+ },
+ "carlos-raul-zapata": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "christian-alejandro-zulli": {
+  "sin_totales": [
+   {
+    "anio": 2019,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "claudio-alvarez": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "daniel-vancsik": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "eduardo-falcone": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "gerardo-huesen": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "german-pedro-martinez": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "guillermo-montenegro": {
+  "ambiguo": true
+ },
+ "jose-gomez": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "jose-luis-garrido": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "jose-peluc": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "juan-carlos-giordano": {
+  "sin_totales": [
+   {
+    "anio": 2020,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "juliana-santillan-juarez-brahim": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "lilia-lemoine": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "lorena-pokoik": {
+  "sin_totales": [
+   {
+    "anio": 2015,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "lourdes-micaela-arrieta": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2024,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "maria-celeste-ponce": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "maria-florencia-de-sensi": {
+  "sin_totales": [
+   {
+    "anio": 2020,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "maria-graciela-parola": {
+  "sin_totales": [
+   {
+    "anio": 2019,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2020,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2021,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "maria-lorena-petrovich": {
+  "sin_totales": [
+   {
+    "anio": 2024,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "mariela-coletta": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "martin-ardohain": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "martin-aveiro": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "miguel-rodriguez": {
+  "ambiguo": true
+ },
+ "natalia-zaracho": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "oscar-zago": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "pablo-ansaloni": {
+  "sin_totales": [
+   {
+    "anio": 2017,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "pablo-outes": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "paula-andrea-penacca": {
+  "sin_totales": [
+   {
+    "anio": 2012,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "ricardo-daives": {
+  "sin_totales": [
+   {
+    "anio": 2019,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "rocio-bonacci": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "romina-del-pla": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "romina-diez": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "roxana-monzon": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:andrea-marcela-cristina": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:edith-elizabeth-terenzi": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:gerardo-zamora": {
+  "sin_totales": [
+   {
+    "anio": 2021,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:maria-carolina-moises": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:maria-florencia-lopez": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:maria-victoria-huala": {
+  "sin_totales": [
+   {
+    "anio": 2020,
+    "tipo": "Anual"
+   },
+   {
+    "anio": 2021,
+    "tipo": "Anual"
+   }
+  ]
+ },
+ "s:maximiliano-abad": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:natalia-elena-gadano": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:vilma-facunda-bedia": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "sebastian-noblega": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "sergio-eduardo-capozzi": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "veronica-razzini": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "yamila-ruiz": {
+  "sin_totales": [
+   {
+    "anio": 2022,
+    "tipo": "Inicial"
+   },
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ },
+ "yolanda-vega": {
+  "sin_totales": [
+   {
+    "anio": 2023,
+    "tipo": "Inicial"
+   }
+  ]
+ }
+}
