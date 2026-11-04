@@ -307,5 +307,14 @@ foreach ($todos as $lg) {
 }
 ok($djMal === 0 && $djConTot > 200 && $djSinTot > 0, 'declaraciones juradas: un solo año por declaración, patrimonio = bienes - deudas, sin bienes en cero, y los años sin totales se registran aparte (' . $djConTot . ' legisladores con totales, ' . $djSinTot . ' años sin totales)');
 
+// Gráficos: salen como SVG o barras sin scripts, con título accesible, y no se dibujan con datos insuficientes
+if (!function_exists('svg_barras')) { require_once __DIR__ . '/../app/Web.php'; }
+$sb = svg_barras(['2023' => 3, '2024' => 5, '2025' => 2], 'prueba');
+ok(str_contains($sb, '<svg') && substr_count($sb, 'class="g-barra"') === 3 && str_contains($sb, '<title') && !str_contains($sb, '<script'), 'el gráfico de barras dibuja una barra por año, con título accesible y sin scripts');
+ok(svg_barras(['2024' => 4], 'x') === '', 'un gráfico con un solo punto no se dibuja');
+$br = barra_resultado(43, 25, 0, 4);
+preg_match_all('#width:([\d.]+)%#', $br, $mw);
+ok(abs(array_sum($mw[1]) - 100) < 0.2 && str_contains($br, 'aria-label'), 'la barra de resultado de una votación suma 100% y tiene descripción accesible');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

@@ -22,6 +22,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_rutas_pasajes.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
   Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_dolar.py` (dólar oficial del BCRA al cierre de cada año, datos.gob.ar), `bajar_dolar_mep.py` (MEP de ArgentinaDatos, no oficial; después de bajar_dolar.py), `bajar_georef.py` (límites provinciales y localidades de Georef para el mapa de pasajes), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
+  `bajar_fotos.py` (copia las fotos de los legisladores a `assets/fotos/`: el sitio no pide imágenes a terceros y la CSP no admite dominios externos),
   `filtrar_ddjj.py` (recorta los archivos anuales de la Oficina Anticorrupción a legisladores y sus otros cargos, y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
 
@@ -38,6 +39,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   mandatos de los listados históricos de cada cámara: los que no cuadran (homónimos, otro cargo) no se publican.
   Las declaraciones de esas personas por otros cargos (ministro, candidato) se unen por CUIT: `filtrar_ddjj.py` recibe
   TODOS los archivos anuales juntos y reemplaza el CUIT por un número de "persona"; cada año se muestra con su cargo.
+- Declaraciones juradas sin cifras: algunas declaraciones figuran presentadas pero con los bienes en `-00` (cero): no se publican totales, se registran en `ddjj_estado.json` y la pestaña lo dice (también nombres ambiguos y quienes asumieron el 10/12/2025). Nunca decir "no presentó": solo "no figura en el archivo publicado".
 - Las columnas de promulgación y veto del archivo de leyes traen el mismo valor en todas las filas: no usarlas.
 
 - Senado, votaciones: los números de `detalleActa/{id}` NO siguen el orden de las fechas y los inexistentes devuelven 200 con una página vacía. Las actas viejas casi no traen el ID del

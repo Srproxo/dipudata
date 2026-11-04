@@ -290,3 +290,13 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .detalle-tabla summary { cursor: pointer; font-size: .9375rem; font-weight: 600; color: var(--acento); min-height: 44px; display: flex; align-items: center; }
 .detalle-tabla[open] summary { margin-bottom: .5rem; }
 @media (max-width: 40rem) { .hemiciclo-sub { font-size: 30px; } }
+
+/* Gráficos de barras y reparto de una votación */
+.g-barra { fill: var(--acento); }
+.g-barra:hover { fill: var(--tinta); }
+.barra-resultado { display: flex; height: 1.25rem; background: var(--linea); overflow: hidden; gap: 1px; max-width: 44rem; margin-top: 1.25rem; }
+.barra-resultado span { display: block; min-width: 2px; }
+.br-a { background: #166534; } .br-n { background: #991b1b; } .br-b { background: #a16207; } .br-u { background: #94a3b8; }
+.leyenda-resultado i { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .4rem; }
+.graficos-resumen { margin-top: 2rem; }
+.graficos-resumen .sub-titulo { margin-top: 1.25rem; }

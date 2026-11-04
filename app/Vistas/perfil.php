@@ -64,6 +64,33 @@ if ($pyR) {
   </p>
 </section>
 
+<?php
+// Gráficos del resumen: proyectos por año y patrimonio neto en pesos de hoy (solo si hay datos suficientes).
+$grProy = [];
+if ($pyR) { foreach ($pyR['proyectos'] as $x) { $an = substr($x[1], 0, 4); $grProy[$an] = ($grProy[$an] ?? 0) + 1; } ksort($grProy); }
+$grPat = [];
+$djG = Datos::ddjj($l['camara'], $l['slug']);
+if ($djG) { [$mesG, $facG] = factores_ipc(); foreach ($djG as $d) { if (isset($facG[(int)$d['anio']])) { $grPat[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $facG[(int)$d['anio']]; } } ksort($grPat); }
+if (count($grProy) >= 2 || count($grPat) >= 2): ?>
+<section class="graficos-resumen" aria-labelledby="graficos-t">
+  <h2 id="graficos-t" class="seccion-titulo">En gráficos</h2>
+  <?php if (count($grProy) >= 2): ?>
+  <figure class="grafico-caja">
+    <p class="sub-titulo">Proyectos por año</p>
+    <?= svg_barras($grProy, 'Cantidad de proyectos por año en los que figura ' . $l['nombre'] . ', de ' . array_key_first($grProy) . ' a ' . array_key_last($grProy)) ?>
+    <figcaption class="tenue pequeno">Cantidad de proyectos por año de presentación. <?= $esSen ? 'Incluye los que firmó junto con otros senadores.' : 'Cuenta los proyectos donde figura como autor/a en el archivo oficial, que no registra cofirmantes.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>?tab=proyectos">Ver los proyectos</a>.</figcaption>
+  </figure>
+  <?php endif; ?>
+  <?php if (count($grPat) >= 2): ?>
+  <figure class="grafico-caja">
+    <p class="sub-titulo">Patrimonio neto declarado</p>
+    <?= svg_linea($grPat, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($grPat) . ' a ' . array_key_last($grPat) . ', en pesos de ' . mes_es($mesG)) ?>
+    <figcaption class="tenue pequeno">Patrimonio neto declarado ante la Oficina Anticorrupción, en pesos de <?= e(mes_es($mesG)) ?> con el IPC del INDEC. Un cambio puede deberse a cómo se valúan los bienes en la declaración y no solo a compras, ventas o ahorro. <a href="<?= e(Datos::urlLegislador($l)) ?>?tab=patrimonio">Ver el detalle y los años que figuran</a>.</figcaption>
+  </figure>
+  <?php endif; ?>
+</section>
+<?php endif; ?>
+
 <div class="dos-col perfil-grilla">
   <section aria-labelledby="ficha">
     <h2 id="ficha" class="seccion-titulo">Ficha</h2>

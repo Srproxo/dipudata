@@ -518,3 +518,53 @@ function estado_ddjj(array $l, array $dj): array
     $sinAnios = array_map(static fn($x) => (int)$x['anio'], $sinTot);
     return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot];
 }
+
+/** Barras verticales en SVG: una por clave (por ejemplo, proyectos por año). Sin scripts. */
+function svg_barras(array $serie, string $titulo): string
+{
+    $n = count($serie);
+    if ($n < 2) {
+        return '';
+    }
+    $w = 640; $h = 240; $izq = 40; $der = 12; $arr = 16; $aba = 30;
+    $max = max(1, (int)max($serie));
+    $ancho = ($w - $izq - $der) / $n;
+    $barra = max(4.0, min(48.0, $ancho * 0.66));
+    $id = 'b-' . md5($titulo);
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($k = 0; $k <= 4; $k++) {
+        $v = $max * $k / 4; $yy = round($arr + ($h - $arr - $aba) * (1 - $k / 4), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 6) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(number_format($v, 0, ',', '.')) . '</text>';
+    }
+    $paso = max(1, (int)ceil($n / 10));
+    $i = 0;
+    foreach ($serie as $et => $v) {
+        $cx = $izq + $ancho * ($i + 0.5);
+        $alto = ($h - $arr - $aba) * ((float)$v / $max);
+        $s .= '<rect class="g-barra" x="' . round($cx - $barra / 2, 1) . '" y="' . round($h - $aba - $alto, 1) . '" width="' . round($barra, 1) . '" height="' . round($alto, 1) . '"><title>' . e($et . ': ' . number_format((float)$v, 0, ',', '.')) . '</title></rect>';
+        if ($i % $paso === 0 || $i === $n - 1) {
+            $s .= '<text class="g-eje" x="' . round($cx, 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$et) . '</text>';
+        }
+        $i++;
+    }
+    return $s . '</svg>';
+}
+
+/** Barra horizontal con el reparto de una votación: afirmativos, negativos, abstenciones y ausentes. */
+function barra_resultado(int $a, int $n, int $b, int $u): string
+{
+    $t = max(1, $a + $n + $b + $u);
+    $tramos = [['a', $a, 'Afirmativos'], ['n', $n, 'Negativos'], ['b', $b, 'Abstenciones'], ['u', $u, 'Ausentes']];
+    $h = '<div class="barra-resultado" role="img" aria-label="' . e("Afirmativos $a, negativos $n, abstenciones $b, ausentes $u") . '">';
+    foreach ($tramos as [$c, $v, $et]) {
+        if ($v > 0) {
+            $h .= '<span class="br-' . $c . '" style="width:' . round($v * 100 / $t, 2) . '%" title="' . e($et . ': ' . $v) . '"></span>';
+        }
+    }
+    $h .= '</div><ul class="leyenda leyenda-resultado">';
+    foreach ($tramos as [$c, $v, $et]) {
+        $h .= '<li><i class="br-' . $c . '"></i>' . e($et) . ' <b class="num">' . $v . '</b></li>';
+    }
+    return $h . '</ul>';
+}
