@@ -333,3 +333,14 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .comparador select { min-width: 0; width: 100%; }
 .comp-cabeza { box-sizing: border-box; min-width: 0; }
 @media (max-width: 40rem) { .comp-cabeza { padding: .5rem; gap: .5rem; } .comp-cabeza .avatar { width: 44px; height: 44px; } }
+
+/* Proyectos por año: categorías y promedio de la cámara */
+.g-s { stroke: var(--papel); stroke-width: .75; }
+.g-s-propio { fill: var(--acento); } .g-s-firmante { fill: #0f766e; } .g-s-recon { fill: #b45309; } .g-s-sin { fill: #94a3b8; }
+.g-s:hover { opacity: .85; }
+.g-prom { fill: none; stroke: var(--tinta); stroke-width: 2; stroke-dasharray: 6 4; }
+.g-prom-m { fill: var(--papel); stroke: var(--tinta); stroke-width: 2; }
+.leyenda-proyectos i { display: inline-block; width: .8rem; height: .8rem; margin-right: .4rem; vertical-align: middle; border-radius: 0; }
+.ley-s-propio { background: var(--acento); } .ley-s-firmante { background: #0f766e; } .ley-s-recon { background: #b45309; } .ley-s-sin { background: #94a3b8; }
+.leyenda-proyectos .ley-prom { width: 1.4rem; height: 0; border-top: 2px dashed var(--tinta); background: none; }
+.etq-rol { display: inline-block; padding: 0 .4rem; margin-left: .35rem; font-size: .75rem; border: 1px solid var(--linea-fuerte); color: var(--tinta-2); }

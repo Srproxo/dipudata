@@ -279,6 +279,14 @@ final class Datos
         return self::leer('ejes')['_meta'] ?? [];
     }
 
+    /** @return array{firmantes_disponibles:bool,anios:array<string,array>} proyectos por año de toda la cámara: total, legisladores en funciones y promedio por legislador */
+    public static function proyectosPromedios(string $camara): array
+    {
+        $ruta = RAIZ . '/storage/verificado/proyectos/_promedios.json';
+        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+        return is_array($d) ? ($d[$camara] ?? []) : [];
+    }
+
     public static function proyectosMeta(): array
     {
         $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';

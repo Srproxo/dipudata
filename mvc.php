@@ -89,8 +89,10 @@ switch (true) {
         $resSel = is_string($_GET['resultado'] ?? null) && isset($pr['resumen']['por_resultado'][$_GET['resultado']]) ? (string)$_GET['resultado'] : '';
         $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
         $nq = Datos::normalizar($q);
-        $lista = array_values(array_filter($pr['proyectos'], static function (array $x) use ($tipo, $resSel, $nq): bool {
+        $rolSel = in_array($_GET['rol'] ?? '', ['propio', 'firmante', 'recon', 'sin'], true) ? (string)$_GET['rol'] : '';
+        $lista = array_values(array_filter($pr['proyectos'], static function (array $x) use ($tipo, $resSel, $nq, $rolSel): bool {
             if ($tipo && $x[2] !== $tipo) return false;
+            if ($rolSel && categoria_proyecto($x) !== $rolSel) return false;
             if ($resSel && ($x[5] ?: 'Sin resolución registrada') !== $resSel) return false;
             if ($nq !== '') {
                 $hay = ' ' . Datos::normalizar($x[4] . ' ' . $x[3]) . ' ';
@@ -102,8 +104,8 @@ switch (true) {
         $paginas = max(1, (int)ceil($total / 50));
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
         $lista = array_slice($lista, ($pagina - 1) * 50, 50);
-        $filtrado = $tipo || $resSel || $q !== '' || $pagina > 1;
-        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+        $filtrado = $tipo || $resSel || $rolSel || $q !== '' || $pagina > 1;
+        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'rolSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
             'Proyectos de ' . $l['nombre'],
             'Proyectos parlamentarios en los que figura ' . $l['nombre'] . ' como autor/a o firmante (' . $pr['resumen']['total'] . ') y qué pasó con ellos, según los registros oficiales del Congreso.',
             Datos::urlLegislador($l) . '/proyectos', 'legisladores', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']
