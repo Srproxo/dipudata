@@ -25,7 +25,10 @@ PC, PR y DE del expediente); las comunicaciones y notas (CO, CC) no son proyecto
 mesa de entradas (o el anterior en enero a marzo: la numeración sigue el período parlamentario). La página del Senado no informa qué pasó con cada proyecto.
 Las salidas del Senado se guardan como s-<slug>.json.
 
-Cada proyecto lleva al final dos datos más, para el gráfico de proyectos por año: ROL y RECONOCIMIENTO.
+Cada proyecto lleva al final tres datos más: ROL y RECONOCIMIENTO (para el gráfico de proyectos por año) y DICTÁMENES.
+  - Dictámenes: lista de dictámenes de comisión del proyecto (scripts/construir_dictamenes.py, conjunto "Dictámenes" de datos.hcdn.gob.ar), cruzados por
+    el ID del proyecto: [comisión, tipo, número, fecha, observaciones]. Vacía si no figura ninguno (no quiere decir que el proyecto haya sido rechazado)
+    y siempre vacía en el Senado, que no publica ese dato.
   - Rol, Senado: el extracto empieza con los firmantes ("SORIA Y OTROS:", "MARKS Y SORIA:"). Si el primero es el propio senador, el proyecto es
     "p" (propio: primer firmante); si es otro, "f" (firmó junto con otros); si el extracto no trae firmantes, "n" (sin dato).
   - Rol, Diputados: el archivo oficial registra un solo autor por proyecto y no trae cofirmantes: todo es "p" y no se puede distinguir a los firmantes.
@@ -124,7 +127,7 @@ def senado(legs_todos, cuenta):
                 continue
             cuenta["senado_proyectos"] += 1
             tipo = TIPOS_SEN[m[3]]
-            out.setdefault(slug, []).append([ref, fecha, tipo, exp, recortar(extracto), "", "", rol_senado(extracto, *nombres[slug]), es_reconocimiento(tipo, extracto)])
+            out.setdefault(slug, []).append([ref, fecha, tipo, exp, recortar(extracto), "", "", rol_senado(extracto, *nombres[slug]), es_reconocimiento(tipo, extracto), []])
     return out
 
 
@@ -220,6 +223,11 @@ def main() -> int:
         por_nombre[norm(f'{h["APELLIDO"]}, {h["NOMBRE"]}')].append((h["ID"], ini, fin))
         por_corto[(norm(h["APELLIDO"]), (norm(h["NOMBRE"]).split() or [""])[0])].append((h["ID"], ini, fin))
 
+    # Dictámenes de comisión por ID de proyecto (verifica la integridad del archivo y que todo expediente exista en proyectos)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from construir_dictamenes import cargar as cargar_dictamenes
+    dictamenes, dict_meta = cargar_dictamenes({p["PROYECTO_ID"] for p in leer_csv("proyectos_parlamentarios.csv.gz")})
+
     # Último movimiento resuelto de cada proyecto
     res = {}
     for r in leer_csv("resultado_proyectos.csv.gz"):
@@ -229,11 +237,15 @@ def main() -> int:
 
     cuenta = collections.Counter()
     por_dip = collections.defaultdict(list)
+    camara = collections.Counter()   # toda la Cámara (cualquier autor), proyectos de origen Diputados: para comparar
     for p in leer_csv("proyectos_parlamentarios.csv.gz"):
         cuenta["total"] += 1
         if p["CAMARA_ORIGEN"] != "Diputados":
             cuenta["origen_senado"] += 1
             continue
+        camara["proyectos"] += 1
+        camara["con_dictamen"] += int(p["PROYECTO_ID"] in dictamenes)
+        camara["aprobados"] += int(res.get(p["PROYECTO_ID"], ("", ""))[1] in ("SANCIONADO", "MEDIA SANCION", "APROBADO"))
         fecha = p["PUBLICACION_FECHA"][:10]
         ap, _, no = p["AUTOR"].partition(",")
         mand = por_nombre.get(norm(p["AUTOR"]))
@@ -261,7 +273,7 @@ def main() -> int:
         r = res.get(p["PROYECTO_ID"])
         titulo, tipo = recortar(html.unescape(p["TITULO"])), p["TIPO"].capitalize()
         por_dip[actual[hid]].append([p["PROYECTO_ID"], fecha, tipo, p["EXP_DIPUTADOS"].strip(), titulo,
-                                     r[1] if r else "", r[0] if r else "", "p", es_reconocimiento(tipo, titulo)])
+                                     r[1] if r else "", r[0] if r else "", "p", es_reconocimiento(tipo, titulo), dictamenes.get(p["PROYECTO_ID"], [])])
 
     por_sen = senado(legs_todos, cuenta)
     salida = SAL / "proyectos"
@@ -287,6 +299,14 @@ def main() -> int:
     meta["senadores_con_proyectos"] = len(por_sen)
     meta["diputados_con_proyectos"] = len(por_dip)
     meta["con_resultado"] = sum(1 for l in por_dip.values() for x in l if x[5])
+    todos = [x for l in por_dip.values() for x in l]
+    meta["con_dictamen"] = sum(1 for x in todos if x[9])
+    meta["dictamenes_fuente"] = {k: dict_meta[k] for k in ("filas", "expedientes", "dictamenes_unicos", "sha256_csv", "url", "bajado", "modificado_en_el_portal", "por_tipo")}
+    # Control de coherencia: casi todo proyecto que la Cámara sancionó o aprobó con modificaciones pasó antes por un dictamen (o se trató sobre tablas / art. 114 / 204).
+    aprobados = [x for x in todos if x[5] in ("SANCIONADO", "MEDIA SANCION")]
+    meta["camara"] = {"proyectos": camara["proyectos"], "con_dictamen_pct": round(100 * camara["con_dictamen"] / camara["proyectos"], 1),
+                      "aprobados_pct": round(100 * camara["aprobados"] / camara["proyectos"], 1)}
+    meta["aprobados_con_dictamen_pct"] = round(100 * sum(1 for x in aprobados if x[9]) / len(aprobados), 1) if aprobados else None
     meta["desde"] = min((l[-1][1] for l in por_dip.values()), default="")
     meta["hasta"] = max((l[0][1] for l in por_dip.values()), default="")
     (salida / "_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")

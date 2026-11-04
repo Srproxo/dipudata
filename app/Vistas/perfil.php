@@ -51,6 +51,10 @@ if ($pyR) {
     // Si todos son anteriores al mandato actual, se dice: no es actividad de este mandato.
     if (!empty($l['inicio']) && $rsP['hasta'] < $l['inicio']) { $f .= ' Ninguno es de su mandato actual, que empezó el ' . fecha_es($l['inicio']) . '.'; }
     $resFrases[] = $f;
+    if (!$esSen) {
+        $av = avance_proyectos($pyR['proyectos']);
+        $resFrases[] = 'De esos proyectos, ' . number_format($av['con_dictamen'], 0, ',', '.') . ' tienen dictamen de comisión y ' . number_format($av['aprobados'], 0, ',', '.') . ' fueron aprobados por la Cámara (según los archivos oficiales).';
+    }
 }
 ?>
 <section class="resumen" aria-labelledby="resumen-t">
@@ -182,6 +186,23 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
 <?php if ($tab === 'proyectos'): ?>
 <?php $ej = Datos::ejes($l['camara'], $l['slug']); $gpTab = grafico_proyectos($l, Datos::proyectos($l['slug'], $l['camara']), false); ?>
 <?php if ($gpTab !== ''): ?><section class="seccion" aria-labelledby="pry-anio"><h2 id="pry-anio" class="seccion-titulo">Proyectos por año</h2><?= $gpTab ?></section><?php endif; ?>
+<?php if (!$esSen && ($prTab = Datos::proyectos($l['slug'], $l['camara'])) && count($prTab['proyectos']) > 0): $av = avance_proyectos($prTab['proyectos']); $max = max(1, $av['presentados']); $cam = Datos::proyectosMeta()['camara'] ?? []; ?>
+<section class="seccion" aria-labelledby="avance">
+  <h2 id="avance" class="seccion-titulo">Qué pasó con sus proyectos</h2>
+  <ul class="ejes embudo">
+    <?php foreach ([['Presentados', $av['presentados'], null], ['Con dictamen de comisión', $av['con_dictamen'], $cam['con_dictamen_pct'] ?? null], ['Aprobados por la Cámara', $av['aprobados'], $cam['aprobados_pct'] ?? null]] as [$et, $v, $promCam]): ?>
+    <li>
+      <span class="ejes-nombre"><?= e($et) ?></span>
+      <span class="barra ejes-barra" aria-hidden="true"><span style="width:<?= e(number_format(100 * $v / $max, 1, '.', '')) ?>%"></span></span>
+      <span class="ejes-num num"><?= number_format($v, 0, ',', '.') ?> <span class="tenue">(<?= e(number_format(100 * $v / $max, 0, ',', '')) ?>%)</span></span>
+      <?php if ($promCam !== null): ?><span class="ejes-votos tenue pequeno">Toda la Cámara: <?= e(number_format((float)$promCam, 0, ',', '')) ?>% de los proyectos de Diputados desde 2008.</span><?php endif; ?>
+    </li>
+    <?php endforeach; ?>
+  </ul>
+  <p class="tenue pequeno">Sobre los <?= number_format($av['presentados'], 0, ',', '.') ?> proyectos donde figura como autor/a. "Con dictamen" son los que tienen al menos un dictamen de comisión en el archivo oficial "Dictámenes"; "Aprobados" son los que el archivo "Resultado de proyectos" registra como aprobados, con media sanción o sancionados (incluye declaraciones y resoluciones). Un proyecto sin dictamen o sin resultado registrado no está necesariamente rechazado: los archivos solo registran los que tuvieron dictamen o se resolvieron. "Toda la Cámara" es el mismo cálculo para todos los proyectos de origen Diputados desde 2008, de cualquier autor, para tener con qué comparar. <a href="<?= e(Datos::urlLegislador($l)) ?>/proyectos">Ver cada proyecto con sus dictámenes</a>.</p>
+</section>
+<?php endif; ?>
+
 <?php if ($ej && $ej['con_eje'] >= 5): $filas = $ej['ejes']; uasort($filas, static fn($a, $b) => $b['proyectos'] <=> $a['proyectos']); ?>
 <section class="seccion" aria-labelledby="temas">
   <h2 id="temas" class="seccion-titulo">Temas de sus proyectos</h2>
