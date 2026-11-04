@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 """
-Resultados de las elecciones generales 2023 (Diputados y Senadores nacionales) por provincia.
-Lee  storage/oficial/dine/generales_2023_provincia.json.gz  (lo genera bajar_resultados_electorales.py desde el archivo
-oficial de la Dirección Nacional Electoral) y escribe  storage/verificado/resultados_2023.json  con la clave de cada
+Resultados de elecciones nacionales (Diputados y Senadores nacionales) por provincia.
+Lee todos los  storage/oficial/dine/<clave>_provincia.json.gz  (los genera bajar_resultados_electorales.py desde los archivos
+oficiales de la Dirección Nacional Electoral) y escribe  storage/verificado/resultados_elecciones.json  con la clave de cada
 provincia igual al slug de storage/verificado/provincias.json.
-Controles (si alguno falla no se escribe nada):
+Controles por elección (si alguno falla no se escribe nada):
   - 24 jurisdicciones, todas asignadas a una provincia del sitio, sin repetir;
-  - cada provincia trae Diputados nacionales; los Senadores solo donde hubo elección;
+  - cada provincia trae Diputados nacionales; los Senadores solo donde hubo elección (en cada año, 8 provincias);
   - votos positivos + blancos + nulos + impugnados + recurridos + comando no superan los electores de las mesas;
   - ninguna agrupación repetida dentro de un cargo ni con votos negativos.
 No se publica qué banca ocupó cada persona: el archivo oficial trae votos por agrupación, no candidatos ni bancas.
 Uso:  python3 -I scripts/construir_resultados.py
 """
-import gzip, json, sys, unicodedata
+import glob, gzip, json, sys, unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-ENTRADA = RAIZ / "storage" / "oficial" / "dine" / "generales_2023_provincia.json.gz"
-SALIDA = RAIZ / "storage" / "verificado" / "resultados_2023.json"
-ALIAS = {"tierra del fuego, antartida e islas del atlantico sur": "tierra del fuego"}
+SALIDA = RAIZ / "storage" / "verificado" / "resultados_elecciones.json"
+ALIAS = {"tierra del fuego, antartida e islas del atlantico sur": "tierra del fuego",
+         "ciudad autonoma bs.as.": "ciudad autonoma de buenos aires"}  # 2017 abrevia el nombre
 ORDEN_OTROS = ["EN BLANCO", "NULO", "IMPUGNADO", "RECURRIDO", "COMANDO"]
+# 2021 escribe los tipos de voto en plural; cualquier otro nombre desconocido hace fallar la construcción (no se pierde en silencio).
+TIPOS_OTROS = {"BLANCOS": "EN BLANCO", "NULOS": "NULO", "IMPUGNADOS": "IMPUGNADO", "RECURRIDOS": "RECURRIDO"}
 
 
 def norm(s: str) -> str:
@@ -27,46 +29,65 @@ def norm(s: str) -> str:
     return "".join(c for c in s if unicodedata.category(c) != "Mn").strip()
 
 
-def main() -> int:
-    d = json.load(gzip.open(ENTRADA, "rt", encoding="utf-8"))
-    sitio = {norm(p["nombre"]): p["slug"] for p in json.load(open(RAIZ / "storage" / "verificado" / "provincias.json", encoding="utf-8"))}
-    errores, prov = [], {}
+def una(d: dict, sitio: dict, errores: list):
+    m = d["_meta"]
+    pref = f"{m['clave']}: "
+    prov = {}
     if len(d["provincias"]) != 24:
-        errores.append(f"hay {len(d['provincias'])} jurisdicciones, no 24")
+        errores.append(f"{pref}hay {len(d['provincias'])} jurisdicciones, no 24")
     for p in d["provincias"]:
         n = norm(p["nombre"])
         slug = sitio.get(ALIAS.get(n, n))
         if not slug or slug in prov:
-            errores.append(f"jurisdicción sin asignar o repetida: {p['nombre']}")
+            errores.append(f"{pref}jurisdicción sin asignar o repetida: {p['nombre']}")
             continue
-        cargos, suma_max = {}, 0
+        cargos = {}
         if "3" not in p["cargos"]:
-            errores.append(f"{p['nombre']}: sin Diputados nacionales")
+            errores.append(f"{pref}{p['nombre']}: sin Diputados nacionales")
         for c, cg in p["cargos"].items():
             ids = [a["id"] for a in cg["agrupaciones"]]
             if len(ids) != len(set(ids)) or any(a["votos"] < 0 for a in cg["agrupaciones"]) or not ids:
-                errores.append(f"{p['nombre']}: agrupaciones repetidas, vacías o con votos negativos en cargo {c}")
+                errores.append(f"{pref}{p['nombre']}: agrupaciones repetidas, vacías o con votos negativos en cargo {c}")
             positivos = sum(a["votos"] for a in cg["agrupaciones"])
-            total = positivos + sum(cg["otros"].values())
+            otros = {t: 0 for t in ORDEN_OTROS}
+            for t, v in cg["otros"].items():
+                t2 = TIPOS_OTROS.get(t, t)
+                if t2 not in otros:
+                    errores.append(f"{pref}{p['nombre']}: tipo de voto desconocido {t!r}")
+                    continue
+                otros[t2] += v
+            total = positivos + sum(otros.values())
             if total > p["electores"] or total <= 0:
-                errores.append(f"{p['nombre']}: los votos del cargo {c} ({total}) no caben en los electores ({p['electores']})")
+                errores.append(f"{pref}{p['nombre']}: los votos del cargo {c} ({total}) no caben en los electores ({p['electores']})")
             cargos["diputados" if c == "3" else "senadores"] = {
                 "positivos": positivos, "votantes": total,
-                "otros": {t: cg["otros"].get(t, 0) for t in ORDEN_OTROS},
+                "otros": otros,
                 "agrupaciones": [{"nombre": a["nombre"], "votos": a["votos"]} for a in cg["agrupaciones"]],
             }
         prov[slug] = {"nombre": p["nombre"], "mesas": p["mesas"], "electores": p["electores"], **cargos}
+    con_sen = sorted(s for s, v in prov.items() if "senadores" in v)
+    if len(con_sen) != 8:
+        errores.append(f"{pref}el Senado se renovó en {len(con_sen)} provincias, no en 8")
+    meta = {k: m[k] for k in ("clave", "anio", "tipo", "fecha", "fuente", "pagina", "url_archivo", "sha256_zip", "eleccion", "escrutinio", "bajado")}
+    meta["provincias_con_senadores"] = con_sen
+    return {"_meta": meta, "provincias": prov}
+
+
+def main() -> int:
+    sitio = {norm(p["nombre"]): p["slug"] for p in json.load(open(RAIZ / "storage" / "verificado" / "provincias.json", encoding="utf-8"))}
+    errores, elecciones = [], []
+    for ruta in sorted(glob.glob(str(RAIZ / "storage" / "oficial" / "dine" / "*_provincia.json.gz"))):
+        d = json.load(gzip.open(ruta, "rt", encoding="utf-8"))
+        if "clave" not in d["_meta"]:
+            errores.append(f"{Path(ruta).name}: archivo viejo, volver a generarlo con bajar_resultados_electorales.py")
+            continue
+        elecciones.append(una(d, sitio, errores))
     if errores:
         print("\n".join(errores), file=sys.stderr)
         return 1
-    m = d["_meta"]
-    salida = {"_meta": {
-        "fuente": m["fuente"], "pagina": m["pagina"], "url_archivo": m["url_archivo"], "sha256_zip": m["sha256_zip"],
-        "eleccion": m["eleccion"], "escrutinio": m["escrutinio"], "bajado": m["bajado"],
-        "provincias_con_senadores": sorted(s for s, v in prov.items() if "senadores" in v),
-    }, "provincias": prov}
-    SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"{len(prov)} provincias; con elección de senadores: {len(salida['_meta']['provincias_con_senadores'])}")
+    elecciones.sort(key=lambda e: e["_meta"]["fecha"], reverse=True)
+    SALIDA.write_text(json.dumps({"elecciones": elecciones}, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{len(elecciones)} elecciones:", ", ".join(e["_meta"]["clave"] for e in elecciones))
     return 0
 
 
