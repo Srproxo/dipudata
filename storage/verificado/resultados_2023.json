@@ -1,0 +1,1071 @@
+{
+ "_meta": {
+  "fuente": "Dirección Nacional Electoral, Ministerio del Interior (argentina.gob.ar/dine/resultados-electorales)",
+  "pagina": "https://www.argentina.gob.ar/dine/resultados-electorales/elecciones-2023",
+  "url_archivo": "https://www.argentina.gob.ar/sites/default/files/2023_generales_1.zip",
+  "sha256_zip": "2562b18c741ba5740d264e5328f206cb25f709ed0a4f8cf962f301e423e79c6b",
+  "eleccion": "Elecciones generales del 22 de octubre de 2023",
+  "escrutinio": "provisorio",
+  "bajado": "2026-11-04",
+  "provincias_con_senadores": [
+   "buenos-aires",
+   "formosa",
+   "jujuy",
+   "la-rioja",
+   "misiones",
+   "san-juan",
+   "san-luis",
+   "santa-cruz"
+  ]
+ },
+ "provincias": {
+  "ciudad-autonoma-de-buenos-aires": {
+   "nombre": "Ciudad Autónoma de Buenos Aires",
+   "mesas": 7326,
+   "electores": 2526676,
+   "diputados": {
+    "positivos": 1786158,
+    "votantes": 1905302,
+    "otros": {
+     "EN BLANCO": 103067,
+     "NULO": 13667,
+     "IMPUGNADO": 183,
+     "RECURRIDO": 517,
+     "COMANDO": 1710
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 761015
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 563481
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 365108
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 96554
+     }
+    ]
+   }
+  },
+  "buenos-aires": {
+   "nombre": "Buenos Aires",
+   "mesas": 38074,
+   "electores": 13124435,
+   "senadores": {
+    "positivos": 9179230,
+    "votantes": 10164979,
+    "otros": {
+     "EN BLANCO": 913613,
+     "NULO": 59140,
+     "IMPUGNADO": 1481,
+     "RECURRIDO": 3088,
+     "COMANDO": 8427
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 4032180
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 2426257
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 2333297
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 387496
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 9148973,
+    "votantes": 10161648,
+    "otros": {
+     "EN BLANCO": 940856,
+     "NULO": 58844,
+     "IMPUGNADO": 1481,
+     "RECURRIDO": 3067,
+     "COMANDO": 8427
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 3993120
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 2431634
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 2327998
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 396221
+     }
+    ]
+   }
+  },
+  "catamarca": {
+   "nombre": "Catamarca",
+   "mesas": 1058,
+   "electores": 340606,
+   "diputados": {
+    "positivos": 187231,
+    "votantes": 234603,
+    "otros": {
+     "EN BLANCO": 45491,
+     "NULO": 1298,
+     "IMPUGNADO": 49,
+     "RECURRIDO": 99,
+     "COMANDO": 435
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 98315
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 48213
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 40703
+     }
+    ]
+   }
+  },
+  "cordoba": {
+   "nombre": "Córdoba",
+   "mesas": 9097,
+   "electores": 3060943,
+   "diputados": {
+    "positivos": 2261021,
+    "votantes": 2319428,
+    "otros": {
+     "EN BLANCO": 39395,
+     "NULO": 18229,
+     "IMPUGNADO": 180,
+     "RECURRIDO": 467,
+     "COMANDO": 136
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 746404
+     },
+     {
+      "nombre": "Hacemos Por Nuestro Pais",
+      "votos": 675792
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 506564
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 284712
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 47549
+     }
+    ]
+   }
+  },
+  "corrientes": {
+   "nombre": "Corrientes",
+   "mesas": 2760,
+   "electores": 930212,
+   "diputados": {
+    "positivos": 648408,
+    "votantes": 686533,
+    "otros": {
+     "EN BLANCO": 31717,
+     "NULO": 5608,
+     "IMPUGNADO": 98,
+     "RECURRIDO": 294,
+     "COMANDO": 408
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 251099
+     },
+     {
+      "nombre": "Encuentro Por Corrientes - Eco+Vamos Corrientes",
+      "votos": 220105
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 177204
+     }
+    ]
+   }
+  },
+  "chaco": {
+   "nombre": "Chaco",
+   "mesas": 2947,
+   "electores": 1000094,
+   "diputados": {
+    "positivos": 662756,
+    "votantes": 719787,
+    "otros": {
+     "EN BLANCO": 52553,
+     "NULO": 3515,
+     "IMPUGNADO": 38,
+     "RECURRIDO": 539,
+     "COMANDO": 386
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 301761
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 189806
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 171189
+     }
+    ]
+   }
+  },
+  "chubut": {
+   "nombre": "Chubut",
+   "mesas": 1416,
+   "electores": 474701,
+   "diputados": {
+    "positivos": 306934,
+    "votantes": 350317,
+    "otros": {
+     "EN BLANCO": 37770,
+     "NULO": 5162,
+     "IMPUGNADO": 18,
+     "RECURRIDO": 360,
+     "COMANDO": 73
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 116723
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 101039
+     },
+     {
+      "nombre": "Juntos Por El Cambio Chubut",
+      "votos": 70634
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 18538
+     }
+    ]
+   }
+  },
+  "entre-rios": {
+   "nombre": "Entre Ríos",
+   "mesas": 3432,
+   "electores": 1145440,
+   "diputados": {
+    "positivos": 723095,
+    "votantes": 868588,
+    "otros": {
+     "EN BLANCO": 137058,
+     "NULO": 7120,
+     "IMPUGNADO": 87,
+     "RECURRIDO": 413,
+     "COMANDO": 815
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Mas Para Entre Rios",
+      "votos": 287123
+     },
+     {
+      "nombre": "Juntos Por Entre Rios",
+      "votos": 264381
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 171591
+     }
+    ]
+   }
+  },
+  "formosa": {
+   "nombre": "Formosa",
+   "mesas": 1484,
+   "electores": 482420,
+   "senadores": {
+    "positivos": 335172,
+    "votantes": 361540,
+    "otros": {
+     "EN BLANCO": 24373,
+     "NULO": 1733,
+     "IMPUGNADO": 24,
+     "RECURRIDO": 120,
+     "COMANDO": 118
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 181790
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 101245
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 52137
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 333269,
+    "votantes": 361206,
+    "otros": {
+     "EN BLANCO": 25949,
+     "NULO": 1726,
+     "IMPUGNADO": 24,
+     "RECURRIDO": 120,
+     "COMANDO": 118
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 181229
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 99778
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 52262
+     }
+    ]
+   }
+  },
+  "jujuy": {
+   "nombre": "Jujuy",
+   "mesas": 1825,
+   "electores": 590950,
+   "senadores": {
+    "positivos": 398687,
+    "votantes": 458725,
+    "otros": {
+     "EN BLANCO": 55602,
+     "NULO": 4116,
+     "IMPUGNADO": 64,
+     "RECURRIDO": 238,
+     "COMANDO": 18
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Renovador Federal",
+      "votos": 151665
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 121553
+     },
+     {
+      "nombre": "Cambia Jujuy",
+      "votos": 95923
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 29546
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 395633,
+    "votantes": 458619,
+    "otros": {
+     "EN BLANCO": 58614,
+     "NULO": 4057,
+     "IMPUGNADO": 64,
+     "RECURRIDO": 233,
+     "COMANDO": 18
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Renovador Federal",
+      "votos": 151209
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 122078
+     },
+     {
+      "nombre": "Cambia Jujuy",
+      "votos": 94706
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 27640
+     }
+    ]
+   }
+  },
+  "la-pampa": {
+   "nombre": "La Pampa",
+   "mesas": 902,
+   "electores": 300032,
+   "diputados": {
+    "positivos": 136627,
+    "votantes": 224449,
+    "otros": {
+     "EN BLANCO": 85845,
+     "NULO": 1629,
+     "IMPUGNADO": 7,
+     "RECURRIDO": 289,
+     "COMANDO": 52
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 79274
+     },
+     {
+      "nombre": "Juntos Por El Cambio La Pampa",
+      "votos": 51775
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 5578
+     }
+    ]
+   }
+  },
+  "la-rioja": {
+   "nombre": "La Rioja",
+   "mesas": 955,
+   "electores": 304409,
+   "senadores": {
+    "positivos": 222908,
+    "votantes": 241045,
+    "otros": {
+     "EN BLANCO": 16478,
+     "NULO": 1550,
+     "IMPUGNADO": 14,
+     "RECURRIDO": 55,
+     "COMANDO": 40
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 94524
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 84254
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 26694
+     },
+     {
+      "nombre": "Democrata Cristiano",
+      "votos": 17436
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 222907,
+    "votantes": 240961,
+    "otros": {
+     "EN BLANCO": 16396,
+     "NULO": 1551,
+     "IMPUGNADO": 14,
+     "RECURRIDO": 53,
+     "COMANDO": 40
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 92360
+     },
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 84838
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 28323
+     },
+     {
+      "nombre": "Democrata Cristiano",
+      "votos": 17386
+     }
+    ]
+   }
+  },
+  "mendoza": {
+   "nombre": "Mendoza",
+   "mesas": 4357,
+   "electores": 1494888,
+   "diputados": {
+    "positivos": 1057298,
+    "votantes": 1137880,
+    "otros": {
+     "EN BLANCO": 64291,
+     "NULO": 15493,
+     "IMPUGNADO": 72,
+     "RECURRIDO": 510,
+     "COMANDO": 216
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 456785
+     },
+     {
+      "nombre": "Cambia Mendoza",
+      "votos": 283411
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 255632
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 43688
+     },
+     {
+      "nombre": "Movimiento Libres Del Sur",
+      "votos": 17782
+     }
+    ]
+   }
+  },
+  "misiones": {
+   "nombre": "Misiones",
+   "mesas": 2879,
+   "electores": 989204,
+   "senadores": {
+    "positivos": 384800,
+    "votantes": 727045,
+    "otros": {
+     "EN BLANCO": 337167,
+     "NULO": 4740,
+     "IMPUGNADO": 57,
+     "RECURRIDO": 182,
+     "COMANDO": 99
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Frente Renovador De La Concordia - Innovacion Federal",
+      "votos": 250454
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 108796
+     },
+     {
+      "nombre": "Partido Agrario Y Social",
+      "votos": 25550
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 384444,
+    "votantes": 727656,
+    "otros": {
+     "EN BLANCO": 338144,
+     "NULO": 4735,
+     "IMPUGNADO": 57,
+     "RECURRIDO": 177,
+     "COMANDO": 99
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Frente Renovador De La Concordia - Innovacion Federal",
+      "votos": 249527
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 108682
+     },
+     {
+      "nombre": "Partido Agrario Y Social",
+      "votos": 26235
+     }
+    ]
+   }
+  },
+  "neuquen": {
+   "nombre": "Neuquén",
+   "mesas": 1670,
+   "electores": 554077,
+   "diputados": {
+    "positivos": 378391,
+    "votantes": 437756,
+    "otros": {
+     "EN BLANCO": 51111,
+     "NULO": 7853,
+     "IMPUGNADO": 23,
+     "RECURRIDO": 273,
+     "COMANDO": 105
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Arriba Neuquen",
+      "votos": 134693
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 110414
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 78408
+     },
+     {
+      "nombre": "Movimiento Popular Neuquino",
+      "votos": 29274
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 25602
+     }
+    ]
+   }
+  },
+  "rio-negro": {
+   "nombre": "Río Negro",
+   "mesas": 1790,
+   "electores": 595968,
+   "diputados": {
+    "positivos": 403925,
+    "votantes": 454412,
+    "otros": {
+     "EN BLANCO": 41572,
+     "NULO": 8215,
+     "IMPUGNADO": 35,
+     "RECURRIDO": 188,
+     "COMANDO": 477
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 132804
+     },
+     {
+      "nombre": "Fe",
+      "votos": 125367
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 67061
+     },
+     {
+      "nombre": "Juntos Somos Rio Negro",
+      "votos": 59044
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 19649
+     }
+    ]
+   }
+  },
+  "salta": {
+   "nombre": "Salta",
+   "mesas": 3290,
+   "electores": 1091792,
+   "diputados": {
+    "positivos": 730612,
+    "votantes": 753033,
+    "otros": {
+     "EN BLANCO": 16142,
+     "NULO": 5115,
+     "IMPUGNADO": 260,
+     "RECURRIDO": 503,
+     "COMANDO": 401
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Ahora Patria",
+      "votos": 292079
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 263689
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 97238
+     },
+     {
+      "nombre": "Autonomista",
+      "votos": 39277
+     },
+     {
+      "nombre": "Si - Salta Independiente",
+      "votos": 21358
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 16971
+     }
+    ]
+   }
+  },
+  "san-juan": {
+   "nombre": "San Juan",
+   "mesas": 1810,
+   "electores": 607413,
+   "senadores": {
+    "positivos": 399829,
+    "votantes": 442293,
+    "otros": {
+     "EN BLANCO": 38358,
+     "NULO": 3663,
+     "IMPUGNADO": 31,
+     "RECURRIDO": 345,
+     "COMANDO": 67
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 146377
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 145615
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 107837
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 398878,
+    "votantes": 441826,
+    "otros": {
+     "EN BLANCO": 38849,
+     "NULO": 3634,
+     "IMPUGNADO": 31,
+     "RECURRIDO": 367,
+     "COMANDO": 67
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 145782
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 145188
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 107908
+     }
+    ]
+   }
+  },
+  "san-luis": {
+   "nombre": "San Luis",
+   "mesas": 1311,
+   "electores": 421037,
+   "senadores": {
+    "positivos": 299877,
+    "votantes": 326608,
+    "otros": {
+     "EN BLANCO": 23120,
+     "NULO": 3268,
+     "IMPUGNADO": 31,
+     "RECURRIDO": 274,
+     "COMANDO": 38
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 124451
+     },
+     {
+      "nombre": "Union Por San Luis",
+      "votos": 81542
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 69350
+     },
+     {
+      "nombre": "Union Y Libertad",
+      "votos": 16276
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 8258
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 300563,
+    "votantes": 326847,
+    "otros": {
+     "EN BLANCO": 22680,
+     "NULO": 3274,
+     "IMPUGNADO": 31,
+     "RECURRIDO": 261,
+     "COMANDO": 38
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 123629
+     },
+     {
+      "nombre": "Union Por San Luis",
+      "votos": 81734
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 70788
+     },
+     {
+      "nombre": "Union Y Libertad",
+      "votos": 16176
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 8236
+     }
+    ]
+   }
+  },
+  "santa-cruz": {
+   "nombre": "Santa Cruz",
+   "mesas": 911,
+   "electores": 265400,
+   "senadores": {
+    "positivos": 121821,
+    "votantes": 184480,
+    "otros": {
+     "EN BLANCO": 57344,
+     "NULO": 5046,
+     "IMPUGNADO": 24,
+     "RECURRIDO": 76,
+     "COMANDO": 169
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Por Santa Cruz",
+      "votos": 56188
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 43732
+     },
+     {
+      "nombre": "Cambia Santa Cruz",
+      "votos": 17932
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 3969
+     }
+    ]
+   },
+   "diputados": {
+    "positivos": 118186,
+    "votantes": 184202,
+    "otros": {
+     "EN BLANCO": 60704,
+     "NULO": 5045,
+     "IMPUGNADO": 24,
+     "RECURRIDO": 74,
+     "COMANDO": 169
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Por Santa Cruz",
+      "votos": 53181
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 43511
+     },
+     {
+      "nombre": "Cambia Santa Cruz",
+      "votos": 17720
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 3774
+     }
+    ]
+   }
+  },
+  "santa-fe": {
+   "nombre": "Santa Fe",
+   "mesas": 8332,
+   "electores": 2827794,
+   "diputados": {
+    "positivos": 1989037,
+    "votantes": 2065289,
+    "otros": {
+     "EN BLANCO": 50245,
+     "NULO": 24748,
+     "IMPUGNADO": 73,
+     "RECURRIDO": 309,
+     "COMANDO": 877
+    },
+    "agrupaciones": [
+     {
+      "nombre": "La Libertad Avanza",
+      "votos": 642829
+     },
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 578409
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 536391
+     },
+     {
+      "nombre": "La Fuerza De Santa Fe",
+      "votos": 183393
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 48015
+     }
+    ]
+   }
+  },
+  "santiago-del-estero": {
+   "nombre": "Santiago del Estero",
+   "mesas": 2464,
+   "electores": 814128,
+   "diputados": {
+    "positivos": 455619,
+    "votantes": 594650,
+    "otros": {
+     "EN BLANCO": 134614,
+     "NULO": 3492,
+     "IMPUGNADO": 121,
+     "RECURRIDO": 154,
+     "COMANDO": 650
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Frente Civico Por Santiago",
+      "votos": 369095
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 49092
+     },
+     {
+      "nombre": "Frente Renovador",
+      "votos": 37432
+     }
+    ]
+   }
+  },
+  "tucuman": {
+   "nombre": "Tucumán",
+   "mesas": 3919,
+   "electores": 1319493,
+   "diputados": {
+    "positivos": 930639,
+    "votantes": 1055954,
+    "otros": {
+     "EN BLANCO": 116392,
+     "NULO": 8243,
+     "IMPUGNADO": 69,
+     "RECURRIDO": 373,
+     "COMANDO": 238
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 437312
+     },
+     {
+      "nombre": "Fuerza Republicana",
+      "votos": 282254
+     },
+     {
+      "nombre": "Juntos Por El Cambio",
+      "votos": 168744
+     },
+     {
+      "nombre": "Movimiento Libres Del Sur",
+      "votos": 23551
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 18778
+     }
+    ]
+   }
+  },
+  "tierra-del-fuego": {
+   "nombre": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
+   "mesas": 511,
+   "electores": 147968,
+   "diputados": {
+    "positivos": 99247,
+    "votantes": 109202,
+    "otros": {
+     "EN BLANCO": 6849,
+     "NULO": 2831,
+     "IMPUGNADO": 67,
+     "RECURRIDO": 198,
+     "COMANDO": 10
+    },
+    "agrupaciones": [
+     {
+      "nombre": "Union Por La Patria",
+      "votos": 33947
+     },
+     {
+      "nombre": "Republicanos Unidos",
+      "votos": 30270
+     },
+     {
+      "nombre": "Juntos Por El Cambio Tdf",
+      "votos": 13145
+     },
+     {
+      "nombre": "Somos Fueguinos",
+      "votos": 9639
+     },
+     {
+      "nombre": "Hacemos Por Nuestro País",
+      "votos": 7894
+     },
+     {
+      "nombre": "Frente De Izquierda Y De Trabajadores - Unidad",
+      "votos": 4352
+     }
+    ]
+   }
+  }
+ }
+}
