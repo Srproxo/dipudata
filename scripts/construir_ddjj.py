@@ -5,7 +5,10 @@ Anticorrupción (datos.jus.gob.ar, "Declaraciones Juradas Patrimoniales Integral
 
 Entrada: storage/oficial/ddjj/declaraciones_juradas_AAAA.csv.gz  (el archivo principal de cada año fiscal;
          agregar un año es copiar su archivo y volver a correr este script).
-Salida:  storage/verificado/ddjj.json   slug -> lista de años, solo con totales y el cargo por el que se presentó.
+Salida:  storage/verificado/ddjj.json         slug -> lista de años, solo con totales y el cargo por el que se presentó.
+         storage/verificado/ddjj_estado.json  slug -> {"sin_totales": [{anio, tipo}], "ambiguo": bool}: los casos en que la declaración figura en el
+                                              archivo pero no se publican sus totales (bienes en cero o sin monto interpretable) o el nombre
+                                              corresponde a más de una persona. Sirve para decir en pantalla por qué falta, sin afirmar que no se presentó.
 
 Cruce: las declaraciones como legislador se buscan por nombre en la cámara actual y cada año se controla contra los
 mandatos oficiales. Si no hay ninguna (por ejemplo, quien asumió en 2025 y fue diputado antes), se buscan en la otra
@@ -199,14 +202,17 @@ def main() -> int:
         return None if len(grupos) > 1 else cand
 
     salida, ambiguos, fuera, saltadas, vacias, varias = {}, [], [], collections.Counter(), collections.Counter(), []
+    estado = {}
     otra_camara, con_otros = [], 0
     for l, ap, resto in datos_leg:
         cam = l["camara"]
         h = hist[cam].get(str(l.get("hcdn_id") if cam == "Diputados" else l.get("id_senado")))
         mand = h[3] if h else [(l.get("inicio") or "1900-01-01", "2099-12-31")]
         cand = cruzar(l, ap, resto, cam)
+        clave = l["slug"] if cam == "Diputados" else "s:" + l["slug"]
         if cand is None:
             ambiguos.append(l["nombre"])
+            estado.setdefault(clave, {})["ambiguo"] = True
             continue
         elegidas = []
         for i in cand:
@@ -248,17 +254,21 @@ def main() -> int:
         anios = []
         for anio, rs in sorted(por_anio.items(), reverse=True):
             # Una declaración por año: Anual antes que Inicial y Baja, la de legislador antes que otro cargo, la más rectificada.
-            r = sorted(rs, key=lambda x: (TIPOS.get(x["tipo_declaracion_jurada_descripcion"], 9), not x["_leg"],
-                                          -int(x["rectificativa"] or 0), -int(x["dj_id"] or 0)))[0]
+            # Se toma la primera, en ese orden, que tenga totales utilizables; si ninguna los tiene, el año no se publica pero se registra.
+            orden = sorted(rs, key=lambda x: (TIPOS.get(x["tipo_declaracion_jurada_descripcion"], 9), not x["_leg"],
+                                              -int(x["rectificativa"] or 0), -int(x["dj_id"] or 0)))
+            r = next((x for x in orden if (monto(x["total_bienes_final"]) or 0) != 0), None)
+            if r is None:
+                r = orden[0]
+                if monto(r["total_bienes_final"]) is None:
+                    saltadas[anio] += 1
+                else:
+                    # Bienes en cero al cierre: más probable una declaración vacía o incompleta que un patrimonio nulo.
+                    vacias[anio] += 1
+                estado.setdefault(clave, {}).setdefault("sin_totales", []).append({"anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"]})
+                continue
             bf, df = monto(r["total_bienes_final"]), monto(r["total_deudas_final"])
             bi, di = monto(r["total_bienes_inicio"]), monto(r["deudas_inicio"])
-            if bf is None:
-                saltadas[anio] += 1
-                continue
-            if bf == 0:
-                # Bienes en cero al cierre: más probable una declaración vacía o incompleta que un patrimonio nulo.
-                vacias[anio] += 1
-                continue
             anios.append({
                 "anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"], "rectificativa": int(r["rectificativa"] or 0),
                 "cargo": cargo_legible(r, r["_leg"]), "camara": r["_camara"] if r["_leg"] else None,
@@ -267,7 +277,7 @@ def main() -> int:
                 "ingresos_netos": monto(r["ingresos_neto_gastos"]),
             })
         if anios:
-            salida[l["slug"] if cam == "Diputados" else "s:" + l["slug"]] = anios
+            salida[clave] = anios
 
     if vacias:
         print("Declaraciones con bienes en cero (no se publican), por año:", dict(sorted(vacias.items())))
@@ -281,6 +291,10 @@ def main() -> int:
     por_anio_n = collections.Counter(a["anio"] for v in salida.values() for a in v)
     print("Legisladores actuales con declaración, por año fiscal:", dict(sorted(por_anio_n.items())))
     (SAL / "ddjj.json").write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
+    for v in estado.values():
+        if "sin_totales" in v:
+            v["sin_totales"].sort(key=lambda x: x["anio"])
+    (SAL / "ddjj_estado.json").write_text(json.dumps(dict(sorted(estado.items())), ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(filas)} declaraciones de legisladores nacionales; {len(salida)} legisladores actuales cruzados "
           f"({con_otros} con declaraciones de otros cargos); {len(ambiguos)} ambiguos")
     return 0

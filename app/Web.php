@@ -175,7 +175,7 @@ function encabezados_seguridad(string $tipo = 'text/html; charset=utf-8', int $m
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
     header('Strict-Transport-Security: max-age=63072000; includeSubDomains');
-    header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://api.argentinadatos.com https://www.senado.gob.ar data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'");
+    header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'");
     header($maxAge > 0 ? "Cache-Control: public, max-age={$maxAge}, s-maxage={$maxAge}" : 'Cache-Control: no-store');
 }
 
@@ -416,9 +416,8 @@ function pestanas_perfil(array $l): array
     if (\App\Datos::proyectos($l['slug'], $l['camara']) || ($ej['con_eje'] ?? 0) > 0) {
         $p['proyectos'] = 'Proyectos y temas';
     }
-    if (\App\Datos::ddjj($l['camara'], $l['slug'])) {
-        $p['patrimonio'] = 'Declaración jurada';
-    }
+    // La pestaña está siempre: si no hay declaración publicada, explica por qué.
+    $p['patrimonio'] = 'Declaración jurada';
     if (!$esSen && (\App\Datos::comisionesDe($l['slug']) || isset($vj['actual'][$l['slug']]) || !empty($vj['por_diputado'][$l['slug']])
             || \App\Datos::subsidiosDiputado($l['slug']) || !empty($l['trayectoria']))) {
         $p['mas'] = 'Más datos';
@@ -498,4 +497,74 @@ function match_temas(array $usuario, string $camara = ''): array
     }
     usort($filas, static fn($a, $b) => $b['afinidad'] <=> $a['afinidad'] ?: strcmp($a['l']['nombre'], $b['l']['nombre']));
     return $filas;
+}
+
+/**
+ * Qué decir de las declaraciones juradas de un legislador: cuántas figuran, de qué años, cuáles faltan en el medio y,
+ * si no hay ninguna, el motivo más probable según cuándo asumió. Solo habla de lo que figura en el archivo publicado.
+ */
+function estado_ddjj(array $l, array $dj): array
+{
+    $es = \App\Datos::ddjjEstado($l['camara'], $l['slug']);
+    $sinTot = $es['sin_totales'] ?? [];
+    if (!$dj) {
+        return ['hay' => false, 'asumio_2025' => !empty($l['inicio']) && $l['inicio'] >= '2025-12-10', 'sin_totales' => $sinTot, 'ambiguo' => !empty($es['ambiguo'])];
+    }
+    $anios = array_values(array_unique(array_map(static fn($d) => (int)$d['anio'], $dj)));
+    sort($anios);
+    $faltan = [];
+    for ($a = $anios[0]; $a <= end($anios); $a++) { if (!in_array($a, $anios, true)) { $faltan[] = $a; } }
+    // Los años que figuran sin totales utilizables no cuentan como "faltantes": se dicen aparte.
+    $sinAnios = array_map(static fn($x) => (int)$x['anio'], $sinTot);
+    return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot];
+}
+
+/** Barras verticales en SVG: una por clave (por ejemplo, proyectos por año). Sin scripts. */
+function svg_barras(array $serie, string $titulo): string
+{
+    $n = count($serie);
+    if ($n < 2) {
+        return '';
+    }
+    $w = 640; $h = 240; $izq = 40; $der = 12; $arr = 16; $aba = 30;
+    $max = max(1, (int)max($serie));
+    $ancho = ($w - $izq - $der) / $n;
+    $barra = max(4.0, min(48.0, $ancho * 0.66));
+    $id = 'b-' . md5($titulo);
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($k = 0; $k <= 4; $k++) {
+        $v = $max * $k / 4; $yy = round($arr + ($h - $arr - $aba) * (1 - $k / 4), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 6) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(number_format($v, 0, ',', '.')) . '</text>';
+    }
+    $paso = max(1, (int)ceil($n / 10));
+    $i = 0;
+    foreach ($serie as $et => $v) {
+        $cx = $izq + $ancho * ($i + 0.5);
+        $alto = ($h - $arr - $aba) * ((float)$v / $max);
+        $s .= '<rect class="g-barra" x="' . round($cx - $barra / 2, 1) . '" y="' . round($h - $aba - $alto, 1) . '" width="' . round($barra, 1) . '" height="' . round($alto, 1) . '"><title>' . e($et . ': ' . number_format((float)$v, 0, ',', '.')) . '</title></rect>';
+        if ($i % $paso === 0 || $i === $n - 1) {
+            $s .= '<text class="g-eje" x="' . round($cx, 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$et) . '</text>';
+        }
+        $i++;
+    }
+    return $s . '</svg>';
+}
+
+/** Barra horizontal con el reparto de una votación: afirmativos, negativos, abstenciones y ausentes. */
+function barra_resultado(int $a, int $n, int $b, int $u): string
+{
+    $t = max(1, $a + $n + $b + $u);
+    $tramos = [['a', $a, 'Afirmativos'], ['n', $n, 'Negativos'], ['b', $b, 'Abstenciones'], ['u', $u, 'Ausentes']];
+    $h = '<div class="barra-resultado" role="img" aria-label="' . e("Afirmativos $a, negativos $n, abstenciones $b, ausentes $u") . '">';
+    foreach ($tramos as [$c, $v, $et]) {
+        if ($v > 0) {
+            $h .= '<span class="br-' . $c . '" style="width:' . round($v * 100 / $t, 2) . '%" title="' . e($et . ': ' . $v) . '"></span>';
+        }
+    }
+    $h .= '</div><ul class="leyenda leyenda-resultado">';
+    foreach ($tramos as [$c, $v, $et]) {
+        $h .= '<li><i class="br-' . $c . '"></i>' . e($et) . ' <b class="num">' . $v . '</b></li>';
+    }
+    return $h . '</ul>';
 }

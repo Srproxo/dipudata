@@ -32,7 +32,10 @@ foreach ($idx as $tipo => $t) { foreach (Datos::docs($tipo, (string)array_key_fi
 ok($urlsMal === 0, 'todo enlace a documentos usa https');
 ok(array_sum(array_column(Datos::bloques('Diputados'), 'cantidad')) === count($dip), 'la suma de bloques de Diputados coincide con el padrón');
 ok(array_sum(array_column(Datos::bloques('Senadores'), 'cantidad')) === count($sen), 'la suma de bloques del Senado coincide con el padrón');
-ok(!array_filter($todos, fn($l) => $l['foto'] && !preg_match('#^https://(api\.argentinadatos\.com|www\.senado\.gob\.ar)/#', $l['foto'])), 'las fotos solo vienen de hosts permitidos por la CSP');
+$fotoMal = array_filter($todos, fn($l) => $l['foto'] && (!preg_match('#^/assets/fotos/[a-z0-9-]+\.(jpg|png|gif)$#', $l['foto']) || !is_file(__DIR__ . '/..' . $l['foto'])));
+ok(!$fotoMal && count(array_filter($todos, fn($l) => $l['foto'])) > 300, 'todas las fotos se sirven desde el propio sitio (assets/fotos/) y el archivo existe, sin pedir nada a terceros');
+$csp = (string)file_get_contents(__DIR__ . '/../app/Web.php');
+ok(str_contains($csp, "img-src 'self' data:;") && !str_contains($csp, 'img-src \'self\' https://'), 'la política de seguridad no admite imágenes de dominios externos');
 
 $cod = (string)shell_exec('grep -rl "legisladores_master" ' . escapeshellarg(__DIR__ . '/../app') . ' ' . escapeshellarg(__DIR__ . '/../api') . ' ' . escapeshellarg(__DIR__ . '/../mvc.php') . ' 2>/dev/null');
 ok(trim($cod) === '', 'ningún código PHP del sitio lee legisladores_master.json');
@@ -291,6 +294,27 @@ ok(count($slugs) === count($ap['empresas'] ?? []) && count($slugs) >= 400 && $em
 $humanasConNombre = 0; foreach (array_slice(explode("\n", $crudo), 1) as $lin) { $c = str_getcsv($lin); if (count($c) > 5 && $c[3] === 'Humana' && ($c[5] !== '' || $c[6] !== '')) { $humanasConNombre++; } }
 ok($humanasConNombre === 0, 'aportes a partidos: ninguna persona humana tiene nombre ni rubro guardado');
 ok($crudo !== '' && !preg_match('/\b\d{11}\b/', $crudo) && str_starts_with($crudo, 'fecha,cod_destino,destino,tipo,aportante,'), 'aportes a partidos: el archivo guardado no tiene CUIL/CUIT');
+
+// Declaraciones juradas: cada caso sin cifras se explica en pantalla; nada se publica dos veces ni se inventa
+$djMal = 0; $djSinTot = 0; $djConTot = 0;
+foreach ($todos as $lg) {
+    $dj = Datos::ddjj($lg['camara'], $lg['slug']); $es = Datos::ddjjEstado($lg['camara'], $lg['slug']);
+    if ($dj) { $djConTot++; }
+    $anPub = array_map(static fn($d) => (int)$d['anio'], $dj);
+    if (count($anPub) !== count(array_unique($anPub))) { $djMal++; }
+    foreach ($es['sin_totales'] ?? [] as $x) { $djSinTot++; if (in_array($x['anio'], $anPub, true)) { $djMal++; } }
+    foreach ($dj as $d) { if ($d['bienes_final'] == 0 || abs($d['patrimonio_neto_final'] - ($d['bienes_final'] - $d['deudas_final'])) > 0.02) { $djMal++; } }
+}
+ok($djMal === 0 && $djConTot > 200 && $djSinTot > 0, 'declaraciones juradas: un solo año por declaración, patrimonio = bienes - deudas, sin bienes en cero, y los años sin totales se registran aparte (' . $djConTot . ' legisladores con totales, ' . $djSinTot . ' años sin totales)');
+
+// Gráficos: salen como SVG o barras sin scripts, con título accesible, y no se dibujan con datos insuficientes
+if (!function_exists('svg_barras')) { require_once __DIR__ . '/../app/Web.php'; }
+$sb = svg_barras(['2023' => 3, '2024' => 5, '2025' => 2], 'prueba');
+ok(str_contains($sb, '<svg') && substr_count($sb, 'class="g-barra"') === 3 && str_contains($sb, '<title') && !str_contains($sb, '<script'), 'el gráfico de barras dibuja una barra por año, con título accesible y sin scripts');
+ok(svg_barras(['2024' => 4], 'x') === '', 'un gráfico con un solo punto no se dibuja');
+$br = barra_resultado(43, 25, 0, 4);
+preg_match_all('#width:([\d.]+)%#', $br, $mw);
+ok(abs(array_sum($mw[1]) - 100) < 0.2 && str_contains($br, 'aria-label'), 'la barra de resultado de una votación suma 100% y tiene descripción accesible');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

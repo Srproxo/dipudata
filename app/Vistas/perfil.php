@@ -39,8 +39,19 @@ $maR = Datos::mandatoActual($l['camara'], $l['slug']);
 if ($maR) { $resFrases[] = 'Desde el 10 de diciembre de 2025 hubo ' . (int)$maR['votaciones'] . ' votaciones nominales en su cámara: votó en ' . (int)$maR['emitio'] . ($maR['voto_pct'] !== null ? ' (' . number_format((float)$maR['voto_pct'], 0, ',', '') . '%)' : '') . '.'; }
 $saR = $esSen ? Datos::senadoAnteriores($l['slug']) : [];
 if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')) . ' votaciones nominales anteriores en el Senado, de ' . count($saR) . ' ' . (count($saR) === 1 ? 'mandato' : 'mandatos') . '.'; }
+$djR = estado_ddjj($l, Datos::ddjj($l['camara'], $l['slug']));
+if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorrupción: ' . $djR['cantidad'] . ($djR['cantidad'] === 1 ? ' año publicado' : ' años publicados') . ' (de ' . $djR['desde'] . ' a ' . $djR['hasta'] . ').'; }
+elseif ($djR['sin_totales']) { $resFrases[] = 'Presentó declaración jurada, pero el archivo oficial trae los totales vacíos: no se publican cifras.'; }
+elseif ($djR['ambiguo']) { $resFrases[] = 'Declaración jurada: el nombre corresponde a más de una persona en el archivo oficial, por eso no se publica.'; }
+else { $resFrases[] = $djR['asumio_2025'] ? 'Asumió el 10 de diciembre de 2025: su primera declaración jurada todavía no está publicada.' : 'No figura en el archivo de declaraciones juradas publicado (años fiscales 2012 a 2024).'; }
 $pyR = Datos::proyectos($l['slug'], $l['camara']);
-if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura como autor/a de ') . number_format((int)$pyR['resumen']['total'], 0, ',', '.') . ' proyectos' . ($esSen ? ' en el Senado.' : ' en Diputados.'); }
+if ($pyR) {
+    $rsP = $pyR['resumen'];
+    $f = ($esSen ? 'Figura entre los firmantes de ' : 'Figura como autor/a de ') . number_format((int)$rsP['total'], 0, ',', '.') . ' proyectos' . ($esSen ? ' en el Senado' : ' en Diputados') . ', entre ' . fecha_es($rsP['desde']) . ' y ' . fecha_es($rsP['hasta']) . '.';
+    // Si todos son anteriores al mandato actual, se dice: no es actividad de este mandato.
+    if (!empty($l['inicio']) && $rsP['hasta'] < $l['inicio']) { $f .= ' Ninguno es de su mandato actual, que empezó el ' . fecha_es($l['inicio']) . '.'; }
+    $resFrases[] = $f;
+}
 ?>
 <section class="resumen" aria-labelledby="resumen-t">
   <h2 id="resumen-t" class="resumen-t">En pocas palabras</h2>
@@ -52,6 +63,33 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
     <a href="#ficha">Ficha y fuentes</a>
   </p>
 </section>
+
+<?php
+// Gráficos del resumen: proyectos por año y patrimonio neto en pesos de hoy (solo si hay datos suficientes).
+$grProy = [];
+if ($pyR) { foreach ($pyR['proyectos'] as $x) { $an = substr($x[1], 0, 4); $grProy[$an] = ($grProy[$an] ?? 0) + 1; } ksort($grProy); }
+$grPat = [];
+$djG = Datos::ddjj($l['camara'], $l['slug']);
+if ($djG) { [$mesG, $facG] = factores_ipc(); foreach ($djG as $d) { if (isset($facG[(int)$d['anio']])) { $grPat[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $facG[(int)$d['anio']]; } } ksort($grPat); }
+if (count($grProy) >= 2 || count($grPat) >= 2): ?>
+<section class="graficos-resumen" aria-labelledby="graficos-t">
+  <h2 id="graficos-t" class="seccion-titulo">En gráficos</h2>
+  <?php if (count($grProy) >= 2): ?>
+  <figure class="grafico-caja">
+    <p class="sub-titulo">Proyectos por año</p>
+    <?= svg_barras($grProy, 'Cantidad de proyectos por año en los que figura ' . $l['nombre'] . ', de ' . array_key_first($grProy) . ' a ' . array_key_last($grProy)) ?>
+    <figcaption class="tenue pequeno">Cantidad de proyectos por año de presentación. <?= $esSen ? 'Incluye los que firmó junto con otros senadores.' : 'Cuenta los proyectos donde figura como autor/a en el archivo oficial, que no registra cofirmantes.' ?> <a href="<?= e(Datos::urlLegislador($l)) ?>?tab=proyectos">Ver los proyectos</a>.</figcaption>
+  </figure>
+  <?php endif; ?>
+  <?php if (count($grPat) >= 2): ?>
+  <figure class="grafico-caja">
+    <p class="sub-titulo">Patrimonio neto declarado</p>
+    <?= svg_linea($grPat, 'Patrimonio neto declarado al cierre de cada año fiscal, de ' . array_key_first($grPat) . ' a ' . array_key_last($grPat) . ', en pesos de ' . mes_es($mesG)) ?>
+    <figcaption class="tenue pequeno">Patrimonio neto declarado ante la Oficina Anticorrupción, en pesos de <?= e(mes_es($mesG)) ?> con el IPC del INDEC. Un cambio puede deberse a cómo se valúan los bienes en la declaración y no solo a compras, ventas o ahorro. <a href="<?= e(Datos::urlLegislador($l)) ?>?tab=patrimonio">Ver el detalle y los años que figuran</a>.</figcaption>
+  </figure>
+  <?php endif; ?>
+</section>
+<?php endif; ?>
 
 <div class="dos-col perfil-grilla">
   <section aria-labelledby="ficha">
@@ -217,9 +255,30 @@ if ($pyR) { $resFrases[] = ($esSen ? 'Figura entre los firmantes de ' : 'Figura 
 
 <?php if ($tab === 'patrimonio'): ?>
 <?php $dj = Datos::ddjj($l['camara'], $l['slug']); ?>
-<?php if ($dj): ?>
+<?php $est = estado_ddjj($l, $dj); ?>
+<?php if (!$dj): ?>
 <section class="seccion" aria-labelledby="ddjj">
   <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
+  <p class="aviso aviso-ddjj">
+  <?php if ($est['sin_totales']): $anS = array_map(static fn($x) => $x['anio'] . ' (' . mb_strtolower($x['tipo']) . ')', $est['sin_totales']); ?>
+    <strong>Presentó declaración, pero el archivo trae los totales vacíos.</strong> En el archivo de la Oficina Anticorrupción figura una declaración a nombre de <?= e($l['nombre']) ?> de los años <?= e(implode(', ', $anS)) ?>, con los bienes en cero o sin monto. Este sitio no publica totales que no se pueden verificar, por eso no se muestran cifras.
+  <?php elseif ($est['ambiguo']): ?>
+    <strong>No se muestra para no mezclar personas.</strong> En el archivo de la Oficina Anticorrupción hay más de una persona con un nombre compatible con el de <?= e($l['nombre']) ?> y no se puede asegurar cuál es. Este sitio no publica una declaración que no puede atribuir con certeza.
+  <?php elseif ($est['asumio_2025']): ?>
+    <strong>Todavía no hay declaración publicada.</strong> <?= e($l['nombre']) ?> asumió el <?= e(fecha_es($l['inicio'])) ?>. La Oficina Anticorrupción publica un archivo por año fiscal y el último disponible es el de 2024, anterior a su asunción. Cuando publique el del año 2025, va a aparecer acá.
+  <?php else: ?>
+    <strong>No figura en el archivo publicado.</strong> El archivo de declaraciones juradas de la Oficina Anticorrupción (años fiscales 2012 a 2024) no trae ninguna a nombre de <?= e($l['nombre']) ?> como <?= $esSen ? 'senador/a' : 'diputado/a' ?>. Eso no quiere decir que no la haya presentado: este sitio solo muestra lo que figura en el archivo publicado.
+  <?php endif; ?>
+  <a href="/metodologia#ddjj">Cómo se arma esta sección</a>.</p>
+</section>
+<?php else: ?>
+<section class="seccion" aria-labelledby="ddjj">
+  <h2 id="ddjj" class="seccion-titulo">Declaración jurada patrimonial</h2>
+  <p class="aviso aviso-ddjj"><strong>Qué figura en el archivo publicado:</strong> <?= (int)$est['cantidad'] ?> <?= $est['cantidad'] === 1 ? 'declaración' : 'declaraciones' ?>, de los años fiscales <?= (int)$est['desde'] ?> a <?= (int)$est['hasta'] ?>.
+    <?php if ($est['hasta'] < 2024): ?>Es la más reciente que figura a su nombre; no hay una posterior en el archivo (el último publicado es el del año fiscal 2024).<?php endif; ?>
+    <?php if ($est['faltan']): ?>No figuran los años <?= e(implode(', ', $est['faltan'])) ?>.<?php endif; ?>
+    <?php if ($est['sin_totales']): ?>De los años <?= e(implode(', ', array_map(static fn($x) => $x['anio'], $est['sin_totales']))) ?> el archivo trae una declaración con los bienes en cero o sin monto: no se publican esas cifras.<?php endif; ?>
+    Que un año no figure no quiere decir que no la haya presentado: acá solo está lo que publicó la Oficina Anticorrupción.</p>
   <?php [$mesBase, $fac] = factores_ipc(); $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
   <?php if (count($serie) >= 2): ?>
   <figure class="grafico-caja">
