@@ -4,6 +4,8 @@ $nav = [
     'legisladores' => ['/', 'Legisladores'],
     'votaciones'   => ['/votaciones', 'Votaciones'],
     'leyes'        => ['/leyes', 'Leyes'],
+    'patrimonio'   => ['/patrimonio', 'Patrimonio'],
+    'comparar'     => ['/comparar', 'Comparar'],
     'bloques'      => ['/congreso/bloques', 'Bloques'],
     'senado'       => ['/senado', 'Senado'],
 ];

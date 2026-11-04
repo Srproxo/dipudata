@@ -300,3 +300,36 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .leyenda-resultado i { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .4rem; }
 .graficos-resumen { margin-top: 2rem; }
 .graficos-resumen .sub-titulo { margin-top: 1.25rem; }
+
+/* Patrimonio y comparador */
+.sr-solo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tabla-patrimonio th a { color: inherit; text-decoration: none; }
+.tabla-patrimonio th a:hover { color: var(--acento); }
+.tabla-patrimonio td.celda-nombre { min-width: 15rem; }
+.comparador { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.comp-cabezas { display: grid; gap: 1rem; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); margin-top: 2rem; }
+@media (max-width: 40rem) { .comp-cabezas { grid-template-columns: 1fr 1fr; } }
+.comp-cabeza { display: flex; gap: .75rem; align-items: center; padding: .75rem; border: 1px solid var(--linea); }
+.comp-nombre { font: 700 1rem/1.25 var(--serif); color: var(--tinta); text-decoration: none; }
+.comp-nombre:hover { color: var(--acento); }
+.tabla-comparar th[scope="row"] { text-align: left; font-weight: 500; color: var(--tinta-2); white-space: normal; min-width: 11rem; }
+.grafico-ancho { max-width: 48rem; }
+.leyenda-series i { display: inline-block; width: 1.4rem; height: 0; border-top: 3px solid; margin-right: .4rem; vertical-align: middle; border-radius: 0; }
+.leyenda-series .ley-serie-0 { border-top-color: var(--acento); } .leyenda-series .ley-serie-1 { border-top-color: #b45309; border-top-style: dashed; }
+.leyenda-series .ley-serie-2 { border-top-color: #0f766e; border-top-style: dotted; } .leyenda-series .ley-serie-3 { border-top-color: #7e22ce; border-top-style: dashed; }
+.g-l { fill: none; stroke-width: 2.25; }
+.g-l0 { stroke: var(--acento); } .g-l1 { stroke: #b45309; stroke-dasharray: 7 4; }
+.g-l2 { stroke: #0f766e; stroke-dasharray: 2 4; } .g-l3 { stroke: #7e22ce; stroke-dasharray: 10 3 2 3; }
+.g-m { stroke-width: 2; fill: var(--papel); }
+.g-m0 { stroke: var(--acento); } .g-m1 { stroke: #b45309; } .g-m2 { stroke: #0f766e; } .g-m3 { stroke: #7e22ce; }
+.tabla-patrimonio { font-size: .875rem; }
+.tabla-patrimonio td, .tabla-patrimonio th { padding: .5rem .55rem; }
+.tabla-patrimonio td.num { white-space: nowrap; }
+.tabla-patrimonio td.celda-nombre { min-width: 13rem; max-width: 18rem; }
+.tabla-patrimonio td.celda-nombre > span { min-width: 0; }
+.tabla-patrimonio td.celda-nombre a { overflow-wrap: anywhere; }
+.comp-cabeza > div { min-width: 0; }
+.comp-nombre { overflow-wrap: anywhere; }
+.comparador select { min-width: 0; width: 100%; }
+.comp-cabeza { box-sizing: border-box; min-width: 0; }
+@media (max-width: 40rem) { .comp-cabeza { padding: .5rem; gap: .5rem; } .comp-cabeza .avatar { width: 44px; height: 44px; } }

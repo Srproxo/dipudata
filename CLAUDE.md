@@ -8,8 +8,11 @@ renderizan en el servidor a partir de archivos JSON en `storage/verificado/`. Gi
 métricas de relleno y acusaciones inventadas: eso nunca debe volver a pasar. Cada dato muestra su fuente. Si un archivo trae
 valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/metodologia`.
 - No se publican CUIT, datos de familiares ni descripción de bienes (declaraciones juradas).
-- Sin rankings ni "crecimiento patrimonial": los montos se muestran como se declararon. Desde el 1/11/2026 (decisión de Marcelo) el patrimonio neto
-  se expresa también en pesos de hoy con el IPC del INDEC (`bajar_ipc.py`, serie desde dic. 2016) y en dólares al tipo de cambio oficial del BCRA del cierre de cada año (`bajar_dolar.py`) y, al lado, en dólar MEP de ArgentinaDatos, no oficial, por decisión de Marcelo del 2/11/2026 (`bajar_dolar_mep.py`, que descarta cierres con el valor repetido); sin calificar la evolución.
+- Rankings, evolución patrimonial y comparaciones: SÍ se muestran (decisión de Marcelo, 4/11/2026: es información pública). Condiciones: se calculan solo con datos reales
+  de fuentes oficiales, cada cifra muestra su fuente, su método y los años o el período que usa, y no se afirma nada que el dato no diga (ni intenciones, ni enriquecimiento, ni
+  causas del cambio). Páginas: `/patrimonio` (orden y filtros) y `/comparar` (hasta 4 legisladores lado a lado).
+  Los montos se muestran como se declararon; desde el 1/11/2026 (decisión de Marcelo) el patrimonio neto
+  se expresa también en pesos de hoy con el IPC del INDEC (`bajar_ipc.py`, serie desde dic. 2016) y en dólares al tipo de cambio oficial del BCRA del cierre de cada año (`bajar_dolar.py`) y, al lado, en dólar MEP de ArgentinaDatos, no oficial, por decisión de Marcelo del 2/11/2026 (`bajar_dolar_mep.py`, que descarta cierres con el valor repetido).
 - Los pasajes de la Cámara "no implican viajes efectivamente realizados": decir "pasajes emitidos", no "viajó".
 - No afirmar nada sobre el personal de un legislador: ni Diputados ni el Senado publican qué asesor trabaja para quién
   (la nómina dice solo "afectado a bloque político"). Informes sensibles van a `informes_privados/` (ignorado por git).
