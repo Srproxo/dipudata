@@ -1,0 +1,26 @@
+{
+ "conjunto": "dictamenes",
+ "portal": "https://datos.hcdn.gob.ar",
+ "recursos": {
+  "59595a93-5a5e-4ba6-a3db-c1044e2f949e": {
+   "nombre": "Dictamenes",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/47704991-ab9d-4934-bcd3-1115294f6ebf/resource/59595a93-5a5e-4ba6-a3db-c1044e2f949e/download/dictamenes3.9.csv",
+   "archivo": "59595a93_Dictamenes.csv",
+   "bytes": 3696174,
+   "sha256": "1ac0ac69f9548e58d65045c926506ce1a30ec1a81bcc7d1c7748cd13a880b96b",
+   "last_modificado": "2026-10-07T20:31:57.617588",
+   "bajado": "2026-11-04"
+  },
+  "0688ef92-3c38-4b74-a398-587865fdad20": {
+   "nombre": "Dictamenes",
+   "formato": "JSON",
+   "url": "https://datos.hcdn.gob.ar/dataset/47704991-ab9d-4934-bcd3-1115294f6ebf/resource/0688ef92-3c38-4b74-a398-587865fdad20/download/dictamenes3.9.json",
+   "archivo": "0688ef92_Dictamenes.json",
+   "bytes": 7662481,
+   "sha256": "14d60f58b1e4b237dc693967c80186e8b386ea5878656297ddc029678745c92d",
+   "last_modificado": "2026-10-07T20:37:13.694214",
+   "bajado": "2026-11-04"
+  }
+ }
+}
