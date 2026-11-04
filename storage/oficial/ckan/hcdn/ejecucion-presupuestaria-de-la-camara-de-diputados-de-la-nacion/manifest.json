@@ -1,0 +1,276 @@
+{
+ "conjunto": "ejecucion-presupuestaria-de-la-camara-de-diputados-de-la-nacion",
+ "portal": "https://datos.hcdn.gob.ar",
+ "recursos": {
+  "28813b47-38d5-4fd2-b595-326bfc60b584": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA SEGUNDO TRIMESTRE ACUMULADO 2026",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/28813b47-38d5-4fd2-b595-326bfc60b584/download/ejec_presupuestaria_2trim_aculumado_2026.csv",
+   "archivo": "28813b47_EJECUCI_N_PRESUPUESTARIA_SEGUNDO_TRIMESTRE_ACUMULADO_2026.csv",
+   "bytes": 3367,
+   "sha256": "029e87fe63d56bac485bb0247e2d4424736401edfedbdb6a2372dbe04921100e",
+   "last_modificado": "2026-08-24T20:27:43.461174",
+   "bajado": "2026-11-04"
+  },
+  "d6ab8bd8-75a9-43b7-babf-6175d40de9c8": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA PRIMER TRIMESTRE 2026",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/d6ab8bd8-75a9-43b7-babf-6175d40de9c8/download/ejec_presupuestaria_1trimestre_2026.csv",
+   "archivo": "d6ab8bd8_EJECUCI_N_PRESUPUESTARIA_PRIMER_TRIMESTRE_2026.csv",
+   "bytes": 3296,
+   "sha256": "a2cb9da4c874bb61ac7b7fd5e1bb220319705da9d04709dc06b68abbb2a8a87d",
+   "last_modificado": "2026-08-24T20:21:53.097814",
+   "bajado": "2026-11-04"
+  },
+  "0fdfe91b-e766-4cd6-be41-2fe7adb34c0f": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO CUARTO TRIMESTRE 2025",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/0fdfe91b-e766-4cd6-be41-2fe7adb34c0f/download/ejec_presupuestaria_4t_acumulado_2025.csv",
+   "archivo": "0fdfe91b_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_CUARTO_TRIMESTRE_2025.csv",
+   "bytes": 3175,
+   "sha256": "ef9de37b293e39a5126a3ea32ea503d101b31385bcd98b01ef3701c4d8239072",
+   "last_modificado": "2026-04-29T10:48:13.966753",
+   "bajado": "2026-11-04"
+  },
+  "1118975e-3857-434b-b3a6-a837f25ba235": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO TERCER TRIMESTRE 2025",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/1118975e-3857-434b-b3a6-a837f25ba235/download/ejec_presupuestaria_3t_acumulado_2025.csv",
+   "archivo": "1118975e_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_TERCER_TRIMESTRE_2025.csv",
+   "bytes": 3532,
+   "sha256": "53342e9856e37159a1da42c33c2b7d414b94af3dff9c8acf2bb54a648ff5cf6a",
+   "last_modificado": "2026-04-29T10:47:23.000654",
+   "bajado": "2026-11-04"
+  },
+  "c3c4ecbd-5e00-4a90-acb6-34b904649c50": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO SEGUNDO TRIMESTRE 2025",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/c3c4ecbd-5e00-4a90-acb6-34b904649c50/download/ejec_presupuestaria_2t_acumulado_2025.csv",
+   "archivo": "c3c4ecbd_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_SEGUNDO_TRIMESTRE_2025.csv",
+   "bytes": 3555,
+   "sha256": "4fb54834f12b7268d1b73d0e25c03246d68de6118c5b6f8daca75ed6cc58db3b",
+   "last_modificado": "2026-04-29T10:45:10.578660",
+   "bajado": "2026-11-04"
+  },
+  "4ac1dd03-1835-46af-8ad0-fa371a3c706f": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO PRIMER TRIMESTRE 2025",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/4ac1dd03-1835-46af-8ad0-fa371a3c706f/download/ejec_presupuestaria_1t_2025.csv",
+   "archivo": "4ac1dd03_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_PRIMER_TRIMESTRE_2025.csv",
+   "bytes": 3464,
+   "sha256": "65ef22f2a9b2e98224aca7551998ae6a6e8d17b648b60b0502d681c12c66226d",
+   "last_modificado": "2026-04-29T10:42:20.053524",
+   "bajado": "2026-11-04"
+  },
+  "c766c85b-bee9-4552-a7a4-8c6833f959ab": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO CUARTO TRIMESTRE 2024",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/c766c85b-bee9-4552-a7a4-8c6833f959ab/download/trim4_2024_acum.1.0.csv",
+   "archivo": "c766c85b_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_CUARTO_TRIMESTRE_2024.csv",
+   "bytes": 2809,
+   "sha256": "3ba72f013e880c5712febeb8cf7f701c25bbd7d25c94e95e8c0ad2a5b0dcfda1",
+   "last_modificado": "2025-09-29T18:29:57.029453",
+   "bajado": "2026-11-04"
+  },
+  "9206c14c-511f-480b-bf1f-061fc136d75c": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO TERCER TRIMESTRE 2024",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/9206c14c-511f-480b-bf1f-061fc136d75c/download/trim3_2024_acum.1.0.csv",
+   "archivo": "9206c14c_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_TERCER_TRIMESTRE_2024.csv",
+   "bytes": 2897,
+   "sha256": "62c7ef14b8142e2d6a3479514e76d77ee8b7e672fcd038996011ea3a957879ed",
+   "last_modificado": "2025-09-29T18:22:06.254868",
+   "bajado": "2026-11-04"
+  },
+  "23a0ff7e-2ffe-4161-9a76-96bbd0b045cb": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA ACUMULADO SEGUNDO TRIMESTRE 2024",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/23a0ff7e-2ffe-4161-9a76-96bbd0b045cb/download/trim2_2024_acum.1.0.csv",
+   "archivo": "23a0ff7e_EJECUCI_N_PRESUPUESTARIA_ACUMULADO_SEGUNDO_TRIMESTRE_2024.csv",
+   "bytes": 2862,
+   "sha256": "0ff820c89a8c3d8c6b3641cc3b2f23f8ca186b2b14c2387314229a71143a964a",
+   "last_modificado": "2025-09-29T18:20:37.368927",
+   "bajado": "2026-11-04"
+  },
+  "a1f108cf-ed1d-4a86-bfac-1346bf4dd3dd": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA PRIMER TRIMESTRE 2024",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/a1f108cf-ed1d-4a86-bfac-1346bf4dd3dd/download/trim1_2024.1.0.csv",
+   "archivo": "a1f108cf_EJECUCI_N_PRESUPUESTARIA_PRIMER_TRIMESTRE_2024.csv",
+   "bytes": 2738,
+   "sha256": "4da682cf1cc2cf4d29e72ee1305ffc6be8421beff607f45b6e2dfd4a230c5539",
+   "last_modificado": "2025-09-29T18:18:21.273579",
+   "bajado": "2026-11-04"
+  },
+  "4746cd0e-c1e1-4fc9-9d5d-06449ba0bd82": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA CUARTO TRIMESTRE 2023",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/4746cd0e-c1e1-4fc9-9d5d-06449ba0bd82/download/trim4_2023_acum.1.0.csv",
+   "archivo": "4746cd0e_EJECUCI_N_PRESUPUESTARIA_CUARTO_TRIMESTRE_2023.csv",
+   "bytes": 2766,
+   "sha256": "08d057d9fc70f71fa577256cb15f8f759ca18fabeb7e40ad615cb14e6caa4141",
+   "last_modificado": "2025-09-29T18:35:29.083412",
+   "bajado": "2026-11-04"
+  },
+  "aaa6721b-d81c-4267-be46-36ea5193cf9f": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA TERCER TRIMESTRE 2023",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/aaa6721b-d81c-4267-be46-36ea5193cf9f/download/ejecucion_del_presupuesto3trimestre2023al30-09.csv",
+   "archivo": "aaa6721b_EJECUCI_N_PRESUPUESTARIA_TERCER_TRIMESTRE_2023.csv",
+   "bytes": 5652,
+   "sha256": "43f29591e4352197320d24759a934c27485f9420c1f99d66967d58a51f724cf8",
+   "last_modificado": "2023-12-14T13:41:47.409904",
+   "bajado": "2026-11-04"
+  },
+  "0b0e3082-625a-4170-a6dd-35ddbaca1600": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA SEGUNDO TRIMESTRE 2023",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/0b0e3082-625a-4170-a6dd-35ddbaca1600/download/ejecucion_del_presupuesto_segundo_semestre2023.csv",
+   "archivo": "0b0e3082_EJECUCI_N_PRESUPUESTARIA_SEGUNDO_TRIMESTRE_2023.csv",
+   "bytes": 3154,
+   "sha256": "883f986bca5db5e2886e0c25a3c77a55374c5c0b4ce61224e378b09f386ecea0",
+   "last_modificado": "2023-12-14T13:40:07.696892",
+   "bajado": "2026-11-04"
+  },
+  "11a31f73-8460-46ed-afe1-fcffe15a5e50": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA PRIMER TRIMESTRE 2023",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/11a31f73-8460-46ed-afe1-fcffe15a5e50/download/ejecucion_presupuestaria_primer_trimestre2023.csv",
+   "archivo": "11a31f73_EJECUCI_N_PRESUPUESTARIA_PRIMER_TRIMESTRE_2023.csv",
+   "bytes": 9733,
+   "sha256": "b31866245ca3654656a0e05a1f92a19bead778e1151f0474777f2fbb0a4748de",
+   "last_modificado": "2023-04-19T16:55:56.472038",
+   "bajado": "2026-11-04"
+  },
+  "683465ff-ffd1-4883-a28c-96c9b8563116": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA CUARTO TRIMESTRE 2022",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/683465ff-ffd1-4883-a28c-96c9b8563116/download/ejecucion-presupuesto-desde-01-01-2022-al-31-12-22-con-parciales.csv",
+   "archivo": "683465ff_EJECUCI_N_PRESUPUESTARIA_CUARTO_TRIMESTRE_2022.csv",
+   "bytes": 8524,
+   "sha256": "7670c97070145225c37a8c27ab35655d480f38a2af4c2c4bef0dff7cb7a47aba",
+   "last_modificado": "2023-03-08T13:15:46.634630",
+   "bajado": "2026-11-04"
+  },
+  "3aad9566-a776-4fab-a3cb-781ceff0433d": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA TERCER TRIMESTRE 2022",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/3aad9566-a776-4fab-a3cb-781ceff0433d/download/ejecucion-presupuestaria.csv",
+   "archivo": "3aad9566_EJECUCI_N_PRESUPUESTARIA_TERCER_TRIMESTRE_2022.csv",
+   "bytes": 10698,
+   "sha256": "acffe2a13c0bedfc84f1a78ce2bcdc6ad164d20583b831cc2ca03d29afd57d27",
+   "last_modificado": "2022-12-01T18:32:23.995137",
+   "bajado": "2026-11-04"
+  },
+  "92df5e22-df6c-42e2-b5ef-41c3b0e8b654": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA SEGUNDO TRIMESTRE 2022",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/92df5e22-df6c-42e2-b5ef-41c3b0e8b654/download/ejecucion_presupuestaria_2022_2t.csv",
+   "archivo": "92df5e22_EJECUCI_N_PRESUPUESTARIA_SEGUNDO_TRIMESTRE_2022.csv",
+   "bytes": 2537,
+   "sha256": "a3e1494bdab90348546174a08d76ee792c8f6b0294915b2dba9e72664fc3ea33",
+   "last_modificado": "2026-08-18T10:50:56.329925",
+   "bajado": "2026-11-04"
+  },
+  "a52ee255-012f-4208-80d1-6ad7d195f272": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA PRIMER TRIMESTRE 2022",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/a52ee255-012f-4208-80d1-6ad7d195f272/download/ejecucion-1-trimestre-ej.-2022.csv",
+   "archivo": "a52ee255_EJECUCI_N_PRESUPUESTARIA_PRIMER_TRIMESTRE_2022.csv",
+   "bytes": 10243,
+   "sha256": "a883bca14efe92dd7217d1d4b10ac9713523e38e63be82356f12f01db43bdff3",
+   "last_modificado": "2022-05-23T21:22:53.110323",
+   "bajado": "2026-11-04"
+  },
+  "0b1b6993-4ed0-4d36-bbcf-33c1c5d9bf5d": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA CUARTO TRIMESTRE 2021",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/0b1b6993-4ed0-4d36-bbcf-33c1c5d9bf5d/download/ejecucion-cuarto-trim-2021.csv",
+   "archivo": "0b1b6993_EJECUCI_N_PRESUPUESTARIA_CUARTO_TRIMESTRE_2021.csv",
+   "bytes": 10311,
+   "sha256": "19b920cce85521cb83c313685ee52e4aec88d56ca9f95a111ef017fc950f185f",
+   "last_modificado": "2022-03-01T12:52:38.978061",
+   "bajado": "2026-11-04"
+  },
+  "7960ee35-a44d-489a-915c-3fbf1ba95375": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA TERCER TRIMESTRE 2021",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/7960ee35-a44d-489a-915c-3fbf1ba95375/download/ejecucion-tercer-trimestre-2021-dab-0007.csv",
+   "archivo": "7960ee35_EJECUCI_N_PRESUPUESTARIA_TERCER_TRIMESTRE_2021.csv",
+   "bytes": 8801,
+   "sha256": "24c6c700d18f7d720730085f3144c55e58a4425829f269c448efb05b92840c40",
+   "last_modificado": "2021-11-12T18:11:19.984280",
+   "bajado": "2026-11-04"
+  },
+  "1e641c19-868e-4678-bf38-895649c2bdf1": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA SEGUNDO TRIMESTRE 2021",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/1e641c19-868e-4678-bf38-895649c2bdf1/download/ejecucion-segundo-trimestre-2021-dab-0006.csv",
+   "archivo": "1e641c19_EJECUCI_N_PRESUPUESTARIA_SEGUNDO_TRIMESTRE_2021.csv",
+   "bytes": 9400,
+   "sha256": "83488c6af1750a2fdc9aa79749b850e26d10f4f353933d18df3ac757bc4cafb7",
+   "last_modificado": "2021-11-12T18:07:24.004437",
+   "bajado": "2026-11-04"
+  },
+  "97affb2e-c5ef-46aa-a56d-2c3f7c85f02a": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA PRIMER TRIMESTRE 2021",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/97affb2e-c5ef-46aa-a56d-2c3f7c85f02a/download/ejecucion-1-trimestre-2021-dab-0005.csv",
+   "archivo": "97affb2e_EJECUCI_N_PRESUPUESTARIA_PRIMER_TRIMESTRE_2021.csv",
+   "bytes": 9602,
+   "sha256": "cc5d98ded9708682441cdf3c69ddff9dc7741006a7de28f5516f80628d458d6f",
+   "last_modificado": "2021-11-12T18:04:21.805697",
+   "bajado": "2026-11-04"
+  },
+  "0a4c7d7a-970a-46e3-a632-e8dcae007be3": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA 2020",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/0a4c7d7a-970a-46e3-a632-e8dcae007be3/download/ejecucion-presupuestaria-2020-dab-0004.csv",
+   "archivo": "0a4c7d7a_EJECUCI_N_PRESUPUESTARIA_2020.csv",
+   "bytes": 8639,
+   "sha256": "a2490449279a73ae512b84ec0d67df1871eaf81567be18d937d37f03c287c851",
+   "last_modificado": "2021-11-12T17:44:05.197162",
+   "bajado": "2026-11-04"
+  },
+  "465dc18d-a63c-4456-8a40-467927bcc99a": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA 2018",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/465dc18d-a63c-4456-8a40-467927bcc99a/download/ejecucion_al_31_diciembre_2018.csv",
+   "archivo": "465dc18d_EJECUCI_N_PRESUPUESTARIA_2018.csv",
+   "bytes": 19146,
+   "sha256": "8e88e81bc88b1c2abc5118404d0c33a49a58cba897a8542c9ef688ebe5d65b45",
+   "last_modificado": "2019-01-08T13:54:08.223059",
+   "bajado": "2026-11-04"
+  },
+  "a21eed7a-3c8f-45ab-9cd4-3d2ffea75e6d": {
+   "nombre": "Ejecución Presupuestaria 2017",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/a21eed7a-3c8f-45ab-9cd4-3d2ffea75e6d/download/ejecucion_2017.1.2.csv",
+   "archivo": "a21eed7a_Ejecuci_n_Presupuestaria_2017.csv",
+   "bytes": 18626,
+   "sha256": "6ee9531b436e850dc5eb14039ae0190653dd71d7de57d0cf5ef720adc2ad11df",
+   "last_modificado": "2018-04-27T12:52:54.566487",
+   "bajado": "2026-11-04"
+  },
+  "2e06fe50-853d-4f90-9b47-e8c971f0bc01": {
+   "nombre": "Ejecución Presupuestaria 2016",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/2e06fe50-853d-4f90-9b47-e8c971f0bc01/download/ejecucion_2016.1.1.csv",
+   "archivo": "2e06fe50_Ejecuci_n_Presupuestaria_2016.csv",
+   "bytes": 18857,
+   "sha256": "c5d7e72242fc3104f5fb915a23a31462fc8597ebb1e87314e6c9333d8427bbf4",
+   "last_modificado": "2018-04-27T12:51:33.035527",
+   "bajado": "2026-11-04"
+  },
+  "e0b876da-1884-47d4-9046-4e7a6d816b0f": {
+   "nombre": "EJECUCIÓN PRESUPUESTARIA AL 31 DE DICIEMBRE DEL 2019",
+   "formato": "CSV",
+   "url": "https://datos.hcdn.gob.ar/dataset/2d37c6ab-0f77-45be-a8ad-40425be66c51/resource/e0b876da-1884-47d4-9046-4e7a6d816b0f/download/ejecucion-al-31-de-diciembre2019.csv",
+   "archivo": "e0b876da_EJECUCI_N_PRESUPUESTARIA_AL_31_DE_DICIEMBRE_DEL_2019.csv",
+   "bytes": 18530,
+   "sha256": "2a9d8450e3be31d80f11e0d8e2117a588cc2b898cb8392a587a586e5bad533ff",
+   "last_modificado": "2020-01-13T14:06:42.885315",
+   "bajado": "2026-11-04"
+  }
+ }
+}
