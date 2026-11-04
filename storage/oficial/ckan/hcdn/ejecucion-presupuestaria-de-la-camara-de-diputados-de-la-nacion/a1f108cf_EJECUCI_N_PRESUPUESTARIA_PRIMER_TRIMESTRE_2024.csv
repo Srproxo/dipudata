@@ -1,0 +1,36 @@
+"pg","in","pp","leyenda","credito_vigente","compromiso_preventivo","compromiso_consumido","devengado_consumido"
+"17",NA,NA,"Formación y Sanción Legislativa",83711956542,790817751.45,30902308775.7,30304351258.09
+NA,1,NA,"Gastos en personal",67109097256,0,27935947755.48,27935947755.48
+"17",1,1,"Personal permanente",38670702845,0,17369050243.9,17369050243.9
+NA,NA,2,"Personal temporario",23103294411,0,8483253775.86,8483253775.86
+NA,NA,5,"Asistencia social al personal",1007800000,0,210622297.02,210622297.02
+NA,NA,6,"Beneficios y compensaciones",3827300000,0,1873021438.7,1873021438.7
+NA,NA,8,"Personal contratado",5e+08,0,0,0
+NA,2,NA,"Bienes de consumo",1233448156,299720760,171378173.84,104898678.84
+NA,2,1,"Productos alimenticios, agropecuarios y forestales",298923893,153216000,84618136.18,51691763.18
+NA,NA,2,"Textiles y vestuario",114160288,0,2433497.29,2433497.29
+NA,NA,3,"Productos de papel, cartón e impresos",39269750,6510000,14197271.02,14197271.02
+NA,NA,4,"Productos de cuero y caucho",14780000,1620500,0,0
+NA,NA,5,"Productos químicos, combustibles y lubricantes",503090932,34393000,19711475.15,19711475.15
+NA,NA,6,"Productos de minerales no metálicos",3157000,0,23300,23300
+NA,NA,7,"Productos metálicos",22592614,4828500,192002.44,192002.44
+NA,NA,8,"Minerales",0,0,16500,16500
+NA,NA,9,"Otros bienes de consumo",237473679,99152760,50185991.76,16632869.76
+NA,3,NA,"Servicios no personales",14301480730,420582431.45,2666499651.38,2179292530.77
+NA,3,1,"Servicios básicos",762330000,0,132904363.21,132904363.21
+NA,NA,2,"Alquileres y derechos",427831796,534000,159268711.14,51614424.09
+NA,NA,3,"Mantenimiento, reparación y limpieza",1185345619,397642874.23,312954447.23,140110661.19
+NA,NA,4,"Servicios técnicos y profesionales",7019895205,0,470499750,330880070
+NA,NA,5,"Servicios comerciales y financieros",623685487,22405557.22,14912464.87,12254750.55
+NA,NA,6,"Publicidad y propaganda",86262648,0,0,0
+NA,NA,7,"Pasajes y viáticos",3201839147,0,1320690103.9,1320690103.9
+NA,NA,8,"Impuestos, derechos, tasas y juicios",379994628,0,165622204.25,165622204.25
+NA,NA,9,"Otros servicios",614296200,0,89647606.78,25215953.58
+NA,4,NA,"Bienes de uso",693658000,70514560,11570000,11570000
+NA,4,3,"Maquinaria y equipo",668658000,70514560,11570000,11570000
+NA,NA,8,"Activos intangibles",2.5e+07,0,0,0
+NA,5,NA,"Transferencias",374272400,0,116913195,72642293
+NA,5,1,"Transferencias al sector privado para financiar gastos corrientes",89301000,0,30207543,30207543
+NA,NA,5,"Transferencias a otras entidades del Sector Público Nacional",254739000,0,86705652,42434750
+NA,NA,9,"Transferencias al exterior",30232400,0,0,0
+"Totales Generales",NA,NA,NA,83711956542,790817751.45,30902308775.7,30304351258.09

@@ -421,7 +421,7 @@ $gd = grafico_proyectos(Datos::legislador('Diputados', 'pablo-ansaloni'), Datos:
 ok(!str_contains($gd, 'g-s-firmante') && str_contains($gd, 'no se puede distinguir a los firmantes'), 'en Diputados el gráfico aclara que el archivo oficial no permite distinguir a los firmantes');
 
 // Glosario: cada término tiene una definición corta y clara, enlaces a secciones que existen y anclas únicas
-$gl = terminos_glosario(); $glMal = 0; $rutasOk = ['/', '/votaciones', '/congreso', '/congreso/bloques', '/congreso/provincias', '/comisiones', '/patrimonio', '/leyes', '/metodologia'];
+$gl = terminos_glosario(); $glMal = 0; $rutasOk = ['/', '/votaciones', '/congreso', '/congreso/bloques', '/congreso/provincias', '/comisiones', '/patrimonio', '/leyes', '/presupuesto', '/metodologia'];
 foreach ($gl as $k => [$t, $d, $u]) {
     if (!preg_match('/^[a-z0-9-]+$/', $k) || trim($t) === '' || mb_strlen($d) < 40 || mb_strlen($d) > 520 || !in_array($u, $rutasOk, true)) { $glMal++; }
 }
@@ -444,6 +444,20 @@ foreach ($todos as $lg) {
 ok($dMal === 0 && $dSen === 0 && $dN > 1500 && ($pm3['con_dictamen'] ?? 0) > 1000, 'dictámenes: cada uno tiene comisión, tipo válido y fecha válida; ninguno se atribuye al Senado (' . $dN . ' dictámenes en proyectos de diputados actuales)');
 ok(($pm3['aprobados_con_dictamen_pct'] ?? 0) > 85, 'dictámenes: coherencia con los resultados, casi todo proyecto sancionado o con media sanción tiene dictamen (' . ($pm3['aprobados_con_dictamen_pct'] ?? 0) . ' %)');
 ok(dictamen_texto(['Cultura', 'od', '0109', '2026-06-05', '']) === 'Dictamen de la comisión de Cultura, Orden del Día 0109 (5 de junio de 2026)' && dictamen_texto(['', 'st', '', '', '']) === 'Pedido de tratamiento sobre tablas', 'el texto de cada dictamen se escribe en lenguaje simple, también cuando falta la comisión o la fecha');
+
+// Presupuesto de la Cámara (programa 17): los importes cuadran con su total y la página los muestra
+$pr = Datos::presupuestoCamara(); $prA = $pr['anios'] ?? []; $prMal = 0; $prCerr = 0;
+foreach ($prA as $a) {
+    $sumC = 0; $sumD = 0;
+    foreach ($a['incisos'] as $v) { $sumC += $v[0]; $sumD += $v[2]; if ($v[0] < 0 || $v[1] < 0 || $v[2] < 0) { $prMal++; } }
+    if (abs($sumC - $a['credito']) > 10 || abs($sumD - $a['devengado']) > 10 || $a['devengado'] > $a['comprometido'] + 10 || $a['devengado'] <= 0 || !preg_match('/^[0-9a-f]{64}$/', (string)$a['sha256'])) { $prMal++; }
+    if ($a['cerrado']) { $prCerr++; }
+}
+ok($prA && $prMal === 0 && $prCerr >= 10 && count($pr['_meta']['incisos'] ?? []) === 5, 'presupuesto de la Cámara: ' . count($prA) . ' ejercicios; en cada uno los cinco tipos de gasto suman el total, sin importes negativos y con la huella del archivo original');
+$prAnios = array_column($prA, 'anio');
+ok($prAnios === array_values(array_unique($prAnios)) && $prAnios === (function (array $x) { sort($x); return $x; })($prAnios) && $prAnios[0] === 2016, 'presupuesto de la Cámara: un ejercicio por año, en orden, desde 2016');
+ok(count(array_filter($prA, static fn($a) => $a['factor_ipc'] !== null)) >= 8 && array_filter($prA, static fn($a) => $a['anio'] === 2016 && $a['factor_ipc'] === null), 'presupuesto de la Cámara: pesos de hoy con el IPC donde hay los 12 meses; 2016 queda sin convertir (la serie empieza en dic. 2016)');
+ok(is_file(__DIR__ . '/../app/Vistas/presupuesto.php') && str_contains((string)file_get_contents(__DIR__ . '/../mvc.php'), "'/presupuesto'") && isset(terminos_glosario()['devengado']), 'presupuesto de la Cámara: tiene página, ruta y término en el glosario');
 
 // Documentación y código no se desfasan: todo script que CLAUDE.md nombra existe (un PR armado sobre una base vieja ya borró uno en silencio)
 $doc = (string)file_get_contents(__DIR__ . '/../CLAUDE.md'); $faltan = [];

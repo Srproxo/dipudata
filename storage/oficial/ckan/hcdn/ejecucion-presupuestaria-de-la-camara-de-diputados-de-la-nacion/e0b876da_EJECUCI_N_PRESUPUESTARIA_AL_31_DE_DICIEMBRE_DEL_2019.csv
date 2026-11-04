@@ -1,0 +1,115 @@
+﻿programa_id,programa_desc,inciso_id,inciso_desc,principal_id,principal_desc,parcial_id,parcial_desc,monto_credito_vigente,monto_compromiso_preventivo,monto_compromiso_reservado,monto_compromiso_consumido,monto_devengado_reservado,monto_devengado_consumido,ejercicio_id
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,1,Retribución del Cargo,2927633345,0,0,2927632404.44,0,2927632404.44,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,3,Retribuciones que no hacen al Cargo,956742322,0,0,956742322,0,956742322,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,4,Sueldo Anual Complementario,277142034,0,0,277142033.99,0,277142033.99,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,6,Contribuciones Patronales,942843164,0,0,942842232.3,0,942842232.3,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,7,Complementos,185888646,0,0,185888525.29,0,185888525.29,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,1,Retribuciones del Cargo,1579190151,0,0,1579189624.69,0,1579189624.69,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,2,Retribuciones que no hacen al Cargo,361951743,0,0,361950938.58,0,361950938.58,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,3,Sueldo Anual Complementario,169845151,0,0,169844874.97,0,169844874.97,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,5,Contribuciones Patronales,476076893,0,0,476075921.13,0,476075921.13,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,6,Complementos,8104572,0,0,8103305.24,0,8103305.24,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,5,Asistencia Social al Personal,1,Seguros de Riesgo de Trabajo,67345291,0,0,67343299.65,0,67343299.65,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,5,Asistencia Social al Personal,9,Otras Asistencias Sociales al Personal,4592353,0,0,4591681.28,0,4591681.28,2019
+17,Formación y Sanción Legislativa,1,Gastos en Personal,6,Beneficios y Compensaciones,0,Beneficios y Compensaciones,564021911,0,0,564021487.51,0,564021487.51,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",1,Alimentos para Personas,44815001,0,0,40945673.3,0,40945673.3,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",3,Productos Pecuarios,11801,0,0,0,0,0,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",4,Productos Agroforestales,60301,0,0,48209.64,0,48209.64,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",5,"Madera, Corcho y sus Manufacturas",159681,0,0,364010.81,0,364010.81,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,1,Hilados y Telas,159354,0,0,373736.19,0,373736.19,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,2,Prendas de Vestir,419164,0,0,3138382.23,0,3138382.23,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,3,Confecciones Textiles,447960,0,0,590068.26,0,590068.26,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,9,Otros N.E.P.,22290,0,0,22683.73,0,22683.73,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",1,Papel de Escritorio y Cartón,1142843,0,0,2739258.77,0,2739258.77,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",2,Papel para Computación,91789,0,0,125730.51,0,125730.51,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",3,Productos de Artes Gráficas,6436501,0,0,7067218.37,0,7067218.37,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",4,Productos de Papel y Cartón,302090,0,0,1326474.12,0,1326474.12,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",5,"Libros, Revistas y Periódicos",585137,0,0,2278417.69,0,2278417.69,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,1,Cueros y Pieles,0,0,0,14038.5,0,14038.5,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,2,Artículos de Cuero,20927,0,0,59419.4,0,59419.4,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,3,Artículos de Caucho,13112,0,0,29738.11,0,29738.11,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,4,Cubiertas y Cámaras de Aire,293323,0,0,330627.95,0,330627.95,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",1,Compuestos Químicos,257590,0,0,497901.91,0,497901.91,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",2,Productos Farmacéuticos y Medicinales,421221,0,0,360820.94,0,360820.94,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",3,Abonos y Fertilizantes,1312,0,0,14575,0,14575,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",4,"Insecticidas, Fumigantes y Otros",34032,0,0,29491.08,0,29491.08,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",5,"Tintas, Pinturas y Colorantes",1345250,0,0,3379978.42,0,3379978.42,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",6,Combustibles y Lubricantes,5548346,0,0,9428422.51,0,9428422.51,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",8,Productos de Material Plástico,172808,0,0,512414.83,0,512414.83,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",9,Otros N.E.P.,170269,0,0,129390.5,0,129390.5,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,1,Productos de Arcilla y Cerámica,0,0,0,8761.01,0,8761.01,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,2,Productos de Vidrio,35861,0,0,331704.09,0,331704.09,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,3,Productos de Loza y Porcelana,81693,0,0,51995.18,0,51995.18,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,4,"Productos de Cemento, Asbesto y Yeso",1312,0,0,121644.44,0,121644.44,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,5,"Cemento, Cal y Yeso",58118,0,0,247006.48,0,247006.48,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,9,Otros N.E.P.,0,0,0,30522.33,0,30522.33,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,1,Productos Ferrosos,103694,0,0,403827.97,0,403827.97,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,2,Productos No Ferrosos,7612,0,0,154125.12,0,154125.12,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,4,Estructuras Metálicas Acabadas,123032,0,0,160302.91,0,160302.91,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,5,Herramientas Menores,3152955,0,0,420488.56,0,420488.56,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,9,Otros N.E.P.,76295,0,0,410031.89,0,410031.89,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,8,Minerales,4,"Piedra, Arcilla y Arena",36779,0,0,124453.18,0,124453.18,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,1,Elementos de Limpieza,1518328,0,0,1835390.76,0,1835390.76,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,2,"Utiles de Escritorio, Oficina y Enseñanza",26198048,0,0,6007629.77,0,6007629.77,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,3,Utiles y Materiales Eléctricos,2448911,0,0,1419689.52,0,1419689.52,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,4,Utensilios de Cocina y Comedor,169459,0,0,112884.85,0,112884.85,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,5,"Utiles Menores Médico, Quirúrgico y de Laboratorio",86748,0,0,204077.59,0,204077.59,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,6,Repuestos y Accesorios,7152114,0,0,9610962.66,0,9610962.66,2019
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,9,Otros N.E.P.,1694939,0,0,1720437.4,0,1720437.4,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,1,Energía Eléctrica,50511018,0,0,39641058.11,0,39641058.11,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,2,Agua,3327347,0,0,10025884.56,0,10025884.56,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,3,Gas,116800,0,0,3166093.16,0,3166093.16,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,4,"Teléfonos, Télex y Telefax",3472771,0,0,4622384.57,0,4622384.57,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,5,Correos y Telégrafo,1468293,0,0,1451563.55,0,1451563.55,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,9,Otros N.E.P.,77606,0,0,66530.59,0,66530.59,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,1,Alquiler de Edificios y Locales,13007792,0,0,11938482.94,0,11938482.94,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,2,"Alquiler de Maquinaria, Equipo y Medios de Transporte",0,0,0,461718.11,0,461718.11,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,3,Alquiler de Equipos de Computación,5515,0,0,17038,0,17038,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,4,Alquiler de Fotocopiadoras,1957160,0,0,953370.8,0,953370.8,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,9,Otros N.E.P.,4225128,0,0,5783203.55,0,5783203.55,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",1,Mantenimiento y Reparación de Edificios y Locales,39410407,0,0,30510087.69,0,30510087.69,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",2,Mantenimiento y Reparación de Vehículos,84272,0,0,420636.87,0,420636.87,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",3,Mantenimiento y Reparación de Maquinaria y Equipo,3298979,0,0,3121700.84,0,3121700.84,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",5,"Limpieza, Aseo y Fumigación",33402673,0,0,39676487.98,0,39676487.98,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",6,Mantenimiento de Sistemas Informáticos,11223518,0,0,6039068.83,0,6039068.83,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",9,Otros N.E.P.,69464,0,0,23381,0,23381,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,1,"Estudios, Investigaciones y Proyectos de Factibilidad",219712,0,0,63000,0,63000,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,2,Médicos y Sanitarios,2387616,0,0,5895618.97,0,5895618.97,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,3,Jurídicos,93625,0,0,463798.91,0,463798.91,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,4,Contabilidad y Auditoría,10717,0,0,0,0,0,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,5,De Capacitación,2034183,0,0,2508580.84,0,2508580.84,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,6,De Informática y Sistemas Computarizados,1559074,0,0,609179.74,0,609179.74,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,9,Otros N.E.P.,410207406,0,0,403054232.14,0,403054232.14,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,1,Transporte,502412,0,0,372065.09,0,372065.09,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,3,"Imprenta, Publicaciones y Reproducciones",6537614,0,0,4590597.91,0,4590597.91,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,4,Primas y Gastos de Seguros,5246894,0,0,9031657.86,0,9031657.86,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,5,Comisiones y Gastos Bancarios,382507,0,0,1219446.82,0,1219446.82,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,6,Internet,10418712,0,0,6200839.21,0,6200839.21,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,9,Otros N.E.P.,12496241,0,0,11315616.64,0,11315616.64,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,6,Publicidad y Propaganda,0,Publicidad y Propaganda,7500000,0,0,7492196,0,7492196,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,7,Pasajes y Viáticos,1,Pasajes,276019097,0,0,272509393.48,0,272509393.48,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,7,Pasajes y Viáticos,2,Viáticos,2861148,0,0,6244627.45,0,6244627.45,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",1,Impuestos Indirectos,0,0,0,2436,0,2436,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",3,Derechos y Tasas,12461117,0,0,15575967.29,0,15575967.29,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",4,Multas y Recargos,11894298,0,0,9367042.94,0,9367042.94,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",6,Juicios y Mediaciones,3976228,0,0,3359116.53,0,3359116.53,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,1,Servicios de Ceremonial,9917137,0,0,7648954.57,0,7648954.57,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,3,Servicios de Vigilancia,20594260,0,0,13706510.4,0,13706510.4,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,4,Gastos Protocolares,47465,0,0,137091.87,0,137091.87,2019
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,9,Otros N.E.P.,217724,0,0,20195,0,20195,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,2,Construcciones,1,Construcciones en Bienes de Dominio Privado,0,0,0,0,0,0,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,2,"Equipo de Transporte, Tracción y Elevación",341616,0,0,26750.33,0,26750.33,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,3,Equipo Sanitario y de Laboratorio,301406,0,0,0,0,0,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,4,Equipo de Comunicación y Señalamiento,3296093,0,0,1257984.66,0,1257984.66,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,5,Equipo Educacional y Recreativo,1788578,0,0,630657.08,0,630657.08,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,6,Equipo para Computación,0,0,0,8332630.48,0,8332630.48,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,7,Equipo de Oficina y Muebles,8000000,0,0,6129764.05,0,6129764.05,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,8,Herramientas y Repuestos Mayores,2849197,0,0,979141.55,0,979141.55,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,9,Equipos Varios,2577245,0,0,1421590.05,0,1421590.05,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,5,"Libros, Revistas y Otros Elementos Coleccionables",0,"Libros, Revistas y Otros Elementos Coleccionables",120000,0,0,110000,0,110000,2019
+17,Formación y Sanción Legislativa,4,Bienes de Uso,8,Activos Intangibles,1,Programas de Computación,761133,0,0,754234.8,0,754234.8,2019
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,3,Becas,393000,0,0,390000,0,390000,2019
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,4,Ayudas Sociales a Personas,9750000,0,0,9750000,0,9750000,2019
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,7,Transf. a Otras Instituc. Culturales y Soc. S/Fines de Lucro,14396000,0,0,14396000,0,14396000,2019
+17,Formación y Sanción Legislativa,5,Transferencias,5,Transferencias a Otras Entidades del Sector Público Nacional,4,Transf. a Fondos Fiduc.y Otros Entes del SPNnF p/Fin.Gs.Ctes,29750000,0,0,29750000,0,29750000,2019
+17,Formación y Sanción Legislativa,5,Transferencias,9,Transferencias al Exterior,2,Transf.a Organismos Internac. p/Financiar Gastos Corrientes,3460000,0,0,3455625.67,0,3455625.67,2019

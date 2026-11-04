@@ -15,6 +15,7 @@ $mas = [
     'provincias'  => ['/congreso/provincias', 'Provincias'],
     'viajes'      => ['/viajes', 'Pasajes y misiones'],
     'remuneraciones' => ['/remuneraciones', 'Cuánto cobran'],
+    'presupuesto' => ['/presupuesto', 'Cuánto gasta la Cámara'],
     'subsidios'   => ['/subsidios', 'Subsidios'],
     'aportes'     => ['/aportes', 'Aportes a partidos'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
@@ -90,6 +91,7 @@ $inf = \App\Datos::informe();
         <li><a href="/comisiones">Comisiones</a></li>
         <li><a href="/viajes">Pasajes y misiones</a></li>
         <li><a href="/remuneraciones">Cuánto cobran</a></li>
+        <li><a href="/presupuesto">Cuánto gasta la Cámara</a></li>
         <li><a href="/subsidios">Subsidios</a></li>
         <li><a href="/senado">Registros del Senado</a></li>
       </ul>

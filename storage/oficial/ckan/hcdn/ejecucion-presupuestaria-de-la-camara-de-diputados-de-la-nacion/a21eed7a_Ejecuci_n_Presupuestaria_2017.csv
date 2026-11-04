@@ -1,0 +1,114 @@
+﻿programa_id,programa_desc,inciso_id,inciso_desc,principal_id,principal_desc,parcial_id,parcial_desc,monto_credito_vigente,monto_compromiso_preventivo,monto_compromiso_reservado,monto_compromiso_consumido,monto_devengado_reservado,monto_devengado_consumido,ejercicio_id
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,1,Retribución del Cargo,1940466011,0,0,1940424771,0,1940424771,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,3,Retribuciones que no hacen al Cargo,634732078,0,0,634709008,0,634709008,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,4,Sueldo Anual Complementario,194968097,0,0,194258528,0,194258528,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,6,Contribuciones Patronales,649410462,0,0,649369242,0,649369242,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,1,Personal Permanente,7,Complementos,83484978,0,0,"83475237,4",0,"83475237,4",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,1,Retribuciones del Cargo,940099803,0,0,940026771,0,940026771,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,2,Retribuciones que no hacen al Cargo,200339961,0,0,198033890,0,198033890,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,3,Sueldo Anual Complementario,98169980,0,0,"97827515,7",0,"97827515,7",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,5,Contribuciones Patronales,292480339,0,0,292416937,0,292416937,2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,2,Personal Temporario,6,Complementos,4363400,0,0,"4359625,55",0,"4359625,55",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,4,Asignaciones Familiares,0,Asignaciones Familiares,9561450,0,0,"9558045,33",0,"9558045,33",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,5,Asistencia Social al Personal,1,Seguros de Riesgo de Trabajo,38000000,0,0,"37985882,3",0,"37985882,3",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,5,Asistencia Social al Personal,9,Otras Asistencias Sociales al Personal,5000000,0,0,"3304520,98",0,"3304520,98",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,6,Beneficios y Compensaciones,0,Beneficios y Compensaciones,22500000,0,0,"22050480,3",0,"22050480,3",2017
+17,Formación y Sanción Legislativa,1,Gastos en Personal,8,Personal contratado,7,Contratos especiales,210000000,0,0,209973701,0,209973701,2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",1,Alimentos para Personas,17111694,0,0,"19721327,2",0,"19721327,2",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",4,Productos Agroforestales,633665,0,0,"588314,79",0,"588314,79",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,1,"Productos Alimenticios, Agropecuarios y Forestales",5,"Madera, Corcho y sus Manufacturas",710872,0,0,"659149,96",0,"659149,96",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,1,Hilados y Telas,248987,0,0,"248926,96",0,"248926,96",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,2,Prendas de Vestir,9917883,0,0,"5913256,87",0,"5913256,87",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,3,Confecciones Textiles,1516064,0,0,"1516011,82",0,"1516011,82",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,2,Textiles y Vestuario,9,Otros N.E.P.,5112,0,0,"2721804,53",0,"2721804,53",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",1,Papel de Escritorio y Cartón,1262248,0,0,"727085,46",0,"727085,46",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",2,Papel para Computación,15437,0,0,"176473,05",0,"176473,05",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",3,Productos de Artes Gráficas,4557501,0,0,"4489925,94",0,"4489925,94",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",4,Productos de Papel y Cartón,124889,0,0,"666903,88",0,"666903,88",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",5,"Libros, Revistas y Periódicos",1867334,0,0,"1866493,67",0,"1866493,67",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,3,"Productos de Papel, Cartón e Impresos",9,Otros N.E.P.,4095,0,0,"1696,09",0,"1696,09",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,1,Cueros y Pieles,0,0,0,"11688,5",0,"11688,5",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,2,Artículos de Cuero,22990,0,0,"32970,28",0,"32970,28",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,3,Artículos de Caucho,22391,0,0,"22346,14",0,"22346,14",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,4,Productos de Cuero y Caucho,4,Cubiertas y Cámaras de Aire,950833,0,0,"722317,68",0,"722317,68",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",1,Compuestos Químicos,519320,0,0,"519261,05",0,"519261,05",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",2,Productos Farmacéuticos y Medicinales,667394,0,0,"603567,43",0,"603567,43",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",4,"Insecticidas, Fumigantes y Otros",30779,0,0,"63185,08",0,"63185,08",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",5,"Tintas, Pinturas y Colorantes",3783197,0,0,"3424485,45",0,"3424485,45",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",6,Combustibles y Lubricantes,14877902,0,0,"7785747,02",0,"7785747,02",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",8,Productos de Material Plástico,144401,0,0,"392878,42",0,"392878,42",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,5,"Productos Químicos, Combustibles y Lubricantes",9,Otros N.E.P.,207955,0,0,"207883,78",0,"207883,78",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,1,Productos de Arcilla y Cerámica,0,0,0,11703,0,11703,2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,2,Productos de Vidrio,572398,0,0,"563521,61",0,"563521,61",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,3,Productos de Loza y Porcelana,542609,0,0,"542550,54",0,"542550,54",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,4,"Productos de Cemento, Asbesto y Yeso",0,0,0,"4544,2",0,"4544,2",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,5,"Cemento, Cal y Yeso",6502,0,0,"32731,22",0,"32731,22",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,6,Productos de Minerales No Metálicos,9,Otros N.E.P.,0,0,0,"7722,61",0,"7722,61",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,1,Productos Ferrosos,444947,0,0,"416651,47",0,"416651,47",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,2,Productos No Ferrosos,6095,0,0,"344328,42",0,"344328,42",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,4,Estructuras Metálicas Acabadas,0,0,0,"13455,74",0,"13455,74",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,5,Herramientas Menores,7716707,0,0,"163794,87",0,"163794,87",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,7,Productos Metálicos,9,Otros N.E.P.,730771,0,0,"397213,86",0,"397213,86",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,8,Minerales,4,"Piedra, Arcilla y Arena",11547,0,0,"10893,99",0,"10893,99",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,1,Elementos de Limpieza,2549219,0,0,"2512121,25",0,"2512121,25",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,2,"Utiles de Escritorio, Oficina y Enseñanza",3002510,0,0,"2946148,14",0,"2946148,14",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,3,Utiles y Materiales Eléctricos,2378164,0,0,"2324233,88",0,"2324233,88",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,4,Utensilios de Cocina y Comedor,1261524,0,0,"1788077,82",0,"1788077,82",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,5,"Utiles Menores Médico, Quirúrgico y de Laboratorio",34092,0,0,"36692,24",0,"36692,24",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,6,Repuestos y Accesorios,5222255,0,0,"3759393,62",0,"3759393,62",2017
+17,Formación y Sanción Legislativa,2,Bienes de Consumo,9,Otros Bienes de Consumo,9,Otros N.E.P.,1254050,0,0,"3969174,25",0,"3969174,25",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,1,Energía Eléctrica,11753610,0,0,"16508861,8",0,"16508861,8",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,2,Agua,6001800,0,0,"5786513,36",0,"5786513,36",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,3,Gas,3004800,0,0,"278633,92",0,"278633,92",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,4,"Teléfonos, Télex y Telefax",2861100,0,0,"4019858,78",0,"4019858,78",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,5,Correos y Telégrafo,1385065,0,0,"819415,31",0,"819415,31",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,1,Servicios Básicos,9,Otros N.E.P.,3033400,0,0,"625209,93",0,"625209,93",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,1,Alquiler de Edificios y Locales,11469875,0,0,"9090435,65",0,"9090435,65",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,2,"Alquiler de Maquinaria, Equipo y Medios de Transporte",2049881,0,0,"1960266,88",0,"1960266,88",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,3,Alquiler de Equipos de Computación,0,0,0,"34852,4",0,"34852,4",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,4,Alquiler de Fotocopiadoras,3031000,0,0,"3030374,89",0,"3030374,89",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,2,Alquileres y Derechos,9,Otros N.E.P.,1610945,0,0,"3956179,69",0,"3956179,69",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",1,Mantenimiento y Reparación de Edificios y Locales,49497640,0,0,"43508957,1",0,"43508957,1",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",2,Mantenimiento y Reparación de Vehículos,287581,0,0,"518109,34",0,"518109,34",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",3,Mantenimiento y Reparación de Maquinaria y Equipo,5524117,0,0,"1955731,05",0,"1955731,05",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",5,"Limpieza, Aseo y Fumigación",22519979,0,0,"27668768,7",0,"27668768,7",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",6,Mantenimiento de Sistemas Informáticos,4904000,0,0,"2000821,8",0,"2000821,8",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,3,"Mantenimiento, Reparación y Limpieza",9,Otros N.E.P.,25420,0,0,"56531,2",0,"56531,2",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,1,"Estudios, Investigaciones y Proyectos de Factibilidad",88000,0,0,"336497,1",0,"336497,1",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,2,Médicos y Sanitarios,218500,0,0,"3171852,56",0,"3171852,56",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,3,Jurídicos,17026,0,0,"658300,35",0,"658300,35",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,4,Contabilidad y Auditoría,57500,0,0,380275,0,380275,2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,5,De Capacitación,921249,0,0,"476602,08",0,"476602,08",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,6,De Informática y Sistemas Computarizados,5058500,0,0,"2506727,16",0,"2506727,16",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,4,Servicios Técnicos y Profesionales,9,Otros N.E.P.,30825605,0,0,"27425818,6",0,"27425818,6",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,1,Transporte,1498092,0,0,"411143,59",0,"411143,59",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,3,"Imprenta, Publicaciones y Reproducciones",4077089,0,0,"3642141,93",0,"3642141,93",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,4,Primas y Gastos de Seguros,7641700,0,0,"5943586,79",0,"5943586,79",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,5,Comisiones y Gastos Bancarios,375000,0,0,"393410,11",0,"393410,11",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,6,Internet,3530300,0,0,"2917007,25",0,"2917007,25",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,5,Servicios Comerciales y Financieros,9,Otros N.E.P.,6391176,0,0,"8671058,98",0,"8671058,98",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,6,Publicidad y Propaganda,0,Publicidad y Propaganda,750000,0,0,750000,0,750000,2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,7,Pasajes y Viáticos,1,Pasajes,308552295,0,0,308551410,0,308551410,2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,7,Pasajes y Viáticos,2,Viáticos,4954000,0,0,"4953949,82",0,"4953949,82",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",2,Impuestos Directos,0,0,0,"1827,88",0,"1827,88",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",3,Derechos y Tasas,9259449,0,0,"11476732,4",0,"11476732,4",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",4,Multas y Recargos,0,0,0,"824986,63",0,"824986,63",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,8,"Impuestos, Derechos, Tasas y Juicios",6,Juicios y Mediaciones,7878608,0,0,"4834466,46",0,"4834466,46",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,1,Servicios de Ceremonial,22471488,0,0,"13165566,1",0,"13165566,1",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,3,Servicios de Vigilancia,4701625,0,0,8873106,0,8873106,2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,4,Gastos Protocolares,204046,0,0,"145935,9",0,"145935,9",2017
+17,Formación y Sanción Legislativa,3,Servicios No Personales,9,Otros Servicios,9,Otros N.E.P.,2290197,0,0,"148823,84",0,"148823,84",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,2,"Equipo de Transporte, Tracción y Elevación",9109210,0,0,"9109200,6",0,"9109200,6",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,4,Equipo de Comunicación y Señalamiento,5230197,0,0,"4590046,78",0,"4590046,78",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,5,Equipo Educacional y Recreativo,180654,0,0,"1417828,92",0,"1417828,92",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,6,Equipo para Computación,8134444,0,0,"5671496,59",0,"5671496,59",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,7,Equipo de Oficina y Muebles,6093600,0,0,"3024704,72",0,"3024704,72",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,8,Herramientas y Repuestos Mayores,0,0,0,"501797,95",0,"501797,95",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,3,Maquinaria y Equipo,9,Equipos Varios,989895,0,0,"509787,43",0,"509787,43",2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,6,Obras de Arte,0,Obras de Arte,130000,0,0,2900,0,2900,2017
+17,Formación y Sanción Legislativa,4,Bienes de Uso,8,Activos Intangibles,1,Programas de Computación,3132000,0,0,"1061070,06",0,"1061070,06",2017
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,3,Becas,300000,0,0,300000,0,300000,2017
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,4,Ayudas Sociales a Personas,10000000,0,0,10000000,0,10000000,2017
+17,Formación y Sanción Legislativa,5,Transferencias,1,Transf. al Sector Privado para Financiar Gastos Corrientes,7,Transf. a Otras Instituc. Culturales y Soc. S/Fines de Lucro,17712200,0,0,17712200,0,17712200,2017
+17,Formación y Sanción Legislativa,5,Transferencias,5,Transferencias a Otras Entidades del Sector Público Nacional,4,Transf. a Fondos Fiduc.y Otros Entes del SPNnF p/Fin.Gs.Ctes,7180000,0,0,7180000,0,7180000,2017
+17,Formación y Sanción Legislativa,5,Transferencias,9,Transferencias al Exterior,2,Transf.a Organismos Internac. p/Financiar Gastos Corrientes,2300000,0,0,"2299908,98",0,"2299908,98",2017
