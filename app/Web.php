@@ -825,3 +825,37 @@ function grafico_proyectos(array $l, ?array $pr, bool $conTitulo = true): string
     }
     return $h . '</tbody></table></div></details>';
 }
+
+/**
+ * Glosario en lenguaje llano: [clave => [término, definición, dónde se ve]]. Las definiciones describen cómo se usan estos términos en DipuData;
+ * donde la práctica de cada cámara puede variar, lo dicen.
+ */
+function terminos_glosario(): array
+{
+    return [
+        'abstencion' => ['Abstención', 'Una forma de votar: el legislador está presente y no vota ni a favor ni en contra. Se cuenta aparte de los votos afirmativos y negativos.', '/votaciones'],
+        'afirmativo-negativo' => ['Voto afirmativo y negativo', 'Afirmativo es votar a favor de lo que se propone; negativo, en contra. El resultado de una votación se decide con estos votos, y según el asunto hace falta una mayoría simple o una mayoría especial.', '/votaciones'],
+        'ausente' => ['Ausente / "No votó"', 'Quiere decir que en esa votación no figura un voto del legislador. No dice por qué: puede ser una licencia, una ausencia o que estuvo presente y no emitió voto. Por eso en DipuData se escribe "no votó" y no se interpreta el motivo.', '/votaciones'],
+        'bloque' => ['Bloque', 'Grupo de legisladores de una misma cámara que se organizan juntos, generalmente porque pertenecen al mismo partido o alianza. Un legislador puede cambiar de bloque durante su mandato, y por eso en cada votación del Senado se muestra el bloque que figuraba en esa fecha.', '/congreso/bloques'],
+        'camara' => ['Cámara', 'El Congreso argentino tiene dos: la Cámara de Diputados (257 bancas, que representan a la población de cada distrito) y el Senado (72 bancas, tres por provincia y tres por la Ciudad de Buenos Aires).', '/congreso'],
+        'comision' => ['Comisión', 'Grupo reducido de legisladores que estudia los proyectos de un tema (salud, presupuesto, educación…) antes de que lleguen al recinto. Cada proyecto se "gira" a una o más comisiones.', '/comisiones'],
+        'conmutador' => ['Conmutador e interno', 'El conmutador es el teléfono general de la cámara; el interno es el número que hay que marcar después para llegar al despacho de cada legislador.', '/'],
+        'declaracion-jurada' => ['Declaración jurada patrimonial', 'Documento en el que funcionarios y legisladores informan sus bienes, deudas e ingresos. Por la Ley 26.857 es público y lo publica la Oficina Anticorrupción. DipuData muestra solo los totales, nunca el CUIT, los datos de familiares ni el detalle de cada bien.', '/patrimonio'],
+        'dolar-oficial' => ['Dólar oficial y MEP', 'Para pasar un patrimonio a dólares se usa el tipo de cambio oficial del Banco Central al último día hábil de cada año. El dólar MEP se muestra aparte y marcado como no oficial, porque no tiene una serie oficial.', '/patrimonio'],
+        'electores-votos' => ['Electores, votos positivos, en blanco y nulos', 'Electores son las personas habilitadas para votar. Votos positivos son los que van a una agrupación; en blanco, los de quien votó sin elegir ninguna; nulos, los que no se pueden contar. El porcentaje de cada agrupación se calcula sobre los votos positivos.', '/congreso/provincias'],
+        'escrutinio' => ['Escrutinio provisorio y definitivo', 'El provisorio es el primer recuento, el de las mesas, que se conoce la noche de la elección. El definitivo lo hace la Justicia electoral después y puede diferir un poco. Los resultados que muestra DipuData son los provisorios publicados por la Dirección Nacional Electoral.', '/congreso/provincias'],
+        'expediente' => ['Expediente', 'El número con el que se registra cada proyecto en la cámara. Por ejemplo, "5242-D-2026" es el proyecto 5242 de Diputados de 2026.', '/votaciones'],
+        'fuente-oficial' => ['Fuente oficial y "no figura en el archivo publicado"', 'DipuData solo publica lo que sale de un registro oficial y se pudo verificar. Cuando algo no aparece, se dice exactamente eso: no figura en el archivo publicado. No quiere decir que no exista o que no se haya presentado.', '/metodologia'],
+        'ipc' => ['IPC y pesos de hoy', 'El Índice de Precios al Consumidor mide cuánto subieron los precios. Se usa para expresar un monto de años anteriores en pesos de hoy y poder compararlo. Para años anteriores a 2016 no hay serie oficial en este formato.', '/patrimonio'],
+        'mandato' => ['Mandato', 'El período para el que fue elegido un legislador: cuatro años en Diputados y seis en el Senado. Cada dos años se renueva la mitad de Diputados y un tercio del Senado.', '/congreso'],
+        'patrimonio-neto' => ['Patrimonio neto', 'Los bienes menos las deudas, tal como los declaró la persona al cierre de cada año. Un cambio entre años puede deberse a cómo se valúan los bienes en la declaración (por ejemplo, a valor fiscal o de compra) y no solo a compras, ventas o ahorro.', '/patrimonio'],
+        'paso' => ['PASO', 'Primarias abiertas, simultáneas y obligatorias: elecciones previas a las generales, en las que cada agrupación elige sus listas internas. En DipuData cada agrupación suma los votos de todas sus listas.', '/congreso/provincias'],
+        'proyecto-ley' => ['Proyecto de ley', 'Propuesta para crear o cambiar una ley. Para convertirse en ley tiene que aprobarla la Cámara de Diputados y el Senado, y promulgarla el Poder Ejecutivo.', '/leyes'],
+        'proyecto-declaracion' => ['Proyecto de declaración', 'Expresa la opinión o el deseo de la cámara sobre un tema (un beneplácito, un reconocimiento, una opinión). No obliga a nadie ni cambia leyes.', '/votaciones'],
+        'proyecto-resolucion-comunicacion' => ['Proyecto de resolución y de comunicación', 'Asuntos que decide una sola cámara: por ejemplo, pedidos de informes al Poder Ejecutivo, citaciones o decisiones internas. Según el reglamento de cada cámara se llaman de un modo u otro. No son leyes.', '/votaciones'],
+        'propio-firmante' => ['Proyecto propio y proyecto firmado', 'En el Senado, un proyecto es propio cuando el senador es el primer firmante, y "firmado" cuando acompaña a otro. En Diputados, el archivo oficial registra un solo autor por proyecto y no trae cofirmantes.', '/'],
+        'recinto' => ['Recinto y sesión', 'El recinto es la sala donde se reúne la cámara; la sesión, cada reunión en la que se debate y se vota.', '/congreso'],
+        'reconocimientos' => ['Reconocimientos y homenajes', 'Proyectos cuyo título expresa o pide reconocimiento, beneplácito, homenaje, felicitación, conmemoración o declara de interés algo. Se cuentan aparte en el gráfico de proyectos por año.', '/'],
+        'votacion-nominal' => ['Votación nominal', 'Votación en la que queda registrado cómo votó cada legislador, con su nombre. No todas las votaciones son nominales: en algunas se vota levantando la mano y solo queda el resultado.', '/votaciones'],
+    ];
+}
