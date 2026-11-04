@@ -25,6 +25,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
   `construir_votaciones.py` → `construir_registros.py` → `construir_diputados_extra.py` → `construir_rutas_pasajes.py` → `construir_ddjj.py` → `construir_proyectos.py` → `construir_ejes.py` → `construir_coautorias.py` → `construir_aportes.py` → `contrastar_datacp.py`.
   Descargas: `bajar_votaciones_hcdn.py` (Diputados 2020 en adelante, desde una máquina local), `bajar_ipc.py` (IPC del INDEC, datos.gob.ar), `bajar_dolar.py` (dólar oficial del BCRA al cierre de cada año, datos.gob.ar), `bajar_dolar_mep.py` (MEP de ArgentinaDatos, no oficial; después de bajar_dolar.py), `bajar_georef.py` (límites provinciales y localidades de Georef para el mapa de pasajes), `bajar_votaciones_senado.py` (senado.gob.ar, todas las actas desde 2005, reanudable, ~1 hora), `bajar_proyectos_senado.py` (lista de proyectos de cada senador), `bajar_giros_senado.py` (giros a comisiones de esos proyectos, ~1 hora), `bajar_votaciones_recientes.py` (Diputados, ArgentinaDatos),
   `filtrar_aportes.py <aportes.csv> <registro-nacional-sociedades-AAAA.zip>` (aportes de la CNE exportados desde el navegador; quita CUIL/CUIT, banco y nombre de personas humanas; agrega el rubro de las empresas),
+  `bajar_resultados_electorales.py` → `construir_resultados.py` (resultados de las generales 2023 por provincia, escrutinio PROVISORIO de la DINE en argentina.gob.ar; el ZIP de 28 MB se lee en streaming y solo se guarda el agregado con su sha256),
   `bajar_fotos.py` (copia las fotos de los legisladores a `assets/fotos/`: el sitio no pide imágenes a terceros y la CSP no admite dominios externos),
   `filtrar_ddjj.py` (recorta los archivos anuales de la Oficina Anticorrupción a legisladores y sus otros cargos, y quita el CUIT).
 - `tests/verificar.php` controles de integridad: `php tests/verificar.php` debe terminar en "Todo en orden".
@@ -66,6 +67,7 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Pasajes, mapa de rutas: el CSV de la Cámara trae ORIGEN y DESTINO como nombre de aeropuerto o terminal (sin coordenadas, a veces con
   caracteres dañados). `scripts/lugares_pasajes.csv` los lleva a una localidad (provincia `*` = la del diputado) y Georef las ubica.
   datos.transporte.gob.ar e ide.transporte.gob.ar (aeródromos de la ANAC) están bloqueados desde la nube; Georef sí responde.
+- Elecciones: la fuente es el archivo oficial de la DINE (argentina.gob.ar/dine/resultados-electorales). Los repos de terceros evaluados (elecciones-ARG, electorAr, PolAr_Data) NO se usan como fuente: reconstruyen datos del Atlas Electoral o no declaran licencia de datos, y electorAr no coincide exacto con lo oficial. Solo hay escrutinio provisorio de 2023; el archivo trae votos por agrupación, no por candidato: no se atribuyen votos a legisladores. Falta 2021 (la DINE publica .rar; usar el ZIP de provisorios) y 2025 (sin página oficial todavía).
 - Declaraciones juradas: el último archivo de la Oficina Anticorrupción es el del año fiscal 2024; el de 2025 todavía no está.
 
 ## Flujo de trabajo
