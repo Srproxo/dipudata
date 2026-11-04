@@ -326,6 +326,18 @@ final class Datos
         return null;
     }
 
+    /** Resultados de las generales 2023 (DINE) por provincia: ["_meta" => ..., "provincias" => [slug => ...]]. */
+    public static function resultados2023(): array
+    {
+        return self::leer('resultados_2023');
+    }
+
+    /** Resultado de la provincia en las generales 2023 (diputados y, donde hubo, senadores nacionales), o null. */
+    public static function resultadosProvincia(string $slug): ?array
+    {
+        return self::resultados2023()['provincias'][$slug] ?? null;
+    }
+
     public static function informe(): array
     {
         return self::leer('informe');
