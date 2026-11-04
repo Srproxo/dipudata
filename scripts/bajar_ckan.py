@@ -12,7 +12,7 @@ se bajan los archivos de forma reanudable. Así se puede detectar sola una publi
 Comandos:
   buscar    PORTAL "texto" [--org organismo] [--max N]   lista conjuntos (de a 10: los portales rechazan pedidos grandes)
   ver       PORTAL ID                                     recursos de un conjunto: nombre, formato, tamaño, última modificación, dirección
-  bajar     PORTAL ID [--recurso ID_O_NOMBRE] [--max-mb N] baja a storage/oficial/ckan/PORTAL/ID/ y anota sha256 en manifest.json
+  bajar     PORTAL ID [--recurso ID_O_NOMBRE] [--formato CSV] [--max-mb N] baja a storage/oficial/ckan/PORTAL/ID/ y anota sha256 en manifest.json
   novedades PORTAL                                        compara lo ya bajado con lo que publica el portal hoy
   --autoprueba                                            prueba todo contra un servidor CKAN falso local (sin red)
 
@@ -178,7 +178,9 @@ def cmd_bajar(c: Cliente, a):
     dest = carpeta(a.portal, d["name"])
     man_ruta = dest / "manifest.json"
     man = json.loads(man_ruta.read_text(encoding="utf-8")) if man_ruta.exists() else {"conjunto": d["name"], "portal": c.base, "recursos": {}}
-    elegidos = [r for r in d.get("resources", []) if not a.recurso or a.recurso in (r["id"], r.get("name"))]
+    # Muchos conjuntos publican cada recurso en CSV y en JSON con el mismo nombre: --formato elige uno solo.
+    elegidos = [r for r in d.get("resources", []) if (not a.recurso or a.recurso in (r["id"], r.get("name")))
+                and (not getattr(a, "formato", "") or (r.get("format") or "").upper() == a.formato.upper())]
     if not elegidos:
         raise ErrorCKAN("no hay recursos que coincidan")
     for r in elegidos:
@@ -282,7 +284,12 @@ def autoprueba() -> int:
         lista = c.buscar("x", maximo=100)
         ok(len(lista) == 23 and len({d["name"] for d in lista}) == 23, "buscar pagina de a 10 y se recupera de una falla 503 (23 conjuntos)")
         ok(len(c.buscar("x", maximo=5)) == 5, "buscar respeta el máximo")
-        a = argparse.Namespace(portal="demo", id="demo", recurso="", max_mb=50)
+        try:
+            cmd_bajar(c, argparse.Namespace(portal="demo", id="demo", recurso="", formato="JSON", max_mb=50))
+            ok(False, "--formato JSON no baja nada si el conjunto solo tiene CSV")
+        except ErrorCKAN:
+            ok(True, "--formato JSON no baja nada si el conjunto solo tiene CSV")
+        a = argparse.Namespace(portal="demo", id="demo", recurso="", formato="csv", max_mb=50)
         cmd_bajar(c, a)
         man = json.loads((carpeta("demo", "demo") / "manifest.json").read_text())
         r = man["recursos"]["abc12345-r1"]
@@ -330,7 +337,7 @@ def main() -> int:
         if nombre in ("ver", "bajar"):
             s.add_argument("id")
         if nombre == "bajar":
-            s.add_argument("--recurso", default=""); s.add_argument("--max-mb", type=int, default=300)
+            s.add_argument("--recurso", default=""); s.add_argument("--formato", default=""); s.add_argument("--max-mb", type=int, default=300)
     a = ap.parse_args()
     if a.autoprueba:
         return autoprueba()
