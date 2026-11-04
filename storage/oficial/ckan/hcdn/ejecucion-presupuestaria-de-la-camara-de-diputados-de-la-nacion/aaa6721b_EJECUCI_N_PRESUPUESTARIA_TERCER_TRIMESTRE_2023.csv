@@ -1,0 +1,64 @@
+Pg,In,Pp,leyenda,credito_vigente,compromiso_preventivo,compromiso_consumido,devengado_consumido
+17,,,Formación y Sanción Legislativa,79.710.914.142.00,604.386.258.34,47.072.362.355.49,46.312.877.711.51
+,1,,Gastos en personal,67.109.097.256.00,0.00,38.181.506.957.44,38.181.506.957.44
+,,1,Personal permanente,37.920.702.845.00,0.00,22.988.860.511.22,22.988.860.511.22
+17,1,1,Personal permanente,37.920.702.845.00,0.00,22.988.860.511.22,22.988.860.511.22
+,,2,Personal temporario,22.353.294.411.00,0.00,12.223.171.143.45,12.223.171.143.45
+,,2,Personal temporario,22.353.294.411.00,0.00,12.223.171.143.45,12.223.171.143.45
+,,5,Asistencia social al personal,1.507.800.000.00,0.00,270.484.305.94,270.484.305.94
+,,5,Asistencia social al personal,1.507.800.000.00,0.00,270.484.305.94,270.484.305.94
+,,6,Beneficios y compensaciones,4.827.300.000.00,0.00,2.526.680.996.83,2.526.680.996.83
+,,6,Beneficios y compensaciones,4.827.300.000.00,0.00,2.526.680.996.83,2.526.680.996.83
+,,8,Personal contratado,500.000.000.00,0.00,172.310.000.00,172.310.000.00
+,,8,Personal contratado,500.000.000.00,0.00,172.310.000.00,172.310.000.00
+,2,,Bienes de consumo,1.313.448.156.00,227.653.083.30,885.022.225.86,646.241.814.57
+,,1,"Productos alimenticios, agropecuarios y forestales",278.923.893.00,36.480.000.00,231.507.995.57,174.324.195.86
+,2,1,"Productos alimenticios, agropecuarios y forestales",278.923.893.00,36.480.000.00,231.507.995.57,174.324.195.86
+,,2,Textiles y vestuario,114.160.288.00,78.104.000.00,84.683.229.08,46.152.912.28
+,,2,Textiles y vestuario,114.160.288.00,78.104.000.00,84.683.229.08,46.152.912.28
+,,3,"Productos de papel, cartón e impresos",39.269.750.00,0.00,69.412.398.76,43.217.600.37
+,,3,"Productos de papel, cartón e impresos",39.269.750.00,0.00,69.412.398.76,43.217.600.37
+,,4,Productos de cuero y caucho,14.780.000.00,6.470.672.40,28.337.490.64,26.528.894.64
+,,4,Productos de cuero y caucho,14.780.000.00,6.470.672.40,28.337.490.64,26.528.894.64
+,,5,"Productos químicos, combustibles y lubricantes",603.090.932.00,5.892.480.00,159.402.752.74,158.062.746.44
+,,5,"Productos químicos, combustibles y lubricantes",603.090.932.00,5.892.480.00,159.402.752.74,158.062.746.44
+,,6,Productos de minerales no metálicos,3.157.000.00,0.00,2.598.237.94,1.667.110.58
+,,6,Productos de minerales no metálicos,3.157.000.00,0.00,2.598.237.94,1.667.110.58
+,,7,Productos metálicos,22.592.614.00,4.388.600.00,10.372.904.62,9.216.368.27
+,,7,Productos metálicos,22.592.614.00,4.388.600.00,10.372.904.62,9.216.368.27
+,,8,Minerales,0.00,0.00,65.705.75,63.676.30
+,,8,Minerales,0.00,0.00,65.705.75,63.676.30
+,,9,Otros bienes de consumo,237.473.679.00,96.317.330.90,298.641.510.76,187.008.309.83
+,,9,Otros bienes de consumo,237.473.679.00,96.317.330.90,298.641.510.76,187.008.309.83
+,3,,Servicios no personales,10.321.480.730.00,292.054.560.04,7.687.490.707.13,7.240.760.769.21
+,,1,Servicios básicos,192.330.000.00,7.104.000.00,172.914.640.45,172.566.943.00
+,3,1,Servicios básicos,192.330.000.00,7.104.000.00,172.914.640.45,172.566.943.00
+,,2,Alquileres y derechos,177.831.796.00,0.00,100.967.411.71,71.525.066.72
+,,2,Alquileres y derechos,177.831.796.00,0.00,100.967.411.71,71.525.066.72
+,,3,"Mantenimiento, reparación y limpieza",555.345.619.00,74.844.618.04,460.490.083.46,308.514.954.12
+,,3,"Mantenimiento, reparación y limpieza",555.345.619.00,74.844.618.04,460.490.083.46,308.514.954.12
+,,4,Servicios técnicos y profesionales,5.629.895.205.00,188.032.750.00,3.993.494.367.82,3.884.548.147.82
+,,4,Servicios técnicos y profesionales,5.629.895.205.00,188.032.750.00,3.993.494.367.82,3.884.548.147.82
+,,5,Servicios comerciales y financieros,1.318.685.487.00,22.073.192.00,1.296.609.664.40,1.272.436.153.78
+,,5,Servicios comerciales y financieros,1.318.685.487.00,22.073.192.00,1.296.609.664.40,1.272.436.153.78
+,,6,Publicidad y propaganda,81.262.648.00,0.00,43.404.550.00,43.404.550.00
+,,6,Publicidad y propaganda,81.262.648.00,0.00,43.404.550.00,43.404.550.00
+,,7,Pasajes y viáticos,1.821.839.147.00,0.00,1.366.862.127.79,1.366.823.540.49
+,,7,Pasajes y viáticos,1.821.839.147.00,0.00,1.366.862.127.79,1.366.823.540.49
+,,8,"Impuestos, derechos, tasas y juicios",69.994.628.00,0.00,61.317.112.61,61.317.112.61
+,,8,"Impuestos, derechos, tasas y juicios",69.994.628.00,0.00,61.317.112.61,61.317.112.61
+,,9,Otros servicios,474.296.200.00,0.00,191.430.748.89,59.624.300.67
+,,9,Otros servicios,474.296.200.00,0.00,191.430.748.89,59.624.300.67
+,4,,Bienes de uso,693.658.000.00,84.678.615.00,58.463.748.29,26.924.203.52
+,,3,Maquinaria y equipo,668.658.000.00,84.678.615.00,56.615.191.51,25.075.646.74
+,4,3,Maquinaria y equipo,668.658.000.00,84.678.615.00,56.615.191.51,25.075.646.74
+,,8,Activos intangibles,25.000.000.00,0.00,1.848.556.78,1.848.556.78
+,,8,Activos intangibles,25.000.000.00,0.00,1.848.556.78,1.848.556.78
+,5,,Transferencias,273.230.000.00,0.00,259.878.716.77,217.443.966.77
+,,1,Transferencias al sector privado para financiar gastos corrientes,89.301.000.00,0.00,88.749.000.00,88.749.000.00
+,5,1,Transferencias al sector privado para financiar gastos corrientes,89.301.000.00,0.00,88.749.000.00,88.749.000.00
+,,5,Transferencias a otras entidades del Sector Público Nacional,169.739.000.00,0.00,169.739.000.00,127.304.250.00
+,,5,Transferencias a otras entidades del Sector Público Nacional,169.739.000.00,0.00,169.739.000.00,127.304.250.00
+,,9,Transferencias al exterior,14.190.000.00,0.00,1.390.716.77,1.390.716.77
+,,9,Transferencias al exterior,14.190.000.00,0.00,1.390.716.77,1.390.716.77
+Totales Generales,,,,79.710.914.142.00,604.386.258.34,47.072.362.355.49,46.312.877.711.51

@@ -490,6 +490,14 @@ switch (true) {
         ));
         break;
 
+    case $path === '/presupuesto':
+        render('presupuesto', ['pres' => \App\Datos::presupuestoCamara()], pagina_meta(
+            'Cuánto gasta la Cámara de Diputados: presupuesto y ejecución',
+            'Presupuesto y gasto de la Cámara de Diputados de 2016 a hoy, por tipo de gasto, en pesos de cada año y en pesos de hoy, con datos oficiales de la propia Cámara.',
+            '/presupuesto', 'presupuesto'
+        ));
+        break;
+
     case $path === '/glosario':
         render('glosario', ['terminos' => terminos_glosario()], pagina_meta(
             'Glosario: qué quiere decir cada palabra',
@@ -520,7 +528,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }

@@ -312,6 +312,12 @@ final class Datos
         return self::leer('votaciones_diputados')[$slug] ?? null;
     }
 
+    /** Ejecución presupuestaria de la Cámara de Diputados (programa 17) por ejercicio: ["_meta" => ..., "anios" => [...]]. */
+    public static function presupuestoCamara(): array
+    {
+        return self::leer('presupuesto_camara');
+    }
+
     /** Teléfono, dirección y fuente del conmutador de cada cámara (el interno de cada legislador va aparte). */
     public static function contactoCamara(string $camara): array
     {
