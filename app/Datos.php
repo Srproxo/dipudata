@@ -25,11 +25,10 @@ final class Datos
     /** @return list<array> */
     public static function legisladores(?string $camara = null): array
     {
-        $todos = array_map(static function (array $l): array {
-            // Solo se muestran fotos servidas por el host que declara la CSP.
-            if (!empty($l['foto']) && !preg_match('#^https://(api\.argentinadatos\.com|www\.senado\.gob\.ar)/#', (string)$l['foto'])) {
-                $l['foto'] = null;
-            }
+        // Las fotos se sirven desde este mismo sitio (scripts/bajar_fotos.py las copia a assets/fotos/); nunca se piden a un tercero.
+        $fotos = self::leer('fotos');
+        $todos = array_map(static function (array $l) use ($fotos): array {
+            $l['foto'] = $fotos[($l['camara'] === 'Senadores' ? 's:' : '') . $l['slug']] ?? null;
             return $l;
         }, self::leer('legisladores'));
         return $camara === null ? $todos : array_values(array_filter($todos, static fn($l) => $l['camara'] === $camara));
