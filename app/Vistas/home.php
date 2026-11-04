@@ -22,6 +22,8 @@ $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== 
   <h2 id="atajos" class="seccion-titulo">Lo que más se busca</h2>
   <ul class="atajos">
     <li><a href="/votaciones"><b>Cómo votó cada uno</b><span>Votaciones nominales de Diputados y del Senado, una por una.</span></a></li>
+    <li><a href="/patrimonio"><b>Patrimonio declarado</b><span>Cuánto declaró cada legislador, en pesos de hoy y en dólares, y cómo cambió.</span></a></li>
+    <li><a href="/comparar"><b>Comparar legisladores</b><span>Hasta cuatro, lado a lado: patrimonio, votos y proyectos.</span></a></li>
     <li><a href="/leyes"><b>Leyes</b><span>Las leyes sancionadas, con su sumario y sus fechas.</span></a></li>
     <li><a href="/remuneraciones"><b>Cuánto cobran</b><span>La dieta y los adicionales que publica la Cámara.</span></a></li>
     <li><a href="/viajes"><b>Pasajes y misiones</b><span>Pasajes emitidos y misiones oficiales de los diputados.</span></a></li>

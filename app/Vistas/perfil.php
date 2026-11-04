@@ -60,6 +60,7 @@ if ($pyR) {
   </ul>
   <p class="resumen-atajos">
     <?php foreach ($pestanas as $clave => $titulo): if ($clave === 'resumen') { continue; } ?><a href="<?= e($base . '?tab=' . $clave) ?>"><?= e($titulo) ?></a><?php endforeach; ?>
+    <a href="/comparar?a=<?= e(clave_legislador($l)) ?>">Comparar con otros</a>
     <a href="#ficha">Ficha y fuentes</a>
   </p>
 </section>

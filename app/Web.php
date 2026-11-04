@@ -568,3 +568,147 @@ function barra_resultado(int $a, int $n, int $b, int $u): string
     }
     return $h . '</ul>';
 }
+
+/**
+ * Evolución del patrimonio neto declarado de un legislador, con las mismas cifras que su pestaña de declaración jurada:
+ * pesos de cada año, pesos de hoy (IPC del INDEC, desde 2016) y dólares oficiales del BCRA al cierre de cada año.
+ * La variación se calcula entre la primera y la última declaración que tienen conversión (IPC o dólar) y siempre informa los años usados.
+ * Devuelve null si no hay declaraciones publicadas.
+ */
+function serie_patrimonio(array $l): ?array
+{
+    static $ipc = null, $usd = null;
+    if ($ipc === null) { $ipc = factores_ipc(); $usd = dolar_cierre(); }
+    [$mesBase, $fac] = $ipc;
+    $dj = \App\Datos::ddjj($l['camara'], $l['slug']);
+    if (!$dj) {
+        return null;
+    }
+    $corr = $hoy = $dol = [];
+    foreach ($dj as $d) {
+        $a = (int)$d['anio']; $pn = (float)$d['patrimonio_neto_final'];
+        $corr[$a] = $pn;
+        if (isset($fac[$a])) { $hoy[$a] = $pn * $fac[$a]; }
+        if (isset($usd[$a])) { $dol[$a] = $pn / $usd[$a]; }
+    }
+    ksort($corr); ksort($hoy); ksort($dol);
+    $var = static function (array $s): ?array {
+        if (count($s) < 2) { return null; }
+        $a0 = array_key_first($s); $a1 = array_key_last($s);
+        return $s[$a0] > 0 ? ['desde' => $a0, 'hasta' => $a1, 'pct' => ($s[$a1] / $s[$a0] - 1) * 100] : null;
+    };
+    $ult = array_key_last($corr);
+    return ['mes_base' => $mesBase, 'corriente' => $corr, 'hoy' => $hoy, 'usd' => $dol, 'ultimo_anio' => $ult, 'ultimo' => $corr[$ult],
+            'ultimo_hoy' => $hoy[$ult] ?? null, 'ultimo_usd' => $dol[$ult] ?? null, 'var_hoy' => $var($hoy), 'var_usd' => $var($dol), 'cantidad' => count($corr)];
+}
+
+/** "+12,3 %" / "−4,0 %" con el período entre paréntesis. */
+function texto_variacion(?array $v): string
+{
+    if (!$v) { return '—'; }
+    return ($v['pct'] >= 0 ? '+' : '−') . number_format(abs($v['pct']), 1, ',', '.') . ' %';
+}
+
+/** Clave de un legislador en la URL de comparación: "d:slug" (diputado) o "s:slug" (senador). */
+function clave_legislador(array $l): string
+{
+    return ($l['camara'] === 'Senadores' ? 's:' : 'd:') . $l['slug'];
+}
+
+function legislador_por_clave(string $k): ?array
+{
+    if (!preg_match('/^([ds]):([a-z0-9]+(?:-[a-z0-9]+)*)$/', $k, $m)) {
+        return null;
+    }
+    return \App\Datos::legislador($m[1] === 's' ? 'Senadores' : 'Diputados', $m[2]);
+}
+
+/**
+ * Gráfico de varias líneas en SVG, sin JavaScript. $series: [nombre => [anio => valor]]. Cada serie usa un color, un trazo y un
+ * marcador distintos (no depende solo del color). El eje Y empieza en 0. $titulo describe el gráfico para lectores de pantalla.
+ */
+function svg_lineas(array $series, string $titulo, string $moneda = '$'): string
+{
+    $anios = [];
+    foreach ($series as $s) { foreach (array_keys($s) as $a) { $anios[$a] = true; } }
+    $anios = array_keys($anios); sort($anios);
+    if (count($anios) < 2) {
+        return '';
+    }
+    $w = 640; $h = 280; $izq = 84; $der = 16; $arr = 14; $aba = 30;
+    $todos = [];
+    foreach ($series as $s) { foreach ($s as $v) { $todos[] = (float)$v; } }
+    $min = min(0.0, min($todos)); $max = max($todos);
+    if ($max <= $min) { $max = $min + 1; }
+    $n = count($anios);
+    $pos = array_flip($anios);
+    $x = static fn(int $a): float => $izq + ($w - $izq - $der) * ($pos[$a] / ($n - 1));
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - ($v - $min) / ($max - $min));
+    $id = 'ls-' . md5($titulo);
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    for ($k = 0; $k <= 4; $k++) {
+        $v = $min + ($max - $min) * $k / 4; $yy = round($y($v), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/>'
+            . '<text class="g-eje" x="' . ($izq - 8) . '" y="' . ($yy + 4) . '" text-anchor="end">' . e(monto_corto($v, $moneda)) . '</text>';
+    }
+    $paso = max(1, (int)ceil($n / 9));
+    foreach ($anios as $i => $a) {
+        if ($i % $paso === 0 || $i === $n - 1) {
+            $s .= '<text class="g-eje" x="' . round($x($a), 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . $a . '</text>';
+        }
+    }
+    $k = 0;
+    foreach ($series as $nombre => $serie) {
+        $c = $k % 4; $camino = []; $marc = ''; $seguido = false;
+        ksort($serie);
+        foreach ($serie as $a => $v) {
+            $px = round($x((int)$a), 1); $py = round($y((float)$v), 1);
+            $camino[] = ($seguido ? 'L' : 'M') . $px . ' ' . $py; $seguido = true;
+            $t = '<title>' . e($nombre . ', ' . $a . ': ' . monto_corto((float)$v, $moneda)) . '</title>';
+            $marc .= match ($c) {
+                0 => '<circle class="g-m g-m' . $c . '" cx="' . $px . '" cy="' . $py . '" r="3.8">' . $t . '</circle>',
+                1 => '<rect class="g-m g-m' . $c . '" x="' . ($px - 3.5) . '" y="' . ($py - 3.5) . '" width="7" height="7">' . $t . '</rect>',
+                2 => '<path class="g-m g-m' . $c . '" d="M' . $px . ' ' . ($py - 5) . ' L' . ($px + 4.5) . ' ' . ($py + 3.5) . ' L' . ($px - 4.5) . ' ' . ($py + 3.5) . ' Z">' . $t . '</path>',
+                default => '<path class="g-m g-m' . $c . '" d="M' . $px . ' ' . ($py - 5) . ' L' . ($px + 5) . ' ' . $py . ' L' . $px . ' ' . ($py + 5) . ' L' . ($px - 5) . ' ' . $py . ' Z">' . $t . '</path>',
+            };
+        }
+        $s .= '<path class="g-l g-l' . $c . '" d="' . implode(' ', $camino) . '"/>' . $marc;
+        $k++;
+    }
+    return $s . '</svg>';
+}
+
+/**
+ * Coincidencia de votos desde el 10/12/2025 entre legisladores de una misma cámara: de las votaciones nominales en que los dos
+ * emitieron voto (afirmativo, negativo o abstención), en cuántas votaron igual. Devuelve [clave_a|clave_b => [coinciden, comunes]].
+ * Solo cuenta votaciones válidas del mandato actual; las que no cuadran con su cabecera no entran.
+ */
+function coincidencias_votos(array $claves): array
+{
+    $por_cam = ['D' => [], 'S' => []];
+    foreach ($claves as $k) { $por_cam[$k[0] === 's' ? 'S' : 'D'][] = $k; }
+    $res = [];
+    foreach ($por_cam as $cam => $ks) {
+        if (count($ks) < 2) { continue; }
+        $slugs = [];
+        foreach ($ks as $k) { $slugs[$k] = $cam === 'S' ? 's:' . substr($k, 2) : substr($k, 2); }
+        foreach ($ks as $i => $a) { foreach (array_slice($ks, $i + 1) as $b) { $res[$a . '|' . $b] = [0, 0]; } }
+        foreach (\App\Datos::votaciones() as $v) {
+            if (($v['c'] ?? 'D') !== $cam || $v['f'] < '2025-12-10') { continue; }
+            $d = \App\Datos::votacion($v['id']);
+            if (!$d || (!empty($d['nota']) && str_contains((string)$d['nota'], 'no coincide'))) { continue; }
+            $voto = [];
+            foreach ($d['votos'] as $f) {
+                $clave = $f[4] ?? null;
+                if ($clave !== null && in_array($f[3], ['A', 'N', 'B'], true)) { $voto[$clave] = $f[3]; }
+            }
+            foreach ($res as $par => &$r) {
+                [$a, $b] = explode('|', $par);
+                if (!isset($slugs[$a], $slugs[$b])) { continue; }
+                if (isset($voto[$slugs[$a]], $voto[$slugs[$b]])) { $r[1]++; $r[0] += $voto[$slugs[$a]] === $voto[$slugs[$b]] ? 1 : 0; }
+            }
+            unset($r);
+        }
+    }
+    return $res;
+}

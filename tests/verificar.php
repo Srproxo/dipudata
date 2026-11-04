@@ -316,5 +316,27 @@ $br = barra_resultado(43, 25, 0, 4);
 preg_match_all('#width:([\d.]+)%#', $br, $mw);
 ok(abs(array_sum($mw[1]) - 100) < 0.2 && str_contains($br, 'aria-label'), 'la barra de resultado de una votación suma 100% y tiene descripción accesible');
 
+// Patrimonio y comparación: cifras reales de las declaraciones, con el período que usa cada variación
+$spN = 0; $spMal = 0;
+foreach ($todos as $lg) {
+    $sp = serie_patrimonio($lg);
+    $dj = Datos::ddjj($lg['camara'], $lg['slug']);
+    if (!$sp) { if ($dj) { $spMal++; } continue; }
+    $spN++;
+    if ($sp['cantidad'] !== count($dj) || $sp['ultimo_anio'] !== max($sp['corriente'] ? array_keys($sp['corriente']) : [0])) { $spMal++; }
+    foreach (['var_hoy', 'var_usd'] as $k) {
+        if ($sp[$k] && ($sp[$k]['desde'] >= $sp[$k]['hasta'] || !is_finite($sp[$k]['pct']))) { $spMal++; }
+    }
+    if ($sp['var_hoy'] && (!isset($sp['hoy'][$sp['var_hoy']['desde']]) || !isset($sp['hoy'][$sp['var_hoy']['hasta']]))) { $spMal++; }
+}
+ok($spMal === 0 && $spN === $djConTot, 'patrimonio: la serie de cada legislador con declaración coincide con sus declaraciones y cada variación usa dos años distintos con conversión (' . $spN . ' legisladores)');
+$ca = coincidencias_votos(['s:carlos-mauricio-espinola', 's:maximiliano-abad']);
+$par = $ca['s:carlos-mauricio-espinola|s:maximiliano-abad'] ?? null;
+ok($par !== null && $par[1] > 100 && $par[0] <= $par[1], 'la coincidencia de votos entre dos senadores se calcula sobre votaciones en que los dos votaron (' . ($par[1] ?? 0) . ')');
+ok(coincidencias_votos(['s:carlos-mauricio-espinola', 'd:guillermo-cesar-aguero']) === [], 'no se compara la coincidencia de votos entre legisladores de cámaras distintas');
+ok(legislador_por_clave('s:carlos-mauricio-espinola') !== null && legislador_por_clave('x:nadie') === null && legislador_por_clave('d:../etc') === null, 'las claves de comparación se validan');
+$sv2 = svg_lineas(['A' => [2020 => 1.0, 2021 => 2.0], 'B' => [2020 => 2.0, 2021 => 1.0]], 'prueba');
+ok(substr_count($sv2, 'class="g-l g-l') === 2 && str_contains($sv2, '<title') && !str_contains($sv2, '<script'), 'el gráfico de varias líneas dibuja una línea por legislador, con título accesible y sin scripts');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
