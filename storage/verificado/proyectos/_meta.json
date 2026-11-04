@@ -15,6 +15,29 @@
  "senadores_con_proyectos": 70,
  "diputados_con_proyectos": 231,
  "con_resultado": 355,
+ "con_dictamen": 1507,
+ "dictamenes_fuente": {
+  "filas": 24198,
+  "expedientes": 19987,
+  "dictamenes_unicos": 24157,
+  "sha256_csv": "1ac0ac69f9548e58d65045c926506ce1a30ec1a81bcc7d1c7748cd13a880b96b",
+  "url": "https://datos.hcdn.gob.ar/dataset/47704991-ab9d-4934-bcd3-1115294f6ebf/resource/59595a93-5a5e-4ba6-a3db-c1044e2f949e/download/dictamenes3.9.csv",
+  "bajado": "2026-11-04",
+  "modificado_en_el_portal": "2026-10-07",
+  "por_tipo": {
+   "a114": 504,
+   "od": 23067,
+   "a204": 83,
+   "sn": 148,
+   "st": 355
+  }
+ },
+ "camara": {
+  "proyectos": 112840,
+  "con_dictamen_pct": 16.6,
+  "aprobados_pct": 10.5
+ },
+ "aprobados_con_dictamen_pct": 94.6,
  "desde": "2008-03-06",
  "hasta": "2026-10-06"
 }

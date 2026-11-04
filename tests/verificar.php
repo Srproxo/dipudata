@@ -390,7 +390,7 @@ foreach ($todos as $lg) {
     if (!$pr) { continue; }
     foreach ($pr['proyectos'] as $x) {
         $totRol++;
-        if (count($x) !== 9 || !in_array($x[7], ['p', 'f', 'n'], true) || !in_array($x[8], [0, 1], true)) { $rolMal++; continue; }
+        if (count($x) !== 10 || !is_array($x[9]) || !in_array($x[7], ['p', 'f', 'n'], true) || !in_array($x[8], [0, 1], true)) { $rolMal++; continue; }
         if ($lg['camara'] === 'Diputados' && $x[7] !== 'p') { $rolMal++; }
         if ($x[8] === 1 && !in_array($x[2], ['Declaracion', 'Resolucion', 'Comunicacion'], true)) { $rolMal++; }
         if ($lg['camara'] === 'Senadores') { $rolSen[$x[7]]++; }
@@ -426,6 +426,24 @@ foreach ($gl as $k => [$t, $d, $u]) {
     if (!preg_match('/^[a-z0-9-]+$/', $k) || trim($t) === '' || mb_strlen($d) < 40 || mb_strlen($d) > 520 || !in_array($u, $rutasOk, true)) { $glMal++; }
 }
 ok($glMal === 0 && count($gl) >= 20, 'glosario: ' . count($gl) . ' términos con definición breve, ancla válida y enlace a una sección que existe');
+
+// Dictámenes de comisión: cruzados por ID con los proyectos, con fuente y huella, y coherentes con los resultados
+$pm3 = Datos::proyectosMeta(); $df = $pm3['dictamenesFuente'] ?? $pm3['dictamenes_fuente'] ?? [];
+ok(preg_match('/^[0-9a-f]{64}$/', (string)($df['sha256_csv'] ?? '')) === 1 && str_starts_with((string)($df['url'] ?? ''), 'https://datos.hcdn.gob.ar/') && ($df['filas'] ?? 0) > 24000, 'dictámenes: citan su fuente oficial (datos.hcdn.gob.ar), la huella sha256 del archivo y la cantidad de filas');
+$dMal = 0; $dN = 0; $dSen = 0; $tiposOk = ['od', 'sn', 'st', 'a114', 'a204'];
+foreach ($todos as $lg) {
+    $pr = Datos::proyectos($lg['slug'], $lg['camara']);
+    foreach ($pr['proyectos'] ?? [] as $x) {
+        foreach ($x[9] ?? [] as $dc) {
+            $dN++;
+            if ($lg['camara'] === 'Senadores') { $dSen++; }
+            if (count($dc) !== 5 || !in_array($dc[1], $tiposOk, true) || ($dc[3] !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dc[3])) || ($dc[1] === 'od' && $dc[0] === '')) { $dMal++; }
+        }
+    }
+}
+ok($dMal === 0 && $dSen === 0 && $dN > 1500 && ($pm3['con_dictamen'] ?? 0) > 1000, 'dictámenes: cada uno tiene comisión, tipo válido y fecha válida; ninguno se atribuye al Senado (' . $dN . ' dictámenes en proyectos de diputados actuales)');
+ok(($pm3['aprobados_con_dictamen_pct'] ?? 0) > 85, 'dictámenes: coherencia con los resultados, casi todo proyecto sancionado o con media sanción tiene dictamen (' . ($pm3['aprobados_con_dictamen_pct'] ?? 0) . ' %)');
+ok(dictamen_texto(['Cultura', 'od', '0109', '2026-06-05', '']) === 'Dictamen de la comisión de Cultura, Orden del Día 0109 (5 de junio de 2026)' && dictamen_texto(['', 'st', '', '', '']) === 'Pedido de tratamiento sobre tablas', 'el texto de cada dictamen se escribe en lenguaje simple, también cuando falta la comisión o la fecha');
 
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

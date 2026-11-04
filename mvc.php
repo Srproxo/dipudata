@@ -90,7 +90,10 @@ switch (true) {
         $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
         $nq = Datos::normalizar($q);
         $rolSel = in_array($_GET['rol'] ?? '', ['propio', 'firmante', 'recon', 'sin'], true) ? (string)$_GET['rol'] : '';
-        $lista = array_values(array_filter($pr['proyectos'], static function (array $x) use ($tipo, $resSel, $nq, $rolSel): bool {
+        $dicSel = in_array($_GET['dictamen'] ?? '', ['con', 'sin'], true) ? (string)$_GET['dictamen'] : '';
+        $lista = array_values(array_filter($pr['proyectos'], static function (array $x) use ($tipo, $resSel, $nq, $rolSel, $dicSel): bool {
+            if ($dicSel === 'con' && empty($x[9])) return false;
+            if ($dicSel === 'sin' && !empty($x[9])) return false;
             if ($tipo && $x[2] !== $tipo) return false;
             if ($rolSel && categoria_proyecto($x) !== $rolSel) return false;
             if ($resSel && ($x[5] ?: 'Sin resolución registrada') !== $resSel) return false;
@@ -104,8 +107,8 @@ switch (true) {
         $paginas = max(1, (int)ceil($total / 50));
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
         $lista = array_slice($lista, ($pagina - 1) * 50, 50);
-        $filtrado = $tipo || $resSel || $rolSel || $q !== '' || $pagina > 1;
-        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'rolSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+        $filtrado = $tipo || $resSel || $rolSel || $dicSel || $q !== '' || $pagina > 1;
+        render('proyectos_legislador', compact('l', 'pr', 'lista', 'tipo', 'resSel', 'rolSel', 'dicSel', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
             'Proyectos de ' . $l['nombre'],
             'Proyectos parlamentarios en los que figura ' . $l['nombre'] . ' como autor/a o firmante (' . $pr['resumen']['total'] . ') y qué pasó con ellos, según los registros oficiales del Congreso.',
             Datos::urlLegislador($l) . '/proyectos', 'legisladores', ['robots' => $filtrado ? 'noindex, follow' : 'index, follow']

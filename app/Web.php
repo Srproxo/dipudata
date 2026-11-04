@@ -843,6 +843,8 @@ function terminos_glosario(): array
         'declaracion-jurada' => ['Declaración jurada patrimonial', 'Documento en el que funcionarios y legisladores informan sus bienes, deudas e ingresos. Por la Ley 26.857 es público y lo publica la Oficina Anticorrupción. DipuData muestra solo los totales, nunca el CUIT, los datos de familiares ni el detalle de cada bien.', '/patrimonio'],
         'dolar-oficial' => ['Dólar oficial y MEP', 'Para pasar un patrimonio a dólares se usa el tipo de cambio oficial del Banco Central al último día hábil de cada año. El dólar MEP se muestra aparte y marcado como no oficial, porque no tiene una serie oficial.', '/patrimonio'],
         'electores-votos' => ['Electores, votos positivos, en blanco y nulos', 'Electores son las personas habilitadas para votar. Votos positivos son los que van a una agrupación; en blanco, los de quien votó sin elegir ninguna; nulos, los que no se pueden contar. El porcentaje de cada agrupación se calcula sobre los votos positivos.', '/congreso/provincias'],
+        'dictamen' => ['Dictamen de comisión y Orden del Día', 'Un dictamen es el informe con el que una comisión recomienda qué hacer con un proyecto: aprobarlo, aprobarlo con modificaciones o rechazarlo. Cuando se numera para llevarlo al recinto se llama Orden del Día. Que un proyecto no tenga dictamen en los archivos oficiales no quiere decir que haya sido rechazado: muchos proyectos nunca llegan a ser dictaminados.', '/comisiones'],
+        'sobre-tablas' => ['Sobre tablas', 'Pedido para que la cámara trate un proyecto en el recinto sin que antes haya un dictamen de comisión. Hace falta una mayoría especial para aprobarlo.', '/votaciones'],
         'escrutinio' => ['Escrutinio provisorio y definitivo', 'El provisorio es el primer recuento, el de las mesas, que se conoce la noche de la elección. El definitivo lo hace la Justicia electoral después y puede diferir un poco. Los resultados que muestra DipuData son los provisorios publicados por la Dirección Nacional Electoral.', '/congreso/provincias'],
         'expediente' => ['Expediente', 'El número con el que se registra cada proyecto en la cámara. Por ejemplo, "5242-D-2026" es el proyecto 5242 de Diputados de 2026.', '/votaciones'],
         'fuente-oficial' => ['Fuente oficial y "no figura en el archivo publicado"', 'DipuData solo publica lo que sale de un registro oficial y se pudo verificar. Cuando algo no aparece, se dice exactamente eso: no figura en el archivo publicado. No quiere decir que no exista o que no se haya presentado.', '/metodologia'],
@@ -858,4 +860,34 @@ function terminos_glosario(): array
         'reconocimientos' => ['Reconocimientos y homenajes', 'Proyectos cuyo título expresa o pide reconocimiento, beneplácito, homenaje, felicitación, conmemoración o declara de interés algo. Se cuentan aparte en el gráfico de proyectos por año.', '/'],
         'votacion-nominal' => ['Votación nominal', 'Votación en la que queda registrado cómo votó cada legislador, con su nombre. No todas las votaciones son nominales: en algunas se vota levantando la mano y solo queda el resultado.', '/votaciones'],
     ];
+}
+
+/** Texto simple de un dictamen de comisión: [comisión, tipo, número, fecha, observaciones]. */
+function dictamen_texto(array $d): string
+{
+    [$comision, $tipo, $num, $fecha] = $d;
+    $f = $fecha !== '' ? ' (' . fecha_es($fecha) . ')' : '';
+    $c = $comision !== '' ? ' · ' . $comision : '';
+    return match ($tipo) {
+        'od' => 'Dictamen de la comisión de ' . ($comision !== '' ? $comision : 'la Cámara') . ($num !== '' ? ', Orden del Día ' . $num : '') . $f,
+        'sn' => 'Dictamen de la comisión de ' . ($comision !== '' ? $comision : 'la Cámara') . ', todavía sin número' . $f,
+        'st' => 'Pedido de tratamiento sobre tablas' . $c . $f,
+        'a114' => 'Artículo 114 del Reglamento' . $c . $f,
+        'a204' => 'Artículo 204 del Reglamento' . $c . $f,
+        default => 'Dictamen' . $c . $f,
+    };
+}
+
+/**
+ * Cuánto avanzaron los proyectos de un diputado: presentados, con dictamen de comisión y con una resolución de la Cámara registrada
+ * (aprobado, media sanción o sancionado). "Sin dictamen" quiere decir que no figura ninguno en el archivo oficial, no que haya sido rechazado.
+ */
+function avance_proyectos(array $proyectos): array
+{
+    $con = 0; $aprob = 0; $dictaminados_od = 0;
+    foreach ($proyectos as $x) {
+        if (!empty($x[9])) { $con++; }
+        if (in_array($x[5], ['APROBADO', 'MEDIA SANCION', 'SANCIONADO'], true)) { $aprob++; }
+    }
+    return ['presentados' => count($proyectos), 'con_dictamen' => $con, 'aprobados' => $aprob];
 }
