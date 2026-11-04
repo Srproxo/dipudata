@@ -292,5 +292,23 @@ $humanasConNombre = 0; foreach (array_slice(explode("\n", $crudo), 1) as $lin) {
 ok($humanasConNombre === 0, 'aportes a partidos: ninguna persona humana tiene nombre ni rubro guardado');
 ok($crudo !== '' && !preg_match('/\b\d{11}\b/', $crudo) && str_starts_with($crudo, 'fecha,cod_destino,destino,tipo,aportante,'), 'aportes a partidos: el archivo guardado no tiene CUIL/CUIT');
 
+$re = Datos::resultados2023(); $reMal = [];
+ok(count($re['provincias'] ?? []) === 24 && count(array_filter(Datos::provincias(), fn($p) => Datos::resultadosProvincia($p['slug']) === null)) === 0, 'resultados 2023: las 24 provincias del sitio tienen resultados');
+ok(str_starts_with((string)($re['_meta']['url_archivo'] ?? ''), 'https://www.argentina.gob.ar/') && preg_match('/^[0-9a-f]{64}$/', (string)($re['_meta']['sha256_zip'] ?? '')) === 1 && ($re['_meta']['escrutinio'] ?? '') === 'provisorio', 'resultados 2023: cita la fuente oficial, la huella del archivo y aclara que es provisorio');
+foreach ($re['provincias'] ?? [] as $slug => $r) {
+    foreach (['diputados', 'senadores'] as $k) {
+        if (empty($r[$k])) { continue; }
+        $ag = $r[$k]['agrupaciones']; $nombres = array_column($ag, 'nombre');
+        if (array_sum(array_column($ag, 'votos')) !== $r[$k]['positivos'] || count($nombres) !== count(array_unique($nombres)) || $r[$k]['positivos'] + array_sum($r[$k]['otros']) !== $r[$k]['votantes'] || $r[$k]['votantes'] > $r['electores']) { $reMal[] = "$slug/$k"; }
+        $v = array_column($ag, 'votos'); $o = $v; rsort($o);
+        if ($v !== $o) { $reMal[] = "$slug/$k orden"; }
+    }
+    if (empty($r['diputados'])) { $reMal[] = "$slug sin diputados"; }
+}
+ok(!$reMal, 'resultados 2023: los votos suman, no hay agrupaciones repetidas y nadie supera a los electores' . ($reMal ? ' (' . implode(', ', $reMal) . ')' : ''));
+ok(($re['_meta']['provincias_con_senadores'] ?? []) === ['buenos-aires', 'formosa', 'jujuy', 'la-rioja', 'misiones', 'san-juan', 'san-luis', 'santa-cruz'], 'resultados 2023: el Senado solo figura en las 8 provincias que lo renovaron');
+$totE = array_sum(array_column($re['provincias'] ?? [], 'electores'));
+ok($totE > 35000000 && $totE < 36500000, 'resultados 2023: el total de electores de las mesas ronda los 35 millones (' . $totE . ')');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
