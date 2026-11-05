@@ -10,3 +10,8 @@ __pycache__/
 *.pyc
 informes_privados/
 storage/cache/
+
+# Datos de personas que no se publican: grupo familiar de la OA y nómina de personal (se usan solo para informes privados)
+**/aeb174ff*
+**/*Grupo_fa*
+storage/oficial/ckan/**/nomina-de-personal/
