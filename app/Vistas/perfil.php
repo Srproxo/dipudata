@@ -47,6 +47,8 @@ if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorru
 elseif ($djR['sin_totales']) { $resFrases[] = 'Presentó declaración jurada, pero el archivo oficial trae los totales vacíos: no se publican cifras.'; }
 elseif ($djR['inconsistente']) { $resFrases[] = 'Declaración jurada: el archivo oficial trae declaraciones del mismo año con montos distintos, por eso no se publican cifras.'; }
 elseif ($djR['ambiguo']) { $resFrases[] = 'Declaración jurada: el nombre corresponde a más de una persona en el archivo oficial, por eso no se publica.'; }
+$parR = parentescos_legislador($l);
+if ($parR) { $resFrases[] = 'En las declaraciones juradas figura un vínculo familiar con ' . (count($parR) === 1 ? 'otro legislador' : count($parR) . ' legisladores') . ' (ver la pestaña Declaración jurada).'; }
 else { $resFrases[] = $djR['asumio_2025'] ? 'Asumió el 10 de diciembre de 2025: su primera declaración jurada todavía no está publicada.' : 'No figura en el archivo de declaraciones juradas publicado (años fiscales 2012 a 2024).'; }
 $pyR = Datos::proyectos($l['slug'], $l['camara']);
 if ($pyR) {
@@ -373,6 +375,18 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
   </details>
   <?php endif; ?>
   <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857), por el cargo que figura en cada año: como legislador o por otra función pública o candidatura. Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
+</section>
+<?php endif; ?>
+<?php $pars = parentescos_legislador($l); ?>
+<?php if ($pars): ?>
+<section class="seccion" aria-labelledby="vinculos">
+  <h2 id="vinculos" class="seccion-titulo">Vínculos familiares declarados con otros legisladores</h2>
+  <ul>
+  <?php foreach ($pars as $pv): $ot = $pv['otro']; ?>
+    <li><?php if ($pv['yo'] && $pv['otro_declaro']): ?>Se declararon mutuamente como <?= e($pv['vinculo']) ?>: <?php elseif ($pv['yo']): ?>Declaró como <?= e($pv['vinculo']) ?> a <?php else: ?>Figura como <?= e($pv['vinculo']) ?> en la declaración jurada de <?php endif; ?><a href="<?= e(Datos::urlLegislador($ot)) ?>"><?= e($ot['nombre']) ?></a> (<?= $ot['camara'] === 'Senadores' ? 'senador/a' : 'diputado/a' ?> nacional por <?= e($ot['provincia']) ?>), año fiscal <?= (int)$pv['anio'] ?>.</li>
+  <?php endforeach; ?>
+  </ul>
+  <p class="tenue pequeno">Es el vínculo que cada persona declaró ante la Oficina Anticorrupción. La identidad de las dos personas se confirmó con el número de CUIT (que no se muestra), no con el nombre. No dice nada más sobre ninguna de las dos. <a href="/correccion?desde=<?= e(rawurlencode($base . '?tab=patrimonio')) ?>">Pedir una corrección o la baja</a>.</p>
 </section>
 <?php endif; ?>
 

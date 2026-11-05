@@ -163,6 +163,13 @@ ok(is_file(__DIR__ . '/../app/Vistas/correccion.php') && str_contains($mv, "'/co
 ok(str_contains($pf, '/correccion?desde=') && str_contains($pl, 'href="/correccion"'), 'cada perfil y el pie del sitio enlazan a /correccion');
 ok(str_contains((string)file_get_contents(__DIR__ . '/../app/bootstrap.php'), 'const CONTACTO_EMAIL') && !preg_match('/mailto:[^\s"\']*@/', $pf), 'el correo de contacto sale de una sola constante, no está escrito en las vistas');
 ok(str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/perfil.php'), 'No es la situación de la persona ante ARCA'), 'el detalle impositivo aclara que no es la situación ante ARCA');
+$parRaw = is_file(__DIR__ . '/../storage/verificado/parentescos.json') ? (string)file_get_contents(__DIR__ . '/../storage/verificado/parentescos.json') : ''; $parMal = [];
+foreach (Datos::parentescos() as $pr) {
+    foreach (['declarante', 'familiar'] as $kk) { $sn = str_starts_with((string)$pr[$kk], 's:'); if (!Datos::legislador($sn ? 'Senadores' : 'Diputados', $sn ? substr((string)$pr[$kk], 2) : (string)$pr[$kk])) { $parMal[] = $pr[$kk]; } }
+    if ($pr['declarante'] === $pr['familiar'] || !in_array($pr['vinculo'], ['CONYUGE / CONVIVIENTE', 'HIJO/A'], true)) { $parMal[] = $pr['declarante'] . ' ' . $pr['vinculo']; }
+}
+ok($parMal === [] && !preg_match('/\d{11}/', $parRaw), 'vínculos familiares entre legisladores: ambos existen, el vínculo es uno de los permitidos y no hay ningún CUIT (' . count(Datos::parentescos()) . ' vínculos)' . ($parMal ? ': ' . implode(', ', array_slice($parMal, 0, 5)) : ''));
+ok(str_contains($pf, 'Vínculos familiares declarados con otros legisladores') && function_exists('parentescos_legislador') && str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/metodologia.php'), 'Familiares y personal de las Cámaras'), 'los vínculos entre legisladores tienen sección en el perfil y explicación en /metodologia, y el cruce con la nómina figura como no publicado');
 ok(str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/metodologia.php'), 'Declaraciones del mismo año con montos distintos'), '/metodologia explica las declaraciones del mismo año con montos distintos (' . $djIncAnios . ' casos)');
 
 $meta = Datos::mandatoActualMeta();
