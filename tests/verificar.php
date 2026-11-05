@@ -180,6 +180,33 @@ $legalAvisos = []; set_error_handler(static function ($n, $m, $f, $ln) use (&$le
 foreach (array_keys($legales) as $vv) { ob_start(); (static function () use ($vv) { include __DIR__ . '/../app/Vistas/' . $vv . '.php'; })(); $hh = (string)ob_get_clean(); if (strlen($hh) < 800) { $legalAvisos[] = $vv . ' casi vacía'; } }
 restore_error_handler();
 ok($legalAvisos === [] && (GA_ID !== '' || str_contains($vl('cookies'), 'DipuData no usa cookies')), 'las páginas legales se renderizan sin avisos de PHP y la de cookies dice la verdad según la configuración');
+// Test de afinidad por votos.
+$afMal = [];
+foreach (['Diputados', 'Senadores'] as $cmA) {
+    $pq = afinidad_preguntas($cmA);
+    if (count($pq) !== 10) { $afMal[] = $cmA . ' tiene ' . count($pq) . ' preguntas'; }
+    $ids = array_column($pq, 'id'); if (count($ids) !== count(array_unique($ids))) { $afMal[] = $cmA . ' repite preguntas'; }
+    foreach ($pq as $q) {
+        if (!Datos::votacion($q['id']) || $q['f'] < '2025-12-10' || preg_match('/O\.D\.\s*\d+\s*-|DICT\. DE M/u', $q['titulo'])) { $afMal[] = $cmA . ' ' . $q['id']; }
+    }
+    $todasA = array_fill_keys($ids, 'a'); $rA = afinidad_calcular($cmA, $todasA); $prev = 2;
+    if (count($rA) < 0.8 * count(Datos::legisladores($cmA))) { $afMal[] = $cmA . ' compara a solo ' . count($rA) . ' de ' . count(Datos::legisladores($cmA)); }
+    foreach ($rA as $f) { if ($f['coinc'] > $f['cons'] || $f['cons'] > 10 || $f['cons'] < 6 || $f['pct'] > $prev + 1e-9) { $afMal[] = $cmA . ' ' . $f['l']['slug'] . ' puntaje incoherente'; break; } $prev = $f['pct']; }
+    if ($rA) {  // control cruzado a mano con el primer legislador de la lista
+        $f0 = $rA[0]; $clave0 = ($f0['l']['camara'] === 'Senadores' ? 's:' : '') . $f0['l']['slug']; $c0 = 0; $k0 = 0;
+        foreach ($ids as $idq) { foreach ((Datos::votacion($idq)['votos'] ?? []) as $vv) { if (($vv[4] ?? '') === $clave0 && in_array($vv[3], ['A', 'N'], true)) { $k0++; $c0 += $vv[3] === 'A' ? 1 : 0; } } }
+        if ($c0 !== $f0['coinc'] || $k0 !== $f0['cons']) { $afMal[] = $cmA . ' control manual ' . $c0 . '/' . $k0 . ' vs ' . $f0['coinc'] . '/' . $f0['cons']; }
+    }
+}
+ok($afMal === [], 'test de afinidad: 10 preguntas por cámara, votaciones reales del mandato actual, títulos legibles y puntajes que coinciden con el recuento manual' . ($afMal ? ': ' . implode(' | ', array_slice($afMal, 0, 3)) : ''));
+$afAv = []; set_error_handler(static function ($n, $m, $f, $ln) use (&$afAv) { $afAv[] = basename($f) . ':' . $ln . ' ' . $m; return true; });
+$pqD = afinidad_preguntas('Diputados'); $respD = []; foreach (array_slice($pqD, 0, 6) as $ii => $qq) { $respD[$qq['id']] = $ii % 2 ? 'n' : 'a'; }
+foreach ([['indice', null], ['form', null], ['form', $respD]] as [$moA, $rsA]) {
+    ob_start(); (static function ($modo, $rsA, $pqD) { $camara = 'Diputados'; $sel = 'diputados'; $preg = $pqD; $resp = $rsA ?? []; $res = $rsA === null ? null : afinidad_calcular('Diputados', $rsA); $consulta = $rsA !== null; include __DIR__ . '/../app/Vistas/afinidad.php'; })($moA, $rsA, $pqD); $hA = (string)ob_get_clean();
+    if (strlen($hA) < 1500) { $afAv[] = 'afinidad ' . $moA . ' casi vacía'; }
+}
+restore_error_handler();
+ok($afAv === [] && str_contains($vl('metodologia'), 'id="afinidad"'), 'las tres pantallas del test de afinidad se renderizan sin avisos y la metodología explica cómo se eligen las preguntas' . ($afAv ? ': ' . implode(' | ', array_slice($afAv, 0, 2)) : ''));
 $djFisMal = []; $djFisN = 0;
 foreach ($todos as $l) {
     foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {

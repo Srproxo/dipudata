@@ -449,6 +449,32 @@ switch (true) {
         ));
         break;
 
+    case (bool)preg_match('#^/afinidad(?:/(diputados|senado))?$#', $path, $m):
+        $sel = $m[1] ?? '';
+        if ($sel === '') {
+            render('afinidad', ['modo' => 'indice'], pagina_meta(
+                'Test de afinidad por votos: ¿con qué legisladores coincidís?',
+                'Respondé a favor o en contra en las votaciones más parejas del Congreso y mirá con qué diputados y senadores coincidís, con sus votos reales.',
+                '/afinidad', 'afinidad'
+            ));
+            break;
+        }
+        $camara = $sel === 'senado' ? 'Senadores' : 'Diputados';
+        $preg = afinidad_preguntas($camara);
+        $resp = []; $consulta = false;
+        foreach ($preg as $q) {
+            $v = $_GET['p' . $q['id']] ?? null;
+            if (is_string($v) && in_array($v, ['a', 'n', 's'], true)) { $consulta = true; if ($v !== 's') { $resp[$q['id']] = $v; } }
+        }
+        $res = $consulta ? afinidad_calcular($camara, $resp) : null;
+        $nombreCam = $sel === 'senado' ? 'senadores' : 'diputados';
+        render('afinidad', ['modo' => 'form', 'camara' => $camara, 'sel' => $sel, 'preg' => $preg, 'resp' => $resp, 'res' => $res, 'consulta' => $consulta], pagina_meta(
+            'Test de afinidad por votos: ' . $nombreCam,
+            'Diez votaciones en general del Congreso, las más parejas desde el 10 de diciembre de 2025. Respondé y mirá con qué ' . $nombreCam . ' coincidís.',
+            '/afinidad/' . $sel, 'afinidad', ['robots' => $consulta ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/match':
         $pesos = []; $consulta = false;
         foreach (temas_match() as $clave => $tema) {
@@ -546,13 +572,13 @@ switch (true) {
     case (bool)preg_match('#^/eje(/|$)#', $path):
         ir('/match');
     case $path === '/match-360':
-        ir('/match');
+        ir('/afinidad');
     case (bool)preg_match('#^/ley(/|$)#', $path):
         ir('/leyes');
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }

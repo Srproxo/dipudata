@@ -10,6 +10,7 @@ $nav = [
     'senado'       => ['/senado', 'Senado'],
 ];
 $mas = [
+    'afinidad'    => ['/afinidad', 'Test de afinidad por votos'],
     'match'       => ['/match', 'Match por temas'],
     'comisiones'  => ['/comisiones', 'Comisiones'],
     'provincias'  => ['/congreso/provincias', 'Provincias'],
