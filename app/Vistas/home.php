@@ -23,6 +23,7 @@ $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== 
   <ul class="atajos">
     <li><a href="/votaciones"><b>Cómo votó cada uno</b><span>Votaciones nominales de Diputados y del Senado, una por una.</span></a></li>
     <li><a href="/patrimonio"><b>Patrimonio declarado</b><span>Cuánto declaró cada legislador, en pesos de hoy y en dólares, y cómo cambió.</span></a></li>
+    <li><a href="/afinidad"><b>¿Con quién coincidís?</b><span>Test de afinidad: respondé en las votaciones más parejas y mirá con qué legisladores votás igual.</span></a></li>
     <li><a href="/comparar"><b>Comparar legisladores</b><span>Hasta cuatro, lado a lado: patrimonio, votos y proyectos.</span></a></li>
     <li><a href="/leyes"><b>Leyes</b><span>Las leyes sancionadas, con su sumario y sus fechas.</span></a></li>
     <li><a href="/remuneraciones"><b>Cuánto cobran</b><span>La dieta y los adicionales que publica la Cámara.</span></a></li>

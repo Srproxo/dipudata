@@ -365,3 +365,5 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .cookies-aviso p { margin: 0 auto .5rem; max-width: 56rem; font-size: .95rem; }
 .cookies-botones, .botones-cookies { display: flex; flex-wrap: wrap; gap: .5rem; }
 .pie-legal { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.botones-cookies label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .25rem .8rem; border: 1px solid var(--linea); cursor: pointer; }
+.botones-cookies label:has(input:checked) { border-color: var(--acento); background: var(--fondo); font-weight: 600; }

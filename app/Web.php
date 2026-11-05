@@ -523,6 +523,90 @@ function estado_ddjj(array $l, array $dj): array
     return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? []];
 }
 
+/** Título legible de una votación para el test de afinidad (el oficial queda aparte, sin tocar). */
+function afinidad_titulo(string $t, string $cod): string
+{
+    $t = trim($t);
+    if ($cod === 'D') {
+        $t = (string)preg_replace('/^O\.D\.\s*\d+\s*-\s*/u', '', $t);
+        $t = (string)preg_replace('/\s*DICT\.\s*DE\s*(MAY|MIN)\..*$/iu', '', $t);
+        $abrev = ['E.F.' => 'ejercicio fiscal', 'CORRESP.' => 'correspondiente', 'ADM.' => 'administración', 'PRESUP.' => 'presupuestos', 'MÍN.' => 'mínimos',
+            'PRESERV.' => 'preservación', 'AMB.' => 'ambiente', 'MODIF.' => 'modificación',
+            'DECL.' => 'declaración', 'IMP.' => 'impuesto', 'DEROG.' => 'derogación', 'CREAC.' => 'creación'];
+        $t = rtrim($t, ' ') . ' ';
+        foreach ($abrev as $k => $v) { $t = (string)preg_replace('/(?<![\p{L}])' . preg_quote($k, '/') . '(?![\p{L}])/u', $v, $t); }
+        $t = rtrim(trim($t), '.');
+        if ($t === '') { return 'Votación en general'; }
+        $t = mb_strtoupper(mb_substr($t, 0, 1)) . mb_strtolower(mb_substr($t, 1));
+        $t = (string)preg_replace_callback('/\b(bcra|rigi|dnu|afip|arca|pami|iva|indec|anses|ley)\b/iu', static fn($m) => strtolower($m[1]) === 'ley' ? 'Ley' : mb_strtoupper($m[1]), $t);
+        return mb_strtoupper(mb_substr($t, 0, 1)) . mb_substr($t, 1);
+    }
+    $t = (string)preg_replace('/\s*\(En general\)\s*$/u', '', $t);
+    $t = (string)preg_replace('/\s+(?:PE|CD|S|OV)-\d+\/\d+[^,]*(?:,\s*)?/u', ' ', $t);
+    $t = (string)preg_replace('/,?\s*O\.D\.\s*(\d+\/\d+)\s*$/u', ' (Orden del Día $1)', $t);
+    $t = trim(preg_replace('/\s+/u', ' ', $t), ' .,');
+    if (preg_match('/^\(?O\.D\.\s*(\d+\/\d+)\)?$/u', $t, $m) || preg_match('/^\(Orden del Día (\d+\/\d+)\)$/u', $t, $m)) { return 'Orden del Día ' . $m[1]; }
+    return $t === '' ? 'Votación en general' : $t;
+}
+
+/**
+ * Preguntas del test de afinidad: las votaciones EN GENERAL del mandato actual (desde el 10/12/2025) con mayor paridad entre afirmativos y
+ * negativos y al menos 80 % de presentes, hasta 10 por cámara, en orden cronológico. Es un criterio objetivo: no hay elección editorial.
+ */
+function afinidad_preguntas(string $camara): array
+{
+    static $memo = [];
+    if (isset($memo[$camara])) { return $memo[$camara]; }
+    $cod = $camara === 'Senadores' ? 'S' : 'D';
+    $desde = (string)(\App\Datos::mandatoActualMeta()['desde'] ?? '2025-12-10');
+    $cand = [];
+    foreach (\App\Datos::votaciones() as $v) {
+        if ($v['c'] !== $cod || empty($v['tiene_detalle']) || $v['f'] < $desde) { continue; }
+        $general = $cod === 'S' ? (bool)preg_match('/\(En general\)\s*$/u', $v['t']) : (bool)preg_match('/VOT\.? EN GRAL|EN GENERAL/iu', $v['t']);
+        $deciden = $v['a'] + $v['n']; $emitidos = $deciden + $v['b']; $total = $emitidos + $v['u'];
+        if (!$general || $deciden === 0 || $total === 0 || $emitidos < 0.8 * $total) { continue; }
+        $v['_paridad'] = abs($v['a'] - $v['n']) / $deciden;
+        $cand[] = $v;
+    }
+    usort($cand, static fn($x, $y) => $x['_paridad'] <=> $y['_paridad'] ?: strcmp($x['id'], $y['id']));
+    $sel = array_slice($cand, 0, 10);
+    usort($sel, static fn($x, $y) => strcmp($x['f'] . ($x['h'] ?? ''), $y['f'] . ($y['h'] ?? '')));
+    return $memo[$camara] = array_map(static fn($v) => [
+        'id' => $v['id'], 'f' => $v['f'], 'titulo' => afinidad_titulo($v['t'], $cod), 'oficial' => $v['t'],
+        'a' => $v['a'], 'n' => $v['n'], 'b' => $v['b'], 'u' => $v['u'], 'res' => $v['res'],
+    ], $sel);
+}
+
+/**
+ * Coincidencia de cada legislador con las respuestas ($resp: id de votación => 'a' a favor | 'n' en contra). Solo cuentan las votaciones
+ * en que el legislador votó afirmativo o negativo; abstenciones y ausencias quedan afuera. Se muestran quienes votaron en al menos el 60 % de las respondidas (mínimo 4).
+ */
+function afinidad_calcular(string $camara, array $resp): array
+{
+    $votos = [];
+    foreach (afinidad_preguntas($camara) as $q) {
+        if (!isset($resp[$q['id']])) { continue; }
+        foreach ((\App\Datos::votacion($q['id'])['votos'] ?? []) as $v) {
+            if (isset($v[4])) { $votos[$v[4]][$q['id']] = $v[3]; }
+        }
+    }
+    $min = max(4, (int)ceil(0.6 * count($resp)));  // al menos el 60 % de lo respondido (mínimo cuatro): con muy pocos votos la coincidencia es azar
+    $filas = [];
+    foreach ($votos as $clave => $vs) {
+        $sen = str_starts_with($clave, 's:');
+        $l = \App\Datos::legislador($sen ? 'Senadores' : 'Diputados', $sen ? substr($clave, 2) : $clave);
+        if (!$l) { continue; }
+        $coinc = 0; $cons = 0;
+        foreach ($resp as $id => $r) {
+            $v = $vs[$id] ?? null;
+            if ($v === 'A' || $v === 'N') { $cons++; if (($r === 'a' && $v === 'A') || ($r === 'n' && $v === 'N')) { $coinc++; } }
+        }
+        if ($cons >= $min) { $filas[] = ['l' => $l, 'coinc' => $coinc, 'cons' => $cons, 'pct' => $coinc / $cons]; }
+    }
+    usort($filas, static fn($x, $y) => $y['pct'] <=> $x['pct'] ?: $y['cons'] <=> $x['cons'] ?: strcmp($x['l']['nombre'], $y['l']['nombre']));
+    return $filas;
+}
+
 /** Vínculos familiares que este legislador declaró con otros legisladores en ejercicio, o que otros declararon con él (identidad confirmada por CUIT). */
 function parentescos_legislador(array $l): array
 {
