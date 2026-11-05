@@ -262,11 +262,6 @@ final class Datos
         return is_array($r) ? $r : null;
     }
 
-    public static function coautoriasMeta(): array
-    {
-        return self::leer('coautorias_senado')['_meta'] ?? [];
-    }
-
     /** Aportes privados a agrupaciones políticas (CNE), por destino: ["_meta" => ..., "destinos" => [...]]. Sin datos de aportantes. */
     public static function aportes(): array
     {

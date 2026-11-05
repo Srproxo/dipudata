@@ -90,6 +90,12 @@ valores repetidos, vacíos o inconsistentes, no se publica y se explica en `/met
 - Sitemap (`/sitemap.xml`, auditado el 5/11/2026): 6.655 URLs únicas, todas responden 200, sin `noindex`, con canonical igual a la URL del sitemap; el límite de Google es 50.000 URLs. `lastmod` es una sola fecha (`informe.generado`).
 - Decisión de Marcelo (5/11/2026), todavía SIN implementar: se podrían publicar datos con fuente oficial o Wikipedia (incluido lo que hoy no se publica) si cada perfil tiene un botón para pedir baja o corrección. Hasta que exista ese botón y esté probado, sigue vigente la regla de arriba (no CUIT, no familiares, no personal).
 
+## Hoja de ruta (lo que falta y de qué depende)
+- Hecho: perfil en pestañas, ejes temáticos (por comisión de primer giro), `/match` por temas, declaraciones con detalle impositivo, vínculos entre legisladores (0 confirmados), páginas legales, Google listo (apagado hasta tener los ID).
+- Espera una fuente: defensa provincial, costo por proyecto, promesas de campaña (nadie las publica); votos por tema en el Senado y en Diputados desde 2020 (las actas no traen expediente); declaraciones 2025 (la OA las anunció para sep-oct 2026 y no están).
+- Espera una decisión de Marcelo: coherencia histórica (lista de leyes espejo elegida a mano), datos de Wikipedia, situación judicial (no hay fuente oficial legible por máquina).
+- Retirado en la limpieza del 5/11/2026: `.agent/` (instrucciones de la versión anterior que pedían Tailwind y Chart.js, contrarias a este archivo), `database/` (esquemas SQL de una base que el sitio no usa) y `.env.example` (variables de esa base). Siguen en el historial de git.
+
 ## Flujo de trabajo
 Desarrollar en la rama indicada por la sesión, correr los scripts y `php tests/verificar.php`, probar las rutas con
 `php -S` y revisar las pantallas (escritorio y móvil). Para publicar: `git merge -s ours origin/main` (conserva el árbol de la
