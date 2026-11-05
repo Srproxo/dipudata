@@ -65,6 +65,12 @@ switch (true) {
         $camara = $m[1] === 'senador' ? 'Senadores' : 'Diputados';
         $l = Datos::legislador($camara, $m[2]);
         if (!$l) { render_404(); break; }
+        if (($_GET['formato'] ?? '') === 'md') {
+            encabezados_seguridad('text/markdown; charset=utf-8', 3600);
+            header('X-Robots-Tag: noindex'); header('Link: <' . SITE_URL . Datos::urlLegislador($l) . '>; rel="canonical"');
+            echo perfil_markdown($l);
+            break;
+        }
         $cargo = $camara === 'Senadores' ? 'Senador/a nacional' : 'Diputado/a nacional';
         $pest = pestanas_perfil($l);
         $tab = is_string($_GET['tab'] ?? null) ? $_GET['tab'] : 'resumen';
@@ -73,6 +79,7 @@ switch (true) {
             $l['nombre'] . ', ' . strtolower($cargo) . ' por ' . $l['provincia'] . ($tab === 'resumen' ? '' : ': ' . mb_strtolower($pest[$tab])),
             $l['nombre'] . ': ' . strtolower($cargo) . ' por ' . $l['provincia'] . ', bloque ' . $l['bloque'] . '. ' . ($tab === 'resumen' ? 'Datos del padrón oficial con su fuente.' : $pest[$tab] . ' según registros oficiales, con su fuente.'),
             Datos::urlLegislador($l) . ($tab === 'resumen' ? '' : '?tab=' . $tab), 'legisladores', [
+                'alternate_md' => SITE_URL . Datos::urlLegislador($l) . '?formato=md',
                 'jsonld' => ['@context' => 'https://schema.org', '@type' => 'Person', 'name' => $l['nombre'], 'jobTitle' => $cargo,
                     'url' => SITE_URL . Datos::urlLegislador($l), 'affiliation' => ['@type' => 'Organization', 'name' => $l['bloque']]],
             ]
@@ -449,6 +456,30 @@ switch (true) {
         ));
         break;
 
+    case $path === '/llms.txt':
+    case $path === '/llms-full.txt':
+        encabezados_seguridad('text/plain; charset=utf-8', 3600);
+        echo llms_txt($path === '/llms-full.txt');
+        break;
+
+    case $path === '/datos':
+        $inf = Datos::informe();
+        render('datos', ['inf' => $inf], pagina_meta(
+            'Datos abiertos, API y uso por inteligencia artificial',
+            'Cómo reutilizar los datos de DipuData: API pública de solo lectura, perfiles en Markdown, llms.txt, licencia Creative Commons Atribución 4.0 y cómo citar.',
+            '/datos', 'datos', ['jsonld' => ['@context' => 'https://schema.org', '@type' => 'Dataset',
+                'name' => 'DipuData: datos verificados del Congreso de la Nación Argentina',
+                'description' => 'Legisladores en ejercicio, votaciones nominales, proyectos, declaraciones juradas y otros datos de diputados y senadores nacionales, con la fuente oficial de cada dato.',
+                'url' => SITE_URL . '/datos', 'license' => 'https://creativecommons.org/licenses/by/4.0/', 'isAccessibleForFree' => true, 'inLanguage' => 'es-AR',
+                'creator' => ['@type' => 'Person', 'name' => TITULAR_NOMBRE !== '' ? TITULAR_NOMBRE : 'DipuData'],
+                'keywords' => ['Congreso de la Nación Argentina', 'diputados', 'senadores', 'votaciones', 'declaraciones juradas', 'datos abiertos'],
+                'spatialCoverage' => 'Argentina', 'temporalCoverage' => '2005-01-01/..', 'dateModified' => (string)($inf['generado'] ?? ''),
+                'distribution' => [['@type' => 'DataDownload', 'encodingFormat' => 'application/json', 'contentUrl' => SITE_URL . '/api/legisladores'],
+                    ['@type' => 'DataDownload', 'encodingFormat' => 'application/json', 'contentUrl' => SITE_URL . '/api/votaciones'],
+                    ['@type' => 'DataDownload', 'encodingFormat' => 'application/json', 'contentUrl' => SITE_URL . '/api/openapi.json']]]]
+        ));
+        break;
+
     case $path === '/tv':
         $op = tv_opciones();
         if (isset($_GET['iniciar'])) {
@@ -601,7 +632,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/datos', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }

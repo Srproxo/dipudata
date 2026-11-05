@@ -523,6 +523,98 @@ function estado_ddjj(array $l, array $dj): array
     return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? []];
 }
 
+/** Perfil de un legislador en Markdown para lectores automáticos (LLM): solo datos que ya se publican, con fuente y límites. */
+function perfil_markdown(array $l): string
+{
+    $sen = $l['camara'] === 'Senadores';
+    $url = SITE_URL . \App\Datos::urlLegislador($l);
+    $cargo = $sen ? 'Senador/a nacional' : 'Diputado/a nacional';
+    $m = ['# ' . $l['nombre'], '', $cargo . ' por ' . $l['provincia'] . ' · bloque ' . $l['bloque'] . '.', '',
+        '- Mandato: ' . ($l['mandato'] ?: 'sin dato') . ($l['jura'] ? ' · juró el ' . fecha_es($l['jura']) : ''),
+        '- Perfil en la web: ' . $url, '- Datos actualizados al: ' . (\App\Datos::informe()['generado'] ?? ''), ''];
+    $mv = \App\Datos::mandatoActual($l['camara'], $l['slug']);
+    if ($mv) {
+        $mt = \App\Datos::mandatoActualMeta();
+        $m[] = '## Votaciones nominales desde el ' . fecha_es($mt['desde'] ?? '2025-12-10') . ' hasta el ' . fecha_es($mt['hasta'] ?? '');
+        $m[] = '- Votó en ' . (int)$mv['emitio'] . ' de ' . (int)$mv['votaciones'] . ' votaciones (' . number_format((float)$mv['voto_pct'], 1, ',', '') . ' %): ' . (int)$mv['afirmativos'] . ' afirmativos, ' . (int)$mv['negativos'] . ' negativos, ' . (int)$mv['abstenciones'] . ' abstenciones; ausente en ' . (int)$mv['ausente'] . '.';
+        if (($mv['coincidencia_bloque_n'] ?? 0) >= 20 && isset($mv['coincidencia_bloque_pct'])) { $m[] = '- Votó como la mayoría de su bloque en el ' . number_format((float)$mv['coincidencia_bloque_pct'], 0, ',', '') . ' % de las ' . (int)$mv['coincidencia_bloque_n'] . ' votaciones comparables.'; }
+        $m[] = '- Fuente: votaciones nominales publicadas por la Cámara. Una cifra de votos no explica los motivos de ningún voto.'; $m[] = '';
+    }
+    $py = \App\Datos::proyectos($l['slug'], $l['camara']);
+    if ($py && ($py['resumen']['total'] ?? 0) > 0) {
+        $rs = $py['resumen'];
+        $m[] = '## Proyectos presentados o firmados';
+        $m[] = '- Total: ' . (int)$rs['total'] . ', entre el ' . fecha_es($rs['desde']) . ' y el ' . fecha_es($rs['hasta']) . '. Por tipo: ' . implode(', ', array_map(static fn($k, $v) => $k . ' ' . $v, array_keys($rs['por_tipo']), $rs['por_tipo'])) . '.';
+        foreach (array_slice($py['proyectos'], 0, 5) as $p) { $m[] = '  - ' . fecha_es((string)$p[1]) . ' · ' . $p[2] . ' ' . $p[3] . ': ' . trim((string)$p[4]); }
+        $m[] = '- Más proyectos no quiere decir más trabajo: mide cuántos presentó, no su calidad ni su resultado. Que no figure un resultado no es un rechazo.'; $m[] = '';
+    }
+    $dj = \App\Datos::ddjj($l['camara'], $l['slug']); $est = estado_ddjj($l, $dj);
+    $m[] = '## Declaraciones juradas patrimoniales (Oficina Anticorrupción)';
+    if ($dj) {
+        $m[] = '| Año fiscal | Bienes | Deudas | Patrimonio neto | Ingresos netos | Tipo |'; $m[] = '|---|---|---|---|---|---|';
+        foreach ($dj as $d) { $m[] = '| ' . (int)$d['anio'] . ' | ' . monto_ars((string)$d['bienes_final']) . ' | ' . monto_ars((string)$d['deudas_final']) . ' | ' . monto_ars((string)$d['patrimonio_neto_final']) . ' | ' . ($d['ingresos_netos'] !== null ? monto_ars((string)$d['ingresos_netos']) : '—') . ' | ' . $d['tipo'] . ' |'; }
+        $m[] = ''; $m[] = 'Importes en pesos de cada año, tal como se declararon. El patrimonio neto es bienes menos deudas.';
+    } else {
+        $m[] = !empty($est['inconsistente']) ? 'El archivo oficial trae declaraciones del mismo año con montos distintos; no se publican cifras.' : (!empty($est['sin_totales']) ? 'Figura una declaración con los totales vacíos; no se publican cifras.' : (!empty($est['asumio_2025']) ? 'Asumió el 10/12/2025: su primera declaración todavía no está publicada.' : 'No figura en el archivo publicado (no quiere decir que no la haya presentado).'));
+    }
+    foreach ($est['inconsistente'] ?? [] as $x) { $m[] = 'Año ' . (int)$x['anio'] . ': el archivo trae ' . (int)$x['cantidad'] . ' declaraciones del mismo tipo con montos distintos; no se publica ninguna cifra de ese año.'; }
+    $m[] = ''; $m[] = '## Fuentes y condiciones';
+    foreach (($l['fuentes'] ?? []) as $f) { $m[] = '- ' . (is_array($f) ? trim(($f['nombre'] ?? '') . ' ' . ($f['url'] ?? '')) : (string)$f); }
+    $m[] = '- Metodología: ' . SITE_URL . '/metodologia';
+    $m[] = '- Licencia de los textos y la compilación: Creative Commons Atribución 4.0. Citar "DipuData (dipudata.com)". Los datos de origen oficial conservan la licencia de su fuente.';
+    $m[] = '- DipuData no es un sitio oficial. Ante dudas, verificar en la fuente oficial.';
+    return implode("\n", $m) . "\n";
+}
+
+/** llms.txt (resumen para modelos de lenguaje) y llms-full.txt (con el listado completo y el glosario). Todo sale de los datos del sitio. */
+function llms_txt(bool $completo): string
+{
+    $inf = \App\Datos::informe();
+    $nd = (int)($inf['diputados'] ?? 0); $ns = (int)($inf['senadores'] ?? 0); $gen = (string)($inf['generado'] ?? '');
+    $u = SITE_URL;
+    $t = ["# DipuData", "",
+        "> Datos abiertos y verificados sobre los {$nd} diputados y {$ns} senadores nacionales de Argentina: quién ocupa cada banca, cómo votó, qué proyectos presentó y qué declaró. Todo con fuente oficial indicada en cada dato. No es un sitio oficial. Datos actualizados al " . fecha_es($gen) . ".", "",
+        "Cómo usar este contenido:", "",
+        "- La información es pública y se puede reutilizar, también por sistemas de IA, con la licencia Creative Commons Atribución 4.0: citar \"DipuData (dipudata.com)\" y la página de origen. Los datos de origen oficial conservan la licencia de su fuente.",
+        "- Cada dato muestra su fuente. Si algo no figura, no quiere decir que no exista: solo se publica lo que se pudo verificar. Ante dudas, verificar en la fuente oficial.",
+        "- El sitio no afirma intenciones ni causas. Una cifra, un voto o un proyecto no implican por sí mismos ninguna conducta.",
+        "- Para pedir una corrección o la baja de un dato: {$u}/correccion", "",
+        "## Datos para máquinas", "",
+        "- [API pública de solo lectura (JSON)]({$u}/datos): legisladores, bloques, provincias, votaciones con el voto de cada legislador y declaraciones juradas. Especificación OpenAPI: {$u}/api/openapi.json",
+        "- Perfil de cada legislador en Markdown: agregar `?formato=md` a su dirección (por ejemplo {$u}/diputado/hilda-aguirre?formato=md)",
+        "- [Datos abiertos y cómo citar]({$u}/datos)", "- [Sitemap]({$u}/sitemap.xml)", "",
+        "## Secciones principales", "",
+        "- [Legisladores en ejercicio]({$u}/): directorio con buscador por nombre, cámara, provincia y bloque",
+        "- [Votaciones]({$u}/votaciones): votaciones nominales de Diputados y del Senado, una por una, con el voto de cada legislador",
+        "- [Leyes]({$u}/leyes): leyes sancionadas con su sumario y fechas",
+        "- [Patrimonio declarado]({$u}/patrimonio): declaraciones juradas de la Oficina Anticorrupción, con el detalle impositivo declarado",
+        "- [Comparar legisladores]({$u}/comparar): hasta cuatro, lado a lado",
+        "- [Test de afinidad por votos]({$u}/afinidad): con qué legisladores coincide una persona según los votos reales",
+        "- [Bloques]({$u}/congreso/bloques), [Provincias]({$u}/congreso/provincias), [Comisiones]({$u}/comisiones)",
+        "- [Cuánto cobran]({$u}/remuneraciones), [Pasajes y misiones]({$u}/viajes), [Cuánto gasta la Cámara]({$u}/presupuesto), [Aportes a partidos]({$u}/aportes)", "",
+        "## Metodología y reglas", "",
+        "- [Metodología y fuentes]({$u}/metodologia): de dónde sale cada dato, qué no se publica y por qué",
+        "- [Glosario]({$u}/glosario): qué quiere decir cada término",
+        "- [Cómo funciona el Congreso]({$u}/congreso)", "",
+        "## Legal", "",
+        "- [Términos y condiciones]({$u}/terminos)", "- [Política de privacidad]({$u}/privacidad)", "- [Política de cookies]({$u}/cookies)", ""];
+    if ($completo) {
+        $t[] = "## Qué no se publica"; $t[] = "";
+        foreach (["CUIT, documentos, domicilios ni teléfonos particulares.", "Datos de familiares que no sean legisladores, ni descripción de bienes.", "Nada sobre el personal de un legislador: las nóminas no dicen a qué legislador responde cada agente.", "Situación judicial: no hay una fuente oficial legible por máquina.", "Cuando una fuente trae valores inconsistentes, no se publican y se explica en la metodología."] as $x) { $t[] = "- {$x}"; }
+        $t[] = ""; $t[] = "## Glosario"; $t[] = "";
+        foreach (terminos_glosario() as $k => $g) { $t[] = '- **' . $g[0] . '**: ' . trim((string)($g[1] ?? '')); }
+        $t[] = ""; $t[] = "## Bloques"; $t[] = "";
+        foreach (\App\Datos::bloques() as $b) { $t[] = '- [' . $b['nombre'] . ' (' . $b['camara'] . ', ' . (int)$b['cantidad'] . ' bancas)](' . $u . \App\Datos::urlBloque($b) . ')'; }
+        foreach (['Diputados' => 'Diputados', 'Senadores' => 'Senadores'] as $cam => $tit) {
+            $t[] = ""; $t[] = "## {$tit} en ejercicio"; $t[] = "";
+            $ls = \App\Datos::legisladores($cam); usort($ls, static fn($x, $y) => strcmp(\App\Datos::normalizar(($x['apellido'] ?? '') . ' ' . $x['nombre']), \App\Datos::normalizar(($y['apellido'] ?? '') . ' ' . $y['nombre'])));
+            foreach ($ls as $l) { $t[] = '- [' . $l['nombre'] . '](' . $u . \App\Datos::urlLegislador($l) . '?formato=md): ' . $l['provincia'] . ', ' . $l['bloque']; }
+        }
+        $t[] = "";
+    }
+    return implode("\n", $t) . "\n";
+}
+
 /** Página a pantalla completa para TV: documento propio, sin el menú ni el pie del sitio. */
 function render_tv(string $modo, array $vars, array $meta): void
 {

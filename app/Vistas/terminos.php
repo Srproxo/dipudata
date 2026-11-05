@@ -40,6 +40,7 @@ $titular = TITULAR_NOMBRE !== '' ? TITULAR_NOMBRE : 'el equipo editor de DipuDat
   <ul>
     <li><strong>Datos de origen oficial.</strong> Conservan las condiciones de su fuente. Por ejemplo, las declaraciones juradas de la Oficina Anticorrupción se publican en datos.jus.gob.ar con licencia Creative Commons Atribución 4.0. Cada pantalla indica la fuente.</li>
     <li><strong>Textos y compilación propios.</strong> Los textos, los cálculos y la forma en que DipuData organiza los datos se pueden reutilizar, también con fines comerciales, bajo la licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" rel="noopener">Creative Commons Atribución 4.0 Internacional</a>, citando "DipuData (dipudata.com)" y enlazando a la página de origen.</li>
+    <li><strong>Sistemas de inteligencia artificial.</strong> Como la información es pública, también pueden leerla, indexarla y usarla (por ejemplo, para responder preguntas), con la misma condición: citar "DipuData (dipudata.com)" y la página de origen, y no presentar como oficial lo que no lo es. Hay un resumen para modelos en <a href="/llms.txt">/llms.txt</a>, una API pública y perfiles en Markdown, explicados en <a href="/datos">Datos abiertos y API</a>. Quien use los datos es responsable de verificarlos en la fuente oficial cuando importe.</li>
     <li>El nombre y el logotipo de DipuData no pueden usarse de una forma que sugiera una relación oficial o un respaldo que no existe.</li>
     <li>Las fotografías de los legisladores provienen de los sitios oficiales de cada Cámara.</li>
   </ul>
