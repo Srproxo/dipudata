@@ -202,6 +202,7 @@ def main() -> int:
         return None if len(grupos) > 1 else cand
 
     salida, ambiguos, fuera, saltadas, vacias, varias = {}, [], [], collections.Counter(), collections.Counter(), []
+    inconsistentes = collections.Counter()
     estado = {}
     otra_camara, con_otros = [], 0
     for l, ap, resto in datos_leg:
@@ -267,6 +268,26 @@ def main() -> int:
                     vacias[anio] += 1
                 estado.setdefault(clave, {}).setdefault("sin_totales", []).append({"anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"]})
                 continue
+            # Varias declaraciones del mismo año, mismo tipo y misma rectificativa, por el mismo carácter (legislador u otro cargo) y con
+            # totales distintos: la fuente trae valores inconsistentes y no hay razón para preferir una. No se elige en silencio: ese año
+            # no se publica y se registra el rango en ddjj_estado.json (las rectificativas distintas sí se resuelven: vale la última).
+            def clave_totales(x):
+                return (monto(x["total_bienes_final"]), monto(x["total_deudas_final"]) or 0.0)
+            rivales = [x for x in rs if x is not r
+                       and x["tipo_declaracion_jurada_descripcion"] == r["tipo_declaracion_jurada_descripcion"]
+                       and int(x["rectificativa"] or 0) == int(r["rectificativa"] or 0)
+                       and x["_leg"] == r["_leg"]
+                       and (monto(x["total_bienes_final"]) or 0) != 0
+                       and clave_totales(x) != clave_totales(r)]
+            if rivales:
+                grupo = [r] + rivales
+                bs = [monto(x["total_bienes_final"]) for x in grupo]
+                ds = [monto(x["total_deudas_final"]) or 0.0 for x in grupo]
+                estado.setdefault(clave, {}).setdefault("inconsistente", []).append({
+                    "anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"], "cantidad": len(grupo),
+                    "bienes": [min(bs), max(bs)], "deudas": [min(ds), max(ds)]})
+                inconsistentes[anio] += 1
+                continue
             bf, df = monto(r["total_bienes_final"]), monto(r["total_deudas_final"])
             bi, di = monto(r["total_bienes_inicio"]), monto(r["deudas_inicio"])
             anios.append({
@@ -283,6 +304,8 @@ def main() -> int:
         print("Declaraciones con bienes en cero (no se publican), por año:", dict(sorted(vacias.items())))
     if saltadas:
         print("Declaraciones sin monto interpretable, por año:", dict(sorted(saltadas.items())))
+    if inconsistentes:
+        print("Años con declaraciones de igual tipo y rectificativa pero totales distintos (no se publican), por año:", dict(sorted(inconsistentes.items())))
     if fuera:
         print(f"Años fuera de todo mandato del legislador (no se publican): {len(fuera)}:", "; ".join(fuera))
     if varias:
@@ -294,6 +317,8 @@ def main() -> int:
     for v in estado.values():
         if "sin_totales" in v:
             v["sin_totales"].sort(key=lambda x: x["anio"])
+        if "inconsistente" in v:
+            v["inconsistente"].sort(key=lambda x: x["anio"])
     (SAL / "ddjj_estado.json").write_text(json.dumps(dict(sorted(estado.items())), ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(filas)} declaraciones de legisladores nacionales; {len(salida)} legisladores actuales cruzados "
           f"({con_otros} con declaraciones de otros cargos); {len(ambiguos)} ambiguos")

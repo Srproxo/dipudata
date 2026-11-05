@@ -38,6 +38,21 @@
   ]
  },
  "christian-alejandro-zulli": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     28855791.0,
+     288557910.0
+    ],
+    "deudas": [
+     28674380.0,
+     286743800.0
+    ]
+   }
+  ],
   "sin_totales": [
    {
     "anio": 2019,
@@ -54,6 +69,21 @@
   ]
  },
  "daniel-vancsik": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     18626908.0,
+     186269080.0
+    ],
+    "deudas": [
+     6002000.0,
+     60020000.0
+    ]
+   }
+  ],
   "sin_totales": [
    {
     "anio": 2022,
@@ -66,6 +96,23 @@
    {
     "anio": 2023,
     "tipo": "Inicial"
+   }
+  ]
+ },
+ "eduardo-felix-valdes": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     235946274.31,
+     235946274.31
+    ],
+    "deudas": [
+     6790000.0,
+     67900000.0
+    ]
    }
   ]
  },
@@ -244,6 +291,21 @@
   "ambiguo": true
  },
  "natalia-zaracho": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     8366208.0,
+     83662080.0
+    ],
+    "deudas": [
+     1149771.69,
+     1149771.69
+    ]
+   }
+  ],
   "sin_totales": [
    {
     "anio": 2021,
@@ -351,6 +413,23 @@
    }
   ]
  },
+ "s:eduardo-alejandro-vischi": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     172434199.0,
+     1724341990.0
+    ],
+    "deudas": [
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
  "s:gerardo-zamora": {
   "sin_totales": [
    {
@@ -399,11 +478,45 @@
    }
   ]
  },
+ "s:mercedes-gabriela-valenzuela": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     49977736.0,
+     499777360.0
+    ],
+    "deudas": [
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
  "s:natalia-elena-gadano": {
   "sin_totales": [
    {
     "anio": 2023,
     "tipo": "Inicial"
+   }
+  ]
+ },
+ "s:sergio-mauricio-unac": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     594511112.45,
+     594511112.45
+    ],
+    "deudas": [
+     1120346.0,
+     11203460.0
+    ]
    }
   ]
  },
@@ -452,6 +565,21 @@
   ]
  },
  "yolanda-vega": {
+  "inconsistente": [
+   {
+    "anio": 2024,
+    "tipo": "Anual",
+    "cantidad": 2,
+    "bienes": [
+     73054692.09,
+     73054692.09
+    ],
+    "deudas": [
+     14921000.0,
+     149210000.0
+    ]
+   }
+  ],
   "sin_totales": [
    {
     "anio": 2023,

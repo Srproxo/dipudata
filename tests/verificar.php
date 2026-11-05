@@ -129,6 +129,27 @@ ok($djFuera === [], 'cada año de declaración jurada como legislador de esta c�
 ok($djMal === 0, 'en cada declaración jurada, patrimonio neto = bienes - deudas y ningún monto es negativo');
 ok($djCuit === 0 && !str_contains((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj.json'), 'cuit'), 'no se publica ningún CUIT en las declaraciones juradas');
 
+// Declaraciones del mismo año con montos distintos: no se elige una en silencio.
+$estadoDj = json_decode((string)file_get_contents(__DIR__ . '/../storage/verificado/ddjj_estado.json'), true) ?: [];
+$djIncAnios = 0; $djIncPublicado = []; $djIncNoDiez = []; $djAniosRepetidos = [];
+foreach ($estadoDj as $clave => $es) {
+    foreach ($es['inconsistente'] ?? [] as $x) {
+        $djIncAnios++;
+        $sl = str_starts_with($clave, 's:') ? substr($clave, 2) : $clave;
+        $cam = str_starts_with($clave, 's:') ? 'Senadores' : 'Diputados';
+        foreach (Datos::ddjj($cam, $sl) ?? [] as $d) { if ((int)$d['anio'] === (int)$x['anio']) { $djIncPublicado[] = $clave . ' ' . $x['anio']; } }
+        foreach (['bienes', 'deudas'] as $k) {
+            [$mn, $mx] = $x[$k];
+            if ($mn > 0 && abs($mx / $mn - 1) > 1e-9 && abs($mx / $mn - 10) > 1e-6) { $djIncNoDiez[] = $clave . ' ' . $x['anio'] . ' ' . $k; }
+        }
+    }
+}
+foreach ($todos as $l) { $vistos = []; foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) { if (isset($vistos[$d['anio']])) { $djAniosRepetidos[] = $l['slug'] . ' ' . $d['anio']; } $vistos[$d['anio']] = true; } }
+ok($djIncPublicado === [], 'ningún año de declaración jurada con declaraciones de montos distintos se publica con cifras' . ($djIncPublicado ? ': ' . implode(', ', array_slice($djIncPublicado, 0, 5)) : ''));
+ok($djAniosRepetidos === [], 'cada legislador tiene a lo sumo una declaración jurada publicada por año' . ($djAniosRepetidos ? ': ' . implode(', ', array_slice($djAniosRepetidos, 0, 5)) : ''));
+ok($djIncNoDiez === [], 'en cada año marcado como inconsistente la diferencia entre las declaraciones es de exactamente diez veces (si cambia, revisar el texto de /metodologia)' . ($djIncNoDiez ? ': ' . implode(', ', array_slice($djIncNoDiez, 0, 5)) : ''));
+ok(str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/metodologia.php'), 'Declaraciones del mismo año con montos distintos'), '/metodologia explica las declaraciones del mismo año con montos distintos (' . $djIncAnios . ' casos)');
+
 $meta = Datos::mandatoActualMeta();
 ok(($meta['validas']['Diputados'] ?? 0) >= 100 && ($meta['validas']['Senadores'] ?? 0) >= 150, 'hay votaciones válidas del mandato actual en ambas cámaras');
 $maMal = 0; $maN = 0;
