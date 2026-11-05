@@ -175,6 +175,7 @@ ok(str_contains($tm, 'No es un sitio oficial') && str_contains($tm, 'Creative Co
 $bs = (string)file_get_contents(__DIR__ . '/../app/bootstrap.php'); $js = (string)file_get_contents(__DIR__ . '/../assets/js/analitica.js'); $wb = (string)file_get_contents(__DIR__ . '/../app/Web.php');
 ok(!preg_match('/G-[A-Z0-9]{6,}/', $bs) && str_contains($bs, "define('GA_ID'") && str_contains($bs, "define('GSC_VERIFICACION'"), 'el ID de Analytics y el código de Search Console salen del entorno, no están escritos en el código');
 ok(substr_count($js, 'googletagmanager.com') === 1 && str_contains($js, "if (actual === 'si') { cargar(); }") && str_contains($wb, "GA_ID === ''"), 'Google Analytics solo se carga con consentimiento y la CSP solo lo permite si está configurado');
+ok(TITULAR_NOMBRE !== '' && TITULAR_DOMICILIO !== '', 'las páginas legales identifican al responsable del sitio (nombre y domicilio, Ley 25.326 art. 6)');
 $legalAvisos = []; set_error_handler(static function ($n, $m, $f, $ln) use (&$legalAvisos) { $legalAvisos[] = basename($f) . ':' . $ln . ' ' . $m; return true; });
 foreach (array_keys($legales) as $vv) { ob_start(); (static function () use ($vv) { include __DIR__ . '/../app/Vistas/' . $vv . '.php'; })(); $hh = (string)ob_get_clean(); if (strlen($hh) < 800) { $legalAvisos[] = $vv . ' casi vacía'; } }
 restore_error_handler();
