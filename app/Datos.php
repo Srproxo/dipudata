@@ -109,6 +109,12 @@ final class Datos
         return self::leer('ddjj')[($camara === 'Senadores' ? 's:' : '') . $slug] ?? [];
     }
 
+    /** @return list<array{declarante:string,familiar:string,vinculo:string,reciproco:bool,anio:int}> vínculos familiares declarados entre legisladores en ejercicio, confirmados por CUIT (scripts/verificar_parentescos_legisladores.py); claves como en ddjj.json */
+    public static function parentescos(): array
+    {
+        return self::leer('parentescos');
+    }
+
     /** @return array{sin_totales?:list<array{anio:int,tipo:string}>,ambiguo?:bool} casos en que la declaración figura pero no se publican sus totales, o el nombre es ambiguo */
     public static function ddjjEstado(string $camara, string $slug): array
     {

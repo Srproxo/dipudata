@@ -519,6 +519,29 @@ function estado_ddjj(array $l, array $dj): array
     return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? []];
 }
 
+/** Vínculos familiares que este legislador declaró con otros legisladores en ejercicio, o que otros declararon con él (identidad confirmada por CUIT). */
+function parentescos_legislador(array $l): array
+{
+    $etiq = ['CONYUGE / CONVIVIENTE' => 'cónyuge o conviviente', 'HIJO/A' => 'hijo/a'];
+    $yo = ($l['camara'] === 'Senadores' ? 's:' : '') . $l['slug'];
+    $por = [];
+    foreach (\App\Datos::parentescos() as $r) {
+        if ($r['declarante'] === $yo) { $otro = $r['familiar']; $dir = 'yo'; }
+        elseif ($r['familiar'] === $yo) { $otro = $r['declarante']; $dir = 'otro'; }
+        else { continue; }
+        $por[$otro]['vinculo'] = $etiq[$r['vinculo']] ?? '';
+        $por[$otro]['anio'] = (int)$r['anio'];
+        $por[$otro][$dir] = true;
+    }
+    $sal = [];
+    foreach ($por as $k => $x) {
+        $sen = str_starts_with($k, 's:');
+        $o = \App\Datos::legislador($sen ? 'Senadores' : 'Diputados', $sen ? substr($k, 2) : $k);
+        if ($o && $x['vinculo'] !== '') { $sal[] = ['otro' => $o, 'vinculo' => $x['vinculo'], 'anio' => $x['anio'], 'yo' => !empty($x['yo']), 'otro_declaro' => !empty($x['otro'])]; }
+    }
+    return $sal;
+}
+
 /** Barras verticales en SVG: una por clave (por ejemplo, proyectos por año). Sin scripts. */
 function svg_barras(array $serie, string $titulo): string
 {

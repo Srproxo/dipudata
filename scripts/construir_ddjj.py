@@ -307,7 +307,7 @@ def main() -> int:
             bf, df = monto(r["total_bienes_final"]), monto(r["total_deudas_final"])
             bi, di = monto(r["total_bienes_inicio"]), monto(r["deudas_inicio"])
             anios.append({
-                "anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"], "rectificativa": int(r["rectificativa"] or 0),
+                "dj_id": r["dj_id"], "anio": int(anio), "tipo": r["tipo_declaracion_jurada_descripcion"], "rectificativa": int(r["rectificativa"] or 0),
                 "cargo": cargo_legible(r, r["_leg"]), "camara": r["_camara"] if r["_leg"] else None,
                 "bienes_inicio": bi, "deudas_inicio": di, "bienes_final": bf, "deudas_final": df or 0.0,
                 "patrimonio_neto_final": round(bf - (df or 0.0), 2),
