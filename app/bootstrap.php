@@ -8,9 +8,9 @@ const CONTACTO_EMAIL = 'correcciones@dipudata.com';
 const PEDIDOS_URL = 'https://github.com/Srproxo/dipudata/issues/new';
 /** Fecha de la última revisión de los textos legales (AAAA-MM-DD). */
 const LEGAL_ACTUALIZADO = '2026-11-05';
-/** Quién edita el sitio (Ley 25.326, art. 6: identidad y domicilio del responsable). Vacío = se dice solo "el equipo editor de DipuData". */
-const TITULAR_NOMBRE = '';
-const TITULAR_DOMICILIO = '';
+/** Quién edita el sitio (Ley 25.326, art. 6: identidad y domicilio del responsable). Cargados por Marcelo el 5/11/2026; si se vacían, se dice solo "el equipo editor de DipuData". */
+const TITULAR_NOMBRE = 'Marcelo Marchesi';
+const TITULAR_DOMICILIO = 'Av. Gral. Paz 70, piso 1, oficina 3';
 /**
  * Configuración que no va al repositorio: un archivo `config.local.php` en la raíz del sitio (git lo ignora; se sube al servidor aparte)
  * que devuelve ['GA_ID' => '...', 'GSC_VERIFICACION' => '...']. También se aceptan las variables de entorno DIPUDATA_GA_ID y DIPUDATA_GSC
