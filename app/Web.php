@@ -313,7 +313,7 @@ function svg_linea(array $puntos, string $titulo, string $moneda = '$', array $s
         $px = round($x($i), 1); $py = round($y((float)$v), 1);
         $camino[] = ($i ? 'L' : 'M') . $px . ' ' . $py;
         $etiquetas .= '<circle class="g-punto" cx="' . $px . '" cy="' . $py . '" r="3.5"/>';
-        if ($i % $paso === 0 || $i === $n - 1) {
+        if (($i % $paso === 0 && ($n - 1 - $i) >= (int)ceil($paso / 2)) || $i === $n - 1) {
             $etiquetas .= '<text class="g-eje" x="' . $px . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$et) . '</text>';
         }
         $i++;
@@ -543,7 +543,7 @@ function svg_barras(array $serie, string $titulo): string
         $cx = $izq + $ancho * ($i + 0.5);
         $alto = ($h - $arr - $aba) * ((float)$v / $max);
         $s .= '<rect class="g-barra" x="' . round($cx - $barra / 2, 1) . '" y="' . round($h - $aba - $alto, 1) . '" width="' . round($barra, 1) . '" height="' . round($alto, 1) . '"><title>' . e($et . ': ' . number_format((float)$v, 0, ',', '.')) . '</title></rect>';
-        if ($i % $paso === 0 || $i === $n - 1) {
+        if (($i % $paso === 0 && ($n - 1 - $i) >= (int)ceil($paso / 2)) || $i === $n - 1) {
             $s .= '<text class="g-eje" x="' . round($cx, 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$et) . '</text>';
         }
         $i++;
@@ -653,7 +653,7 @@ function svg_lineas(array $series, string $titulo, string $moneda = '$'): string
     }
     $paso = max(1, (int)ceil($n / 9));
     foreach ($anios as $i => $a) {
-        if ($i % $paso === 0 || $i === $n - 1) {
+        if (($i % $paso === 0 && ($n - 1 - $i) >= (int)ceil($paso / 2)) || $i === $n - 1) {
             $s .= '<text class="g-eje" x="' . round($x($a), 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . $a . '</text>';
         }
     }
@@ -772,7 +772,7 @@ function svg_proyectos_anuales(array $anios, array $promedio, string $titulo, st
             $camino[] = (count($camino) ? 'L' : 'M') . $px . ' ' . $py;
             $marc .= '<path class="g-prom-m" d="M' . $px . ' ' . ($py - 5) . ' L' . ($px + 5) . ' ' . $py . ' L' . $px . ' ' . ($py + 5) . ' L' . ($px - 5) . ' ' . $py . ' Z"><title>' . e($anio . ' · ' . $etiquetaPromedio . ': ' . number_format((float)$promedio[$anio], 1, ',', '.')) . '</title></path>';
         }
-        if ($i % $paso === 0 || $i === $n - 1) {
+        if (($i % $paso === 0 && ($n - 1 - $i) >= (int)ceil($paso / 2)) || $i === $n - 1) {
             $s .= '<text class="g-eje" x="' . round($cx, 1) . '" y="' . ($h - 8) . '" text-anchor="middle">' . e((string)$anio . ($notaParcial !== '' && (string)$anio === $notaParcial ? '*' : '')) . '</text>';
         }
         $i++;

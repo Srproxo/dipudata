@@ -213,6 +213,7 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .atajos a:hover { border-color: var(--acento); background: var(--fondo); }
 .atajos b { font: 700 1.05rem/1.25 var(--serif); }
 .atajos span { font-size: .9rem; color: var(--tinta-2); }
+@media (max-width: 40rem) { .atajos { grid-template-columns: 1fr 1fr; gap: .5rem; } .atajos a { padding: .65rem .75rem; } .atajos b { font-size: .95rem; } .atajos span { font-size: .8rem; } }
 .resumen { margin-top: 1.75rem; padding: 1rem 1.25rem; border-left: 4px solid var(--acento); background: var(--fondo); max-width: 48rem; }
 .resumen-t { margin: 0 0 .5rem; font: 700 1.1rem/1.2 var(--serif); }
 .resumen ul { margin: 0; padding-left: 1.1rem; }

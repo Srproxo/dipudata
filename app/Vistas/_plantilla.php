@@ -103,6 +103,7 @@ $inf = \App\Datos::informe();
         <li><a href="https://www.senado.gob.ar/" rel="noopener">Senado de la Nación (datos abiertos)</a></li>
         <li><a href="https://www.congreso.gob.ar/constitucionNacional.php" rel="noopener">Constitución Nacional</a></li>
         <li><a href="/metodologia">Cómo trabajamos</a></li>
+        <li><a href="/correccion">Pedir corrección o baja</a></li>
       </ul>
     </div>
   </div>
