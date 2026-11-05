@@ -50,6 +50,22 @@ def monto(s):
     return None
 
 
+def detalle_fiscal(r):
+    """Ingresos netos por categoría (sueldos, capitales, empresa, trabajo personal), total, deducciones y desgravaciones, tal como figuran en la
+    declaración. Solo se devuelve si cierran dos cuentas del propio archivo: las cuatro categorías suman el total y total - deducciones -
+    desgravaciones = ingreso neto que ya publicamos. Si no cierran, no se publica el detalle de ese año (ver CLAUDE.md)."""
+    cat = [monto(r.get(k)) for k in ("ingreso_neto_renta_sueldo_c1", "ingreso_neto_renta_capitales_c2", "ingreso_neto_renta_empresa_c3", "ingreso_neto_renta_trabajo_personal_c4")]
+    tot, neto = monto(r.get("total_ingreso_neto_c1234")), monto(r.get("ingresos_neto_gastos"))
+    if tot is None or neto is None:
+        return None
+    ded, des = monto(r.get("deducciones_generales")) or 0.0, monto(r.get("desgravaciones")) or 0.0
+    cat = [x or 0.0 for x in cat]
+    if abs(sum(cat) - tot) >= 1 or abs(tot - ded - des - neto) >= 1:
+        return None
+    return {"sueldos": round(cat[0], 2), "capitales": round(cat[1], 2), "empresa": round(cat[2], 2), "trabajo_personal": round(cat[3], 2),
+            "total": round(tot, 2), "deducciones": round(ded, 2), "desgravaciones": round(des, 2)}
+
+
 def tokens(s):
     return norm(s or "").split()
 
@@ -296,6 +312,7 @@ def main() -> int:
                 "bienes_inicio": bi, "deudas_inicio": di, "bienes_final": bf, "deudas_final": df or 0.0,
                 "patrimonio_neto_final": round(bf - (df or 0.0), 2),
                 "ingresos_netos": monto(r["ingresos_neto_gastos"]),
+                "fiscal": detalle_fiscal(r),
             })
         if anios:
             salida[clave] = anios
@@ -311,6 +328,8 @@ def main() -> int:
     if varias:
         print("Con más de una persona en sus filas (no se suman otros cargos):", "; ".join(varias))
     print(f"Cruzados por la otra cámara: {len(otra_camara)}:", "; ".join(otra_camara))
+    n_fis = sum(1 for v in salida.values() for a in v if a.get("fiscal")); n_tot = sum(len(v) for v in salida.values())
+    print(f"Detalle impositivo publicado en {n_fis} de {n_tot} declaraciones (las demás no cierran sus cuentas o no lo traen)")
     por_anio_n = collections.Counter(a["anio"] for v in salida.values() for a in v)
     print("Legisladores actuales con declaración, por año fiscal:", dict(sorted(por_anio_n.items())))
     (SAL / "ddjj.json").write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")

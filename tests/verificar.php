@@ -148,6 +148,21 @@ foreach ($todos as $l) { $vistos = []; foreach (Datos::ddjj($l['camara'], $l['sl
 ok($djIncPublicado === [], 'ningún año de declaración jurada con declaraciones de montos distintos se publica con cifras' . ($djIncPublicado ? ': ' . implode(', ', array_slice($djIncPublicado, 0, 5)) : ''));
 ok($djAniosRepetidos === [], 'cada legislador tiene a lo sumo una declaración jurada publicada por año' . ($djAniosRepetidos ? ': ' . implode(', ', array_slice($djAniosRepetidos, 0, 5)) : ''));
 ok($djIncNoDiez === [], 'en cada año marcado como inconsistente la diferencia entre las declaraciones es de exactamente diez veces (si cambia, revisar el texto de /metodologia)' . ($djIncNoDiez ? ': ' . implode(', ', array_slice($djIncNoDiez, 0, 5)) : ''));
+$djFisMal = []; $djFisN = 0;
+foreach ($todos as $l) {
+    foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {
+        $f = $d['fiscal'] ?? null; if (!$f) { continue; }
+        $djFisN++;
+        $suma = $f['sueldos'] + $f['capitales'] + $f['empresa'] + $f['trabajo_personal'];
+        if (abs($suma - $f['total']) >= 1 || abs($f['total'] - $f['deducciones'] - $f['desgravaciones'] - (float)$d['ingresos_netos']) >= 1) { $djFisMal[] = $l['slug'] . ' ' . $d['anio']; }
+    }
+}
+ok($djFisMal === [] && $djFisN > 500, 'detalle impositivo de las declaraciones: las categorías suman el total y total - deducciones - desgravaciones = ingreso neto (' . $djFisN . ' años)' . ($djFisMal ? ': ' . implode(', ', array_slice($djFisMal, 0, 5)) : ''));
+$pf = (string)file_get_contents(__DIR__ . '/../app/Vistas/perfil.php'); $pl = (string)file_get_contents(__DIR__ . '/../app/Vistas/_plantilla.php'); $mv = (string)file_get_contents(__DIR__ . '/../mvc.php');
+ok(is_file(__DIR__ . '/../app/Vistas/correccion.php') && str_contains($mv, "'/correccion'"), 'existe la página /correccion para pedir corrección o baja de un dato');
+ok(str_contains($pf, '/correccion?desde=') && str_contains($pl, 'href="/correccion"'), 'cada perfil y el pie del sitio enlazan a /correccion');
+ok(str_contains((string)file_get_contents(__DIR__ . '/../app/bootstrap.php'), 'const CONTACTO_EMAIL') && !preg_match('/mailto:[^\s"\']*@/', $pf), 'el correo de contacto sale de una sola constante, no está escrito en las vistas');
+ok(str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/perfil.php'), 'No es la situación de la persona ante ARCA'), 'el detalle impositivo aclara que no es la situación ante ARCA');
 ok(str_contains((string)file_get_contents(__DIR__ . '/../app/Vistas/metodologia.php'), 'Declaraciones del mismo año con montos distintos'), '/metodologia explica las declaraciones del mismo año con montos distintos (' . $djIncAnios . ' casos)');
 
 $meta = Datos::mandatoActualMeta();

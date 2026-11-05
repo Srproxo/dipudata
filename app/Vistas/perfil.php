@@ -40,7 +40,10 @@ if ($maR) { $resFrases[] = 'Desde el 10 de diciembre de 2025 hubo ' . (int)$maR[
 $saR = $esSen ? Datos::senadoAnteriores($l['slug']) : [];
 if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')) . ' votaciones nominales anteriores en el Senado, de ' . count($saR) . ' ' . (count($saR) === 1 ? 'mandato' : 'mandatos') . '.'; }
 $djR = estado_ddjj($l, Datos::ddjj($l['camara'], $l['slug']));
-if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorrupción: ' . $djR['cantidad'] . ($djR['cantidad'] === 1 ? ' año publicado' : ' años publicados') . ' (de ' . $djR['desde'] . ' a ' . $djR['hasta'] . ').'; }
+$djFrase = ''; $djUlt = null;
+foreach (Datos::ddjj($l['camara'], $l['slug']) as $x) { if ($djUlt === null || (int)$x['anio'] > (int)$djUlt['anio']) { $djUlt = $x; } }
+if ($djUlt) { $djFrase = ' El último año con cifras es ' . (int)$djUlt['anio'] . ': patrimonio neto ' . monto_ars((string)$djUlt['patrimonio_neto_final']) . ' (bienes ' . monto_ars((string)$djUlt['bienes_final']) . ', deudas ' . monto_ars((string)$djUlt['deudas_final']) . ').'; }
+if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorrupción: ' . $djR['cantidad'] . ($djR['cantidad'] === 1 ? ' año publicado' : ' años publicados') . ' (de ' . $djR['desde'] . ' a ' . $djR['hasta'] . ').' . $djFrase; }
 elseif ($djR['sin_totales']) { $resFrases[] = 'Presentó declaración jurada, pero el archivo oficial trae los totales vacíos: no se publican cifras.'; }
 elseif ($djR['inconsistente']) { $resFrases[] = 'Declaración jurada: el archivo oficial trae declaraciones del mismo año con montos distintos, por eso no se publican cifras.'; }
 elseif ($djR['ambiguo']) { $resFrases[] = 'Declaración jurada: el nombre corresponde a más de una persona en el archivo oficial, por eso no se publica.'; }
@@ -344,6 +347,31 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
     <?php endforeach; ?>
     </tbody>
   </table></div>
+  <?php $fis = array_values(array_filter($dj, static fn($d) => !empty($d['fiscal']))); ?>
+  <?php if ($fis): ?>
+  <details class="ver-datos">
+    <summary>Ver el detalle impositivo declarado (ingresos por categoría y deducciones)</summary>
+    <div class="tabla-caja"><table class="tabla tabla-cifras">
+      <thead><tr><th scope="col">Año<br>fiscal</th><th scope="col" class="der">Sueldos</th><th scope="col" class="der">Rentas de<br>capital</th><th scope="col" class="der">Empresa</th><th scope="col" class="der">Trabajo<br>personal</th><th scope="col" class="der">Total de<br>ingresos netos</th><th scope="col" class="der">Deducciones<br>generales</th><th scope="col" class="der">Desgravaciones</th><th scope="col" class="der">Ingreso neto<br>declarado</th></tr></thead>
+      <tbody>
+      <?php foreach ($fis as $d): $f = $d['fiscal']; ?>
+        <tr>
+          <td class="num" data-etiqueta="Año fiscal"><?= (int)$d['anio'] ?></td>
+          <td class="der num" data-etiqueta="Sueldos"><?= e(monto_ars((string)$f['sueldos'])) ?></td>
+          <td class="der num" data-etiqueta="Rentas de capital"><?= e(monto_ars((string)$f['capitales'])) ?></td>
+          <td class="der num" data-etiqueta="Empresa"><?= e(monto_ars((string)$f['empresa'])) ?></td>
+          <td class="der num" data-etiqueta="Trabajo personal"><?= e(monto_ars((string)$f['trabajo_personal'])) ?></td>
+          <td class="der num" data-etiqueta="Total de ingresos netos"><?= e(monto_ars((string)$f['total'])) ?></td>
+          <td class="der num" data-etiqueta="Deducciones generales"><?= e(monto_ars((string)$f['deducciones'])) ?></td>
+          <td class="der num" data-etiqueta="Desgravaciones"><?= e(monto_ars((string)$f['desgravaciones'])) ?></td>
+          <td class="der num" data-etiqueta="Ingreso neto declarado"><b><?= e(monto_ars((string)$d['ingresos_netos'])) ?></b></td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table></div>
+    <p class="tenue pequeno">Son los importes que la persona declaró para el impuesto a las ganancias, tal como figuran en el archivo de la Oficina Anticorrupción: ingresos netos de cada categoría, menos deducciones y desgravaciones. <strong>No es la situación de la persona ante ARCA</strong>: no dice si pagó, debe o está inscripta en algún régimen. Solo se muestran los años en que las cuentas del archivo cierran (las categorías suman el total, y el total menos deducciones y desgravaciones da el ingreso neto); en los demás no se publica el detalle. Importes en pesos de cada año.</p>
+  </details>
+  <?php endif; ?>
   <p class="tenue pequeno">Valores al cierre del año fiscal, según la declaración jurada que presentó ante la Oficina Anticorrupción (Ley 26.857), por el cargo que figura en cada año: como legislador o por otra función pública o candidatura. Bienes, deudas, patrimonio neto e ingresos están en pesos de cada año, tal como se declararon; la columna ajustada usa el IPC del INDEC de diciembre de cada año y del último mes publicado. Son los totales que declara la persona; este sitio no los verificó ni los interpreta. <a href="/metodologia#ddjj">Cómo se calculan</a>.</p>
 </section>
 <?php endif; ?>
@@ -451,3 +479,4 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
 </section>
 <?php endif; ?>
 <?php endif; ?>
+<p class="tenue pequeno aviso-correccion">¿Hay un dato incorrecto o querés pedir que se retire? <a href="/correccion?desde=<?= e(rawurlencode($base . ($tab === 'resumen' ? '' : '?tab=' . $tab))) ?>">Pedir una corrección o la baja</a>.</p>

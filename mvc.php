@@ -378,6 +378,15 @@ switch (true) {
         ));
         break;
 
+    case $path === '/correccion':
+        $desde = is_string($_GET['desde'] ?? null) && preg_match('#^/[A-Za-z0-9/_\-?=&%.]{0,200}$#', $_GET['desde']) ? $_GET['desde'] : '';
+        render('correccion', ['desde' => $desde], pagina_meta(
+            'Pedir una corrección o la baja de un dato',
+            'Cómo avisar que un dato de DipuData está mal o pedir que se retire, y qué pasa con cada pedido.',
+            '/correccion', 'correccion'
+        ));
+        break;
+
     case $path === '/metodologia':
         render('metodologia', [], pagina_meta(
             'Metodología y fuentes',
