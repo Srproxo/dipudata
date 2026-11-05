@@ -583,5 +583,15 @@ preg_match_all('/`([a-z_]+\.py)`/', $doc, $mm);
 foreach (array_unique($mm[1]) as $py) { if (!is_file(__DIR__ . '/../scripts/' . $py) && !in_array($py, ['json.py'], true)) { $faltan[] = $py; } }
 ok(!$faltan && count(array_unique($mm[1])) > 25, 'todo script que nombra CLAUDE.md existe en scripts/ (' . count(array_unique($mm[1])) . ' nombrados)' . ($faltan ? ': faltan ' . implode(', ', $faltan) : ''));
 
+// Capa para IA: llms.txt, perfiles en Markdown, API documentada y robots.txt
+$llm = llms_txt(false); $llmF = llms_txt(true);
+ok(str_starts_with($llm, '# DipuData') && str_contains($llm, SITE_URL . '/datos') && str_contains($llm, 'Creative Commons Atribución 4.0') && strlen($llmF) > strlen($llm) * 5, 'llms.txt: encabezado, enlace a /datos, licencia y versión extendida con el listado de legisladores');
+$l0 = Datos::legisladores('Senadores')[0]; $md = perfil_markdown($l0);
+ok(str_starts_with($md, '# ' . $l0['nombre']) && str_contains($md, SITE_URL . Datos::urlLegislador($l0)) && !preg_match('/\b\d{2}-?\d{8}-?\d\b/', $md . $llmF), 'perfil en Markdown: título, enlace al perfil web y ningún CUIT en llms ni en Markdown');
+$rb = (string)file_get_contents(__DIR__ . '/../robots.txt');
+ok(str_contains($rb, 'GPTBot') && str_contains($rb, 'ClaudeBot') && str_contains($rb, 'Sitemap:') && str_contains($rb, 'Disallow: /tv/'), 'robots.txt: grupo para rastreadores de IA, sitemap y /tv/ excluido');
+$api = (string)file_get_contents(__DIR__ . '/../api/index.php');
+ok(str_contains($api, "'/openapi.json'") && str_contains($api, "'/votaciones'") && is_file(__DIR__ . '/../app/Vistas/datos.php') && str_contains((string)file_get_contents(__DIR__ . '/../mvc.php'), "'/datos'"), 'API: OpenAPI, votaciones y página /datos existen');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

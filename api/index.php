@@ -6,6 +6,7 @@ declare(strict_types=1);
  *   GET /api/legisladores?camara=&provincia=&bloque=&q=&pagina=&limite=
  *   GET /api/legisladores/{diputado|senador}/{slug}
  *   GET /api/bloques        GET /api/provincias
+ *   GET /api/votaciones?camara=&anio=   GET /api/votaciones/{id}   GET /api/openapi.json
  * Devuelve únicamente datos de storage/verificado, con su fuente.
  */
 
@@ -71,6 +72,116 @@ if ($ruta === '/bloques') {
 
 if ($ruta === '/provincias') {
     json_salida(['datos' => Datos::provincias()]);
+}
+
+if ($ruta === '/votaciones') {
+    $camara = ['Diputados' => 'D', 'Senadores' => 'S'][$_GET['camara'] ?? ''] ?? null;
+    $anio = preg_match('/^\d{4}$/', (string)($_GET['anio'] ?? '')) ? (string)$_GET['anio'] : '';
+    $lista = array_values(array_filter(Datos::votaciones(), static fn(array $v): bool => ($camara === null || ($v['c'] ?? '') === $camara) && ($anio === '' || str_starts_with((string)($v['f'] ?? ''), $anio))));
+    $limite = max(1, min(100, (int)($_GET['limite'] ?? 50)));
+    $pagina = max(1, (int)($_GET['pagina'] ?? 1));
+    json_salida([
+        'total' => count($lista), 'pagina' => $pagina, 'limite' => $limite,
+        'campos' => 'id, c (D/S), f fecha, h hora, t título, res resultado, m mayoría, a afirmativos, n negativos, b abstenciones, u ausentes',
+        'datos' => array_slice($lista, ($pagina - 1) * $limite, $limite),
+        'fuentes' => 'Votaciones nominales: HCDN (datos.hcdn.gob.ar y votaciones.hcdn.gob.ar) y Senado (senado.gob.ar/votaciones). Ver /metodologia.',
+    ]);
+}
+
+if (preg_match('#^/votaciones/(S?\d{1,6})$#', $ruta, $m)) {
+    $v = Datos::votacion($m[1]);
+    $v ? json_salida(['id' => $m[1], 'datos' => $v, 'url' => SITE_URL . '/votaciones/' . $m[1]]) : json_salida(['error' => 'No encontrado'], 404);
+}
+
+if ($ruta === '/openapi.json') {
+    $pag = [['name' => 'pagina', 'in' => 'query', 'schema' => ['type' => 'integer', 'minimum' => 1]], ['name' => 'limite', 'in' => 'query', 'schema' => ['type' => 'integer', 'maximum' => 100]]];
+    $ok = ['200' => ['description' => 'JSON']];
+    json_salida([
+        'openapi' => '3.0.3',
+        'info' => ['title' => 'API de DipuData', 'version' => '1.0', 'description' => 'Datos verificados del Congreso de la Nación Argentina. Solo lectura. Licencia CC BY 4.0: citar como "DipuData (dipudata.com)". Cada dato lleva su fuente oficial.',
+            'license' => ['name' => 'CC BY 4.0', 'url' => 'https://creativecommons.org/licenses/by/4.0/']],
+        'servers' => [['url' => SITE_URL . '/api']],
+        'paths' => [
+            '/' => ['get' => ['summary' => 'Índice de la API', 'responses' => $ok]],
+            '/legisladores' => ['get' => ['summary' => 'Legisladores en ejercicio', 'parameters' => array_merge([
+                ['name' => 'camara', 'in' => 'query', 'schema' => ['type' => 'string', 'enum' => ['Diputados', 'Senadores']]],
+                ['name' => 'provincia', 'in' => 'query', 'schema' => ['type' => 'string']],
+                ['name' => 'bloque', 'in' => 'query', 'schema' => ['type' => 'string']],
+                ['name' => 'q', 'in' => 'query', 'schema' => ['type' => 'string']]], $pag), 'responses' => $ok]],
+            '/legisladores/{camara}/{slug}' => ['get' => ['summary' => 'Un legislador', 'parameters' => [
+                ['name' => 'camara', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string', 'enum' => ['diputado', 'senador']]],
+                ['name' => 'slug', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string']]], 'responses' => $ok]],
+            '/bloques' => ['get' => ['summary' => 'Bloques y bancas', 'responses' => $ok]],
+            '/provincias' => ['get' => ['summary' => 'Provincias', 'responses' => $ok]],
+            '/votaciones' => ['get' => ['summary' => 'Votaciones nominales (cabeceras)', 'parameters' => array_merge([
+                ['name' => 'camara', 'in' => 'query', 'schema' => ['type' => 'string', 'enum' => ['Diputados', 'Senadores']]],
+                ['name' => 'anio', 'in' => 'query', 'schema' => ['type' => 'integer']]], $pag), 'responses' => $ok]],
+            '/votaciones/{id}' => ['get' => ['summary' => 'Una votación con el voto de cada legislador', 'parameters' => [
+                ['name' => 'id', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string']]], 'responses' => $ok]],
+        ],
+    ]);
+}
+
+if ($ruta === '/') {
+    json_salida([
+        'nombre' => 'API de DipuData', 'licencia' => 'CC BY 4.0', 'documentacion' => SITE_URL . '/datos', 'openapi' => SITE_URL . '/api/openapi.json',
+        'endpoints' => ['/api/legisladores', '/api/legisladores/{diputado|senador}/{slug}', '/api/bloques', '/api/provincias', '/api/votaciones', '/api/votaciones/{id}', '/api/openapi.json'],
+    ]);
+}
+
+if ($ruta === '/votaciones') {
+    $camara = ['Diputados' => 'D', 'Senadores' => 'S'][$_GET['camara'] ?? ''] ?? null;
+    $anio = preg_match('/^\d{4}$/', (string)($_GET['anio'] ?? '')) ? (string)$_GET['anio'] : '';
+    $lista = array_values(array_filter(Datos::votaciones(), static fn(array $v): bool => ($camara === null || ($v['c'] ?? '') === $camara) && ($anio === '' || str_starts_with((string)($v['f'] ?? ''), $anio))));
+    $limite = max(1, min(100, (int)($_GET['limite'] ?? 50)));
+    $pagina = max(1, (int)($_GET['pagina'] ?? 1));
+    json_salida([
+        'total' => count($lista), 'pagina' => $pagina, 'limite' => $limite,
+        'campos' => 'id, c (D/S), f fecha, h hora, t título, res resultado, m mayoría, a afirmativos, n negativos, b abstenciones, u ausentes',
+        'datos' => array_slice($lista, ($pagina - 1) * $limite, $limite),
+        'fuentes' => 'Votaciones nominales: HCDN (datos.hcdn.gob.ar y votaciones.hcdn.gob.ar) y Senado (senado.gob.ar/votaciones). Ver /metodologia.',
+    ]);
+}
+
+if (preg_match('#^/votaciones/(S?\d{1,6})$#', $ruta, $m)) {
+    $v = Datos::votacion($m[1]);
+    $v ? json_salida(['id' => $m[1], 'datos' => $v, 'url' => SITE_URL . '/votaciones/' . $m[1]]) : json_salida(['error' => 'No encontrado'], 404);
+}
+
+if ($ruta === '/openapi.json') {
+    $pag = [['name' => 'pagina', 'in' => 'query', 'schema' => ['type' => 'integer', 'minimum' => 1]], ['name' => 'limite', 'in' => 'query', 'schema' => ['type' => 'integer', 'maximum' => 100]]];
+    $ok = ['200' => ['description' => 'JSON']];
+    json_salida([
+        'openapi' => '3.0.3',
+        'info' => ['title' => 'API de DipuData', 'version' => '1.0', 'description' => 'Datos verificados del Congreso de la Nación Argentina. Solo lectura. Licencia CC BY 4.0: citar como "DipuData (dipudata.com)". Cada dato lleva su fuente oficial.',
+            'license' => ['name' => 'CC BY 4.0', 'url' => 'https://creativecommons.org/licenses/by/4.0/']],
+        'servers' => [['url' => SITE_URL . '/api']],
+        'paths' => [
+            '/' => ['get' => ['summary' => 'Índice de la API', 'responses' => $ok]],
+            '/legisladores' => ['get' => ['summary' => 'Legisladores en ejercicio', 'parameters' => array_merge([
+                ['name' => 'camara', 'in' => 'query', 'schema' => ['type' => 'string', 'enum' => ['Diputados', 'Senadores']]],
+                ['name' => 'provincia', 'in' => 'query', 'schema' => ['type' => 'string']],
+                ['name' => 'bloque', 'in' => 'query', 'schema' => ['type' => 'string']],
+                ['name' => 'q', 'in' => 'query', 'schema' => ['type' => 'string']]], $pag), 'responses' => $ok]],
+            '/legisladores/{camara}/{slug}' => ['get' => ['summary' => 'Un legislador', 'parameters' => [
+                ['name' => 'camara', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string', 'enum' => ['diputado', 'senador']]],
+                ['name' => 'slug', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string']]], 'responses' => $ok]],
+            '/bloques' => ['get' => ['summary' => 'Bloques y bancas', 'responses' => $ok]],
+            '/provincias' => ['get' => ['summary' => 'Provincias', 'responses' => $ok]],
+            '/votaciones' => ['get' => ['summary' => 'Votaciones nominales (cabeceras)', 'parameters' => array_merge([
+                ['name' => 'camara', 'in' => 'query', 'schema' => ['type' => 'string', 'enum' => ['Diputados', 'Senadores']]],
+                ['name' => 'anio', 'in' => 'query', 'schema' => ['type' => 'integer']]], $pag), 'responses' => $ok]],
+            '/votaciones/{id}' => ['get' => ['summary' => 'Una votación con el voto de cada legislador', 'parameters' => [
+                ['name' => 'id', 'in' => 'path', 'required' => true, 'schema' => ['type' => 'string']]], 'responses' => $ok]],
+        ],
+    ]);
+}
+
+if ($ruta === '/') {
+    json_salida([
+        'nombre' => 'API de DipuData', 'licencia' => 'CC BY 4.0', 'documentacion' => SITE_URL . '/datos', 'openapi' => SITE_URL . '/api/openapi.json',
+        'endpoints' => ['/api/legisladores', '/api/legisladores/{diputado|senador}/{slug}', '/api/bloques', '/api/provincias', '/api/votaciones', '/api/votaciones/{id}', '/api/openapi.json'],
+    ]);
 }
 
 json_salida(['error' => 'No encontrado'], 404);

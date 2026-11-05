@@ -21,6 +21,7 @@ $mas = [
     'aportes'     => ['/aportes', 'Aportes a partidos'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
     'tv'          => ['/tv', 'Modo TV (pantalla completa)'],
+    'datos'       => ['/datos', 'Datos abiertos y API'],
     'glosario'    => ['/glosario', 'Glosario'],
     'metodologia' => ['/metodologia', 'Metodología'],
 ];
@@ -36,6 +37,7 @@ $inf = \App\Datos::informe();
 <meta name="description" content="<?= e($meta['description']) ?>">
 <meta name="robots" content="<?= e($meta['robots']) ?>">
 <link rel="canonical" href="<?= e($meta['canonical']) ?>">
+<?php if (!empty($meta['alternate_md'])): ?><link rel="alternate" type="text/markdown" href="<?= e($meta['alternate_md']) ?>" title="Perfil en Markdown"><?php endif; ?>
 <?php if (GSC_VERIFICACION !== ''): ?><meta name="google-site-verification" content="<?= e(GSC_VERIFICACION) ?>"><?php endif; ?>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DipuData">
@@ -111,6 +113,7 @@ $inf = \App\Datos::informe();
     </div>
   </div>
   <nav class="pie-legal" aria-label="Información legal">
+    <a href="/datos">Datos abiertos y API</a>
     <a href="/terminos">Términos y condiciones</a>
     <a href="/privacidad">Política de privacidad</a>
     <a href="/cookies"><?= GA_ID !== '' ? 'Preferencias de cookies' : 'Política de cookies' ?></a>
