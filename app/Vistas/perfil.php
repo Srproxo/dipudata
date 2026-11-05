@@ -47,9 +47,9 @@ if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorru
 elseif ($djR['sin_totales']) { $resFrases[] = 'Presentó declaración jurada, pero el archivo oficial trae los totales vacíos: no se publican cifras.'; }
 elseif ($djR['inconsistente']) { $resFrases[] = 'Declaración jurada: el archivo oficial trae declaraciones del mismo año con montos distintos, por eso no se publican cifras.'; }
 elseif ($djR['ambiguo']) { $resFrases[] = 'Declaración jurada: el nombre corresponde a más de una persona en el archivo oficial, por eso no se publica.'; }
+else { $resFrases[] = $djR['asumio_2025'] ? 'Asumió el 10 de diciembre de 2025: su primera declaración jurada todavía no está publicada.' : 'No figura en el archivo de declaraciones juradas publicado (años fiscales 2012 a 2024).'; }
 $parR = parentescos_legislador($l);
 if ($parR) { $resFrases[] = 'En las declaraciones juradas figura un vínculo familiar con ' . (count($parR) === 1 ? 'otro legislador' : count($parR) . ' legisladores') . ' (ver la pestaña Declaración jurada).'; }
-else { $resFrases[] = $djR['asumio_2025'] ? 'Asumió el 10 de diciembre de 2025: su primera declaración jurada todavía no está publicada.' : 'No figura en el archivo de declaraciones juradas publicado (años fiscales 2012 a 2024).'; }
 $pyR = Datos::proyectos($l['slug'], $l['camara']);
 if ($pyR) {
     $rsP = $pyR['resumen'];

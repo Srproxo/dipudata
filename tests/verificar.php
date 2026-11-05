@@ -148,6 +148,21 @@ foreach ($todos as $l) { $vistos = []; foreach (Datos::ddjj($l['camara'], $l['sl
 ok($djIncPublicado === [], 'ningún año de declaración jurada con declaraciones de montos distintos se publica con cifras' . ($djIncPublicado ? ': ' . implode(', ', array_slice($djIncPublicado, 0, 5)) : ''));
 ok($djAniosRepetidos === [], 'cada legislador tiene a lo sumo una declaración jurada publicada por año' . ($djAniosRepetidos ? ': ' . implode(', ', array_slice($djAniosRepetidos, 0, 5)) : ''));
 ok($djIncNoDiez === [], 'en cada año marcado como inconsistente la diferencia entre las declaraciones es de exactamente diez veces (si cambia, revisar el texto de /metodologia)' . ($djIncNoDiez ? ': ' . implode(', ', array_slice($djIncNoDiez, 0, 5)) : ''));
+// Renderizado real de perfiles: sin avisos de PHP y con el resumen coherente con las declaraciones publicadas.
+$avisosPerfil = []; $perfilIncoherente = [];
+set_error_handler(static function ($n, $m, $f, $ln) use (&$avisosPerfil) { $avisosPerfil[] = basename($f) . ':' . $ln . ' ' . $m; return true; });
+$conDj = $sinDj = [];
+foreach ($todos as $l) { if (Datos::ddjj($l['camara'], $l['slug'])) { if (count($conDj) < 4) { $conDj[] = $l; } } elseif (count($sinDj) < 3) { $sinDj[] = $l; } }
+foreach (array_merge($conDj, $sinDj) as $l) {
+    foreach (['resumen', 'patrimonio'] as $tabP) {
+        ob_start(); (static function ($l, $tab) { include __DIR__ . '/../app/Vistas/perfil.php'; })($l, $tabP); $htmlP = (string)ob_get_clean();
+        $tiene = (bool)Datos::ddjj($l['camara'], $l['slug']);
+        if ($tabP === 'resumen' && $tiene && str_contains($htmlP, 'No figura en el archivo de declaraciones juradas')) { $perfilIncoherente[] = $l['slug'] . ' dice que no figura pero tiene declaraciones'; }
+        if ($tabP === 'resumen' && !$tiene && !str_contains($htmlP, 'declaración jurada') && !str_contains($htmlP, 'declaraciones juradas')) { $perfilIncoherente[] = $l['slug'] . ' no explica por qué falta la declaración'; }
+    }
+}
+restore_error_handler();
+ok($avisosPerfil === [] && $perfilIncoherente === [], 'los perfiles (resumen y declaración jurada) se renderizan sin avisos de PHP y el resumen es coherente con las declaraciones (' . (count($conDj) + count($sinDj)) . ' perfiles)' . ($avisosPerfil ? ': ' . implode(' | ', array_slice($avisosPerfil, 0, 2)) : '') . ($perfilIncoherente ? ': ' . implode(' | ', array_slice($perfilIncoherente, 0, 2)) : ''));
 $djFisMal = []; $djFisN = 0;
 foreach ($todos as $l) {
     foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {
