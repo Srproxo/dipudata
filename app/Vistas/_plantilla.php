@@ -34,6 +34,7 @@ $inf = \App\Datos::informe();
 <meta name="description" content="<?= e($meta['description']) ?>">
 <meta name="robots" content="<?= e($meta['robots']) ?>">
 <link rel="canonical" href="<?= e($meta['canonical']) ?>">
+<?php if (GSC_VERIFICACION !== ''): ?><meta name="google-site-verification" content="<?= e(GSC_VERIFICACION) ?>"><?php endif; ?>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DipuData">
 <meta property="og:locale" content="es_AR">
@@ -107,6 +108,12 @@ $inf = \App\Datos::informe();
       </ul>
     </div>
   </div>
+  <nav class="pie-legal" aria-label="Información legal">
+    <a href="/terminos">Términos y condiciones</a>
+    <a href="/privacidad">Política de privacidad</a>
+    <a href="/cookies"><?= GA_ID !== '' ? 'Preferencias de cookies' : 'Política de cookies' ?></a>
+  </nav>
 </footer>
+<?php if (GA_ID !== ''): ?><script src="/assets/js/analitica.js" data-id="<?= e(GA_ID) ?>" defer></script><?php endif; ?>
 </body>
 </html>

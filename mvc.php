@@ -387,6 +387,18 @@ switch (true) {
         ));
         break;
 
+    case $path === '/terminos':
+        render('terminos', [], pagina_meta('Términos y condiciones de uso', 'Qué es DipuData, de dónde salen sus datos, qué puede y qué no puede esperarse del sitio y cómo se reutiliza su contenido.', '/terminos', 'legal'));
+        break;
+
+    case $path === '/privacidad':
+        render('privacidad', [], pagina_meta('Política de privacidad', 'Qué datos trata DipuData, con qué fundamento, con quién los comparte y cómo ejercer los derechos de acceso, rectificación y supresión (Ley 25.326).', '/privacidad', 'legal'));
+        break;
+
+    case $path === '/cookies':
+        render('cookies', [], pagina_meta('Política de cookies', 'Qué cookies usa DipuData, para qué sirven y cómo aceptarlas, rechazarlas o cambiar la elección.', '/cookies', 'legal'));
+        break;
+
     case $path === '/metodologia':
         render('metodologia', [], pagina_meta(
             'Metodología y fuentes',
@@ -537,7 +549,7 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }

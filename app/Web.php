@@ -175,7 +175,11 @@ function encabezados_seguridad(string $tipo = 'text/html; charset=utf-8', int $m
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
     header('Strict-Transport-Security: max-age=63072000; includeSubDomains');
-    header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'");
+    // Sin scripts ni recursos externos, salvo Google Analytics cuando está configurado (solo se carga con el consentimiento de la persona).
+    $csp = GA_ID === ''
+        ? "default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'"
+        : "default-src 'none'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'";
+    header('Content-Security-Policy: ' . $csp);
     header($maxAge > 0 ? "Cache-Control: public, max-age={$maxAge}, s-maxage={$maxAge}" : 'Cache-Control: no-store');
 }
 
