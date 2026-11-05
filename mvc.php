@@ -542,10 +542,13 @@ switch (true) {
         ));
         break;
 
-    case (bool)preg_match('#^/(eje|ley|match-360)(/|$)#', $path):
-        header('Retry-After: 86400');
-        render('en_revision', [], pagina_meta('Sección en revisión', 'Estamos verificando estos datos contra las fuentes oficiales.', '/', '', ['robots' => 'noindex, follow']), 503);
-        break;
+    // Rutas de la versión anterior: redirecciones permanentes en lugar de una página "en revisión".
+    case (bool)preg_match('#^/eje(/|$)#', $path):
+        ir('/match');
+    case $path === '/match-360':
+        ir('/match');
+    case (bool)preg_match('#^/ley(/|$)#', $path):
+        ir('/leyes');
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);

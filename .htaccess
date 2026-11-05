@@ -38,7 +38,7 @@ DirectoryIndex mvc.php
     RewriteBase /
 
     # Directorios internos: solo los lee PHP, nunca el navegador
-    RewriteRule ^(app|storage|scripts|database|tests|\.git|\.agent)(/|$) - [F,L,NC]
+    RewriteRule ^(app|storage|scripts|tests|\.git)(/|$) - [F,L,NC]
 
     # API de solo lectura
     RewriteRule ^api(/.*)?$ api/index.php [L,QSA]
