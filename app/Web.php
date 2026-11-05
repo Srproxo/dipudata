@@ -523,6 +523,51 @@ function estado_ddjj(array $l, array $dj): array
     return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? []];
 }
 
+/** Página a pantalla completa para TV: documento propio, sin el menú ni el pie del sitio. */
+function render_tv(string $modo, array $vars, array $meta): void
+{
+    encabezados_seguridad('text/html; charset=utf-8', 0);
+    $meta += ['robots' => 'noindex, nofollow'];
+    extract($vars, EXTR_SKIP);
+    require __DIR__ . '/Vistas/tv.php';
+}
+
+/** Opciones del modo TV tomadas de la dirección: segundos por diapositiva, lista que recorre y pausa. */
+function tv_opciones(): array
+{
+    $seg = (int)($_GET['seg'] ?? 12);
+    $lista = in_array($_GET['lista'] ?? '', ['diputados', 'senado', 'todos'], true) ? (string)$_GET['lista'] : '';
+    return ['seg' => max(6, min(60, $seg ?: 12)), 'lista' => $lista, 'pausa' => !empty($_GET['pausa'])];
+}
+
+/** @return list<array> legisladores que recorre la lista del modo TV, en orden alfabético por apellido, por cámara. */
+function tv_lista(string $lista): array
+{
+    $dip = \App\Datos::legisladores('Diputados'); $sen = \App\Datos::legisladores('Senadores');
+    $orden = static function (array $a): array { usort($a, static fn($x, $y) => strcmp(\App\Datos::normalizar(($x['apellido'] ?? '') . ' ' . $x['nombre']), \App\Datos::normalizar(($y['apellido'] ?? '') . ' ' . $y['nombre']))); return $a; };
+    return match ($lista) { 'diputados' => $orden($dip), 'senado' => $orden($sen), default => array_merge($orden($dip), $orden($sen)) };
+}
+
+function tv_url(array $l, int $n, array $o): string
+{
+    $q = ['seg' => $o['seg'], 'lista' => $o['lista']] + ($o['pausa'] ? ['pausa' => 1] : []);
+    return '/tv/' . ($l['camara'] === 'Senadores' ? 'senador' : 'diputado') . '/' . $l['slug'] . '/' . $n . '?' . http_build_query($q);
+}
+
+/** Diapositivas de un legislador con datos que ya se publican en su perfil; las que no tienen datos se omiten (salvo la declaración jurada, que explica por qué falta). */
+function tv_diapositivas(array $l): array
+{
+    $d = [['tipo' => 'portada']];
+    $mv = \App\Datos::mandatoActual($l['camara'], $l['slug']);
+    if ($mv) { $d[] = ['tipo' => 'votos', 'mv' => $mv, 'meta' => \App\Datos::mandatoActualMeta()]; }
+    $py = \App\Datos::proyectos($l['slug'], $l['camara']);
+    if ($py && ($py['resumen']['total'] ?? 0) > 0) { $d[] = ['tipo' => 'proyectos', 'py' => $py]; }
+    $dj = \App\Datos::ddjj($l['camara'], $l['slug']);
+    $d[] = ['tipo' => 'ddjj', 'dj' => $dj, 'est' => estado_ddjj($l, $dj)];
+    $d[] = ['tipo' => 'cierre'];
+    return $d;
+}
+
 /** Título legible de una votación para el test de afinidad (el oficial queda aparte, sin tocar). */
 function afinidad_titulo(string $t, string $cod): string
 {

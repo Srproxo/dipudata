@@ -207,6 +207,22 @@ foreach ([['indice', null], ['form', null], ['form', $respD]] as [$moA, $rsA]) {
 }
 restore_error_handler();
 ok($afAv === [] && str_contains($vl('metodologia'), 'id="afinidad"'), 'las tres pantallas del test de afinidad se renderizan sin avisos y la metodología explica cómo se eligen las preguntas' . ($afAv ? ': ' . implode(' | ', array_slice($afAv, 0, 2)) : ''));
+// Modo TV.
+$tvMal = []; $tvAv = [];
+set_error_handler(static function ($n, $m, $f, $ln) use (&$tvAv) { $tvAv[] = basename($f) . ':' . $ln . ' ' . $m; return true; });
+foreach ($todos as $iTv => $lgTv) {
+    if ($iTv % 9 !== 0) { continue; }  // muestra: uno de cada nueve legisladores, ambas cámaras
+    $diaTv = tv_diapositivas($lgTv);
+    if ($diaTv[0]['tipo'] !== 'portada' || end($diaTv)['tipo'] !== 'cierre' || count($diaTv) < 3) { $tvMal[] = $lgTv['slug'] . ' diapositivas mal armadas'; }
+    foreach ($diaTv as $kTv => $_) {
+        $op = ['seg' => 12, 'lista' => $lgTv['camara'] === 'Senadores' ? 'senado' : 'diputados', 'pausa' => false]; $lg = $lgTv; $dia = $diaTv; $nn = $kTv + 1; $ls = tv_lista($op['lista']); $pos = 0; $sig = '/x'; $ant = '/y'; $meta = ['title' => 't', 'robots' => 'noindex, nofollow'];
+        ob_start(); (static function () use ($lg, $dia, $nn, $op, $ls, $pos, $sig, $ant, $meta) { $modo = 'slide'; include __DIR__ . '/../app/Vistas/tv.php'; })(); $hTv = (string)ob_get_clean();
+        if (strlen($hTv) < 900 || !str_contains($hTv, 'http-equiv="refresh"')) { $tvMal[] = $lgTv['slug'] . ' diapositiva ' . $nn . ' vacía o sin avance'; }
+    }
+}
+restore_error_handler();
+$robTv = (string)file_get_contents(__DIR__ . '/../robots.txt');
+ok($tvMal === [] && $tvAv === [] && str_contains($robTv, 'Disallow: /tv/') && count(tv_lista('todos')) === count(Datos::legisladores()), 'modo TV: diapositivas completas y sin avisos en una muestra de legisladores, avance automático, lista que cubre a todos y fuera de los buscadores' . ($tvMal ? ': ' . implode(' | ', array_slice($tvMal, 0, 2)) : '') . ($tvAv ? ': ' . implode(' | ', array_slice($tvAv, 0, 2)) : ''));
 $djFisMal = []; $djFisN = 0;
 foreach ($todos as $l) {
     foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {
