@@ -15,3 +15,6 @@ storage/cache/
 **/aeb174ff*
 **/*Grupo_fa*
 storage/oficial/ckan/**/nomina-de-personal/
+
+# Configuración propia del servidor (ID de Google): no va al repositorio
+config.local.php
