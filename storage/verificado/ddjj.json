@@ -12974,19 +12974,6 @@
  ],
  "s:sergio-mauricio-unac": [
   {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Senador nacional",
-   "camara": "Senadores",
-   "bienes_inicio": 498603040.18,
-   "deudas_inicio": 2264551.46,
-   "bienes_final": 594511112.45,
-   "deudas_final": 1120346.0,
-   "patrimonio_neto_final": 593390766.45,
-   "ingresos_netos": 67163762.97
-  },
-  {
    "anio": 2023,
    "tipo": "Anual",
    "rectificativa": 0,
@@ -13001,19 +12988,6 @@
   }
  ],
  "eduardo-felix-valdes": [
-  {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Diputado nacional",
-   "camara": "Diputados",
-   "bienes_inicio": 153235424.83,
-   "deudas_inicio": 0.0,
-   "bienes_final": 235946274.31,
-   "deudas_final": 6790000.0,
-   "patrimonio_neto_final": 229156274.31,
-   "ingresos_netos": 43008593.65
-  },
   {
    "anio": 2023,
    "tipo": "Anual",
@@ -13160,19 +13134,6 @@
  ],
  "s:mercedes-gabriela-valenzuela": [
   {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Senador nacional",
-   "camara": "Senadores",
-   "bienes_inicio": 39894578.0,
-   "deudas_inicio": 0.0,
-   "bienes_final": 49977736.0,
-   "deudas_final": 0.0,
-   "patrimonio_neto_final": 49977736.0,
-   "ingresos_netos": 58236338.51
-  },
-  {
    "anio": 2023,
    "tipo": "Anual",
    "rectificativa": 0,
@@ -13213,19 +13174,6 @@
   }
  ],
  "daniel-vancsik": [
-  {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Diputado nacional",
-   "camara": "Diputados",
-   "bienes_inicio": 13400000.0,
-   "deudas_inicio": 4354000.0,
-   "bienes_final": 18626908.0,
-   "deudas_final": 6002000.0,
-   "patrimonio_neto_final": 12624908.0,
-   "ingresos_netos": 46827513.71
-  },
   {
    "anio": 2023,
    "tipo": "Anual",
@@ -13357,21 +13305,6 @@
    "deudas_final": 0.0,
    "patrimonio_neto_final": 2110500.0,
    "ingresos_netos": 0.0
-  }
- ],
- "yolanda-vega": [
-  {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Diputada nacional",
-   "camara": "Diputados",
-   "bienes_inicio": 12940674.0,
-   "deudas_inicio": 0.0,
-   "bienes_final": 73054692.09,
-   "deudas_final": 14921000.0,
-   "patrimonio_neto_final": 58133692.09,
-   "ingresos_netos": 50462173.32
   }
  ],
  "pamela-fernanda-verasay": [
@@ -13537,19 +13470,6 @@
   }
  ],
  "s:eduardo-alejandro-vischi": [
-  {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Senador nacional",
-   "camara": "Senadores",
-   "bienes_inicio": 22195785.0,
-   "deudas_inicio": 0.0,
-   "bienes_final": 172434199.0,
-   "deudas_final": 0.0,
-   "patrimonio_neto_final": 172434199.0,
-   "ingresos_netos": 49523401.28
-  },
   {
    "anio": 2023,
    "tipo": "Anual",
@@ -14126,19 +14046,6 @@
  ],
  "natalia-zaracho": [
   {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Diputada nacional",
-   "camara": "Diputados",
-   "bienes_inicio": 4803968.0,
-   "deudas_inicio": 589959.6,
-   "bienes_final": 8366208.0,
-   "deudas_final": 1149771.69,
-   "patrimonio_neto_final": 7216436.31,
-   "ingresos_netos": 11391656.01
-  },
-  {
    "anio": 2023,
    "tipo": "Anual",
    "rectificativa": 0,
@@ -14179,19 +14086,6 @@
   }
  ],
  "christian-alejandro-zulli": [
-  {
-   "anio": 2024,
-   "tipo": "Anual",
-   "rectificativa": 0,
-   "cargo": "Diputado nacional",
-   "camara": "Diputados",
-   "bienes_inicio": 9388740.0,
-   "deudas_inicio": 566000.0,
-   "bienes_final": 28855791.0,
-   "deudas_final": 28674380.0,
-   "patrimonio_neto_final": 181411.0,
-   "ingresos_netos": 50012350.37
-  },
   {
    "anio": 2023,
    "tipo": "Anual",

@@ -508,7 +508,7 @@ function estado_ddjj(array $l, array $dj): array
     $es = \App\Datos::ddjjEstado($l['camara'], $l['slug']);
     $sinTot = $es['sin_totales'] ?? [];
     if (!$dj) {
-        return ['hay' => false, 'asumio_2025' => !empty($l['inicio']) && $l['inicio'] >= '2025-12-10', 'sin_totales' => $sinTot, 'ambiguo' => !empty($es['ambiguo'])];
+        return ['hay' => false, 'asumio_2025' => !empty($l['inicio']) && $l['inicio'] >= '2025-12-10', 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? [], 'ambiguo' => !empty($es['ambiguo'])];
     }
     $anios = array_values(array_unique(array_map(static fn($d) => (int)$d['anio'], $dj)));
     sort($anios);
@@ -516,7 +516,7 @@ function estado_ddjj(array $l, array $dj): array
     for ($a = $anios[0]; $a <= end($anios); $a++) { if (!in_array($a, $anios, true)) { $faltan[] = $a; } }
     // Los años que figuran sin totales utilizables no cuentan como "faltantes": se dicen aparte.
     $sinAnios = array_map(static fn($x) => (int)$x['anio'], $sinTot);
-    return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot];
+    return ['hay' => true, 'desde' => $anios[0], 'hasta' => end($anios), 'cantidad' => count($anios), 'faltan' => array_values(array_diff($faltan, $sinAnios)), 'sin_totales' => $sinTot, 'inconsistente' => $es['inconsistente'] ?? []];
 }
 
 /** Barras verticales en SVG: una por clave (por ejemplo, proyectos por año). Sin scripts. */

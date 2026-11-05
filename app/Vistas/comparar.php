@@ -91,7 +91,7 @@ $nada = '<span class="tenue">—</span>';
   </table></div>
   <?php foreach ($datos as $d): if (!$d['sp']): $est = estado_ddjj($d['l'], []); ?>
     <p class="tenue pequeno"><strong><?= e($d['l']['nombre']) ?>:</strong>
-      <?= $est['sin_totales'] ? 'presentó declaración pero el archivo oficial trae los totales vacíos.' : ($est['ambiguo'] ? 'el nombre corresponde a más de una persona en el archivo oficial.' : ($est['asumio_2025'] ? 'asumió el 10/12/2025 y su primera declaración todavía no está publicada.' : 'no figura en el archivo de declaraciones juradas publicado.')) ?></p>
+      <?= $est['sin_totales'] ? 'presentó declaración pero el archivo oficial trae los totales vacíos.' : ($est['inconsistente'] ? 'el archivo oficial trae declaraciones del mismo año con montos distintos y no se muestra ninguna cifra.' : ($est['ambiguo'] ? 'el nombre corresponde a más de una persona en el archivo oficial.' : ($est['asumio_2025'] ? 'asumió el 10/12/2025 y su primera declaración todavía no está publicada.' : 'no figura en el archivo de declaraciones juradas publicado.'))) ?></p>
   <?php endif; endforeach; ?>
   <p class="tenue pequeno">Los períodos de cada persona son distintos: comparar variaciones solo tiene sentido si los años son parecidos. Un cambio puede deberse a cómo se valúan los bienes en la declaración y no solo a compras, ventas o ahorro. Fuente: declaraciones juradas de la Oficina Anticorrupción, IPC del INDEC y dólar oficial del Banco Central. <a href="/metodologia#ddjj">Cómo se calcula</a>.</p>
 </section>

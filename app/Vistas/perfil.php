@@ -42,6 +42,7 @@ if ($saR) { $resFrases[] = 'Tiene ' . array_sum(array_column($saR, 'votaciones')
 $djR = estado_ddjj($l, Datos::ddjj($l['camara'], $l['slug']));
 if ($djR['hay']) { $resFrases[] = 'Declaración jurada ante la Oficina Anticorrupción: ' . $djR['cantidad'] . ($djR['cantidad'] === 1 ? ' año publicado' : ' años publicados') . ' (de ' . $djR['desde'] . ' a ' . $djR['hasta'] . ').'; }
 elseif ($djR['sin_totales']) { $resFrases[] = 'Presentó declaración jurada, pero el archivo oficial trae los totales vacíos: no se publican cifras.'; }
+elseif ($djR['inconsistente']) { $resFrases[] = 'Declaración jurada: el archivo oficial trae declaraciones del mismo año con montos distintos, por eso no se publican cifras.'; }
 elseif ($djR['ambiguo']) { $resFrases[] = 'Declaración jurada: el nombre corresponde a más de una persona en el archivo oficial, por eso no se publica.'; }
 else { $resFrases[] = $djR['asumio_2025'] ? 'Asumió el 10 de diciembre de 2025: su primera declaración jurada todavía no está publicada.' : 'No figura en el archivo de declaraciones juradas publicado (años fiscales 2012 a 2024).'; }
 $pyR = Datos::proyectos($l['slug'], $l['camara']);
@@ -280,6 +281,9 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
   <p class="aviso aviso-ddjj">
   <?php if ($est['sin_totales']): $anS = array_map(static fn($x) => $x['anio'] . ' (' . mb_strtolower($x['tipo']) . ')', $est['sin_totales']); ?>
     <strong>Presentó declaración, pero el archivo trae los totales vacíos.</strong> En el archivo de la Oficina Anticorrupción figura una declaración a nombre de <?= e($l['nombre']) ?> de los años <?= e(implode(', ', $anS)) ?>, con los bienes en cero o sin monto. Este sitio no publica totales que no se pueden verificar, por eso no se muestran cifras.
+    <?php foreach ($est['inconsistente'] as $x): ?>Además, del año <?= (int)$x['anio'] ?> el archivo trae <?= (int)$x['cantidad'] ?> declaraciones del mismo tipo con montos distintos (bienes entre <?= e(monto_ars((string)$x['bienes'][0])) ?> y <?= e(monto_ars((string)$x['bienes'][1])) ?>; deudas entre <?= e(monto_ars((string)$x['deudas'][0])) ?> y <?= e(monto_ars((string)$x['deudas'][1])) ?>): este sitio no elige una.<?php endforeach; ?>
+  <?php elseif ($est['inconsistente']): $anI = array_map(static fn($x) => (int)$x['anio'], $est['inconsistente']); ?>
+    <strong>El archivo trae declaraciones con montos distintos y no se muestra ninguna cifra.</strong> En el archivo de la Oficina Anticorrupción figuran <?= (int)$est['inconsistente'][0]['cantidad'] ?> declaraciones del mismo tipo para el año <?= e(implode(', ', $anI)) ?> a nombre de <?= e($l['nombre']) ?>, con bienes y deudas que no coinciden entre sí. Este sitio no elige una por su cuenta. Los valores que figuran: bienes entre <?= e(monto_ars((string)$est['inconsistente'][0]['bienes'][0])) ?> y <?= e(monto_ars((string)$est['inconsistente'][0]['bienes'][1])) ?>; deudas entre <?= e(monto_ars((string)$est['inconsistente'][0]['deudas'][0])) ?> y <?= e(monto_ars((string)$est['inconsistente'][0]['deudas'][1])) ?>.
   <?php elseif ($est['ambiguo']): ?>
     <strong>No se muestra para no mezclar personas.</strong> En el archivo de la Oficina Anticorrupción hay más de una persona con un nombre compatible con el de <?= e($l['nombre']) ?> y no se puede asegurar cuál es. Este sitio no publica una declaración que no puede atribuir con certeza.
   <?php elseif ($est['asumio_2025']): ?>
@@ -295,6 +299,7 @@ if (count($grProy) >= 2 || count($grPat) >= 2): ?>
   <p class="aviso aviso-ddjj"><strong>Qué figura en el archivo publicado:</strong> <?= (int)$est['cantidad'] ?> <?= $est['cantidad'] === 1 ? 'declaración' : 'declaraciones' ?>, de los años fiscales <?= (int)$est['desde'] ?> a <?= (int)$est['hasta'] ?>.
     <?php if ($est['hasta'] < 2024): ?>Es la más reciente que figura a su nombre; no hay una posterior en el archivo (el último publicado es el del año fiscal 2024).<?php endif; ?>
     <?php if ($est['faltan']): ?>No figuran los años <?= e(implode(', ', $est['faltan'])) ?>.<?php endif; ?>
+    <?php foreach ($est['inconsistente'] as $x): ?>Del año <?= (int)$x['anio'] ?> el archivo trae <?= (int)$x['cantidad'] ?> declaraciones del mismo tipo con montos distintos (bienes entre <?= e(monto_ars((string)$x['bienes'][0])) ?> y <?= e(monto_ars((string)$x['bienes'][1])) ?>; deudas entre <?= e(monto_ars((string)$x['deudas'][0])) ?> y <?= e(monto_ars((string)$x['deudas'][1])) ?>): este sitio no elige una y no publica las cifras de ese año. <?php endforeach; ?>
     <?php if ($est['sin_totales']): ?>De los años <?= e(implode(', ', array_map(static fn($x) => $x['anio'], $est['sin_totales']))) ?> el archivo trae una declaración con los bienes en cero o sin monto: no se publican esas cifras.<?php endif; ?>
     Que un año no figure no quiere decir que no la haya presentado: acá solo está lo que publicó la Oficina Anticorrupción.</p>
   <?php [$mesBase, $fac] = factores_ipc(); $serie = []; foreach ($dj as $d) { if (isset($fac[(int)$d['anio']])) { $serie[(string)(int)$d['anio']] = (float)$d['patrimonio_neto_final'] * $fac[(int)$d['anio']]; } } ksort($serie); ?>
