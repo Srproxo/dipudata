@@ -449,6 +449,29 @@ switch (true) {
         ));
         break;
 
+    case $path === '/tv':
+        $op = tv_opciones();
+        if (isset($_GET['iniciar'])) {
+            $ls = tv_lista($op['lista'] ?: 'todos');
+            $ls ? ir(tv_url($ls[0], 1, ['lista' => $op['lista'] ?: 'todos'] + $op), 302) : render_404();
+        }
+        render_tv('indice', ['op' => $op], pagina_meta('Modo TV: perfiles a pantalla completa', 'Diapositivas a pantalla completa con el perfil de cada diputado y senador, para mostrar en una TV.', '/tv', 'tv'));
+        break;
+
+    case (bool)preg_match("#^/tv/(diputado|senador)/({$S})(?:/([1-9]))?$#", $path, $m):
+        $lg = Datos::legislador($m[1] === 'senador' ? 'Senadores' : 'Diputados', $m[2]);
+        if (!$lg) { render_404(); break; }
+        $op = tv_opciones();
+        $dia = tv_diapositivas($lg);
+        $nn = max(1, min((int)($m[3] ?? 1), count($dia)));
+        $ls = tv_lista($op['lista'] ?: ($lg['camara'] === 'Senadores' ? 'senado' : 'diputados'));
+        $op['lista'] = $op['lista'] ?: ($lg['camara'] === 'Senadores' ? 'senado' : 'diputados');
+        $pos = 0; foreach ($ls as $i => $x) { if ($x['slug'] === $lg['slug'] && $x['camara'] === $lg['camara']) { $pos = $i; break; } }
+        $sig = $nn < count($dia) ? tv_url($lg, $nn + 1, $op) : tv_url($ls[($pos + 1) % count($ls)], 1, $op);
+        $ant = $nn > 1 ? tv_url($lg, $nn - 1, $op) : (function () use ($ls, $pos, $op) { $pl = $ls[($pos - 1 + count($ls)) % count($ls)]; return tv_url($pl, count(tv_diapositivas($pl)), $op); })();
+        render_tv('slide', compact('lg', 'dia', 'nn', 'op', 'sig', 'ant', 'ls', 'pos'), pagina_meta('Modo TV: ' . $lg['nombre'], 'Perfil a pantalla completa.', '/tv', 'tv'));
+        break;
+
     case (bool)preg_match('#^/afinidad(?:/(diputados|senado))?$#', $path, $m):
         $sel = $m[1] ?? '';
         if ($sel === '') {

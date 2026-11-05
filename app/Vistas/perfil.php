@@ -71,6 +71,7 @@ if ($pyR) {
   <p class="resumen-atajos">
     <?php foreach ($pestanas as $clave => $titulo): if ($clave === 'resumen') { continue; } ?><a href="<?= e($base . '?tab=' . $clave) ?>"><?= e($titulo) ?></a><?php endforeach; ?>
     <a href="/comparar?a=<?= e(clave_legislador($l)) ?>">Comparar con otros</a>
+    <a href="/tv/<?= $esSen ? 'senador' : 'diputado' ?>/<?= e($l['slug']) ?>/1?lista=<?= $esSen ? 'senado' : 'diputados' ?>" rel="nofollow">Ver en modo TV</a>
     <a href="#ficha">Ficha y fuentes</a>
   </p>
 </section>

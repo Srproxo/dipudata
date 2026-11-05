@@ -20,6 +20,7 @@ $mas = [
     'subsidios'   => ['/subsidios', 'Subsidios'],
     'aportes'     => ['/aportes', 'Aportes a partidos'],
     'congreso'    => ['/congreso', 'Cómo funciona el Congreso'],
+    'tv'          => ['/tv', 'Modo TV (pantalla completa)'],
     'glosario'    => ['/glosario', 'Glosario'],
     'metodologia' => ['/metodologia', 'Metodología'],
 ];
