@@ -163,6 +163,22 @@ foreach (array_merge($conDj, $sinDj) as $l) {
 }
 restore_error_handler();
 ok($avisosPerfil === [] && $perfilIncoherente === [], 'los perfiles (resumen y declaración jurada) se renderizan sin avisos de PHP y el resumen es coherente con las declaraciones (' . (count($conDj) + count($sinDj)) . ' perfiles)' . ($avisosPerfil ? ': ' . implode(' | ', array_slice($avisosPerfil, 0, 2)) : '') . ($perfilIncoherente ? ': ' . implode(' | ', array_slice($perfilIncoherente, 0, 2)) : ''));
+// Páginas legales, sitemap y Google (analítica apagada por defecto).
+$vl = fn(string $n) => (string)file_get_contents(__DIR__ . '/../app/Vistas/' . $n . '.php');
+$mvc = (string)file_get_contents(__DIR__ . '/../mvc.php'); $plt = (string)file_get_contents(__DIR__ . '/../app/Vistas/_plantilla.php');
+$legales = ['terminos' => '/terminos', 'privacidad' => '/privacidad', 'cookies' => '/cookies'];
+$legalFalta = []; foreach ($legales as $v => $ruta) { if (!is_file(__DIR__ . '/../app/Vistas/' . $v . '.php') || !str_contains($mvc, "'" . $ruta . "'") || !str_contains($mvc, "['" . $ruta . "', 'yearly'") || !str_contains($plt, 'href="' . $ruta . '"')) { $legalFalta[] = $ruta; } }
+ok($legalFalta === [], 'las páginas legales existen, tienen ruta, están en el sitemap y se enlazan desde el pie' . ($legalFalta ? ': faltan ' . implode(', ', $legalFalta) : ''));
+$pv = $vl('privacidad'); $tm = $vl('terminos');
+ok(str_contains($pv, 'Ley 25.326') && str_contains($pv, 'AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA') && str_contains($pv, 'diez días corridos') && str_contains($pv, 'cinco días hábiles') && str_contains($pv, 'Si quien lo pide tiene derecho a hacerlo, la información se quita'), 'la política de privacidad incluye la leyenda de la AAIP, los derechos, los plazos y la baja a pedido');
+ok(str_contains($tm, 'No es un sitio oficial') && str_contains($tm, 'Creative Commons') && str_contains($tm, 'Ley aplicable'), 'los términos dicen que no es un sitio oficial, la licencia y la ley aplicable');
+$bs = (string)file_get_contents(__DIR__ . '/../app/bootstrap.php'); $js = (string)file_get_contents(__DIR__ . '/../assets/js/analitica.js'); $wb = (string)file_get_contents(__DIR__ . '/../app/Web.php');
+ok(!preg_match('/G-[A-Z0-9]{6,}/', $bs) && str_contains($bs, "define('GA_ID'") && str_contains($bs, "define('GSC_VERIFICACION'"), 'el ID de Analytics y el código de Search Console salen del entorno, no están escritos en el código');
+ok(substr_count($js, 'googletagmanager.com') === 1 && str_contains($js, "if (actual === 'si') { cargar(); }") && str_contains($wb, "GA_ID === ''"), 'Google Analytics solo se carga con consentimiento y la CSP solo lo permite si está configurado');
+$legalAvisos = []; set_error_handler(static function ($n, $m, $f, $ln) use (&$legalAvisos) { $legalAvisos[] = basename($f) . ':' . $ln . ' ' . $m; return true; });
+foreach (array_keys($legales) as $vv) { ob_start(); (static function () use ($vv) { include __DIR__ . '/../app/Vistas/' . $vv . '.php'; })(); $hh = (string)ob_get_clean(); if (strlen($hh) < 800) { $legalAvisos[] = $vv . ' casi vacía'; } }
+restore_error_handler();
+ok($legalAvisos === [] && (GA_ID !== '' || str_contains($vl('cookies'), 'DipuData no usa cookies')), 'las páginas legales se renderizan sin avisos de PHP y la de cookies dice la verdad según la configuración');
 $djFisMal = []; $djFisN = 0;
 foreach ($todos as $l) {
     foreach (Datos::ddjj($l['camara'], $l['slug']) ?? [] as $d) {

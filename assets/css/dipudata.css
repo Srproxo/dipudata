@@ -360,3 +360,8 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 /* Dictámenes en el listado de proyectos */
 .dictamenes { list-style: none; margin: .4rem 0 0; padding: 0; font-size: .875rem; color: var(--tinta-2); }
 .dictamenes li { padding: .15rem 0 .15rem .75rem; border-left: 3px solid var(--linea-fuerte); margin-top: .25rem; overflow-wrap: anywhere; }
+/* Cookies (solo cuando hay Google Analytics configurado) y enlaces legales del pie */
+.cookies-aviso { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--fondo); border-top: 2px solid var(--acento); padding: .9rem 1rem; box-shadow: 0 -2px 12px rgba(0,0,0,.12); }
+.cookies-aviso p { margin: 0 auto .5rem; max-width: 56rem; font-size: .95rem; }
+.cookies-botones, .botones-cookies { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pie-legal { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }

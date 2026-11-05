@@ -38,7 +38,8 @@ $urlPedido = PEDIDOS_URL . '?title=' . rawurlencode($asunto) . '&body=' . rawurl
   <ul>
     <li>Revisamos el pedido contra la fuente oficial.</li>
     <li>Si el dato es incorrecto, lo corregimos o lo retiramos y lo anotamos en <a href="/metodologia">la metodología</a>.</li>
-    <li>Si el dato es correcto y es información pública oficial, queda con su fuente y te explicamos por qué.</li>
-    <li>Los pedidos de personas que no son legisladoras y aparecen en algún dato se atienden con prioridad.</li>
+    <li><strong>Si quien lo pide tiene derecho a hacerlo, la información se quita.</strong></li>
+    <li>Si no corresponde retirarla (por ejemplo, porque el pedido no lo hace la persona a la que se refiere el dato), queda con su fuente y te explicamos por qué.</li>
+    <li>Respondemos dentro de los plazos de la <a href="/privacidad">Ley 25.326</a>: diez días corridos para el acceso y cinco días hábiles para rectificar o suprimir.</li>
   </ul>
 </section>
