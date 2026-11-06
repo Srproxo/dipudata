@@ -456,6 +456,27 @@ switch (true) {
         ));
         break;
 
+    case $path === '/notas':
+        render('notas_indice', ['notas' => notas()], pagina_meta(
+            'Notas: análisis del Congreso con datos oficiales',
+            'Análisis sobre el Congreso de la Nación escritos con datos oficiales: presentismo por provincia, cómo votó cada distrito las leyes clave y más, con la fuente de cada cifra.',
+            '/notas', 'notas'
+        ));
+        break;
+
+    case (bool)preg_match("#^/notas/({$S})$#", $path, $m):
+        $n = nota($m[1]);
+        if (!$n) { render_404(); break; }
+        render('nota', ['n' => $n], pagina_meta($n['titulo'], nota_texto($n['bajada']), '/notas/' . $n['slug'], 'notas', ['jsonld' => [
+            '@context' => 'https://schema.org', '@type' => 'Article', 'headline' => $n['titulo'], 'description' => nota_texto($n['bajada']),
+            'datePublished' => $n['fecha'], 'dateModified' => $n['fecha'], 'inLanguage' => 'es-AR', 'url' => SITE_URL . '/notas/' . $n['slug'],
+            'author' => ['@type' => 'Organization', 'name' => 'DipuData', 'url' => SITE_URL . '/'],
+            'publisher' => ['@type' => 'Organization', 'name' => 'DipuData', 'url' => SITE_URL . '/'],
+            'license' => 'https://creativecommons.org/licenses/by/4.0/',
+            'citation' => array_map(static fn($pr) => ['@type' => 'NewsArticle', 'headline' => $pr['titulo'], 'url' => $pr['url'], 'publisher' => $pr['medio']], $n['prensa'] ?? []),
+        ]]));
+        break;
+
     case $path === '/llms.txt':
     case $path === '/llms-full.txt':
         encabezados_seguridad('text/plain; charset=utf-8', 3600);
@@ -632,12 +653,13 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/datos', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/notas', 'weekly', '0.8'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/datos', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
         foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
         foreach (Datos::votaciones() as $v) { $urls[] = ['/votaciones/' . $v['id'], 'yearly', '0.4']; }
+        foreach (notas() as $nt) { $urls[] = ['/notas/' . $nt['slug'], 'monthly', '0.7']; }
         foreach (Datos::bloques() as $b) { $urls[] = [Datos::urlBloque($b), 'weekly', '0.6']; }
         foreach (Datos::provincias() as $p) { $urls[] = ['/congreso/provincias/' . $p['slug'], 'weekly', '0.6']; }
         foreach (Datos::legisladores() as $l) { $urls[] = [Datos::urlLegislador($l), 'weekly', '0.7']; }

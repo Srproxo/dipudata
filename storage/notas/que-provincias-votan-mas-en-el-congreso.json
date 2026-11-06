@@ -1,0 +1,439 @@
+{
+ "slug": "que-provincias-votan-mas-en-el-congreso",
+ "titulo": "Qué provincias votan más en el Congreso",
+ "antetitulo": "Presentismo en las votaciones",
+ "bajada": "Desde el 10 de diciembre de 2025 hubo 141 votaciones nominales en Diputados y 183 en el Senado. Contamos en cuántas votó cada legislador y lo sumamos por provincia.",
+ "fecha": "2026-11-06",
+ "datos_al": "2026-10-29",
+ "cuerpo": [
+  {
+   "p": "Entre el 10 de diciembre de 2025 y el 29 de octubre de 2026, los 256 diputados con registro votaron, en conjunto, en el **93,7 %** de las votaciones en las que estaban en funciones. Los 72 senadores votaron en el **94,3 %**. Votar quiere decir haber emitido un voto afirmativo, negativo o una abstención; el resto figura como ausente en el acta oficial."
+  },
+  {
+   "h2": "Diputados"
+  },
+  {
+   "p": "Las delegaciones con mayor porcentaje fueron La Pampa (99,7 %, 5 diputados), San Juan (99,5 %, 6) y San Luis y Corrientes (99,3 %). Las de menor porcentaje fueron Jujuy y Formosa (87,2 %), Chubut y Santiago del Estero (89,9 %) y Tucumán (90,3 %)."
+  },
+  {
+   "p": "En las provincias grandes el promedio esconde mucha diferencia entre personas: en Buenos Aires (70 diputados, 93,1 %) los valores individuales van del 50,4 % al 100 %, y en Córdoba (18 diputados, 92,1 %), del 54,1 % al 100 %. El perfil de cada diputado muestra su propio porcentaje."
+  },
+  {
+   "tabla": {
+    "cab": [
+     "Distrito",
+     "Legisladores",
+     "Votó en",
+     "Mínimo",
+     "Máximo"
+    ],
+    "der": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "filas": [
+     [
+      "[La Pampa](/congreso/provincias/la-pampa)",
+      "5",
+      "99,7 %",
+      "98,6 %",
+      "100,0 %"
+     ],
+     [
+      "[San Juan](/congreso/provincias/san-juan)",
+      "6",
+      "99,5 %",
+      "97,9 %",
+      "100,0 %"
+     ],
+     [
+      "[Corrientes](/congreso/provincias/corrientes)",
+      "7",
+      "99,3 %",
+      "95,7 %",
+      "100,0 %"
+     ],
+     [
+      "[San Luis](/congreso/provincias/san-luis)",
+      "5",
+      "99,3 %",
+      "97,9 %",
+      "100,0 %"
+     ],
+     [
+      "[Chaco](/congreso/provincias/chaco)",
+      "7",
+      "98,8 %",
+      "95,0 %",
+      "100,0 %"
+     ],
+     [
+      "[Neuquén](/congreso/provincias/neuquen)",
+      "5",
+      "98,2 %",
+      "94,3 %",
+      "100,0 %"
+     ],
+     [
+      "[Río Negro](/congreso/provincias/rio-negro)",
+      "5",
+      "96,7 %",
+      "86,5 %",
+      "100,0 %"
+     ],
+     [
+      "[Catamarca](/congreso/provincias/catamarca)",
+      "5",
+      "95,7 %",
+      "88,7 %",
+      "100,0 %"
+     ],
+     [
+      "[Ciudad Autónoma de Buenos Aires](/congreso/provincias/ciudad-autonoma-de-buenos-aires)",
+      "25",
+      "95,3 %",
+      "73,8 %",
+      "100,0 %"
+     ],
+     [
+      "[Salta](/congreso/provincias/salta)",
+      "7",
+      "95,3 %",
+      "86,5 %",
+      "99,3 %"
+     ],
+     [
+      "[Entre Ríos](/congreso/provincias/entre-rios)",
+      "9",
+      "94,0 %",
+      "80,9 %",
+      "100,0 %"
+     ],
+     [
+      "[Santa Cruz](/congreso/provincias/santa-cruz)",
+      "5",
+      "93,8 %",
+      "79,4 %",
+      "99,3 %"
+     ],
+     [
+      "[Santa Fe](/congreso/provincias/santa-fe)",
+      "19",
+      "93,5 %",
+      "65,2 %",
+      "100,0 %"
+     ],
+     [
+      "[Buenos Aires](/congreso/provincias/buenos-aires)",
+      "70",
+      "93,1 %",
+      "50,4 %",
+      "100,0 %"
+     ],
+     [
+      "[La Rioja](/congreso/provincias/la-rioja)",
+      "4",
+      "92,7 %",
+      "79,4 %",
+      "100,0 %"
+     ],
+     [
+      "[Misiones](/congreso/provincias/misiones)",
+      "7",
+      "92,5 %",
+      "87,2 %",
+      "100,0 %"
+     ],
+     [
+      "[Mendoza](/congreso/provincias/mendoza)",
+      "10",
+      "92,2 %",
+      "75,2 %",
+      "100,0 %"
+     ],
+     [
+      "[Córdoba](/congreso/provincias/cordoba)",
+      "18",
+      "92,1 %",
+      "54,1 %",
+      "100,0 %"
+     ],
+     [
+      "[Tierra del Fuego](/congreso/provincias/tierra-del-fuego)",
+      "5",
+      "91,2 %",
+      "57,4 %",
+      "100,0 %"
+     ],
+     [
+      "[Tucumán](/congreso/provincias/tucuman)",
+      "9",
+      "90,3 %",
+      "52,5 %",
+      "100,0 %"
+     ],
+     [
+      "[Chubut](/congreso/provincias/chubut)",
+      "5",
+      "89,9 %",
+      "60,3 %",
+      "100,0 %"
+     ],
+     [
+      "[Santiago del Estero](/congreso/provincias/santiago-del-estero)",
+      "7",
+      "89,9 %",
+      "59,6 %",
+      "100,0 %"
+     ],
+     [
+      "[Formosa](/congreso/provincias/formosa)",
+      "5",
+      "87,2 %",
+      "61,0 %",
+      "100,0 %"
+     ],
+     [
+      "[Jujuy](/congreso/provincias/jujuy)",
+      "6",
+      "87,2 %",
+      "60,3 %",
+      "100,0 %"
+     ]
+    ]
+   }
+  },
+  {
+   "h2": "Senado"
+  },
+  {
+   "p": "Chaco (99,8 %), Misiones (99,6 %) y Río Negro (99,3 %) encabezan; Mendoza (81,4 %), La Rioja (84,4 %) y Córdoba (85,2 %) tienen los porcentajes más bajos. Con tres senadores por provincia, una sola persona mueve mucho el promedio: en Mendoza los tres valores van del 55,2 % al 99,5 %."
+  },
+  {
+   "tabla": {
+    "cab": [
+     "Distrito",
+     "Legisladores",
+     "Votó en",
+     "Mínimo",
+     "Máximo"
+    ],
+    "der": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "filas": [
+     [
+      "[Chaco](/congreso/provincias/chaco)",
+      "3",
+      "99,8 %",
+      "99,5 %",
+      "100,0 %"
+     ],
+     [
+      "[Misiones](/congreso/provincias/misiones)",
+      "3",
+      "99,6 %",
+      "98,9 %",
+      "100,0 %"
+     ],
+     [
+      "[Río Negro](/congreso/provincias/rio-negro)",
+      "3",
+      "99,3 %",
+      "98,9 %",
+      "100,0 %"
+     ],
+     [
+      "[Tierra del Fuego](/congreso/provincias/tierra-del-fuego)",
+      "3",
+      "99,1 %",
+      "97,3 %",
+      "100,0 %"
+     ],
+     [
+      "[San Luis](/congreso/provincias/san-luis)",
+      "3",
+      "98,9 %",
+      "97,3 %",
+      "100,0 %"
+     ],
+     [
+      "[Jujuy](/congreso/provincias/jujuy)",
+      "3",
+      "98,7 %",
+      "97,8 %",
+      "99,5 %"
+     ],
+     [
+      "[San Juan](/congreso/provincias/san-juan)",
+      "3",
+      "98,5 %",
+      "96,7 %",
+      "100,0 %"
+     ],
+     [
+      "[Formosa](/congreso/provincias/formosa)",
+      "3",
+      "98,2 %",
+      "96,2 %",
+      "99,5 %"
+     ],
+     [
+      "[Neuquén](/congreso/provincias/neuquen)",
+      "3",
+      "98,2 %",
+      "95,1 %",
+      "100,0 %"
+     ],
+     [
+      "[Salta](/congreso/provincias/salta)",
+      "3",
+      "98,2 %",
+      "97,8 %",
+      "98,9 %"
+     ],
+     [
+      "[Corrientes](/congreso/provincias/corrientes)",
+      "3",
+      "97,4 %",
+      "94,5 %",
+      "100,0 %"
+     ],
+     [
+      "[Santa Cruz](/congreso/provincias/santa-cruz)",
+      "3",
+      "96,7 %",
+      "94,0 %",
+      "98,9 %"
+     ],
+     [
+      "[Catamarca](/congreso/provincias/catamarca)",
+      "3",
+      "95,1 %",
+      "92,9 %",
+      "98,9 %"
+     ],
+     [
+      "[La Pampa](/congreso/provincias/la-pampa)",
+      "3",
+      "94,0 %",
+      "86,9 %",
+      "97,8 %"
+     ],
+     [
+      "[Ciudad Autónoma de Buenos Aires](/congreso/provincias/ciudad-autonoma-de-buenos-aires)",
+      "3",
+      "93,3 %",
+      "82,0 %",
+      "100,0 %"
+     ],
+     [
+      "[Tucumán](/congreso/provincias/tucuman)",
+      "3",
+      "93,1 %",
+      "85,2 %",
+      "100,0 %"
+     ],
+     [
+      "[Entre Ríos](/congreso/provincias/entre-rios)",
+      "3",
+      "92,5 %",
+      "80,3 %",
+      "100,0 %"
+     ],
+     [
+      "[Santa Fe](/congreso/provincias/santa-fe)",
+      "3",
+      "90,3 %",
+      "71,6 %",
+      "100,0 %"
+     ],
+     [
+      "[Chubut](/congreso/provincias/chubut)",
+      "3",
+      "90,2 %",
+      "86,3 %",
+      "96,7 %"
+     ],
+     [
+      "[Buenos Aires](/congreso/provincias/buenos-aires)",
+      "3",
+      "90,0 %",
+      "85,2 %",
+      "92,9 %"
+     ],
+     [
+      "[Santiago del Estero](/congreso/provincias/santiago-del-estero)",
+      "3",
+      "88,5 %",
+      "75,4 %",
+      "95,6 %"
+     ],
+     [
+      "[Córdoba](/congreso/provincias/cordoba)",
+      "3",
+      "85,2 %",
+      "63,9 %",
+      "98,4 %"
+     ],
+     [
+      "[La Rioja](/congreso/provincias/la-rioja)",
+      "3",
+      "84,4 %",
+      "81,4 %",
+      "100,0 %"
+     ],
+     [
+      "[Mendoza](/congreso/provincias/mendoza)",
+      "3",
+      "81,4 %",
+      "55,2 %",
+      "99,5 %"
+     ]
+    ]
+   }
+  },
+  {
+   "h2": "Votaron en todas"
+  },
+  {
+   "p": "97 diputados y 16 senadores votaron en todas las votaciones del período. 26 diputados y 4 senadores votaron en menos del 80 %."
+  },
+  {
+   "h2": "Qué no dice este dato"
+  },
+  {
+   "lista": [
+    "El acta registra «ausente» sin distinguir licencias, enfermedad, una salida del recinto en ese momento o una decisión política de no votar. No se puede saber el motivo con este dato.",
+    "No mide el trabajo en comisiones, los proyectos presentados ni la asistencia a la sesión: solo si la persona votó en cada votación nominal.",
+    "Quien preside la sesión no vota y no se cuenta: por eso Martín Menem, presidente de la Cámara de Diputados, no figura.",
+    "Quienes asumieron después del 10 de diciembre de 2025 se miden solo sobre las votaciones en las que estaban en funciones.",
+    "Una provincia con más votaciones nominales de un tipo u otro no «trabaja más»: el porcentaje compara personas de la misma cámara en el mismo período."
+   ]
+  }
+ ],
+ "fuentes": [
+  {
+   "nombre": "Votaciones nominales de la Cámara de Diputados",
+   "detalle": "141 actas del 10/12/2025 al 29/10/2026. Réplica de ArgentinaDatos, que coincide voto por voto con el registro de la Cámara; contrastada con datacp.ar.",
+   "url": "/votaciones"
+  },
+  {
+   "nombre": "Votaciones nominales del Senado",
+   "detalle": "183 actas del mismo período, tomadas de senado.gob.ar. Cada acta se valida contra sus totales; ninguna quedó excluida.",
+   "url": "/votaciones"
+  },
+  {
+   "nombre": "Padrón de legisladores en ejercicio",
+   "detalle": "Datos abiertos de cada cámara: provincia y bloque de cada legislador.",
+   "url": "/congreso/provincias"
+  }
+ ],
+ "metodo": "Para cada provincia se suman los votos emitidos (afirmativo, negativo o abstención) de sus legisladores y se dividen por la suma de las votaciones en que cada uno estaba en funciones. Mínimo y máximo son los porcentajes individuales más bajo y más alto de la delegación.",
+ "prensa": []
+}

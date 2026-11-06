@@ -585,6 +585,7 @@ function llms_txt(bool $completo): string
         "- [Datos abiertos y cómo citar]({$u}/datos)", "- [Sitemap]({$u}/sitemap.xml)", "",
         "## Secciones principales", "",
         "- [Legisladores en ejercicio]({$u}/): directorio con buscador por nombre, cámara, provincia y bloque",
+        "- [Notas]({$u}/notas): análisis escritos con los datos oficiales del sitio, con la fuente y el método de cada cifra",
         "- [Votaciones]({$u}/votaciones): votaciones nominales de Diputados y del Senado, una por una, con el voto de cada legislador",
         "- [Leyes]({$u}/leyes): leyes sancionadas con su sumario y fechas",
         "- [Patrimonio declarado]({$u}/patrimonio): declaraciones juradas de la Oficina Anticorrupción, con el detalle impositivo declarado",
@@ -601,6 +602,7 @@ function llms_txt(bool $completo): string
     if ($completo) {
         $t[] = "## Qué no se publica"; $t[] = "";
         foreach (["CUIT, documentos, domicilios ni teléfonos particulares.", "Datos de familiares que no sean legisladores, ni descripción de bienes.", "Nada sobre el personal de un legislador: las nóminas no dicen a qué legislador responde cada agente.", "Situación judicial: no hay una fuente oficial legible por máquina.", "Cuando una fuente trae valores inconsistentes, no se publican y se explica en la metodología."] as $x) { $t[] = "- {$x}"; }
+        if (notas()) { $t[] = ""; $t[] = "## Notas"; $t[] = ""; foreach (notas() as $nt) { $t[] = '- [' . $nt['titulo'] . '](' . $u . '/notas/' . $nt['slug'] . '): ' . nota_texto($nt['bajada']); } }
         $t[] = ""; $t[] = "## Glosario"; $t[] = "";
         foreach (terminos_glosario() as $k => $g) { $t[] = '- **' . $g[0] . '**: ' . trim((string)($g[1] ?? '')); }
         $t[] = ""; $t[] = "## Bloques"; $t[] = "";
@@ -1139,4 +1141,45 @@ function avance_proyectos(array $proyectos): array
         if (in_array($x[5], ['APROBADO', 'MEDIA SANCION', 'SANCIONADO'], true)) { $aprob++; }
     }
     return ['presentados' => count($proyectos), 'con_dictamen' => $con, 'aprobados' => $aprob];
+}
+
+/**
+ * Notas de análisis: archivos escritos a mano en storage/notas/{slug}.json (entran por PR, nunca se generan solos).
+ * Cada nota trae su cuerpo en bloques (p, h2, lista, tabla), las fuentes oficiales, el método y las notas de prensa citadas.
+ * @return list<array> notas ordenadas de la más nueva a la más vieja
+ */
+function notas(): array
+{
+    static $cache = null;
+    if ($cache !== null) { return $cache; }
+    $cache = [];
+    foreach (glob(RAIZ . '/storage/notas/*.json') ?: [] as $f) {
+        $n = json_decode((string)file_get_contents($f), true);
+        if (is_array($n) && ($n['slug'] ?? '') === basename($f, '.json')) { $cache[] = $n; }
+    }
+    usort($cache, static fn($a, $b) => [$b['fecha'], $a['titulo']] <=> [$a['fecha'], $b['titulo']]);
+    return $cache;
+}
+
+function nota(string $slug): ?array
+{
+    foreach (notas() as $n) { if ($n['slug'] === $slug) { return $n; } }
+    return null;
+}
+
+/** Texto de una nota con formato mínimo: **negrita** y [enlace](/ruta o https://…). Todo lo demás se escapa. */
+function nota_inline(string $t): string
+{
+    $h = e($t);
+    $h = (string)preg_replace('/\*\*(.+?)\*\*/u', '<strong>$1</strong>', $h);
+    return (string)preg_replace_callback('/\[([^\]]+)\]\(((?:\/|https:\/\/)[^\s)"<>]*)\)/u', static function ($m) {
+        $externo = str_starts_with($m[2], 'https://');
+        return '<a href="' . $m[2] . '"' . ($externo ? ' rel="noopener"' : '') . '>' . $m[1] . '</a>';
+    }, $h);
+}
+
+/** Texto plano de una nota (para llms.txt y descripciones): saca el formato y deja el texto de los enlaces. */
+function nota_texto(string $t): string
+{
+    return (string)preg_replace(['/\*\*(.+?)\*\*/u', '/\[([^\]]+)\]\([^)]*\)/u'], ['$1', '$1'], $t);
 }

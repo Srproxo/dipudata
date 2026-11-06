@@ -2,6 +2,7 @@
 /** @var array $meta @var string $contenido */
 $nav = [
     'legisladores' => ['/', 'Legisladores'],
+    'notas'        => ['/notas', 'Notas'],
     'votaciones'   => ['/votaciones', 'Votaciones'],
     'leyes'        => ['/leyes', 'Leyes'],
     'patrimonio'   => ['/patrimonio', 'Patrimonio'],
@@ -87,6 +88,7 @@ $inf = \App\Datos::informe();
       <p class="pie-titulo">Explorar</p>
       <ul>
         <li><a href="/">Legisladores</a></li>
+        <li><a href="/notas">Notas de análisis</a></li>
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
         <li><a href="/glosario">Glosario</a></li>
         <li><a href="/congreso/bloques">Bloques</a></li>
