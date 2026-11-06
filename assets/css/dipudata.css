@@ -367,3 +367,12 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .pie-legal { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 .botones-cookies label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .25rem .8rem; border: 1px solid var(--linea); cursor: pointer; }
 .botones-cookies label:has(input:checked) { border-color: var(--acento); background: var(--fondo); font-weight: 600; }
+
+/* Notas de análisis */
+.nota-antetitulo { margin: 0; }
+.nota-fecha { margin: .75rem 0 0; font-size: .875rem !important; color: var(--tenue) !important; }
+.tabla-nota { margin: 1rem 0 1.25rem; font-size: .9375rem; }
+.tabla-nota td { vertical-align: top; }
+.nota-fuentes { margin-top: 2.5rem; padding: 1rem 1.25rem; background: var(--fondo); border-top: 2px solid var(--tinta); }
+.nota-fuentes h2 { margin-top: 0; font-size: 1.15rem; }
+.nota-fuentes li, .nota-fuentes p { font-size: .9375rem; line-height: 1.6; }

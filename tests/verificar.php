@@ -593,5 +593,43 @@ ok(str_contains($rb, 'GPTBot') && str_contains($rb, 'ClaudeBot') && str_contains
 $api = (string)file_get_contents(__DIR__ . '/../api/index.php');
 ok(str_contains($api, "'/openapi.json'") && str_contains($api, "'/votaciones'") && is_file(__DIR__ . '/../app/Vistas/datos.php') && str_contains((string)file_get_contents(__DIR__ . '/../mvc.php'), "'/datos'"), 'API: OpenAPI, votaciones y página /datos existen');
 
+// Notas de análisis: cada nota declara fuentes y método, sus enlaces internos existen, las citas de prensa van por https,
+// no hay CUIT ni calificativos sin dato, y las cifras de la reforma laboral coinciden con el acta oficial 5853.
+$nts = notas(); $ntMal = [];
+foreach ($nts as $nt) {
+    foreach (['slug', 'titulo', 'antetitulo', 'bajada', 'fecha', 'datos_al', 'cuerpo', 'fuentes', 'metodo'] as $k) { if (empty($nt[$k])) { $ntMal[] = "{$nt['slug']}: falta {$k}"; } }
+    $txt = json_encode($nt, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if (preg_match('/\b\d{2}-?\d{8}-?\d\b/', $txt)) { $ntMal[] = "{$nt['slug']}: parece traer un CUIT"; }
+    if (preg_match('/\b(vag[oa]s?|faltador|corrupt|ñoqui|chant|traidor|mentiros)/iu', $txt)) { $ntMal[] = "{$nt['slug']}: calificativo sin dato"; }
+    foreach ($nt['prensa'] ?? [] as $pr) { if (!str_starts_with($pr['url'], 'https://') || empty($pr['medio']) || empty($pr['fecha'])) { $ntMal[] = "{$nt['slug']}: cita de prensa incompleta"; } }
+    preg_match_all('#\]\((/[^)]*)\)|"url": ?"(/[^"]*)"#', $txt, $mm);
+    foreach (array_filter(array_merge($mm[1], $mm[2])) as $u) {
+        $bien = match (true) {
+            (bool)preg_match('#^/votaciones/(S?\d+)$#', $u, $x) => Datos::votacion($x[1]) !== null,
+            (bool)preg_match('#^/(diputado|senador)/([a-z0-9-]+)$#', $u, $x) => Datos::legislador($x[1] === 'senador' ? 'Senadores' : 'Diputados', $x[2]) !== null,
+            (bool)preg_match('#^/congreso/provincias/([a-z0-9-]+)$#', $u, $x) => in_array($x[1], array_column(Datos::provincias(), 'slug'), true),
+            default => in_array($u, ['/votaciones', '/congreso/provincias', '/correccion', '/metodologia'], true),
+        };
+        if (!$bien) { $ntMal[] = "{$nt['slug']}: enlace roto {$u}"; }
+    }
+}
+$nrl = nota('reforma-laboral-como-voto-cada-provincia-en-diputados'); $a5853 = Datos::votacion('5853');
+if ($nrl && $a5853) {
+    $cuenta = [];
+    foreach ($a5853['votos'] as $vv) { if ($vv[2] !== '') { $cuenta[$vv[2]][$vv[3]] = ($cuenta[$vv[2]][$vv[3]] ?? 0) + 1; } }
+    $voto = []; foreach ($a5853['votos'] as $vv) { if (isset($vv[4])) { $voto[$vv[4]] = $vv[3]; } }
+    foreach ($nrl['cuerpo'] as $b) {
+        foreach ($b['tabla']['filas'] ?? [] as $f) {
+            if (preg_match('#^\[([^\]]+)\]\(/congreso/provincias/#', $f[0], $x) && count($f) === 4) {
+                $c = $cuenta[$x[1]] ?? [];
+                if ([(int)$f[1], (int)$f[2], (int)$f[3]] !== [$c['A'] ?? 0, $c['N'] ?? 0, $c['U'] ?? 0]) { $ntMal[] = "reforma laboral: {$x[1]} no coincide con el acta"; }
+            } elseif (preg_match('#\(/diputado/([a-z0-9-]+)\)#', $f[0], $x) && count($f) === 4) {
+                if (($voto[$x[1]] ?? '') !== ['Afirmativo' => 'A', 'Negativo' => 'N'][$f[3]]) { $ntMal[] = "reforma laboral: el voto de {$x[1]} no coincide con el acta"; }
+            }
+        }
+    }
+} else { $ntMal[] = 'falta la nota de la reforma laboral o el acta 5853'; }
+ok(count($nts) >= 2 && !$ntMal, 'notas: ' . count($nts) . ' con fuentes y método, enlaces internos que existen, prensa por https, sin CUIT ni calificativos, y la reforma laboral coincide con el acta 5853' . ($ntMal ? ': ' . implode(' | ', array_slice($ntMal, 0, 4)) : ''));
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);
