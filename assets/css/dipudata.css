@@ -148,6 +148,20 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .pie-marca { font: 800 1.25rem/1 var(--serif); color: #fff; }
 .pie-titulo { font-weight: 700; color: #fff; }
 .pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.pie-titulo { display: block; margin: 0 0 .6rem; }
+/* En el celular las listas del pie se pliegan: el título abre y cierra (casilla + etiqueta, sin JavaScript). */
+@media (max-width: 40rem) {
+  .pie { padding-block: 1.75rem; }
+  .pie-grilla { gap: 0; }
+  .pie-grilla > div:first-child { margin-bottom: 1rem; }
+  .pie-titulo { display: flex; justify-content: space-between; align-items: center; min-height: 44px; margin: 0; border-top: 1px solid #334155; cursor: pointer; }
+  .pie-titulo::after { content: "+"; font-size: 1.25rem; font-weight: 400; }
+  .pie-toggle:checked + .pie-titulo::after { content: "−"; }
+  .pie-toggle:focus-visible + .pie-titulo { outline: 2px solid #93c5fd; outline-offset: 2px; }
+  .pie-toggle + .pie-titulo + ul { display: none; padding-bottom: .9rem; }
+  .pie-toggle:checked + .pie-titulo + ul { display: grid; }
+  .pie ul a { display: inline-block; padding-block: .3rem; }
+}
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 @media print { .cabecera, .pie, .filtros, .lateral { display: none; } }
@@ -193,6 +207,28 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .mas-panel a:last-child { border-bottom: 0; }
 .mas-panel a:hover, .mas-panel a[aria-current="page"] { background: var(--fondo); color: var(--acento); }
 @media (max-width: 40rem) { .mas-panel { position: static; border: 0; border-top: 1px solid var(--linea); } .mas { flex-basis: 100%; } }
+/* Menú compacto en el celular: botón "Menú" que abre la lista, sin JavaScript (casilla + etiqueta; la CSP no admite scripts). */
+.menu-boton { display: none; }
+@media (max-width: 60rem) {
+  .mas { width: 100%; }
+  .mas summary { display: flex; }
+  .mas-panel { position: static; border: 0; border-top: 1px solid var(--linea); min-width: 0; }
+  .mas-panel a { padding-left: 1.5rem; }
+  .cabecera-fila { flex-wrap: wrap; gap: 0 1rem; }
+  .menu-boton { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: .4rem .8rem; border: 1px solid var(--linea-fuerte); font-size: .9rem; font-weight: 600; color: var(--tinta); cursor: pointer; user-select: none; }
+  .menu-icono, .menu-icono::before, .menu-icono::after { display: block; width: 1.1rem; height: 2px; background: currentColor; transition: transform .15s; }
+  .menu-icono { position: relative; }
+  .menu-icono::before, .menu-icono::after { content: ""; position: absolute; left: 0; }
+  .menu-icono::before { top: -6px; } .menu-icono::after { top: 6px; }
+  .menu-toggle:checked + .menu-boton .menu-icono { background: transparent; }
+  .menu-toggle:checked + .menu-boton .menu-icono::before { transform: translateY(6px) rotate(45deg); }
+  .menu-toggle:checked + .menu-boton .menu-icono::after { transform: translateY(-6px) rotate(-45deg); }
+  .menu-toggle:focus-visible + .menu-boton { outline: 2px solid var(--acento); outline-offset: 2px; }
+  .menu { display: none; flex-basis: 100%; flex-direction: column; flex-wrap: nowrap; gap: 0; padding: .25rem 0 .5rem; max-height: calc(100vh - 4rem); overflow-y: auto; }
+  .menu-toggle:checked ~ .menu { display: flex; }
+  .menu a, .mas summary { border-bottom: 1px solid var(--linea); border-left: 3px solid transparent; padding-left: .75rem; }
+  .menu a[aria-current="page"], .mas[data-activo] summary { border-bottom-color: var(--linea); border-left-color: var(--acento); }
+}
 
 /* Leyes y subsidios */
 .ley-num { font: 700 1.05rem/1 var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -364,7 +400,7 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .cookies-aviso { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--fondo); border-top: 2px solid var(--acento); padding: .9rem 1rem; box-shadow: 0 -2px 12px rgba(0,0,0,.12); }
 .cookies-aviso p { margin: 0 auto .5rem; max-width: 56rem; font-size: .95rem; }
 .cookies-botones, .botones-cookies { display: flex; flex-wrap: wrap; gap: .5rem; }
-.pie-legal { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.pie-legal { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #334155; font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 .botones-cookies label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .25rem .8rem; border: 1px solid var(--linea); cursor: pointer; }
 .botones-cookies label:has(input:checked) { border-color: var(--acento); background: var(--fondo); font-weight: 600; }
 
