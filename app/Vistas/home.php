@@ -82,7 +82,7 @@ $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== 
     <?php if ($filtrado): ?><a class="enlace-limpiar" href="/#directorio">Quitar filtros</a><?php endif; ?>
   </form>
 
-  <p class="conteo" aria-live="polite"><?= count($lista) ?> <?= count($lista) === 1 ? 'legislador' : 'legisladores' ?><?= $filtrado ? ' con estos filtros' : '' ?></p>
+  <p class="conteo" aria-live="polite"><?= $totalDir ?> <?= $totalDir === 1 ? 'legislador' : 'legisladores' ?><?= $filtrado ? ' con estos filtros' : '' ?><?= $paginas > 1 ? ' · página ' . $pagina . ' de ' . $paginas : '' ?></p>
   <?php if (!$lista): ?>
     <p class="vacio-txt">Ningún legislador coincide con la búsqueda. Probá con menos filtros o con otra forma del nombre.</p>
   <?php else: ?>
@@ -101,5 +101,17 @@ $filtrado = $q !== '' || $camaraSel !== '' || $provSel !== '' || $bloqueSel !== 
     </tbody>
   </table>
   </div>
+  <?php if ($paginas > 1): ?>
+  <nav class="paginas paginas-num" aria-label="Páginas del directorio">
+    <?php if ($pagina > 1): ?><a href="<?= e(url_con(['pagina' => $pagina - 1 > 1 ? $pagina - 1 : null])) ?>#directorio" rel="prev">← Anterior</a><?php else: ?><span class="tenue">← Anterior</span><?php endif; ?>
+    <span class="paginas-lista">
+      <?php for ($i = 1; $i <= $paginas; $i++): ?>
+        <?php if ($i === $pagina): ?><span class="pag-actual" aria-current="page"><?= $i ?></span><?php else: ?><a href="<?= e(url_con(['pagina' => $i > 1 ? $i : null])) ?>#directorio" aria-label="Página <?= $i ?>"><?= $i ?></a><?php endif; ?>
+      <?php endfor; ?>
+    </span>
+    <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>#directorio" rel="next">Siguiente →</a><?php else: ?><span class="tenue">Siguiente →</span><?php endif; ?>
+  </nav>
   <?php endif; ?>
+  <?php endif; ?>
+  <p class="volver-arriba"><a href="#arriba">↑ Volver arriba</a></p>
 </section>

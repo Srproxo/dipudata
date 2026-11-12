@@ -54,6 +54,7 @@ $inf = \App\Datos::informe();
 <?php endif; ?>
 </head>
 <body>
+<span id="arriba"></span>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
   <div class="contenedor cabecera-fila">

@@ -175,6 +175,15 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .block { display: block; margin-top: .15rem; }
 .tabla-docs td { vertical-align: top; }
 .docs-links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .35rem; }
+.paginas-num { flex-wrap: wrap; }
+.paginas-lista { display: flex; flex-wrap: wrap; gap: .25rem; }
+.paginas-lista a, .paginas-lista .pag-actual { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 .5rem; border: 1px solid var(--linea); text-decoration: none; font-variant-numeric: tabular-nums; }
+.paginas-lista a:hover { border-color: var(--acento); }
+.paginas-lista .pag-actual { background: var(--tinta); border-color: var(--tinta); color: #fff; font-weight: 700; }
+.volver-arriba { margin: 1.5rem 0 0; text-align: right; }
+.volver-arriba a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 1px solid var(--linea-fuerte); text-decoration: none; font-weight: 600; color: var(--tinta); }
+.volver-arriba a:hover { border-color: var(--acento); color: var(--acento); }
+@media (max-width: 40rem) { .paginas-num { justify-content: center; } .paginas-num > :first-child, .paginas-num > :last-child { flex: 1 1 40%; } .paginas-num > :last-child { text-align: right; } .paginas-lista { order: -1; flex-basis: 100%; justify-content: center; } .volver-arriba { text-align: center; } }
 .paginas { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--linea); }
 .contacto { margin: 0; padding: 0; list-style: none; }
 .contacto li { padding: .55rem 0; border-bottom: 1px solid var(--linea); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
@@ -491,3 +500,4 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
   .esquema-ley .flecha::after { right: -4px; top: auto; bottom: -1px; border: 5px solid transparent; border-top: 7px solid var(--linea-fuerte); border-bottom: 0; }
 }
 .aviso-ley { margin: 1.25rem 0 0; padding: .75rem 1rem; max-width: 44rem; background: var(--acento-claro); border-left: 4px solid var(--acento); font-size: .9375rem; }
+#directorio { scroll-margin-top: 5rem; }
