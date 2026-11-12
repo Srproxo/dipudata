@@ -2,7 +2,10 @@
 /** @var array $cab @var array $det @var string $filtro */
 $esSen = ($cab['c'] ?? 'D') === 'S';
 $orden = ['A' => 0, 'N' => 1, 'B' => 2, 'U' => 3, 'P' => 4, 'E' => 5, 'S' => 6, 'X' => 7];
-$votos = array_values(array_filter($det['votos'], static fn($v) => $filtro === '' || $v[3] === $filtro));
+$votos = $det['votos'];
+$grupoVoto = static fn(string $c): string => in_array($c, ['A', 'N', 'B'], true) ? $c : ($c === 'P' ? 'P' : 'U');
+$cuenta = ['A' => 0, 'N' => 0, 'B' => 0, 'U' => 0];
+foreach ($votos as $v) { $g = $grupoVoto($v[3]); if (isset($cuenta[$g])) { $cuenta[$g]++; } }
 usort($votos, static fn($x, $y) => [$x[1], $orden[$x[3]] ?? 9, $x[0]] <=> [$y[1], $orden[$y[3]] ?? 9, $y[0]]);
 $analisis = analisis_bloques($det);
 $resumen = Datos::resumenLey($cab);
@@ -20,7 +23,7 @@ $divididos = count(array_filter($analisis, static fn($b) => $b['postura'] === 'd
   <div><dt>Fecha y hora</dt><dd><?= e(fecha_es($cab['f'])) ?>, <?= e($cab['h']) ?></dd></div>
   <div><dt>Resultado</dt><dd><?= resultado_votacion((string)$cab['res']) ?></dd></div>
   <div><dt>Mayoría requerida</dt><dd><?= e($cab['m']) ?></dd></div>
-  <?php if (!empty($cab['pres'])): ?><div><dt>Preside</dt><dd><?= e(nombre_acta($cab['pres'])) ?></dd></div><?php endif; ?>
+  <?php if (!empty($cab['pres'])): $urlPres = url_preside($cab, $det, $esSen); ?><div><dt>Preside</dt><dd><?= $urlPres ? '<a href="' . e($urlPres) . '">' . e(nombre_acta($cab['pres'])) . '</a>' : e(nombre_acta($cab['pres'])) ?></dd></div><?php endif; ?>
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>
 </dl>
 <?= barra_resultado((int)$cab['a'], (int)$cab['n'], (int)$cab['b'], (int)$cab['u']) ?>
@@ -73,7 +76,7 @@ $divididos = count(array_filter($analisis, static fn($b) => $b['postura'] === 'd
     <tbody>
     <?php foreach ($analisis as $bi => $b): $c = $b['c']; $sd = bloque_sin_dato($b['nombre']); ?>
       <tr>
-        <td class="celda-bloque"><i class="punto" style="background:<?= e($sd ? '#cbd5e1' : color_bloque(mb_strtoupper($b['nombre'], 'UTF-8'))) ?>"></i><?= e($sd ? ($b['nombre'] !== '' ? $b['nombre'] : 'Sin bloque') : $b['nombre']) ?>
+        <td class="celda-bloque"><i class="punto" style="background:<?= e($sd ? '#cbd5e1' : color_bloque(mb_strtoupper($b['nombre'], 'UTF-8'))) ?>"></i><?php $ubl = $sd ? null : url_bloque_nombre($b['nombre'], $esSen); ?><?= $ubl ? '<a class="enlace-suave" href="' . e($ubl) . '">' . e($b['nombre']) . '</a>' : e($sd ? ($b['nombre'] !== '' ? $b['nombre'] : 'Sin bloque') : $b['nombre']) ?>
           <span class="barra-mini" aria-hidden="true"><?php foreach (['A' => 'a', 'N' => 'n', 'B' => 'b'] as $k => $cl): if (!empty($c[$k])): ?><span class="br-<?= $cl ?>" style="width:<?= round($c[$k] * 100 / $b['total'], 2) ?>%"></span><?php endif; endforeach; ?></span></td>
         <td class="der num" data-etiqueta="A favor"><?= (int)($c['A'] ?? 0) ?></td>
         <td class="der num" data-etiqueta="En contra"><?= (int)($c['N'] ?? 0) ?></td>
@@ -113,21 +116,22 @@ $divididos = count(array_filter($analisis, static fn($b) => $b['postura'] === 'd
 
 <section class="seccion" aria-labelledby="por-diputado">
   <h2 id="por-diputado" class="seccion-titulo">Cómo votó cada <?= $esSen ? 'senador' : 'diputado' ?></h2>
-  <p class="conteo">
+  <?php foreach (['T' => '', 'A' => 'A', 'N' => 'N', 'B' => 'B', 'U' => 'U'] as $k => $c): ?><input type="radio" name="ver-voto" id="fv-<?= $k ?>" class="fv-radio"<?= $filtro === $c ? ' checked' : '' ?>><?php endforeach; ?>
+  <p class="conteo filtro-voto" role="group" aria-label="Filtrar por voto">
     Ver:
-    <a href="/votaciones/<?= e($cab['id']) ?>"<?= $filtro === '' ? ' aria-current="true"' : '' ?>>todos</a> ·
+    <label for="fv-T">todos <span class="num">(<?= count($votos) ?>)</span></label>
     <?php foreach (['A' => 'afirmativos', 'N' => 'negativos', 'B' => 'abstenciones', 'U' => 'ausentes'] as $c => $t): ?>
-      <a href="/votaciones/<?= e($cab['id']) ?>?voto=<?= $c ?>"<?= $filtro === $c ? ' aria-current="true"' : '' ?>><?= $t ?></a><?= $c !== 'U' ? ' ·' : '' ?>
+      <label for="fv-<?= $c ?>"><?= $t ?> <span class="num">(<?= $cuenta[$c] ?>)</span></label>
     <?php endforeach; ?>
   </p>
-  <div class="tabla-caja"><table class="tabla">
+  <div class="tabla-caja"><table class="tabla tabla-votos">
     <thead><tr><th scope="col"><?= $esSen ? 'Senador' : 'Diputado' ?></th><th scope="col">Bloque</th><th scope="col">Distrito</th><th scope="col">Voto</th></tr></thead>
     <tbody>
-    <?php foreach ($votos as $v): ?>
-      <tr>
+    <?php foreach ($votos as $v): $ub = url_bloque_nombre((string)$v[1], $esSen); $ud = url_distrito((string)$v[2]); ?>
+      <tr class="fv-<?= $grupoVoto($v[3]) ?>">
         <td><?= isset($v[4]) ? '<a href="' . ($esSen ? '/senador/' . e(substr($v[4], 2)) : '/diputado/' . e($v[4])) . '">' . e(nombre_acta($v[0])) . '</a>' : e(nombre_acta($v[0])) ?></td>
-        <td class="tenue" data-etiqueta="Bloque"><?= e($v[1]) ?></td>
-        <td class="tenue" data-etiqueta="Distrito"><?= e($v[2]) ?></td>
+        <td class="tenue" data-etiqueta="Bloque"><?= $ub ? '<a class="enlace-suave" href="' . e($ub) . '">' . e($v[1]) . '</a>' : e($v[1]) ?></td>
+        <td class="tenue" data-etiqueta="Distrito"><?= $ud ? '<a class="enlace-suave" href="' . e($ud) . '">' . e($v[2]) . '</a>' : e($v[2]) ?></td>
         <td data-etiqueta="Voto"><span class="voto voto-<?= e($v[3]) ?>"><?= e(etiqueta_voto($v[3])) ?></span></td>
       </tr>
     <?php endforeach; ?>

@@ -624,5 +624,11 @@ foreach ($res as $r) {
 }
 ok($res !== [] && $malR === [], 'resúmenes de leyes: fuente oficial, cada punto con su artículo, sin palabras de valoración y aplicados a votaciones reales' . ($malR ? ': ' . implode(' | ', $malR) : ''));
 
+$malD = []; foreach ($vot as $v) { foreach (Datos::votacion($v['id'])['votos'] ?? [] as $x) { if ($x[2] !== '' && !url_distrito($x[2])) { $malD[$x[2]] = true; } } }
+ok($malD === [], 'cada distrito de las actas enlaza a la página de su provincia' . ($malD ? ': ' . implode(', ', array_slice(array_keys($malD), 0, 5)) : ''));
+ok(url_preside(['pres' => 'x'], Datos::votacion('5853'), false) === '/diputado/martin-alexis-menem', 'quien preside una votación enlaza a su perfil');
+$vt = (string)file_get_contents(__DIR__ . '/../app/Vistas/votacion.php');
+ok(str_contains($vt, 'fv-radio') && !str_contains($vt, '<script'), 'el filtro de votos funciona sin recargar y sin scripts (la CSP no los admite)');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

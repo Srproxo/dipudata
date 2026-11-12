@@ -1291,3 +1291,49 @@ function hemiciclo_votacion(array $det, array $analisis, string $id, bool $esSen
     $h .= '<text x="' . $f($cx) . '" y="' . $f($cy - $R * 0.03) . '" text-anchor="middle" class="hemiciclo-sub">a favor · en contra</text>';
     return $h . '</svg>';
 }
+
+/** URL de la página de una provincia a partir del distrito como lo escribe un acta ("C.A.B.A.", "RÍO NEGRO", "Tierra del Fuego, Antártida…"), o null. */
+function url_distrito(string $d): ?string
+{
+    static $mapa = null;
+    if ($mapa === null) {
+        $mapa = [];
+        foreach (Datos::provincias() as $p) {
+            $mapa[Datos::normalizar($p['nombre'])] = '/congreso/provincias/' . $p['slug'];
+        }
+        $caba = $mapa[Datos::normalizar('Ciudad Autónoma de Buenos Aires')] ?? null;
+        $mapa['c a b a'] = $mapa['caba'] = $mapa['capital federal'] = $caba;
+        $mapa['tierra del fuego antartida e islas del atlantico sur'] = $mapa[Datos::normalizar('Tierra del Fuego')] ?? null;
+    }
+    return $mapa[Datos::normalizar($d)] ?? null;
+}
+
+/** URL de la página de un bloque actual de esa cámara con ese nombre, o null (los bloques que ya no existen no tienen página). */
+function url_bloque_nombre(string $nombre, bool $esSen): ?string
+{
+    static $mapa = [];
+    $cam = $esSen ? 'Senadores' : 'Diputados';
+    if (!isset($mapa[$cam])) {
+        $mapa[$cam] = [];
+        foreach (Datos::bloques($cam) as $b) {
+            $mapa[$cam][Datos::normalizar($b['nombre'])] = Datos::urlBloque($b);
+        }
+    }
+    return $mapa[$cam][Datos::normalizar($nombre)] ?? null;
+}
+
+/** Enlace al perfil de quien preside una votación: la fila "Preside" del acta si trae ID, o un legislador en ejercicio con ese nombre exacto. */
+function url_preside(array $cab, array $det, bool $esSen): ?string
+{
+    foreach ($det['votos'] ?? [] as $v) {
+        if ($v[3] === 'P' && isset($v[4])) {
+            return $esSen ? '/senador/' . substr((string)$v[4], 2) : '/diputado/' . $v[4];
+        }
+    }
+    $n = Datos::normalizar(nombre_acta((string)($cab['pres'] ?? '')));
+    if ($n === '') {
+        return null;
+    }
+    $hay = array_values(array_filter(Datos::legisladores(), static fn($l) => Datos::normalizar($l['nombre']) === $n));
+    return count($hay) === 1 ? Datos::urlLegislador($hay[0]) : null;
+}
