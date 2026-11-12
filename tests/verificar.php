@@ -624,5 +624,20 @@ foreach ($res as $r) {
 }
 ok($res !== [] && $malR === [], 'resúmenes de leyes: fuente oficial, cada punto con su artículo, sin palabras de valoración y aplicados a votaciones reales' . ($malR ? ': ' . implode(' | ', $malR) : ''));
 
+$malD = []; foreach ($vot as $v) { foreach (Datos::votacion($v['id'])['votos'] ?? [] as $x) { if ($x[2] !== '' && !url_distrito($x[2])) { $malD[$x[2]] = true; } } }
+ok($malD === [], 'cada distrito de las actas enlaza a la página de su provincia' . ($malD ? ': ' . implode(', ', array_slice(array_keys($malD), 0, 5)) : ''));
+ok(url_preside(['pres' => 'x'], Datos::votacion('5853'), false) === '/diputado/martin-alexis-menem', 'quien preside una votación enlaza a su perfil');
+$vt = (string)file_get_contents(__DIR__ . '/../app/Vistas/votacion.php');
+ok(str_contains($vt, 'fv-radio') && !str_contains($vt, '<script'), 'el filtro de votos funciona sin recargar y sin scripts (la CSP no los admite)');
+
+$vl = json_decode((string)file_get_contents(__DIR__ . '/../storage/verificado/leyes/vinculos.json'), true);
+$malL = [];
+foreach ($vl['leyes'] as $n => $e) {
+    if (!Datos::leyIndice((int)$n)) { $malL[] = "$n no está en el índice"; }
+    foreach (['original', 'actualizado'] as $k) { $u = $e['infoleg'][$k] ?? ''; if ($u !== '' && !preg_match('#^https://www\.argentina\.gob\.ar/normativa/nacional/norma-\d+/(texto|actualizacion)$#', $u)) { $malL[] = "$n $k"; } }
+    foreach ($e['votaciones'] ?? [] as $v) { $c = null; foreach ($vot as $x) { if ($x['id'] === $v['id']) { $c = $x; break; } } if (!$c || $c['f'] !== Datos::leyIndice((int)$n)[2]) { $malL[] = "$n votación {$v['id']} de otra fecha"; } }
+}
+ok($malL === [] && $vl['_meta']['con_infoleg'] > 1100 && $vl['_meta']['con_votacion'] > 400, 'leyes: texto oficial en Infoleg (https, argentina.gob.ar) y votaciones del mismo día de la sanción (' . $vl['_meta']['con_infoleg'] . ' con texto, ' . $vl['_meta']['con_votacion'] . ' con votación)' . ($malL ? ': ' . implode(' | ', array_slice($malL, 0, 3)) : ''));
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

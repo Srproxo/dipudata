@@ -1,0 +1,24 @@
+{
+ "fuente": "Base Infoleg de Normativa Nacional, datos.jus.gob.ar (Ministerio de Justicia), CC BY 4.0",
+ "conjunto": "https://datos.jus.gob.ar/dataset/base-de-datos-legislativos-infoleg",
+ "origen": {
+  "bf0ec116_Base_Infoleg_Normativa_Nacional.zip": {
+   "url": "https://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/bf0ec116-ad4e-4572-a476-e57167a84403/download/base-infoleg-normativa-nacional.zip",
+   "sha256": "2573e59f0c5aadee93131a5634f4fbe0391ccb018aef3392af34c58f64b34666",
+   "modificado": "2026-11-02T09:36:36.445951",
+   "bajado": "2026-11-12"
+  },
+  "0c4fdafe_Base_Complementaria_Infoleg_de_Normas_Modificadas.zip": {
+   "url": "https://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/0c4fdafe-f4e8-4ac2-bc2e-acf50c27066d/download/base-complementaria-infoleg-normas-modificadas.zip",
+   "sha256": "041e56a5614220584576c18d8873b747cca6735ee617c1ac763e28d5ccf7799d",
+   "modificado": "2026-11-02T09:36:57.145290",
+   "bajado": "2026-11-12"
+  }
+ },
+ "leyes": 27623,
+ "relaciones": 129337,
+ "sha256": {
+  "leyes_infoleg.csv.gz": "c65977c257c4eeeb6e0ba56f8412fc4058997d26ad8c850ca4a0f4f6c4855bfd",
+  "relaciones_leyes.csv.gz": "d3f98876f76e48871e43ecf4409dc701663f37f6ee1ca17ed6f5b9759f598ba4"
+ }
+}

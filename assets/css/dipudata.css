@@ -402,3 +402,26 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .resumen-alcanza { margin: .3rem 0 1rem; padding-left: 1.1rem; }
 .resumen-alcanza li { margin: .35rem 0; }
 @media (max-width: 40rem) { .resumen-ley { padding: 1rem; } .resumen-ley .nowrap { white-space: normal; } }
+
+/* Votación: filtro de "Ver" sin recargar (solo CSS, la CSP no admite scripts) */
+.fv-radio { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.filtro-voto { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem; }
+.filtro-voto label { display: inline-flex; align-items: center; gap: .25rem; min-height: 44px; padding: 0 .7rem; border: 1px solid var(--linea-fuerte); color: var(--acento); cursor: pointer; font-size: .875rem; background: var(--papel); }
+.filtro-voto label:hover { border-color: var(--acento); }
+.filtro-voto .num { color: var(--tenue); }
+#fv-T:checked ~ .filtro-voto label[for="fv-T"], #fv-A:checked ~ .filtro-voto label[for="fv-A"], #fv-N:checked ~ .filtro-voto label[for="fv-N"], #fv-B:checked ~ .filtro-voto label[for="fv-B"], #fv-U:checked ~ .filtro-voto label[for="fv-U"] { background: var(--tinta); border-color: var(--tinta); color: #fff; font-weight: 600; }
+#fv-T:checked ~ .filtro-voto label[for="fv-T"] .num, #fv-A:checked ~ .filtro-voto label[for="fv-A"] .num, #fv-N:checked ~ .filtro-voto label[for="fv-N"] .num, #fv-B:checked ~ .filtro-voto label[for="fv-B"] .num, #fv-U:checked ~ .filtro-voto label[for="fv-U"] .num { color: #cbd5e1; }
+#fv-T:focus-visible ~ .filtro-voto label[for="fv-T"], #fv-A:focus-visible ~ .filtro-voto label[for="fv-A"], #fv-N:focus-visible ~ .filtro-voto label[for="fv-N"], #fv-B:focus-visible ~ .filtro-voto label[for="fv-B"], #fv-U:focus-visible ~ .filtro-voto label[for="fv-U"] { outline: 2px solid var(--acento); outline-offset: 2px; }
+#fv-A:checked ~ .tabla-caja tbody tr:not(.fv-A), #fv-N:checked ~ .tabla-caja tbody tr:not(.fv-N), #fv-B:checked ~ .tabla-caja tbody tr:not(.fv-B), #fv-U:checked ~ .tabla-caja tbody tr:not(.fv-U) { display: none; }
+.enlace-suave { color: inherit; text-decoration-color: var(--linea-fuerte); }
+.enlace-suave:hover { color: var(--acento); text-decoration-color: var(--acento); }
+
+/* Ley: texto oficial, contexto y votaciones */
+.acciones-ley { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin: 1.5rem 0 0; }
+.contexto-ley { max-width: 62ch; margin: 0 0 .8rem; }
+.ley-vinculos { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem 2rem; margin-top: 1rem; }
+.ley-vinculos h3 { margin: 0 0 .4rem; font: 700 1rem/1.3 var(--sans); }
+.ley-vinculos ul, .lista-votos-ley, .lista-leyes-rel { list-style: none; margin: 0; padding: 0; }
+.ley-vinculos li, .lista-leyes-rel li { padding: .45rem 0; border-bottom: 1px solid var(--linea); }
+.lista-votos-ley li { display: grid; gap: .15rem; padding: .7rem 0; border-bottom: 1px solid var(--linea); }
+.aviso-ley { margin: 1.25rem 0 0; padding: .75rem 1rem; max-width: 44rem; background: var(--acento-claro); border-left: 4px solid var(--acento); font-size: .9375rem; }
