@@ -593,5 +593,36 @@ ok(str_contains($rb, 'GPTBot') && str_contains($rb, 'ClaudeBot') && str_contains
 $api = (string)file_get_contents(__DIR__ . '/../api/index.php');
 ok(str_contains($api, "'/openapi.json'") && str_contains($api, "'/votaciones'") && is_file(__DIR__ . '/../app/Vistas/datos.php') && str_contains((string)file_get_contents(__DIR__ . '/../mvc.php'), "'/datos'"), 'API: OpenAPI, votaciones y página /datos existen');
 
+// Votación por bloque: postura del bloque y quiénes votaron distinto.
+$malB = 0; $conPostura = 0;
+foreach ($vot as $v) {
+    $an = analisis_bloques(Datos::votacion($v['id']) ?? []);
+    if (array_sum(array_column($an, 'total')) !== count(Datos::votacion($v['id'])['votos'] ?? [])) { $malB++; }
+    foreach ($an as $b) {
+        if (bloque_sin_dato($b['nombre']) && ($b['postura'] !== null || $b['distintos'])) { $malB++; }
+        if ($b['postura'] === 'dividido' && $b['distintos']) { $malB++; }
+        if ($b['distintos']) {
+            $conPostura++;
+            $mayor = (int)($b['c'][$b['postura']] ?? 0);
+            if ($mayor + count($b['distintos']) !== $b['presentes'] || $mayor <= max(array_map(static fn($x) => (int)($b['c'][$x] ?? 0), array_diff(['A', 'N', 'B'], [$b['postura']])))) { $malB++; }
+            foreach ($b['distintos'] as $d) { if (!in_array($d[3], ['A', 'N', 'B'], true) || $d[3] === $b['postura']) { $malB++; } }
+        }
+    }
+}
+ok($malB === 0 && $conPostura > 100, 'votación por bloque: cada bloque suma sus votos, la postura es la mayoría estricta de presentes, los ausentes no cuentan como voto distinto (' . $conPostura . ' casos con votos distintos)');
+$hv = hemiciclo_votacion(Datos::votacion('5853'), analisis_bloques(Datos::votacion('5853')), 'x', false);
+ok(substr_count($hv, '<title>') - substr_count($hv, 'class="arco') === count(Datos::votacion('5853')['votos']), 'el hemiciclo de una votación tiene una banca por legislador del acta');
+$res = Datos::resumenesLeyes(); $malR = [];
+foreach ($res as $r) {
+    $n = count(array_filter($vot, static fn($v) => (Datos::resumenLey($v)['id'] ?? '') === $r['id']));
+    $txt = $r['para_que'] . ' ' . implode(' ', array_map(static fn($a) => $a['quien'] . ' ' . $a['que'], $r['alcanza']));
+    if ($n === 0) { $malR[] = $r['id'] . ' no coincide con ninguna votación'; }
+    if (!preg_match('#^https://[a-z0-9.]+\.gob\.ar/#', $r['fuente']['url'] ?? '')) { $malR[] = $r['id'] . ' sin fuente oficial'; }
+    if (preg_match('/\b(favorec|perjudic|benefici[ao]\b|gana|pierde|mejor|peor|bueno|malo)/iu', $txt)) { $malR[] = $r['id'] . ' usa palabras de valoración'; }
+    if (array_filter($r['alcanza'], static fn($a) => empty($a['donde']))) { $malR[] = $r['id'] . ' tiene un punto sin artículo'; }
+    if (empty($r['revisado'])) { $malR[] = $r['id'] . ' sin fecha de revisión'; }
+}
+ok($res !== [] && $malR === [], 'resúmenes de leyes: fuente oficial, cada punto con su artículo, sin palabras de valoración y aplicados a votaciones reales' . ($malR ? ': ' . implode(' | ', $malR) : ''));
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

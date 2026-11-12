@@ -17,6 +17,8 @@ function color_bloque(string $oficial): string
         'LA LIBERTAD AVANZA' => '#6d28d9', 'UNIÓN POR LA PATRIA' => '#1d4ed8', 'PROVINCIAS UNIDAS' => '#0e7490',
         'PRO' => '#ca8a04', 'ARGENTINA FEDERAL' => '#be185d', 'UCR - UNIÓN CÍVICA RADICAL' => '#dc2626',
         'JUSTICIALISTA' => '#2563eb', 'COALICION CIVICA' => '#059669', 'COALICIÓN CÍVICA' => '#059669',
+        // Bloques de períodos anteriores (solo aparecen en votaciones viejas).
+        'FRENTE PARA LA VICTORIA - PJ' => '#1d4ed8', 'FRENTE DE TODOS' => '#1d4ed8', 'UNIÓN CÍVICA RADICAL' => '#dc2626', 'UNIÓN PRO' => '#ca8a04',
     ];
     if (isset($mapa[$oficial])) {
         return $mapa[$oficial];
@@ -1139,4 +1141,153 @@ function avance_proyectos(array $proyectos): array
         if (in_array($x[5], ['APROBADO', 'MEDIA SANCION', 'SANCIONADO'], true)) { $aprob++; }
     }
     return ['presentados' => count($proyectos), 'con_dictamen' => $con, 'aprobados' => $aprob];
+}
+
+/** Bloques que no son un bloque: filas sin dato o de quien ya no ejerce. */
+function bloque_sin_dato(string $b): bool
+{
+    return in_array(Datos::normalizar($b), ['', 'sin dato', 'sin bloque', 'sin datos'], true);
+}
+
+/**
+ * Cómo votó cada bloque en una votación y quiénes votaron distinto a la mayoría de su bloque.
+ * Solo cuentan los votos emitidos (afirmativo, negativo, abstención): un ausente no "vota distinto".
+ * La postura del bloque es el voto con más presentes; si dos empatan, el bloque queda "dividido" y no se marca a nadie.
+ * @return list<array{nombre:string,c:array<string,int>,total:int,presentes:int,postura:?string,distintos:list<array>,orden:int}>
+ */
+function analisis_bloques(array $det): array
+{
+    $bl = [];
+    foreach ($det['votos'] ?? [] as $i => $v) {
+        $b = (string)$v[1];
+        $bl[$b] ??= ['nombre' => $b, 'c' => [], 'total' => 0, 'presentes' => 0, 'postura' => null, 'distintos' => [], 'votos' => []];
+        $bl[$b]['c'][$v[3]] = ($bl[$b]['c'][$v[3]] ?? 0) + 1;
+        $bl[$b]['total']++;
+        $bl[$b]['votos'][] = $v;
+        if (in_array($v[3], ['A', 'N', 'B'], true)) {
+            $bl[$b]['presentes']++;
+        }
+    }
+    foreach ($bl as &$x) {
+        $emit = array_intersect_key($x['c'], ['A' => 1, 'N' => 1, 'B' => 1]);
+        if ($emit && !bloque_sin_dato($x['nombre'])) {
+            arsort($emit);
+            $top = array_values($emit);
+            $x['postura'] = (count($top) > 1 && $top[0] === $top[1]) ? 'dividido' : (string)array_key_first($emit);
+            if ($x['presentes'] >= 2 && $x['postura'] !== 'dividido') {
+                foreach ($x['votos'] as $v) {
+                    if (in_array($v[3], ['A', 'N', 'B'], true) && $v[3] !== $x['postura']) {
+                        $x['distintos'][] = $v;
+                    }
+                }
+            }
+        }
+        unset($x['votos']);
+    }
+    unset($x);
+    $bl = array_values($bl);
+    // De mayor a menor; "sin dato" al final.
+    usort($bl, static fn($p, $q) => [bloque_sin_dato($p['nombre']), -$p['total'], Datos::normalizar($p['nombre'])] <=> [bloque_sin_dato($q['nombre']), -$q['total'], Datos::normalizar($q['nombre'])]);
+    return $bl;
+}
+
+/** Postura de un bloque en palabras. */
+function postura_bloque(?string $p, int $presentes): string
+{
+    if ($p === null) {
+        return $presentes === 0 ? 'Nadie votó' : '—';
+    }
+    return ['A' => 'A favor', 'N' => 'En contra', 'B' => 'Abstención', 'dividido' => 'Dividido'][$p] ?? $p;
+}
+
+/** Color de cada voto en el hemiciclo (los mismos de la barra de resultado). */
+function color_voto(string $c): string
+{
+    return ['A' => '#166534', 'N' => '#991b1b', 'B' => '#a16207'][$c] ?? '#ffffff';
+}
+
+/**
+ * Hemiciclo de una votación: una banca por legislador del acta, del color de su voto, agrupadas por bloque
+ * (de mayor a menor, de izquierda a derecha) con un arco del color del bloque por fuera.
+ * Quien votó distinto a la mayoría de su bloque lleva un borde oscuro.
+ * El orden no representa una ubicación ideológica ni la disposición real del recinto.
+ */
+function hemiciclo_votacion(array $det, array $analisis, string $id, bool $esSen): string
+{
+    $ordenVoto = ['A' => 0, 'N' => 1, 'B' => 2, 'P' => 3, 'U' => 4, 'S' => 5, 'E' => 6, 'X' => 7];
+    $distinto = [];
+    foreach ($analisis as $b) {
+        foreach ($b['distintos'] as $v) {
+            $distinto[$b['nombre'] . '|' . $v[0]] = true;
+        }
+    }
+    $porBloque = [];
+    foreach ($det['votos'] ?? [] as $v) {
+        $porBloque[(string)$v[1]][] = $v;
+    }
+    $sillas = [];
+    $tramos = [];
+    foreach ($analisis as $bi => $b) {
+        $vs = $porBloque[$b['nombre']] ?? [];
+        usort($vs, static fn($x, $y) => [$ordenVoto[$x[3]] ?? 9, Datos::normalizar($x[0])] <=> [$ordenVoto[$y[3]] ?? 9, Datos::normalizar($y[0])]);
+        $ini = count($sillas);
+        foreach ($vs as $v) {
+            $sillas[] = [$v, $bi];
+        }
+        $tramos[$bi] = [$ini, count($sillas) - 1];
+    }
+    $n = count($sillas);
+    if ($n === 0) {
+        return '';
+    }
+    [$pos, $rs] = hemiciclo_posiciones($n);
+    $R = 500.0;
+    $r = $rs * $R;
+    $banda = 10.0;
+    $margen = $r + $banda + 10;
+    $ancho = 2 * ($R + $margen);
+    $alto = $R + $margen + $r + 4;
+    $cx = $ancho / 2;
+    $cy = $R + $margen;
+    $f = static fn(float $v) => rtrim(rtrim(number_format($v, 1, '.', ''), '0'), '.');
+    $quien = $esSen ? 'senadores' : 'diputados';
+    $a = $nn = $ab = 0;
+    foreach ($det['votos'] ?? [] as $v) { $a += $v[3] === 'A' ? 1 : 0; $nn += $v[3] === 'N' ? 1 : 0; $ab += $v[3] === 'B' ? 1 : 0; }
+    $h = '<svg class="hemiciclo hemiciclo-voto" id="' . e($id) . '" viewBox="0 0 ' . $f($ancho) . ' ' . $f($alto) . '" role="group" aria-label="' . e("Hemiciclo de la votación: {$n} {$quien} agrupados por bloque; {$a} a favor, {$nn} en contra, {$ab} abstenciones") . '">';
+    // Arco de cada bloque, por fuera de las bancas.
+    $rb = $R + $r + $banda / 2 + 3;
+    $paso = M_PI / max(1, $n);
+    foreach ($tramos as $bi => [$i0, $i1]) {
+        if ($i1 < $i0) { continue; }
+        // Tramo proporcional a la cantidad de bancas del bloque, con un pequeño corte entre bloques.
+        $corte = min($paso * 0.3, 0.006);
+        $a1 = M_PI * (1 - $i0 / $n) - ($i0 > 0 ? $corte : 0);
+        $a2 = M_PI * (1 - ($i1 + 1) / $n) + ($i1 + 1 < $n ? $corte : 0);
+        $color = bloque_sin_dato($analisis[$bi]['nombre']) ? '#cbd5e1' : color_bloque(mb_strtoupper($analisis[$bi]['nombre'], 'UTF-8'));
+        $h .= '<path class="arco b' . $bi . '" d="M' . $f($cx + $rb * cos($a1)) . ' ' . $f($cy - $rb * sin($a1)) . ' A' . $f($rb) . ' ' . $f($rb) . ' 0 0 1 ' . $f($cx + $rb * cos($a2)) . ' ' . $f($cy - $rb * sin($a2)) . '" stroke="' . e($color) . '" stroke-width="' . $f($banda) . '" fill="none"><title>' . e($analisis[$bi]['nombre'] . ': ' . $analisis[$bi]['total']) . '</title></path>';
+    }
+    foreach ($sillas as $i => [$v, $bi]) {
+        $x = $cx + $pos[$i][0] * $R;
+        $y = $cy + $pos[$i][1] * $R;
+        $c = $v[3];
+        $esDist = isset($distinto[$v[1] . '|' . $v[0]]);
+        $et = nombre_acta($v[0]) . ' · ' . ($v[1] !== '' ? $v[1] : 'sin bloque') . ' · ' . etiqueta_voto($c) . ($esDist ? ' (distinto a la mayoría de su bloque)' : '');
+        $url = isset($v[4]) ? ($esSen ? '/senador/' . substr((string)$v[4], 2) : '/diputado/' . $v[4]) : null;
+        $h .= ($url ? '<a href="' . e($url) . '" aria-label="' . e($et) . '"' : '<g') . ' class="b' . $bi . ($esDist ? ' distinto' : '') . '"><title>' . e($et) . '</title>';
+        $emitido = in_array($c, ['A', 'N', 'B'], true);
+        if ($c === 'P') {
+            $h .= '<circle cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r * 0.82) . '" fill="#fff" stroke="#0f172a" stroke-width="' . $f(max(2, $r * 0.22)) . '"/>';
+        } elseif ($emitido) {
+            $h .= '<circle cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r * 0.92) . '" fill="' . color_voto($c) . '"/>';
+        } else {
+            $h .= '<circle cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r * 0.8) . '" fill="#fff" stroke="#94a3b8" stroke-width="' . $f(max(1.5, $r * 0.14)) . '"/>';
+        }
+        if ($esDist) {
+            $h .= '<circle class="marca-distinto" cx="' . $f($x) . '" cy="' . $f($y) . '" r="' . $f($r * 1.08) . '" fill="none" stroke="#0f172a" stroke-width="' . $f(max(2.5, $r * 0.2)) . '"/>';
+        }
+        $h .= $url ? '</a>' : '</g>';
+    }
+    $h .= '<text x="' . $f($cx) . '" y="' . $f($cy - $R * 0.13) . '" text-anchor="middle" class="hemiciclo-total"><tspan fill="#166534">' . $a . '</tspan><tspan fill="#94a3b8"> · </tspan><tspan fill="#991b1b">' . $nn . '</tspan></text>';
+    $h .= '<text x="' . $f($cx) . '" y="' . $f($cy - $R * 0.03) . '" text-anchor="middle" class="hemiciclo-sub">a favor · en contra</text>';
+    return $h . '</svg>';
 }
