@@ -17,7 +17,14 @@ if (!in_array($metodo, ['GET', 'HEAD'], true)) {
     exit;
 }
 
-$path = '/' . trim((string)parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+$crudo = (string)parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$path = '/' . trim($crudo, '/');
+// Una sola URL por página: /metodologia/ redirige a /metodologia (evita duplicados en Search Console)
+if ($crudo !== '' && $crudo !== $path) {
+    $qs = (string)($_SERVER['QUERY_STRING'] ?? '');
+    header('Location: ' . $path . ($qs !== '' ? '?' . $qs : ''), true, 301);
+    exit;
+}
 $S = '[a-z0-9]+(?:-[a-z0-9]+)*';
 
 function ir(string $destino, int $codigo = 301): never

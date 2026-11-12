@@ -37,6 +37,14 @@ DirectoryIndex mvc.php
     RewriteEngine On
     RewriteBase /
 
+    # Una sola versión del sitio para Google: https://dipudata.com (sin www, sin http)
+    RewriteCond %{HTTP_HOST} ^www\.dipudata\.com$ [NC]
+    RewriteRule ^ https://dipudata.com%{REQUEST_URI} [R=301,L,NE]
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} ^dipudata\.com$ [NC]
+    RewriteRule ^ https://dipudata.com%{REQUEST_URI} [R=301,L,NE]
+
     # Directorios internos: solo los lee PHP, nunca el navegador
     RewriteRule ^(app|storage|scripts|tests|\.git)(/|$) - [F,L,NC]
 

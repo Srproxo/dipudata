@@ -36,7 +36,7 @@ $inf = \App\Datos::informe();
 <title><?= e($meta['title']) ?></title>
 <meta name="description" content="<?= e($meta['description']) ?>">
 <meta name="robots" content="<?= e($meta['robots']) ?>">
-<link rel="canonical" href="<?= e($meta['canonical']) ?>">
+<?php if ($meta['canonical'] !== ''): ?><link rel="canonical" href="<?= e($meta['canonical']) ?>"><?php endif; ?>
 <?php if (!empty($meta['alternate_md'])): ?><link rel="alternate" type="text/markdown" href="<?= e($meta['alternate_md']) ?>" title="Perfil en Markdown"><?php endif; ?>
 <?php if (GSC_VERIFICACION !== ''): ?><meta name="google-site-verification" content="<?= e(GSC_VERIFICACION) ?>"><?php endif; ?>
 <meta property="og:type" content="website">
@@ -44,7 +44,7 @@ $inf = \App\Datos::informe();
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="<?= e($meta['title']) ?>">
 <meta property="og:description" content="<?= e($meta['description']) ?>">
-<meta property="og:url" content="<?= e($meta['canonical']) ?>">
+<?php if ($meta['canonical'] !== ''): ?><meta property="og:url" content="<?= e($meta['canonical']) ?>"><?php endif; ?>
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#0f172a">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
