@@ -27,6 +27,9 @@ $divididos = count(array_filter($analisis, static fn($b) => $b['postura'] === 'd
   <div><dt>Afirmativos · negativos · abstenciones · ausentes</dt><dd class="num"><?= (int)$cab['a'] ?> · <?= (int)$cab['n'] ?> · <?= (int)$cab['b'] ?> · <?= (int)$cab['u'] ?></dd></div>
 </dl>
 <?= barra_resultado((int)$cab['a'], (int)$cab['n'], (int)$cab['b'], (int)$cab['u']) ?>
+<?php $leyesV = Datos::leyesDeVotacion((string)$cab['id']); if ($leyesV): ?>
+<p class="aviso-ley">Esta votación es del día en que se sancionó <?php foreach ($leyesV as $i => $ln): $li = Datos::leyIndice($ln); ?><?= $i ? ($i === count($leyesV) - 1 ? ' y ' : ', ') : '' ?>la <a href="/leyes/<?= (int)$ln ?>">Ley <?= number_format($ln, 0, ',', '.') ?></a><?php endforeach; ?><?= count($leyesV) === 1 ? ': ahí están su texto completo, el sumario y las normas vinculadas.' : '.' ?></p>
+<?php endif; ?>
 
 <?php if ($resumen): ?>
 <section class="seccion resumen-ley" aria-labelledby="simple">

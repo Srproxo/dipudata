@@ -415,3 +415,13 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 #fv-A:checked ~ .tabla-caja tbody tr:not(.fv-A), #fv-N:checked ~ .tabla-caja tbody tr:not(.fv-N), #fv-B:checked ~ .tabla-caja tbody tr:not(.fv-B), #fv-U:checked ~ .tabla-caja tbody tr:not(.fv-U) { display: none; }
 .enlace-suave { color: inherit; text-decoration-color: var(--linea-fuerte); }
 .enlace-suave:hover { color: var(--acento); text-decoration-color: var(--acento); }
+
+/* Ley: texto oficial, contexto y votaciones */
+.acciones-ley { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin: 1.5rem 0 0; }
+.contexto-ley { max-width: 62ch; margin: 0 0 .8rem; }
+.ley-vinculos { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem 2rem; margin-top: 1rem; }
+.ley-vinculos h3 { margin: 0 0 .4rem; font: 700 1rem/1.3 var(--sans); }
+.ley-vinculos ul, .lista-votos-ley, .lista-leyes-rel { list-style: none; margin: 0; padding: 0; }
+.ley-vinculos li, .lista-leyes-rel li { padding: .45rem 0; border-bottom: 1px solid var(--linea); }
+.lista-votos-ley li { display: grid; gap: .15rem; padding: .7rem 0; border-bottom: 1px solid var(--linea); }
+.aviso-ley { margin: 1.25rem 0 0; padding: .75rem 1rem; max-width: 44rem; background: var(--acento-claro); border-left: 4px solid var(--acento); font-size: .9375rem; }

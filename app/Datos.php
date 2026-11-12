@@ -85,6 +85,53 @@ final class Datos
         return is_array($d) ? $d : null;
     }
 
+    /** Datos extra de una ley (scripts/construir_leyes_extra.py): texto oficial en Infoleg, normas vinculadas y votaciones del día de la sanción. */
+    public static function leyVinculos(int $n): array
+    {
+        $d = self::leer('leyes/vinculos');
+        return $d['leyes'][(string)$n] ?? [];
+    }
+
+    /** @return list<int> leyes cuya votación del día de la sanción es esta (cruce de construir_leyes_extra.py) */
+    public static function leyesDeVotacion(string $id): array
+    {
+        if (!isset(self::$cache['_ley_por_voto'])) {
+            self::$cache['_ley_por_voto'] = [];
+            foreach ((self::leer('leyes/vinculos')['leyes'] ?? []) as $n => $e) {
+                foreach ($e['votaciones'] ?? [] as $v) { self::$cache['_ley_por_voto'][$v['id']][] = (int)$n; }
+            }
+        }
+        return self::$cache['_ley_por_voto'][$id] ?? [];
+    }
+
+    /** @return array{0:int,1:string,2:string,3:string}|null fila del índice de una ley (número, título, sanción, referencias) */
+    public static function leyIndice(int $n): ?array
+    {
+        if (!isset(self::$cache['_leyes_por_n'])) {
+            self::$cache['_leyes_por_n'] = [];
+            foreach (self::leyes() as $l) { self::$cache['_leyes_por_n'][(int)$l[0]] = $l; }
+        }
+        return self::$cache['_leyes_por_n'][$n] ?? null;
+    }
+
+    /** @return list<array> hasta $max leyes del sitio con más palabras clave en común (mínimo 2), de la más reciente a la más vieja a igual coincidencia */
+    public static function leyesRelacionadas(int $n, int $max = 6): array
+    {
+        $yo = self::leyIndice($n);
+        $mias = $yo ? array_unique(array_filter(preg_split('/\s+/', (string)$yo[3]) ?: [], static fn($w) => mb_strlen($w) > 3 && !ctype_digit($w))) : [];
+        if (count($mias) < 2) {
+            return [];
+        }
+        $puntaje = [];
+        foreach (self::leyes() as $l) {
+            if ((int)$l[0] === $n) { continue; }
+            $c = count(array_intersect($mias, preg_split('/\s+/', (string)$l[3]) ?: []));
+            if ($c >= 2) { $puntaje[] = [$c, (int)$l[0], $l]; }
+        }
+        usort($puntaje, static fn($a, $b) => [$b[0], $b[1]] <=> [$a[0], $a[1]]);
+        return array_map(static fn($x) => $x[2], array_slice($puntaje, 0, $max));
+    }
+
     /** @return array<string,array> resumen por año de subsidios (y 'covid') */
     public static function subsidiosIndice(): array
     {

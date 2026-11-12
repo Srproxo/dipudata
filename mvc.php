@@ -254,7 +254,7 @@ switch (true) {
         if (!$ley) { render_404(); break; }
         render('ley', ['ley' => $ley], pagina_meta(
             'Ley ' . number_format((int)$ley['n'], 0, ',', '.') . ': ' . mb_substr($ley['t'] ?? '', 0, 90),
-            'Ley ' . $ley['n'] . ($ley['t'] ?? '' ? ': ' . mb_substr($ley['t'], 0, 150) : '') . '. Sumario y fechas según la Cámara de Diputados.',
+            'Ley ' . $ley['n'] . ($ley['t'] ?? '' ? ': ' . mb_substr($ley['t'], 0, 150) : '') . '. Sumario, fechas, texto completo oficial, normas vinculadas y cómo se votó.',
             '/leyes/' . $ley['n'], 'leyes'
         ));
         break;

@@ -1,0 +1,36 @@
+{
+ "conjunto": "base-de-datos-legislativos-infoleg",
+ "portal": "https://datos.jus.gob.ar",
+ "recursos": {
+  "bf0ec116-ad4e-4572-a476-e57167a84403": {
+   "nombre": "Base Infoleg Normativa Nacional",
+   "formato": "ZIP",
+   "url": "https://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/bf0ec116-ad4e-4572-a476-e57167a84403/download/base-infoleg-normativa-nacional.zip",
+   "archivo": "bf0ec116_Base_Infoleg_Normativa_Nacional.zip",
+   "bytes": 49506844,
+   "sha256": "2573e59f0c5aadee93131a5634f4fbe0391ccb018aef3392af34c58f64b34666",
+   "last_modificado": "2026-11-02T09:36:36.445951",
+   "bajado": "2026-11-12"
+  },
+  "0c4fdafe-f4e8-4ac2-bc2e-acf50c27066d": {
+   "nombre": "Base Complementaria Infoleg de Normas Modificadas",
+   "formato": "ZIP",
+   "url": "https://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/0c4fdafe-f4e8-4ac2-bc2e-acf50c27066d/download/base-complementaria-infoleg-normas-modificadas.zip",
+   "archivo": "0c4fdafe_Base_Complementaria_Infoleg_de_Normas_Modificadas.zip",
+   "bytes": 10341704,
+   "sha256": "041e56a5614220584576c18d8873b747cca6735ee617c1ac763e28d5ccf7799d",
+   "last_modificado": "2026-11-02T09:36:57.145290",
+   "bajado": "2026-11-12"
+  },
+  "dea3c247-5a5d-408f-a224-39ae0f8eb371": {
+   "nombre": "Base Complementaria Infoleg de Normas Modificatorias",
+   "formato": "ZIP",
+   "url": "https://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/dea3c247-5a5d-408f-a224-39ae0f8eb371/download/base-complementaria-infoleg-normas-modificatorias.zip",
+   "archivo": "dea3c247_Base_Complementaria_Infoleg_de_Normas_Modificatorias.zip",
+   "bytes": 9494199,
+   "sha256": "1e7c62b7a90a654c88012996e23ec83e10e0f3bf81fb3e61d9d5e00bddfa3f35",
+   "last_modificado": "2026-11-02T09:37:17.883350",
+   "bajado": "2026-11-12"
+  }
+ }
+}
