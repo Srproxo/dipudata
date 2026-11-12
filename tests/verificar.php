@@ -64,7 +64,21 @@ $pctMal = array_filter($part, fn($l) => ($p = Datos::participacion($l['slug'])) 
 ok(!$pctMal, 'ningún porcentaje de participación sale de 0 a 100');
 
 $ley = Datos::leyes();
-ok(count($ley) === 1193, 'hay 1.193 leyes en el sumario (hay ' . count($ley) . ')');
+ok(count(array_filter($ley, fn($l) => (int)$l[0] <= 27544)) === 1193, 'hay 1.193 leyes del sumario de la Cámara (26.352 a 27.544)');
+$nuevas = array_filter($ley, fn($l) => (int)$l[0] > 27544);
+ok(count($nuevas) >= 270, 'se suman las leyes posteriores a la 27.544 desde Infoleg (' . count($nuevas) . ')');
+$nuevaMal = 0;
+foreach ($nuevas as [$n, $t, $fs]) {
+    $d = Datos::ley((int)$n);
+    $v = Datos::leyVinculos((int)$n);
+    if (!$d || ($d['fuente'] ?? '') !== 'infoleg' || $fs < '2020-01-01' || empty($d['s']) || empty($v['infoleg']['original'])) { $nuevaMal++; }
+}
+ok($nuevaMal === 0, 'cada ley tomada de Infoleg tiene sumario, sanción desde 2020 y enlace al texto oficial');
+$numsLey = array_map(fn($l) => (int)$l[0], $ley);
+$ordenados = $numsLey; rsort($ordenados);
+ok(count($numsLey) === count(array_unique($numsLey)) && $ordenados === $numsLey, 'ningún número de ley se repite y el índice va de la más nueva a la más vieja');
+ok(empty(Datos::leyVinculos(27784)['votaciones']) && empty(Datos::leyVinculos(27785)['votaciones']), 'leyes del mismo día con el mismo título no se enlazan a una votación ambigua');
+ok(!empty(Datos::leyVinculos(27802)['votaciones']), 'la Ley 27.802 (modernización laboral) enlaza a su votación');
 $fechaMal = 0; $sinTexto = 0;
 foreach (array_slice($ley, 0, 400) as [$n]) {
     $d = Datos::ley($n);

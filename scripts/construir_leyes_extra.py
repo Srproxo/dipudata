@@ -17,6 +17,10 @@ expedientes cubra al menos el 60 % de las palabras distintivas del título de la
 con el título de la Cámara o el de Infoleg. Es un cruce por texto: se publica como
 "votación nominal del día de la sanción" y la página lo aclara. Muchas leyes se aprueban sin votación nominal o en bloque sin detalle: ahí no hay enlace.
 
+Leyes posteriores al índice de la Cámara: el índice de datos.hcdn.gob.ar termina en la 27.544 (feb. 2020). Las leyes de número mayor,
+sancionadas desde 2020 según Infoleg, se publican desde Infoleg (storage/verificado/leyes/indice_infoleg.json y
+leyes/infoleg/{n}.json): título, sumario (texto_resumido), fechas y observaciones tal como las publica Infoleg. Los números que Infoleg no tiene no se inventan.
+
 Uso:  python3 -I scripts/construir_leyes_extra.py            (desde el recorte guardado)
       python3 -I scripts/construir_leyes_extra.py --desde-zip (rehace el recorte desde los ZIP bajados)
 """
@@ -29,7 +33,10 @@ RECORTE = RAIZ / "storage" / "oficial" / "infoleg"
 VERIF = RAIZ / "storage" / "verificado"
 csv.field_size_limit(10**9)
 
-COLS_NORMA = ["id_norma", "tipo_norma", "numero_norma", "fecha_sancion", "fecha_boletin", "titulo_sumario", "titulo_resumido", "texto_original", "texto_actualizado"]
+COLS_NORMA = ["id_norma", "tipo_norma", "numero_norma", "fecha_sancion", "fecha_boletin", "titulo_sumario", "titulo_resumido", "texto_original", "texto_actualizado",
+              "organismo_origen", "texto_resumido", "observaciones"]
+# Títulos resumidos de Infoleg que no agregan nada al título del sumario.
+GENERICOS = {"DISPOSICIONES", "DISPOSICIONES GENERALES", ""}
 COLS_REL = ["id_norma_modificada", "id_norma_modificatoria", "tipo_norma", "nro_norma", "fecha_boletin", "titulo_sumario", "titulo_resumido"]
 
 
@@ -94,6 +101,9 @@ VACIAS = set("""para sobre entre como esta este desde hasta del los las una unos
 dictamen mayoria minoria orden dia votacion general particular expediente articulo articulos modificacion sancion aprobacion suscripto suscripta
 gobierno revision similar and the""".split())
 UMBRAL = 0.6
+# Palabras de rubro que no identifican a una ley entre varias del mismo tipo (sirven para el control extra de las leyes de Infoleg).
+RUBRO = set("""estado nacionales provincia provincias municipalidad municipio dominio inmueble inmuebles titulo gratuito transfierase transferencia
+instituyase dia cada ano apruebase aprobacion convenio acuerdo gobierno""".split())
 
 
 def coincide(titulo_ley: str, titulo_voto: str) -> bool:
@@ -113,6 +123,67 @@ def _https(u: str, id_norma: str, actualizado: bool) -> str:
     return f"https://www.argentina.gob.ar/normativa/nacional/norma-{id_norma}/" + ("actualizacion" if actualizado else "texto")
 
 
+def _limpio(x: str) -> str:
+    """Quita caracteres de control que trae a veces Infoleg (por ejemplo antes de "T.O.") y normaliza espacios."""
+    x = "".join(c if unicodedata.category(c)[0] != "C" else " " for c in x)
+    return " ".join(x.split())
+
+
+def titulo_infoleg(r: dict) -> str:
+    t, res = _limpio(r["titulo_sumario"]), _limpio(r["titulo_resumido"])
+    return t if res.upper() in GENERICOS or res.upper() == t.upper() else f"{t} - {res}"
+
+
+def leyes_infoleg(info: dict, ultima_hcdn: int) -> list:
+    """Leyes posteriores al índice de la Cámara, desde Infoleg. Escribe el índice y una ficha por ley; devuelve las filas del índice."""
+    dest = VERIF / "leyes" / "infoleg"
+    dest.mkdir(parents=True, exist_ok=True)
+    for viejo in dest.glob("*.json"):
+        viejo.unlink()
+    filas = []
+    for n in sorted(info):
+        cand = info[n]
+        if n <= ultima_hcdn or len(cand) != 1:
+            continue
+        r = cand[0]
+        # Infoleg trae algunas normas viejas con números altos (decretos-ley de 1944, 1961 y 1973): solo leyes sancionadas desde 2020.
+        # El organismo de origen no se usa como filtro: la Ley 27.702 (2022) figura con "Poder Ejecutivo Nacional" por error de carga.
+        if r["fecha_sancion"] < "2020-01-01":
+            continue
+        t = titulo_infoleg(r)
+        ficha = {"n": n, "t": t, "s": _limpio(r["texto_resumido"]), "r": "", "fs": r["fecha_sancion"], "fp": r["fecha_boletin"], "fuente": "infoleg"}
+        (dest / f"{n}.json").write_text(json.dumps(ficha, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        filas.append([n, t, r["fecha_sancion"], ""])
+    filas.sort(key=lambda l: -l[0])
+    (VERIF / "leyes" / "indice_infoleg.json").write_text(json.dumps(filas, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"leyes desde Infoleg (posteriores a la {ultima_hcdn}): {len(filas)}")
+    return filas
+
+
+def quitar_ambiguas(salida: dict, leyes_sitio: dict) -> int:
+    """Si dos leyes del mismo día tienen casi el mismo título (75 % de palabras distintivas en común) y el cruce les asigna la misma
+    votación (que no es en conjunto), no se puede saber a cuál corresponde: se quita de las dos (por ejemplo las leyes 27.784 y 27.785, ambas
+    "Código Procesal Penal ... - Modificación"). Devuelve cuántos enlaces se quitaron."""
+    por_voto = collections.defaultdict(list)
+    for n, e in salida.items():
+        for v in e.get("votaciones", []):
+            if not v["conjunto"]:   # una votación en conjunto (varios expedientes) puede ser de las dos leyes a la vez
+                por_voto[v["id"]].append(int(n))
+    quitar = set()
+    for vid, ns in por_voto.items():
+        for i, a in enumerate(ns):
+            for b in ns[i + 1:]:
+                pa, pb = (set(_normalizar(leyes_sitio[x][1])) - VACIAS for x in (a, b))
+                if pa and pb and len(pa & pb) / len(pa | pb) >= 0.75:
+                    quitar |= {(a, vid), (b, vid)}
+    for n, vid in quitar:
+        e = salida[str(n)]
+        e["votaciones"] = [v for v in e["votaciones"] if v["id"] != vid]
+        if not e["votaciones"]:
+            del e["votaciones"]
+    return len(quitar)
+
+
 def construir() -> None:
     man = json.loads((RECORTE / "manifest.json").read_text(encoding="utf-8"))
     for n, h in man["sha256"].items():
@@ -124,6 +195,8 @@ def construir() -> None:
         for row in csv.DictReader(f):
             if row["numero_norma"].isdigit():
                 info[int(row["numero_norma"])].append(row)
+    nuevas = leyes_infoleg(info, max(leyes_sitio))
+    leyes_sitio.update({l[0]: l for l in nuevas})
     rel_mod = collections.defaultdict(list)   # id ley -> normas posteriores que la modifican o complementan
     rel_hace = collections.defaultdict(list)  # id ley -> normas que esta ley modifica
     with gzip.open(RECORTE / "relaciones_leyes.csv.gz", "rt", encoding="utf-8") as f:
@@ -142,7 +215,24 @@ def construir() -> None:
             det_cache[v["id"]] = [v["t"]] + [e[1] for e in d.get("expedientes", [])], len(d.get("expedientes", []))
         return det_cache[v["id"]]
 
-    salida, sin_infoleg, fecha_distinta, con_voto = {}, 0, 0, 0
+    resumen_nuevas = {}
+    for l in nuevas:
+        f = json.loads((VERIF / "leyes" / "infoleg" / f"{l[0]}.json").read_text(encoding="utf-8"))
+        resumen_nuevas[l[0]] = set(_normalizar(f["s"])) - VACIAS
+
+    def especifica(n: int, titulo_ley: str, titulo_voto: str) -> bool:
+        """Las leyes que vienen solo de Infoleg suelen tener títulos de rubro ("INMUEBLES - TRANSFERENCIA"). En esos, con menos de cuatro
+        palabras distintivas en el título, la votación tiene que compartir además dos palabras del sumario que no estén en el título
+        (por ejemplo el municipio que recibe el inmueble), sin contar números ni palabras de rubro."""
+        if n not in resumen_nuevas or " - " not in titulo_ley:   # sin "rubro - asunto", el título es propio (p. ej. "Ley de Modernización Laboral")
+            return True
+        pal = set(_normalizar(titulo_ley)) - VACIAS
+        if len(pal) >= 4:
+            return True
+        comunes = (resumen_nuevas[n] - pal - RUBRO) & set(_normalizar(titulo_voto))
+        return sum(1 for w in comunes if not w.isdigit()) >= 2
+
+    salida, sin_infoleg, fecha_distinta = {}, 0, 0
     for n, (num, titulo, fsan, _r) in leyes_sitio.items():
         e = {}
         cand = info.get(n, [])
@@ -152,6 +242,8 @@ def construir() -> None:
             titulos.append(r["titulo_sumario"])
             e["infoleg"] = {"id": int(r["id_norma"]), "original": _https(r["texto_original"], r["id_norma"], False),
                             "actualizado": _https(r["texto_actualizado"], r["id_norma"], True), "boletin": r["fecha_boletin"]}
+            if r["observaciones"].strip():
+                e["infoleg"]["observaciones"] = _limpio(r["observaciones"])
             if r["fecha_sancion"] != fsan:
                 # El número de ley es único; si las fechas no coinciden se muestran las dos, sin elegir.
                 e["infoleg"]["sancion"] = r["fecha_sancion"]
@@ -170,18 +262,19 @@ def construir() -> None:
         votos = []
         for v in votos_por_fecha.get(fsan, []):
             its, nexp = items_voto(v)
-            if any(coincide(tl, t) for tl in titulos for t in its):
+            if any(coincide(tl, t) and especifica(n, tl, t) for tl in titulos for t in its):
                     votos.append({"id": v["id"], "c": v["c"], "t": v["t"], "res": v["res"], "a": v["a"], "n": v["n"], "conjunto": nexp > 1})
         if votos:
-            con_voto += 1
             e["votaciones"] = sorted(votos, key=lambda x: (x["c"], x["id"]))
         salida[str(n)] = e
+    ambiguas = quitar_ambiguas(salida, leyes_sitio)
+    con_voto = sum(1 for x in salida.values() if x.get("votaciones"))
     (VERIF / "leyes" / "vinculos.json").write_text(json.dumps({
         "_meta": {"fuente_infoleg": man["fuente"], "conjunto": man["conjunto"], "origen": man["origen"], "umbral_titulo": UMBRAL,
-                  "leyes": len(salida), "con_infoleg": sum(1 for x in salida.values() if "infoleg" in x), "sin_infoleg": sin_infoleg,
-                  "fecha_distinta_infoleg": fecha_distinta, "con_votacion": con_voto},
+                  "leyes": len(salida), "solo_infoleg": len(nuevas), "con_infoleg": sum(1 for x in salida.values() if "infoleg" in x), "sin_infoleg": sin_infoleg,
+                  "fecha_distinta_infoleg": fecha_distinta, "con_votacion": con_voto, "votos_ambiguos_quitados": ambiguas},
         "leyes": salida}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(salida)} leyes · Infoleg {len(salida) - sin_infoleg} (con otra fecha de sanción: {fecha_distinta}) · sin Infoleg {sin_infoleg} · con votación {con_voto}")
+    print(f"{len(salida)} leyes · Infoleg {len(salida) - sin_infoleg} (con otra fecha de sanción: {fecha_distinta}) · sin Infoleg {sin_infoleg} · con votación {con_voto} · enlaces ambiguos quitados {ambiguas}")
 
 
 if __name__ == "__main__":

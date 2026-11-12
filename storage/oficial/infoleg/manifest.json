@@ -18,7 +18,7 @@
  "leyes": 27623,
  "relaciones": 129337,
  "sha256": {
-  "leyes_infoleg.csv.gz": "c65977c257c4eeeb6e0ba56f8412fc4058997d26ad8c850ca4a0f4f6c4855bfd",
-  "relaciones_leyes.csv.gz": "d3f98876f76e48871e43ecf4409dc701663f37f6ee1ca17ed6f5b9759f598ba4"
+  "leyes_infoleg.csv.gz": "c9346658c4af1c9385959bb9c6084c442815d90ee74023f7f6e4d12fcb991682",
+  "relaciones_leyes.csv.gz": "476ade8c545dd874580a0ab09d5ad7b23f95e622a6d39b4a3d13b76542abd6fe"
  }
 }

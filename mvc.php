@@ -242,9 +242,9 @@ switch (true) {
         $paginas = max(1, (int)ceil($total / 50));
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
         $lista = array_slice($lista, ($pagina - 1) * 50, 50);
-        render('leyes', compact('lista', 'anios', 'anio', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
+        render('leyes', compact('todas', 'lista', 'anios', 'anio', 'q', 'total', 'pagina', 'paginas'), pagina_meta(
             'Leyes sancionadas por el Congreso argentino',
-            'Más de mil leyes sancionadas entre 2008 y 2020, con su sumario y sus fechas. Buscá por número, tema o palabra clave. Fuente: datos abiertos de la HCDN.',
+            'Casi 1.500 leyes sancionadas desde 2008 hasta hoy, con su sumario, sus fechas, el texto oficial y cómo se votó. Buscá por número, tema o palabra clave. Fuentes: HCDN e Infoleg.',
             '/leyes', 'leyes', ['robots' => ($q !== '' || $anio || $pagina > 1) ? 'noindex, follow' : 'index, follow']
         ));
         break;

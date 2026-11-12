@@ -2,6 +2,7 @@
 /** @var array $ley */
 $refs = array_filter(preg_split('/\s+/', (string)($ley['r'] ?? '')) ?: []);
 $n = (int)$ley['n'];
+$deInfoleg = ($ley['fuente'] ?? '') === 'infoleg';
 $num = static fn(int $x): string => number_format($x, 0, ',', '.');
 $vin = Datos::leyVinculos($n);
 $inf = $vin['infoleg'] ?? null;
@@ -33,6 +34,7 @@ $lista = static function (array $xs): string {
   <?php if (!empty($ley['fs'])): ?><div><dt>Sancionada el</dt><dd><?= e(fecha_es($ley['fs'])) ?><?= !empty($inf['sancion']) ? '<br><span class="tenue pequeno">Infoleg registra el ' . e(fecha_es($inf['sancion'])) . '</span>' : '' ?></dd></div><?php endif; ?>
   <?php if (!empty($vin['promulgacion'])): ?><div><dt>Promulgada por</dt><dd><?= e($vin['promulgacion']) ?></dd></div><?php endif; ?>
   <?php if (!empty($ley['fp'])): ?><div><dt>Publicada en el Boletín Oficial</dt><dd><?= e(fecha_es($ley['fp'])) ?></dd></div><?php endif; ?>
+  <?php if (!empty($inf['observaciones'])): ?><div><dt>Observaciones de Infoleg</dt><dd class="pequeno"><?= e($inf['observaciones']) ?></dd></div><?php endif; ?>
 </dl>
 
 <?php if ($inf && !empty($inf['original'])): ?>
@@ -84,7 +86,7 @@ $lista = static function (array $xs): string {
 
 <?php if (!empty($ley['s'])): ?>
 <section class="seccion" aria-labelledby="sumario">
-  <h2 id="sumario" class="seccion-titulo">Sumario oficial</h2>
+  <h2 id="sumario" class="seccion-titulo"><?= $deInfoleg ? 'Sumario de Infoleg' : 'Sumario oficial' ?></h2>
   <p class="sumario"><?= e($ley['s']) ?></p>
   <?php if ($refs): ?>
     <p class="tenue pequeno" style="margin-top:1rem">Palabras clave</p>
@@ -105,4 +107,4 @@ $lista = static function (array $xs): string {
 </section>
 <?php endif; ?>
 
-<p class="fuente-pie">Fuentes: Sumario de leyes y Leyes promulgadas, Cámara de Diputados de la Nación (datos.hcdn.gob.ar); el sumario se muestra tal como lo publica la Cámara. Texto completo, decreto de promulgación y normas vinculadas: Base Infoleg de Normativa Nacional, Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Votaciones: actas nominales de cada cámara, cruzadas por fecha y título (ver <a href="/metodologia">metodología</a>).</p>
+<p class="fuente-pie">Fuentes: <?= $deInfoleg ? 'título, sumario y fechas de la Base Infoleg de Normativa Nacional (la Cámara de Diputados todavía no publicó esta ley en sus datos abiertos); se muestran tal como los publica Infoleg' : 'Sumario de leyes y Leyes promulgadas, Cámara de Diputados de la Nación (datos.hcdn.gob.ar); el sumario se muestra tal como lo publica la Cámara' ?>. Texto completo, decreto de promulgación y normas vinculadas: Base Infoleg de Normativa Nacional, Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Votaciones: actas nominales de cada cámara, cruzadas por fecha y título (ver <a href="/metodologia">metodología</a>).</p>
