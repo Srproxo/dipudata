@@ -50,11 +50,16 @@ switch (true) {
             return true;
         }));
         $filtrado = $q !== '' || $camaraSel || $nombreProv || $bloqueSel;
-        render('home', compact('lista', 'q', 'camaraSel', 'provSel', 'bloqueSel'), pagina_meta(
+        // Directorio paginado de a 50 (del lado del servidor; los filtros viajan en la URL de cada página).
+        $totalDir = count($lista);
+        $paginas = max(1, (int)ceil($totalDir / 50));
+        $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));
+        $lista = array_slice($lista, ($pagina - 1) * 50, 50);
+        render('home', compact('lista', 'q', 'camaraSel', 'provSel', 'bloqueSel', 'totalDir', 'pagina', 'paginas'), pagina_meta(
             'Legisladores del Congreso argentino',
             'Directorio de los diputados y senadores nacionales en ejercicio: bloque, provincia y mandato, con la fuente de cada dato.',
             '/', 'legisladores', [
-                'robots' => $filtrado ? 'noindex, follow' : 'index, follow, max-image-preview:large',
+                'robots' => ($filtrado || $pagina > 1) ? 'noindex, follow' : 'index, follow, max-image-preview:large',
                 'jsonld' => ['@context' => 'https://schema.org', '@type' => 'WebSite', 'name' => 'DipuData', 'url' => SITE_URL . '/', 'inLanguage' => 'es-AR',
                     'potentialAction' => ['@type' => 'SearchAction', 'target' => SITE_URL . '/?q={q}', 'query-input' => 'required name=q']],
             ]
