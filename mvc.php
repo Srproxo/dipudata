@@ -230,14 +230,22 @@ switch (true) {
         $q = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 80);
         $anios = array_values(array_unique(array_filter(array_map(static fn($l) => substr($l[2], 0, 4), $todas))));
         $anio = is_string($_GET['anio'] ?? null) && in_array($_GET['anio'], $anios, true) ? $_GET['anio'] : '';
+        // Un número de ley (27802 o 27.802) que existe lleva directo a su página.
+        if (preg_match('/^\s*(?:ley\s*)?(\d{1,2})\.?(\d{3})\s*$/i', $q, $mq) && Datos::ley((int)($mq[1] . $mq[2]))) { ir('/leyes/' . $mq[1] . $mq[2], 302); }
         $nq = Datos::normalizar($q);
-        $lista = array_values(array_filter($todas, static function (array $l) use ($nq, $anio): bool {
+        $busq = $nq !== '' ? Datos::leyesBusqueda() : [];
+        $lista = array_values(array_filter($todas, static function (array $l) use ($nq, $anio, $busq): bool {
             if ($anio && substr($l[2], 0, 4) !== $anio) return false;
             if ($nq === '') return true;
-            $hay = ' ' . Datos::normalizar($l[0] . ' ' . $l[1] . ' ' . $l[3]) . ' ';
+            $hay = ' ' . ($busq[(string)$l[0]] ?? Datos::normalizar($l[0] . ' ' . $l[1] . ' ' . $l[3])) . ' ';
             foreach (explode(' ', $nq) as $w) { if (!str_contains($hay, $w)) return false; }
             return true;
         }));
+        if ($nq !== '') {
+            // Primero las que tienen todas las palabras en el título; después las que las tienen en el sumario.
+            $enTitulo = static function (array $l) use ($nq): int { $t = ' ' . Datos::normalizar($l[0] . ' ' . $l[1]) . ' '; foreach (explode(' ', $nq) as $w) { if (!str_contains($t, $w)) return 1; } return 0; };
+            usort($lista, static fn($a, $b) => [$enTitulo($a), -(int)$a[0]] <=> [$enTitulo($b), -(int)$b[0]]);
+        }
         $total = count($lista);
         $paginas = max(1, (int)ceil($total / 50));
         $pagina = min($paginas, max(1, (int)($_GET['pagina'] ?? 1)));

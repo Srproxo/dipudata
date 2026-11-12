@@ -90,6 +90,12 @@ final class Datos
         return self::$cache['_leyes'];
     }
 
+    /** @return array<string,string> texto normalizado de búsqueda por número de ley (título, palabras clave y sumario) */
+    public static function leyesBusqueda(): array
+    {
+        return self::leer('leyes/busqueda');
+    }
+
     /** Ficha de una ley: la de la Cámara si existe; si no, la tomada de Infoleg (trae 'fuente' => 'infoleg'). */
     public static function ley(int $n): ?array
     {

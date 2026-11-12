@@ -37,6 +37,11 @@ $lista = static function (array $xs): string {
 };
 ?>
 <nav class="migas" aria-label="Ubicación"><a href="/leyes">Leyes</a> <span aria-hidden="true">/</span> <span>Ley <?= $num($n) ?></span></nav>
+<form class="buscar-ley" method="get" action="/leyes" role="search">
+  <label for="buscar-ley-q" class="sr-solo">Buscar otra ley</label>
+  <input id="buscar-ley-q" type="search" name="q" maxlength="80" placeholder="Buscar otra ley" autocomplete="off">
+  <button class="boton boton-sec" type="submit">Buscar</button>
+</form>
 <p class="antetitulo">Ley <?= $num($n) ?></p>
 <h1 class="titulo" style="max-width:36ch;font-size:clamp(1.4rem,3.2vw,2.1rem)"><?= e($ley['t'] ?? 'Sin título registrado') ?></h1>
 

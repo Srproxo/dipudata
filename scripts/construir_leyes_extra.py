@@ -160,6 +160,25 @@ def leyes_infoleg(info: dict, ultima_hcdn: int) -> list:
     return filas
 
 
+def _norm_busqueda(s: str) -> str:
+    # Igual que Datos::normalizar() en PHP: minúsculas, sin tildes, solo letras y números separados por un espacio.
+    s = unicodedata.normalize("NFD", (s or "").lower())
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", s).split())
+
+
+def escribir_busqueda(leyes_sitio: dict) -> None:
+    """Texto de búsqueda de /leyes: número, título, palabras clave y sumario de cada ley, ya normalizado."""
+    out = {}
+    for n, l in leyes_sitio.items():
+        ficha = VERIF / "leyes" / "ley" / f"{n}.json"
+        if not ficha.exists():
+            ficha = VERIF / "leyes" / "infoleg" / f"{n}.json"
+        s = json.loads(ficha.read_text(encoding="utf-8")).get("s", "") if ficha.exists() else ""
+        out[str(n)] = _norm_busqueda(f"{n} {l[1]} {l[3]} {s}")
+    (VERIF / "leyes" / "busqueda.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
 def quitar_ambiguas(salida: dict, leyes_sitio: dict) -> int:
     """Si dos leyes del mismo día tienen casi el mismo título (75 % de palabras distintivas en común) y el cruce les asigna la misma
     votación (que no es en conjunto), no se puede saber a cuál corresponde: se quita de las dos (por ejemplo las leyes 27.784 y 27.785, ambas
@@ -268,6 +287,7 @@ def construir() -> None:
             e["votaciones"] = sorted(votos, key=lambda x: (x["c"], x["id"]))
         salida[str(n)] = e
     ambiguas = quitar_ambiguas(salida, leyes_sitio)
+    escribir_busqueda(leyes_sitio)
     con_voto = sum(1 for x in salida.values() if x.get("votaciones"))
     (VERIF / "leyes" / "vinculos.json").write_text(json.dumps({
         "_meta": {"fuente_infoleg": man["fuente"], "conjunto": man["conjunto"], "origen": man["origen"], "umbral_titulo": UMBRAL,

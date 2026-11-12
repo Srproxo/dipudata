@@ -78,6 +78,8 @@ $numsLey = array_map(fn($l) => (int)$l[0], $ley);
 $ordenados = $numsLey; rsort($ordenados);
 ok(count($numsLey) === count(array_unique($numsLey)) && $ordenados === $numsLey, 'ningún número de ley se repite y el índice va de la más nueva a la más vieja');
 ok(empty(Datos::leyVinculos(27784)['votaciones']) && empty(Datos::leyVinculos(27785)['votaciones']), 'leyes del mismo día con el mismo título no se enlazan a una votación ambigua');
+$bq = Datos::leyesBusqueda();
+ok(count($bq) === count($ley) && str_contains($bq['27600'] ?? '', 'concordia'), 'el buscador de leyes cubre todas las leyes y busca también en el sumario');
 ok(!empty(Datos::leyVinculos(27802)['votaciones']), 'la Ley 27.802 (modernización laboral) enlaza a su votación');
 $fechaMal = 0; $sinTexto = 0;
 foreach (array_slice($ley, 0, 400) as [$n]) {

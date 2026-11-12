@@ -424,6 +424,9 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .ley-vinculos ul, .lista-votos-ley, .lista-leyes-rel { list-style: none; margin: 0; padding: 0; }
 .ley-vinculos li, .lista-leyes-rel li { padding: .45rem 0; border-bottom: 1px solid var(--linea); }
 .lista-votos-ley li { display: grid; gap: .15rem; padding: .7rem 0; border-bottom: 1px solid var(--linea); }
+.buscar-ley { display: flex; gap: .5rem; max-width: 30rem; margin: 0 0 1.25rem; }
+.buscar-ley input { flex: 1; min-width: 0; min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--linea-fuerte); font: inherit; font-size: .9375rem; background: var(--papel); color: var(--tinta); }
+.buscar-ley .boton { min-height: 44px; }
 /* Ley: gráficos propios (línea de tiempo, medio círculo de votos, esquema de normas vinculadas) */
 .linea-ley { list-style: none; margin: .5rem 0 1.5rem; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; max-width: 44rem; counter-reset: paso; }
 .linea-ley li { position: relative; display: grid; gap: .1rem; padding: 1.4rem .75rem 0 0; font-size: .9375rem; }

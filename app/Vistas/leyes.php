@@ -7,17 +7,18 @@
 
 <form class="filtros" method="get" action="/leyes" style="margin-top:1.5rem">
   <label>Buscar
-    <input type="search" name="q" value="<?= e($q) ?>" maxlength="80" placeholder="Número, tema o palabra clave" autocomplete="off">
+    <input type="search" name="q" value="<?= e($q) ?>" maxlength="80" placeholder="Ej.: 27802, zona fría, discapacidad" autocomplete="off">
   </label>
   <label>Año de sanción
     <select name="anio"><option value="">Todos</option>
       <?php foreach ($anios as $a): ?><option value="<?= e($a) ?>"<?= $anio === $a ? ' selected' : '' ?>><?= e($a) ?></option><?php endforeach; ?>
     </select>
   </label>
-  <button class="boton" type="submit">Filtrar</button>
+  <button class="boton" type="submit">Buscar</button>
   <?php if ($q !== '' || $anio): ?><a class="enlace-limpiar" href="/leyes">Quitar filtros</a><?php endif; ?>
 </form>
 
+<p class="tenue pequeno" style="margin:.5rem 0 0">La búsqueda mira el número, el título, las palabras clave y el sumario de cada ley. Con un número de ley (por ejemplo 27.802) se abre directo su página.</p>
 <p class="conteo" aria-live="polite"><?= number_format($total, 0, ',', '.') ?> <?= $total === 1 ? 'ley' : 'leyes' ?></p>
 <?php if (!$lista): ?>
   <p class="vacio-txt">No hay leyes con esos filtros.</p>
