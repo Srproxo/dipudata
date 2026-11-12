@@ -1,22 +1,24 @@
-<?php /** @var list<array> $lista @var list<string> $anios @var string $anio @var string $q @var int $total @var int $pagina @var int $paginas */ ?>
+<?php /** @var list<array> $lista @var list<array> $todas @var list<string> $anios @var string $anio @var string $q @var int $total @var int $pagina @var int $paginas */ ?>
 <p class="antetitulo">Congreso de la Nación</p>
 <h1 class="titulo">Leyes sancionadas.</h1>
-<p class="bajada">Las leyes que el Congreso sancionó entre 2008 y 2020, con el sumario de cada una y las fechas de sanción y de publicación en el Boletín Oficial. Se pueden buscar por número, por tema o por palabra clave.</p>
-<p class="aviso"><strong>Período cubierto: leyes 26.352 a 27.544.</strong> Las leyes posteriores se suman cuando la Cámara las publique en sus datos abiertos.</p>
+<?php $ultima = $todas[0] ?? null; ?>
+<p class="bajada">Las leyes que el Congreso sancionó desde 2008, con el sumario de cada una, las fechas de sanción y de publicación en el Boletín Oficial, el enlace al texto oficial y, cuando la hubo, la votación nominal. Se pueden buscar por número, por tema o por palabra clave.</p>
+<p class="aviso"><strong>Período cubierto: leyes 26.352 a <?= $ultima ? number_format((int)$ultima[0], 0, ',', '.') : '' ?><?= $ultima && $ultima[2] ? ' (sancionada el ' . e(fecha_es($ultima[2])) . ')' : '' ?>.</strong> Hasta la 27.544 (febrero de 2020) los datos son de la Cámara de Diputados; las posteriores, de Infoleg, porque la Cámara todavía no las publicó en sus datos abiertos.</p>
 
 <form class="filtros" method="get" action="/leyes" style="margin-top:1.5rem">
   <label>Buscar
-    <input type="search" name="q" value="<?= e($q) ?>" maxlength="80" placeholder="Número, tema o palabra clave" autocomplete="off">
+    <input type="search" name="q" value="<?= e($q) ?>" maxlength="80" placeholder="Ej.: 27802, zona fría, discapacidad" autocomplete="off">
   </label>
   <label>Año de sanción
     <select name="anio"><option value="">Todos</option>
       <?php foreach ($anios as $a): ?><option value="<?= e($a) ?>"<?= $anio === $a ? ' selected' : '' ?>><?= e($a) ?></option><?php endforeach; ?>
     </select>
   </label>
-  <button class="boton" type="submit">Filtrar</button>
+  <button class="boton" type="submit">Buscar</button>
   <?php if ($q !== '' || $anio): ?><a class="enlace-limpiar" href="/leyes">Quitar filtros</a><?php endif; ?>
 </form>
 
+<p class="tenue pequeno" style="margin:.5rem 0 0">La búsqueda mira el número, el título, las palabras clave y el sumario de cada ley. Con un número de ley (por ejemplo 27.802) se abre directo su página.</p>
 <p class="conteo" aria-live="polite"><?= number_format($total, 0, ',', '.') ?> <?= $total === 1 ? 'ley' : 'leyes' ?></p>
 <?php if (!$lista): ?>
   <p class="vacio-txt">No hay leyes con esos filtros.</p>
@@ -40,4 +42,4 @@
   <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>" rel="next">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; endif; ?>
-<p class="fuente-pie">Fuente: Sumario de leyes y Leyes promulgadas, Cámara de Diputados de la Nación (datos.hcdn.gob.ar). Los textos se muestran tal como los publica la Cámara.</p>
+<p class="fuente-pie">Fuentes: leyes 26.352 a 27.544, Sumario de leyes y Leyes promulgadas de la Cámara de Diputados de la Nación (datos.hcdn.gob.ar); leyes posteriores, Base Infoleg de Normativa Nacional del Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Los títulos y sumarios se muestran tal como los publica cada fuente.</p>

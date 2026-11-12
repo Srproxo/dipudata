@@ -70,19 +70,41 @@ final class Datos
         ));
     }
 
-    /** @return list<array{0:int,1:string,2:string,3:string}> [numero, titulo, fecha sancion, referencias] */
+    /**
+     * Índice de leyes: el de la Cámara de Diputados (hasta la 27.544) más las posteriores tomadas de Infoleg
+     * (scripts/construir_leyes_extra.py), de la más nueva a la más vieja.
+     * @return list<array{0:int,1:string,2:string,3:string}> [numero, titulo, fecha sancion, referencias]
+     */
     public static function leyes(): array
     {
-        $ruta = RAIZ . '/storage/verificado/leyes/indice.json';
-        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
-        return is_array($d) ? $d : [];
+        if (!isset(self::$cache['_leyes'])) {
+            $todas = [];
+            foreach (['indice', 'indice_infoleg'] as $f) {
+                $ruta = RAIZ . "/storage/verificado/leyes/{$f}.json";
+                $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+                if (is_array($d)) { array_push($todas, ...$d); }
+            }
+            usort($todas, static fn($a, $b) => (int)$b[0] <=> (int)$a[0]);
+            self::$cache['_leyes'] = $todas;
+        }
+        return self::$cache['_leyes'];
     }
 
+    /** @return array<string,string> texto normalizado de búsqueda por número de ley (título, palabras clave y sumario) */
+    public static function leyesBusqueda(): array
+    {
+        return self::leer('leyes/busqueda');
+    }
+
+    /** Ficha de una ley: la de la Cámara si existe; si no, la tomada de Infoleg (trae 'fuente' => 'infoleg'). */
     public static function ley(int $n): ?array
     {
-        $ruta = RAIZ . "/storage/verificado/leyes/ley/{$n}.json";
-        $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
-        return is_array($d) ? $d : null;
+        foreach (["leyes/ley/{$n}.json", "leyes/infoleg/{$n}.json"] as $r) {
+            $ruta = RAIZ . '/storage/verificado/' . $r;
+            $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+            if (is_array($d)) { return $d; }
+        }
+        return null;
     }
 
     /** Datos extra de una ley (scripts/construir_leyes_extra.py): texto oficial en Infoleg, normas vinculadas y votaciones del día de la sanción. */
