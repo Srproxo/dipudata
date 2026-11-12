@@ -58,7 +58,9 @@ $inf = \App\Datos::informe();
 <header class="cabecera">
   <div class="contenedor cabecera-fila">
     <a class="marca" href="/" aria-label="DipuData, inicio">Dipu<span>Data</span></a>
-    <nav class="menu" aria-label="Principal">
+    <input type="checkbox" id="menu-abrir" class="menu-toggle sr-solo" aria-controls="menu-principal">
+    <label for="menu-abrir" class="menu-boton"><span class="menu-icono" aria-hidden="true"></span>Menú</label>
+    <nav class="menu" id="menu-principal" aria-label="Principal">
       <?php foreach ($nav as $clave => [$href, $texto]): ?>
         <a href="<?= e($href) ?>"<?= $meta['seccion'] === $clave ? ' aria-current="page"' : '' ?>><?= e($texto) ?></a>
       <?php endforeach; ?>
@@ -84,7 +86,8 @@ $inf = \App\Datos::informe();
       <?php if (!empty($inf['generado'])): ?><p>Datos actualizados el <?= e(fecha_es($inf['generado'])) ?>.</p><?php endif; ?>
     </div>
     <div>
-      <p class="pie-titulo">Explorar</p>
+      <input type="checkbox" id="pie-explorar" class="pie-toggle sr-solo">
+      <label for="pie-explorar" class="pie-titulo">Explorar</label>
       <ul>
         <li><a href="/">Legisladores</a></li>
         <li><a href="/congreso">Cómo funciona el Congreso</a></li>
@@ -102,7 +105,8 @@ $inf = \App\Datos::informe();
       </ul>
     </div>
     <div>
-      <p class="pie-titulo">Fuentes</p>
+      <input type="checkbox" id="pie-fuentes" class="pie-toggle sr-solo">
+      <label for="pie-fuentes" class="pie-titulo">Fuentes</label>
       <ul>
         <li><a href="https://datos.hcdn.gob.ar/" rel="noopener">Datos abiertos de Diputados</a></li>
         <li><a href="https://www.senado.gob.ar/" rel="noopener">Senado de la Nación (datos abiertos)</a></li>
@@ -112,7 +116,7 @@ $inf = \App\Datos::informe();
       </ul>
     </div>
   </div>
-  <nav class="pie-legal" aria-label="Información legal">
+  <nav class="contenedor pie-legal" aria-label="Información legal">
     <a href="/datos">Datos abiertos y API</a>
     <a href="/terminos">Términos y condiciones</a>
     <a href="/privacidad">Política de privacidad</a>
