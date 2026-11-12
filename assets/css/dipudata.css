@@ -367,3 +367,38 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 .pie-legal { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 .botones-cookies label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .25rem .8rem; border: 1px solid var(--linea); cursor: pointer; }
 .botones-cookies label:has(input:checked) { border-color: var(--acento); background: var(--fondo); font-weight: 600; }
+
+/* Votación: hemiciclo por voto y análisis por bloque */
+.hemiciclo-voto > a, .hemiciclo-voto > g, .hemiciclo-voto > path { transition: opacity .15s; }
+.hemiciclo-voto a:hover circle:first-of-type, .hemiciclo-voto a:focus-visible circle:first-of-type { stroke: var(--tinta); stroke-width: 6; }
+.leyenda-voto { justify-content: center; margin: 0 0 1.25rem; }
+.leyenda-voto i { display: inline-block; width: .75rem; height: .75rem; border-radius: 50%; margin-right: .4rem; vertical-align: -.05em; box-sizing: border-box; }
+.lv-A { background: #166534; } .lv-N { background: #991b1b; } .lv-B { background: #a16207; }
+.lv-U { background: #fff; border: 2px solid #94a3b8; } .lv-P { background: #fff; border: 2px solid var(--tinta); }
+.lv-D { background: #cbd5e1; outline: 2px solid var(--tinta); outline-offset: 1px; }
+.barra-mini { display: flex; height: .35rem; margin-top: .35rem; max-width: 12rem; background: var(--linea); gap: 1px; }
+.barra-mini span { display: block; min-width: 2px; }
+.distinto-bloque { margin: 1.25rem 0 0; padding-top: .9rem; border-top: 1px solid var(--linea); }
+.distinto-bloque h3 { margin: 0 0 .2rem; font: 700 1.0625rem/1.3 var(--serif); }
+.lista-distintos { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .1rem 1.5rem; }
+.lista-distintos li { padding: .45rem 0; border-bottom: 1px solid var(--linea); display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+.lista-distintos .voto { margin-left: auto; }
+.nota-metodo { margin-top: 1.25rem; max-width: 62ch; }
+@media (max-width: 40rem) {
+  .tabla-bloques-voto tr { display: grid; grid-template-columns: repeat(4, 1fr); gap: .15rem .5rem; }
+  .tabla-bloques-voto td.celda-bloque { display: block; grid-column: 1 / -1; font-weight: 600; }
+  .tabla-bloques-voto td.der { flex-direction: column-reverse; justify-content: flex-end; align-items: flex-start; gap: 0; text-align: left; }
+  .tabla-bloques-voto td.der::before { font-size: .75rem; }
+  .tabla-bloques-voto td:nth-child(6), .tabla-bloques-voto td:nth-child(7) { grid-column: span 2; justify-content: flex-start; align-items: center; gap: .5rem; flex-direction: row; }
+  .tabla-bloques-voto td:nth-child(7)::before { order: 0; }
+  .barra-mini { max-width: none; }
+}
+.tabla-bloques-voto .voto { white-space: nowrap; }
+@media (max-width: 40rem) { .tabla-bloques-voto td.der { font-weight: 600; } .tabla-bloques-voto td.der::before { font-weight: 400; } }
+.resumen-ley { max-width: 46rem; padding: 1.25rem 1.4rem; background: var(--fondo); border: 1px solid var(--linea); border-top: 3px solid var(--acento); }
+.resumen-ley h3 { margin: 1.1rem 0 .3rem; font: 700 1rem/1.3 var(--sans); }
+.resumen-ley p { margin: .3rem 0; max-width: 62ch; }
+.resumen-etiqueta { margin: 0 0 .4rem !important; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--acento); }
+.resumen-alcanza { margin: .3rem 0 1rem; padding-left: 1.1rem; }
+.resumen-alcanza li { margin: .35rem 0; }
+@media (max-width: 40rem) { .resumen-ley { padding: 1rem; } .resumen-ley .nowrap { white-space: normal; } }

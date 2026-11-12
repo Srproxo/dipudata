@@ -403,6 +403,35 @@ final class Datos
         return self::leer('comisiones_senado');
     }
 
+    /**
+     * Resumen en lenguaje simple de la ley tratada en una votación (storage/editorial/resumenes_leyes.json), o null.
+     * Se escribe a mano a partir del texto oficial; se aplica por cámara, texto del título y rango de fechas.
+     */
+    public static function resumenLey(array $cab): ?array
+    {
+        if (!isset(self::$cache['_resumenes'])) {
+            $ruta = RAIZ . '/storage/editorial/resumenes_leyes.json';
+            $d = is_file($ruta) ? json_decode((string)file_get_contents($ruta), true) : null;
+            self::$cache['_resumenes'] = is_array($d['resumenes'] ?? null) ? $d['resumenes'] : [];
+        }
+        $t = self::normalizar((string)($cab['t'] ?? ''));
+        foreach (self::$cache['_resumenes'] as $r) {
+            foreach ($r['votaciones'] ?? [] as $m) {
+                if (($cab['c'] ?? '') === $m['c'] && $cab['f'] >= $m['desde'] && $cab['f'] <= $m['hasta'] && str_contains($t, self::normalizar($m['titulo']))) {
+                    return $r;
+                }
+            }
+        }
+        return null;
+    }
+
+    /** @return list<array> todos los resúmenes de leyes */
+    public static function resumenesLeyes(): array
+    {
+        self::resumenLey(['t' => '', 'c' => '', 'f' => '']);
+        return self::$cache['_resumenes'];
+    }
+
     public static function urlLegislador(array $l): string
     {
         return ($l['camara'] === 'Senadores' ? '/senador/' : '/diputado/') . $l['slug'];

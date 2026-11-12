@@ -1,0 +1,31 @@
+{
+  "_leeme": "Resúmenes en lenguaje simple, escritos a mano a partir del texto oficial de cada ley. Cada uno dice qué cambia y a quién se dirige, según el propio texto, con los artículos. No se evalúa la ley ni se dice quién gana o pierde. Cada resumen se aplica a las votaciones que coinciden con 'votaciones' (cámara, texto del título y rango de fechas). Agregar uno nuevo: copiar la estructura, citar artículos y hacerlo revisar antes de publicar.",
+  "resumenes": [
+    {
+      "id": "ley-27802",
+      "ley": 27802,
+      "nombre": "Ley de Modernización Laboral",
+      "sancion": "2026-02-27",
+      "publicacion": "2026-03-06",
+      "fuente": {"nombre": "Ley 27.802, texto original (Infoleg, Ministerio de Justicia)", "url": "https://www.argentina.gob.ar/normativa/nacional/norma-423680/texto"},
+      "revisado": "2026-11-12",
+      "votaciones": [
+        {"c": "D", "titulo": "LEY DE MODERNIZACIÓN LABORAL", "desde": "2026-02-20", "hasta": "2026-02-20"},
+        {"c": "S", "titulo": "Modernización Laboral", "desde": "2026-02-11", "hasta": "2026-02-27"}
+      ],
+      "para_que": "Cambia reglas del trabajo en relación de dependencia en el sector privado. Modifica la Ley de Contrato de Trabajo y otras leyes laborales (jornada, convenios colectivos, sindicatos, juicios laborales, trabajo agrario y de casas particulares), obliga a cada empleador a tener una cuenta en un fondo para pagar indemnizaciones, crea un régimen para quienes trabajan con aplicaciones de reparto o de transporte y suma incentivos impositivos para registrar empleo y para invertir.",
+      "alcanza": [
+        {"quien": "Trabajadores en relación de dependencia y empleadores del sector privado", "que": "Cambian artículos de la Ley de Contrato de Trabajo (20.744), de la ley de jornada de trabajo (11.544) y del Régimen Laboral (25.877).", "donde": "Títulos I, VI y VII"},
+        {"quien": "Empleadores del sector privado", "que": "Cada uno debe abrir una cuenta en un Fondo de Asistencia Laboral, que solo puede usarse para pagar indemnizaciones por despido y otras obligaciones de fin del contrato.", "donde": "Arts. 58 y 59"},
+        {"quien": "Quienes trabajan con aplicaciones de reparto o de transporte de personas", "que": "Crea un régimen propio. El texto dice que busca \"asegurar la independencia\" de quienes prestan esos servicios.", "donde": "Título XII, art. 119"},
+        {"quien": "Sindicatos y negociación colectiva", "que": "Modifica las leyes de convenios colectivos (14.250), de asociaciones sindicales (23.551) y del procedimiento de negociación (23.546), y fija reglas para las bolsas de trabajo a cargo de sindicatos.", "donde": "Títulos XIII a XVI"},
+        {"quien": "Personal de casas particulares, trabajo agrario y trabajo a domicilio", "que": "Cambia sus regímenes especiales (leyes 26.844, 26.727 y 12.713).", "donde": "Títulos IX a XI"},
+        {"quien": "Juicios laborales", "que": "Cambia el procedimiento de la Justicia Nacional del Trabajo (18.345), los honorarios de abogados y auxiliares de la Justicia (27.423) y las comisiones médicas de riesgos del trabajo (27.348).", "donde": "Títulos III, IV y XVIII"},
+        {"quien": "Empleadores que registren trabajadores", "que": "Crea un régimen de incentivo (RIFL) por cada nueva incorporación, durante un año, y otro (PER) para regularizar relaciones laborales no registradas o mal registradas que empezaron antes de la promulgación.", "donde": "Arts. 156, 157 y 168"},
+        {"quien": "Micro, pequeñas y medianas empresas que inviertan", "que": "Crea el Régimen de Incentivo para Medianas Inversiones (RIMI), para inversiones productivas en el país en sus dos primeros años.", "donde": "Arts. 177 a 179"},
+        {"quien": "Algunos impuestos internos", "que": "Deja sin efecto el impuesto interno sobre seguros, telefonía celular y satelital, objetos suntuarios, autos y motores, embarcaciones de recreo y aeronaves.", "donde": "Art. 195"},
+        {"quien": "Personas sin formación laboral básica", "que": "Crea el Programa de Formación Laboral Básica, para quienes no pudieron adquirir las competencias mínimas para incorporarse al mundo laboral.", "donde": "Art. 152"}
+      ]
+    }
+  ]
+}
