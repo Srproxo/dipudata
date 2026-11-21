@@ -75,7 +75,11 @@ $lista = static function (array $xs): string {
     <?php endforeach; ?>
     </ul>
   <?php else: ?>
+    <?php if ((int)$anio < 2005): ?>
+    <p>Las votaciones nominales publicadas en este sitio empiezan en 2005 (Senado), así que no hay una votación para enlazar a esta ley.</p>
+    <?php else: ?>
     <p>No encontramos una votación nominal del día de la sanción con este título. Muchas leyes se aprueban a mano alzada, sin registro voto por voto, o en una votación conjunta cuyo acta no trae el título de cada proyecto. <a href="/votaciones?anio=<?= e($anio) ?>">Ver las votaciones de <?= e($anio) ?></a>.</p>
+    <?php endif; ?>
   <?php endif; ?>
 </section>
 
@@ -142,4 +146,4 @@ $lista = static function (array $xs): string {
 </section>
 <?php endif; ?>
 
-<p class="fuente-pie">Fuentes: <?= $deInfoleg ? 'título, sumario y fechas de la Base Infoleg de Normativa Nacional (la Cámara de Diputados todavía no publicó esta ley en sus datos abiertos); se muestran tal como los publica Infoleg' : 'Sumario de leyes y Leyes promulgadas, Cámara de Diputados de la Nación (datos.hcdn.gob.ar); el sumario se muestra tal como lo publica la Cámara' ?>. Texto completo, decreto de promulgación y normas vinculadas: Base Infoleg de Normativa Nacional, Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Votaciones: actas nominales de cada cámara, cruzadas por fecha y título (ver <a href="/metodologia">metodología</a>).</p>
+<p class="fuente-pie">Fuentes: <?= $deInfoleg ? 'título, sumario y fechas de la Base Infoleg de Normativa Nacional (el sumario de leyes de la Cámara de Diputados en sus datos abiertos cubre solo las leyes 26.352 a 27.544); se muestran tal como los publica Infoleg' : 'Sumario de leyes y Leyes promulgadas, Cámara de Diputados de la Nación (datos.hcdn.gob.ar); el sumario se muestra tal como lo publica la Cámara' ?>. Texto completo, decreto de promulgación y normas vinculadas: Base Infoleg de Normativa Nacional, Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Votaciones: actas nominales de cada cámara, cruzadas por fecha y título (ver <a href="/metodologia">metodología</a>).</p>

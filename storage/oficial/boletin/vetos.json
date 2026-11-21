@@ -1,0 +1,87 @@
+{
+ "_meta": {
+  "fuente": "Boletín Oficial de la República Argentina, primera sección (boletinoficial.gob.ar)",
+  "consultado": "2026-11-21",
+  "nota": "Proyectos de ley que el Poder Ejecutivo observó en su totalidad. Infoleg no los carga como leyes. Datos tomados del texto del decreto publicado; sha256 de la página HTML tal como se bajó."
+ },
+ "vetos": [
+  {
+   "numero": 27756,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2024-08-22",
+   "decreto_veto": "Decreto 782/2024",
+   "decreto_gde": "DECTO-2024-782-APN-PTE",
+   "fecha_decreto": "2024-08-30",
+   "fecha_publicacion_bo": "2024-09-02",
+   "texto_articulo": "Obsérvase en su totalidad el proyecto de ley registrado bajo el N° 27.756 (IF-2024-92098894-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/313142/20240902",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/313142/20240902",
+   "sha256_pagina": "db87e57a467210a158c2cd5c19316787b389e9247fb9eb48e8ecb86abe003c7c"
+  },
+  {
+   "numero": 27757,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2024-09-12",
+   "decreto_veto": "Decreto 879/2024",
+   "decreto_gde": "DECTO-2024-879-APN-PTE",
+   "fecha_decreto": "2024-10-02",
+   "fecha_publicacion_bo": "2024-10-03",
+   "texto_articulo": "Obsérvase en su totalidad el Proyecto de Ley registrado bajo el Nº 27.757 (IF-2024-102408582-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/315058/20241003",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/315058/20241003",
+   "sha256_pagina": "f64c2768e2879b40a5bb12893d2b498cc22fd100491adc76b510cbf0c49c0270"
+  },
+  {
+   "numero": 27790,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2025-06-04",
+   "decreto_veto": "Decreto 424/2025",
+   "decreto_gde": "DECTO-2025-424-APN-PTE",
+   "fecha_decreto": "2025-06-23",
+   "fecha_publicacion_bo": "2025-06-24",
+   "texto_articulo": "Obsérvase en su totalidad el Proyecto de Ley registrado bajo el Nº 27.790 (IF-2025-61460920-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/327332/20250624",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/327332/20250624",
+   "sha256_pagina": "049cf996cb6cc3bf87350b0e32e20dc9aebcb849da63eed79d0e84a1e109123d"
+  },
+  {
+   "numero": 27791,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2025-07-10",
+   "decreto_veto": "Decreto 534/2025",
+   "decreto_gde": "DECTO-2025-534-APN-PTE",
+   "fecha_decreto": "2025-08-01",
+   "fecha_publicacion_bo": "2025-08-04",
+   "texto_articulo": "Obsérvase en su totalidad el Proyecto de Ley registrado bajo el N° 27.791 (IF-2025-78988902-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/329236/20250804",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/329236/20250804",
+   "sha256_pagina": "c86c7092c312abdfde2c9d7d5443b63e3e965b646f79b86e3d39b97cdc8d8de5"
+  },
+  {
+   "numero": 27792,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2025-07-10",
+   "decreto_veto": "Decreto 534/2025",
+   "decreto_gde": "DECTO-2025-534-APN-PTE",
+   "fecha_decreto": "2025-08-01",
+   "fecha_publicacion_bo": "2025-08-04",
+   "texto_articulo": "Obsérvase en su totalidad el Proyecto de Ley registrado bajo el N° 27.792 (IF-2025-78991887-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/329236/20250804",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/329236/20250804",
+   "sha256_pagina": "c86c7092c312abdfde2c9d7d5443b63e3e965b646f79b86e3d39b97cdc8d8de5"
+  },
+  {
+   "numero": 27794,
+   "estado": "vetada totalmente",
+   "fecha_sancion": "2025-08-20",
+   "decreto_veto": "Decreto 652/2025",
+   "decreto_gde": "DECTO-2025-652-APN-PTE",
+   "fecha_decreto": "2025-09-11",
+   "fecha_publicacion_bo": "2025-09-12",
+   "texto_articulo": "Obsérvase en su totalidad el Proyecto de Ley registrado bajo el Nº 27.794 (IF-2025-95643101-APN-DSGA#SLYT).",
+   "url_bo": "https://www.boletinoficial.gob.ar/detalleAviso/primera/331210/20250912",
+   "url_pdf_bo": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/331210/20250912",
+   "sha256_pagina": "5d4765c2ebeccfc08b76f85e6b50ba8fc5cf6a2349eb71f858d8f3f2f73740dd"
+  }
+ ]
+}

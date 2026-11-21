@@ -64,7 +64,15 @@ $pctMal = array_filter($part, fn($l) => ($p = Datos::participacion($l['slug'])) 
 ok(!$pctMal, 'ningún porcentaje de participación sale de 0 a 100');
 
 $ley = Datos::leyes();
-ok(count(array_filter($ley, fn($l) => (int)$l[0] <= 27544)) === 1193, 'hay 1.193 leyes del sumario de la Cámara (26.352 a 27.544)');
+ok(count(array_filter($ley, fn($l) => (int)$l[0] >= 26352 && (int)$l[0] <= 27544)) === 1193, 'hay 1.193 leyes del sumario de la Cámara (26.352 a 27.544)');
+$viejas = array_filter($ley, fn($l) => (int)$l[0] < 26352);
+$viejaMal = 0;
+foreach ($viejas as [$n, $t, $fs]) {
+    $d = Datos::ley((int)$n);
+    // Solo leyes del Congreso desde la vuelta de la democracia: número desde la 23.040 y sanción desde el 10/12/1983 (los decretos-ley de facto no van).
+    if (!$d || ($d['fuente'] ?? '') !== 'infoleg' || (int)$n < 23040 || $fs < '1983-12-10' || $fs >= '2008-03-01' || trim((string)$t) === '' || (!empty($d['fp']) && $fs > $d['fp'])) { $viejaMal++; }
+}
+ok(count($viejas) > 3000 && $viejaMal === 0, 'se suman las leyes anteriores a la 26.352 desde Infoleg, desde la Ley 23.040 (diciembre de 1983), con título y fechas coherentes (' . count($viejas) . ')');
 $nuevas = array_filter($ley, fn($l) => (int)$l[0] > 27544);
 ok(count($nuevas) >= 270, 'se suman las leyes posteriores a la 27.544 desde Infoleg (' . count($nuevas) . ')');
 $nuevaMal = 0;
