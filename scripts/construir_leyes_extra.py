@@ -134,8 +134,17 @@ def titulo_infoleg(r: dict) -> str:
     return t if res.upper() in GENERICOS or res.upper() == t.upper() else f"{t} - {res}"
 
 
-def leyes_infoleg(info: dict, ultima_hcdn: int) -> list:
-    """Leyes posteriores al índice de la Cámara, desde Infoleg. Escribe el índice y una ficha por ley; devuelve las filas del índice."""
+# Las leyes anteriores al índice de la Cámara (26.352, feb. 2008) se toman de Infoleg desde la vuelta de la democracia: el Congreso
+# volvió a sesionar el 10/12/1983. Las normas con número de ley sancionadas antes de esa fecha son decretos-ley de gobiernos de facto
+# (Infoleg los carga como "Ley", por ejemplo 23.030 a 23.039 del 9/12/1983): no son leyes del Congreso y no se publican.
+# La numeración de esta etapa empieza en la Ley 23.040 (22/12/1983); Infoleg carga dos leyes del siglo XIX (3.683 y 4.408) con fechas de
+# 1989 y 1994 por error, por eso se pide también el número.
+DESDE_DEMOCRACIA, PRIMERA_LEY_DEMOCRACIA = "1983-12-10", 23040
+
+
+def leyes_infoleg(info: dict, primera_hcdn: int, ultima_hcdn: int) -> list:
+    """Leyes que no están en el índice de la Cámara, desde Infoleg: las posteriores a la última (sancionadas desde 2020) y las
+    anteriores a la primera (sancionadas desde el 10/12/1983). Escribe el índice y una ficha por ley; devuelve las filas del índice."""
     dest = VERIF / "leyes" / "infoleg"
     dest.mkdir(parents=True, exist_ok=True)
     for viejo in dest.glob("*.json"):
@@ -143,20 +152,23 @@ def leyes_infoleg(info: dict, ultima_hcdn: int) -> list:
     filas = []
     for n in sorted(info):
         cand = info[n]
-        if n <= ultima_hcdn or len(cand) != 1:
+        if primera_hcdn <= n <= ultima_hcdn or len(cand) != 1:
             continue
         r = cand[0]
-        # Infoleg trae algunas normas viejas con números altos (decretos-ley de 1944, 1961 y 1973): solo leyes sancionadas desde 2020.
+        # Infoleg trae algunas normas viejas con números altos (decretos-ley de 1944, 1961 y 1973): de las posteriores, solo las sancionadas desde 2020.
         # El organismo de origen no se usa como filtro: la Ley 27.702 (2022) figura con "Poder Ejecutivo Nacional" por error de carga.
-        if r["fecha_sancion"] < "2020-01-01":
+        if n > ultima_hcdn and r["fecha_sancion"] < "2020-01-01":
             continue
-        t = titulo_infoleg(r)
+        if n < primera_hcdn and (n < PRIMERA_LEY_DEMOCRACIA or not DESDE_DEMOCRACIA <= r["fecha_sancion"] < "2008-03-01"):
+            continue
+        # Dos leyes viejas (23.216 y 25.209) vienen sin título en Infoleg: se usa su sumario, que es de la misma fuente.
+        t = titulo_infoleg(r) or _limpio(r["texto_resumido"])
         ficha = {"n": n, "t": t, "s": _limpio(r["texto_resumido"]), "r": "", "fs": r["fecha_sancion"], "fp": r["fecha_boletin"], "fuente": "infoleg"}
         (dest / f"{n}.json").write_text(json.dumps(ficha, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         filas.append([n, t, r["fecha_sancion"], ""])
     filas.sort(key=lambda l: -l[0])
     (VERIF / "leyes" / "indice_infoleg.json").write_text(json.dumps(filas, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"leyes desde Infoleg (posteriores a la {ultima_hcdn}): {len(filas)}")
+    print(f"leyes desde Infoleg: {sum(1 for f in filas if f[0] > ultima_hcdn)} posteriores a la {ultima_hcdn} y {sum(1 for f in filas if f[0] < primera_hcdn)} anteriores a la {primera_hcdn}")
     return filas
 
 
@@ -214,7 +226,7 @@ def construir() -> None:
         for row in csv.DictReader(f):
             if row["numero_norma"].isdigit():
                 info[int(row["numero_norma"])].append(row)
-    nuevas = leyes_infoleg(info, max(leyes_sitio))
+    nuevas = leyes_infoleg(info, min(leyes_sitio), max(leyes_sitio))
     leyes_sitio.update({l[0]: l for l in nuevas})
     rel_mod = collections.defaultdict(list)   # id ley -> normas posteriores que la modifican o complementan
     rel_hace = collections.defaultdict(list)  # id ley -> normas que esta ley modifica

@@ -2,8 +2,8 @@
 <p class="antetitulo">Congreso de la Nación</p>
 <h1 class="titulo">Leyes sancionadas.</h1>
 <?php $ultima = $todas[0] ?? null; ?>
-<p class="bajada">Las leyes que el Congreso sancionó desde 2008, con el sumario de cada una, las fechas de sanción y de publicación en el Boletín Oficial, el enlace al texto oficial y, cuando la hubo, la votación nominal. Se pueden buscar por número, por tema o por palabra clave.</p>
-<p class="aviso"><strong>Período cubierto: leyes 26.352 a <?= $ultima ? number_format((int)$ultima[0], 0, ',', '.') : '' ?><?= $ultima && $ultima[2] ? ' (sancionada el ' . e(fecha_es($ultima[2])) . ')' : '' ?>.</strong> Hasta la 27.544 (febrero de 2020) los datos son de la Cámara de Diputados; las posteriores, de Infoleg, porque la Cámara todavía no las publicó en sus datos abiertos.</p>
+<p class="bajada">Las leyes que el Congreso sancionó desde la vuelta de la democracia (diciembre de 1983), con el sumario de cada una, las fechas de sanción y de publicación en el Boletín Oficial, el enlace al texto oficial y, cuando la hubo, la votación nominal. Se pueden buscar por número, por tema o por palabra clave.</p>
+<p class="aviso"><strong>Período cubierto: leyes 23.040 (diciembre de 1983) a <?= $ultima ? number_format((int)$ultima[0], 0, ',', '.') : '' ?><?= $ultima && $ultima[2] ? ' (sancionada el ' . e(fecha_es($ultima[2])) . ')' : '' ?>.</strong> De la 26.352 a la 27.544 (2008 a 2020) los datos son de la Cámara de Diputados; las anteriores y las posteriores, de Infoleg, porque la Cámara no las tiene en sus datos abiertos.</p>
 
 <form class="filtros" method="get" action="/leyes" style="margin-top:1.5rem">
   <label>Buscar
@@ -42,4 +42,4 @@
   <?php if ($pagina < $paginas): ?><a href="<?= e(url_con(['pagina' => $pagina + 1])) ?>" rel="next">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; endif; ?>
-<p class="fuente-pie">Fuentes: leyes 26.352 a 27.544, Sumario de leyes y Leyes promulgadas de la Cámara de Diputados de la Nación (datos.hcdn.gob.ar); leyes posteriores, Base Infoleg de Normativa Nacional del Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Los títulos y sumarios se muestran tal como los publica cada fuente.</p>
+<p class="fuente-pie">Fuentes: leyes 26.352 a 27.544, Sumario de leyes y Leyes promulgadas de la Cámara de Diputados de la Nación (datos.hcdn.gob.ar); leyes anteriores y posteriores, Base Infoleg de Normativa Nacional del Ministerio de Justicia (datos.jus.gob.ar, CC BY 4.0). Los títulos y sumarios se muestran tal como los publica cada fuente.</p>
