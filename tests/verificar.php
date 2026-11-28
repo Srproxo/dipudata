@@ -663,5 +663,31 @@ foreach ($vl['leyes'] as $n => $e) {
 }
 ok($malL === [] && $vl['_meta']['con_infoleg'] > 1100 && $vl['_meta']['con_votacion'] > 400, 'leyes: texto oficial en Infoleg (https, argentina.gob.ar) y votaciones del mismo día de la sanción (' . $vl['_meta']['con_infoleg'] . ' con texto, ' . $vl['_meta']['con_votacion'] . ' con votación)' . ($malL ? ': ' . implode(' | ', array_slice($malL, 0, 3)) : ''));
 
+// Cruces de datos: cuadran con los datos que ya publica cada perfil, las reglas de texto no confunden y las páginas no afirman lo que el dato no dice
+$cr = Datos::cruces(); $mm = Datos::mandatoActualMeta();
+ok(($cr['_meta']['votaciones_validas']['D'] ?? -1) === $mm['validas']['Diputados'] && ($cr['_meta']['votaciones_validas']['S'] ?? -1) === $mm['validas']['Senadores'], 'cruces: usan las mismas votaciones válidas del mandato que los perfiles');
+$malP = [];
+foreach ($cr['presentismo_comisiones'] as $sl => $s) {
+    $ma = Datos::mandatoActual('Diputados', $sl);
+    if (!$ma || $ma['votaciones'] !== $s['total'] || $ma['emitio'] !== $s['presente'] || $s['com_total'] > $s['total'] || $s['com_presente'] > $s['com_presente'] + $s['com_total']) { $malP[] = $sl; }
+}
+ok(count($cr['presentismo_comisiones']) > 240 && !$malP, 'cruces: votaciones y votos de cada diputado iguales a los de su perfil' . ($malP ? ': ' . implode(', ', array_slice($malP, 0, 3)) : ''));
+$malD = [];
+foreach ($cr['disciplina'] as $k => $s) {
+    $ma = Datos::mandatoActual(str_starts_with($k, 's:') ? 'Senadores' : 'Diputados', str_starts_with($k, 's:') ? substr($k, 2) : $k);
+    if ($s['distintos'] > $s['con_postura'] || count($s['lista']) !== $s['distintos'] || ($ma && $s['con_postura'] > $ma['emitio'])) { $malD[] = $k; }
+}
+ok(!$malD, 'cruces: votos distintos al bloque coherentes (no más que los votos emitidos, lista completa)');
+$vjA = Datos::viajes()['actual'] ?? [];
+$malV = array_filter($cr['pasajes_presentismo'], static fn($s, $k) => $s['pasajes'] !== ($vjA[$k]['total'] ?? 0), ARRAY_FILTER_USE_BOTH);
+ok(!$malV, 'cruces: pasajes iguales a los de la pestaña de cada diputado');
+$sj = array_filter($cr['provincias']['san-juan']['votaciones'] ?? [], static fn($v) => str_contains(Datos::normalizar($v['t']), 'ara san juan') && !preg_match('/provincia de san juan|pcia\.? de san juan|prov\.? de san juan/', Datos::normalizar($v['t'])));
+ok(count($cr['provincias']) >= 20 && !$sj, 'cruces: provincias nombradas con "provincia de" (el submarino ARA San Juan no cuenta como la provincia)');
+$econ = array_column($cr['patrimonio_votos']['votaciones'], 't');
+ok(count($econ) >= 5 && (bool)array_filter($econ, static fn($t) => str_contains($t, 'PRESUPUESTO')) && (bool)array_filter($econ, static fn($t) => str_contains($t, 'LABORAL')), 'cruces: las votaciones económicas incluyen el presupuesto y la reforma laboral');
+$vistasCr = '';
+foreach (glob(__DIR__ . '/../app/Vistas/cruce*.php') as $f) { $vistasCr .= (string)file_get_contents($f); }
+ok(count(cruces_lista()) === 7 && !preg_match('/favorec|perjudic|enriquec|viajó|asistencia|faltó/iu', $vistasCr) && substr_count($vistasCr, 'class="fuente-pie"') >= 8, 'cruces: 7 cruces, cada página con fuentes y sin afirmar intenciones, beneficios ni viajes');
+
 echo $fallos ? "\n" . count($fallos) . " controles fallaron\n" : "\nTodo en orden\n";
 exit($fallos ? 1 : 0);

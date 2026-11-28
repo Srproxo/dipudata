@@ -357,6 +357,12 @@ final class Datos
         return is_array($d) ? ($d[$camara] ?? []) : [];
     }
 
+    /** Cruces entre datos ya publicados (scripts/construir_cruces.py): patrimonio y votos, comisiones, bloque, afinidad, pasajes, provincias y proyectos. */
+    public static function cruces(): array
+    {
+        return self::leer('cruces');
+    }
+
     public static function proyectosMeta(): array
     {
         $ruta = RAIZ . '/storage/verificado/proyectos/_meta.json';

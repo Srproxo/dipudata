@@ -501,3 +501,31 @@ input[type=search]:focus, select:focus { border-color: var(--acento); }
 }
 .aviso-ley { margin: 1.25rem 0 0; padding: .75rem 1rem; max-width: 44rem; background: var(--acento-claro); border-left: 4px solid var(--acento); font-size: .9375rem; }
 #directorio { scroll-margin-top: 5rem; }
+
+/* Cruces de datos */
+.cruce-detalle { margin-top: .25rem; text-align: left; }
+.cruce-detalle summary { cursor: pointer; color: var(--acento); font-size: .875rem; text-decoration: underline; min-height: 32px; display: inline-flex; align-items: center; }
+.cruce-detalle ul { margin: .35rem 0 0; max-width: 40rem; }
+.cruce-detalle li { padding: .2rem 0; }
+.par-legisladores { display: grid; gap: .15rem; }
+.g-disp { fill: var(--acento); fill-opacity: .55; stroke: var(--papel); stroke-width: 1; }
+.g-disp:hover, a:focus-visible .g-disp { fill-opacity: 1; stroke: var(--tinta); }
+.tabla-cruce-votos td .voto { white-space: nowrap; }
+.tabla-provincia-votos .voto { margin: 0 .15rem .2rem 0; white-space: nowrap; }
+@media (max-width: 40rem) {
+  .tabla td .cruce-detalle { flex-basis: 100%; }
+  .tabla td:has(> .cruce-detalle), .tabla td:has(.cruce-detalle) { flex-wrap: wrap; }
+}
+.celda-nombre-td .celda-nombre { font-weight: 500; }
+@media (max-width: 40rem) { .tabla td.celda-nombre-td { font-size: 1.0625rem; } }
+.pct-barra { display: inline-block; min-width: 6.5rem; }
+@media (max-width: 40rem) {
+  .tabla td.td-bloque { display: block; text-align: left; }
+  .tabla td.td-bloque::before { display: block; margin-bottom: .15rem; }
+}
+.celda-valor { display: inline-block; }
+.tabla-cruce-votos th:first-child { min-width: 14rem; }
+.tabla-cruce-votos .voto { padding: .05rem .4rem; }
+.tabla-cruce-votos th:first-child { min-width: 12rem; }
+.tabla-cruce-votos td, .tabla-cruce-votos th { padding-left: .45rem; padding-right: .45rem; }
+@media (max-width: 40rem) { .tabla td .celda-valor { text-align: right; } }
