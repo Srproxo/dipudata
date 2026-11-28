@@ -205,7 +205,7 @@ function render_404(): void
 {
     render('404', [], [
         'title' => 'Página no encontrada | DipuData', 'description' => 'La página que buscás no existe.',
-        'canonical' => SITE_URL . '/', 'robots' => 'noindex, follow',
+        'canonical' => '', 'robots' => 'noindex, follow',
     ], 404);
 }
 
