@@ -1337,3 +1337,158 @@ function url_preside(array $cab, array $det, bool $esSen): ?string
     $hay = array_values(array_filter(Datos::legisladores(), static fn($l) => Datos::normalizar($l['nombre']) === $n));
     return count($hay) === 1 ? Datos::urlLegislador($hay[0]) : null;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------
+ * Cruces de datos (/cruces): solo combinan datos que el sitio ya publica, cada uno con su fuente. Los números los
+ * calcula scripts/construir_cruces.py; aquí se ordenan y se muestran.
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+/** Los siete cruces: slug => [título, descripción corta, cámara]. */
+function cruces_lista(): array
+{
+    return [
+        'patrimonio-y-votos' => ['Patrimonio y votos en temas económicos', 'Cómo votó cada diputado el presupuesto, la reforma laboral, impuestos y otros temas económicos, al lado de su patrimonio declarado en pesos de hoy.', 'Diputados'],
+        'votos-y-comisiones' => ['Votaciones de los temas de sus comisiones', 'Si cada diputado votó en las votaciones de los dictámenes de las comisiones que integra, comparado con todas las votaciones.', 'Diputados'],
+        'votos-distintos-al-bloque' => ['Votos distintos a su bloque', 'Quién votó más veces distinto a la mayoría de su bloque y en qué temas.', 'Ambas cámaras'],
+        'coincidencias-entre-bloques' => ['Coincidencias entre bloques distintos', 'Qué legisladores y qué bloques votan igual en las votaciones disputadas aunque pertenezcan a bloques distintos.', 'Ambas cámaras'],
+        'pasajes-y-votaciones' => ['Pasajes emitidos y votaciones', 'Los pasajes que la Cámara emitió para cada diputado y en cuántas votaciones del mismo período votó.', 'Diputados'],
+        'provincias-y-leyes' => ['Provincias y las votaciones que las nombran', 'Cómo votó la delegación de cada provincia los proyectos que nombran a su provincia, comparado con el resto de la cámara.', 'Ambas cámaras'],
+        'proyectos-y-resultados' => ['Qué pasó con sus proyectos', 'Cuántos proyectos presentó cada diputado, cuántos tuvieron dictamen de comisión y cuántos llegaron a votarse en el recinto.', 'Diputados'],
+    ];
+}
+
+/** Porcentaje con coma decimal ("97,9 %"); "—" si no hay base. */
+function pct_txt(int $parte, int $total, int $dec = 1): string
+{
+    return $total > 0 ? number_format($parte / $total * 100, $dec, ',', '.') . ' %' : '—';
+}
+
+/** Mediana de una lista de números (null si está vacía). */
+function mediana(array $xs): ?float
+{
+    if (!$xs) { return null; }
+    sort($xs);
+    $n = count($xs);
+    return $n % 2 ? (float)$xs[intdiv($n, 2)] : ($xs[$n / 2 - 1] + $xs[$n / 2]) / 2;
+}
+
+/** Título corto de una votación de Diputados: sin "O.D. 209 -" y hasta el primer punto que separa una frase. */
+function titulo_corto_votacion(string $t, int $max = 70): string
+{
+    $t = trim((string)preg_replace('/^\s*O\.?\s?D\.?\s*\d+\s*-\s*/u', '', $t));
+    $t = preg_split('/\.?\s+(?:DICT\.|VOT\.|VOT\s|T[IÍ]TULO\s|CAP[IÍ]TULO\s)/u', $t)[0];
+    $t = rtrim(preg_split('/(?<=[A-ZÁÉÍÓÚÑ]{5})\.\s+(?=[A-ZÁÉÍÓÚÑ]{4,})/u', $t)[0], ' .');
+    if (mb_strtoupper($t) !== $t) {
+        return mb_strlen($t) > $max ? rtrim(mb_substr($t, 0, $max - 1)) . '…' : $t;
+    }
+    $t = mb_strtoupper(mb_substr($t, 0, 1)) . mb_strtolower(mb_substr($t, 1));
+    $t = (string)preg_replace_callback('/\b(bcra|i\.v\.a|ley|leyes)\b/u', static fn($m) => in_array($m[1], ['bcra', 'i.v.a'], true) ? mb_strtoupper($m[1]) : $m[1], $t);
+    return mb_strlen($t) > $max ? rtrim(mb_substr($t, 0, $max - 1)) . '…' : $t;
+}
+
+/** Celda con el voto de un legislador: A, N, B, U (ausente) o null (no era diputado o no figura). */
+function chip_voto(?string $c, bool $corto = false): string
+{
+    if ($c === null) { return '<span class="tenue" title="No figura en el acta">—</span>'; }
+    $t = ['A' => 'A favor', 'N' => 'En contra', 'B' => 'Abstención', 'U' => 'Ausente', 'P' => 'Presidió la sesión'][$c] ?? $c;
+    $k = ['A' => 'Sí', 'N' => 'No', 'B' => 'Abst.', 'U' => 'Aus.', 'P' => 'Pres.'][$c] ?? $c;
+    return '<span class="voto voto-' . e($c) . '"' . ($corto ? ' title="' . e($t) . '"' : '') . '>' . e($corto ? $k : $t) . '</span>';
+}
+
+/** Orden de una tabla de cruces: ['orden' => columna válida, 'dir' => asc|desc]. */
+function orden_tabla(array $validas, string $porDefecto, string $dirDefecto = 'desc'): array
+{
+    $o = is_string($_GET['orden'] ?? null) && in_array($_GET['orden'], $validas, true) ? $_GET['orden'] : $porDefecto;
+    $d = ($_GET['dir'] ?? '') === 'asc' ? 'asc' : (($_GET['dir'] ?? '') === 'desc' ? 'desc' : $dirDefecto);
+    return [$o, $d];
+}
+
+/** Encabezado de columna que ordena la tabla (mismo estilo que /patrimonio). */
+function th_orden(string $col, string $titulo, string $orden, string $dir, bool $der = true): string
+{
+    $activo = $orden === $col;
+    $nuevo = $activo && $dir === 'desc' ? 'asc' : 'desc';
+    $flecha = $activo ? ($dir === 'desc' ? ' ↓' : ' ↑') : '';
+    return '<th scope="col" class="' . ($der ? 'der' : '') . '"' . ($activo ? ' aria-sort="' . ($dir === 'desc' ? 'descending' : 'ascending') . '"' : '')
+        . '><a href="' . e(url_con(['orden' => $col, 'dir' => $nuevo, 'pagina' => null])) . '">' . e($titulo) . $flecha . '</a></th>';
+}
+
+/** Ordena filas por una función de valor; los null van siempre al final. */
+function ordenar_filas(array $filas, callable $valor, string $dir): array
+{
+    usort($filas, static function ($x, $y) use ($valor, $dir) {
+        $vx = $valor($x); $vy = $valor($y);
+        if ($vx === null || $vy === null) { return ($vx === null) <=> ($vy === null); }
+        $c = $vx <=> $vy;
+        return $dir === 'desc' ? -$c : $c;
+    });
+    return $filas;
+}
+
+/**
+ * Diagrama de dispersión en SVG, sin JavaScript: $puntos = [[x, y, etiqueta, url]]. Eje X desde 0; eje Y de 0 a 100 (%).
+ * Cada punto lleva su etiqueta como <title> y enlaza al perfil.
+ */
+function svg_dispersion(array $puntos, string $titulo, string $ejeX, string $ejeY): string
+{
+    if (!$puntos) { return ''; }
+    $w = 640; $h = 340; $izq = 52; $der = 16; $arr = 14; $aba = 44;
+    $maxX = max(1, max(array_column($puntos, 0)));
+    $paso = $maxX > 60 ? 20 : ($maxX > 30 ? 10 : 5);
+    $maxX = (int)(ceil($maxX / $paso) * $paso);
+    $minY = 0.0;
+    $x = static fn(float $v): float => $izq + ($w - $izq - $der) * $v / $maxX;
+    $y = static fn(float $v): float => $arr + ($h - $arr - $aba) * (1 - ($v - $minY) / (100 - $minY));
+    $id = 'dp-' . md5($titulo);
+    $s = '<svg class="grafico" viewBox="0 0 ' . $w . ' ' . $h . '" role="img" aria-labelledby="' . $id . '"><title id="' . $id . '">' . e($titulo) . '</title>';
+    foreach ([0, 25, 50, 75, 100] as $v) {
+        $yy = round($y($v), 1);
+        $s .= '<line class="g-guia" x1="' . $izq . '" x2="' . ($w - $der) . '" y1="' . $yy . '" y2="' . $yy . '"/><text class="g-eje" x="' . ($izq - 8) . '" y="' . ($yy + 4) . '" text-anchor="end">' . $v . ' %</text>';
+    }
+    for ($v = 0; $v <= $maxX; $v += $paso) {
+        $s .= '<text class="g-eje" x="' . round($x($v), 1) . '" y="' . ($h - 24) . '" text-anchor="middle">' . $v . '</text>';
+    }
+    $s .= '<text class="g-eje" x="' . round(($izq + $w - $der) / 2) . '" y="' . ($h - 4) . '" text-anchor="middle">' . e($ejeX) . '</text>';
+    $s .= '<text class="g-eje" x="12" y="' . round(($arr + $h - $aba) / 2) . '" text-anchor="middle" transform="rotate(-90 12 ' . round(($arr + $h - $aba) / 2) . ')">' . e($ejeY) . '</text>';
+    foreach ($puntos as [$px, $py, $et, $url]) {
+        $s .= '<a href="' . e($url) . '"><circle class="g-disp" cx="' . round($x((float)$px), 1) . '" cy="' . round($y((float)$py), 1) . '" r="4"><title>' . e($et) . '</title></circle></a>';
+    }
+    return $s . '</svg>';
+}
+
+/** Distrito de un acta pasado al nombre de provincias.json (para enlazar). */
+function slug_provincia_cruce(string $nombre): string
+{
+    foreach (Datos::provincias() as $p) {
+        if ($p['nombre'] === $nombre) { return $p['slug']; }
+    }
+    return slug_provincia($nombre);
+}
+
+/** Opción con más votos emitidos en un conteo ['A','N','B','U'] (null si nadie votó o hay empate). */
+function mayoria_cruce(array $c): ?string
+{
+    $e = ['A' => (int)$c['A'], 'N' => (int)$c['N'], 'B' => (int)$c['B']];
+    arsort($e);
+    $v = array_values($e);
+    return ($v[0] === 0 || $v[0] === $v[1]) ? null : (string)array_key_first($e);
+}
+
+/** Página de una tabla larga: [filas de esta página, página, total de páginas]. */
+function paginar(array $filas, int $por = 50): array
+{
+    $paginas = max(1, (int)ceil(count($filas) / $por));
+    $p = is_string($_GET['pagina'] ?? null) && ctype_digit($_GET['pagina']) ? max(1, min($paginas, (int)$_GET['pagina'])) : 1;
+    return [array_slice($filas, ($p - 1) * $por, $por), $p, $paginas];
+}
+
+/** Navegación entre páginas (mismo marcado que /patrimonio). */
+function nav_paginas(int $pagina, int $paginas): string
+{
+    if ($paginas < 2) { return ''; }
+    $s = '<nav class="paginas" aria-label="Paginación">';
+    if ($pagina > 1) { $s .= '<a href="' . e(url_con(['pagina' => $pagina - 1])) . '" rel="prev">← Anterior</a>'; }
+    $s .= '<span class="num">Página ' . $pagina . ' de ' . $paginas . '</span>';
+    if ($pagina < $paginas) { $s .= '<a href="' . e(url_con(['pagina' => $pagina + 1])) . '" rel="next">Siguiente →</a>'; }
+    return $s . '</nav>';
+}

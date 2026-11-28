@@ -620,6 +620,32 @@ switch (true) {
         ));
         break;
 
+    case $path === '/cruces':
+        render('cruces', ['lista' => cruces_lista(), 'cr' => Datos::cruces()], pagina_meta(
+            'Cruces de datos del Congreso',
+            'Siete cruces entre datos oficiales del Congreso: patrimonio y votos, votaciones de sus comisiones, votos distintos al bloque, coincidencias entre bloques, pasajes, provincias y proyectos.',
+            '/cruces', 'cruces'
+        ));
+        break;
+
+    case (bool)preg_match("#^/cruces/provincias-y-leyes/({$S})$#", $path, $m):
+        $pv = Datos::cruces()['provincias'][$m[1]] ?? null;
+        if (!$pv) { render_404(); break; }
+        render('cruce_provincia', ['pv' => $pv, 'slug' => $m[1]], pagina_meta(
+            $pv['nombre'] . ': cómo votó su delegación los proyectos que la nombran',
+            'Votaciones nominales cuyo título nombra a ' . $pv['nombre'] . ': cómo votaron sus diputados y senadores y cómo votó el resto de la cámara. Datos oficiales.',
+            '/cruces/provincias-y-leyes/' . $m[1], 'cruces'
+        ));
+        break;
+
+    case (bool)preg_match("#^/cruces/({$S})$#", $path, $m) && isset(cruces_lista()[$m[1]]):
+        $info = cruces_lista()[$m[1]];
+        $conParam = array_intersect_key($_GET, ['orden' => 1, 'dir' => 1, 'camara' => 1, 'pagina' => 1]) !== [];
+        render('cruce_' . str_replace('-', '_', $m[1]), ['cr' => Datos::cruces(), 'info' => $info, 'slug' => $m[1]], pagina_meta(
+            $info[0], $info[1], '/cruces/' . $m[1], 'cruces', ['robots' => $conParam ? 'noindex, follow' : 'index, follow']
+        ));
+        break;
+
     case $path === '/comparar':
         $sel = [];
         foreach (['a', 'b', 'c', 'd'] as $p) {
@@ -645,8 +671,10 @@ switch (true) {
 
     case $path === '/sitemap.xml':
         encabezados_seguridad('application/xml; charset=utf-8', 3600);
-        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/datos', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
+        $urls = [['/', 'daily', '1.0'], ['/congreso', 'monthly', '0.9'], ['/senado', 'weekly', '0.8'], ['/votaciones', 'monthly', '0.8'], ['/patrimonio', 'monthly', '0.8'], ['/glosario', 'monthly', '0.6'], ['/presupuesto', 'monthly', '0.7'], ['/comparar', 'monthly', '0.7'], ['/cruces', 'monthly', '0.7'], ['/leyes', 'monthly', '0.8'], ['/comisiones', 'monthly', '0.7'], ['/viajes', 'monthly', '0.6'], ['/remuneraciones', 'monthly', '0.6'], ['/subsidios', 'monthly', '0.6'], ['/congreso/bloques', 'weekly', '0.8'], ['/congreso/provincias', 'weekly', '0.8'], ['/match', 'monthly', '0.6'], ['/aportes', 'monthly', '0.6'], ['/aportes/empresas', 'monthly', '0.5'], ['/metodologia', 'monthly', '0.5'], ['/afinidad', 'monthly', '0.7'], ['/afinidad/diputados', 'monthly', '0.6'], ['/afinidad/senado', 'monthly', '0.6'], ['/datos', 'monthly', '0.6'], ['/correccion', 'yearly', '0.3'], ['/terminos', 'yearly', '0.2'], ['/privacidad', 'yearly', '0.2'], ['/cookies', 'yearly', '0.2']];
         foreach (secciones_congreso() as $k => $_) { $urls[] = ["/congreso/{$k}", 'monthly', '0.8']; }
+        foreach (array_keys(cruces_lista()) as $k) { $urls[] = ['/cruces/' . $k, 'monthly', '0.6']; }
+        foreach (array_keys(Datos::cruces()['provincias'] ?? []) as $k) { $urls[] = ['/cruces/provincias-y-leyes/' . $k, 'monthly', '0.5']; }
         foreach (array_keys(Datos::docsIndice()) as $k) { $urls[] = ['/senado/' . $k, 'weekly', '0.6']; }
         foreach (Datos::comisionesDiputados() as $cm) { $urls[] = ['/comisiones/' . $cm['slug'], 'monthly', '0.5']; }
         foreach (Datos::leyes() as $l) { $urls[] = ['/leyes/' . $l[0], 'yearly', '0.4']; }
